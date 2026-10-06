@@ -2,6 +2,7 @@
 id: pos4
 titulo: Pos4
 patch: 7.41
+categoria: papel
 fontes:
 - Termo de uso comum no jogo (definição, sem número no texto)
 links:

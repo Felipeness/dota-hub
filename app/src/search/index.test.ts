@@ -1,8 +1,8 @@
 import { buscar, construirIndice, sugerir } from "./index";
 
 const termos = [
-  { id: "roshan", titulo: "Roshan", patch: "7.41", fontes: [], secoes: { basico: "Chefe neutro do rio.", avancado: null }, origem: { basico: null, avancado: null }, links: [] },
-  { id: "pull", titulo: "Pull", patch: "7.41", fontes: [], secoes: { basico: "Puxar o camp para a wave.", avancado: null }, origem: { basico: null, avancado: null }, links: [] },
+  { id: "roshan", titulo: "Roshan", patch: "7.41", fontes: [], secoes: { basico: "Chefe neutro do rio.", avancado: null }, origem: { basico: null, avancado: null }, links: [], extras: {} },
+  { id: "pull", titulo: "Pull", patch: "7.41", fontes: [], secoes: { basico: "Puxar o camp para a wave.", avancado: null }, origem: { basico: null, avancado: null }, links: [], extras: {} },
 ];
 const busca = construirIndice({ rotas: [], objetivos: [], termos });
 
@@ -32,4 +32,16 @@ it("id exato de rota vem primeiro", () => {
     objetivos: [], termos: [],
   });
   expect(buscar(comRotas, "MA-R-01")[0]?.id).toBe("MA-R-01");
+});
+
+it("acha herói, jogador e time", () => {
+  const b = construirIndice({
+    rotas: [], objetivos: [], termos: [],
+    herois: [{ id: "medusa", nome: "Medusa", hero_id: 94, patch: "7.41f", resumo: "Carry de safelane.", tem_por_minuto: false }],
+    jogadores: [{ id: "skiter", nome: "skiter", tipo: "pro", time: null, amostra: "1 replay" }],
+    times: [{ id: "team-spirit", nome: "Team Spirit", jogadores: ["yatoro"], fonte: "" }],
+  });
+  expect(buscar(b, "medu")[0]).toMatchObject({ tipo: "heroi", link: "/herois/medusa" });
+  expect(buscar(b, "skit")[0]).toMatchObject({ tipo: "jogador", link: "/jogadores/skiter" });
+  expect(buscar(b, "spirit")[0]).toMatchObject({ tipo: "time", link: "/times/team-spirit" });
 });

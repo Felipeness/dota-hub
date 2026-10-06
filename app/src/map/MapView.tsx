@@ -1,13 +1,19 @@
 import { lazy, Suspense } from "react";
 import type { Objetivo, Rota } from "../data/schemas";
 import { MapFlat } from "./MapFlat";
+import type { Marca, Trilha } from "./trilhas";
 import { hasWebGL } from "./webgl";
 
 const Map3D = lazy(() => import("./Map3D").then((m) => ({ default: m.Map3D })));
 
+// A fuga é opcional para que um traçado de fase de herói (sem fuga) também desenhe no mapa.
+export type Tracado = Pick<Rota, "passos" | "caminhos"> & { fuga?: Rota["fuga"] };
+
 export type MapViewProps = {
   objetivos: Objetivo[];
-  rota?: Rota | null;
+  rota?: Tracado | null;
+  trilhas?: Trilha[];
+  marcas?: Marca[];
   selecionado?: string | null;
   onSelecionar: (id: string) => void;
   forcarPlano?: boolean;

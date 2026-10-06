@@ -2,6 +2,7 @@
 id: pull
 titulo: Pull
 patch: 7.41
+categoria: lane
 fontes:
 - dota-imortal/work/farm_mechanics_corrigido.json (7.41f: notas da Valve, datamine e Liquipedia, conferidos em 03/10/2026)
 links:

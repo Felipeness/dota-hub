@@ -1,0 +1,43 @@
+/* Tokens do visual v1 (docs/design/v1). Telas novas usam só estas variáveis. */
+:root {
+  --cor-fundo: #0a0e11;
+  --cor-superficie: #0e151a;
+  --cor-superficie-2: #111920;
+  --cor-superficie-3: #17212a;
+  --cor-linha: #1f2a31;
+  --cor-linha-forte: #24313a;
+  --cor-linha-pilula: #2a363e;
+  --cor-linha-ativa: #3a4a55;
+  --cor-texto: #e9e4d8;
+  --cor-texto-2: #c8c2b5;
+  --cor-texto-3: #8b968f;
+  --cor-texto-leitura: #d6d0c3;
+  --cor-nav: #a9b2ab;
+  --cor-destaque: #f2b544;
+  --cor-destaque-forte: #ffd27a;
+  --cor-destaque-fundo: rgba(242, 181, 68, 0.12);
+  --cor-info: #4fc3e8;
+  --cor-radiant: #5bbf7a;
+  --cor-dire: #e0675a;
+  --cor-alerta-texto: #f08a7e;
+  --cor-neutro: #b08cff;
+  --cor-brilho-mapa: #13202a;
+
+  --fonte-display: 'Saira Condensed', 'Arial Narrow', sans-serif;
+  --fonte-texto: 'IBM Plex Sans', system-ui, sans-serif;
+  --fonte-num: 'JetBrains Mono', ui-monospace, monospace;
+
+  --raio: 12px;
+  --raio-pequeno: 8px;
+  --raio-pilula: 99px;
+
+  --espaco-1: 4px;
+  --espaco-2: 8px;
+  --espaco-3: 12px;
+  --espaco-4: 16px;
+  --espaco-5: 24px;
+  --espaco-6: 32px;
+
+  --alvo-toque: 44px;
+  --altura-barra-celular: 64px;
+}

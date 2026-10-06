@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "textos": {"type": "array", "items": {"type": "string"}},
+    "passo": {"type": "object", "required": ["n", "alvo", "x", "y", "rotulo", "minuto", "acao", "risco"],
+      "properties": {"x": {"type": "number", "minimum": -0.05, "maximum": 1.05}, "y": {"type": "number", "minimum": -0.05, "maximum": 1.05}}},
+    "fase": {"type": "object", "required": ["de", "ate", "janela", "objetivo", "passos", "caminhos"],
+      "properties": {"de": {"type": "number"}, "ate": {"type": ["number", "null"]}, "passos": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/passo"}},
+        "caminhos": {"type": "array", "items": {"type": "array", "minItems": 2}}}}
+  },
+  "type": "object",
+  "required": ["id", "nome", "hero_id", "patch", "resumo", "confianca", "guia", "power_spikes", "por_minuto", "rotas", "rotas_relacionadas", "pros", "fontes"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z_]+$"},
+    "hero_id": {"type": "integer"},
+    "guia": {"type": "object", "required": ["bom_quando", "evitar_quando", "momento_do_draft", "lane", "skill_build", "itens_core", "itens_situacionais", "condicao_para_farmar", "depois_dos_20", "erros_comuns"],
+      "properties": {"bom_quando": {"$ref": "#/$defs/textos"}, "evitar_quando": {"$ref": "#/$defs/textos"},
+        "depois_dos_20": {"$ref": "#/$defs/textos"}, "erros_comuns": {"$ref": "#/$defs/textos"}}},
+    "power_spikes": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["minuto", "faixa", "marco", "o_que_fazer"],
+      "properties": {"minuto": {"type": ["number", "null"]}, "faixa": {"type": "string"}}}},
+    "por_minuto": {"type": ["array", "null"]},
+    "rotas": {"type": "object", "required": ["radiant", "dire"],
+      "properties": {"radiant": {"type": "array", "items": {"$ref": "#/$defs/fase"}}, "dire": {"type": "array", "items": {"$ref": "#/$defs/fase"}}}},
+    "rotas_relacionadas": {"type": "array", "items": {"type": "string"}},
+    "pros": {"type": "object", "required": ["linhas", "leitura"],
+      "properties": {"linhas": {"type": "array", "items": {"type": "object", "required": ["jogador", "jogos", "vitorias", "lh10"],
+        "properties": {"jogos": {"type": "integer"}, "vitorias": {"type": ["integer", "null"]}, "lh10": {"type": ["number", "null"]}}}},
+        "leitura": {"type": ["string", "null"]}}},
+    "fontes": {"$ref": "#/$defs/textos"}
+  }
+}

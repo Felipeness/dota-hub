@@ -5,6 +5,6 @@ import { Shell } from "./layout/Shell";
 it("mostra o nome do app", () => {
   vi.stubGlobal("fetch", vi.fn(() => new Promise(() => {})));
   render(<MemoryRouter><Shell /></MemoryRouter>);
-  expect(screen.getByText("Dota Hub")).toBeInTheDocument();
+  expect(screen.getByRole("link", { name: "Dota Hub" })).toBeInTheDocument();
   vi.unstubAllGlobals();
 });

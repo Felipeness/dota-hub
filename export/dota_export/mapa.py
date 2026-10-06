@@ -11,6 +11,8 @@ TIPO_POR_GRUPO = {"roshan": "roshan", "tormentors": "tormentor", "towers": "torr
                   "shops": "loja", "twin_gates": "twin_gate", "ancients": "ancient", "fountains": "fonte"}
 CAMPOS_TOPO = ("id", "nome_pt", "x", "y", "side")
 LADOS = {"radiant", "dire"}
+# qualidade 70 deixa o mapa_2048 com cerca de 830 KB (era 1,37 MB com 85), pela meta de 3 s no 4G
+JPEG = {"quality": 70, "optimize": True, "progressive": True}
 
 
 def textura_alinhada(tamanho: int) -> Image.Image:

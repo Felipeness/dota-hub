@@ -2,6 +2,8 @@
 id: bkb
 titulo: BKB
 patch: 7.41
+categoria: item
+item: black_king_bar
 fontes:
 - Termo de uso comum no jogo (definição, sem número no texto)
 links:

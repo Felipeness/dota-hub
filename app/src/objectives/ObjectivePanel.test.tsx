@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { ObjectivePanel, rotuloOrigem } from "./ObjectivePanel";
+import { numerosDoObjetivo, ObjectivePanel, rotuloOrigem } from "./ObjectivePanel";
 
 const camp = { id: "rad_safe_small_1", tipo: "camp", nome: "Pequeno do pull", x: 0.7, y: 0.2, lado: "radiant" as const, detalhes: {} };
-const conteudo = [{ id: "camp", titulo: "Camp", patch: "7.41", fontes: ["Liquipedia"], secoes: { basico: "Camps nascem a cada minuto.", avancado: null }, origem: { basico: null, avancado: null }, links: [] }];
+const conteudo = [{ id: "camp", titulo: "Camp", patch: "7.41", fontes: ["Liquipedia"], secoes: { basico: "Camps nascem a cada minuto.", avancado: null }, origem: { basico: null, avancado: null }, links: [], extras: {} }];
 
 it("mostra o básico e, sem avançado, avisa que ainda não foi escrito", () => {
   render(<ObjectivePanel objetivo={camp} conteudo={conteudo} onFechar={() => {}} />);
@@ -14,7 +14,7 @@ it("mostra o básico e, sem avançado, avisa que ainda não foi escrito", () => 
 
 const rosh = { ...camp, id: "roshan", tipo: "roshan", nome: "Roshan" };
 const roshConteudo = [{
-  id: "roshan", titulo: "Roshan", patch: "7.41", fontes: ["datamine"], links: [],
+  id: "roshan", titulo: "Roshan", patch: "7.41", fontes: ["datamine"], links: [], extras: {},
   secoes: { basico: "Vida 6000.", avancado: "Mediana 23:10." },
   origem: { basico: { tipo: "recomendado" as const, replays: [] }, avancado: { tipo: "replay" as const, replays: ["111", "222"] } },
 }];
@@ -32,4 +32,22 @@ it.each([
   { marca: { tipo: "replay" as const, replays: ["8834466305"] }, esperado: "Visto em replay 8834466305." },
 ])("rotuloOrigem($marca) devolve $esperado", ({ marca, esperado }) => {
   expect(rotuloOrigem(marca)).toBe(esperado);
+});
+
+it.each([
+  { detalhes: { lane: "top", tier: 1 }, esperado: [["lane", "top"], ["tier", "1"]] },
+  { detalhes: { empilhavel: true, anfibio: false }, esperado: [["empilhavel", "sim"], ["anfibio", "não"]] },
+  { detalhes: { dist_torre_unidades: 1420, regra: "texto longo demais para caber numa célula da grade" }, esperado: [["dist torre unidades", "1420"]] },
+  { detalhes: { lista: [1, 2] }, esperado: [] },
+])("numerosDoObjetivo($detalhes) mostra só valores curtos", ({ detalhes, esperado }) => {
+  expect(numerosDoObjetivo(detalhes)).toEqual(esperado);
+});
+
+it("no avançado, cada parágrafo vira um cartão numerado", () => {
+  const dois = [{ ...roshConteudo[0], secoes: { basico: "Vida 6000.", avancado: "Primeiro ponto.\n\nSegundo ponto." } }];
+  render(<ObjectivePanel objetivo={rosh} conteudo={dois} onFechar={() => {}} />);
+  fireEvent.click(screen.getByRole("tab", { name: "Avançado" }));
+  const cartoes = screen.getAllByRole("listitem");
+  expect(cartoes).toHaveLength(2);
+  expect(cartoes[1]).toHaveTextContent("2Segundo ponto.");
 });

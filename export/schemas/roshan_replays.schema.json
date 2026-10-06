@@ -1,0 +1,3 @@
+{"$schema": "https://json-schema.org/draft/2020-12/schema", "type": "array",
+ "items": {"type": "object", "required": ["match_id", "minuto", "heroi", "lado", "aliados_perto", "solo"],
+   "properties": {"aliados_perto": {"type": ["integer", "null"]}, "solo": {"type": "boolean"}, "lado": {"enum": ["radiant", "dire"]}}}}

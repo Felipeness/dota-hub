@@ -3,6 +3,7 @@ import re
 from pathlib import Path
 
 ORIGENS = ("recomendado", "replay")
+PADRAO = frozenset({"id", "titulo", "patch", "fontes", "links"})
 SECAO = re.compile(r"^##\s+(Básico|Avançado)\s*$", re.MULTILINE)
 
 
@@ -52,7 +53,7 @@ def _item(arq: Path) -> dict:
         secoes = _secoes(corpo)
         return {"id": meta.get("id", arq.stem), "titulo": meta["titulo"], "patch": meta.get("patch", "7.41"),
                 "fontes": meta.get("fontes", []), "secoes": secoes, "origem": _origem(meta, secoes),
-                "links": meta.get("links", [])}
+                "links": meta.get("links", []), "extras": {k: v for k, v in meta.items() if k not in PADRAO}}
     except (ValueError, KeyError) as erro:
         raise ValueError(f"{arq.name}: {erro}") from erro
 

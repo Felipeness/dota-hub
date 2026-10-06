@@ -1,3 +1,5 @@
+import io
+
 from dota_export import mapa, validar
 
 def test_objetos_cobrem_os_tipos_do_mapa():
@@ -17,3 +19,8 @@ def test_textura_alinha_coordenada_normalizada():
     # a fonte Radiant (0,09; 0,124) fica no canto de baixo à esquerda da textura
     x, y = 0.09, 0.124
     assert img.getpixel((int(x * 256), int((1 - y) * 256))) != (0, 0, 0)
+
+def test_textura_de_celular_cabe_na_meta_do_4g():
+    arquivo = io.BytesIO()
+    mapa.textura_alinhada(2048).save(arquivo, "JPEG", **mapa.JPEG)
+    assert len(arquivo.getvalue()) < 900 * 1024

@@ -2,6 +2,7 @@
 id: item_timing
 titulo: Item timing
 patch: 7.41
+categoria: economia
 fontes:
 - Termo de uso comum no jogo (definição, sem número no texto)
 links:

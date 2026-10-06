@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array", "minItems": 22,
+  "items": {"type": "object", "required": ["id", "nome", "hero_id", "patch", "resumo", "tem_por_minuto"],
+    "properties": {"tem_por_minuto": {"type": "boolean"}}}
+}

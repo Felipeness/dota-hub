@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["match_id", "passo_s", "fim_s", "focos", "herois", "wards", "mortes"],
+  "properties": {
+    "match_id": {"type": "string", "pattern": "^[0-9]+$"},
+    "passo_s": {"type": "integer", "minimum": 1},
+    "fim_s": {"type": "integer", "minimum": 0, "maximum": 1800},
+    "focos": {"type": "array", "items": {"type": "integer"}},
+    "herois": {"type": "array", "items": {"type": "object", "required": ["slot", "heroi", "lado", "jogador", "xy"],
+      "properties": {"lado": {"enum": ["radiant", "dire"]}, "jogador": {"type": ["string", "null"]},
+        "xy": {"type": "array", "items": {"type": "integer", "minimum": -1, "maximum": 1000}}}}},
+    "wards": {"type": "array", "items": {"type": "object", "required": ["t", "ate", "x", "y", "lado", "tipo"]}},
+    "mortes": {"type": "array", "items": {"type": "object", "required": ["t", "x", "y", "heroi", "lado"]}}
+  }
+}

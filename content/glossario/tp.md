@@ -2,6 +2,8 @@
 id: tp
 titulo: TP
 patch: 7.41
+categoria: item
+item: tpscroll
 fontes:
 - Termo de uso comum no jogo (definição, sem número no texto)
 links:
