@@ -76,8 +76,9 @@ function Resultados({ consulta, limpar }: { consulta: string; limpar: () => void
     const parecidos = sugerir(busca, consulta);
     return <p>Nada encontrado.{parecidos.length > 0 && ` Você quis dizer: ${parecidos.join(", ")}?`}</p>;
   }
+  // O Safari não dá foco ao link no clique: o preventDefault mantém o foco no campo e a lista não some antes do click.
   return (
-    <ul>
+    <ul onMouseDown={(e) => e.preventDefault()}>
       {achados.map((a) => (
         <li key={`${a.tipo}:${a.id}`}>
           <span className="etiqueta">{ETIQUETA[a.tipo]}</span>{" "}

@@ -28,3 +28,15 @@ it("Esc e foco fora da busca fecham os resultados", () => {
   fireEvent.focusOut(campo, { relatedTarget: screen.getByRole("button", { name: "fora" }) });
   expect(screen.queryByText("Carregando a busca.")).not.toBeInTheDocument();
 });
+
+it("clicar num resultado não tira o foco do campo antes da navegação", async () => {
+  const termo = { id: "roshan", titulo: "Roshan", patch: "7.41", fontes: [], secoes: { basico: "Chefe.", avancado: null }, origem: { basico: null, avancado: null } };
+  vi.stubGlobal("fetch", vi.fn((url: string) => Promise.resolve(new Response(JSON.stringify(url.endsWith("glossario.json") ? [termo] : [])))));
+  render(<MemoryRouter><SearchBox /></MemoryRouter>);
+  const campo = screen.getByRole("searchbox");
+  fireEvent.focus(campo);
+  fireEvent.change(campo, { target: { value: "rosh" } });
+  const link = await screen.findByRole("link", { name: "Roshan" });
+  // O Safari não dá foco ao link no clique: sem o preventDefault o campo perde o foco e a lista some antes do click.
+  expect(fireEvent.mouseDown(link)).toBe(false);
+});
