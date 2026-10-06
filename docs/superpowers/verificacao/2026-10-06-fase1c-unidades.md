@@ -119,7 +119,7 @@ A rolagem horizontal não vem mais da tabela de crescimento, que já fica num co
 ## Backlog (diferenças achadas)
 
 1. Diagnóstico corrigido na rodada de correção: a tabela de crescimento do Roshan (744 px) já fica dentro de `.tabela-rolavel` com `overflow-x: auto` e rola sozinha. A rolagem horizontal do painel vem das habilidades; ver o item 6.
-2. Tempo do toque até o primeiro quadro do Roshan: 2,34 s no celular simulado, acima dos 2 s. Opções: pré-carregar o Cena3D quando o painel abre, ou mostrar o poster enquanto o modelo carrega.
+2. Tempo do toque até o primeiro quadro do Roshan: 2,34 s no celular simulado, acima dos 2 s. Opções: pré-carregar o Cena3D quando o painel abre, ou mostrar o poster enquanto o modelo carrega. Feito na correção final: o painel do Roshan e do Tormentor começa a baixar o Cena3D ao abrir, junto com a ficha, e o poster já fica na tela enquanto o modelo carrega. Falta medir de novo no celular simulado; o critério 4 só fecha com essa medida abaixo de 2 s ou com o aceite do Felipe.
 3. O canvas do mapa aparece em 3,98 s no celular simulado, por causa dos 835 KB do `mapa_2048.jpg`. Vem da 1B, não da 1C, mas o critério de primeira tela em 3 s depende de qual marco conta.
 4. Vistos no caminho, anteriores à 1C: em 1280 px o item "Mapa" do menu fica por cima do logo; em 390 px o seletor "Rota real de replay" passa da borda direita; `favicon.ico` dá 404.
 5. Pendente de pessoa: os 10 pares do Roshan contra o jogo e um teste em celular de verdade.

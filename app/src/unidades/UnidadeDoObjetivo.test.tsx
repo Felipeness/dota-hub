@@ -2,6 +2,8 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import { UnidadeDoObjetivo } from "./UnidadeDoObjetivo";
 
+const { precarregarCena3D } = vi.hoisted(() => ({ precarregarCena3D: vi.fn() }));
+vi.mock("./VisualizadorUnidade", () => ({ precarregarCena3D }));
 vi.mock("./FichaUnidade", () => ({ FichaUnidade: ({ unidade }: { unidade: { nome: string } }) => `ficha de ${unidade.nome}` }));
 
 const objetivo = (tipo: string, detalhes: Record<string, unknown> = {}) => ({ id: `${tipo}_1`, tipo, nome: tipo, x: 0.5, y: 0.5, lado: "neutro" as const, detalhes });
@@ -28,6 +30,13 @@ afterEach(() => vi.unstubAllGlobals());
 it("Roshan mostra a ficha da unidade", async () => {
   render(<MemoryRouter><UnidadeDoObjetivo objetivo={objetivo("roshan")} /></MemoryRouter>);
   expect(await screen.findByText("ficha de Roshan")).toBeInTheDocument();
+});
+
+it("abrir o Roshan já começa a baixar a cena 3D, antes da ficha chegar", () => {
+  vi.stubGlobal("fetch", () => new Promise(() => {}));
+  render(<MemoryRouter><UnidadeDoObjetivo objetivo={objetivo("roshan")} /></MemoryRouter>);
+  expect(screen.getByText("Carregando…")).toBeInTheDocument();
+  expect(precarregarCena3D).toHaveBeenCalled();
 });
 
 it("camp pequeno seco lista os tipos possíveis com as unidades e quantidades", async () => {

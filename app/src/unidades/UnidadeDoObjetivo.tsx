@@ -1,13 +1,16 @@
+import { useEffect } from "react";
 import { Link } from "react-router";
 import { campsSchema, unidadeSchema, unidadesSchema, type Objetivo } from "../data/schemas";
 import { Indisponivel, useData } from "../data/useData";
 import { tiposDoCamp } from "./ficha";
 import { FichaUnidade } from "./FichaUnidade";
+import { precarregarCena3D } from "./VisualizadorUnidade";
 
 const UNIDADE_DO_TIPO: Readonly<Partial<Record<string, string>>> = { roshan: "roshan", tormentor: "tormentor" };
 
 function FichaDoObjetivo({ id }: { id: string }) {
   const ficha = useData(`/data/unidades/${id}.json`, unidadeSchema);
+  useEffect(precarregarCena3D, []);
   if (ficha.estado === "carregando") return <p>Carregando…</p>;
   if (ficha.estado === "indisponivel") return <Indisponivel motivo={ficha.motivo} />;
   return <FichaUnidade unidade={ficha.dados} />;

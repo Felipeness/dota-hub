@@ -2,7 +2,14 @@ import { Component, lazy, Suspense, useState, type ReactNode } from "react";
 import { hasWebGL } from "../map/webgl";
 import { urlDoModelo, urlDoPoster } from "./ficha";
 
-const Cena3D = lazy(() => import("./Cena3D").then((m) => ({ default: m.Cena3D })));
+const carregarCena3D = () => import("./Cena3D");
+const Cena3D = lazy(() => carregarCena3D().then((m) => ({ default: m.Cena3D })));
+
+// Baixa o pedaço do Three.js junto com a ficha, em vez de só depois dela: o modelo aparece antes.
+// Falha aqui não quebra nada: o lazy tenta de novo e o LimiteDeErro mostra o aviso.
+export function precarregarCena3D(): void {
+  carregarCena3D().catch((erro: unknown) => console.warn("pré-carga do modelo 3D:", erro));
+}
 
 export type VisualizadorProps = { modelo: string | null; nome: string };
 
