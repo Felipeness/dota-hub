@@ -12,7 +12,9 @@ from . import jogo
 GLTF_TRANSFORM = "@gltf-transform/cli@4.5.1"
 OTIMIZACAO = ["--compress", "meshopt", "--texture-compress", "webp"]
 PARADA_EXATA = re.compile(r"(^|_)idle(_loop)?$")
-FORA_DA_PARADA = ("portrait", "capture", "death", "channel", "sleep", "victory", "defeat", "reversed")
+FORA_DA_PARADA = ("portrait", "capture", "death", "channel", "sleep", "victory", "defeat", "reversed", "_to_")
+MALHA_EMBUTIDA = re.compile(r'm_Name = "([^"]*)"\s+m_nMeshIndex = (\d+)')
+LOD_ZERO = 1
 TEXTURA_MENOR = "256"
 LIMITE_BYTES = 400 * 1024
 LIMITE_TOTAL_BYTES = 15 * 1024 * 1024
@@ -25,23 +27,53 @@ def nome(caminho: str) -> str:
     return Path(caminho).stem
 
 
-def animacoes(glb: Path) -> list[str]:
+def _gltf(glb: Path) -> dict:
     with glb.open("rb") as arquivo:
         cabecalho = arquivo.read(20)
         if len(cabecalho) < 20 or struct.unpack("<I", cabecalho[:4])[0] != MAGICO_GLB:
             raise ValueError(f"{glb.name} não é glb")
         tamanho = struct.unpack("<I", cabecalho[12:16])[0]
-        gltf = json.loads(arquivo.read(tamanho))
-    return [a.get("name", "") for a in gltf.get("animations", [])]
+        return json.loads(arquivo.read(tamanho))
+
+
+def animacoes(glb: Path) -> list[str]:
+    return [a.get("name", "") for a in _gltf(glb).get("animations", [])]
+
+
+def malhas(glb: Path) -> list[str]:
+    """Nome de cada malha sem o prefixo '<caminho do vmdl_c>.' que o exportador põe."""
+    return [m.get("name", "").rpartition(".vmdl_c.")[2] for m in _gltf(glb).get("meshes", [])]
 
 
 def escolher_parada(nomes: list[str]) -> str | None:
-    """'idle' exato primeiro; senão a variação de idle de nome mais curto (sapos e reaproveitados não têm o exato)."""
-    exata = next((n for n in nomes if PARADA_EXATA.search(n)), None)
-    if exata:
-        return exata
-    candidatos = [n for n in nomes if "idle" in n.lower() and not any(f in n.lower() for f in FORA_DA_PARADA)]
-    return min(candidatos, key=len, default=None)
+    """'idle' exato primeiro; senão a variação de idle de nome mais curto (sapos e reaproveitados não têm o exato).
+
+    Transições como 'sleeping_lying_to_idle' terminam em '_idle' mas deitam o creep: ficam de fora nos dois passos.
+    """
+    paradas = [n for n in nomes if "idle" in n.lower() and not any(f in n.lower() for f in FORA_DA_PARADA)]
+    exata = next((n for n in paradas if PARADA_EXATA.search(n)), None)
+    return exata or min(paradas, key=len, default=None)
+
+
+def _lista_numeros(data: str, chave: str) -> list[int]:
+    achado = re.search(chave + r" =\s*(\[[^\]]*\]|-?\d+)", data)
+    if achado is None:
+        raise ValueError(f"bloco DATA do modelo sem {chave}")
+    return [int(n) for n in re.findall(r"-?\d+", achado.group(1))]
+
+
+def malhas_visiveis(ctrl: str, data: str) -> list[str] | None:
+    """Malhas de LOD 0 que o jogo mostra no corpo padrão; None quando nenhuma fica escondida (exporta tudo).
+
+    O exportador junta todas as malhas, inclusive as de grupos de corpo desligados (a variante 'cavern' do creep
+    melee do Dire ficava sobreposta ao corpo normal). Cada malha liga se a máscara dela cruza a máscara padrão.
+    """
+    grupos = _lista_numeros(data, "m_refMeshGroupMasks")
+    lods = _lista_numeros(data, "m_refLODGroupMasks")
+    (padrao,) = _lista_numeros(data, "m_nDefaultMeshGroupMask")
+    lod_zero = [(nome, int(i)) for nome, i in MALHA_EMBUTIDA.findall(ctrl) if lods[int(i)] & LOD_ZERO]
+    visiveis = [nome for nome, i in lod_zero if grupos[i] & padrao]
+    return visiveis if len(visiveis) < len(lod_zero) else None
 
 
 def _vrf_glb(arquivo_vpk: Path, caminho: str, saida: Path, extra: list[str]) -> None:
@@ -60,6 +92,10 @@ def otimizar(origem: Path, saida: Path, textura: str = "512") -> None:
         raise RuntimeError(f"gltf-transform {origem.name}: {r.stderr[-500:]}")
 
 
+def _bloco(arquivo_vpk: Path, caminho: str, bloco: str) -> str:
+    return jogo.vrf("-i", str(arquivo_vpk), "-f", f"{caminho}_c", "-b", bloco)
+
+
 def exportar(arquivo_vpk: Path, caminho: str, destino: Path) -> None:
     """Exporta duas vezes: a primeira só para descobrir o nome da animação parada."""
     n = nome(caminho)
@@ -67,8 +103,11 @@ def exportar(arquivo_vpk: Path, caminho: str, destino: Path) -> None:
         todas = Path(tmp) / "todas" / f"{n}.glb"
         _vrf_glb(arquivo_vpk, caminho, todas, ["--gltf_export_animations"])
         parada = escolher_parada(animacoes(todas))
+        visiveis = malhas_visiveis(_bloco(arquivo_vpk, caminho, "CTRL"), _bloco(arquivo_vpk, caminho, "DATA"))
+        extra = ["--gltf_export_animations", "--gltf_animation_list", parada] if parada else []
+        extra += ["--gltf_mesh_list", ",".join(visiveis)] if visiveis else []
         bruto = Path(tmp) / "bruto" / f"{n}.glb"
-        _vrf_glb(arquivo_vpk, caminho, bruto, ["--gltf_export_animations", "--gltf_animation_list", parada] if parada else [])
+        _vrf_glb(arquivo_vpk, caminho, bruto, extra)
         destino.mkdir(parents=True, exist_ok=True)
         final = destino / f"{n}.glb"
         otimizar(bruto, final)
