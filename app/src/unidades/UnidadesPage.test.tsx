@@ -39,3 +39,11 @@ it("ficha que não carrega mostra dados indisponíveis e mantém a lista", async
   expect(await screen.findByRole("alert")).toHaveTextContent("Dados indisponíveis");
   expect(screen.getByRole("link", { name: "Kobold" })).toBeInTheDocument();
 });
+
+it("sem camps.json mostra dados indisponíveis em vez de agrupar a selva errado", async () => {
+  vi.stubGlobal("fetch", (path: string) => Promise.resolve(path === "/data/camps.json"
+    ? new Response("", { status: 404 }) : new Response(JSON.stringify(arquivos[path]))));
+  abrir("/glossario/unidades");
+  expect(await screen.findByRole("alert")).toHaveTextContent("Dados indisponíveis");
+  expect(screen.queryByRole("heading", { name: "Selva: pequeno" })).not.toBeInTheDocument();
+});

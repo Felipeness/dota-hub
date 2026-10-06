@@ -51,13 +51,15 @@ export function tiposDoCamp(camp: Objetivo, tipos: readonly TipoCamp[]): TipoCam
 
 const ROTULO_TAMANHO = { small: "pequeno", medium: "médio", large: "grande", ancient: "ancient" } as const satisfies Record<TipoCamp["tamanho"], string>;
 const rotuloDoTipo = (t: TipoCamp) => `Selva: ${t.terreno === "inundado" ? "anfíbio" : ROTULO_TAMANHO[t.tamanho]}`;
-const ORDEM_SELVA = ["Selva: pequeno", "Selva: médio", "Selva: grande", "Selva: ancient", "Selva: anfíbio"];
+// Unidade de selva sem camp conhecido aparece num grupo próprio, para o erro do export ficar visível.
+const SEM_CAMP = "Selva: sem camp";
+const ORDEM_SELVA = ["Selva: pequeno", "Selva: médio", "Selva: grande", "Selva: ancient", "Selva: anfíbio", SEM_CAMP];
 const TITULO_GRUPO = { chefe: "Roshan e Tormentor", lane: "Creeps de lane" } as const;
 
 function tituloDe(u: UnidadeResumo, tipos: ReadonlyMap<string, TipoCamp>): string {
   if (u.grupo !== "selva") return TITULO_GRUPO[u.grupo];
   const primeiro = u.camps.map((id) => tipos.get(id)).find((t) => t !== undefined);
-  return primeiro ? rotuloDoTipo(primeiro) : "Selva: pequeno";
+  return primeiro ? rotuloDoTipo(primeiro) : SEM_CAMP;
 }
 
 export function agruparUnidades(unidades: readonly UnidadeResumo[], tipos: readonly TipoCamp[]): { titulo: string; unidades: UnidadeResumo[] }[] {

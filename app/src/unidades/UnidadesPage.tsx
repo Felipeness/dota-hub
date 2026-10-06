@@ -19,9 +19,11 @@ export function UnidadesPage() {
   const { id } = useParams();
   const unidades = useData("/data/unidades.json", unidadesSchema);
   const camps = useData("/data/camps.json", campsSchema);
-  if (unidades.estado === "carregando") return <p>Carregando…</p>;
+  // Sem camps.json não dá para separar a selva por tipo de camp: esperar e avisar em vez de agrupar errado.
+  if (unidades.estado === "carregando" || camps.estado === "carregando") return <p>Carregando…</p>;
   if (unidades.estado === "indisponivel") return <Indisponivel motivo={unidades.motivo} />;
-  const grupos = agruparUnidades(unidades.dados, camps.estado === "ok" ? camps.dados : []);
+  if (camps.estado === "indisponivel") return <Indisponivel motivo={camps.motivo} />;
+  const grupos = agruparUnidades(unidades.dados, camps.dados);
   return (
     <section className="unidades-pagina">
       <nav className="unidades-lista" aria-label="Unidades">

@@ -54,3 +54,10 @@ it("agrupa as unidades como a tela Unidades mostra", () => {
     ["Selva: pequeno", ["kobold"]], ["Selva: anfíbio", ["tadpole"]],
   ]);
 });
+
+it("unidade de selva sem camp conhecido vai para o grupo sem camp", () => {
+  const grupos = agruparUnidades([resumo("kobold", "selva", ["kobold"]), resumo("perdido", "selva", ["camp_inexistente"])], TIPOS);
+  expect(grupos.map((g) => [g.titulo, g.unidades.map((u) => u.id)])).toEqual([
+    ["Selva: pequeno", ["kobold"]], ["Selva: sem camp", ["perdido"]],
+  ]);
+});
