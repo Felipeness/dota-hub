@@ -118,7 +118,7 @@ function Rotas({ rotas, indice, objetivos }: RotasProps) {
       </div>
       </div>
       <div className="rotas-mapa" id={ID_DO_MAPA}>
-        {id ? <RotaAberta key={id} id={id} objetivos={objetivos} onIrPara={irPara} /> : <MapaSemRota objetivos={objetivos} />}
+        {id ? <RotaAberta id={id} objetivos={objetivos} onIrPara={irPara} /> : <MapaSemRota objetivos={objetivos} />}
       </div>
     </section>
   );
