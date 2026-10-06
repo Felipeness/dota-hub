@@ -1,8 +1,8 @@
 import { buscar, construirIndice, sugerir } from "./index";
 
 const termos = [
-  { id: "roshan", titulo: "Roshan", patch: "7.41", fontes: [], secoes: { basico: "Chefe neutro do rio.", avancado: null }, links: [] },
-  { id: "pull", titulo: "Pull", patch: "7.41", fontes: [], secoes: { basico: "Puxar o camp para a wave.", avancado: null }, links: [] },
+  { id: "roshan", titulo: "Roshan", patch: "7.41", fontes: [], secoes: { basico: "Chefe neutro do rio.", avancado: null }, origem: { basico: null, avancado: null }, links: [] },
+  { id: "pull", titulo: "Pull", patch: "7.41", fontes: [], secoes: { basico: "Puxar o camp para a wave.", avancado: null }, origem: { basico: null, avancado: null }, links: [] },
 ];
 const busca = construirIndice({ rotas: [], objetivos: [], termos });
 

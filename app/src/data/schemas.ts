@@ -30,9 +30,12 @@ const celula = z.object({ id: z.string().nullable(), nota: z.string().nullable()
 const linha = z.object({ minuto: z.number(), cenarios: z.record(z.string(), celula) });
 export const indiceSchema = z.object({ colunas: z.array(z.string()), radiant: z.array(linha), dire: z.array(linha) });
 
+const marcaSchema = z.object({ tipo: z.enum(["recomendado", "replay"]), replays: z.array(z.string()) }).nullable();
 export const conteudoItemSchema = z.object({
   id: z.string(), titulo: z.string(), patch: z.string(), fontes: z.array(z.string()),
-  secoes: z.object({ basico: z.string(), avancado: z.string().nullable() }), links: z.array(z.string()).default([]),
+  secoes: z.object({ basico: z.string(), avancado: z.string().nullable() }),
+  origem: z.object({ basico: marcaSchema, avancado: marcaSchema }),
+  links: z.array(z.string()).default([]),
 });
 export const conteudoSchema = z.array(conteudoItemSchema);
 
@@ -45,6 +48,7 @@ export type Objetivo = z.infer<typeof objetivoSchema>;
 export type Passo = z.infer<typeof passoSchema>;
 export type Rota = z.infer<typeof rotaSchema>;
 export type Indice = z.infer<typeof indiceSchema>;
+export type Marca = z.infer<typeof marcaSchema>;
 export type ConteudoItem = z.infer<typeof conteudoItemSchema>;
 export type Conteudo = z.infer<typeof conteudoSchema>;
 export type Meta = z.infer<typeof metaSchema>;

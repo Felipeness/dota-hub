@@ -2,7 +2,7 @@ import type { ConteudoItem } from "../data/schemas";
 import { destinoDoLink } from "./destino";
 
 const termo = (id: string, titulo: string): ConteudoItem =>
-  ({ id, titulo, patch: "7.41", fontes: [], secoes: { basico: "", avancado: null }, links: [] });
+  ({ id, titulo, patch: "7.41", fontes: [], secoes: { basico: "", avancado: null }, origem: { basico: null, avancado: null }, links: [] });
 const termos = [termo("pull", "Pull"), termo("camp", "Camp")];
 
 it.each([
