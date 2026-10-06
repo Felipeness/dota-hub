@@ -3,6 +3,10 @@ import { MemoryRouter } from "react-router";
 import type { Heroi } from "../data/schemas";
 import { FichaHeroi } from "./FichaHeroi";
 
+const fetchOriginal = globalThis.fetch;
+
+afterEach(() => vi.unstubAllGlobals());
+
 const heroi: Heroi = {
   id: "medusa", nome: "Medusa", hero_id: 94, patch: "7.41f", resumo: "Carry de jogo longo.", confianca: "Média.",
   guia: {
@@ -63,5 +67,8 @@ it("aba Rotas mostra só os alvos da fase e troca para a rota da situação", as
   fireEvent.click(await screen.findByRole("button", { name: "lane impossível" }));
   expect(await screen.findByText(/Lane impossível no minuto 4/)).toBeInTheDocument();
   expect(within(screen.getByRole("list", { name: "Passos da rota" })).getByText(/Puxe o camp./)).toBeInTheDocument();
-  vi.unstubAllGlobals();
+});
+
+it("devolve o fetch original depois de um teste que o trocou", () => {
+  expect(globalThis.fetch).toBe(fetchOriginal);
 });
