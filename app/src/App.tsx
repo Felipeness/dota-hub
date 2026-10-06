@@ -24,6 +24,7 @@ const router = createBrowserRouter([
       { path: "/times/:id", hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./players/TeamPage")).TeamPage }) },
     ],
   },
+  { path: "/poster/:modelo", hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./unidades/PaginaPoster")).PaginaPoster }) },
 ]);
 
 export default function App() {
