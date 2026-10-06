@@ -45,3 +45,16 @@ it("acha herói, jogador e time", () => {
   expect(buscar(b, "skit")[0]).toMatchObject({ tipo: "jogador", link: "/jogadores/skiter" });
   expect(buscar(b, "spirit")[0]).toMatchObject({ tipo: "time", link: "/times/team-spirit" });
 });
+
+const unidades = [{ id: "roshan", nome: "Roshan", grupo: "chefe" as const, papel: "chefe neutro", lado: "neutro" as const, modelo: "roshan", camps: [],
+  habilidades: [{ id: "roshan_slam", nome: "Porrada", nome_en: "Slam" }] },
+  { id: "kobold", nome: "Kobold", grupo: "selva" as const, papel: "monstro da selva", lado: "neutro" as const, modelo: "k", camps: ["kobold"], habilidades: [] }];
+
+it.each([
+  { consulta: "porrada", tipo: "habilidade", link: "/glossario/unidades/roshan#roshan_slam" },
+  { consulta: "slam", tipo: "habilidade", link: "/glossario/unidades/roshan#roshan_slam" },
+  { consulta: "kobo", tipo: "unidade", link: "/glossario/unidades/kobold" },
+])("busca $consulta acha $tipo", ({ consulta, tipo, link }) => {
+  const indice = construirIndice({ rotas: [], objetivos: [], termos: [], unidades });
+  expect(buscar(indice, consulta)[0]).toMatchObject({ tipo, link });
+});
