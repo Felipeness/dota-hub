@@ -2,6 +2,7 @@
 id: rotacao
 titulo: Rotação
 patch: 7.41
+categoria: estrategia
 fontes:
 - Termo de uso comum no jogo (definição, sem número no texto)
 links:

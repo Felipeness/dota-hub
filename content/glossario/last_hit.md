@@ -2,6 +2,7 @@
 id: last_hit
 titulo: Last hit
 patch: 7.41
+categoria: lane
 fontes:
 - Termo de uso comum no jogo (definição, sem número no texto)
 links:

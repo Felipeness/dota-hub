@@ -2,6 +2,7 @@
 id: high_ground
 titulo: High ground
 patch: 7.41
+categoria: mapa
 fontes:
 - Termo de uso comum no jogo (definição, sem número no texto)
 links:

@@ -2,6 +2,7 @@
 id: deward
 titulo: Deward
 patch: 7.41
+categoria: visao
 fontes:
 - Termo de uso comum no jogo (definição, sem número no texto)
 links:

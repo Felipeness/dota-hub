@@ -2,6 +2,7 @@
 id: creep
 titulo: Creep
 patch: 7.41
+categoria: lane
 fontes:
 - Termo de uso comum no jogo (definição, sem número no texto)
 links:
