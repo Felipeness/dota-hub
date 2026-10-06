@@ -1,0 +1,5 @@
+{"$schema": "https://json-schema.org/draft/2020-12/schema", "type": "array", "minItems": 26,
+ "items": {"type": "object", "required": ["id", "nome", "tamanho", "terreno", "unidades", "ouro", "xp"],
+   "properties": {"tamanho": {"enum": ["small", "medium", "large", "ancient"]}, "terreno": {"enum": ["seco", "inundado"]},
+     "unidades": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["id", "qtd"]}},
+     "ouro": {"type": "array", "minItems": 2, "maxItems": 2}}}}
