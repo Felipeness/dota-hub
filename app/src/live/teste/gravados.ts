@@ -4,6 +4,7 @@ import { cacheEmMemoria } from "../cache";
 import { criarConsulta, type Consultar } from "../consulta";
 import { REGRAS_OPENDOTA, criarFila, type Fila } from "../fila";
 import { BASE_OPENDOTA, criarFonte } from "../fonte/opendota";
+import type { ServicosAoVivo } from "../servicos";
 
 export const YATORO = 321580662;
 export const SPIRIT = 7119388;
@@ -40,4 +41,9 @@ export const filaSemIntervalo = (): Fila => criarFila({ ...REGRAS_OPENDOTA, inte
 export function consultaGravada(fila: Fila = filaSemIntervalo(), substituicoes: Readonly<Record<string, unknown>> = {}): Consultar {
   const fonte = criarFonte({ fila, buscar: fonteGravada(substituicoes), estaOnline: () => true, registrar: () => {} });
   return criarConsulta({ fonte, cache: cacheEmMemoria(), agora: Date.now });
+}
+
+export function servicosGravados(substituicoes: Readonly<Record<string, unknown>> = {}): ServicosAoVivo {
+  const fila = filaSemIntervalo();
+  return { fila, consultar: consultaGravada(fila, substituicoes) };
 }
