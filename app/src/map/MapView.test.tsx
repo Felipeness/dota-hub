@@ -30,3 +30,18 @@ it("marca de morte desenha o × e o CSS não tem byte de controle", () => {
   expect(css).toContain(String.raw`.marca-morte::before { content: "\d7"; }`);
   expect(css).not.toMatch(/[\u0000-\u0008]/);
 });
+
+it("mapa plano desenha as manchas da rota aproximada com opacidade pelo peso", () => {
+  const { container } = render(
+    <MapView objetivos={[]} manchas={[{ x: 0.2, y: 0.2, peso: 1 }, { x: 0.3, y: 0.2, peso: 0.5 }]} onSelecionar={() => {}} forcarPlano />,
+  );
+  const manchas = container.querySelectorAll<HTMLElement>(".mancha");
+  expect(manchas).toHaveLength(2);
+  expect(manchas[1]?.style.opacity).toBe("0.6");
+  expect(screen.getByLabelText("Rota aproximada")).toBeInTheDocument();
+});
+
+it("sem manchas não desenha a camada", () => {
+  const { container } = render(<MapView objetivos={[]} onSelecionar={() => {}} forcarPlano />);
+  expect(container.querySelector(".manchas")).toBeNull();
+});

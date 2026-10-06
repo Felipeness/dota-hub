@@ -6,7 +6,7 @@ import { useData } from "../data/useData";
 import type { MapViewProps, Tracado } from "./MapView";
 import { alturaEm, normToWorld, type Ponto } from "./coords";
 import { texturaDoMapa } from "./textura";
-import type { Marca, Trilha } from "./trilhas";
+import { opacidadeDaMancha, type Marca, type Trilha } from "./trilhas";
 
 type Vetor = [number, number, number];
 type NoChao = (p: Ponto, acima: number) => Vetor;
@@ -113,7 +113,7 @@ function Marcas({ marcas, noChao }: { marcas: Marca[]; noChao: NoChao }) {
   ));
 }
 
-export function Map3D({ objetivos, rota, trilhas = [], marcas = [], selecionado, onSelecionar }: MapViewProps) {
+export function Map3D({ objetivos, rota, trilhas = [], marcas = [], manchas = [], selecionado, onSelecionar }: MapViewProps) {
   const noChao = useNoChao();
   const corLado: Record<Objetivo["lado"], string> = { radiant: corDoToken("--cor-radiant"), dire: corDoToken("--cor-dire"), neutro: corDoToken("--cor-neutro") };
   const destaque = corDoToken("--cor-destaque");
@@ -131,6 +131,12 @@ export function Map3D({ objetivos, rota, trilhas = [], marcas = [], selecionado,
         {rota && <TracadoRota rota={rota} cor={destaque} noChao={noChao} />}
         <Trilhas trilhas={trilhas} corLado={corLado} destaque={destaque} noChao={noChao} />
         <Marcas marcas={marcas} noChao={noChao} />
+        {manchas.map((m) => (
+          <mesh key={`mancha-${m.x}-${m.y}`} position={noChao([m.x, m.y], 0.3)} rotation={[-Math.PI / 2, 0, 0]}>
+            <circleGeometry args={[0.9, 16]} />
+            <meshBasicMaterial color={destaque} transparent opacity={opacidadeDaMancha(m.peso)} />
+          </mesh>
+        ))}
         <OrbitControls target={ALVO_DA_CAMERA} enablePan maxPolarAngle={Math.PI / 2.4} minDistance={20} maxDistance={DISTANCIA_MAXIMA} />
       </Canvas>
     </div>

@@ -1,9 +1,10 @@
 import type { MapViewProps, Tracado } from "./MapView";
 import { normToPercent, type Ponto } from "./coords";
+import { opacidadeDaMancha } from "./trilhas";
 
 const pontosSvg = (pontos: readonly Ponto[]) => pontos.map(([x, y]) => `${x},${1 - y}`).join(" ");
 
-export function MapFlat({ objetivos, rota, trilhas = [], marcas = [], selecionado, onSelecionar }: MapViewProps) {
+export function MapFlat({ objetivos, rota, trilhas = [], marcas = [], manchas = [], selecionado, onSelecionar }: MapViewProps) {
   return (
     <div className="mapa-plano">
       <img src="/data/mapa_2048.jpg" crossOrigin="anonymous" alt="Mapa do Dota 7.41" />
@@ -34,6 +35,13 @@ export function MapFlat({ objetivos, rota, trilhas = [], marcas = [], selecionad
         <span key={m.id} role="img" aria-label={m.rotulo} title={m.rotulo}
           className={`marca marca-${m.tipo} marca-${m.lado}`} style={normToPercent([m.x, m.y])} />
       ))}
+      {manchas.length > 0 && (
+        <div className="manchas" aria-label="Rota aproximada">
+          {manchas.map((m) => (
+            <span key={`${m.x}-${m.y}`} className="mancha" style={{ ...normToPercent([m.x, m.y]), opacity: opacidadeDaMancha(m.peso) }} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

@@ -245,6 +245,8 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .marca-ward { transform: translate(-50%, -50%) rotate(45deg); background: var(--cor-info); border: 1px solid rgb(10 14 17 / 0.9); }
 .marca-morte { display: grid; place-items: center; border-radius: 2px; background: var(--cor-dire); color: #fff; font-size: 8px; line-height: 1; }
 .marca-morte::before { content: "\d7"; }
+.manchas { position: absolute; inset: 0; pointer-events: none; }
+.mancha { position: absolute; width: 3.5%; aspect-ratio: 1; border-radius: 50%; transform: translate(-50%, -50%); background: radial-gradient(circle, var(--cor-destaque) 35%, transparent 70%); }
 @media (prefers-reduced-motion: reduce) {
   .heroi-agora, .marca { transition: none; }
 }
