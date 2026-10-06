@@ -88,6 +88,7 @@ export function GlossaryPage() {
   return (
     <section className="glossario">
       <aside className="glossario-lista">
+        <Link className="pilula" to="/glossario/unidades">Unidades: Roshan, creeps e selva</Link>
         <label className="campo">
           <span>Filtrar termos</span>
           <input type="search" value={texto} placeholder="stack, pull, BKB…" onChange={(e) => setTexto(e.target.value)} />
