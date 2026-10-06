@@ -1,10 +1,11 @@
 """python -m dota_export: gera todos os arquivos de dados do app em app/public/data/."""
 import json
+import shutil
 from datetime import datetime, timezone
 from pathlib import Path
 
-from . import (amigos, conteudo, fontes, herois, icones, jogadores, jogo, mapa, modelos, relevo, roshan, rotas,
-               trajetorias, unidades, validar)
+from . import (amigos, conteudo, fontes, herois, icones, jogadores, jogo, mapa, modelos, relevo, retratos, roshan,
+               rotas, trajetorias, unidades, validar)
 
 RAIZ = Path(__file__).resolve().parents[2]
 DESTINO = RAIZ / "app" / "public" / "data"
@@ -22,17 +23,31 @@ def _gravar_colecao(pasta: str, schema: str, itens: list[dict], chave: str = "id
         _gravar(f"{pasta}/{item[chave]}.json", item)
 
 
+def _gravar_rotas(todas: list[dict]) -> None:
+    """Uma rota por arquivo: a tela abre só a rota escolhida. Refaz a pasta para não sobrar rota renomeada."""
+    validar.validar("rotas", todas)
+    pasta = DESTINO / "rotas"
+    shutil.rmtree(pasta, ignore_errors=True)
+    pasta.mkdir()
+    for rota in todas:
+        _gravar(f"rotas/{rota['id']}.json", rota)
+    (DESTINO / "rotas.json").unlink(missing_ok=True)
+
+
 def main() -> None:
     DESTINO.mkdir(parents=True, exist_ok=True)
     for tamanho in (2048, 4096):
         mapa.textura_alinhada(tamanho).save(DESTINO / f"mapa_{tamanho}.jpg", **mapa.JPEG)
-    pacotes = {"objetivos": mapa.objetos(), "rotas": rotas.carregar_rotas(), "indice": rotas.indice(),
+    todas_rotas = rotas.carregar_rotas()
+    _gravar_rotas(todas_rotas)
+    pacotes = {"objetivos": mapa.objetos(), "rotas_resumo": rotas.resumo(todas_rotas),
+               "indice": rotas.indice(),
                "objetivos_conteudo": conteudo.carregar(RAIZ / "content" / "objetivos"),
                "glossario": conteudo.carregar(RAIZ / "content" / "glossario")}
     altura = relevo.relevo()
     altura.save(DESTINO / "relevo_512.png")
     pacotes["relevo"] = relevo.grade(altura)
-    fichas = herois.todos(frozenset(r["id"] for r in pacotes["rotas"]))
+    fichas = herois.todos(frozenset(r["id"] for r in todas_rotas))
     _gravar_colecao("herois", "heroi", fichas)
     pacotes["herois"] = herois.indice(fichas)
     paineis = [jogadores.felipe(), *(jogadores.pro_compare(c) for c in ("satanic", "yatoro", "watson")),
@@ -46,6 +61,9 @@ def main() -> None:
     pacotes["roshan_replays"] = roshan.todas()
     pacotes["roshan_solo"] = conteudo.carregar(RAIZ / "content" / "roshan_solo")
     arquivo_vpk = jogo.vpk()
+    retratos.atualizar_herois(arquivo_vpk, retratos.nomes_no_jogo(fichas), DESTINO / "retratos" / "herois")
+    itens_do_glossario = {t["extras"]["item"] for t in pacotes["glossario"] if "item" in t["extras"]}
+    retratos.atualizar_itens(arquivo_vpk, itens_do_glossario, DESTINO / "retratos" / "itens")
     base = unidades.Jogo.dos_arquivos(jogo.textos(arquivo_vpk), icones.disponiveis(arquivo_vpk))
     farm = fontes.farm()
     fichas_unidades = unidades.todas(base, farm, conteudo.carregar(RAIZ / "content" / "unidades"))
@@ -62,7 +80,7 @@ def main() -> None:
         validar.validar(SCHEMA_POR_ARQUIVO.get(nome, nome), dados)
         _gravar(f"{nome}.json", dados)
     meta = {"exportado_em": datetime.now(timezone.utc).isoformat(timespec="seconds"), "patch": "7.41",
-            "contagens": {"rotas": len(pacotes["rotas"]), "objetivos": len(pacotes["objetivos"]),
+            "contagens": {"rotas": len(todas_rotas), "objetivos": len(pacotes["objetivos"]),
                           "termos": len(pacotes["glossario"])}}
     validar.validar("meta", meta)
     _gravar("meta.json", meta)

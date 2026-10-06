@@ -35,12 +35,18 @@ it.each([
 });
 
 it.each([
-  { detalhes: { lane: "top", tier: 1 }, esperado: [["lane", "top"], ["tier", "1"]] },
-  { detalhes: { empilhavel: true, anfibio: false }, esperado: [["empilhavel", "sim"], ["anfibio", "não"]] },
-  { detalhes: { dist_torre_unidades: 1420, regra: "texto longo demais para caber numa célula da grade" }, esperado: [["dist torre unidades", "1420"]] },
+  { detalhes: { lane: "top", tier: 1 }, esperado: [["Lane", "top"], ["Tier", "1"]] },
+  { detalhes: { empilhavel: true, anfibio: false }, esperado: [["Dá stack", "sim"], ["Anfíbio", "não"]] },
+  { detalhes: { dist_torre_unidades: 1420, regra: "texto longo demais para caber numa célula da grade" }, esperado: [["Distância da torre", "1.420"]] },
+  { detalhes: { chave_nova: "x" }, esperado: [["chave nova", "x"]] },
   { detalhes: { lista: [1, 2] }, esperado: [] },
-])("numerosDoObjetivo($detalhes) mostra só valores curtos", ({ detalhes, esperado }) => {
+])("numerosDoObjetivo($detalhes) devolve $esperado", ({ detalhes, esperado }) => {
   expect(numerosDoObjetivo(detalhes)).toEqual(esperado);
+});
+
+it("troca o id de outro objetivo pelo nome dele", () => {
+  const nomes = new Map([["rad_bot_t1", "Torre T1 de baixo (Radiant)"]]);
+  expect(numerosDoObjetivo({ perto_de: "rad_bot_t1" }, nomes)).toEqual([["Perto de", "Torre T1 de baixo (Radiant)"]]);
 });
 
 it("no avançado, cada parágrafo vira um cartão numerado", () => {

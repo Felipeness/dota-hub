@@ -13,17 +13,22 @@ CAMPOS_TOPO = ("id", "nome_pt", "x", "y", "side")
 LADOS = {"radiant", "dire"}
 # qualidade 70 deixa o mapa_2048 com cerca de 830 KB (era 1,37 MB com 85), pela meta de 3 s no 4G
 JPEG = {"quality": 70, "optimize": True, "progressive": True}
+# Cor de fundo do app (--cor-fundo): a área sem mapa some no fundo da página.
+FORA_DO_MAPA = (10, 14, 17)
 
 
 def textura_alinhada(tamanho: int) -> Image.Image:
     basemap, _ = fontes.gps()
-    fonte = Image.open(fontes.MAP_IMAGE).convert("RGB")
+    fonte = np.asarray(Image.open(fontes.MAP_IMAGE).convert("RGB"))
     u = (np.arange(tamanho) + 0.5) / tamanho
     xs, ys = np.meshgrid(u, 1 - u)
     px, py = basemap.norm_to_px(xs, ys)
-    w, h = fonte.size
-    px, py = np.clip(px, 0, w - 1).astype(int), np.clip(py, 0, h - 1).astype(int)
-    return Image.fromarray(np.asarray(fonte)[py, px])
+    altura, largura = fonte.shape[:2]
+    dentro = (px >= 0) & (px <= largura - 1) & (py >= 0) & (py <= altura - 1)
+    # Fora da imagem de origem não há mapa. O clip esticava a última linha até a borda e desenhava a faixa listrada.
+    px, py = np.clip(px, 0, largura - 1).astype(int), np.clip(py, 0, altura - 1).astype(int)
+    pixels = np.where(dentro[..., None], fonte[py, px], np.array(FORA_DO_MAPA, dtype=np.uint8))
+    return Image.fromarray(pixels.astype(np.uint8))
 
 
 def _tipo(grupo: str, feicao: dict) -> str | None:

@@ -22,7 +22,7 @@ export function MapFlat({ objetivos, rota, trilhas = [], marcas = [], selecionad
       {rota?.passos.map((p) => (
         <span key={p.n} className="passo-no-mapa" style={normToPercent([p.x, p.y])}>
           <span className={`passo passo-${p.risco}`}>{p.n}</span>
-          <span className="passo-minuto">{p.minuto}</span>
+          {p.minuto && <span className="passo-minuto">{p.minuto}</span>}
         </span>
       ))}
       {rota?.fuga && <span className="rotulo-fuga" style={normToPercent([rota.fuga.x, rota.fuga.y])}>{rota.fuga.rotulo}</span>}

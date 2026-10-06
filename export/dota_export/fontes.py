@@ -28,6 +28,7 @@ COMPARE_PROS = WORK / "compare_pros.json"
 REPLAYS = WORK / "minuto" / "replays"
 PADROES_PRO = (WORK / "minuto" / "padroes_pro.json", WORK / "minuto" / "padroes_pro_extra.json")
 ITENS = IMORTAL / "data" / "opendota" / "items.json"
+HEROIS_OPENDOTA = IMORTAL / "data" / "opendota" / "heroes.json"
 LEONARDO = DESKTOP / "dota-leonardo"
 HANE = DESKTOP / "dota-hane"
 YUMA = DESKTOP / "dota-yuma"

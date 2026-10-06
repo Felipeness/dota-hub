@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { heroisSchema } from "../data/schemas";
 import { Indisponivel, useData } from "../data/useData";
 import { filtrarHerois } from "./fases";
+import { urlDoRetrato } from "./resumo";
 
 const LIMITE_RESUMO = 120;
 const resumoCurto = (texto: string) => (texto.length > LIMITE_RESUMO ? `${texto.slice(0, LIMITE_RESUMO).trimEnd()}…` : texto);
@@ -18,7 +19,12 @@ export function HeroesPage() {
       <input type="search" aria-label="Filtrar heróis" placeholder="Filtrar heróis" value={texto} onChange={(e) => setTexto(e.target.value)} />
       <ul className="grade-herois">
         {filtrarHerois(herois.dados, texto).map((h) => (
-          <li key={h.id}><Link to={`/herois/${h.id}`}><strong>{h.nome}</strong><span>{resumoCurto(h.resumo)}</span></Link></li>
+          <li key={h.id}>
+            <Link to={`/herois/${h.id}`}>
+              <img className="retrato" src={urlDoRetrato(h.id)} alt="" width={64} height={36} loading="lazy" />
+              <span className="heroi-texto"><strong>{h.nome}</strong><span>{resumoCurto(h.resumo)}</span></span>
+            </Link>
+          </li>
         ))}
       </ul>
     </section>

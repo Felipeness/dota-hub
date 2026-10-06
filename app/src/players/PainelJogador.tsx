@@ -30,7 +30,7 @@ export function PainelJogador({ painel }: { painel: Painel }) {
           <ul>{painel.replays.map((r) => <li key={r}><Link to={`/?replay=${r}`}>Ver o replay {r} no mapa</Link></li>)}</ul>
         </section>
       )}
-      <footer className="fonte">Fontes: {painel.fontes.join("; ")}</footer>
+      <details className="recolhivel fonte"><summary>Fontes</summary><p>{painel.fontes.join("; ")}</p></details>
     </article>
   );
 }

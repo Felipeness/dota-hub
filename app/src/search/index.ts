@@ -1,5 +1,5 @@
 import MiniSearch, { type SearchResult } from "minisearch";
-import type { ConteudoItem, HeroiResumo, JogadorResumo, Objetivo, Rota, Time, UnidadeResumo } from "../data/schemas";
+import type { ConteudoItem, HeroiResumo, JogadorResumo, Objetivo, RotaResumo, Time, UnidadeResumo } from "../data/schemas";
 import { normalizar } from "../routes/filtros";
 
 const TIPOS = ["rota", "objetivo", "termo", "heroi", "jogador", "time", "unidade", "habilidade"] as const;
@@ -8,7 +8,7 @@ export type Doc = Achado & { chave: string; texto: string };
 export type Busca = MiniSearch<Doc>;
 
 type Fontes = {
-  rotas: Rota[]; objetivos: Objetivo[]; termos: ConteudoItem[];
+  rotas: Pick<RotaResumo, "id" | "pergunta" | "titulo">[]; objetivos: Objetivo[]; termos: ConteudoItem[];
   herois?: HeroiResumo[]; jogadores?: JogadorResumo[]; times?: Time[];
   unidades?: readonly UnidadeResumo[];
 };

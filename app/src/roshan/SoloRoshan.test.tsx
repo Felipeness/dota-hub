@@ -1,20 +1,36 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import type { ConteudoItem } from "../data/schemas";
 import { SoloRoshan } from "./SoloRoshan";
 
-const solo = (id: string, extras: Record<string, string | string[]>): ConteudoItem => ({
-  id, titulo: id, patch: "7.41", fontes: ["Liquipedia"], secoes: { basico: "Passo a passo.", avancado: null },
-  origem: { basico: null, avancado: null }, links: [], extras,
+const solo = (heroi: string, solos: string, replays: string[]): ConteudoItem => ({
+  id: `roshan-solo-${heroi.toLowerCase()}`, titulo: `Solo de Roshan: ${heroi}`, patch: "7.41",
+  fontes: replays.map((r) => `replay ${r}`), secoes: { basico: `Básico do ${heroi}.`, avancado: `Avançado do ${heroi}.` },
+  origem: { basico: { tipo: "replay", replays }, avancado: { tipo: "replay", replays } }, links: [], extras: { heroi, solos },
+});
+const ursa = solo("Ursa", "8", ["1", "2"]);
+const huskar = solo("Huskar", "58", ["3", "4", "5"]);
+
+it("lista os heróis com o Huskar primeiro e o n de solos", () => {
+  render(<SoloRoshan solos={[ursa, huskar]} />);
+  const botoes = screen.getAllByRole("button");
+  expect(botoes.map((b) => b.textContent)).toEqual(["Huskar58 solos", "Ursa8 solos"]);
+  expect(screen.queryByText("Básico do Huskar.")).not.toBeInTheDocument();
 });
 
-it("marca recomendado e visto em replay", () => {
-  render(<SoloRoshan solos={[
-    solo("Ursa", { origem: "recomendado", nivel: "7", minuto: "9:00", itens: ["Vladmir's Offering"] }),
-    solo("Huskar", { origem: "replay", replay: "9022767300", nivel: "11", minuto: "14:30", itens: ["Armlet"] }),
-  ]} />);
-  expect(screen.getByText("recomendado")).toBeInTheDocument();
-  expect(screen.getByText("visto em replay 9022767300")).toBeInTheDocument();
-  expect(screen.getByText(/nível 7 · 9:00/)).toBeInTheDocument();
+it("ao escolher um herói mostra o básico, o avançado e quantos replays", () => {
+  render(<SoloRoshan solos={[ursa, huskar]} />);
+  fireEvent.click(screen.getByRole("button", { name: /Huskar/ }));
+  expect(screen.getByRole("button", { name: /Huskar/ })).toHaveAttribute("aria-pressed", "true");
+  expect(screen.getByText("Visto em 3 replays")).toBeInTheDocument();
+  expect(screen.getByText("Básico do Huskar.")).toBeInTheDocument();
+  expect(screen.getByText("Avançado do Huskar.")).toBeInTheDocument();
+});
+
+it("com um herói só abre direto, sem lista", () => {
+  render(<SoloRoshan solos={[ursa]} />);
+  expect(screen.queryByRole("button")).not.toBeInTheDocument();
+  expect(screen.getByText("Visto em 2 replays")).toBeInTheDocument();
+  expect(screen.getByText("Básico do Ursa.")).toBeInTheDocument();
 });
 
 it("sem nenhum solo avisa que ainda não foi escrito", () => {

@@ -27,9 +27,19 @@ def test_mortes_de_roshan_dos_replays(kills):
     assert all(k["solo"] == (k["aliados_perto"] == 0) for k in kills)
 
 
-def test_solo_fica_vazio_ate_ter_fonte_741():
-    # Decisão da Task 5 (opção a): nenhuma fonte 7.41 confirma solo de Roshan, e o plano
-    # diz que conteúdo sem fonte conferida não entra. Quando houver fonte, este teste falha
-    # de propósito: volte o contrato do conteúdo (ursa, huskar, morphling, >= 6, origem,
-    # nível, minuto, itens, fonte, patch 7.41) que está no histórico do git deste arquivo.
-    assert conteudo.carregar(SOLO) == []
+def test_solo_vem_de_replay_com_fonte_741():
+    solos = conteudo.carregar(SOLO)
+    ids = {s["id"] for s in solos}
+    assert {"roshan-solo-huskar", "roshan-solo-ursa"} <= ids
+    for s in solos:
+        assert s["patch"] == "7.41"
+        assert s["fontes"] and all(f.startswith("replay ") for f in s["fontes"])
+        assert s["secoes"]["basico"] and s["secoes"]["avancado"]
+
+
+def test_solo_marca_cada_replay_da_lista():
+    # O frontmatter traz "replay: id1, id2, ..." numa linha só; cada id vira uma marca.
+    huskar = next(s for s in conteudo.carregar(SOLO) if s["id"] == "roshan-solo-huskar")
+    assert huskar["origem"]["basico"]["replays"] == [f.removeprefix("replay ") for f in huskar["fontes"]]
+    assert huskar["extras"]["heroi"] == "Huskar"
+    assert huskar["extras"]["solos"] == "58"

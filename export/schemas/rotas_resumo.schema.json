@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["id", "pdf", "lado", "pergunta", "titulo", "janela", "heroi"],
+    "additionalProperties": false,
+    "properties": {
+      "id": {"type": "string", "pattern": "^[A-Z]{1,2}-(R|D)-\\d{2}$"},
+      "pdf": {"enum": ["03", "05", "06"]},
+      "lado": {"enum": ["radiant", "dire"]},
+      "pergunta": {"type": "string"},
+      "titulo": {"type": "string"},
+      "janela": {"type": "object"},
+      "heroi": {"type": ["string", "null"]}
+    }
+  }
+}

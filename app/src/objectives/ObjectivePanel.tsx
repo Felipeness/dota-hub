@@ -16,17 +16,25 @@ export function rotuloOrigem(marca: Marca): string | null {
 
 const LIMITE_VALOR_CURTO = 20;
 const ROTULO_LADO: Record<Objetivo["lado"], string> = { radiant: "Radiant", dire: "Dire", neutro: "Neutro" };
+// Rótulo das chaves de `detalhes` que o export grava hoje; chave nova aparece com o nome cru até ganhar rótulo aqui.
+const ROTULO_DETALHE: Readonly<Partial<Record<string, string>>> = {
+  codigo: "Código", tipo: "Tipo", area: "Área", lane: "Lane", tier: "Tier", risco: "Risco",
+  anfibio: "Anfíbio", empilhavel: "Dá stack", puxavel: "Dá pull", perto_de: "Perto de", liga_com: "Liga com",
+  dist_torre_unidades: "Distância da torre", confianca_posicao: "Confiança da posição", lado_do_mapa: "Lado do mapa", regra: "Regra",
+  notas: "Notas", timing: "Tempo", evolui: "Evolui", entrada: "Entrada",
+};
 
 // A grade mostra só o que cabe numa célula; frases longas já estão no texto do conteúdo.
-export function numerosDoObjetivo(detalhes: Record<string, unknown>): [string, string][] {
-  return Object.entries(detalhes).flatMap(([chave, valor]) => {
+export function numerosDoObjetivo(detalhes: Record<string, unknown>, nomes: ReadonlyMap<string, string> = new Map()): [string, string][] {
+  return Object.entries(detalhes).flatMap(([chave, valor]): [string, string][] => {
     const texto = valorCurto(valor);
-    return texto === null ? [] : [[chave.replaceAll("_", " "), texto]];
+    if (texto === null) return [];
+    return [[ROTULO_DETALHE[chave] ?? chave.replaceAll("_", " "), nomes.get(texto) ?? texto]];
   });
 }
 
 function valorCurto(valor: unknown): string | null {
-  if (typeof valor === "number") return String(valor);
+  if (typeof valor === "number") return valor.toLocaleString("pt-BR");
   if (typeof valor === "boolean") return valor ? "sim" : "não";
   if (typeof valor === "string" && valor.length <= LIMITE_VALOR_CURTO) return valor;
   return null;
@@ -40,9 +48,12 @@ const ABAS = [
   { id: "avancado", rotulo: "Avançado" },
 ] as const satisfies ReadonlyArray<{ id: Aba; rotulo: string }>;
 
-type Props = { objetivo: Objetivo; conteudo: ConteudoItem[]; onFechar: () => void; unidade?: ReactNode; children?: ReactNode };
+type Props = {
+  objetivo: Objetivo; conteudo: ConteudoItem[]; onFechar: () => void;
+  nomes?: ReadonlyMap<string, string>; unidade?: ReactNode; children?: ReactNode;
+};
 
-export function ObjectivePanel({ objetivo, conteudo, onFechar, unidade, children }: Props) {
+export function ObjectivePanel({ objetivo, conteudo, onFechar, nomes, unidade, children }: Props) {
   const [aba, setAba] = useState<Aba>("basico");
   const item = conteudoDoObjetivo(objetivo, conteudo);
   const texto = item?.secoes[aba] ?? null;
@@ -66,7 +77,7 @@ export function ObjectivePanel({ objetivo, conteudo, onFechar, unidade, children
       </div>
       <div role="tabpanel" className="painel-texto">
         {aba === "basico" && unidade}
-        {aba === "basico" && <GradeNumeros numeros={numerosDoObjetivo(objetivo.detalhes)} />}
+        {aba === "basico" && <GradeNumeros numeros={numerosDoObjetivo(objetivo.detalhes, nomes)} />}
         {!texto && "Ainda não escrito."}
         {texto && aba === "basico" && <div><ReactMarkdown>{texto}</ReactMarkdown></div>}
         {texto && aba === "avancado" && <Cartoes texto={texto} />}
@@ -93,7 +104,7 @@ export function GradeNumeros({ numeros }: { numeros: [string, string][] }) {
 
 function Cartoes({ texto }: { texto: string }) {
   return (
-    <ol className="cartoes">
+    <ol className="cartoes-texto">
       {paragrafos(texto).map((p, i) => (
         <li key={i}><span className="cartao-numero">{i + 1}</span><div><ReactMarkdown>{p}</ReactMarkdown></div></li>
       ))}

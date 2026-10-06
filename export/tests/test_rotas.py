@@ -35,3 +35,20 @@ def test_rota_de_heroi_vem_do_pdf_05():
     assert por_id["AM-D-05"] == "05"
     assert por_id["C-R-01"] == "03"
     assert por_id["MA-R-01"] == "06"
+
+
+import json
+
+
+def test_rota_do_pdf_05_sabe_de_qual_heroi_e():
+    por_id = {r["id"]: r["heroi"] for r in rotas.carregar_rotas()}
+    assert por_id["AM-R-11"] == "anti_mage"
+    assert por_id["MA-R-01"] is None
+    assert por_id["C-R-01"] is None
+
+
+def test_resumo_tem_so_o_que_a_lista_usa_e_e_leve():
+    leve = rotas.resumo(rotas.carregar_rotas())
+    validar.validar("rotas_resumo", leve)
+    assert set(leve[0]) == set(rotas.CAMPOS_RESUMO)
+    assert len(json.dumps(leve, ensure_ascii=False).encode("utf-8")) < 400 * 1024
