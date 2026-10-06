@@ -13,3 +13,18 @@ it("só baixa os dados da busca quando o campo recebe foco", () => {
   const urls = fetch.mock.calls.map((c: unknown[]) => String(c[0]));
   expect(urls).toEqual(expect.arrayContaining(["/data/rotas_resumo.json", "/data/objetivos.json", "/data/glossario.json"]));
 });
+
+it("Esc e foco fora da busca fecham os resultados", () => {
+  vi.stubGlobal("fetch", vi.fn(() => new Promise(() => {})));
+  render(<MemoryRouter><SearchBox /><button>fora</button></MemoryRouter>);
+  const campo = screen.getByRole("searchbox");
+  fireEvent.focus(campo);
+  fireEvent.change(campo, { target: { value: "rosh" } });
+  expect(screen.getByText("Carregando a busca.")).toBeInTheDocument();
+  fireEvent.keyDown(campo, { key: "Escape" });
+  expect(screen.queryByText("Carregando a busca.")).not.toBeInTheDocument();
+  fireEvent.change(campo, { target: { value: "roshan" } });
+  expect(screen.getByText("Carregando a busca.")).toBeInTheDocument();
+  fireEvent.focusOut(campo, { relatedTarget: screen.getByRole("button", { name: "fora" }) });
+  expect(screen.queryByText("Carregando a busca.")).not.toBeInTheDocument();
+});

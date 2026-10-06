@@ -23,14 +23,15 @@ export function SearchBox() {
     return () => document.removeEventListener("keydown", focarComBarra);
   }, []);
   return (
-    <div className="busca">
+    <div className="busca" onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setAtiva(false); }}>
       <label className="busca-campo">
         <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="7" /><path d="M20 20l-4-4" /></svg>
         <input
           ref={campo} type="search" role="searchbox" value={consulta}
           aria-label="Buscar herói, rota, objetivo ou termo" placeholder="Buscar herói, rota, objetivo ou termo"
           onFocus={() => setAtiva(true)}
-          onChange={(e) => setConsulta(e.target.value)}
+          onChange={(e) => { setConsulta(e.target.value); setAtiva(true); }}
+          onKeyDown={(e) => { if (e.key === "Escape") setAtiva(false); }}
         />
         <kbd aria-hidden="true">/</kbd>
       </label>
