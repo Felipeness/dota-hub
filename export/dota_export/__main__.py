@@ -24,7 +24,7 @@ def _gravar_colecao(pasta: str, schema: str, itens: list[dict], chave: str = "id
 def main() -> None:
     DESTINO.mkdir(parents=True, exist_ok=True)
     for tamanho in (2048, 4096):
-        mapa.textura_alinhada(tamanho).save(DESTINO / f"mapa_{tamanho}.jpg", quality=85)
+        mapa.textura_alinhada(tamanho).save(DESTINO / f"mapa_{tamanho}.jpg", **mapa.JPEG)
     pacotes = {"objetivos": mapa.objetos(), "rotas": rotas.carregar_rotas(), "indice": rotas.indice(),
                "objetivos_conteudo": conteudo.carregar(RAIZ / "content" / "objetivos"),
                "glossario": conteudo.carregar(RAIZ / "content" / "glossario")}
