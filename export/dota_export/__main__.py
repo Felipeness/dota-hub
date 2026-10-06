@@ -3,7 +3,7 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
-from . import conteudo, mapa, rotas, validar
+from . import conteudo, herois, mapa, rotas, validar
 
 RAIZ = Path(__file__).resolve().parents[2]
 DESTINO = RAIZ / "app" / "public" / "data"
@@ -14,6 +14,13 @@ def _gravar(nome: str, dados) -> None:
     (DESTINO / nome).write_text(json.dumps(dados, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
 
+def _gravar_colecao(pasta: str, schema: str, itens: list[dict], chave: str = "id") -> None:
+    (DESTINO / pasta).mkdir(parents=True, exist_ok=True)
+    for item in itens:
+        validar.validar(schema, item)
+        _gravar(f"{pasta}/{item[chave]}.json", item)
+
+
 def main() -> None:
     DESTINO.mkdir(parents=True, exist_ok=True)
     for tamanho in (2048, 4096):
@@ -21,6 +28,9 @@ def main() -> None:
     pacotes = {"objetivos": mapa.objetos(), "rotas": rotas.carregar_rotas(), "indice": rotas.indice(),
                "objetivos_conteudo": conteudo.carregar(RAIZ / "content" / "objetivos"),
                "glossario": conteudo.carregar(RAIZ / "content" / "glossario")}
+    fichas = herois.todos(frozenset(r["id"] for r in pacotes["rotas"]))
+    _gravar_colecao("herois", "heroi", fichas)
+    pacotes["herois"] = herois.indice(fichas)
     for nome, dados in pacotes.items():
         validar.validar(SCHEMA_POR_ARQUIVO.get(nome, nome), dados)
         _gravar(f"{nome}.json", dados)

@@ -22,7 +22,7 @@ def resolver_alvo(alvo) -> tuple[float, float]:
 
 
 @cache
-def _caminho(a: tuple[float, float], b: tuple[float, float]) -> list[list[float]]:
+def caminho_andando(a: tuple[float, float], b: tuple[float, float]) -> list[list[float]]:
     _, paths = fontes.gps()
     pts = paths.path_between(a, b).points
     return [[round(float(x), 4), round(float(y), 4)] for x, y in pts]
@@ -60,7 +60,7 @@ def _rota(pdf: str, secao: dict, r: dict) -> dict:
         "titulo": r.get("titulo_curto", ""), "secao": f"{secao.get('numero', '')} {secao.get('titulo', '')}".strip(),
         "janela": r.get("janela", {}), "estado": r.get("estado"), "origem": r.get("origem", "recomendada"),
         "replay": str(r["replay"]) if r.get("replay") else None, "passos": passos,
-        "caminhos": [_caminho((a["x"], a["y"]), (b["x"], b["y"])) for a, b in zip(passos, passos[1:])],
+        "caminhos": [caminho_andando((a["x"], a["y"]), (b["x"], b["y"])) for a, b in zip(passos, passos[1:])],
         "fuga": _fuga(r.get("fuga")), "proxima": list(r.get("proxima", [])),
         "se": [{"condicao": s["condicao"], "rota": s.get("rota")} for s in r.get("se", [])],
         "interrupcao": [{"condicao": i["condicao"], "acao": i.get("acao", ""), "rota": i.get("rota")}

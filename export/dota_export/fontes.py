@@ -19,3 +19,18 @@ def gps() -> tuple[ModuleType, ModuleType]:
     if src not in sys.path:
         sys.path.insert(0, src)
     return importlib.import_module("gps.basemap"), importlib.import_module("gps.paths")
+
+
+WORK = IMORTAL / "work"
+POWER_SPIKES = WORK / "minuto" / "power_spikes.json"
+COMPARE_PROS = WORK / "compare_pros.json"
+REPLAYS = WORK / "minuto" / "replays"
+PADROES_PRO = (WORK / "minuto" / "padroes_pro.json", WORK / "minuto" / "padroes_pro_extra.json")
+ITENS = IMORTAL / "data" / "opendota" / "items.json"
+LEONARDO = DESKTOP / "dota-leonardo"
+HANE = DESKTOP / "dota-hane"
+YUMA = DESKTOP / "dota-yuma"
+
+
+def guias_de_heroi() -> list[Path]:
+    return sorted(WORK.glob("hero_*_corrigido.json"))
