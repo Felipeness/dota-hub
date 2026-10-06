@@ -5,6 +5,8 @@ from pathlib import Path
 
 from . import fontes
 
+CAMPOS_RESUMO = ("id", "pdf", "lado", "pergunta", "titulo", "janela", "heroi")
+
 
 def _ler(caminho: Path) -> dict:
     return json.loads(caminho.read_text(encoding="utf-8"))
@@ -36,6 +38,11 @@ def _arquivos() -> list[tuple[str, Path]]:
             + [("06", p) for p in sorted(fontes.ESTUDOS_SPECS.glob("*.json"))])
 
 
+def _heroi_do_arquivo(arq: Path) -> str | None:
+    # H05_<id do herói>.json guarda as rotas do guia daquele herói (PDF 05).
+    return arq.stem.removeprefix("H05_") if arq.name.startswith("H05_") else None
+
+
 def _passo(rota_id: str, p: dict) -> dict:
     try:
         x, y = resolver_alvo(p["alvo"])
@@ -53,10 +60,10 @@ def _fuga(fuga: dict | None) -> dict | None:
     return {"de_passo": fuga["de_passo"], "x": x, "y": y, "rotulo": fuga.get("rotulo", "FUGA")}
 
 
-def _rota(pdf: str, secao: dict, r: dict) -> dict:
+def _rota(pdf: str, secao: dict, r: dict, heroi: str | None) -> dict:
     passos = [_passo(r["id"], p) for p in r["passos"]]
     return {
-        "id": r["id"], "pdf": pdf, "lado": r["lado"], "pergunta": r["pergunta"],
+        "id": r["id"], "pdf": pdf, "lado": r["lado"], "heroi": heroi, "pergunta": r["pergunta"],
         "titulo": r.get("titulo_curto", ""), "secao": f"{secao.get('numero', '')} {secao.get('titulo', '')}".strip(),
         "janela": r.get("janela", {}), "estado": r.get("estado"), "origem": r.get("origem", "recomendada"),
         "replay": str(r["replay"]) if r.get("replay") else None, "passos": passos,
@@ -70,7 +77,7 @@ def _rota(pdf: str, secao: dict, r: dict) -> dict:
 
 
 def carregar_rotas() -> list[dict]:
-    return [_rota(pdf, secao, r) for pdf, arq in _arquivos()
+    return [_rota(pdf, secao, r, _heroi_do_arquivo(arq)) for pdf, arq in _arquivos()
             for secao in _ler(arq).get("secoes", []) for r in secao.get("rotas", [])]
 
 
@@ -83,3 +90,8 @@ def _linhas(cadeia: dict, lado: str) -> list[dict]:
 def indice() -> dict:
     cadeia = _ler(fontes.CADEIA)
     return {"colunas": cadeia["colunas"], "radiant": _linhas(cadeia, "radiant"), "dire": _linhas(cadeia, "dire")}
+
+
+def resumo(todas: list[dict]) -> list[dict]:
+    """O que a lista, a busca e o glossário usam, sem passos nem caminhos (o arquivo com tudo passa de 5 MB)."""
+    return [{campo: r[campo] for campo in CAMPOS_RESUMO} for r in todas]

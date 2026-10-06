@@ -1,5 +1,6 @@
 """python -m dota_export: gera todos os arquivos de dados do app em app/public/data/."""
 import json
+import shutil
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -22,11 +23,23 @@ def _gravar_colecao(pasta: str, schema: str, itens: list[dict], chave: str = "id
         _gravar(f"{pasta}/{item[chave]}.json", item)
 
 
+def _gravar_rotas(todas: list[dict]) -> None:
+    """Uma rota por arquivo: a tela abre só a rota escolhida. Refaz a pasta para não sobrar rota renomeada."""
+    pasta = DESTINO / "rotas"
+    shutil.rmtree(pasta, ignore_errors=True)
+    pasta.mkdir()
+    for rota in todas:
+        _gravar(f"rotas/{rota['id']}.json", rota)
+
+
 def main() -> None:
     DESTINO.mkdir(parents=True, exist_ok=True)
     for tamanho in (2048, 4096):
         mapa.textura_alinhada(tamanho).save(DESTINO / f"mapa_{tamanho}.jpg", **mapa.JPEG)
-    pacotes = {"objetivos": mapa.objetos(), "rotas": rotas.carregar_rotas(), "indice": rotas.indice(),
+    todas_rotas = rotas.carregar_rotas()
+    _gravar_rotas(todas_rotas)
+    pacotes = {"objetivos": mapa.objetos(), "rotas": todas_rotas, "rotas_resumo": rotas.resumo(todas_rotas),
+               "indice": rotas.indice(),
                "objetivos_conteudo": conteudo.carregar(RAIZ / "content" / "objetivos"),
                "glossario": conteudo.carregar(RAIZ / "content" / "glossario")}
     altura = relevo.relevo()
