@@ -427,3 +427,41 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
   .herois, .ficha-heroi { padding: 20px var(--espaco-4) 28px; }
   .ficha-heroi h1 { font-size: 40px; }
 }
+
+/* Jogadores e times */
+.jogadores, .painel-jogador { display: flex; flex-direction: column; gap: 18px; padding: 28px var(--espaco-6) 40px; max-width: 1100px; min-width: 0; overflow-wrap: anywhere; }
+.jogadores h2, .painel-jogador h2 { font-family: var(--fonte-display); font-size: 24px; margin: 0 0 var(--espaco-3); }
+.cartoes { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--espaco-3); }
+.cartoes a {
+  display: flex; flex-direction: column; gap: 6px; height: 100%; padding: var(--espaco-4);
+  border-radius: var(--raio); background: var(--cor-superficie-2); border: 1px solid var(--cor-linha-forte);
+  color: var(--cor-texto-2); text-decoration: none; font-size: 13px; line-height: 1.5;
+}
+.cartoes a:hover { border-color: var(--cor-destaque); }
+.cartoes strong { font-family: var(--fonte-display); font-size: 22px; color: var(--cor-texto); }
+.painel-jogador h1 { font-weight: 700; font-size: 56px; line-height: 0.95; }
+.painel-jogador header p { margin: var(--espaco-2) 0 0; color: var(--cor-texto-leitura); max-width: 62ch; }
+.painel-jogador header a { color: var(--cor-destaque); }
+.painel-jogador ul { color: var(--cor-texto-2); line-height: 1.6; }
+.painel-jogador ul a { color: var(--cor-info); }
+.destaques { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--espaco-3); }
+.destaques div { display: flex; flex-direction: column-reverse; gap: var(--espaco-1); padding: var(--espaco-4); border-radius: var(--raio); background: var(--cor-superficie-2); border: 1px solid var(--cor-linha-forte); }
+.destaques dd { margin: 0; font-family: var(--fonte-num); font-variant-numeric: tabular-nums; font-size: 28px; color: var(--cor-destaque); }
+.destaques dt { font-size: 12px; color: var(--cor-texto-3); }
+.grafico { margin: 0; padding: var(--espaco-4); border-radius: var(--raio); background: var(--cor-superficie); border: 1px solid var(--cor-linha); display: flex; flex-direction: column; gap: var(--espaco-3); min-width: 0; }
+.grafico figcaption { font-family: var(--fonte-display); font-size: 20px; color: var(--cor-texto); }
+.grafico-area { position: relative; height: 260px; }
+.grafico-numeros summary { cursor: pointer; color: var(--cor-texto-2); font-size: 13px; min-height: var(--alvo-toque); display: flex; align-items: center; }
+.rolagem { overflow-x: auto; }
+.rolagem table { border-collapse: collapse; font-size: 13px; color: var(--cor-texto-2); font-variant-numeric: tabular-nums; }
+.rolagem th, .rolagem td { padding: var(--espaco-1) var(--espaco-3); border-bottom: 1px solid var(--cor-linha); text-align: left; white-space: nowrap; }
+.grafico-fonte, .jogadores .fonte, .painel-jogador .fonte { margin: 0; font-size: 12px; color: var(--cor-texto-3); }
+@media (min-width: 900px) {
+  .destaques { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .cartoes { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .grafico-area { height: 360px; }
+}
+@media (max-width: 720px) {
+  .jogadores, .painel-jogador { padding: 20px var(--espaco-4) 28px; }
+  .painel-jogador h1 { font-size: 40px; }
+}

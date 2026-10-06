@@ -23,6 +23,7 @@ export function Shell() {
           <NavLink to="/" end className={({ isActive }) => (isActive || noMapa ? "active" : "")}>Mapa</NavLink>
           <NavLink to="/rotas">Rotas</NavLink>
           <NavLink to="/herois">Heróis</NavLink>
+          <NavLink to="/jogadores">Jogadores</NavLink>
           <NavLink to="/glossario">Glossário</NavLink>
         </nav>
         <SearchBox />

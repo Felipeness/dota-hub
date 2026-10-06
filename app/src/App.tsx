@@ -18,6 +18,9 @@ const router = createBrowserRouter([
       { path: "/glossario/:id", element: <GlossaryPage /> },
       { path: "/herois", hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./heroes/HeroesPage")).HeroesPage }) },
       { path: "/herois/:id", hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./heroes/HeroPage")).HeroPage }) },
+      { path: "/jogadores", hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./players/PlayersPage")).PlayersPage }) },
+      { path: "/jogadores/:id", hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./players/PlayerPage")).PlayerPage }) },
+      { path: "/times/:id", hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./players/TeamPage")).TeamPage }) },
     ],
   },
 ]);
