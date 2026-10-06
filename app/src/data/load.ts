@@ -10,7 +10,13 @@ export async function loadJson<T>(path: string, schema: z.ZodType<T>, fetcher: t
     return { ok: false, motivo: `falha de rede ao buscar ${path}: ${String(erro)}` };
   }
   if (!resposta.ok) return { ok: false, motivo: `arquivo ${path} não encontrado (${resposta.status})` };
-  const analise = schema.safeParse(await resposta.json());
+  let corpo: unknown;
+  try {
+    corpo = await resposta.json();
+  } catch {
+    return { ok: false, motivo: `JSON inválido em ${path}` };
+  }
+  const analise = schema.safeParse(corpo);
   if (!analise.success) return { ok: false, motivo: `formato inesperado em ${path}: ${analise.error.issues[0]?.message ?? ""}` };
   return { ok: true, dados: analise.data };
 }

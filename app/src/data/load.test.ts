@@ -18,3 +18,9 @@ it("vira indisponível quando o formato não bate", async () => {
   const r = await loadJson("/data/meta.json", metaSchema, resposta({ patch: 7 }));
   expect(r.ok).toBe(false);
 });
+
+it("vira indisponível quando o corpo não é JSON", async () => {
+  const html = (async () => new Response("<!doctype html>", { status: 200 })) as unknown as typeof fetch;
+  const r = await loadJson("/data/meta.json", metaSchema, html);
+  expect(r).toEqual({ ok: false, motivo: "JSON inválido em /data/meta.json" });
+});
