@@ -64,6 +64,7 @@ def _lista_numeros(data: str, chave: str) -> list[int]:
 
 def malhas_visiveis(ctrl: str, data: str) -> list[str] | None:
     """Malhas de LOD 0 que o jogo mostra no corpo padrão; None quando nenhuma fica escondida (exporta tudo).
+    Falha quando todas ficam desligadas: lista vazia pareceria "sem filtro" e exportaria o modelo inteiro.
 
     O exportador junta todas as malhas, inclusive as de grupos de corpo desligados (a variante 'cavern' do creep
     melee do Dire ficava sobreposta ao corpo normal). Cada malha liga se a máscara dela cruza a máscara padrão.
@@ -73,6 +74,8 @@ def malhas_visiveis(ctrl: str, data: str) -> list[str] | None:
     (padrao,) = _lista_numeros(data, "m_nDefaultMeshGroupMask")
     lod_zero = [(nome, int(i)) for nome, i in MALHA_EMBUTIDA.findall(ctrl) if lods[int(i)] & LOD_ZERO]
     visiveis = [nome for nome, i in lod_zero if grupos[i] & padrao]
+    if lod_zero and not visiveis:
+        raise ValueError("nenhuma malha de LOD 0 fica ligada no corpo padrão do modelo")
     return visiveis if len(visiveis) < len(lod_zero) else None
 
 
@@ -105,7 +108,7 @@ def exportar(arquivo_vpk: Path, caminho: str, destino: Path) -> None:
         parada = escolher_parada(animacoes(todas))
         visiveis = malhas_visiveis(_bloco(arquivo_vpk, caminho, "CTRL"), _bloco(arquivo_vpk, caminho, "DATA"))
         extra = ["--gltf_export_animations", "--gltf_animation_list", parada] if parada else []
-        extra += ["--gltf_mesh_list", ",".join(visiveis)] if visiveis else []
+        extra += ["--gltf_mesh_list", ",".join(visiveis)] if visiveis is not None else []
         bruto = Path(tmp) / "bruto" / f"{n}.glb"
         _vrf_glb(arquivo_vpk, caminho, bruto, extra)
         destino.mkdir(parents=True, exist_ok=True)

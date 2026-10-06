@@ -68,6 +68,12 @@ def test_sem_malha_escondida_nao_filtra_nada():
     assert modelos.malhas_visiveis(CTRL_TROLL_DARK_A, DATA_TROLL_DARK_A) is None
 
 
+def test_falha_quando_todas_as_malhas_estao_desligadas():
+    data = DATA_CREEP_BAD_MELEE.replace("m_nDefaultMeshGroupMask = 5", "m_nDefaultMeshGroupMask = 2")
+    with pytest.raises(ValueError, match="nenhuma malha de LOD 0"):
+        modelos.malhas_visiveis(CTRL_CREEP_BAD_MELEE, data)
+
+
 def test_le_os_nomes_das_animacoes_do_glb(tmp_path):
     glb = tmp_path / "a.glb"
     glb.write_bytes(_glb({"asset": {"version": "2.0"}, "animations": [{"name": "idle"}, {"name": "run"}]}))
