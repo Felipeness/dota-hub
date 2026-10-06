@@ -31,6 +31,31 @@ Medido com `vite preview` num navegador Playwright em 360×800, no PC, **sem** l
 
 Pendente de medir no celular de verdade (ou DevTools com Fast 4G e CPU 4×): primeira tela abaixo de 3 s e mapa a 30 fps ou mais. O ponto de risco é o `mapa_2048.jpg` de 1,37 MB.
 
+Correção feita antes da medição: o export agora grava os mapas em JPEG qualidade 70, progressivo e otimizado. O `mapa_2048.jpg` caiu de 1,37 MB para cerca de 830 KB, e a primeira tela com WebGL fica perto de 1,3 MB (era cerca de 2 MB). Pela conta, a rede no Fast 4G cai de 1,8 s para perto de 1,2 s. Um teste do export falha se o mapa de celular passar de 900 KB.
+
+Isso é estimativa, não medição. Falta medir:
+
+| Medida | Como | Meta | Resultado |
+|---|---|---|---|
+| Primeira tela | DevTools, Fast 4G e CPU 4×, aba Performance, recarregar em `/` | menos de 3 s | |
+| Mapa parado | mesmo perfil, contador de fps do DevTools | 30 fps ou mais | |
+| Replay 9027486175 a 16× | mesmo perfil | 30 fps ou mais | |
+
+Se a primeira tela passar de 3 s mesmo assim, o próximo passo é a malha do relevo (255x255 segmentos) e o parse do three.js, não a imagem.
+
+## Passos de navegador pendentes (Tasks 10 e 13)
+
+**Pendente.** Fazer no celular ou no DevTools em 360x800, antes de fechar a fase.
+
+| Passo | O que ver | Ok? |
+|---|---|---|
+| Mapa, replay 9027486175 | o TA anda pela safelane, wards aparecem e somem no tempo certo | |
+| Objetivo Roshan, aba Avançado | a lista de solo mostra "Ainda não escrito." e os selos de origem aparecem | |
+| Rotas, filtro Item > Black King Bar | só ficam rotas com BKB | |
+| Glossário, 5 links quaisquer (herói, item, objetivo, rota, termo) | cada link chega na tela e no item certos | |
+
+O merge do código pode seguir antes disso se o Felipe aceitar fechar a fase depois.
+
 ## Critério 7: Felipe e um amigo usam sem explicação
 
 **Pendente de teste com usuário.** Um agente não consegue simular isso.

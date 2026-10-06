@@ -69,6 +69,7 @@ Entidades principais e relações: Objetivo (posição, básico, avançado, font
 
 - **Objetivos**: básico e avançado de Roshan, Tormentor, torres, barracks, runas (poder, bounty, sabedoria, água), lotus, watchers, outposts, twin gates, lojas, camps por tipo. Conferido no 7.41 (Liquipedia, notas do patch, constantes do jogo) e com os replays já lidos (por exemplo, quando os profissionais fazem o 1º Roshan e o que fazem depois).
 - **Solo de Roshan por herói**: Ursa, Huskar, Morphling e outros que solam no 7.41: nível, itens, minuto, passo a passo, conferidos, com o rótulo de origem.
+  - Ressalva da fase 1B: saiu vazio (`roshan_solo.json = []`). Nenhum dos 15 heróis candidatos tem fonte 7.41 que confirme o solo, e a regra é que conteúdo sem fonte conferida não entra (detalhes em `.superpowers/sdd/2026-10-06-dota-hub-fase1b/task-5-report.md`). Proposta: o item passa para a fase 1C. **Pendente de aprovação do Felipe antes do merge no master.**
 - **Glossário**: 150 a 250 termos.
 
 ## Qualidade e testes
