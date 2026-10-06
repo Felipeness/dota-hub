@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams, useSearchParams } from "react-router";
 import type { Objetivo } from "../data/schemas";
 import { conteudoSchema, objetivosSchema } from "../data/schemas";
 import { Indisponivel, useData } from "../data/useData";
 import { ObjectivePanel } from "../objectives/ObjectivePanel";
-import { MapView } from "./MapView";
+import { MapaComCamadas } from "../replays/MapaComCamadas";
+import { SeletorReplay } from "../replays/SeletorReplay";
 import { objetivoDaUrl } from "./objetivoDaUrl";
 
 const ROTULO_TIPO: Record<string, string> = {
@@ -32,6 +33,8 @@ export function MapPage() {
   const conteudo = useData("/data/objetivos_conteudo.json", conteudoSchema);
   const { id } = useParams();
   const navigate = useNavigate();
+  const [params, setParams] = useSearchParams();
+  const replayId = params.get("replay");
   const [ocultos, setOcultos] = useState<ReadonlySet<string>>(new Set());
   const [vista, setVista] = useState<Vista>("2.5d");
 
@@ -42,7 +45,8 @@ export function MapPage() {
   const aberto = id ? objetivoDaUrl(id, todos) : undefined;
   const textos = conteudo.estado === "ok" ? conteudo.dados : [];
   const visiveis = todos.filter((o) => !ocultos.has(o.tipo));
-  const abrir = (alvo: string) => navigate(`/mapa/${alvo}`);
+  // Leva a query junto para abrir um objetivo sem perder o replay escolhido.
+  const abrir = (alvo: string) => navigate({ pathname: `/mapa/${alvo}`, search: params.toString() });
   const alternarCamada = (tipo: string) => setOcultos((atual) => {
     const proximo = new Set(atual);
     if (!proximo.delete(tipo)) proximo.add(tipo);
@@ -54,6 +58,7 @@ export function MapPage() {
       <aside className="mapa-lateral">
         <div className="grupo">
           <h2 className="sobretitulo">Camadas</h2>
+          <SeletorReplay valor={replayId} onMudar={(novo) => setParams(novo ? { replay: novo } : {})} />
           {contagemPorTipo(todos).map(([tipo, n]) => (
             <button key={tipo} className="camada" aria-pressed={!ocultos.has(tipo)} onClick={() => alternarCamada(tipo)}>
               <span className="camada-nome">{ROTULO_TIPO[tipo] ?? tipo}</span>
@@ -78,7 +83,7 @@ export function MapPage() {
           <span className="sobretitulo">Mapa</span>
           <span className="mapa-chamada">Clique num objetivo</span>
         </div>
-        <MapView objetivos={visiveis} selecionado={aberto?.id ?? null} onSelecionar={abrir} forcarPlano={vista === "plano"} />
+        <MapaComCamadas replayId={replayId} objetivos={visiveis} selecionado={aberto?.id ?? null} onSelecionar={abrir} forcarPlano={vista === "plano"} />
         <nav className="atalhos pilulas" aria-label="Atalhos do mapa">
           {ATALHOS.map((tipo) => {
             const primeiro = todos.find((o) => o.tipo === tipo);
@@ -89,7 +94,7 @@ export function MapPage() {
       </div>
       {id && !aberto && <p role="alert">Objetivo {id} não encontrado.</p>}
       {aberto
-        ? <ObjectivePanel key={aberto.id} objetivo={aberto} conteudo={textos} onFechar={() => navigate("/")} />
+        ? <ObjectivePanel key={aberto.id} objetivo={aberto} conteudo={textos} onFechar={() => navigate({ pathname: "/", search: params.toString() })} />
         : <aside className="painel painel-vazio"><p>Toque num marcador para ver o objetivo.</p></aside>}
     </section>
   );

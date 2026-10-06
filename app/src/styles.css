@@ -230,6 +230,27 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
   .heroi-agora, .marca { transition: none; }
 }
 
+/* Camada de replay: seletor, controles de reprodução e legenda dos heróis. */
+.seletor-replay { display: flex; flex-direction: column; gap: var(--espaco-1); font-size: 13px; color: var(--cor-texto-2); }
+.seletor-replay select { min-height: var(--alvo-toque); max-width: 100%; }
+.mapa-com-replay { width: min(100%, 720px, calc(100vh - 240px)); display: flex; flex-direction: column; gap: var(--espaco-2); }
+.mapa-com-replay > .mapa-plano, .mapa-com-replay > .mapa-3d { width: 100%; }
+.controles-replay { display: flex; flex-wrap: wrap; align-items: center; gap: var(--espaco-2); font-family: var(--fonte-num); font-size: 13px; }
+.controles-replay button { min-width: var(--alvo-toque); min-height: var(--alvo-toque); }
+.controles-replay input[type="range"] { flex: 1 1 160px; min-width: 0; min-height: var(--alvo-toque); accent-color: var(--cor-destaque); }
+.controles-replay select { min-height: var(--alvo-toque); }
+.legenda-replay { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.legenda-replay li {
+  padding: 2px 8px; border-radius: var(--raio-pilula); font-size: 11px; color: var(--cor-texto-2);
+  background: var(--cor-superficie-2); border: 1px solid var(--cor-lado, var(--cor-linha));
+}
+.legenda-replay .heroi-radiant { --cor-lado: var(--cor-radiant); }
+.legenda-replay .heroi-dire { --cor-lado: var(--cor-dire); }
+.legenda-replay .destaque { color: var(--cor-texto); box-shadow: 0 0 0 1px var(--cor-destaque); }
+@media (max-width: 480px) {
+  .controles-replay input[type="range"] { order: 1; flex-basis: 100%; }
+}
+
 /* Painel do objetivo */
 .painel {
   flex: 0 1 420px; min-width: 320px;
