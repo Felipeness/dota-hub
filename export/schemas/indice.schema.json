@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["colunas", "radiant", "dire"],
+  "properties": {
+    "colunas": {"type": "array", "minItems": 11, "maxItems": 11},
+    "radiant": {"type": "array", "minItems": 27, "maxItems": 27},
+    "dire": {"type": "array", "minItems": 27, "maxItems": 27}
+  }
+}

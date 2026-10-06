@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["id", "tipo", "nome", "x", "y", "lado", "detalhes"],
+    "properties": {
+      "id": {"type": "string", "minLength": 1},
+      "tipo": {"enum": ["roshan", "tormentor", "torre", "barracks", "camp", "runa", "lotus", "watcher", "outpost", "loja", "twin_gate", "ancient", "fonte"]},
+      "nome": {"type": "string"},
+      "x": {"type": "number", "minimum": 0, "maximum": 1},
+      "y": {"type": "number", "minimum": 0, "maximum": 1},
+      "lado": {"enum": ["radiant", "dire", "neutro"]},
+      "detalhes": {"type": "object"}
+    }
+  }
+}
