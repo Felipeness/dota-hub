@@ -28,7 +28,7 @@ def test_mortes_de_roshan_dos_replays(kills):
     assert all(k["solo"] == (k["aliados_perto"] == 0) for k in kills)
 
 
-@pytest.mark.skip(reason="pendente: nenhuma fonte confirma solo de Roshan no 7.41 (ver task-5-report.md)")
+@pytest.mark.skip(reason="fora da 1B: nenhuma fonte confirma solo de Roshan no 7.41; o plano diz que conteúdo sem fonte conferida não entra")
 def test_solo_tem_os_herois_da_spec_e_mais_tres():
     ids = {c["id"] for c in conteudo.carregar(SOLO)}
     assert {"ursa", "huskar", "morphling"} <= ids
