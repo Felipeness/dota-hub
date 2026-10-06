@@ -397,19 +397,29 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .herois, .ficha-heroi { display: flex; flex-direction: column; gap: 18px; padding: 28px var(--espaco-6) 40px; max-width: 1100px; }
 .grade-herois { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr; gap: var(--espaco-3); }
 .grade-herois a {
-  display: flex; flex-direction: column; gap: 6px; height: 100%; padding: var(--espaco-4);
+  display: flex; align-items: flex-start; gap: 14px; height: 100%; padding: var(--espaco-4);
   border-radius: var(--raio); background: var(--cor-superficie-2); border: 1px solid var(--cor-linha-forte);
   color: var(--cor-texto-2); text-decoration: none; font-size: 13px; line-height: 1.5;
 }
 .grade-herois a:hover { border-color: var(--cor-destaque); }
 .grade-herois strong { font-family: var(--fonte-display); font-size: 24px; color: var(--cor-texto); }
 @media (min-width: 900px) { .grade-herois { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-.ficha-heroi { min-width: 0; overflow-wrap: anywhere; }
+.ficha-heroi { min-width: 0; }
 .ficha-heroi h1 { font-weight: 700; font-size: 56px; line-height: 0.95; }
-.ficha-heroi header p { margin: var(--espaco-2) 0 0; color: var(--cor-texto-leitura); max-width: 62ch; }
 .ficha-heroi .abas-pilula { overflow-x: auto; }
 .ficha-heroi .abas-pilula button { flex: 1 0 auto; padding: 0 14px; }
 .ficha-heroi [role="tabpanel"] { min-width: 0; color: var(--cor-texto-2); line-height: 1.6; }
+.retrato { flex-shrink: 0; border-radius: var(--raio-pequeno); background: var(--cor-superficie-3); object-fit: cover; }
+.heroi-texto { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.ficha-topo { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: end; gap: var(--espaco-3) 18px; }
+.ficha-topo > p, .ficha-topo > dl, .ficha-topo > details { grid-column: 1 / -1; }
+.abertura { margin: 0; max-width: 62ch; font-size: 18px; line-height: 1.55; color: var(--cor-texto-leitura); }
+.ficha-heroi .destaques dd { font-size: 22px; }
+.recolhivel { border-top: 1px solid var(--cor-linha); }
+.recolhivel > summary { display: flex; align-items: center; gap: var(--espaco-2); min-height: var(--alvo-toque); cursor: pointer; color: var(--cor-texto-2); }
+.recolhivel > summary h3 { margin: 0; }
+.recolhivel[open] > summary { color: var(--cor-texto); }
+.recolhivel > :not(summary) { margin: 0 0 var(--espaco-4); }
 .ficha-rotas { display: flex; flex-direction: column; gap: var(--espaco-3); }
 .ficha-rotas .rota-mapa { width: min(100%, 640px); }
 .linha-do-tempo { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--espaco-3); }

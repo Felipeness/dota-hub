@@ -29,3 +29,12 @@ it("aba Roshan avisa que ainda não foi escrita", () => {
   fireEvent.click(screen.getByRole("tab", { name: "Roshan" }));
   expect(screen.getByText("Ainda não escrito.")).toBeInTheDocument();
 });
+
+it("abre com a primeira frase e os números e guarda o resto do resumo recolhido", () => {
+  render(<MemoryRouter><FichaHeroi heroi={{ ...heroi, resumo: "Carry de jogo longo. Segunda frase com detalhe." }} objetivos={[]} solos={[]} /></MemoryRouter>);
+  expect(screen.getByText("Carry de jogo longo.")).toBeInTheDocument();
+  expect(screen.getByText("Segunda frase com detalhe.").closest("details")).not.toHaveAttribute("open");
+  expect(screen.getByText("nível 6 · 7:54")).toBeInTheDocument();
+  // alt="" tira o retrato da árvore de acessibilidade (é decorativo; o nome está no título), por isso o seletor de classe.
+  expect(document.querySelector("img.retrato")).toHaveAttribute("src", "/data/retratos/herois/medusa.webp");
+});

@@ -2,6 +2,7 @@ import { useState, type ReactNode } from "react";
 import { Link } from "react-router";
 import type { ConteudoItem, Heroi, Objetivo } from "../data/schemas";
 import { MapView } from "../map/MapView";
+import { destaquesDoHeroi, dividirResumo, urlDoRetrato } from "./resumo";
 
 const ABAS = { guia: "Guia", spikes: "Power spikes", rotas: "Rotas", pros: "Pros", roshan: "Roshan" } as const;
 type Aba = keyof typeof ABAS;
@@ -14,15 +15,44 @@ const numero = (n: number) => n.toLocaleString("pt-BR");
 
 const Lista = ({ itens }: { itens: readonly string[] }) => <ul>{itens.map((i) => <li key={i}>{i}</li>)}</ul>;
 
-function Secao({ titulo, children }: { titulo: string; children: ReactNode }) {
-  return <section><h3 className="sobretitulo">{titulo}</h3>{children}</section>;
+function Secao({ titulo, aberta = false, children }: { titulo: string; aberta?: boolean; children: ReactNode }) {
+  return (
+    <details className="recolhivel" open={aberta}>
+      <summary><h3 className="sobretitulo">{titulo}</h3></summary>
+      {children}
+    </details>
+  );
+}
+
+function Topo({ heroi }: { heroi: Heroi }) {
+  const { abertura, resto } = dividirResumo(heroi.resumo);
+  return (
+    <header className="ficha-topo">
+      <img className="retrato" src={urlDoRetrato(heroi.id)} alt="" width={128} height={72} />
+      <div><span className="sobretitulo">Herói</span><h1>{heroi.nome}</h1></div>
+      <p className="abertura">{abertura}</p>
+      <dl className="destaques">
+        {destaquesDoHeroi(heroi).map(([rotulo, valor]) => <div key={rotulo}><dt>{rotulo}</dt><dd>{valor}</dd></div>)}
+      </dl>
+      {resto && <details className="recolhivel"><summary>Ler o resumo completo</summary><p>{resto}</p></details>}
+    </header>
+  );
+}
+
+function Fontes({ heroi }: { heroi: Heroi }) {
+  return (
+    <details className="recolhivel fonte">
+      <summary>Fontes e confiança</summary>
+      <p>Patch {heroi.patch}. Confiança: {heroi.confianca} Fontes: {heroi.fontes.join("; ")}</p>
+    </details>
+  );
 }
 
 function AbaGuia({ heroi }: { heroi: Heroi }) {
   const { guia } = heroi;
   return (
     <div className="painel-texto">
-      <Secao titulo="Quando pegar"><Lista itens={guia.bom_quando} /></Secao>
+      <Secao titulo="Quando pegar" aberta><Lista itens={guia.bom_quando} /></Secao>
       <Secao titulo="Quando evitar"><Lista itens={guia.evitar_quando} /><p>{guia.momento_do_draft}</p></Secao>
       <Secao titulo="Lane"><p>{guia.lane.objetivo}</p><Lista itens={guia.lane.itens_iniciais} /><Lista itens={guia.lane.dicas} /></Secao>
       <Secao titulo="Quando começar a farmar a selva"><p>{guia.condicao_para_farmar.explicacao}</p></Secao>
@@ -130,14 +160,14 @@ export function FichaHeroi({ heroi, objetivos, solos, roshan }: Props) {
   };
   return (
     <article className="ficha-heroi">
-      <header><span className="sobretitulo">Herói</span><h1>{heroi.nome}</h1><p>{heroi.resumo}</p></header>
+      <Topo heroi={heroi} />
       <div role="tablist" className="abas-pilula">
         {(Object.keys(ABAS) as Aba[]).map((a) => (
           <button key={a} role="tab" aria-selected={aba === a} onClick={() => setAba(a)}>{ABAS[a]}</button>
         ))}
       </div>
       <div role="tabpanel">{conteudo[aba]()}</div>
-      <footer className="fonte">Patch {heroi.patch}. Confiança: {heroi.confianca} Fontes: {heroi.fontes.join("; ")}</footer>
+      <Fontes heroi={heroi} />
     </article>
   );
 }
