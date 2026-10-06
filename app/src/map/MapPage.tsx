@@ -40,6 +40,8 @@ export function MapPage() {
   const replayId = params.get("replay");
   const [ocultos, setOcultos] = useState<ReadonlySet<string>>(new Set());
   const [vista, setVista] = useState<Vista>("2.5d");
+  // Abaixo de 1180 px as camadas ficam recolhidas atrás de um botão; acima, o CSS ignora o estado e mostra a coluna.
+  const [camadasAbertas, setCamadasAbertas] = useState(false);
 
   if (objetivos.estado === "indisponivel") return <Indisponivel motivo={objetivos.motivo} />;
   if (objetivos.estado === "carregando") return <p>Carregando mapa…</p>;
@@ -60,26 +62,34 @@ export function MapPage() {
   return (
     <section className="pagina-mapa">
       <aside className="mapa-lateral">
-        <div className="grupo">
-          <h2 className="sobretitulo">Camadas</h2>
-          <SeletorReplay valor={replayId} onMudar={(novo) => setParams(novo ? { replay: novo } : {})} />
-          {contagemPorTipo(todos).map(([tipo, n]) => (
-            <button key={tipo} className="camada" aria-pressed={!ocultos.has(tipo)} onClick={() => alternarCamada(tipo)}>
-              <span className="camada-nome">{ROTULO_TIPO[tipo] ?? tipo}</span>
-              <span className="numero">{n}</span>
-            </button>
-          ))}
-        </div>
-        <div className="grupo">
-          <h2 className="sobretitulo">Vista</h2>
-          <div className="alternador">
-            <button aria-pressed={vista === "2.5d"} onClick={() => setVista("2.5d")}>2.5D</button>
-            <button aria-pressed={vista === "plano"} onClick={() => setVista("plano")}>Plano</button>
+        <button className="botao-camadas" aria-expanded={camadasAbertas} aria-controls="camadas" onClick={() => setCamadasAbertas((aberta) => !aberta)}>
+          Camadas
+        </button>
+        <div id="camadas" role="group" aria-label="Camadas do mapa" className="camadas" data-aberta={camadasAbertas}>
+          <div className="grupo grupo-camadas">
+            <h2 className="sobretitulo">Camadas</h2>
+            {contagemPorTipo(todos).map(([tipo, n]) => (
+              <button key={tipo} className="camada" aria-pressed={!ocultos.has(tipo)} onClick={() => alternarCamada(tipo)}>
+                <span className="camada-nome">{ROTULO_TIPO[tipo] ?? tipo}</span>
+                <span className="numero">{n}</span>
+              </button>
+            ))}
           </div>
-        </div>
-        <div className="grupo legenda">
-          <h2 className="sobretitulo">Legenda</h2>
-          {LEGENDA.map(({ lado, rotulo }) => <span key={lado}><i className={`ponto lado-${lado}`} />{rotulo}</span>)}
+          <div className="grupo">
+            <h2 className="sobretitulo">Replay</h2>
+            <SeletorReplay valor={replayId} onMudar={(novo) => setParams(novo ? { replay: novo } : {})} />
+          </div>
+          <div className="grupo">
+            <h2 className="sobretitulo">Vista</h2>
+            <div className="alternador">
+              <button aria-pressed={vista === "2.5d"} onClick={() => setVista("2.5d")}>2.5D</button>
+              <button aria-pressed={vista === "plano"} onClick={() => setVista("plano")}>Plano</button>
+            </div>
+          </div>
+          <div className="grupo legenda">
+            <h2 className="sobretitulo">Legenda</h2>
+            {LEGENDA.map(({ lado, rotulo }) => <span key={lado}><i className={`ponto lado-${lado}`} />{rotulo}</span>)}
+          </div>
         </div>
       </aside>
       <div className="mapa-centro">

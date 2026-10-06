@@ -22,6 +22,15 @@ function corDoToken(nome: string): string {
   return getComputedStyle(document.documentElement).getPropertyValue(nome).trim();
 }
 
+// Calibradas na captura de 1440×900: os quatro cantos do tabuleiro cabem no quadro com pouca sobra em cima.
+// Inclinação de uns 13°; mais inclinada, a borda de baixo (perto da câmera) abre além do quadro e corta as bases.
+// Se a captura mostrar borda cortada ou sobra, ajuste aqui e capture de novo.
+const POSICAO_DA_CAMERA: Vetor = [0, 144, 36];
+const CAMERA = { position: POSICAO_DA_CAMERA, fov: 42 };
+const ALVO_DA_CAMERA: Vetor = [0, 0, 2];
+// A câmera inicial fica a 148 do alvo; o limite precisa passar disso para o zoom não puxar a vista no primeiro toque.
+const DISTANCIA_MAXIMA = 170;
+
 function Chao() {
   const [textura, relevo] = useLoader(TextureLoader, [texturaDoMapa(window.innerWidth), "/data/relevo_512.png"]);
   return (
@@ -108,19 +117,22 @@ export function Map3D({ objetivos, rota, trilhas = [], marcas = [], selecionado,
   const noChao = useNoChao();
   const corLado: Record<Objetivo["lado"], string> = { radiant: corDoToken("--cor-radiant"), dire: corDoToken("--cor-dire"), neutro: corDoToken("--cor-neutro") };
   const destaque = corDoToken("--cor-destaque");
+  // O Canvas põe height: 100% em linha no próprio elemento; a proporção quadrada fica no div em volta.
   return (
-    <Canvas className="mapa-3d" camera={{ position: [0, 100, 78], fov: 45 }} dpr={[1, 2]}>
-      <color attach="background" args={[corDoToken("--cor-fundo")]} />
-      <ambientLight intensity={1.1} />
-      <directionalLight position={[30, 60, 20]} intensity={0.6} />
-      <Chao />
-      {objetivos.map((o) => (
-        <Gota key={o.id} objetivo={o} ativo={o.id === selecionado} cor={o.id === selecionado ? destaque : corLado[o.lado]} noChao={noChao} onSelecionar={onSelecionar} />
-      ))}
-      {rota && <TracadoRota rota={rota} cor={destaque} noChao={noChao} />}
-      <Trilhas trilhas={trilhas} corLado={corLado} destaque={destaque} noChao={noChao} />
-      <Marcas marcas={marcas} noChao={noChao} />
-      <OrbitControls enablePan maxPolarAngle={Math.PI / 2.4} minDistance={20} maxDistance={140} />
-    </Canvas>
+    <div className="mapa-3d">
+      <Canvas camera={CAMERA} dpr={[1, 2]}>
+        <color attach="background" args={[corDoToken("--cor-fundo")]} />
+        <ambientLight intensity={1.1} />
+        <directionalLight position={[30, 60, 20]} intensity={0.6} />
+        <Chao />
+        {objetivos.map((o) => (
+          <Gota key={o.id} objetivo={o} ativo={o.id === selecionado} cor={o.id === selecionado ? destaque : corLado[o.lado]} noChao={noChao} onSelecionar={onSelecionar} />
+        ))}
+        {rota && <TracadoRota rota={rota} cor={destaque} noChao={noChao} />}
+        <Trilhas trilhas={trilhas} corLado={corLado} destaque={destaque} noChao={noChao} />
+        <Marcas marcas={marcas} noChao={noChao} />
+        <OrbitControls target={ALVO_DA_CAMERA} enablePan maxPolarAngle={Math.PI / 2.4} minDistance={20} maxDistance={DISTANCIA_MAXIMA} />
+      </Canvas>
+    </div>
   );
 }
