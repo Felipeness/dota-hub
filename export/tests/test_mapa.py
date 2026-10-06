@@ -1,5 +1,7 @@
 import io
 
+import numpy as np
+
 from dota_export import mapa, validar
 
 def test_objetos_cobrem_os_tipos_do_mapa():
@@ -24,3 +26,11 @@ def test_textura_de_celular_cabe_na_meta_do_4g():
     arquivo = io.BytesIO()
     mapa.textura_alinhada(2048).save(arquivo, "JPEG", **mapa.JPEG)
     assert len(arquivo.getvalue()) < 900 * 1024
+
+def test_borda_fora_da_imagem_vira_fundo_e_nao_repete_a_ultima_linha():
+    img = np.asarray(mapa.textura_alinhada(512)).astype(int)
+    for nome, grade in (("linha", img), ("coluna", img.transpose(1, 0, 2))):
+        for i in range(1, grade.shape[0]):
+            repete = np.abs(grade[i] - grade[i - 1]).mean() < 1
+            fundo = (grade[i] == mapa.FORA_DO_MAPA).all()
+            assert not repete or fundo, f"{nome} {i} repete a anterior: textura esticada"
