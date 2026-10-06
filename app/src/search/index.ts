@@ -1,14 +1,18 @@
 import MiniSearch, { type SearchResult } from "minisearch";
-import type { ConteudoItem, Objetivo, Rota } from "../data/schemas";
+import type { ConteudoItem, HeroiResumo, JogadorResumo, Objetivo, Rota, Time } from "../data/schemas";
 import { normalizar } from "../routes/filtros";
 
-export type Achado = { tipo: "rota" | "objetivo" | "termo"; id: string; titulo: string; link: string };
+const TIPOS = ["rota", "objetivo", "termo", "heroi", "jogador", "time"] as const;
+export type Achado = { tipo: (typeof TIPOS)[number]; id: string; titulo: string; link: string };
 type Doc = Achado & { chave: string; texto: string };
 export type Busca = MiniSearch<Doc>;
 
-type Fontes = { rotas: Rota[]; objetivos: Objetivo[]; termos: ConteudoItem[] };
+type Fontes = {
+  rotas: Rota[]; objetivos: Objetivo[]; termos: ConteudoItem[];
+  herois?: HeroiResumo[]; jogadores?: JogadorResumo[]; times?: Time[];
+};
 
-export function construirIndice({ rotas, objetivos, termos }: Fontes): Busca {
+export function construirIndice({ rotas, objetivos, termos, herois = [], jogadores = [], times = [] }: Fontes): Busca {
   const busca: Busca = new MiniSearch<Doc>({
     idField: "chave", fields: ["titulo", "texto"], storeFields: ["tipo", "id", "titulo", "link"],
     processTerm: normalizar, searchOptions: { prefix: true, boost: { titulo: 3 } },
@@ -17,13 +21,16 @@ export function construirIndice({ rotas, objetivos, termos }: Fontes): Busca {
     ...rotas.map((r) => ({ chave: `rota:${r.id}`, tipo: "rota" as const, id: r.id, titulo: `${r.id} · ${r.pergunta}`, texto: r.titulo, link: `/rotas/${r.id}` })),
     ...objetivos.map((o) => ({ chave: `objetivo:${o.id}`, tipo: "objetivo" as const, id: o.id, titulo: o.nome, texto: o.tipo, link: `/mapa/${o.id}` })),
     ...termos.map((t) => ({ chave: `termo:${t.id}`, tipo: "termo" as const, id: t.id, titulo: t.titulo, texto: t.secoes.basico, link: `/glossario/${t.id}` })),
+    ...herois.map((h) => ({ chave: `heroi:${h.id}`, tipo: "heroi" as const, id: h.id, titulo: h.nome, texto: h.resumo, link: `/herois/${h.id}` })),
+    ...jogadores.map((j) => ({ chave: `jogador:${j.id}`, tipo: "jogador" as const, id: j.id, titulo: j.nome, texto: `${j.time ?? ""} ${j.amostra}`, link: `/jogadores/${j.id}` })),
+    ...times.map((t) => ({ chave: `time:${t.id}`, tipo: "time" as const, id: t.id, titulo: t.nome, texto: t.jogadores.join(" "), link: `/times/${t.id}` })),
   ]);
   return busca;
 }
 
-const TIPOS = ["rota", "objetivo", "termo"];
+const ehTipo = (valor: unknown): valor is Achado["tipo"] => TIPOS.some((t) => t === valor);
 const ehAchado = (r: SearchResult): r is SearchResult & Achado =>
-  TIPOS.includes(r.tipo) && typeof r.id === "string" && typeof r.titulo === "string" && typeof r.link === "string";
+  ehTipo(r.tipo) && typeof r.id === "string" && typeof r.titulo === "string" && typeof r.link === "string";
 const comoAchado = ({ tipo, id, titulo, link }: Achado): Achado => ({ tipo, id, titulo, link });
 
 export function buscar(busca: Busca, consulta: string, limite = 20): Achado[] {

@@ -16,6 +16,10 @@ export function useData<T>(path: string, schema: z.ZodType<T>): EstadoDados<T> {
   return estado;
 }
 
+export function dadosOuVazio<T>(estado: EstadoDados<T[]>): T[] {
+  return estado.estado === "ok" ? estado.dados : [];
+}
+
 export function Indisponivel({ motivo }: { motivo: string }) {
   return <p role="alert" className="indisponivel">Dados indisponíveis. {motivo}</p>;
 }

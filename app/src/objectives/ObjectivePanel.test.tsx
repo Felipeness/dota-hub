@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { numerosDoObjetivo, ObjectivePanel, rotuloOrigem } from "./ObjectivePanel";
 
 const camp = { id: "rad_safe_small_1", tipo: "camp", nome: "Pequeno do pull", x: 0.7, y: 0.2, lado: "radiant" as const, detalhes: {} };
-const conteudo = [{ id: "camp", titulo: "Camp", patch: "7.41", fontes: ["Liquipedia"], secoes: { basico: "Camps nascem a cada minuto.", avancado: null }, origem: { basico: null, avancado: null }, links: [] }];
+const conteudo = [{ id: "camp", titulo: "Camp", patch: "7.41", fontes: ["Liquipedia"], secoes: { basico: "Camps nascem a cada minuto.", avancado: null }, origem: { basico: null, avancado: null }, links: [], extras: {} }];
 
 it("mostra o básico e, sem avançado, avisa que ainda não foi escrito", () => {
   render(<ObjectivePanel objetivo={camp} conteudo={conteudo} onFechar={() => {}} />);
@@ -14,7 +14,7 @@ it("mostra o básico e, sem avançado, avisa que ainda não foi escrito", () => 
 
 const rosh = { ...camp, id: "roshan", tipo: "roshan", nome: "Roshan" };
 const roshConteudo = [{
-  id: "roshan", titulo: "Roshan", patch: "7.41", fontes: ["datamine"], links: [],
+  id: "roshan", titulo: "Roshan", patch: "7.41", fontes: ["datamine"], links: [], extras: {},
   secoes: { basico: "Vida 6000.", avancado: "Mediana 23:10." },
   origem: { basico: { tipo: "recomendado" as const, replays: [] }, avancado: { tipo: "replay" as const, replays: ["111", "222"] } },
 }];
