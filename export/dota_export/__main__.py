@@ -4,8 +4,8 @@ import shutil
 from datetime import datetime, timezone
 from pathlib import Path
 
-from . import (amigos, conteudo, fontes, herois, icones, jogadores, jogo, mapa, modelos, relevo, roshan, rotas,
-               trajetorias, unidades, validar)
+from . import (amigos, conteudo, fontes, herois, icones, jogadores, jogo, mapa, modelos, relevo, retratos, roshan,
+               rotas, trajetorias, unidades, validar)
 
 RAIZ = Path(__file__).resolve().parents[2]
 DESTINO = RAIZ / "app" / "public" / "data"
@@ -61,6 +61,9 @@ def main() -> None:
     pacotes["roshan_replays"] = roshan.todas()
     pacotes["roshan_solo"] = conteudo.carregar(RAIZ / "content" / "roshan_solo")
     arquivo_vpk = jogo.vpk()
+    retratos.atualizar_herois(arquivo_vpk, retratos.nomes_no_jogo(fichas), DESTINO / "retratos" / "herois")
+    itens_do_glossario = {t["extras"]["item"] for t in pacotes["glossario"] if "item" in t["extras"]}
+    retratos.atualizar_itens(arquivo_vpk, itens_do_glossario, DESTINO / "retratos" / "itens")
     base = unidades.Jogo.dos_arquivos(jogo.textos(arquivo_vpk), icones.disponiveis(arquivo_vpk))
     farm = fontes.farm()
     fichas_unidades = unidades.todas(base, farm, conteudo.carregar(RAIZ / "content" / "unidades"))
