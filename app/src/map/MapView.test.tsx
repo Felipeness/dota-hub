@@ -1,4 +1,6 @@
+/// <reference types="node" />
 import { fireEvent, render, screen } from "@testing-library/react";
+import { readFileSync } from "node:fs";
 import { MapView } from "./MapView";
 
 const rosh = { id: "roshan_pit_top", tipo: "roshan", nome: "Roshan", x: 0.326, y: 0.638, lado: "neutro" as const, detalhes: {} };
@@ -21,4 +23,10 @@ it("mapa plano mostra a posição atual da trilha e a marca", () => {
   render(<MapView objetivos={[]} trilhas={[trilha]} marcas={[marca]} onSelecionar={() => {}} forcarPlano />);
   expect(screen.getByRole("img", { name: "Lou" })).toBeInTheDocument();
   expect(screen.getByRole("img", { name: "Morte de sven" })).toBeInTheDocument();
+});
+
+it("marca de morte desenha o × e o CSS não tem byte de controle", () => {
+  const css = readFileSync("src/styles.css", "utf-8");
+  expect(css).toContain(String.raw`.marca-morte::before { content: "\d7"; }`);
+  expect(css).not.toMatch(/[\u0000-\u0008]/);
 });
