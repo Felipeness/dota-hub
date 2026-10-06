@@ -353,6 +353,35 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .termo-texto p { margin: 0 0 0.8em; }
 .fonte { font-family: var(--fonte-num); font-size: 11px; color: var(--cor-texto-3); }
 
+/* Heróis */
+.herois, .ficha-heroi { display: flex; flex-direction: column; gap: 18px; padding: 28px var(--espaco-6) 40px; max-width: 1100px; }
+.grade-herois { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr; gap: var(--espaco-3); }
+.grade-herois a {
+  display: flex; flex-direction: column; gap: 6px; height: 100%; padding: var(--espaco-4);
+  border-radius: var(--raio); background: var(--cor-superficie-2); border: 1px solid var(--cor-linha-forte);
+  color: var(--cor-texto-2); text-decoration: none; font-size: 13px; line-height: 1.5;
+}
+.grade-herois a:hover { border-color: var(--cor-destaque); }
+.grade-herois strong { font-family: var(--fonte-display); font-size: 24px; color: var(--cor-texto); }
+@media (min-width: 900px) { .grade-herois { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.ficha-heroi { min-width: 0; overflow-wrap: anywhere; }
+.ficha-heroi h1 { font-weight: 700; font-size: 56px; line-height: 0.95; }
+.ficha-heroi header p { margin: var(--espaco-2) 0 0; color: var(--cor-texto-leitura); max-width: 62ch; }
+.ficha-heroi .abas-pilula { overflow-x: auto; }
+.ficha-heroi .abas-pilula button { flex: 1 0 auto; padding: 0 14px; }
+.ficha-heroi [role="tabpanel"] { min-width: 0; color: var(--cor-texto-2); line-height: 1.6; }
+.ficha-rotas { display: flex; flex-direction: column; gap: var(--espaco-3); }
+.ficha-rotas .rota-mapa { width: min(100%, 640px); }
+.linha-do-tempo { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--espaco-3); }
+.linha-do-tempo li { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 14px; border-left: 2px solid var(--cor-linha-forte); }
+.linha-do-tempo .tempo { padding-left: var(--espaco-3); font-family: var(--fonte-num); font-weight: 700; color: var(--cor-destaque); }
+.linha-do-tempo strong { color: var(--cor-texto); }
+.linha-do-tempo p { margin: 2px 0 0; }
+.tabela-rolavel { max-width: 100%; overflow-x: auto; margin-top: var(--espaco-4); }
+.tabela-rolavel table { border-collapse: collapse; min-width: 100%; font-size: 13px; }
+.tabela-rolavel th, .tabela-rolavel td { padding: var(--espaco-2) var(--espaco-3); border-bottom: 1px solid var(--cor-linha); text-align: left; white-space: nowrap; }
+.tabela-rolavel th { color: var(--cor-texto-3); font-weight: 600; }
+
 /* Celular: navegação embaixo, painel vira folha de baixo */
 @media (max-width: 720px) {
   .shell { padding-bottom: var(--altura-barra-celular); }
@@ -395,4 +424,6 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
   .glossario-lista { max-width: none; border-right: 0; border-bottom: 1px solid var(--cor-linha); }
   .termo { order: -1; padding: 28px var(--espaco-4); }
   .termo h1 { font-size: 44px; }
+  .herois, .ficha-heroi { padding: 20px var(--espaco-4) 28px; }
+  .ficha-heroi h1 { font-size: 40px; }
 }

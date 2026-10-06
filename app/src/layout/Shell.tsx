@@ -22,6 +22,7 @@ export function Shell() {
         <nav className="abas" aria-label="Principal">
           <NavLink to="/" end className={({ isActive }) => (isActive || noMapa ? "active" : "")}>Mapa</NavLink>
           <NavLink to="/rotas">Rotas</NavLink>
+          <NavLink to="/herois">Heróis</NavLink>
           <NavLink to="/glossario">Glossário</NavLink>
         </nav>
         <SearchBox />
