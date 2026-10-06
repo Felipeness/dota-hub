@@ -80,12 +80,51 @@ Medido no `vite preview` com o celular simulado descrito acima.
 
 - `/glossario/unidades` mostra: Roshan e Tormentor 2; Creeps de lane 24 (12 Radiant, 12 Dire); Selva pequeno 10, médio 10, grande 8, ancient 10, anfíbio 7, total 45 na selva.
 - Roshan: 6 habilidades, 5 com ícone do jogo. Força do Imortal mostra o ícone neutro com a inicial "F", como esperado.
-- Conferi visualmente a ficha completa do Roshan e o painel do mapa em 1280×800 e 390×844: modelo, grade de números em fonte mono, tabela de crescimento e habilidades. Não abri uma unidade de cada grupo de selva nem comparei lado a lado com `docs/design/v1/Main.dc.html`.
+- Conferi visualmente a ficha completa do Roshan e o painel do mapa em 1280×800 e 390×844: modelo, grade de números em fonte mono, tabela de crescimento e habilidades.
+
+### Uma unidade de cada grupo e de cada lado
+
+Aberta em `/glossario/unidades/<id>` no `vite preview`, Chromium do Playwright em 1280×800, sem limitação de rede. Para cada uma: captura de tela do modelo, conferência de 6 números da tela (vida, armadura, dano, alcance de ataque, velocidade, XP) contra `app/public/data/unidades/<id>.json`, e checagem de que cada ícone de habilidade carregou (imagem com largura natural acima de zero).
+
+| Grupo | Unidade | Modelo baixado e desenhado | Números da tela | Habilidades |
+|---|---|---|---|---|
+| pequeno | Troll da Montanha Sacerdote | n_creep_forest_troll_high_priest.glb, girando | vida 450, armadura 0, dano 28 a 34, alcance 600, velocidade 290, XP 28: iguais ao JSON | 3 de 3 com ícone (Curar, Aura de Amplificação de Cura, Perfurante) |
+| médio | Ogro Mago de Gelo | n_creep_ogre_lrg.glb, girando | 600, 0, 18 a 20, 100, 270, 48: iguais | 1 de 1 com ícone (Armadura de Gelo) |
+| grande | Sátiro Atormentador | n_creep_satyr_a.glb, girando | 1.100, 2, 49 a 55, 100, 290, 90: iguais | 2 de 2 com ícone (Onda de Choque, Aura Profana) |
+| ancient | Dragão Negro Ancestral | n_creep_black_dragon.glb, girando | 2.000, 4, 62 a 68, 300, 300, 124: iguais | 3 de 3 com ícone (Bola de Fogo, Ataque Explosivo, Aura do Couro de Dragão) |
+| anfíbio | Mago Pantanoso Ancestral | n_creep_ancient_frog_mage.glb, girando | 1.250, 5, 58 a 62, 500, 300, 104: iguais | 2 de 2 com ícone (Bolha d'Água (Grande), Aura Ribeirinha) |
+| Radiant | Criatura Maga | radiant_ranged.glb, girando | 300, 0, 21 a 26, 500, 325, 69: iguais | 1 de 1 com ícone (Perfurante) |
+| Dire | Criatura Porta-Bandeira | creep_bad_flagbearer.glb, girando | 550, 2, 19 a 23, 100, 325, 57: iguais | 2 de 2 com ícone (Acanhada, Aura de Inspiração) |
+
+Nas 7 fichas o sobretítulo traz o papel certo (monstro da selva; creep à distância, normal, Radiant; creep porta-bandeira, normal, Dire), o botão "Parar o giro" aparece e o console só mostra o aviso do three.js sobre `THREE.Clock` obsoleto, sem erro. Nenhuma delas usa o ícone neutro: todas as habilidades dessas unidades têm ícone do jogo. O ícone neutro só aparece na Força do Imortal do Roshan, como já conferido acima.
+
+### Painel do mapa contra `docs/design/v1/Main.dc.html`
+
+Aberto `/mapa/roshan_pit_top` em 1280×800 e em 390×844. Medido com `getComputedStyle` e comparado com os estilos escritos no design.
+
+| Item | Design | App em 1280×800 | App em 390×844 |
+|---|---|---|---|
+| Posição do painel | coluna à direita, 380 a 460 px, borda à esquerda #1f2a31, fundo #0e151a, padding 28 px | coluna à direita, 420 px, borda e fundo iguais, padding 28 px | folha fixa embaixo, 390×473 px, sobre o mapa |
+| Sobretítulo | Saira Condensed 13 px, espaçamento .14em, cor de destaque #f2b544 | Saira Condensed 13 px, 1,82 px (.14em), cor roxa #b08cff ("Neutro") | igual ao PC |
+| Título do objetivo | Saira Condensed 700, 44 px | Saira Condensed 700, 40 px | 34 px |
+| Título da ficha ("Roshan") | (não existe no design) | Saira Condensed 44 px | 34 px |
+| Abas Básico e Avançado | duas abas, Básico ativa em #f2b544 | iguais | iguais |
+| Grade de números | 2 colunas, 1 px entre células, raio 12 px, célula 12×14 px, rótulo 12 px #8b968f, valor JetBrains Mono 18 px #e9e4d8 | 2 colunas de 172 px, 1 px, raio 12 px, célula 12×14 px, rótulo 12 px #8b968f, valor JetBrains Mono 18 px #c8c2b5 | 2 colunas de 168 px, resto igual |
+| Ordem no Básico | grade logo abaixo das abas | abas, modelo 3D (cerca de 345 px de altura), título "Roshan", grade, tabela de crescimento, habilidades | igual, com o modelo em 337×337 px ocupando a folha inteira antes dos números |
+| Rodapé de fonte | JetBrains Mono 11 px | JetBrains Mono 11 px | igual |
+| Rolagem horizontal | nenhuma | o painel rola 10 px na horizontal (scrollWidth 414, clientWidth 404) | 29 px (404 contra 375) |
+
+A rolagem horizontal não vem mais da tabela de crescimento, que já fica num contêiner com `overflow-x: auto`. Vem das habilidades: a coluna de texto de 4 das 6 habilidades do Roshan (Rugido Vingativo, Porrada, Força do Imortal, Arremessar) fica com 292 px onde cabem 237, porque a grade de condições (`dl.condicoes`, 2 colunas de 145 px) não encolhe.
 
 ## Backlog (diferenças achadas)
 
-1. Tabela de crescimento do Roshan (8 colunas, 744 px) estoura o painel do objetivo em 360, 390 e também em 1280 px: o painel inteiro ganha rolagem horizontal. Colocar a tabela num contêiner com `overflow-x: auto`.
+1. Diagnóstico corrigido na rodada de correção: a tabela de crescimento do Roshan (744 px) já fica dentro de `.tabela-rolavel` com `overflow-x: auto` e rola sozinha. A rolagem horizontal do painel vem das habilidades; ver o item 6.
 2. Tempo do toque até o primeiro quadro do Roshan: 2,34 s no celular simulado, acima dos 2 s. Opções: pré-carregar o Cena3D quando o painel abre, ou mostrar o poster enquanto o modelo carrega.
 3. O canvas do mapa aparece em 3,98 s no celular simulado, por causa dos 835 KB do `mapa_2048.jpg`. Vem da 1B, não da 1C, mas o critério de primeira tela em 3 s depende de qual marco conta.
 4. Vistos no caminho, anteriores à 1C: em 1280 px o item "Mapa" do menu fica por cima do logo; em 390 px o seletor "Rota real de replay" passa da borda direita; `favicon.ico` dá 404.
 5. Pendente de pessoa: os 10 pares do Roshan contra o jogo e um teste em celular de verdade.
+6. Habilidades com grade de condições estouram o painel do objetivo: 10 px de rolagem horizontal em 1280 e 29 px em 390. Dar `min-width: 0` à coluna de texto da habilidade e deixar a `dl.condicoes` cair para 1 coluna quando faltar largura.
+7. Valores da grade no painel do mapa em #c8c2b5; o design pede #e9e4d8. Título do objetivo em 40 px no PC; o design pede 44 px.
+8. Sobretítulo do painel em roxo (cor de neutro) em vez do dourado de destaque do design. Vem da 1B; decidir se a cor por lado é a regra nova e atualizar o design.
+9. No celular (390×844) o modelo 3D ocupa a folha inteira (337 px) antes do título e dos números; no design os números vêm logo abaixo das abas. Avaliar modelo menor ou números antes do modelo no celular.
+10. Enquadramento: a Criatura Porta-Bandeira Dire sai cortada embaixo no visualizador, e o Dragão Negro Ancestral fica escuro demais contra o fundo escuro. Ajustar o enquadramento pela caixa do modelo e a luz.
