@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["id", "nome", "tipo", "time", "amostra", "fontes", "destaques", "graficos", "achados", "replays"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+    "tipo": {"enum": ["amigo", "pro"]},
+    "time": {"type": ["string", "null"]},
+    "destaques": {"type": "array", "items": {"type": "object", "required": ["rotulo", "valor", "unidade", "fonte"],
+      "properties": {"valor": {"type": "number"}}}},
+    "graficos": {"type": "array", "items": {"type": "object", "required": ["id", "titulo", "tipo", "x", "series", "unidade", "fonte", "nota"],
+      "properties": {"tipo": {"enum": ["linha", "barra"]},
+        "x": {"type": "object", "required": ["rotulo", "valores"], "properties": {"valores": {"type": "array", "minItems": 1, "items": {"type": ["string", "number"]}}}},
+        "series": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["nome", "valores"],
+          "properties": {"valores": {"type": "array", "items": {"type": ["number", "null"]}}}}},
+        "nota": {"type": ["string", "null"]}}}},
+    "achados": {"type": "array", "items": {"type": "object", "required": ["texto", "fonte"]}},
+    "replays": {"type": "array", "items": {"type": "string", "pattern": "^\\d+$"}}
+  }
+}
