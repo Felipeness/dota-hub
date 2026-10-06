@@ -24,7 +24,6 @@ export const rotaSchema = z.object({
   interrupcao: z.array(z.object({ condicao: z.string(), acao: z.string(), rota: z.string().nullable().optional() })),
   porque: z.string(),
 });
-export const rotasSchema = z.array(rotaSchema);
 export const rotaResumoSchema = rotaSchema
   .pick({ id: true, pdf: true, lado: true, pergunta: true, titulo: true, janela: true })
   .extend({ heroi: z.string().nullable() });

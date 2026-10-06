@@ -306,16 +306,12 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .origem { margin: 0 0 var(--espaco-1); color: var(--cor-info); }
 
 /* Rotas */
-.rotas { display: flex; flex-direction: column; gap: 18px; padding: 28px var(--espaco-6) 40px; }
 .rotas-topo { display: flex; flex-direction: column; gap: var(--espaco-1); }
 .rotas-topo h1 { font-weight: 700; font-size: 40px; }
-.seletores { display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start; }
 .seletor { border: 0; margin: 0; padding: 0; min-width: 0; display: flex; flex-direction: column; gap: var(--espaco-2); }
 .seletor legend { padding: 0 0 var(--espaco-2); font-size: 12px; color: var(--cor-texto-3); }
 .seletor-opcoes { display: flex; flex-wrap: wrap; gap: 6px; }
 .seletor-botoes button { border-radius: 10px; font-weight: 600; padding: 0 18px; }
-.seletor-minutos { flex: 1 1 520px; }
-.seletor-minutos .seletor-opcoes { flex-wrap: nowrap; gap: var(--espaco-1); overflow-x: auto; padding-bottom: var(--espaco-1); scrollbar-width: thin; }
 .seletor-minutos button { flex: 0 0 auto; min-width: var(--alvo-toque); padding: 0; border-radius: 10px; font-family: var(--fonte-num); font-size: 14px; color: var(--cor-texto-2); }
 .seletor-minutos button[aria-pressed="true"] { color: var(--cor-destaque); }
 .seletor-pilulas button { border-radius: var(--raio-pilula); padding: 0 14px; font-size: 13px; }
@@ -347,10 +343,25 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .caixa-alerta .sobretitulo { color: var(--cor-alerta-texto); }
 .caixa-alerta ul { margin: 6px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
 .porque { margin: 0; font-size: 14px; color: var(--cor-texto-2); font-style: italic; }
-.lista-rotas { margin: 0; padding: 0; list-style: none; columns: 2 360px; column-gap: var(--espaco-5); }
-.lista-rotas a { display: flex; align-items: baseline; gap: var(--espaco-2); min-height: var(--alvo-toque); padding: 10px 0; color: var(--cor-texto-2); text-decoration: none; break-inside: avoid; }
+.lista-rotas a { display: flex; align-items: baseline; gap: var(--espaco-2); min-height: var(--alvo-toque); padding: 10px 0; color: var(--cor-texto-2); text-decoration: none; }
 .lista-rotas a:hover { color: var(--cor-texto); }
 .lista-rotas .numero { flex-shrink: 0; font-size: 12px; color: var(--cor-destaque); }
+.rotas { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px 32px; padding: 28px var(--espaco-6) 40px; }
+.rotas-escolha, .rotas-lista { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.rotas-mapa { min-width: 0; scroll-margin-top: 96px; }
+.rotas-dica { margin: 0 0 var(--espaco-3); color: var(--cor-texto-2); }
+.contagem { margin: 0; font-size: 13px; color: var(--cor-texto-3); }
+.seletor:disabled button { opacity: 0.45; cursor: not-allowed; }
+.seletor-minutos .seletor-opcoes { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--alvo-toque), 1fr)); gap: var(--espaco-1); }
+.lista-rotas { margin: 0; padding: 0; list-style: none; }
+.lista-rotas a[aria-current="page"] { color: var(--cor-texto); font-weight: 600; }
+/* Telas largas: escolha e lista à esquerda, mapa da rota preso à direita. */
+@media (min-width: 1100px) {
+  .rotas { grid-template-columns: minmax(340px, 420px) minmax(0, 1fr); grid-template-areas: "escolha mapa" "lista mapa"; align-items: start; }
+  .rotas-escolha { grid-area: escolha; }
+  .rotas-lista { grid-area: lista; }
+  .rotas-mapa { grid-area: mapa; position: sticky; top: 100px; max-height: calc(100vh - 116px); overflow-y: auto; }
+}
 
 /* Glossário */
 .glossario { display: flex; flex-wrap: wrap; min-height: calc(100vh - 82px); }
@@ -446,7 +457,6 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 
   .rotas { padding: 20px var(--espaco-4) 28px; }
   .rotas-topo h1 { font-size: 30px; }
-  .seletor-minutos { flex-basis: 100%; }
   .rota-lateral { max-width: none; }
   .glossario-lista { max-width: none; border-right: 0; border-bottom: 1px solid var(--cor-linha); }
   .filtro-categorias { flex-wrap: nowrap; overflow-x: auto; margin: 0 calc(-1 * var(--espaco-5)); padding: 0 var(--espaco-5); }

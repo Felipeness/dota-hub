@@ -25,11 +25,13 @@ def _gravar_colecao(pasta: str, schema: str, itens: list[dict], chave: str = "id
 
 def _gravar_rotas(todas: list[dict]) -> None:
     """Uma rota por arquivo: a tela abre só a rota escolhida. Refaz a pasta para não sobrar rota renomeada."""
+    validar.validar("rotas", todas)
     pasta = DESTINO / "rotas"
     shutil.rmtree(pasta, ignore_errors=True)
     pasta.mkdir()
     for rota in todas:
         _gravar(f"rotas/{rota['id']}.json", rota)
+    (DESTINO / "rotas.json").unlink(missing_ok=True)
 
 
 def main() -> None:
@@ -38,14 +40,14 @@ def main() -> None:
         mapa.textura_alinhada(tamanho).save(DESTINO / f"mapa_{tamanho}.jpg", **mapa.JPEG)
     todas_rotas = rotas.carregar_rotas()
     _gravar_rotas(todas_rotas)
-    pacotes = {"objetivos": mapa.objetos(), "rotas": todas_rotas, "rotas_resumo": rotas.resumo(todas_rotas),
+    pacotes = {"objetivos": mapa.objetos(), "rotas_resumo": rotas.resumo(todas_rotas),
                "indice": rotas.indice(),
                "objetivos_conteudo": conteudo.carregar(RAIZ / "content" / "objetivos"),
                "glossario": conteudo.carregar(RAIZ / "content" / "glossario")}
     altura = relevo.relevo()
     altura.save(DESTINO / "relevo_512.png")
     pacotes["relevo"] = relevo.grade(altura)
-    fichas = herois.todos(frozenset(r["id"] for r in pacotes["rotas"]))
+    fichas = herois.todos(frozenset(r["id"] for r in todas_rotas))
     _gravar_colecao("herois", "heroi", fichas)
     pacotes["herois"] = herois.indice(fichas)
     paineis = [jogadores.felipe(), *(jogadores.pro_compare(c) for c in ("satanic", "yatoro", "watson")),
@@ -75,7 +77,7 @@ def main() -> None:
         validar.validar(SCHEMA_POR_ARQUIVO.get(nome, nome), dados)
         _gravar(f"{nome}.json", dados)
     meta = {"exportado_em": datetime.now(timezone.utc).isoformat(timespec="seconds"), "patch": "7.41",
-            "contagens": {"rotas": len(pacotes["rotas"]), "objetivos": len(pacotes["objetivos"]),
+            "contagens": {"rotas": len(todas_rotas), "objetivos": len(pacotes["objetivos"]),
                           "termos": len(pacotes["glossario"])}}
     validar.validar("meta", meta)
     _gravar("meta.json", meta)
