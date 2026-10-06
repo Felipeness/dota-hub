@@ -1,0 +1,40 @@
+/* app/src/unidades/unidades.css: só variáveis de tokens.css, no visual de docs/design/v1. */
+.ficha-unidade { display: flex; flex-direction: column; gap: var(--espaco-4); }
+.ficha-unidade h2 { margin: 0; font-family: var(--fonte-display); font-weight: 700; font-size: 44px; line-height: 1; letter-spacing: .02em; }
+.modelo { position: relative; margin: 0; aspect-ratio: 1 / 1; max-height: 360px; border-radius: var(--raio); border: 1px solid var(--cor-linha); background: radial-gradient(ellipse at 50% 40%, var(--cor-brilho-mapa) 0%, var(--cor-fundo) 70%); overflow: hidden; }
+.modelo canvas { touch-action: none; }
+.modelo-poster { width: 100%; height: 100%; object-fit: contain; }
+.modelo-aviso { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--espaco-3); height: 100%; color: var(--cor-texto-3); }
+.modelo-girar { position: absolute; right: var(--espaco-3); bottom: var(--espaco-3); min-height: var(--alvo-toque); }
+.habilidades { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--espaco-4); }
+.habilidade { display: grid; grid-template-columns: 48px 1fr; gap: var(--espaco-3); padding: var(--espaco-4); border: 1px solid var(--cor-linha); border-radius: var(--raio); background: var(--cor-superficie); }
+.habilidade h4 { margin: 0 0 var(--espaco-2); font-family: var(--fonte-display); font-size: 20px; }
+.habilidade p { margin: 0 0 var(--espaco-2); color: var(--cor-texto-2); line-height: 1.55; }
+.habilidade-icone { width: 48px; height: 48px; border-radius: var(--raio-pequeno); }
+.habilidade-icone-vazio { display: grid; place-items: center; background: var(--cor-superficie-3); font-family: var(--fonte-display); font-size: 22px; }
+.nome-en { color: var(--cor-texto-3); font-size: 14px; font-weight: 400; }
+.condicoes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin: var(--espaco-2) 0; background: var(--cor-linha); border: 1px solid var(--cor-linha); border-radius: var(--raio-pequeno); overflow: hidden; }
+.condicoes div { background: var(--cor-superficie); padding: var(--espaco-2) var(--espaco-3); }
+.condicoes dt { font-size: 12px; color: var(--cor-texto-3); }
+.condicoes dd { margin: 0; font-family: var(--fonte-num); font-size: 14px; }
+.o-que-muda { border-left: 3px solid var(--cor-destaque); padding-left: var(--espaco-3); }
+.o-que-muda h5 { margin: 0 0 var(--espaco-1); font-family: var(--fonte-display); font-size: 13px; letter-spacing: .14em; color: var(--cor-destaque); text-transform: uppercase; }
+.o-que-muda-vazio { color: var(--cor-texto-3); font-size: 13px; }
+.crescimento-tabela { width: 100%; border-collapse: collapse; font-family: var(--fonte-num); font-size: 13px; }
+.crescimento-tabela caption { text-align: left; font-family: var(--fonte-display); letter-spacing: .14em; color: var(--cor-texto-3); padding-bottom: var(--espaco-2); }
+.crescimento-tabela th, .crescimento-tabela td { padding: var(--espaco-1) var(--espaco-2); border-bottom: 1px solid var(--cor-linha); text-align: right; }
+.tabela-rolavel { overflow-x: auto; }
+.unidades-pagina { display: flex; flex-wrap: wrap; }
+.unidades-lista { flex: 1 1 300px; max-width: 360px; padding: var(--espaco-5); border-right: 1px solid var(--cor-linha); }
+.unidades-lista h2 { margin: var(--espaco-5) 0 var(--espaco-2); }
+.unidades-lista ul { list-style: none; margin: 0 0 var(--espaco-4); padding: 0; }
+.unidades-lista a { display: flex; align-items: center; min-height: 40px; padding: 0 var(--espaco-3); border-radius: var(--raio-pequeno); color: var(--cor-texto); text-decoration: none; }
+.unidades-lista a[aria-current="page"] { background: var(--cor-superficie-3); font-weight: 600; }
+.unidades-ficha { flex: 999 1 560px; min-width: 0; max-width: 860px; padding: var(--espaco-6); }
+.camp-tipos { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--espaco-3); }
+@media (max-width: 720px) {
+  .unidades-lista { max-width: none; border-right: 0; border-bottom: 1px solid var(--cor-linha); }
+  .unidades-ficha { padding: var(--espaco-4); }
+  .ficha-unidade h2 { font-size: 34px; }
+}
+@media (prefers-reduced-motion: reduce) { .modelo-girar { display: none; } }

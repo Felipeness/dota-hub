@@ -81,7 +81,7 @@ export function ObjectivePanel({ objetivo, conteudo, onFechar, children }: Props
   );
 }
 
-function GradeNumeros({ numeros }: { numeros: [string, string][] }) {
+export function GradeNumeros({ numeros }: { numeros: [string, string][] }) {
   if (numeros.length === 0) return null;
   return (
     <dl className="grade-numeros">
