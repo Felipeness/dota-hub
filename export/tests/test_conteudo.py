@@ -32,3 +32,8 @@ def test_origem_replay_sem_id_falha(tmp_path):
         assert "x.md" in str(erro) and "replay" in str(erro)
     else:
         raise AssertionError("esperava ValueError")
+
+def test_extras_guardam_chaves_fora_do_padrao(tmp_path):
+    (tmp_path / "x.md").write_text("---\nid: x\ntitulo: X\norigem: recomendado\nitens:\n- BKB\n---\n## Básico\nTexto.\n", encoding="utf-8")
+    item = conteudo.carregar(tmp_path)[0]
+    assert item["extras"] == {"origem": "recomendado", "itens": ["BKB"]}

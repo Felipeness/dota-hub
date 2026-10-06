@@ -3,11 +3,11 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
-from . import amigos, conteudo, fontes, herois, jogadores, mapa, rotas, trajetorias, validar
+from . import amigos, conteudo, fontes, herois, jogadores, mapa, roshan, rotas, trajetorias, validar
 
 RAIZ = Path(__file__).resolve().parents[2]
 DESTINO = RAIZ / "app" / "public" / "data"
-SCHEMA_POR_ARQUIVO = {"objetivos_conteudo": "conteudo", "glossario": "conteudo"}
+SCHEMA_POR_ARQUIVO = {"objetivos_conteudo": "conteudo", "glossario": "conteudo", "roshan_solo": "conteudo"}
 
 
 def _gravar(nome: str, dados) -> None:
@@ -39,6 +39,8 @@ def main() -> None:
     replays = [trajetorias.replay(p) for p in sorted(fontes.REPLAYS.iterdir()) if p.is_dir()]
     _gravar_colecao("trajetorias", "trajetoria", replays, chave="match_id")
     pacotes["replays"] = trajetorias.indice(replays)
+    pacotes["roshan_replays"] = roshan.todas()
+    pacotes["roshan_solo"] = conteudo.carregar(RAIZ / "content" / "roshan_solo")
     for nome, dados in pacotes.items():
         validar.validar(SCHEMA_POR_ARQUIVO.get(nome, nome), dados)
         _gravar(f"{nome}.json", dados)
