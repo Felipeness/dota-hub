@@ -24,35 +24,53 @@ export function RoutesPage() {
   return <Rotas rotas={rotas.dados} indice={indice.dados} objetivos={objetivos.dados} />;
 }
 
-type Selecao = { lado?: Lado; minuto?: number };
+type Selecao = { lado?: Lado; minuto?: number; situacao?: string };
 type RotasProps = { rotas: RotaResumo[]; indice: Indice; objetivos: Objetivo[] };
 
 // No celular o mapa fica abaixo dos seletores: depois do terceiro toque a tela desce até ele.
 const mostrarOMapa = () => document.getElementById(ID_DO_MAPA)?.scrollIntoView({ block: "start" });
+const ROTULO_DO_LADO: Record<Lado, string> = { radiant: "Radiant", dire: "Dire" };
+
+function celulaDaSelecao(indice: Indice, { lado, minuto, situacao }: Selecao) {
+  if (!lado || minuto === undefined || !situacao) return null;
+  return rotaDaCelula(indice, lado, minuto, situacao);
+}
+
+const descreverSelecao = ({ lado, minuto, situacao }: Selecao) =>
+  [lado && ROTULO_DO_LADO[lado], minuto !== undefined && `minuto ${minuto}`, situacao].filter(Boolean).join(", ");
+
 const rotuloDaContagem = (n: number) => (n === 1 ? "1 rota" : `${n.toLocaleString("pt-BR")} rotas`);
 
 function Rotas({ rotas, indice, objetivos }: RotasProps) {
   const { id } = useParams();
   const navigate = useNavigate();
   const [selecao, setSelecao] = useState<Selecao>({});
-  const [nota, setNota] = useState<string | null>(null);
   const [texto, setTexto] = useState("");
   const [limite, setLimite] = useState(POR_PAGINA);
   const rolarQuandoAbrir = useRef(false);
   const irPara = (destino: string) => navigate(`/rotas/${destino}`);
-  const filtrar = (nova: Selecao) => { setSelecao(nova); setLimite(POR_PAGINA); };
   const temLadoEMinuto = selecao.lado !== undefined && selecao.minuto !== undefined;
-  const filtradas = filtrarRotas(rotas, { ...selecao, texto });
+  const celula = celulaDaSelecao(indice, selecao);
+  // Com a situação marcada, a lista mostra a rota da célula; sem ela, as rotas do lado e da janela do minuto.
+  const filtradas = filtrarRotas(rotas, celula ? { id: celula.id, texto } : { ...selecao, texto });
 
-  const escolherSituacao = (coluna: string) => {
-    if (!selecao.lado || selecao.minuto === undefined) return;
-    const celula = rotaDaCelula(indice, selecao.lado, selecao.minuto, coluna);
-    setNota(celula.nota);
-    if (!celula.id) return;
-    if (celula.id === id) return mostrarOMapa();
+  // Com os três toques dados, a rota da célula abre no mapa; marcar ou trocar qualquer um deles reaplica.
+  const filtrar = (nova: Selecao) => {
+    setSelecao(nova);
+    setLimite(POR_PAGINA);
+    const destino = celulaDaSelecao(indice, nova)?.id;
+    if (destino === undefined) return;
+    // Célula sem rota: o mapa deixa de mostrar a rota anterior, que já não responde à pergunta.
+    if (destino === null) {
+      if (id) navigate("/rotas");
+      return;
+    }
+    if (destino === id) return mostrarOMapa();
     rolarQuandoAbrir.current = true;
-    irPara(celula.id);
+    irPara(destino);
   };
+  const alternarSituacao = (coluna: string) =>
+    filtrar({ ...selecao, situacao: coluna === selecao.situacao ? undefined : coluna });
 
   useEffect(() => {
     if (!id || !rolarQuandoAbrir.current) return;
@@ -62,6 +80,8 @@ function Rotas({ rotas, indice, objetivos }: RotasProps) {
 
   return (
     <section className="rotas">
+      {/* No desktop escolha e lista viram uma coluna que rola sozinha; abaixo disso o wrapper some (display: contents). */}
+      <div className="rotas-filtros">
       <div className="rotas-escolha">
         <header className="rotas-topo">
           <span className="sobretitulo">GPS de farm · 3 toques</span>
@@ -72,11 +92,8 @@ function Rotas({ rotas, indice, objetivos }: RotasProps) {
         <Seletor rotulo="2 · Minuto" estilo="minutos" opcoes={MINUTOS.map((m) => ({ valor: m, rotulo: String(m) }))} atual={selecao.minuto}
           onEscolher={(minuto) => filtrar({ ...selecao, minuto })} />
         <Seletor rotulo={temLadoEMinuto ? "3 · Situação" : "3 · Situação (escolha lado e minuto antes)"} estilo="pilulas" desligado={!temLadoEMinuto}
-          opcoes={indice.colunas.map((c) => ({ valor: c, rotulo: c }))} onEscolher={escolherSituacao} />
-        {nota && <p className="nota-celula">{nota}</p>}
-      </div>
-      <div className="rotas-mapa" id={ID_DO_MAPA}>
-        {id ? <RotaAberta key={id} id={id} objetivos={objetivos} onIrPara={irPara} /> : <MapaSemRota objetivos={objetivos} />}
+          opcoes={indice.colunas.map((c) => ({ valor: c, rotulo: c }))} atual={selecao.situacao} onEscolher={alternarSituacao} />
+        {celula?.nota && <p className="nota-celula">{celula.nota}</p>}
       </div>
       <div className="rotas-lista">
         <label className="campo">
@@ -84,16 +101,24 @@ function Rotas({ rotas, indice, objetivos }: RotasProps) {
           <input type="search" value={texto} onChange={(e) => { setTexto(e.target.value); setLimite(POR_PAGINA); }} />
         </label>
         <p className="contagem" aria-live="polite">{rotuloDaContagem(filtradas.length)}</p>
-        <ul className="lista-rotas" aria-label="Rotas">
-          {filtradas.slice(0, limite).map((r) => (
-            <li key={r.id}>
-              <Link to={`/rotas/${r.id}`} aria-current={r.id === id ? "page" : undefined}><span className="numero">{r.id}</span> {r.pergunta}</Link>
-            </li>
-          ))}
-        </ul>
+        {filtradas.length === 0
+          ? <p className="rotas-vazio">{selecao.situacao ? `Não há rota para ${descreverSelecao(selecao)}.` : "Nenhuma rota com esses filtros."}</p>
+          : (
+            <ul className="lista-rotas" aria-label="Rotas">
+              {filtradas.slice(0, limite).map((r) => (
+                <li key={r.id}>
+                  <Link to={`/rotas/${r.id}`} aria-current={r.id === id ? "page" : undefined}><span className="numero">{r.id}</span> {r.pergunta}</Link>
+                </li>
+              ))}
+            </ul>
+          )}
         {filtradas.length > limite && (
           <button className="pilula" onClick={() => setLimite(limite + POR_PAGINA)}>Mostrar mais {Math.min(POR_PAGINA, filtradas.length - limite)}</button>
         )}
+      </div>
+      </div>
+      <div className="rotas-mapa" id={ID_DO_MAPA}>
+        {id ? <RotaAberta key={id} id={id} objetivos={objetivos} onIrPara={irPara} /> : <MapaSemRota objetivos={objetivos} />}
       </div>
     </section>
   );

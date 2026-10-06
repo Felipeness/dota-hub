@@ -46,7 +46,7 @@ describe("enquadramento da câmera 3D", () => {
     const caixa = caixaDoFoco([[0.7, 0.2], [0.8, 0.3]], 100);
     expect(caixa.centro.x).toBeCloseTo(25);
     expect(caixa.centro.y).toBeCloseTo(25);
-    expect(caixa.lado).toBe(30);
+    expect(caixa.lado).toBe(40);
   });
 });
 

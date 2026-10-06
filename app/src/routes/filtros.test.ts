@@ -17,3 +17,8 @@ it("acha a rota da célula do índice", () => {
   expect(rotaDaCelula(indice, "radiant", 6, "equilibrado")).toEqual({ id: "MA-R-01", nota: null });
   expect(rotaDaCelula(indice, "radiant", 7, "equilibrado")).toEqual({ id: null, nota: "sem rota para este minuto" });
 });
+
+it("com a célula escolhida, filtra só pela rota dela e não deixa passar nada quando ela não tem rota", () => {
+  expect(filtrarRotas(rotas, { id: "MA-D-01" }).map((r) => r.id)).toEqual(["MA-D-01"]);
+  expect(filtrarRotas(rotas, { id: null })).toEqual([]);
+});

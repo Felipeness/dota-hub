@@ -349,7 +349,7 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .rota-titulo { margin: 0; color: var(--cor-texto-3); font-size: 14px; }
 .rota-mapa { position: relative; }
 .rota-mapa .mapa-plano, .rota-mapa .mapa-3d { border-radius: 16px; }
-.proximas { position: absolute; right: 4%; top: var(--espaco-4); display: flex; flex-direction: column; gap: 6px; }
+.proximas { position: absolute; left: var(--espaco-4); top: var(--espaco-4); z-index: 2; display: flex; flex-direction: column; gap: 6px; }
 .selo-proxima { border: 0; background: var(--cor-info); color: var(--cor-fundo); font-weight: 600; font-size: 12px; }
 .rota-lateral { flex: 1 1 360px; max-width: 460px; display: flex; flex-direction: column; gap: 14px; }
 .passos { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--espaco-2); }
@@ -384,12 +384,24 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .seletor-minutos .seletor-opcoes { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--alvo-toque), 1fr)); gap: var(--espaco-1); }
 .lista-rotas { margin: 0; padding: 0; list-style: none; }
 .lista-rotas a[aria-current="page"] { color: var(--cor-texto); font-weight: 600; }
-/* Telas largas: escolha e lista à esquerda, mapa da rota preso à direita. */
+.rotas-filtros { display: contents; }
+.rotas-vazio { margin: 0; color: var(--cor-texto-2); }
+/* Telas largas: filtros, mapa e passos em três colunas que cabem na janela; cada coluna rola por dentro. */
 @media (min-width: 1100px) {
-  .rotas { grid-template-columns: minmax(340px, 420px) minmax(0, 1fr); grid-template-areas: "escolha mapa" "lista mapa"; align-items: start; }
-  .rotas-escolha { grid-area: escolha; }
-  .rotas-lista { grid-area: lista; }
-  .rotas-mapa { grid-area: mapa; position: sticky; top: 100px; max-height: calc(100vh - 116px); overflow-y: auto; }
+  .shell:has(.rotas) { height: 100vh; height: 100dvh; min-height: 0; }
+  .shell > main:has(> .rotas) { display: flex; flex-direction: column; min-height: 0; }
+  .rotas {
+    flex: 1; min-height: 0; padding-top: 20px; padding-bottom: 20px;
+    grid-template-columns: minmax(340px, 420px) minmax(0, 1fr); grid-template-rows: minmax(0, 1fr);
+  }
+  .rotas-filtros { display: flex; flex-direction: column; gap: 28px; min-height: 0; overflow-y: auto; padding-right: var(--espaco-2); }
+  .rotas-mapa { display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
+  .rotas-mapa > .rota-mapa { flex: 1; min-height: 0; }
+  .rotas-mapa .rota { flex: 1; min-height: 0; flex-wrap: nowrap; padding-top: 0; }
+  .rotas-mapa .rota-principal { min-height: 0; }
+  .rotas-mapa .rota-principal .rota-mapa { flex: 1; min-height: 0; }
+  .rotas-mapa .rota-lateral { min-height: 0; overflow-y: auto; padding-right: var(--espaco-2); }
+  .rotas-mapa .rota-mapa .mapa-3d, .rotas-mapa .rota-mapa .mapa-plano { height: 100%; aspect-ratio: auto; }
 }
 
 /* Glossário */

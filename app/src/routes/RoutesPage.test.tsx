@@ -73,3 +73,41 @@ it("lista 20 rotas por vez", async () => {
   fireEvent.click(screen.getByRole("button", { name: "Mostrar mais 5" }));
   expect(within(lista).getAllByRole("listitem")).toHaveLength(45);
 });
+
+describe("situação", () => {
+  const indiceComDuas: Indice = {
+    colunas: ["lane impossível", "à frente"],
+    radiant: [{ minuto: 6, cenarios: { "lane impossível": { id: "MA-R-01", nota: null }, "à frente": { id: null, nota: "ainda não há rota de quem está à frente" } } }],
+    dire: [],
+  };
+  const escolherLadoEMinuto = async () => {
+    fireEvent.click(await screen.findByRole("button", { name: "Radiant" }));
+    fireEvent.click(screen.getByRole("button", { name: "6" }));
+  };
+
+  it("fica marcada como o minuto, filtra a lista e desmarca no segundo clique", async () => {
+    arquivos["/data/rotas_resumo.json"] = [resumo, { ...resumo, id: "MA-R-02", pergunta: "Outra do minuto 6" }];
+    renderizar();
+    await escolherLadoEMinuto();
+    const situacao = screen.getByRole("button", { name: "lane impossível" });
+    expect(screen.getByText("2 rotas")).toBeInTheDocument();
+    fireEvent.click(situacao);
+    expect(situacao).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByText("1 rota")).toBeInTheDocument();
+    expect(within(screen.getByRole("list", { name: "Rotas" })).getByText("MA-R-01")).toBeInTheDocument();
+    fireEvent.click(situacao);
+    expect(situacao).toHaveAttribute("aria-pressed", "false");
+    expect(screen.getByText("2 rotas")).toBeInTheDocument();
+  });
+
+  it("diz em texto quando a combinação não tem rota, em vez de lista vazia", async () => {
+    arquivos["/data/indice.json"] = indiceComDuas;
+    renderizar();
+    await escolherLadoEMinuto();
+    fireEvent.click(screen.getByRole("button", { name: "à frente" }));
+    expect(screen.getByRole("button", { name: "à frente" })).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByText("Não há rota para Radiant, minuto 6, à frente.")).toBeInTheDocument();
+    expect(screen.getByText("ainda não há rota de quem está à frente")).toBeInTheDocument();
+    expect(screen.queryByRole("list", { name: "Rotas" })).not.toBeInTheDocument();
+  });
+});

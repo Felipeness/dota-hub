@@ -35,7 +35,8 @@ const limitar = (v: number, min: number, max: number) => Math.min(max, Math.max(
 // Área do chão a enquadrar, no plano x/z do mundo (y aqui é o z).
 export type Caixa = { centro: Ponto2; lado: number };
 
-const LADO_MINIMO_DO_FOCO = 30;
+// Rota curta não vira close: sobra contexto de uns 40% do tabuleiro em volta dela.
+const LADO_MINIMO_DO_FOCO = 40;
 const FOLGA_DO_FOCO = 1.4;
 
 // Caixa que cobre os pontos (normalizados 0..1, y para cima) com folga, para a câmera abrir sobre uma rota.

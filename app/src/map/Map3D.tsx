@@ -95,7 +95,11 @@ function TracadoRota({ rota, cor, noChao }: { rota: Tracado; cor: string; noChao
   );
 }
 
-const pontosDaRota = (rota: Tracado): Ponto[] => [...rota.caminhos.flat(), ...rota.passos.map((p): Ponto => [p.x, p.y])];
+const pontosDaRota = (rota: Tracado): Ponto[] => [
+  ...rota.caminhos.flat(),
+  ...rota.passos.map((p): Ponto => [p.x, p.y]),
+  ...(rota.fuga ? [[rota.fuga.x, rota.fuga.y] satisfies Ponto] : []),
+];
 
 type TrilhasProps = { trilhas: Trilha[]; corLado: Record<Trilha["lado"], string>; destaque: string; noChao: NoChao };
 
