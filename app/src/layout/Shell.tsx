@@ -15,7 +15,7 @@ export function Shell() {
   return (
     <div className="shell">
       <header className="topo">
-        <div className="marca">
+        <div className="topo-marca">
           <Link to="/" className="logo" aria-label="Dota Hub">DOTA<span>HUB</span></Link>
           {meta.estado === "ok" && <span className="selo-patch" aria-label={`Patch ${meta.dados.patch}`}>{meta.dados.patch}</span>}
         </div>

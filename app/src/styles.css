@@ -27,7 +27,8 @@ button {
   cursor: pointer;
 }
 button[aria-pressed="true"] { border-color: var(--cor-destaque); background: var(--cor-destaque-fundo); }
-button.link { min-height: 0; padding: 0; border: 0; background: none; color: var(--cor-destaque); text-decoration: underline; }
+button.link { position: relative; min-height: 0; padding: 0; border: 0; background: none; color: var(--cor-destaque); text-decoration: underline; }
+button.link::after { content: ""; position: absolute; inset: -12px -6px; }
 
 input[type="search"] {
   font: inherit;
@@ -39,6 +40,8 @@ input[type="search"] {
   border-radius: 10px;
   padding: 0 var(--espaco-3);
 }
+/* #8b968f sobre #111920 dá 5,8:1; o cinza padrão do navegador dava 3,85:1. */
+::placeholder { color: var(--cor-texto-3); opacity: 1; }
 
 /* Peças comuns */
 .sobretitulo {
@@ -92,7 +95,7 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
   background: var(--cor-fundo);
   border-bottom: 1px solid var(--cor-linha);
 }
-.marca { display: flex; align-items: baseline; gap: 10px; }
+.topo-marca { display: flex; align-items: baseline; gap: 10px; }
 .logo {
   font-family: var(--fonte-display); font-weight: 700; font-size: 30px; letter-spacing: 0.06em;
   color: var(--cor-texto); text-decoration: none;
@@ -273,12 +276,12 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .painel-texto { display: flex; flex-direction: column; gap: 18px; color: var(--cor-texto-2); font-size: 14px; line-height: 1.6; }
 .painel-texto p { margin: 0 0 0.8em; }
 .painel-texto ul { margin: 0 0 0.8em; padding-left: 1.2em; }
-.cartoes { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--espaco-3); }
-.cartoes > li {
+.cartoes-texto { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--espaco-3); }
+.cartoes-texto > li {
   display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 14px; padding: var(--espaco-4);
   border-radius: var(--raio); background: var(--cor-superficie-2); border: 1px solid var(--cor-linha-forte);
 }
-.cartoes > li > div > :last-child { margin-bottom: 0; }
+.cartoes-texto > li > div > :last-child { margin-bottom: 0; }
 .cartao-numero { font-family: var(--fonte-display); font-weight: 700; font-size: 30px; line-height: 1; color: var(--cor-destaque); }
 .painel footer {
   margin-top: auto; padding-top: 14px; border-top: 1px solid var(--cor-linha);
@@ -336,7 +339,7 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 /* Glossário */
 .glossario { display: flex; flex-wrap: wrap; min-height: calc(100vh - 82px); }
 .glossario-lista {
-  flex: 1 1 300px; max-width: 360px; padding: var(--espaco-5);
+  flex: 1 1 300px; min-width: 0; max-width: 360px; padding: var(--espaco-5);
   border-right: 1px solid var(--cor-linha);
   display: flex; flex-direction: column; gap: 18px;
 }
@@ -354,7 +357,7 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .fonte { font-family: var(--fonte-num); font-size: 11px; color: var(--cor-texto-3); }
 .termo-titulo { display: flex; flex-wrap: wrap; align-items: center; gap: var(--espaco-3); }
 .filtro-categorias { display: flex; flex-wrap: wrap; gap: 6px; }
-.filtro-categorias button { min-height: 32px; padding: 0 12px; border-radius: var(--raio-pilula); font-size: 12px; }
+.filtro-categorias button { min-height: var(--alvo-toque); padding: 0 12px; border-radius: var(--raio-pilula); font-size: 12px; }
 
 /* Solo de Roshan */
 .solo-roshan { display: flex; flex-direction: column; gap: var(--espaco-2); margin-top: var(--espaco-4); }

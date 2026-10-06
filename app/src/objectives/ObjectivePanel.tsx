@@ -93,7 +93,7 @@ export function GradeNumeros({ numeros }: { numeros: [string, string][] }) {
 
 function Cartoes({ texto }: { texto: string }) {
   return (
-    <ol className="cartoes">
+    <ol className="cartoes-texto">
       {paragrafos(texto).map((p, i) => (
         <li key={i}><span className="cartao-numero">{i + 1}</span><div><ReactMarkdown>{p}</ReactMarkdown></div></li>
       ))}
