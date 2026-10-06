@@ -1,18 +1,19 @@
 import MiniSearch, { type SearchResult } from "minisearch";
-import type { ConteudoItem, HeroiResumo, JogadorResumo, Objetivo, Rota, Time } from "../data/schemas";
+import type { ConteudoItem, HeroiResumo, JogadorResumo, Objetivo, Rota, Time, UnidadeResumo } from "../data/schemas";
 import { normalizar } from "../routes/filtros";
 
-const TIPOS = ["rota", "objetivo", "termo", "heroi", "jogador", "time"] as const;
+const TIPOS = ["rota", "objetivo", "termo", "heroi", "jogador", "time", "unidade", "habilidade"] as const;
 export type Achado = { tipo: (typeof TIPOS)[number]; id: string; titulo: string; link: string };
-type Doc = Achado & { chave: string; texto: string };
+export type Doc = Achado & { chave: string; texto: string };
 export type Busca = MiniSearch<Doc>;
 
 type Fontes = {
   rotas: Rota[]; objetivos: Objetivo[]; termos: ConteudoItem[];
   herois?: HeroiResumo[]; jogadores?: JogadorResumo[]; times?: Time[];
+  unidades?: readonly UnidadeResumo[];
 };
 
-export function construirIndice({ rotas, objetivos, termos, herois = [], jogadores = [], times = [] }: Fontes): Busca {
+export function construirIndice({ rotas, objetivos, termos, herois = [], jogadores = [], times = [], unidades = [] }: Fontes): Busca {
   const busca: Busca = new MiniSearch<Doc>({
     idField: "chave", fields: ["titulo", "texto"], storeFields: ["tipo", "id", "titulo", "link"],
     processTerm: normalizar, searchOptions: { prefix: true, boost: { titulo: 3 } },
@@ -24,8 +25,23 @@ export function construirIndice({ rotas, objetivos, termos, herois = [], jogador
     ...herois.map((h) => ({ chave: `heroi:${h.id}`, tipo: "heroi" as const, id: h.id, titulo: h.nome, texto: h.resumo, link: `/herois/${h.id}` })),
     ...jogadores.map((j) => ({ chave: `jogador:${j.id}`, tipo: "jogador" as const, id: j.id, titulo: j.nome, texto: `${j.time ?? ""} ${j.amostra}`, link: `/jogadores/${j.id}` })),
     ...times.map((t) => ({ chave: `time:${t.id}`, tipo: "time" as const, id: t.id, titulo: t.nome, texto: t.jogadores.join(" "), link: `/times/${t.id}` })),
+    ...docsDeUnidades(unidades),
   ]);
   return busca;
+}
+
+// Habilidade repetida (Perfurante está em vários creeps) entra uma vez, ligada à primeira unidade.
+export function docsDeUnidades(unidades: readonly UnidadeResumo[]): Doc[] {
+  const habilidades = new Map<string, Doc>();
+  for (const u of unidades) {
+    for (const h of u.habilidades) {
+      if (habilidades.has(h.id)) continue;
+      const titulo = h.nome_en ? `${h.nome} (${h.nome_en})` : h.nome;
+      habilidades.set(h.id, { chave: `habilidade:${h.id}`, tipo: "habilidade", id: h.id, titulo, texto: u.nome, link: `/glossario/unidades/${u.id}#${h.id}` });
+    }
+  }
+  const docsUnidade = unidades.map((u): Doc => ({ chave: `unidade:${u.id}`, tipo: "unidade", id: u.id, titulo: u.nome, texto: `${u.papel} ${u.id}`, link: `/glossario/unidades/${u.id}` }));
+  return [...docsUnidade, ...habilidades.values()];
 }
 
 const ehTipo = (valor: unknown): valor is Achado["tipo"] => TIPOS.some((t) => t === valor);

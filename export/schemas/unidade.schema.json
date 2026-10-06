@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "rv": {"type": "object", "required": ["rotulo", "valor"],
+      "properties": {"rotulo": {"type": "string", "minLength": 1}, "valor": {"type": "string", "minLength": 1}}},
+    "num": {"type": ["number", "null"]},
+    "habilidade": {"type": "object",
+      "required": ["id", "nome", "nome_en", "descricao", "notas", "condicoes", "valores", "icone", "texto_em_ingles", "o_que_muda"],
+      "properties": {
+        "descricao": {"type": "string", "minLength": 1, "not": {"pattern": "%\\w+%|<[a-zA-Z/]"}},
+        "notas": {"type": "array", "items": {"type": "string"}},
+        "condicoes": {"type": "array", "items": {"$ref": "#/$defs/rv"}},
+        "valores": {"type": "array", "items": {"$ref": "#/$defs/rv"}},
+        "icone": {"type": ["string", "null"]},
+        "texto_em_ingles": {"type": "boolean"},
+        "o_que_muda": {"oneOf": [{"type": "null"}, {"type": "object", "required": ["texto", "fontes", "origem"],
+          "properties": {"texto": {"type": "string", "minLength": 1}, "fontes": {"type": "array", "minItems": 1}}}]}}}
+  },
+  "type": "object",
+  "required": ["id", "id_jogo", "nome", "grupo", "papel", "lado", "numeros", "habilidades", "crescimento", "modelo", "patch", "fontes"],
+  "properties": {
+    "grupo": {"enum": ["chefe", "lane", "selva"]},
+    "lado": {"enum": ["radiant", "dire", "neutro"]},
+    "numeros": {"type": "object",
+      "required": ["vida", "regeneracao", "mana", "regeneracao_mana", "armadura", "resistencia_magica", "dano_min", "dano_max",
+                   "intervalo_ataque", "alcance_ataque", "ataque", "velocidade", "ouro_min", "ouro_max", "xp", "visao_dia", "visao_noite"],
+      "properties": {"vida": {"$ref": "#/$defs/num"}, "dano_min": {"$ref": "#/$defs/num"}, "dano_max": {"$ref": "#/$defs/num"},
+        "intervalo_ataque": {"$ref": "#/$defs/num"}, "alcance_ataque": {"$ref": "#/$defs/num"},
+        "ataque": {"enum": ["corpo a corpo", "à distância", "sem ataque"]}}},
+    "habilidades": {"type": "array", "items": {"$ref": "#/$defs/habilidade"}},
+    "crescimento": {"oneOf": [
+      {"type": "null"},
+      {"type": "object", "required": ["tipo", "a_cada_s", "vida", "dano", "armadura", "vel_ataque", "ouro", "xp", "nivel_max"],
+        "properties": {"tipo": {"const": "por_nivel"}}},
+      {"type": "object", "required": ["tipo", "colunas", "linhas", "fonte"],
+        "properties": {"tipo": {"const": "tabela"}, "linhas": {"type": "array", "items": {"type": "array", "items": {"type": "number"}}}}}]},
+    "modelo": {"type": ["string", "null"]},
+    "patch": {"const": "7.41"},
+    "fontes": {"type": "array", "minItems": 1}
+  }
+}

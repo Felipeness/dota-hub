@@ -1,5 +1,6 @@
 """Onde ficam os projetos de análise (só leitura) e como importar o motor do GPS deles."""
 import importlib
+import json
 import sys
 from pathlib import Path
 from types import ModuleType
@@ -34,3 +35,10 @@ YUMA = DESKTOP / "dota-yuma"
 
 def guias_de_heroi() -> list[Path]:
     return sorted(WORK.glob("hero_*_corrigido.json"))
+
+
+FARM = WORK / "farm_mechanics_corrigido.json"
+
+
+def farm() -> dict:
+    return json.loads(FARM.read_text(encoding="utf-8"))

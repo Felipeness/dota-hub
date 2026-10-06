@@ -3,7 +3,8 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
-from . import amigos, conteudo, fontes, herois, jogadores, mapa, relevo, roshan, rotas, trajetorias, validar
+from . import (amigos, conteudo, fontes, herois, icones, jogadores, jogo, mapa, modelos, relevo, roshan, rotas,
+               trajetorias, unidades, validar)
 
 RAIZ = Path(__file__).resolve().parents[2]
 DESTINO = RAIZ / "app" / "public" / "data"
@@ -44,6 +45,19 @@ def main() -> None:
     pacotes["replays"] = trajetorias.indice(replays)
     pacotes["roshan_replays"] = roshan.todas()
     pacotes["roshan_solo"] = conteudo.carregar(RAIZ / "content" / "roshan_solo")
+    arquivo_vpk = jogo.vpk()
+    base = unidades.Jogo.dos_arquivos(jogo.textos(arquivo_vpk), icones.disponiveis(arquivo_vpk))
+    farm = fontes.farm()
+    fichas_unidades = unidades.todas(base, farm, conteudo.carregar(RAIZ / "content" / "unidades"))
+    _gravar_colecao("unidades", "unidade", fichas_unidades)
+    tipos = unidades.tipos_de_camp(farm)
+    pacotes["unidades"] = unidades.indice(fichas_unidades, tipos)
+    pacotes["camps"] = tipos
+    icones.atualizar(arquivo_vpk, unidades.icones_usados(fichas_unidades), DESTINO / "icones")
+    caminhos = unidades.caminhos_de_modelo(base, fichas_unidades)
+    modelos.atualizar(arquivo_vpk, caminhos, DESTINO / "modelos")
+    total = modelos.conferir_tamanhos(DESTINO / "modelos", [modelos.nome(c) for c in caminhos])
+    print(f"modelos: {len(caminhos)}, {total // 1024} KB")
     for nome, dados in pacotes.items():
         validar.validar(SCHEMA_POR_ARQUIVO.get(nome, nome), dados)
         _gravar(f"{nome}.json", dados)
