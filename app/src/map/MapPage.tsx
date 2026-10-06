@@ -48,6 +48,7 @@ export function MapPage() {
   const aberto = id ? objetivoDaUrl(id, todos) : undefined;
   const textos = conteudo.estado === "ok" ? conteudo.dados : [];
   const visiveis = todos.filter((o) => !ocultos.has(o.tipo));
+  const nomes = new Map(todos.map((o) => [o.id, o.nome]));
   // Leva a query junto para abrir um objetivo sem perder o replay escolhido.
   const abrir = (alvo: string) => navigate({ pathname: `/mapa/${alvo}`, search: params.toString() });
   const alternarCamada = (tipo: string) => setOcultos((atual) => {
@@ -97,7 +98,7 @@ export function MapPage() {
       </div>
       {id && !aberto && <p role="alert">Objetivo {id} não encontrado.</p>}
       {aberto
-        ? <ObjectivePanel key={aberto.id} objetivo={aberto} conteudo={textos} unidade={<UnidadeDoObjetivo objetivo={aberto} />} onFechar={() => navigate({ pathname: "/", search: params.toString() })}>
+        ? <ObjectivePanel key={aberto.id} objetivo={aberto} conteudo={textos} nomes={nomes} unidade={<UnidadeDoObjetivo objetivo={aberto} />} onFechar={() => navigate({ pathname: "/", search: params.toString() })}>
             {aberto.tipo === "roshan" && <SoloRoshan solos={dadosOuVazio(solos)} />}
           </ObjectivePanel>
         : <aside className="painel painel-vazio"><p>Toque num marcador para ver o objetivo.</p></aside>}
