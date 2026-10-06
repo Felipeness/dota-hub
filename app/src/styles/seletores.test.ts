@@ -13,7 +13,9 @@ function blocosDeClasse(css: string, arquivo: string): Bloco[] {
   let secao = 0;
   for (let i = 0; i < css.length; i++) {
     if (css.startsWith("/*", i)) {
-      const fim = css.indexOf("*/", i) + 2;
+      const fechamento = css.indexOf("*/", i);
+      if (fechamento === -1) break;
+      const fim = fechamento + 2;
       if (profundidade === 0) {
         secao++;
         inicio = fim;
@@ -44,6 +46,10 @@ function classesEmDoisLugares(arquivos: ReadonlyArray<readonly [string, string]>
 it("acha a mesma classe definida em duas seções", () => {
   const css = "/* Casca */\n.marca { display: flex; }\n/* Replay */\n.marca { position: absolute; }";
   expect(classesEmDoisLugares([["a.css", css]])).toEqual([".marca"]);
+});
+
+it("termina com comentário sem fechamento", () => {
+  expect(classesEmDoisLugares([["a.css", ".marca { color: red; }\n/* sem fim"]])).toEqual([]);
 });
 
 it("aceita complemento na mesma seção e regra dentro de @media", () => {
