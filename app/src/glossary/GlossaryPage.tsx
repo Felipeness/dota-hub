@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router";
 import { useMemo, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { conteudoSchema, heroisSchema, objetivosSchema, rotasSchema, type ConteudoItem } from "../data/schemas";
+import { conteudoSchema, heroisSchema, objetivosSchema, rotasResumoSchema, type ConteudoItem } from "../data/schemas";
 import { dadosOuVazio, Indisponivel, useData } from "../data/useData";
 import { normalizar } from "../routes/filtros";
 import { CATEGORIAS, filtrarTermos, textoExtra } from "./filtros";
@@ -25,10 +25,9 @@ const rotuloDaCategoria = (termo: ConteudoItem): string | null => {
   return categoria && (ROTULOS_CATEGORIA.get(categoria) ?? categoria);
 };
 
-// ponytail: rotas.json passa de 1 MB gzip só para resolver links de rota; só baixa com um termo aberto.
 function Relacionados({ termo, termos }: { termo: ConteudoItem; termos: ConteudoItem[] }) {
   const herois = useData("/data/herois.json", heroisSchema);
-  const rotas = useData("/data/rotas.json", rotasSchema);
+  const rotas = useData("/data/rotas_resumo.json", rotasResumoSchema);
   const objetivos = useData("/data/objetivos.json", objetivosSchema);
   const catalogo = useMemo(
     () => montarCatalogo({ termos, herois: dadosOuVazio(herois), rotas: dadosOuVazio(rotas), objetivos: dadosOuVazio(objetivos) }),

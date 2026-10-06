@@ -25,6 +25,10 @@ export const rotaSchema = z.object({
   porque: z.string(),
 });
 export const rotasSchema = z.array(rotaSchema);
+export const rotaResumoSchema = rotaSchema
+  .pick({ id: true, pdf: true, lado: true, pergunta: true, titulo: true, janela: true })
+  .extend({ heroi: z.string().nullable() });
+export const rotasResumoSchema = z.array(rotaResumoSchema);
 
 const celula = z.object({ id: z.string().nullable(), nota: z.string().nullable() });
 const linha = z.object({ minuto: z.number(), cenarios: z.record(z.string(), celula) });
@@ -86,6 +90,7 @@ export const metaSchema = z.object({
 export type Objetivo = z.infer<typeof objetivoSchema>;
 export type Passo = z.infer<typeof passoSchema>;
 export type Rota = z.infer<typeof rotaSchema>;
+export type RotaResumo = z.infer<typeof rotaResumoSchema>;
 export type Indice = z.infer<typeof indiceSchema>;
 export type Marca = z.infer<typeof marcaSchema>;
 export type ConteudoItem = z.infer<typeof conteudoItemSchema>;

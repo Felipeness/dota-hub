@@ -1,14 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router";
 import { dadosOuVazio, Indisponivel, useData } from "../data/useData";
-import { conteudoSchema, heroisSchema, jogadoresSchema, objetivosSchema, rotasSchema, timesSchema, unidadesSchema } from "../data/schemas";
+import { conteudoSchema, heroisSchema, jogadoresSchema, objetivosSchema, rotasResumoSchema, timesSchema, unidadesSchema } from "../data/schemas";
 import { type Achado, buscar, construirIndice, sugerir } from "./index";
 
 const ETIQUETA = {
   rota: "Rota", objetivo: "Objetivo", termo: "Termo", heroi: "Herói", jogador: "Jogador", time: "Time", unidade: "Unidade", habilidade: "Habilidade",
 } as const satisfies Record<Achado["tipo"], string>;
 
-// rotas.json passa de 1 MB gzip: só baixa quando a pessoa vai buscar, para não pesar na primeira tela.
+// Os dados da busca só baixam quando a pessoa vai buscar, para não pesar na primeira tela.
 export function SearchBox() {
   const [ativa, setAtiva] = useState(false);
   const [consulta, setConsulta] = useState("");
@@ -44,7 +44,7 @@ function estaDigitando(alvo: EventTarget | null): boolean {
 }
 
 function Resultados({ consulta, limpar }: { consulta: string; limpar: () => void }) {
-  const rotas = useData("/data/rotas.json", rotasSchema);
+  const rotas = useData("/data/rotas_resumo.json", rotasResumoSchema);
   const objetivos = useData("/data/objetivos.json", objetivosSchema);
   const termos = useData("/data/glossario.json", conteudoSchema);
   // Os opcionais (1B e unidades): um arquivo que falta só tira aquele tipo da busca.

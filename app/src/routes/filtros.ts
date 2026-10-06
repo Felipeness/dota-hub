@@ -1,14 +1,15 @@
-import type { Indice, Rota } from "../data/schemas";
+import type { Indice, RotaResumo } from "../data/schemas";
 
 export type Lado = "radiant" | "dire";
-export type FiltroRotas = { lado?: Lado; minuto?: number; texto?: string; pdf?: Rota["pdf"] };
+export type FiltroRotas = { lado?: Lado; minuto?: number; texto?: string; pdf?: RotaResumo["pdf"] };
+type Filtravel = Pick<RotaResumo, "id" | "lado" | "pdf" | "pergunta" | "titulo" | "janela">;
 
 export const normalizar = (s: string) => s.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
-const minutos = (mmss?: string) => (mmss ? Number(mmss.split(":")[0]) : NaN);
+export const minutoDaJanela = (mmss?: string) => (mmss ? Number(mmss.split(":")[0]) : NaN);
 
-const naJanela = (r: Rota, minuto: number) => {
-  const de = minutos(r.janela.de);
-  return de <= minuto && minuto < Math.max(minutos(r.janela.ate), de + 1);
+const naJanela = (r: Filtravel, minuto: number) => {
+  const de = minutoDaJanela(r.janela.de);
+  return de <= minuto && minuto < Math.max(minutoDaJanela(r.janela.ate), de + 1);
 };
 
 export function rotaDaCelula(indice: Indice, lado: Lado, minuto: number, coluna: string) {
@@ -16,7 +17,7 @@ export function rotaDaCelula(indice: Indice, lado: Lado, minuto: number, coluna:
   return celula ?? { id: null, nota: "sem rota para este minuto" };
 }
 
-export function filtrarRotas(rotas: Rota[], f: FiltroRotas): Rota[] {
+export function filtrarRotas<T extends Filtravel>(rotas: readonly T[], f: FiltroRotas): T[] {
   const texto = f.texto ? normalizar(f.texto) : null;
   return rotas.filter((r) =>
     (!f.lado || r.lado === f.lado) &&

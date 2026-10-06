@@ -11,5 +11,5 @@ it("só baixa os dados da busca quando o campo recebe foco", () => {
   expect(fetch).not.toHaveBeenCalled();
   fireEvent.focus(screen.getByRole("searchbox"));
   const urls = fetch.mock.calls.map((c: unknown[]) => String(c[0]));
-  expect(urls).toEqual(expect.arrayContaining(["/data/rotas.json", "/data/objetivos.json", "/data/glossario.json"]));
+  expect(urls).toEqual(expect.arrayContaining(["/data/rotas_resumo.json", "/data/objetivos.json", "/data/glossario.json"]));
 });
