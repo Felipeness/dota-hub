@@ -32,9 +32,10 @@ function Modelo({ url, parado, aoCarregar }: ModeloProps) {
   return <primitive object={scene} />;
 }
 
-export type Cena3DProps = { url: string; girarSozinho?: boolean; aoCarregar?: () => void };
+// animar e mostrarGiro só ficam falsos na página dos pôsteres; a animação parada não depende do giro.
+export type Cena3DProps = { url: string; girarSozinho?: boolean; animar?: boolean; mostrarGiro?: boolean; aoCarregar?: () => void };
 
-export function Cena3D({ url, girarSozinho = !prefereMenosMovimento(), aoCarregar }: Cena3DProps) {
+export function Cena3D({ url, girarSozinho = !prefereMenosMovimento(), animar = true, mostrarGiro = true, aoCarregar }: Cena3DProps) {
   const [girando, setGirando] = useState(girarSozinho);
   useEffect(() => () => useGLTF.clear(url), [url]);
   return (
@@ -43,11 +44,11 @@ export function Cena3D({ url, girarSozinho = !prefereMenosMovimento(), aoCarrega
         <hemisphereLight args={["#fff4e0", "#5a6470", 4]} />
         <directionalLight position={[2, 4, 6]} intensity={4.5} />
         <Bounds fit clip observe margin={1.2}>
-          <Modelo url={url} parado={!girando} aoCarregar={aoCarregar} />
+          <Modelo url={url} parado={!animar} aoCarregar={aoCarregar} />
         </Bounds>
         <OrbitControls makeDefault autoRotate={girando} enablePan={false} />
       </Canvas>
-      {girarSozinho && (
+      {mostrarGiro && (
         <button className="modelo-girar pilula" aria-pressed={girando} onClick={() => setGirando((g) => !g)}>
           {girando ? "Parar o giro" : "Girar"}
         </button>

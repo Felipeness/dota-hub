@@ -9,7 +9,7 @@ export function PaginaPoster() {
   const [pronto, setPronto] = useState(false);
   return (
     <div style={{ width: 512, height: 512, background: "var(--cor-fundo)" }}>
-      <Cena3D url={urlDoModelo(modelo)} girarSozinho={false} aoCarregar={() => setPronto(true)} />
+      <Cena3D url={urlDoModelo(modelo)} girarSozinho={false} animar={false} mostrarGiro={false} aoCarregar={() => setPronto(true)} />
       {pronto && <output>pronto</output>}
     </div>
   );
