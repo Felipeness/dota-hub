@@ -28,7 +28,10 @@ const comoAchado = ({ tipo, id, titulo, link }: Achado): Achado => ({ tipo, id, 
 
 export function buscar(busca: Busca, consulta: string, limite = 20): Achado[] {
   if (!consulta.trim()) return [];
-  return busca.search(consulta).filter(ehAchado).slice(0, limite).map(comoAchado);
+  const alvo = normalizar(consulta.trim());
+  // O BM25 quebra "MA-R-01" em tokens e pode ranquear M-R-01 acima; id exato sempre vem primeiro.
+  const idExatoPrimeiro = (a: Achado, b: Achado) => Number(normalizar(b.id) === alvo) - Number(normalizar(a.id) === alvo);
+  return busca.search(consulta).filter(ehAchado).toSorted(idExatoPrimeiro).slice(0, limite).map(comoAchado);
 }
 
 export function sugerir(busca: Busca, consulta: string): string[] {

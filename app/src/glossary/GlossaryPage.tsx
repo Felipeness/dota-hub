@@ -4,17 +4,18 @@ import ReactMarkdown from "react-markdown";
 import { conteudoSchema, type ConteudoItem } from "../data/schemas";
 import { Indisponivel, useData } from "../data/useData";
 import { normalizar } from "../routes/filtros";
+import { destinoDoLink } from "./destino";
 
 const porTitulo = (a: ConteudoItem, b: ConteudoItem) => a.titulo.localeCompare(b.titulo, "pt-BR");
 
-function TermoAberto({ termo }: { termo: ConteudoItem }) {
+function TermoAberto({ termo, termos }: { termo: ConteudoItem; termos: ConteudoItem[] }) {
   return (
     <article>
       <h2>{termo.titulo}</h2>
       <ReactMarkdown>{termo.secoes.basico}</ReactMarkdown>
       {termo.links.length > 0 && (
         <ul aria-label="Relacionados">
-          {termo.links.map((link) => <li key={link}><Link to={link}>{link}</Link></li>)}
+          {termo.links.map((link) => destinoDoLink(link, termos)).map(({ to, rotulo }) => <li key={to}><Link to={to}>{rotulo}</Link></li>)}
         </ul>
       )}
       <footer>Patch {termo.patch}. Fontes: {termo.fontes.join("; ")}</footer>
@@ -35,7 +36,7 @@ export function GlossaryPage() {
   const lista = dados.dados.filter((t) => normalizar(t.titulo).includes(texto)).toSorted(porTitulo);
 
   return (
-    <main>
+    <section className="glossario">
       <h1>Glossário</h1>
       <input
         type="search" value={filtro} aria-label="Filtrar termos"
@@ -44,7 +45,7 @@ export function GlossaryPage() {
       <ul>
         {lista.map((t) => <li key={t.id}><Link to={`/glossario/${t.id}`}>{t.titulo}</Link></li>)}
       </ul>
-      {id && (termo ? <TermoAberto termo={termo} /> : <p>Termo não encontrado.</p>)}
-    </main>
+      {id && (termo ? <TermoAberto termo={termo} termos={dados.dados} /> : <p>Termo não encontrado.</p>)}
+    </section>
   );
 }
