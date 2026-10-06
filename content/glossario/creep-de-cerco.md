@@ -3,6 +3,7 @@ id: creep-de-cerco
 titulo: Creep de cerco
 patch: 7.41
 categoria: lane
+unidade: goodguys_siege
 fontes:
 - dota-imortal/work/farm_mechanics_corrigido.json (7.41f: notas da Valve, datamine e Liquipedia, conferidos em 03/10/2026)
 links:

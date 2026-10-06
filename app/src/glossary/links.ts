@@ -24,3 +24,9 @@ export function destinoDoLink(id: string, catalogo: Catalogo): string | null {
   const objetivo = catalogo.objetivos.get(id);
   return objetivo ? `/mapa/${objetivo}` : null;
 }
+
+// Links do glossário citam o objetivo pelo tipo ("camp" marca todos os camps) ou pelo id exato.
+export function lugaresDoTermo<T extends { id: string; tipo: string }>(links: readonly string[], objetivos: readonly T[]): T[] {
+  const alvos = new Set(links);
+  return objetivos.filter((o) => alvos.has(o.id) || alvos.has(o.tipo));
+}

@@ -6,6 +6,7 @@ import { dadosOuVazio, Indisponivel, useData } from "../data/useData";
 import { normalizar } from "../routes/filtros";
 import { CATEGORIAS, filtrarTermos, textoExtra } from "./filtros";
 import { destinoDoLink, montarCatalogo } from "./links";
+import { IconeDoItem, urlDoIconeDeItem, VisualDoTermo } from "./VisualDoTermo";
 
 const porTitulo = (a: ConteudoItem, b: ConteudoItem) => a.titulo.localeCompare(b.titulo, "pt-BR");
 
@@ -47,14 +48,17 @@ function Relacionados({ termo, termos }: { termo: ConteudoItem; termos: Conteudo
 
 function TermoAberto({ termo, termos }: { termo: ConteudoItem; termos: ConteudoItem[] }) {
   const categoria = rotuloDaCategoria(termo);
+  const item = textoExtra(termo, "item");
   return (
     <article className="termo">
       <span className="sobretitulo">Termo</span>
       <div className="termo-titulo">
+        {item && <IconeDoItem item={item} nome={termo.titulo} />}
         <h1>{termo.titulo}</h1>
         {categoria && <span className="selo">{categoria}</span>}
       </div>
       <div className="termo-texto"><ReactMarkdown>{termo.secoes.basico}</ReactMarkdown></div>
+      <VisualDoTermo termo={termo} />
       {termo.links.length > 0 && <Relacionados termo={termo} termos={termos} />}
       <footer className="fonte">Patch {termo.patch} · Fontes: {termo.fontes.join("; ")}</footer>
     </article>
@@ -97,7 +101,17 @@ export function GlossaryPage() {
         {grupos.map(([letra, itens]) => (
           <section key={letra} aria-label={`Letra ${letra}`}>
             <h2 className="sobretitulo">{letra}</h2>
-            <ul>{itens.map((t) => <li key={t.id}><Link to={`/glossario/${t.id}`} aria-current={t.id === id ? "page" : undefined}>{t.titulo}</Link></li>)}</ul>
+            <ul>{itens.map((t) => {
+              const item = textoExtra(t, "item");
+              return (
+                <li key={t.id}>
+                  <Link to={`/glossario/${t.id}`} aria-current={t.id === id ? "page" : undefined}>
+                    {item && <img className="icone-item-lista" src={urlDoIconeDeItem(item)} alt="" width={24} height={18} loading="lazy" />}
+                    {t.titulo}
+                  </Link>
+                </li>
+              );
+            })}</ul>
           </section>
         ))}
       </aside>

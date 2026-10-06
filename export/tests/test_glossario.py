@@ -5,6 +5,7 @@ import pytest
 
 from dota_export import conteudo, fontes, herois, mapa, rotas
 
+DADOS = Path(__file__).resolve().parents[2] / "app" / "public" / "data"
 GLOSSARIO = Path(__file__).resolve().parents[2] / "content" / "glossario"
 CATEGORIAS = {"mecanica", "lane", "farm", "mapa", "objetivo", "runa", "item", "combate", "visao",
               "economia", "papel", "estrategia", "partida", "giria", "estatistica"}
@@ -39,3 +40,10 @@ def test_links_apontam_para_algo_que_existe(termos):
                | {f["id"] for f in herois.todos()} | {r["id"] for r in rotas.carregar_rotas()})
     quebrados = [(t["id"], link) for t in termos for link in t["links"] if link not in validos]
     assert quebrados == []
+
+
+def test_termo_com_unidade_aponta_para_unidade_exportada(termos):
+    exportadas = {u["id"] for u in json.loads((DADOS / "unidades.json").read_text(encoding="utf-8"))}
+    citadas = {t["extras"]["unidade"] for t in termos if "unidade" in t["extras"]}
+    assert len(citadas) == 5
+    assert citadas <= exportadas

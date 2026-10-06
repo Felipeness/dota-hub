@@ -389,6 +389,23 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .filtro-categorias { display: flex; flex-wrap: wrap; gap: 6px; }
 .filtro-categorias button { min-height: var(--alvo-toque); padding: 0 12px; border-radius: var(--raio-pilula); font-size: 12px; }
 
+.glossario-lista li a { gap: var(--espaco-2); }
+.icone-item { flex-shrink: 0; border-radius: var(--raio-pequeno); box-shadow: 0 0 0 1px var(--cor-linha-pilula); }
+.icone-item-lista { flex-shrink: 0; border-radius: 3px; }
+.termo-visual { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--espaco-5); align-items: start; }
+.termo-visual:empty { display: none; }
+.mini-mapa { margin: 0; display: flex; flex-direction: column; gap: var(--espaco-2); max-width: 360px; }
+.mini-mapa figcaption { font-size: 13px; color: var(--cor-texto-3); }
+.unidade-do-termo { display: flex; flex-direction: column; gap: var(--espaco-3); }
+.unidade-do-termo .modelo { max-height: 280px; }
+.habilidades-curtas { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: var(--espaco-2); }
+.habilidades-curtas li {
+  display: inline-flex; align-items: center; gap: var(--espaco-2); padding: 4px 12px 4px 4px;
+  border-radius: var(--raio-pilula); background: var(--cor-superficie-2); font-size: 13px; color: var(--cor-texto-2);
+}
+.habilidades-curtas img, .habilidades-curtas span { width: 32px; height: 32px; border-radius: 6px; }
+.habilidades-curtas span { display: grid; place-items: center; background: var(--cor-superficie-3); font-family: var(--fonte-display); }
+
 /* Solo de Roshan */
 .solo-roshan { display: flex; flex-direction: column; gap: var(--espaco-2); margin-top: var(--espaco-4); }
 .solo-lista { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--espaco-2); }

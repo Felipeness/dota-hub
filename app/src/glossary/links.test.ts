@@ -1,4 +1,4 @@
-import { destinoDoLink, montarCatalogo } from "./links";
+import { destinoDoLink, lugaresDoTermo, montarCatalogo } from "./links";
 
 const catalogo = montarCatalogo({
   termos: [{ id: "aegis" }], herois: [{ id: "medusa" }], rotas: [{ id: "MA-R-01" }],
@@ -13,4 +13,10 @@ it.each([
   { id: "nada", destino: null },
 ])("link $id vai para $destino", ({ id, destino }) => {
   expect(destinoDoLink(id, catalogo)).toBe(destino);
+});
+
+it("acha os lugares do termo pelo id ou pelo tipo do objetivo", () => {
+  const objetivos = [{ id: "roshan_pit_top", tipo: "roshan" }, { id: "rad_ancient", tipo: "ancient" }, { id: "dire_ancient", tipo: "ancient" }];
+  expect(lugaresDoTermo(["roshan", "stack"], objetivos).map((o) => o.id)).toEqual(["roshan_pit_top"]);
+  expect(lugaresDoTermo(["rad_ancient"], objetivos).map((o) => o.id)).toEqual(["rad_ancient"]);
 });
