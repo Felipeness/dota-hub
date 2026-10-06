@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { Objetivo, Passo, Rota } from "../data/schemas";
 import { MapView } from "../map/MapView";
+import { ETIQUETA_DA_VIA } from "../map/selos";
 
 type Props = { rota: Rota; objetivos: Objetivo[]; onIrPara: (id: string) => void };
 type Desvio = { condicao: string; acao?: string; rota?: string | null };
@@ -26,11 +27,7 @@ export function RouteDetail({ rota, objetivos, onIrPara }: Props) {
         <p className="rota-titulo">{rota.titulo}</p>
         <div className="rota-mapa">
           <MapView objetivos={objetivos} rota={rota} selecionado={selecionado} onSelecionar={setSelecionado} />
-          {rota.proxima.length > 0 && (
-            <nav aria-label="Próximas rotas" className="proximas">
-              {rota.proxima.map((id) => <button key={id} className="selo-proxima" onClick={() => onIrPara(id)}>PRÓXIMA → {id}</button>)}
-            </nav>
-          )}
+          <Proximas ids={rota.proxima} onIrPara={onIrPara} />
         </div>
       </div>
       <aside className="rota-lateral">
@@ -40,6 +37,23 @@ export function RouteDetail({ rota, objetivos, onIrPara }: Props) {
         {rota.porque && <p className="porque">{rota.porque}</p>}
       </aside>
     </article>
+  );
+}
+
+// Como no PDF: a primeira é a padrão (a que vai no mapa); as demais são alternativas, menores.
+function Proximas({ ids, onIrPara }: { ids: readonly string[]; onIrPara: (id: string) => void }) {
+  const [padrao, ...outras] = ids;
+  if (!padrao) return null;
+  return (
+    <nav aria-label="Próximas rotas" className="proximas">
+      <button className="selo-proxima" onClick={() => onIrPara(padrao)}>PRÓXIMA → {padrao}</button>
+      {outras.length > 0 && (
+        <div className="proximas-outras">
+          <span>outras:</span>
+          {outras.map((id) => <button key={id} className="link" onClick={() => onIrPara(id)}>{id}</button>)}
+        </div>
+      )}
+    </nav>
   );
 }
 
@@ -62,7 +76,7 @@ export function ListaPassos({ passos, fuga = null }: { passos: readonly Passo[];
         <li key={p.n}>
           <span className={`passo passo-${p.risco}`}>{p.n}</span>
           <span className="numero">{p.minuto}</span>
-          <span><strong>{p.rotulo}</strong> · {p.acao}</span>
+          <span><strong>{p.via && `${ETIQUETA_DA_VIA[p.via]} `}{p.rotulo}</strong> · {p.acao}</span>
         </li>
       ))}
       {fuga && <li className="fuga"><span className="passo passo-fuga">↩</span><span /><span><strong>{fuga.rotulo}</strong> · a partir do passo {fuga.de_passo}</span></li>}

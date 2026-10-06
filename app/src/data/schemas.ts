@@ -7,9 +7,13 @@ export const objetivoSchema = z.object({
 });
 export const objetivosSchema = z.array(objetivoSchema);
 
+// via: como o passo é alcançado (null = andando). lugar: passos com o mesmo lugar dividem um selo, como no PDF.
+// Os dois são opcionais porque as fases de herói reaproveitam o passo sem eles.
+export const viaSchema = z.enum(["tp", "portal", "salto"]).nullable();
 export const passoSchema = z.object({
   n: z.number(), alvo: z.string(), x: z.number(), y: z.number(),
   rotulo: z.string(), minuto: z.string(), acao: z.string(), risco: z.string(),
+  via: viaSchema.optional(), lugar: z.number().int().optional(),
 });
 export const rotaSchema = z.object({
   id: z.string(), pdf: z.enum(["03", "05", "06"]), lado: z.enum(["radiant", "dire"]),
@@ -18,7 +22,10 @@ export const rotaSchema = z.object({
   estado: z.record(z.string(), z.unknown()).nullable().optional(),
   origem: z.enum(["recomendada", "real"]), replay: z.string().nullable(),
   passos: z.array(passoSchema), caminhos: z.array(z.array(z.tuple([z.number(), z.number()]))),
-  fuga: z.object({ de_passo: z.number(), x: z.number(), y: z.number(), rotulo: z.string() }).nullable(),
+  fuga: z.object({
+    de_passo: z.number(), x: z.number(), y: z.number(), rotulo: z.string(),
+    via: z.literal("tp").nullable().optional(), caminho: z.array(z.tuple([z.number(), z.number()])).optional(),
+  }).nullable(),
   proxima: z.array(z.string()),
   se: z.array(z.object({ condicao: z.string(), rota: z.string().nullable().optional() })),
   interrupcao: z.array(z.object({ condicao: z.string(), acao: z.string(), rota: z.string().nullable().optional() })),
@@ -88,6 +95,7 @@ export const metaSchema = z.object({
 
 export type Objetivo = z.infer<typeof objetivoSchema>;
 export type Passo = z.infer<typeof passoSchema>;
+export type Via = NonNullable<z.infer<typeof viaSchema>>;
 export type Rota = z.infer<typeof rotaSchema>;
 export type RotaResumo = z.infer<typeof rotaResumoSchema>;
 export type Indice = z.infer<typeof indiceSchema>;

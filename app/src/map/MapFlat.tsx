@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState, type CSSProperties, type MouseEvent, type PointerEvent } from "react";
-import type { MapViewProps, Tracado } from "./MapView";
+import type { MapViewProps } from "./MapView";
 import { normToPercent, type Ponto } from "./coords";
+import { SeloDaRota } from "./SeloDaRota";
+import { caminhoDaFuga, selosDaRota, trechosDaRota } from "./selos";
 import {
   VISTA_PLANA_INICIAL, arrastarVista, fatorDaRoda, foiArraste, pontoNoTabuleiro, zoomNoPonto,
   type Ponto2, type VistaPlana,
@@ -16,8 +18,8 @@ export function MapFlat({ objetivos, rota, trilhas = [], marcas = [], selecionad
       <div className="mapa-plano-tabuleiro" style={estilo}>
         <img src="/data/mapa_2048.jpg" crossOrigin="anonymous" alt="Mapa do Dota 7.41" draggable={false} />
         <svg viewBox="0 0 1 1" preserveAspectRatio="none" className="mapa-plano-rota">
-          {rota?.caminhos.map((c, i) => <polyline key={`rota-${i}`} points={pontosSvg(c)} />)}
-          {rota && <Fuga rota={rota} />}
+          {rota && trechosDaRota(rota).map((t, i) => <polyline key={`rota-${i}`} className={t.salto ? "salto" : undefined} points={pontosSvg(t.pontos)} />)}
+          {rota && <polyline className="fuga-linha" points={pontosSvg(caminhoDaFuga(rota))} />}
           {trilhas.map((t) => (
             <polyline key={t.id} className={`trilha trilha-${t.lado}${t.destaque ? " destaque" : ""}`} points={pontosSvg(t.rastro)} />
           ))}
@@ -27,11 +29,8 @@ export function MapFlat({ objetivos, rota, trilhas = [], marcas = [], selecionad
             className={`marcador marcador-${o.tipo} lado-${o.lado}${o.id === selecionado ? " ativo" : ""}`}
             style={normToPercent([o.x, o.y])} onClick={() => onSelecionar(o.id)} />
         ))}
-        {rota?.passos.map((p) => (
-          <span key={p.n} className="passo-no-mapa" style={normToPercent([p.x, p.y])}>
-            <span className={`passo passo-${p.risco}`}>{p.n}</span>
-            {p.minuto && <span className="passo-minuto">{p.minuto}</span>}
-          </span>
+        {rota && selosDaRota(rota.passos).map((selo) => (
+          <span key={selo.chave} className="passo-no-mapa" style={normToPercent([selo.x, selo.y])}><SeloDaRota selo={selo} /></span>
         ))}
         {rota?.fuga && <span className="rotulo-fuga" style={normToPercent([rota.fuga.x, rota.fuga.y])}>{rota.fuga.rotulo}</span>}
         {trilhas.map((t) => t.atual && (
@@ -126,10 +125,4 @@ function useNavegacaoPlana() {
     centralizar: () => setVista(VISTA_PLANA_INICIAL),
     gestos: { onPointerDown: aoApertar, onPointerMove: aoMover, onPointerUp: aoSoltar, onPointerCancel: aoSoltar, onClickCapture: aoClicar },
   };
-}
-
-function Fuga({ rota }: { rota: Tracado }) {
-  const origem = rota.passos.find((p) => p.n === rota.fuga?.de_passo);
-  if (!rota.fuga || !origem) return null;
-  return <line className="fuga-linha" x1={origem.x} y1={1 - origem.y} x2={rota.fuga.x} y2={1 - rota.fuga.y} />;
 }

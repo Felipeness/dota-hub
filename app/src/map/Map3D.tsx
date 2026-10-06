@@ -7,6 +7,8 @@ import { useData } from "../data/useData";
 import type { MapViewProps, Tracado } from "./MapView";
 import { alturaEm, normToWorld, type Ponto } from "./coords";
 import { caixaDoFoco, distanciaParaEnquadrar, foiArraste, posicaoDaCamera, prenderAlvo, type Caixa } from "./navegacao";
+import { SeloDaRota } from "./SeloDaRota";
+import { caminhoDaFuga, selosDaRota, trechosDaRota } from "./selos";
 import { texturaDoMapa } from "./textura";
 import type { Marca, Trilha } from "./trilhas";
 
@@ -79,16 +81,18 @@ function Gota({ objetivo, cor, ativo, noChao, onSelecionar }: GotaProps) {
 }
 
 function TracadoRota({ rota, cor, noChao }: { rota: Tracado; cor: string; noChao: NoChao }) {
-  const origem = rota.passos.find((p) => p.n === rota.fuga?.de_passo);
+  const fuga = caminhoDaFuga(rota);
   return (
     <>
-      {rota.caminhos.map((c, i) => <Line key={i} points={c.map((p) => noChao(p, 0.4))} color={cor} lineWidth={4} />)}
-      {rota.fuga && origem && (
-        <Line points={[noChao([origem.x, origem.y], 0.4), noChao([rota.fuga.x, rota.fuga.y], 0.4)]} color={corDoToken("--cor-texto")} lineWidth={2} dashed dashSize={1.2} gapSize={1} />
+      {trechosDaRota(rota).map((t, i) => (
+        <Line key={i} points={t.pontos.map((p) => noChao(p, 0.4))} color={cor} lineWidth={4} dashed={t.salto} dashSize={1.5} gapSize={1} />
+      ))}
+      {fuga.length >= 2 && (
+        <Line points={fuga.map((p) => noChao(p, 0.4))} color={corDoToken("--cor-texto")} lineWidth={2} dashed dashSize={1.2} gapSize={1} />
       )}
-      {rota.passos.map((p) => (
-        <Html key={p.n} position={noChao([p.x, p.y], 2.5)} center zIndexRange={[10, 0]}>
-          <span className="passo-no-mapa"><span className={`passo passo-${p.risco}`}>{p.n}</span>{p.minuto && <span className="passo-minuto">{p.minuto}</span>}</span>
+      {selosDaRota(rota.passos).map((selo) => (
+        <Html key={selo.chave} position={noChao([selo.x, selo.y], 2.5)} center zIndexRange={[10, 0]}>
+          <span className="passo-no-mapa"><SeloDaRota selo={selo} /></span>
         </Html>
       ))}
     </>
@@ -98,7 +102,7 @@ function TracadoRota({ rota, cor, noChao }: { rota: Tracado; cor: string; noChao
 const pontosDaRota = (rota: Tracado): Ponto[] => [
   ...rota.caminhos.flat(),
   ...rota.passos.map((p): Ponto => [p.x, p.y]),
-  ...(rota.fuga ? [[rota.fuga.x, rota.fuga.y] satisfies Ponto] : []),
+  ...caminhoDaFuga(rota),
 ];
 
 type TrilhasProps = { trilhas: Trilha[]; corLado: Record<Trilha["lado"], string>; destaque: string; noChao: NoChao };
