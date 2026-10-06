@@ -4,7 +4,7 @@ import { normToPercent } from "./coords";
 export function MapFlat({ objetivos, rota, selecionado, onSelecionar }: MapViewProps) {
   return (
     <div className="mapa-plano">
-      <img src="/data/mapa_2048.jpg" alt="Mapa do Dota 7.41" />
+      <img src="/data/mapa_2048.jpg" crossOrigin="anonymous" alt="Mapa do Dota 7.41" />
       <svg viewBox="0 0 1 1" preserveAspectRatio="none" className="mapa-plano-rota">
         {rota?.caminhos.map((c, i) => (
           <polyline key={i} points={c.map(([x, y]) => `${x},${1 - y}`).join(" ")} />

@@ -9,3 +9,8 @@ it("sem WebGL cai para o mapa plano e o objeto continua clicável", () => {
   fireEvent.click(screen.getByRole("button", { name: "Roshan" }));
   expect(onSelecionar).toHaveBeenCalledWith("roshan_pit_top");
 });
+
+it("mapa plano pede a imagem em modo CORS, igual ao loader da textura 3D, para baixar uma vez só", () => {
+  render(<MapView objetivos={[]} onSelecionar={() => {}} forcarPlano />);
+  expect(screen.getByAltText("Mapa do Dota 7.41")).toHaveAttribute("crossorigin", "anonymous");
+});
