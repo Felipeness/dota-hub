@@ -1,3 +1,5 @@
+> **CANCELADO em 06/10/2026**, junto com a fase 3. Fica só como histórico.
+
 # Pre-Implementation Audit: Dota Hub fase 3
 
 ## Requisito → tarefa

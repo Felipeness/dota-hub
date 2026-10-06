@@ -1,3 +1,5 @@
+> **CANCELADO em 06/10/2026.** A fase 3 foi cancelada pelo Felipe (o app roda local) e o plano está marcado para não executar. Este gate não libera nada; fica só como histórico.
+
 # Post-Plan Gate: Dota Hub fase 3
 
 Plano: `docs/superpowers/plans/2026-10-06-dota-hub-fase3.md`. Spec: `docs/superpowers/specs/2026-10-06-dota-hub-fase2-3-design.md` (fase 3). Data: 06/10/2026. Constitution: não existe (checagem pulada).

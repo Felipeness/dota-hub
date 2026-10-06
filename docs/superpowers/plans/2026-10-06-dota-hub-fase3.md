@@ -1,3 +1,5 @@
+> **PLANO CANCELADO em 06/10/2026 por decisão do Felipe. NÃO EXECUTAR.** O app roda só no PC dele (`npm run dev` ou build local); publicar fica para quando ele pedir. A fase 2 foi refeita sem backend (`docs/superpowers/plans/2026-10-06-dota-hub-fase2.md`), então este plano nem tem mais a base em que se apoiava (pacote `api/`, Lambda, DynamoDB). Nenhum recurso da AWS deve ser criado a partir dele. Fica só como histórico.
+
 # Dota Hub, fase 3 (publicação na AWS com teto de custo) Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
