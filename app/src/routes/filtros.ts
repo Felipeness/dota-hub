@@ -1,7 +1,7 @@
 import type { Indice, Rota } from "../data/schemas";
 
 export type Lado = "radiant" | "dire";
-export type FiltroRotas = { lado?: Lado; minuto?: number; texto?: string; pdf?: "03" | "06" };
+export type FiltroRotas = { lado?: Lado; minuto?: number; texto?: string; pdf?: Rota["pdf"] };
 
 export const normalizar = (s: string) => s.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
 const minutos = (mmss?: string) => (mmss ? Number(mmss.split(":")[0]) : NaN);

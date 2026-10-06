@@ -29,7 +29,9 @@ def _caminho(a: tuple[float, float], b: tuple[float, float]) -> list[list[float]
 
 
 def _arquivos() -> list[tuple[str, Path]]:
-    return ([("03", p) for p in sorted(fontes.GPS_SPECS.glob("*.json")) if not p.name.startswith("Z_")]
+    # H05_* mora na pasta do GPS, mas é impresso no PDF 05 (guias de herói).
+    return ([("05" if p.name.startswith("H05_") else "03", p)
+             for p in sorted(fontes.GPS_SPECS.glob("*.json")) if not p.name.startswith("Z_")]
             + [("06", p) for p in sorted(fontes.MINUTO_SPECS.glob("*.json"))]
             + [("06", p) for p in sorted(fontes.ESTUDOS_SPECS.glob("*.json"))])
 

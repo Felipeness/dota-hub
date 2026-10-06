@@ -12,7 +12,7 @@ export const passoSchema = z.object({
   rotulo: z.string(), minuto: z.string(), acao: z.string(), risco: z.string(),
 });
 export const rotaSchema = z.object({
-  id: z.string(), pdf: z.enum(["03", "06"]), lado: z.enum(["radiant", "dire"]),
+  id: z.string(), pdf: z.enum(["03", "05", "06"]), lado: z.enum(["radiant", "dire"]),
   pergunta: z.string(), titulo: z.string(), secao: z.string(),
   janela: z.object({ de: z.string().optional(), ate: z.string().optional() }),
   estado: z.record(z.string(), z.unknown()).nullable().optional(),

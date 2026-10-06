@@ -28,3 +28,10 @@ def test_indice_tem_minutos_4_a_30_e_11_colunas():
     validar.validar("indice", ind)
     assert [l["minuto"] for l in ind["radiant"]] == list(range(4, 31))
     assert len(ind["colunas"]) == 11
+
+def test_rota_de_heroi_vem_do_pdf_05():
+    # As specs H05_* moram na pasta do GPS, mas viram páginas do PDF 05 (guias de herói), não do 03.
+    por_id = {r["id"]: r["pdf"] for r in rotas.carregar_rotas()}
+    assert por_id["AM-D-05"] == "05"
+    assert por_id["C-R-01"] == "03"
+    assert por_id["MA-R-01"] == "06"
