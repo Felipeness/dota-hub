@@ -14,3 +14,11 @@ it("mapa plano pede a imagem em modo CORS, igual ao loader da textura 3D, para b
   render(<MapView objetivos={[]} onSelecionar={() => {}} forcarPlano />);
   expect(screen.getByAltText("Mapa do Dota 7.41")).toHaveAttribute("crossorigin", "anonymous");
 });
+
+it("mapa plano mostra a posição atual da trilha e a marca", () => {
+  const trilha = { id: "1:0", rotulo: "Lou", lado: "radiant" as const, destaque: true, rastro: [[0.1, 0.2] as [number, number]], atual: [0.1, 0.2] as [number, number] };
+  const marca = { id: "m", x: 0.2, y: 0.3, tipo: "morte" as const, lado: "radiant" as const, rotulo: "Morte de sven" };
+  render(<MapView objetivos={[]} trilhas={[trilha]} marcas={[marca]} onSelecionar={() => {}} forcarPlano />);
+  expect(screen.getByRole("img", { name: "Lou" })).toBeInTheDocument();
+  expect(screen.getByRole("img", { name: "Morte de sven" })).toBeInTheDocument();
+});

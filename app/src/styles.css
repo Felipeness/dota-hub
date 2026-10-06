@@ -212,6 +212,24 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 }
 .rotulo-fuga { position: absolute; transform: translate(-50%, -50%); border: 1px dashed var(--cor-texto); font-size: 11px; pointer-events: none; }
 
+/* Replay no mapa plano: rastro, posição atual do herói, wards e mortes. */
+.mapa-plano-rota .trilha { fill: none; stroke-width: 0.004; opacity: 0.7; }
+.mapa-plano-rota .trilha-radiant { stroke: var(--cor-radiant); }
+.mapa-plano-rota .trilha-dire { stroke: var(--cor-dire); }
+.mapa-plano-rota .trilha.destaque { stroke-width: 0.007; opacity: 1; }
+.heroi-agora, .marca { position: absolute; transform: translate(-50%, -50%); pointer-events: none; transition: left 0.3s linear, top 0.3s linear; }
+.heroi-agora { width: 10px; height: 10px; border-radius: 50%; border: 1px solid rgb(10 14 17 / 0.9); }
+.heroi-radiant { background: var(--cor-radiant); }
+.heroi-dire { background: var(--cor-dire); }
+.heroi-agora.destaque { z-index: 1; box-shadow: 0 0 0 2px var(--cor-destaque); }
+.marca { width: 8px; height: 8px; }
+.marca-ward { transform: translate(-50%, -50%) rotate(45deg); background: var(--cor-info); border: 1px solid rgb(10 14 17 / 0.9); }
+.marca-morte { display: grid; place-items: center; border-radius: 2px; background: var(--cor-dire); color: #fff; font-size: 8px; line-height: 1; }
+.marca-morte::before { content: " d7"; }
+@media (prefers-reduced-motion: reduce) {
+  .heroi-agora, .marca { transition: none; }
+}
+
 /* Painel do objetivo */
 .painel {
   flex: 0 1 420px; min-width: 320px;
