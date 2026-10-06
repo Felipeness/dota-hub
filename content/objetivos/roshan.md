@@ -37,6 +37,7 @@ fontes:
 - dota-imortal/work/farm_mechanics_corrigido.json (7.41f: notas da Valve, datamine e Liquipedia, conferidos em 03/10/2026)
 - dota-imortal/work/map_features_corrigido.json (posições e regras do mapa 7.41)
 - dota-imortal/work/minuto/replays (28 partidas de liga 7.41 com pos1 profissional, eventos lidos em 06/10/2026)
+- dota-roshan-solo/work/solo_roshan.md (1.328 replays 7.41, 111 solos confirmados, lidos em 06/10/2026)
 links:
 - aegis
 - tormentor
@@ -65,7 +66,7 @@ Recompensa:
 Renasce de 8 a 11 min depois da morte, no poço do ciclo atual. O relógio mostra morto por 8:00 e depois talvez vivo por até 3:00. Só se bate nele de dentro do poço, e ward não entra no poço.
 
 ## Avançado
-Nos replays de pos1 profissionais (28 partidas 7.41), 26 tiveram Roshan. O 1º Roshan saiu na mediana aos 23:10. O mais cedo foi 16:08 e o mais tarde 33:03. Nenhum saiu antes de 15:00, o que bate com o dado do mapa: só 1 de 653 mortes de Roshan em 390 partidas 7.41 foi antes de 15:00.
+Nos replays de pos1 profissionais (28 partidas 7.41), 26 tiveram Roshan. O 1º Roshan saiu na mediana aos 23:10. O mais cedo foi 16:08 e o mais tarde 33:03. Nenhum desses saiu antes de 15:00, e no dado do mapa só 1 de 653 mortes de Roshan em 390 partidas 7.41 foi antes de 15:00. Isso não vale para o Huskar: em 1.245 partidas 7.41 lidas, 29 solos de Huskar em jogo pro começaram antes de 15:00, o mais cedo às 9:20. Veja o solo de Roshan por herói abaixo.
 
 Para que serve:
 - 1º Roshan: a Aegis cobre a tomada das T2. Nos mesmos replays a 1ª T2 caiu na mediana aos 25:05, logo depois do Roshan mediano.

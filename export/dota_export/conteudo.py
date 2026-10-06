@@ -31,7 +31,8 @@ def _secoes(corpo: str) -> dict:
 
 def _marca(origem: str | None, replay: str | list[str] | None) -> dict | None:
     """Marca de recomendação de uma seção: recomendado, ou replay com os ids das partidas."""
-    replays = [replay] if isinstance(replay, str) else (replay or [])
+    # "replay: id1, id2" numa linha só também vale (formato dos solos de Roshan).
+    replays = [r.strip() for r in replay.split(",")] if isinstance(replay, str) else (replay or [])
     if origem is None:
         return None
     if origem not in ORIGENS:
