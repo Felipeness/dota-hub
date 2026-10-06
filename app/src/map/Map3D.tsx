@@ -4,6 +4,7 @@ import { TextureLoader } from "three";
 import type { Objetivo } from "../data/schemas";
 import type { MapViewProps } from "./MapView";
 import { normToWorld } from "./coords";
+import { texturaDoMapa } from "./textura";
 
 const TAMANHO = 100;
 const ALTURA: Record<string, number> = { roshan: 4, tormentor: 4, torre: 3, barracks: 3, ancient: 5, fonte: 3 };
@@ -11,7 +12,7 @@ const COR_LADO: Record<Objetivo["lado"], string> = { radiant: "#5cc26b", dire: "
 const COR_SELECIONADO = "#ffd166";
 
 function Chao() {
-  const textura = useLoader(TextureLoader, "/data/mapa_4096.jpg");
+  const textura = useLoader(TextureLoader, texturaDoMapa(window.innerWidth));
   return (
     <mesh rotation={[-Math.PI / 2, 0, 0]}>
       <planeGeometry args={[TAMANHO, TAMANHO]} />

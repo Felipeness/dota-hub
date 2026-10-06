@@ -6,11 +6,27 @@ import { buscar, construirIndice, sugerir } from "./index";
 
 const ETIQUETA = { rota: "Rota", objetivo: "Objetivo", termo: "Termo" } as const;
 
+// rotas.json passa de 1 MB gzip: só baixa quando a pessoa vai buscar, para não pesar na primeira tela.
 export function SearchBox() {
+  const [ativa, setAtiva] = useState(false);
+  const [consulta, setConsulta] = useState("");
+  return (
+    <div className="busca">
+      <input
+        type="search" role="searchbox" value={consulta}
+        aria-label="Buscar herói, rota, objetivo ou termo" placeholder="Buscar herói, rota, objetivo ou termo"
+        onFocus={() => setAtiva(true)}
+        onChange={(e) => setConsulta(e.target.value)}
+      />
+      {ativa && <Resultados consulta={consulta} limpar={() => setConsulta("")} />}
+    </div>
+  );
+}
+
+function Resultados({ consulta, limpar }: { consulta: string; limpar: () => void }) {
   const rotas = useData("/data/rotas.json", rotasSchema);
   const objetivos = useData("/data/objetivos.json", objetivosSchema);
   const termos = useData("/data/glossario.json", conteudoSchema);
-  const [consulta, setConsulta] = useState("");
 
   const busca = useMemo(
     () => rotas.estado === "ok" && objetivos.estado === "ok" && termos.estado === "ok"
@@ -21,30 +37,22 @@ export function SearchBox() {
 
   const indisponivel = [rotas, objetivos, termos].find((e) => e.estado === "indisponivel");
   if (indisponivel) return <Indisponivel motivo={indisponivel.motivo} />;
+  if (!consulta.trim()) return null;
+  if (!busca) return <p>Carregando a busca.</p>;
 
-  const achados = busca ? buscar(busca, consulta) : [];
-  const parecidos = busca && consulta.trim() && achados.length === 0 ? sugerir(busca, consulta) : [];
-
+  const achados = buscar(busca, consulta);
+  if (achados.length === 0) {
+    const parecidos = sugerir(busca, consulta);
+    return <p>Nada encontrado.{parecidos.length > 0 && ` Você quis dizer: ${parecidos.join(", ")}?`}</p>;
+  }
   return (
-    <div className="busca">
-      <input
-        type="search" role="searchbox" value={consulta} disabled={!busca}
-        aria-label="Buscar herói, rota, objetivo ou termo" placeholder="Buscar herói, rota, objetivo ou termo"
-        onChange={(e) => setConsulta(e.target.value)}
-      />
-      {achados.length > 0 && (
-        <ul>
-          {achados.map((a) => (
-            <li key={`${a.tipo}:${a.id}`}>
-              <span className="etiqueta">{ETIQUETA[a.tipo]}</span>{" "}
-              <Link to={a.link} onClick={() => setConsulta("")}>{a.titulo}</Link>
-            </li>
-          ))}
-        </ul>
-      )}
-      {consulta.trim() && busca && achados.length === 0 && (
-        <p>Nada encontrado.{parecidos.length > 0 && ` Você quis dizer: ${parecidos.join(", ")}?`}</p>
-      )}
-    </div>
+    <ul>
+      {achados.map((a) => (
+        <li key={`${a.tipo}:${a.id}`}>
+          <span className="etiqueta">{ETIQUETA[a.tipo]}</span>{" "}
+          <Link to={a.link} onClick={limpar}>{a.titulo}</Link>
+        </li>
+      ))}
+    </ul>
   );
 }
