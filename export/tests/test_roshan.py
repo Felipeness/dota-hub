@@ -1,4 +1,3 @@
-import re
 from pathlib import Path
 
 import pytest
@@ -28,20 +27,9 @@ def test_mortes_de_roshan_dos_replays(kills):
     assert all(k["solo"] == (k["aliados_perto"] == 0) for k in kills)
 
 
-@pytest.mark.skip(reason="fora da 1B: nenhuma fonte confirma solo de Roshan no 7.41; o plano diz que conteúdo sem fonte conferida não entra")
-def test_solo_tem_os_herois_da_spec_e_mais_tres():
-    ids = {c["id"] for c in conteudo.carregar(SOLO)}
-    assert {"ursa", "huskar", "morphling"} <= ids
-    assert len(ids) >= 6
-
-
-def test_cada_solo_tem_origem_nivel_minuto_itens_e_fonte(kills):
-    solos_vistos = {k["match_id"] for k in kills if k["solo"]}
-    for item in conteudo.carregar(SOLO):
-        extras = item["extras"]
-        assert extras["origem"] in {"recomendado", "replay"}, item["id"]
-        assert extras["nivel"].isdigit(), item["id"]
-        assert re.fullmatch(r"\d{1,2}:\d{2}", extras["minuto"]), item["id"]
-        assert extras["itens"] and item["fontes"] and item["patch"] == "7.41", item["id"]
-        if extras["origem"] == "replay":
-            assert extras["replay"] in solos_vistos, item["id"]
+def test_solo_fica_vazio_ate_ter_fonte_741():
+    # Decisão da Task 5 (opção a): nenhuma fonte 7.41 confirma solo de Roshan, e o plano
+    # diz que conteúdo sem fonte conferida não entra. Quando houver fonte, este teste falha
+    # de propósito: volte o contrato do conteúdo (ursa, huskar, morphling, >= 6, origem,
+    # nível, minuto, itens, fonte, patch 7.41) que está no histórico do git deste arquivo.
+    assert conteudo.carregar(SOLO) == []
