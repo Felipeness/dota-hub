@@ -39,6 +39,19 @@ it("abre a rota da célula em três toques e leva a tela até o mapa", async () 
   expect(Element.prototype.scrollIntoView).toHaveBeenCalled();
 });
 
+it("rola até o mapa só depois que a rota da URL já está na tela", async () => {
+  const dicaVisivelNaRolagem: boolean[] = [];
+  Element.prototype.scrollIntoView = vi.fn(() => {
+    dicaVisivelNaRolagem.push(screen.queryByText(/a rota aparece aqui no mapa/) !== null);
+  });
+  renderizar();
+  fireEvent.click(await screen.findByRole("button", { name: "Radiant" }));
+  fireEvent.click(screen.getByRole("button", { name: "6" }));
+  fireEvent.click(screen.getByRole("button", { name: "lane impossível" }));
+  await screen.findByRole("heading", { name: rota.pergunta });
+  expect(dicaVisivelNaRolagem).toEqual([false]);
+});
+
 it("mostra o mapa antes de escolher e deixa a situação desligada até ter lado e minuto", async () => {
   renderizar();
   expect(await screen.findByText(/a rota aparece aqui no mapa/)).toBeInTheDocument();

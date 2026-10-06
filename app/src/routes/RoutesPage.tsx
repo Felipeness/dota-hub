@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import type { Indice, Objetivo, RotaResumo } from "../data/schemas";
 import { indiceSchema, objetivosSchema, rotaSchema, rotasResumoSchema } from "../data/schemas";
@@ -38,6 +38,7 @@ function Rotas({ rotas, indice, objetivos }: RotasProps) {
   const [nota, setNota] = useState<string | null>(null);
   const [texto, setTexto] = useState("");
   const [limite, setLimite] = useState(POR_PAGINA);
+  const rolarQuandoAbrir = useRef(false);
   const irPara = (destino: string) => navigate(`/rotas/${destino}`);
   const filtrar = (nova: Selecao) => { setSelecao(nova); setLimite(POR_PAGINA); };
   const temLadoEMinuto = selecao.lado !== undefined && selecao.minuto !== undefined;
@@ -48,9 +49,16 @@ function Rotas({ rotas, indice, objetivos }: RotasProps) {
     const celula = rotaDaCelula(indice, selecao.lado, selecao.minuto, coluna);
     setNota(celula.nota);
     if (!celula.id) return;
+    if (celula.id === id) return mostrarOMapa();
+    rolarQuandoAbrir.current = true;
     irPara(celula.id);
-    mostrarOMapa();
   };
+
+  useEffect(() => {
+    if (!id || !rolarQuandoAbrir.current) return;
+    rolarQuandoAbrir.current = false;
+    mostrarOMapa();
+  }, [id]);
 
   return (
     <section className="rotas">
