@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Dota Hub · Glossário</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0a0e11;color:#e9e4d8;font-family:"IBM Plex Sans",system-ui,sans-serif}
+a{color:#f2b544}a:hover{color:#ffd27a}
+button{font:inherit;cursor:pointer}
+</style>
+</helmet>
+<div style="min-height: 900px; display: flex; flex-direction: column; background: #0a0e11">
+  <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 24px; padding: 18px 32px; border-bottom: 1px solid #1f2a31">
+    <span style="font-family: 'Saira Condensed', sans-serif; font-weight: 700; font-size: 30px; letter-spacing: .06em">DOTA<span style="color: #f2b544">HUB</span></span>
+    <nav style="display: flex; flex-wrap: wrap; gap: 4px">
+      <a href="Main.dc.html" style="text-decoration: none; padding: 10px 16px; border-radius: 8px; color: #a9b2ab; font-size: 14px">Mapa</a>
+      <a href="Rotas.dc.html" style="text-decoration: none; padding: 10px 16px; border-radius: 8px; color: #a9b2ab; font-size: 14px">Rotas</a>
+      <a href="#" style="text-decoration: none; padding: 10px 16px; border-radius: 8px; color: #a9b2ab; font-size: 14px">Heróis</a>
+      <a href="#" style="text-decoration: none; padding: 10px 16px; border-radius: 8px; color: #a9b2ab; font-size: 14px">Jogadores</a>
+      <a href="Glossario.dc.html" style="text-decoration: none; padding: 10px 16px; border-radius: 8px; background: #17212a; color: #e9e4d8; font-weight: 600; font-size: 14px">Glossário</a>
+    </nav>
+  </header>
+  <div style="display: flex; flex-wrap: wrap; flex: 1">
+    <aside style="flex: 1 1 300px; max-width: 360px; border-right: 1px solid #1f2a31; padding: 24px; display: flex; flex-direction: column; gap: 18px">
+      <label style="display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 12px; color: #8b968f">Filtrar termos</span>
+        <input placeholder="stack, pull, BKB…" style="background: #111920; border: 1px solid #24313a; border-radius: 10px; padding: 12px 14px; color: #e9e4d8; font-size: 14px; outline: none">
+      </label>
+      <sc-for list="{{groups}}" as="g" hint-placeholder-count="3">
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <span style="font-family: 'Saira Condensed', sans-serif; font-size: 13px; letter-spacing: .14em; color: #8b968f">{{g.name}}</span>
+          <sc-for list="{{g.items}}" as="t" hint-placeholder-count="4">
+            <button onClick="{{t.pick}}" style="text-align: left; min-height: 40px; padding: 0 12px; border-radius: 8px; border: 0; background: {{t.bg}}; color: {{t.fg}}; font-size: 14px">{{t.label}}</button>
+          </sc-for>
+        </div>
+      </sc-for>
+    </aside>
+    <article style="flex: 999 1 560px; min-width: 0; padding: 48px 56px; display: flex; flex-direction: column; gap: 20px; max-width: 860px">
+      <span style="font-family: 'Saira Condensed', sans-serif; font-size: 13px; letter-spacing: .14em; color: #f2b544">{{term.cat}}</span>
+      <h1 style="margin: 0; font-family: 'Saira Condensed', sans-serif; font-weight: 700; font-size: 64px; line-height: .95">{{term.label}}</h1>
+      <p style="margin: 0; font-size: 18px; line-height: 1.65; color: #d6d0c3; max-width: 62ch; text-wrap: pretty">{{term.text}}</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px">
+        <sc-for list="{{term.links}}" as="l" hint-placeholder-count="2">
+          <a href="{{l.href}}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 14px; border-radius: 99px; border: 1px solid #2a363e; text-decoration: none; color: #e9e4d8; font-size: 13px">{{l.label}}</a>
+        </sc-for>
+      </div>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #7f8a83">Patch 7.41 · {{term.src}}</span>
+    </article>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { id: 'stack' }; }
+  renderVals() {
+    const T = {
+      stack: { label: 'Stack', cat: 'FARM', text: 'Puxar os neutros para fora da caixa do camp perto do minuto :53, para nascer outro grupo no minuto seguinte. O camp acumula e rende mais quando você limpa tudo de uma vez.', links: [{label:'Ver no mapa', href:'Main.dc.html'},{label:'Rotas com stack', href:'Rotas.dc.html'}], src: 'fonte: mecânicas de farm do GPS' },
+      pull: { label: 'Pull', cat: 'FARM', text: 'Atacar um camp e voltar para a lane para os neutros seguirem até a wave. A wave inimiga vem para a sua torre e o offlaner perde a XP.', links: [{label:'Ver no mapa', href:'Main.dc.html'}], src: 'fonte: mecânicas de farm do GPS' },
+      bkb: { label: 'BKB', cat: 'ITENS', text: 'Black King Bar: imunidade a magia por alguns segundos. É o que deixa o carry lutar sem morrer no primeiro controle.', links: [], src: 'fonte: [conferir no 7.41]' },
+      aegis: { label: 'Aegis', cat: 'OBJETIVOS', text: 'Item que o Roshan deixa na primeira morte. Quem carrega volta à vida no mesmo lugar uma vez.', links: [{label:'Abrir o Roshan', href:'Main.dc.html'}], src: 'fonte: glossário do jogo' },
+      highground: { label: 'High ground', cat: 'MAPA', text: 'A parte alta de cada base. Quem está embaixo não vê quem está em cima sem visão, por isso subir pede vantagem.', links: [{label:'Ver no mapa', href:'Main.dc.html'}], src: 'fonte: glossário do jogo' }
+    };
+    const G = [['FARM',['stack','pull']],['ITENS',['bkb']],['OBJETIVOS',['aegis']],['MAPA',['highground']]];
+    const groups = G.map(([name, ids]) => ({ name, items: ids.map((id) => ({ label: T[id].label, bg: id === this.state.id ? '#17212a' : 'transparent', fg: id === this.state.id ? '#f2b544' : '#c8c2b5', pick: () => this.setState({ id }) })) }));
+    return { groups, term: T[this.state.id] };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Dota Hub · Mapa</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0a0e11;color:#e9e4d8;font-family:"IBM Plex Sans",system-ui,sans-serif}
+a{color:#f2b544}a:hover{color:#ffd27a}
+button{font:inherit;cursor:pointer}
+.pin{transition:transform .25s ease, box-shadow .25s ease}
+.pin:hover{transform:translate(-50%,-100%) scale(1.15)}
+.plane{transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.grain{background-image:radial-gradient(rgba(255,255,255,.035) 1px,transparent 1px);background-size:3px 3px}
+</style>
+</helmet>
+<div class="grain" style="min-height: 980px; display: flex; flex-direction: column; background-color: #0a0e11">
+
+  <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 24px; padding: 18px 32px; border-bottom: 1px solid #1f2a31">
+    <div style="display: flex; align-items: baseline; gap: 10px">
+      <span style="font-family: 'Saira Condensed', sans-serif; font-weight: 700; font-size: 30px; letter-spacing: .06em; color: #e9e4d8">DOTA</span>
+      <span style="font-family: 'Saira Condensed', sans-serif; font-weight: 700; font-size: 30px; letter-spacing: .06em; color: {{accent}}">HUB</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8b968f; border: 1px solid #2a363e; padding: 2px 8px; border-radius: 99px">7.41</span>
+    </div>
+    <nav style="display: flex; flex-wrap: wrap; gap: 4px">
+      <a href="Main.dc.html" style="text-decoration: none; padding: 10px 16px; border-radius: 8px; background: #17212a; color: #e9e4d8; font-weight: 600; font-size: 14px">Mapa</a>
+      <a href="Rotas.dc.html" style="text-decoration: none; padding: 10px 16px; border-radius: 8px; color: #a9b2ab; font-size: 14px">Rotas</a>
+      <a href="#" style="text-decoration: none; padding: 10px 16px; border-radius: 8px; color: #a9b2ab; font-size: 14px">Heróis</a>
+      <a href="#" style="text-decoration: none; padding: 10px 16px; border-radius: 8px; color: #a9b2ab; font-size: 14px">Jogadores</a>
+      <a href="Glossario.dc.html" style="text-decoration: none; padding: 10px 16px; border-radius: 8px; color: #a9b2ab; font-size: 14px">Glossário</a>
+    </nav>
+    <label style="margin-left: auto; display: flex; align-items: center; gap: 10px; background: #111920; border: 1px solid #24313a; border-radius: 10px; padding: 0 14px; min-width: 280px; flex: 0 1 380px">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8b968f" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+      <span style="position: absolute; left: -9999px">Buscar</span>
+      <input placeholder="Buscar herói, rota, objetivo ou termo" style="flex: 1; background: transparent; border: 0; outline: none; color: #e9e4d8; font-size: 14px; padding: 12px 0">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6f7a73">/</span>
+    </label>
+  </header>
+
+  <div style="display: flex; flex-wrap: wrap; flex: 1; min-height: 0">
+
+    <aside style="flex: 1 1 220px; max-width: 240px; padding: 24px 20px; border-right: 1px solid #1f2a31; display: flex; flex-direction: column; gap: 28px">
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <span style="font-family: 'Saira Condensed', sans-serif; font-size: 13px; letter-spacing: .14em; color: #8b968f">CAMADAS</span>
+        <sc-for list="{{layers}}" as="l" hint-placeholder-count="4">
+          <button onClick="{{l.toggle}}" style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 10px; border: 1px solid {{l.border}}; background: {{l.bg}}; color: #e9e4d8; text-align: left">
+            <span style="width: 10px; height: 10px; border-radius: 3px; background: {{l.dot}}"></span>
+            <span style="flex: 1; font-size: 14px">{{l.label}}</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8b968f">{{l.count}}</span>
+          </button>
+        </sc-for>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <span style="font-family: 'Saira Condensed', sans-serif; font-size: 13px; letter-spacing: .14em; color: #8b968f">VISTA</span>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; background: #111920; padding: 4px; border-radius: 10px; border: 1px solid #24313a">
+          <button onClick="{{set3d}}" style="min-height: 40px; border: 0; border-radius: 7px; background: {{view3dBg}}; color: #e9e4d8; font-weight: 600; font-size: 13px">2.5D</button>
+          <button onClick="{{setFlat}}" style="min-height: 40px; border: 0; border-radius: 7px; background: {{viewFlatBg}}; color: #e9e4d8; font-weight: 600; font-size: 13px">Plano</button>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px; margin-top: auto">
+        <span style="font-family: 'Saira Condensed', sans-serif; font-size: 13px; letter-spacing: .14em; color: #8b968f">LEGENDA</span>
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #c8c2b5"><span style="width: 9px; height: 9px; border-radius: 99px; background: #5bbf7a"></span>Radiant</div>
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #c8c2b5"><span style="width: 9px; height: 9px; border-radius: 99px; background: #e0675a"></span>Dire</div>
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #c8c2b5"><span style="width: 9px; height: 9px; border-radius: 99px; background: #b08cff"></span>Neutro e objetivos</div>
+      </div>
+    </aside>
+
+    <main style="flex: 999 1 560px; min-width: 0; position: relative; display: flex; align-items: center; justify-content: center; padding: 24px; overflow: hidden; background: radial-gradient(ellipse at 50% 40%, #13202a 0%, #0a0e11 70%)">
+      <div style="position: absolute; top: 20px; left: 28px; display: flex; flex-direction: column; gap: 4px">
+        <span style="font-family: 'Saira Condensed', sans-serif; font-size: 13px; letter-spacing: .14em; color: #8b968f">MAPA 7.41</span>
+        <span style="font-family: 'Saira Condensed', sans-serif; font-weight: 600; font-size: 26px; color: #e9e4d8">Clique num objetivo</span>
+      </div>
+      <div style="perspective: 1700px; width: min(100%, 720px); aspect-ratio: 1 / 1">
+        <div class="plane" style="position: relative; width: 100%; height: 100%; transform: {{tilt}}; transform-style: preserve-3d; border-radius: 18px; box-shadow: 0 40px 80px rgba(0,0,0,.6), 0 0 0 1px #2a363e">
+          <img src="/_blob/e25e107888fe0bd88d7183c7547971f0" alt="Mapa do Dota 7.41" style="width: 100%; height: 100%; display: block; border-radius: 18px; filter: saturate(.75) brightness(.8)">
+          <sc-if value="{{showRoute}}" hint-placeholder-val="{{ true }}">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none" style="position: absolute; inset: 0; width: 100%; height: 100%">
+              <polyline points="72.4,77.9 70.6,73.2 66.7,74.5 61.8,76.3" fill="none" stroke="{{accent}}" stroke-width=".8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0"></polyline>
+            </svg>
+          </sc-if>
+          <sc-for list="{{pins}}" as="p" hint-placeholder-count="8">
+            <button class="pin" onClick="{{p.pick}}" aria-label="{{p.name}}" title="{{p.name}}" style="position: absolute; left: {{p.left}}; top: {{p.top}}; transform: translate(-50%,-100%); width: {{p.size}}; height: {{p.size}}; padding: 0; border-radius: 99px 99px 99px 2px; rotate: -45deg; border: 2px solid {{p.ring}}; background: {{p.fill}}; box-shadow: {{p.glow}}"></button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="position: absolute; bottom: 20px; left: 28px; right: 28px; display: flex; flex-wrap: wrap; gap: 8px">
+        <sc-for list="{{quick}}" as="q" hint-placeholder-count="5">
+          <button onClick="{{q.pick}}" style="min-height: 40px; padding: 0 14px; border-radius: 99px; border: 1px solid {{q.border}}; background: {{q.bg}}; color: #e9e4d8; font-size: 13px">{{q.label}}</button>
+        </sc-for>
+      </div>
+    </main>
+
+    <section style="flex: 1 1 380px; max-width: 460px; border-left: 1px solid #1f2a31; background: #0e151a; display: flex; flex-direction: column">
+      <div style="padding: 28px 28px 0; display: flex; flex-direction: column; gap: 6px">
+        <span style="font-family: 'Saira Condensed', sans-serif; font-size: 13px; letter-spacing: .14em; color: {{accent}}">{{obj.kicker}}</span>
+        <h1 style="margin: 0; font-family: 'Saira Condensed', sans-serif; font-weight: 700; font-size: 44px; line-height: 1; letter-spacing: .02em">{{obj.title}}</h1>
+        <p style="margin: 6px 0 0; color: #b9b3a6; font-size: 14px; line-height: 1.55; text-wrap: pretty">{{obj.lead}}</p>
+      </div>
+      <div role="tablist" style="display: flex; gap: 4px; margin: 22px 28px 0; padding: 4px; background: #111920; border: 1px solid #24313a; border-radius: 12px">
+        <button role="tab" aria-selected="{{basicSel}}" onClick="{{tabBasic}}" style="flex: 1; min-height: 44px; border: 0; border-radius: 9px; background: {{basicBg}}; color: {{basicFg}}; font-weight: 600; font-size: 14px">Básico</button>
+        <button role="tab" aria-selected="{{advSel}}" onClick="{{tabAdv}}" style="flex: 1; min-height: 44px; border: 0; border-radius: 9px; background: {{advBg}}; color: {{advFg}}; font-weight: 600; font-size: 14px">Avançado</button>
+      </div>
+
+      <div style="padding: 22px 28px 28px; display: flex; flex-direction: column; gap: 18px; overflow-y: auto">
+        <sc-if value="{{isBasic}}" hint-placeholder-val="{{ true }}">
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: #1f2a31; border: 1px solid #1f2a31; border-radius: 12px; overflow: hidden">
+            <sc-for list="{{obj.stats}}" as="s" hint-placeholder-count="8">
+              <div style="background: #0e151a; padding: 12px 14px; display: flex; flex-direction: column; gap: 2px">
+                <span style="font-size: 12px; color: #8b968f">{{s.k}}</span>
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 18px; color: #e9e4d8">{{s.v}}</span>
+              </div>
+            </sc-for>
+          </div>
+          <p style="margin: 0; color: #c8c2b5; font-size: 14px; line-height: 1.6; text-wrap: pretty">{{obj.basicText}}</p>
+        </sc-if>
+
+        <sc-if value="{{isAdv}}" hint-placeholder-val="{{ false }}">
+          <sc-for list="{{obj.adv}}" as="a" hint-placeholder-count="3">
+            <div style="display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 14px; padding: 16px; border-radius: 12px; background: #111920; border: 1px solid #24313a">
+              <span style="font-family: 'Saira Condensed', sans-serif; font-weight: 700; font-size: 30px; line-height: 1; color: {{accent}}">{{a.n}}</span>
+              <div style="display: flex; flex-direction: column; gap: 4px">
+                <span style="font-weight: 600; font-size: 15px">{{a.t}}</span>
+                <span style="color: #b9b3a6; font-size: 14px; line-height: 1.5; text-wrap: pretty">{{a.d}}</span>
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #7f8a83">{{a.src}}</span>
+              </div>
+            </div>
+          </sc-for>
+          <sc-if value="{{obj.hasSolo}}" hint-placeholder-val="{{ true }}">
+            <div style="display: flex; flex-direction: column; gap: 10px">
+              <span style="font-family: 'Saira Condensed', sans-serif; font-size: 13px; letter-spacing: .14em; color: #8b968f">SOLO POR HERÓI</span>
+              <div style="display: flex; flex-wrap: wrap; gap: 6px">
+                <sc-for list="{{heroes}}" as="h" hint-placeholder-count="3">
+                  <button onClick="{{h.pick}}" style="min-height: 40px; padding: 0 14px; border-radius: 99px; border: 1px solid {{h.border}}; background: {{h.bg}}; color: #e9e4d8; font-size: 13px; font-weight: 600">{{h.name}}</button>
+                </sc-for>
+              </div>
+              <ol style="margin: 0; padding: 16px 16px 16px 36px; border-radius: 12px; background: #111920; border: 1px solid #24313a; display: flex; flex-direction: column; gap: 8px; color: #c8c2b5; font-size: 14px; line-height: 1.5">
+                <sc-for list="{{heroSteps}}" as="st" hint-placeholder-count="4">
+                  <li>{{st}}</li>
+                </sc-for>
+              </ol>
+            </div>
+          </sc-if>
+        </sc-if>
+
+        <div style="margin-top: 4px; padding-top: 14px; border-top: 1px solid #1f2a31; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #7f8a83">{{obj.foot}}</div>
+      </div>
+    </section>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#f2b544","options":["#f2b544","#4fc3e8","#e0675a"]},"tilt":{"editor":"range","default":32,"min":0,"max":55,"step":1,"unit":"°"},"$preview":{"width":1440,"height":980}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { sel: 'roshan', tab: 'basic', view: '3d', hero: 'Ursa', layers: { rotas: true, replays: false, wards: false, mortes: false } };
+  }
+  renderVals() {
+    const accent = this.props.accent ?? '#f2b544';
+    const deg = this.props.tilt ?? 32;
+    const s = this.state;
+    const OBJ = {
+      roshan: { kicker: 'OBJETIVO NEUTRO', title: 'Roshan', lead: 'Fica num dos dois fossos do rio e troca de fosso entre o dia e a noite. Fica mais forte com o tempo de jogo e costuma pedir o time inteiro.',
+        stats: [{k:'Vida',v:'6.000'},{k:'Regeneração',v:'20'},{k:'Dano',v:'75'},{k:'Armadura',v:'30'},{k:'Resist. mágica',v:'55%'},{k:'Vel. de ataque',v:'2,0'},{k:'Ouro',v:'200–290'},{k:'XP',v:'400'}],
+        basicText: 'Além do ouro de quem dá o último golpe, cada jogador do time que mata ganha 135 de ouro. Renasce depois de um tempo. A 1ª morte deixa a Aegis.',
+        adv: [{n:'1º',t:'Aegis para tomar as T2',d:'Com a Aegis, o time força as torres de segundo nível sem medo da primeira luta perdida.',src:'fonte: Felipe · conferir timing nos replays'},{n:'2º',t:'Subir o high ground',d:'O segundo Roshan dá a margem para atacar a base. A bandeira entra aqui.',src:'fonte: Felipe · [conferir a bandeira no 7.41]'},{n:'23:10',t:'Quando os pros fazem o 1º',d:'Mediana do primeiro Roshan nos replays profissionais já lidos.',src:'fonte: replays lidos (n no app)'}],
+        hasSolo: true, foot: 'Patch 7.41 · básico: glossário do jogo · avançado: replays e notas do Felipe' },
+      tormentor: { kicker: 'OBJETIVO NEUTRO', title: 'Tormentor', lead: 'Dois no mapa, um de cada lado, ativos em horários diferentes. Dá o fragmento de Aghanim a quem o time escolher.',
+        stats: [{k:'Primeiro',v:'20:00'},{k:'Lado',v:'SE e NW'},{k:'Recompensa',v:'Shard'},{k:'Reflete',v:'dano'}],
+        basicText: 'O Tormentor reflete parte do dano recebido para o time que ataca: vá com dois ou mais heróis.', adv: [{n:'1',t:'Quem pega o Shard',d:'Escolha o herói que mais ganha com o Shard naquele jogo, não quem deu o último golpe.',src:'fonte: [conferir no 7.41]'}], hasSolo: false, foot: 'Patch 7.41' },
+      torre: { kicker: 'ESTRUTURA', title: 'Torre T1', lead: 'Primeira torre de cada lane. Cair a T1 muda a rota de farm do carry: a jungle passa a ser a fonte segura.',
+        stats: [{k:'Nível',v:'T1'},{k:'Lane',v:'bot'},{k:'Lado',v:'Radiant'},{k:'Proteção',v:'Glyph'}],
+        basicText: 'Torres atacam o inimigo mais próximo e dão ouro ao time que derruba.', adv: [{n:'T1',t:'Rota quando a T1 cai',d:'Veja as rotas de "perdi as T1" no índice de rotas.',src:'fonte: GPS de farm (PDF 06)'}], hasSolo: false, foot: 'Patch 7.41' },
+      runa: { kicker: 'RUNA', title: 'Runa de poder', lead: 'Aparece no rio a partir das 6:00 e a cada 2 minutos, num dos dois pontos.',
+        stats: [{k:'Primeira',v:'6:00'},{k:'Intervalo',v:'2:00'},{k:'Pontos',v:'2'},{k:'Água',v:'2:00 e 4:00'}],
+        basicText: 'Mid e suportes disputam a runa; o carry raramente vai até ela.', adv: [{n:'+1',t:'Runa vale vitória',d:'Nos jogos analisados, cada runa de poder até os 20 minutos vem junto com mais chance de vitória.',src:'fonte: análise do Leonardo (associação)'}], hasSolo: false, foot: 'Patch 7.41' }
+    };
+    const kindOf = { roshan_pit_top:'roshan', roshan_pit_bot:'roshan', tormentor_se:'tormentor', tormentor_nw:'tormentor', rad_bot_t1:'torre', dire_top_t1:'torre', rad_mid_t1:'torre', dire_mid_t1:'torre', dire_bot_t1:'torre', rad_top_t1:'torre', rune_power_top:'runa', rune_power_bot:'runa' };
+    const P = [
+      ['roshan_pit_top','Roshan (fosso de cima)',0.326,0.638,'n'],['roshan_pit_bot','Roshan (fosso de baixo)',0.657,0.357,'n'],
+      ['tormentor_se','Tormentor SE',0.922,0.165,'n'],['tormentor_nw','Tormentor NW',0.077,0.853,'n'],
+      ['rune_power_top','Runa de poder (cima)',0.41,0.567,'n'],['rune_power_bot','Runa de poder (baixo)',0.565,0.441,'n'],
+      ['rad_top_t1','T1 top Radiant',0.151,0.606,'r'],['rad_mid_t1','T1 mid Radiant',0.415,0.427,'r'],['rad_bot_t1','T1 bot Radiant',0.767,0.156,'r'],
+      ['dire_top_t1','T1 top Dire',0.21,0.837,'d'],['dire_mid_t1','T1 mid Dire',0.529,0.54,'d'],['dire_bot_t1','T1 bot Dire',0.846,0.379,'d'],
+      ['rad_ancient','Ancient Radiant',0.173,0.214,'r'],['dire_ancient','Ancient Dire',0.807,0.781,'d']
+    ];
+    const col = { r:'#5bbf7a', d:'#e0675a', n:'#b08cff' };
+    const selKind = s.sel;
+    const pins = P.map(([id,name,x,y,side]) => {
+      const kind = kindOf[id] || 'torre';
+      const on = kind === selKind && (id.startsWith('roshan') ? selKind === 'roshan' : true) && this.state.pinId === id;
+      const big = kind === 'roshan' || kind === 'tormentor';
+      return { name, left: (x*100)+'%', top: ((1-y)*100)+'%', size: big ? '30px' : '20px', ring: on ? accent : 'rgba(10,14,17,.9)', fill: col[side], glow: on ? '0 0 0 6px rgba(242,181,68,.25), 0 8px 18px rgba(0,0,0,.6)' : '0 6px 14px rgba(0,0,0,.55)', pick: () => this.setState({ sel: kind, pinId: id, tab: 'basic' }) };
+    });
+    const quick = [['roshan','Roshan'],['tormentor','Tormentor'],['torre','Torres'],['runa','Runas']].map(([k,label]) => ({ label, border: k === selKind ? accent : '#2a363e', bg: k === selKind ? 'rgba(242,181,68,.12)' : 'rgba(17,25,32,.8)', pick: () => this.setState({ sel: k, tab: 'basic' }) }));
+    const L = [['rotas','Rotas do GPS','#f2b544','512'],['replays','Replays reais','#4fc3e8','28'],['wards','Wards','#b08cff','—'],['mortes','Mortes','#e0675a','—']];
+    const layers = L.map(([k,label,dot,count]) => ({ label, dot, count, border: s.layers[k] ? '#3a4a55' : '#1f2a31', bg: s.layers[k] ? '#17212a' : 'transparent', toggle: () => this.setState({ layers: { ...s.layers, [k]: !s.layers[k] } }) }));
+    const SOLO = {
+      Ursa: ['Nível [x] com [itens]: confirmar no 7.41', 'Entre no fosso com vida cheia e o Enrage pronto', 'Ataque contínuo, use o Enrage quando a vida cair', 'Saia com a Aegis antes do inimigo ver'],
+      Huskar: ['Nível [x] com [itens]: confirmar no 7.41', 'Burning Spear ligado e vida baixa para o Berserker’s Blood', 'Cura de lifesteal para manter o ritmo', 'Saia pelo lado do seu time'],
+      Morphling: ['Nível [x] com [itens]: confirmar no 7.41', 'Agilidade no máximo antes de entrar', 'Troque para força quando a vida cair', 'Saia antes do timer do Roshan virar no mapa inimigo']
+    };
+    const heroes = Object.keys(SOLO).map((name) => ({ name, border: name === s.hero ? accent : '#2a363e', bg: name === s.hero ? 'rgba(242,181,68,.12)' : '#111920', pick: () => this.setState({ hero: name }) }));
+    const isBasic = s.tab === 'basic';
+    return {
+      accent, pins, quick, layers, heroes, heroSteps: SOLO[s.hero],
+      obj: OBJ[selKind], isBasic, isAdv: !isBasic,
+      basicSel: isBasic ? 'true' : 'false', advSel: isBasic ? 'false' : 'true',
+      basicBg: isBasic ? accent : 'transparent', basicFg: isBasic ? '#0a0e11' : '#c8c2b5',
+      advBg: isBasic ? 'transparent' : accent, advFg: isBasic ? '#c8c2b5' : '#0a0e11',
+      tabBasic: () => this.setState({ tab: 'basic' }), tabAdv: () => this.setState({ tab: 'adv' }),
+      tilt: s.view === '3d' ? 'rotateX(' + deg + 'deg) scale(.94)' : 'none',
+      set3d: () => this.setState({ view: '3d' }), setFlat: () => this.setState({ view: 'flat' }),
+      view3dBg: s.view === '3d' ? '#24313a' : 'transparent', viewFlatBg: s.view === 'flat' ? '#24313a' : 'transparent',
+      showRoute: s.layers.rotas
+    };
+  }
+}
+</script>
+</body>
+</html>
