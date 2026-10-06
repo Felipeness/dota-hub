@@ -40,6 +40,44 @@ export const conteudoItemSchema = z.object({
 });
 export const conteudoSchema = z.array(conteudoItemSchema);
 
+const rotuloValorSchema = z.object({ rotulo: z.string(), valor: z.string() });
+export const habilidadeSchema = z.object({
+  id: z.string(), nome: z.string(), nome_en: z.string().nullable(), descricao: z.string(),
+  notas: z.array(z.string()), condicoes: z.array(rotuloValorSchema), valores: z.array(rotuloValorSchema),
+  icone: z.string().nullable(), texto_em_ingles: z.boolean(),
+  o_que_muda: z.object({ texto: z.string(), fontes: z.array(z.string()), origem: marcaSchema }).nullable(),
+});
+const numeroOuNulo = z.number().nullable();
+export const numerosSchema = z.object({
+  vida: numeroOuNulo, regeneracao: z.number(), mana: z.number(), regeneracao_mana: z.number(), armadura: z.number(),
+  resistencia_magica: z.number(), dano_min: numeroOuNulo, dano_max: numeroOuNulo, intervalo_ataque: numeroOuNulo,
+  alcance_ataque: numeroOuNulo, ataque: z.enum(["corpo a corpo", "à distância", "sem ataque"]), velocidade: z.number(),
+  ouro_min: z.number(), ouro_max: z.number(), xp: z.number(), visao_dia: z.number(), visao_noite: z.number(),
+});
+export const crescimentoSchema = z.discriminatedUnion("tipo", [
+  z.object({ tipo: z.literal("por_nivel"), a_cada_s: z.number(), vida: z.number(), dano: z.number(), armadura: z.number(),
+    vel_ataque: z.number(), ouro: z.number(), xp: z.number(), nivel_max: z.number() }),
+  z.object({ tipo: z.literal("tabela"), colunas: z.array(z.string()), linhas: z.array(z.array(z.number())), fonte: z.string() }),
+]).nullable();
+const grupoUnidadeSchema = z.enum(["chefe", "lane", "selva"]);
+const ladoUnidadeSchema = z.enum(["radiant", "dire", "neutro"]);
+export const unidadeSchema = z.object({
+  id: z.string(), id_jogo: z.string(), nome: z.string(), grupo: grupoUnidadeSchema, papel: z.string(), lado: ladoUnidadeSchema,
+  numeros: numerosSchema, habilidades: z.array(habilidadeSchema), crescimento: crescimentoSchema,
+  modelo: z.string().nullable(), patch: z.string(), fontes: z.array(z.string()),
+});
+export const unidadeResumoSchema = z.object({
+  id: z.string(), nome: z.string(), grupo: grupoUnidadeSchema, papel: z.string(), lado: ladoUnidadeSchema,
+  modelo: z.string().nullable(), camps: z.array(z.string()),
+  habilidades: z.array(z.object({ id: z.string(), nome: z.string(), nome_en: z.string().nullable() })),
+});
+export const unidadesSchema = z.array(unidadeResumoSchema);
+export const tipoCampSchema = z.object({
+  id: z.string(), nome: z.string(), tamanho: z.enum(["small", "medium", "large", "ancient"]), terreno: z.enum(["seco", "inundado"]),
+  unidades: z.array(z.object({ id: z.string(), qtd: z.number() })), ouro: z.tuple([z.number(), z.number()]), xp: z.number(),
+});
+export const campsSchema = z.array(tipoCampSchema);
+
 export const metaSchema = z.object({
   exportado_em: z.string(), patch: z.string(),
   contagens: z.object({ rotas: z.number(), objetivos: z.number(), termos: z.number() }),
@@ -152,3 +190,9 @@ export type Trajetoria = z.infer<typeof trajetoriaSchema>;
 export type ReplayResumo = z.infer<typeof replaysSchema>[number];
 export type Relevo = z.infer<typeof relevoSchema>;
 export type RoshanReplay = z.infer<typeof roshanReplaysSchema>[number];
+export type Habilidade = z.infer<typeof habilidadeSchema>;
+export type Numeros = z.infer<typeof numerosSchema>;
+export type Crescimento = z.infer<typeof crescimentoSchema>;
+export type Unidade = z.infer<typeof unidadeSchema>;
+export type UnidadeResumo = z.infer<typeof unidadeResumoSchema>;
+export type TipoCamp = z.infer<typeof tipoCampSchema>;
