@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, type ReactNode } from "react";
 import type { Objetivo, Rota } from "../data/schemas";
 import { MapFlat } from "./MapFlat";
 import type { Marca, Trilha } from "./trilhas";
@@ -17,6 +17,8 @@ export type MapViewProps = {
   selecionado?: string | null;
   onSelecionar: (id: string) => void;
   forcarPlano?: boolean;
+  // Fica por cima do mapa, junto do botão Centralizar (por exemplo, os atalhos da tela Mapa).
+  children?: ReactNode;
 };
 
 export function MapView(props: MapViewProps) {

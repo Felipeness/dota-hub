@@ -137,7 +137,10 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .rodape { padding: var(--espaco-2) var(--espaco-3); font-family: var(--fonte-num); font-size: 11px; text-align: center; color: var(--cor-texto-3); }
 
 /* Mapa: camadas | mapa | painel */
-.pagina-mapa { display: flex; height: calc(100vh - 83px); min-height: 560px; }
+/* A tela Mapa ocupa a janela abaixo do topo: a casca vira coluna de altura fixa e o mapa pega o que sobra. */
+.shell:has(.pagina-mapa) { height: 100vh; height: 100dvh; min-height: 0; }
+.shell > main:has(> .pagina-mapa) { display: flex; flex-direction: column; min-height: 0; }
+.pagina-mapa { flex: 1; min-height: 0; display: flex; }
 .mapa-lateral {
   flex: 0 0 240px; display: flex; flex-direction: column; padding: var(--espaco-5) 20px;
   border-right: 1px solid var(--cor-linha); overflow-y: auto;
@@ -161,30 +164,54 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .legenda { margin-top: auto; font-size: 13px; color: var(--cor-texto-2); }
 
 .mapa-centro {
-  flex: 1 1 560px; min-width: 0;
-  display: flex; flex-direction: column; align-items: center; gap: var(--espaco-4);
-  padding: var(--espaco-5); overflow: hidden;
+  flex: 1 1 560px; min-width: 0; min-height: 0; position: relative;
+  display: flex; flex-direction: column; overflow: hidden;
   background: radial-gradient(ellipse at 50% 40%, var(--cor-brilho-mapa) 0%, var(--cor-fundo) 70%);
 }
-.mapa-titulo { align-self: stretch; display: flex; flex-direction: column; gap: var(--espaco-1); }
-.mapa-chamada { font-family: var(--fonte-display); font-weight: 600; font-size: 26px; }
-/* 290 px = cabeçalho, título, atalhos e respiros medidos em 1440×900; flex-shrink 0 impede o quadro de achatar. */
-.mapa-centro > .mapa-plano, .mapa-centro > .mapa-3d, .mapa-centro > .mapa-com-replay { flex-shrink: 0; width: min(100%, 760px, calc(100vh - 290px)); }
-.atalhos { width: 100%; }
-
-.mapa-3d { width: 100%; aspect-ratio: 1; touch-action: none; border-radius: 18px; overflow: hidden; }
-.mapa-plano {
-  position: relative; width: 100%; aspect-ratio: 1;
-  border-radius: 18px; box-shadow: 0 40px 80px rgb(0 0 0 / 0.6), 0 0 0 1px var(--cor-linha-pilula);
+.mapa-titulo {
+  position: absolute; top: 20px; left: 28px; z-index: 2; pointer-events: none;
+  display: flex; flex-direction: column; gap: var(--espaco-1);
 }
-.mapa-plano img { width: 100%; height: 100%; display: block; border-radius: 18px; filter: saturate(0.75) brightness(0.8); }
+.mapa-chamada { font-family: var(--fonte-display); font-weight: 600; font-size: 26px; }
+/* Na tela Mapa o quadro pega toda a área; fora dela (rotas, glossário) continua quadrado. */
+.mapa-centro > .mapa-plano, .mapa-centro > .mapa-3d, .mapa-centro > .mapa-com-replay { flex: 1; min-height: 0; width: 100%; aspect-ratio: auto; border-radius: 0; }
+.mapa-com-replay > .mapa-plano, .mapa-com-replay > .mapa-3d { flex: 1; min-height: 0; aspect-ratio: auto; }
+.mapa-centro .mapa-com-replay { padding-bottom: var(--espaco-3); }
+.mapa-centro .mapa-com-replay > :not(.mapa-plano, .mapa-3d) { margin: 0 var(--espaco-5); }
+
+/* Atalhos e Centralizar flutuam sobre o quadro do mapa. */
+.atalhos { position: absolute; left: 20px; right: 20px; bottom: 20px; z-index: 2; pointer-events: none; }
+.atalhos .pilula { pointer-events: auto; min-height: 40px; background: rgb(17 25 32 / 0.85); backdrop-filter: blur(6px); }
+.atalhos .pilula[aria-pressed="true"] { border-color: var(--cor-destaque); background: var(--cor-destaque-fundo); }
+.botao-centralizar {
+  position: absolute; top: 16px; right: 16px; z-index: 2; min-height: 40px; padding: 0 14px;
+  border-radius: var(--raio-pilula); font-size: 13px; background: rgb(17 25 32 / 0.85); backdrop-filter: blur(6px);
+}
+
+.mapa-3d { position: relative; width: 100%; aspect-ratio: 1; touch-action: none; border-radius: 18px; overflow: hidden; }
+/* O tabuleiro é o maior quadrado que cabe na área; --escala, --dx e --dy vêm do zoom e do arraste. */
+.mapa-plano {
+  position: relative; width: 100%; aspect-ratio: 1; overflow: hidden; border-radius: 18px;
+  container-type: size; touch-action: none; cursor: grab; user-select: none;
+}
+.mapa-plano:active { cursor: grabbing; }
+.mapa-plano-tabuleiro {
+  --lado: min(100cqw, 100cqh);
+  position: absolute;
+  left: calc((100cqw - var(--lado)) / 2 + var(--dx, 0px)); top: calc((100cqh - var(--lado)) / 2 + var(--dy, 0px));
+  width: calc(var(--lado) * var(--escala, 1)); height: calc(var(--lado) * var(--escala, 1));
+}
+.mapa-plano img {
+  width: 100%; height: 100%; display: block; border-radius: 18px; filter: saturate(0.75) brightness(0.8);
+  box-shadow: 0 40px 80px rgb(0 0 0 / 0.6), 0 0 0 1px var(--cor-linha-pilula); pointer-events: none;
+}
 .mapa-plano-rota { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .mapa-plano-rota polyline { fill: none; stroke: var(--cor-destaque); stroke-width: 0.006; stroke-linecap: round; stroke-linejoin: round; }
 .fuga-linha { stroke: var(--cor-texto); stroke-width: 0.003; stroke-dasharray: 0.01 0.01; }
 
 /* Entre o celular e 1180 px: mapa e painel lado a lado, camadas recolhidas em cima do mapa. */
 @media (max-width: 1179px) {
-  .pagina-mapa { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 360px); grid-template-rows: auto 1fr; height: auto; }
+  .pagina-mapa { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 360px); grid-template-rows: auto minmax(0, 1fr); }
   .mapa-lateral { grid-column: 1; padding: var(--espaco-3) var(--espaco-4); border-right: 0; border-bottom: 1px solid var(--cor-linha); overflow: visible; }
   .botao-camadas { display: inline-flex; align-items: center; align-self: flex-start; }
   .camadas { flex-direction: row; flex-wrap: wrap; gap: var(--espaco-4); padding-top: var(--espaco-3); }
@@ -192,8 +219,7 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
   .camadas > .grupo { flex: 1 1 100%; min-width: 0; }
   .grupo-camadas { flex-direction: row; flex-wrap: wrap; align-items: center; }
   .grupo-camadas .sobretitulo { flex-basis: 100%; }
-  .mapa-centro { grid-column: 1; padding: var(--espaco-5) var(--espaco-4); }
-  .mapa-centro > .mapa-plano, .mapa-centro > .mapa-3d, .mapa-centro > .mapa-com-replay { width: min(100%, 760px); }
+  .mapa-centro { grid-column: 1; }
   .painel { grid-column: 2; grid-row: 1 / span 2; }
 }
 
@@ -473,10 +499,13 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
   .abas a { justify-content: center; border-radius: 0; font-size: 13px; }
   .abas a.active { background: none; color: var(--cor-destaque); }
 
-  .pagina-mapa { display: block; }
-  .mapa-lateral { padding: var(--espaco-2) var(--espaco-4); }
+  .shell:has(.pagina-mapa) { padding-bottom: 0; height: calc(100dvh - var(--altura-barra-celular)); }
+  .pagina-mapa { display: flex; flex-direction: column; }
+  .mapa-lateral { flex: 0 0 auto; padding: var(--espaco-2) var(--espaco-4); }
   .legenda { display: none; }
-  .mapa-centro { padding: var(--espaco-3) var(--espaco-4); }
+  .mapa-centro { flex: 1 1 auto; }
+  .atalhos { left: 12px; right: 12px; bottom: 12px; }
+  .botao-centralizar { top: 12px; right: 12px; }
   .mapa-titulo { display: none; }
   .painel-vazio { display: none; }
   .painel {

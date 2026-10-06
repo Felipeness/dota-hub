@@ -1,10 +1,12 @@
-import { OrbitControls, Html, Line } from "@react-three/drei";
-import { Canvas, useLoader } from "@react-three/fiber";
-import { TextureLoader } from "three";
+import { Html, Line, MapControls } from "@react-three/drei";
+import { Canvas, useLoader, type ThreeEvent } from "@react-three/fiber";
+import { useEffect, useRef, useState, type ComponentRef } from "react";
+import { PerspectiveCamera, TextureLoader } from "three";
 import { relevoSchema, type Objetivo } from "../data/schemas";
 import { useData } from "../data/useData";
 import type { MapViewProps, Tracado } from "./MapView";
 import { alturaEm, normToWorld, type Ponto } from "./coords";
+import { caixaDoFoco, distanciaParaEnquadrar, foiArraste, posicaoDaCamera, prenderAlvo, type Caixa } from "./navegacao";
 import { texturaDoMapa } from "./textura";
 import type { Marca, Trilha } from "./trilhas";
 
@@ -22,14 +24,14 @@ function corDoToken(nome: string): string {
   return getComputedStyle(document.documentElement).getPropertyValue(nome).trim();
 }
 
-// Calibradas na captura de 1440×900: os quatro cantos do tabuleiro cabem no quadro com pouca sobra em cima.
-// Inclinação de uns 13°; mais inclinada, a borda de baixo (perto da câmera) abre além do quadro e corta as bases.
-// Se a captura mostrar borda cortada ou sobra, ajuste aqui e capture de novo.
-const POSICAO_DA_CAMERA: Vetor = [0, 144, 36];
-const CAMERA = { position: POSICAO_DA_CAMERA, fov: 42 };
-const ALVO_DA_CAMERA: Vetor = [0, 0, 2];
-// A câmera inicial fica a 148 do alvo; o limite precisa passar disso para o zoom não puxar a vista no primeiro toque.
-const DISTANCIA_MAXIMA = 170;
+// A posição é provisória: o enquadramento ajusta a distância ao tamanho real do quadro antes do primeiro uso.
+const CAMERA = { position: posicaoDaCamera({ x: 0, y: 0 }, 150), fov: 42 };
+const TABULEIRO_INTEIRO: Caixa = { centro: { x: 0, y: 0 }, lado: TAMANHO };
+// Perto o bastante para ler um acampamento; longe fica limitado a um pouco além do enquadramento inicial.
+const DISTANCIA_MINIMA = 12;
+const FOLGA_DO_AFASTAMENTO = 1.35;
+// 60° a partir da vertical: dá para inclinar e ver o relevo sem a câmera passar por baixo do chão.
+const INCLINACAO_MAXIMA = Math.PI / 3;
 
 function Chao() {
   const [textura, relevo] = useLoader(TextureLoader, [texturaDoMapa(window.innerWidth), "/data/relevo_512.png"]);
@@ -51,13 +53,19 @@ function useNoChao(): NoChao {
   };
 }
 
+// O fiber dispara onClick mesmo depois de um arraste; e.delta diz quanto o ponteiro andou desde o aperto.
+function aoClicarGota(e: ThreeEvent<MouseEvent>, selecionar: () => void) {
+  e.stopPropagation();
+  if (!foiArraste(e.delta)) selecionar();
+}
+
 type GotaProps = { objetivo: Objetivo; cor: string; ativo: boolean; noChao: NoChao; onSelecionar: (id: string) => void };
 
 // Gota: cone com a ponta no chão e esfera em cima, como o marcador do mapa plano.
 function Gota({ objetivo, cor, ativo, noChao, onSelecionar }: GotaProps) {
   const escala = (GRANDES.has(objetivo.tipo) ? 1.5 : 1) * (ativo ? 1.35 : 1);
   return (
-    <group position={noChao([objetivo.x, objetivo.y], 0)} scale={escala} onClick={(e) => { e.stopPropagation(); onSelecionar(objetivo.id); }}>
+    <group position={noChao([objetivo.x, objetivo.y], 0)} scale={escala} onClick={(e) => aoClicarGota(e, () => onSelecionar(objetivo.id))}>
       <mesh position={[0, 1, 0]} rotation={[Math.PI, 0, 0]}>
         <coneGeometry args={[0.7, 2, 10]} />
         <meshStandardMaterial color={cor} emissive={cor} emissiveIntensity={ativo ? 0.6 : 0.1} />
@@ -87,6 +95,8 @@ function TracadoRota({ rota, cor, noChao }: { rota: Tracado; cor: string; noChao
   );
 }
 
+const pontosDaRota = (rota: Tracado): Ponto[] => [...rota.caminhos.flat(), ...rota.passos.map((p): Ponto => [p.x, p.y])];
+
 type TrilhasProps = { trilhas: Trilha[]; corLado: Record<Trilha["lado"], string>; destaque: string; noChao: NoChao };
 
 function Trilhas({ trilhas, corLado, destaque, noChao }: TrilhasProps) {
@@ -113,11 +123,54 @@ function Marcas({ marcas, noChao }: { marcas: Marca[]; noChao: NoChao }) {
   ));
 }
 
-export function Map3D({ objetivos, rota, trilhas = [], marcas = [], selecionado, onSelecionar }: MapViewProps) {
+type Controles = ComponentRef<typeof MapControls>;
+
+function enquadrar(controles: Controles, caixa: Caixa) {
+  const camera = controles.object;
+  if (!(camera instanceof PerspectiveCamera)) return;
+  const distancia = distanciaParaEnquadrar({ tamanho: caixa.lado, fovVerticalGraus: camera.fov, aspecto: camera.aspect });
+  controles.maxDistance = Math.max(distancia, distanciaParaEnquadrar({ tamanho: TAMANHO, fovVerticalGraus: camera.fov, aspecto: camera.aspect })) * FOLGA_DO_AFASTAMENTO;
+  controles.target.set(caixa.centro.x, 0, caixa.centro.y);
+  camera.position.set(...posicaoDaCamera(caixa.centro, distancia));
+  controles.update();
+}
+
+// Depois de cada movimento, alvo e câmera andam juntos de volta para dentro do tabuleiro.
+function manterNoTabuleiro(controles: Controles) {
+  const { target, object } = controles;
+  const preso = prenderAlvo({ x: target.x, y: target.z }, TAMANHO / 2);
+  const dx = preso.x - target.x;
+  const dz = preso.y - target.z;
+  if (dx === 0 && dz === 0) return;
+  target.x += dx;
+  target.z += dz;
+  object.position.x += dx;
+  object.position.z += dz;
+}
+
+// Arrastar move o mapa, a roda aproxima no ponto do cursor, botão direito ou Ctrl+arrastar giram e inclinam.
+// No toque: um dedo move, pinça aproxima entre os dedos e dois dedos giram.
+function Navegacao({ caixa, pedido }: { caixa: Caixa; pedido: number }) {
+  const controles = useRef<Controles>(null);
+  // Só os números da caixa entram nas dependências: um objeto novo com os mesmos valores não tira a vista do lugar.
+  const { centro: { x, y }, lado } = caixa;
+  useEffect(() => {
+    if (controles.current) enquadrar(controles.current, { centro: { x, y }, lado });
+  }, [x, y, lado, pedido]);
+  return (
+    <MapControls ref={controles} makeDefault enableDamping zoomToCursor
+      minDistance={DISTANCIA_MINIMA} minPolarAngle={0} maxPolarAngle={INCLINACAO_MAXIMA}
+      onChange={() => { if (controles.current) manterNoTabuleiro(controles.current); }} />
+  );
+}
+
+export function Map3D({ objetivos, rota, trilhas = [], marcas = [], selecionado, onSelecionar, children }: MapViewProps) {
   const noChao = useNoChao();
+  const [pedidoDeCentralizar, setPedidoDeCentralizar] = useState(0);
+  const caixa = rota ? caixaDoFoco(pontosDaRota(rota), TAMANHO) : TABULEIRO_INTEIRO;
   const corLado: Record<Objetivo["lado"], string> = { radiant: corDoToken("--cor-radiant"), dire: corDoToken("--cor-dire"), neutro: corDoToken("--cor-neutro") };
   const destaque = corDoToken("--cor-destaque");
-  // O Canvas põe height: 100% em linha no próprio elemento; a proporção quadrada fica no div em volta.
+  // O Canvas põe height: 100% em linha no próprio elemento; o tamanho do quadro vem do div em volta.
   return (
     <div className="mapa-3d">
       <Canvas camera={CAMERA} dpr={[1, 2]}>
@@ -131,8 +184,10 @@ export function Map3D({ objetivos, rota, trilhas = [], marcas = [], selecionado,
         {rota && <TracadoRota rota={rota} cor={destaque} noChao={noChao} />}
         <Trilhas trilhas={trilhas} corLado={corLado} destaque={destaque} noChao={noChao} />
         <Marcas marcas={marcas} noChao={noChao} />
-        <OrbitControls target={ALVO_DA_CAMERA} enablePan maxPolarAngle={Math.PI / 2.4} minDistance={20} maxDistance={DISTANCIA_MAXIMA} />
+        <Navegacao caixa={caixa} pedido={pedidoDeCentralizar} />
       </Canvas>
+      <button className="botao-centralizar" onClick={() => setPedidoDeCentralizar((n) => n + 1)}>Centralizar</button>
+      {children}
     </div>
   );
 }

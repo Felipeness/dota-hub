@@ -30,3 +30,34 @@ it("marca de morte desenha o × e o CSS não tem byte de controle", () => {
   expect(css).toContain(String.raw`.marca-morte::before { content: "\d7"; }`);
   expect(css).not.toMatch(/[\u0000-\u0008]/);
 });
+
+describe("arraste no mapa plano", () => {
+  beforeEach(() => { Element.prototype.setPointerCapture = vi.fn(); });
+
+  const apertarEMover = (alvo: HTMLElement, dx: number) => {
+    fireEvent.pointerDown(alvo, { pointerId: 1, button: 0, clientX: 100, clientY: 100 });
+    fireEvent.pointerMove(alvo, { pointerId: 1, clientX: 100 + dx, clientY: 100 });
+    fireEvent.pointerUp(alvo, { pointerId: 1, clientX: 100 + dx, clientY: 100 });
+    fireEvent.click(alvo);
+  };
+
+  it("arrastar a partir de um marcador não abre o objetivo", () => {
+    const onSelecionar = vi.fn();
+    render(<MapView objetivos={[rosh]} onSelecionar={onSelecionar} forcarPlano />);
+    apertarEMover(screen.getByRole("button", { name: "Roshan" }), 40);
+    expect(onSelecionar).not.toHaveBeenCalled();
+  });
+
+  it("um toque que mal saiu do lugar ainda abre o objetivo", () => {
+    const onSelecionar = vi.fn();
+    render(<MapView objetivos={[rosh]} onSelecionar={onSelecionar} forcarPlano />);
+    apertarEMover(screen.getByRole("button", { name: "Roshan" }), 3);
+    expect(onSelecionar).toHaveBeenCalledWith("roshan_pit_top");
+  });
+
+  it("os filhos ficam por cima do mapa, ao lado do Centralizar", () => {
+    render(<MapView objetivos={[]} onSelecionar={() => {}} forcarPlano><nav aria-label="Atalhos do mapa" /></MapView>);
+    expect(screen.getByRole("navigation", { name: "Atalhos do mapa" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Centralizar" })).toBeInTheDocument();
+  });
+});

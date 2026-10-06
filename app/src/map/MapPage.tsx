@@ -97,14 +97,15 @@ export function MapPage() {
           <span className="sobretitulo">Mapa</span>
           <span className="mapa-chamada">Clique num objetivo</span>
         </div>
-        <MapaComCamadas replayId={replayId} objetivos={visiveis} selecionado={aberto?.id ?? null} onSelecionar={abrir} forcarPlano={vista === "plano"} />
-        <nav className="atalhos pilulas" aria-label="Atalhos do mapa">
-          {ATALHOS.map((tipo) => {
-            const primeiro = todos.find((o) => o.tipo === tipo);
-            if (!primeiro) return null;
-            return <button key={tipo} className="pilula" aria-pressed={aberto?.tipo === tipo} onClick={() => abrir(primeiro.id)}>{ROTULO_TIPO[tipo]}</button>;
-          })}
-        </nav>
+        <MapaComCamadas replayId={replayId} objetivos={visiveis} selecionado={aberto?.id ?? null} onSelecionar={abrir} forcarPlano={vista === "plano"}>
+          <nav className="atalhos pilulas" aria-label="Atalhos do mapa">
+            {ATALHOS.map((tipo) => {
+              const primeiro = todos.find((o) => o.tipo === tipo);
+              if (!primeiro) return null;
+              return <button key={tipo} className="pilula" aria-pressed={aberto?.tipo === tipo} onClick={() => abrir(primeiro.id)}>{ROTULO_TIPO[tipo]}</button>;
+            })}
+          </nav>
+        </MapaComCamadas>
       </div>
       {id && !aberto && <p role="alert">Objetivo {id} não encontrado.</p>}
       {aberto
