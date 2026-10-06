@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Objetivo, Rota } from "../data/schemas";
+import type { Objetivo, Passo, Rota } from "../data/schemas";
 import { MapView } from "../map/MapView";
 
 type Props = { rota: Rota; objetivos: Objetivo[]; onIrPara: (id: string) => void };
@@ -35,7 +35,7 @@ export function RouteDetail({ rota, objetivos, onIrPara }: Props) {
       </div>
       <aside className="rota-lateral">
         <FaixaEstado estado={rota.estado} />
-        <ListaPassos rota={rota} />
+        <ListaPassos passos={rota.passos} fuga={rota.fuga} />
         <SeOMapaMudar itens={desvios} onIrPara={onIrPara} />
         {rota.porque && <p className="porque">{rota.porque}</p>}
       </aside>
@@ -55,17 +55,17 @@ function FaixaEstado({ estado }: { estado: Rota["estado"] }) {
   );
 }
 
-function ListaPassos({ rota }: { rota: Rota }) {
+export function ListaPassos({ passos, fuga = null }: { passos: readonly Passo[]; fuga?: Rota["fuga"] }) {
   return (
     <ol className="passos" aria-label="Passos da rota">
-      {rota.passos.map((p) => (
+      {passos.map((p) => (
         <li key={p.n}>
           <span className={`passo passo-${p.risco}`}>{p.n}</span>
           <span className="numero">{p.minuto}</span>
           <span><strong>{p.rotulo}</strong> · {p.acao}</span>
         </li>
       ))}
-      {rota.fuga && <li className="fuga"><span className="passo passo-fuga">↩</span><span /><span><strong>{rota.fuga.rotulo}</strong> · a partir do passo {rota.fuga.de_passo}</span></li>}
+      {fuga && <li className="fuga"><span className="passo passo-fuga">↩</span><span /><span><strong>{fuga.rotulo}</strong> · a partir do passo {fuga.de_passo}</span></li>}
     </ol>
   );
 }

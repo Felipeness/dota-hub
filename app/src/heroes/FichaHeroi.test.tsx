@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import type { Heroi } from "../data/schemas";
 import { FichaHeroi } from "./FichaHeroi";
@@ -37,4 +37,31 @@ it("abre com a primeira frase e os números e guarda o resto do resumo recolhido
   expect(screen.getByText("nível 6 · 7:54")).toBeInTheDocument();
   // alt="" tira o retrato da árvore de acessibilidade (é decorativo; o nome está no título), por isso o seletor de classe.
   expect(document.querySelector("img.retrato")).toHaveAttribute("src", "/data/retratos/herois/medusa.webp");
+});
+
+it("aba Rotas mostra só os alvos da fase e troca para a rota da situação", async () => {
+  const torre = { id: "rad_bot_t1", tipo: "torre", nome: "T1 de baixo", x: 0.8, y: 0.2, lado: "radiant" as const, detalhes: {} };
+  const camp = { ...torre, id: "rad_safe_small_1", tipo: "camp", nome: "Pequeno do pull" };
+  const fase = { de: 0, ate: 8, janela: "0:00-8:00", objetivo: "Lane de baixo.", caminhos: [],
+    passos: [{ n: 1, alvo: "rad_bot_t1", x: 0.8, y: 0.2, rotulo: "T1 de baixo", minuto: "", acao: "Segure a wave.", risco: "objetivo" }] };
+  const rotaDaSituacao = {
+    id: "ML-R-02", pdf: "06", lado: "radiant", pergunta: "Lane impossível no minuto 4: para onde vou?", titulo: "", secao: "",
+    janela: { de: "4:00", ate: "5:00" }, estado: null, origem: "recomendada", replay: null,
+    passos: [{ n: 1, alvo: "rad_safe_small_1", x: 0.7, y: 0.2, rotulo: "SMALL R1", minuto: "4:05", acao: "Puxe o camp.", risco: "seguro" }],
+    caminhos: [], fuga: null, proxima: [], se: [], interrupcao: [], porque: "",
+  };
+  const arquivos: Record<string, unknown> = {
+    "/data/indice.json": { colunas: ["lane impossível"], radiant: [{ minuto: 4, cenarios: { "lane impossível": { id: "ML-R-02", nota: null } } }], dire: [] },
+    "/data/rotas_resumo.json": [], "/data/rotas/ML-R-02.json": rotaDaSituacao,
+  };
+  vi.stubGlobal("fetch", (path: string) => Promise.resolve(new Response(JSON.stringify(arquivos[path]))));
+  render(<MemoryRouter><FichaHeroi heroi={{ ...heroi, rotas: { radiant: [fase], dire: [] } }} objetivos={[torre, camp]} solos={[]} /></MemoryRouter>);
+  fireEvent.click(screen.getByRole("tab", { name: "Rotas" }));
+  expect(within(screen.getByRole("list", { name: "Passos da rota" })).getByText(/Segure a wave./)).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "T1 de baixo" })).toBeInTheDocument();
+  expect(screen.queryByRole("button", { name: "Pequeno do pull" })).not.toBeInTheDocument();
+  fireEvent.click(await screen.findByRole("button", { name: "lane impossível" }));
+  expect(await screen.findByText(/Lane impossível no minuto 4/)).toBeInTheDocument();
+  expect(within(screen.getByRole("list", { name: "Passos da rota" })).getByText(/Puxe o camp./)).toBeInTheDocument();
+  vi.unstubAllGlobals();
 });

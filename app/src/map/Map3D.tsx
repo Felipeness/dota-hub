@@ -80,7 +80,7 @@ function TracadoRota({ rota, cor, noChao }: { rota: Tracado; cor: string; noChao
       )}
       {rota.passos.map((p) => (
         <Html key={p.n} position={noChao([p.x, p.y], 2.5)} center zIndexRange={[10, 0]}>
-          <span className="passo-no-mapa"><span className={`passo passo-${p.risco}`}>{p.n}</span><span className="passo-minuto">{p.minuto}</span></span>
+          <span className="passo-no-mapa"><span className={`passo passo-${p.risco}`}>{p.n}</span>{p.minuto && <span className="passo-minuto">{p.minuto}</span>}</span>
         </Html>
       ))}
     </>

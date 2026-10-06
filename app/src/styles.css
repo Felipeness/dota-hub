@@ -334,6 +334,9 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
   font-size: 14px; line-height: 1.45; color: var(--cor-texto-2);
 }
 .passos .numero { padding-top: 4px; color: var(--cor-texto); }
+/* Passo de herói vem sem minuto: o texto ocupa a coluna do minuto. */
+.passos .numero:empty { display: none; }
+.passos .numero:empty + span { grid-column: 2 / -1; }
 .passos strong { color: var(--cor-texto); }
 .passos > li.fuga { border-style: dashed; }
 .caixa-alerta {
