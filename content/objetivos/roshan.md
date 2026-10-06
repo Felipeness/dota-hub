@@ -3,6 +3,36 @@ id: roshan
 titulo: Roshan
 patch: 7.41
 origem: recomendado
+origem_avancado: replay
+replay_avancado:
+- 8834466305
+- 8861864250
+- 8875216877
+- 8896139222
+- 8922327423
+- 8943010675
+- 8943143428
+- 8944565060
+- 8944612322
+- 8944819470
+- 8946414154
+- 8946416702
+- 8960991322
+- 9015896010
+- 9015977795
+- 9017299527
+- 9018736585
+- 9021397264
+- 9021485923
+- 9021540875
+- 9021866654
+- 9022076452
+- 9022767300
+- 9023007039
+- 9024384432
+- 9025821355
+- 9027486175
+- 9028005974
 fontes:
 - dota-imortal/work/farm_mechanics_corrigido.json (7.41f: notas da Valve, datamine e Liquipedia, conferidos em 03/10/2026)
 - dota-imortal/work/map_features_corrigido.json (posições e regras do mapa 7.41)

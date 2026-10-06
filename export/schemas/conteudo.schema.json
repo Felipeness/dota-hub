@@ -1,7 +1,11 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {"marca": {"oneOf": [{"type": "null"}, {"type": "object", "required": ["tipo", "replays"],
+    "properties": {"tipo": {"enum": ["recomendado", "replay"]}, "replays": {"type": "array", "items": {"type": "string"}}}}]}},
   "type": "array",
-  "items": {"type": "object", "required": ["id", "titulo", "patch", "fontes", "secoes"],
+  "items": {"type": "object", "required": ["id", "titulo", "patch", "fontes", "secoes", "origem"],
     "properties": {"secoes": {"type": "object", "required": ["basico", "avancado"],
-      "properties": {"basico": {"type": "string", "minLength": 1}, "avancado": {"type": ["string", "null"]}}}}}
+      "properties": {"basico": {"type": "string", "minLength": 1}, "avancado": {"type": ["string", "null"]}}},
+      "origem": {"type": "object", "required": ["basico", "avancado"],
+        "properties": {"basico": {"$ref": "#/$defs/marca"}, "avancado": {"$ref": "#/$defs/marca"}}}}}
 }

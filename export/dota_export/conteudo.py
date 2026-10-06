@@ -2,6 +2,7 @@
 import re
 from pathlib import Path
 
+ORIGENS = ("recomendado", "replay")
 SECAO = re.compile(r"^##\s+(Básico|Avançado)\s*$", re.MULTILINE)
 
 
@@ -27,11 +28,31 @@ def _secoes(corpo: str) -> dict:
     return {"basico": blocos.get("básico") or partes[0].strip(), "avancado": blocos.get("avançado") or None}
 
 
+def _marca(origem: str | None, replay: str | list[str] | None) -> dict | None:
+    """Marca de recomendação de uma seção: recomendado, ou replay com os ids das partidas."""
+    replays = [replay] if isinstance(replay, str) else (replay or [])
+    if origem is None:
+        return None
+    if origem not in ORIGENS:
+        raise ValueError(f"origem inválida: {origem}")
+    if origem == "replay" and not replays:
+        raise ValueError("origem replay sem replay: <id>")
+    return {"tipo": origem, "replays": replays}
+
+
+def _origem(meta: dict, secoes: dict) -> dict:
+    basico = _marca(meta.get("origem"), meta.get("replay"))
+    avancado = _marca(meta.get("origem_avancado"), meta.get("replay_avancado")) or basico
+    return {"basico": basico, "avancado": avancado if secoes["avancado"] else None}
+
+
 def _item(arq: Path) -> dict:
     try:
         meta, corpo = _frontmatter(arq.read_text(encoding="utf-8"))
+        secoes = _secoes(corpo)
         return {"id": meta.get("id", arq.stem), "titulo": meta["titulo"], "patch": meta.get("patch", "7.41"),
-                "fontes": meta.get("fontes", []), "secoes": _secoes(corpo), "links": meta.get("links", [])}
+                "fontes": meta.get("fontes", []), "secoes": secoes, "origem": _origem(meta, secoes),
+                "links": meta.get("links", [])}
     except (ValueError, KeyError) as erro:
         raise ValueError(f"{arq.name}: {erro}") from erro
 

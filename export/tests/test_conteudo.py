@@ -15,3 +15,20 @@ def test_objetivo_sem_avancado_vira_null():
 def test_conteudo_valida():
     validar.validar("conteudo", conteudo.carregar(RAIZ / "objetivos"))
     validar.validar("conteudo", conteudo.carregar(RAIZ / "glossario"))
+
+def test_origem_por_secao_chega_ao_json():
+    itens = {c["id"]: c for c in conteudo.carregar(RAIZ / "objetivos")}
+    rosh = itens["roshan"]["origem"]
+    assert rosh["basico"] == {"tipo": "recomendado", "replays": []}
+    assert rosh["avancado"]["tipo"] == "replay" and len(rosh["avancado"]["replays"]) == 28
+    assert itens["torre"]["origem"]["avancado"]["tipo"] == "replay"
+    assert itens["camp"]["origem"] == {"basico": None, "avancado": None}
+
+def test_origem_replay_sem_id_falha(tmp_path):
+    (tmp_path / "x.md").write_text("---\ntitulo: X\norigem: replay\n---\n## Básico\nTexto.\n", encoding="utf-8")
+    try:
+        conteudo.carregar(tmp_path)
+    except ValueError as erro:
+        assert "x.md" in str(erro) and "replay" in str(erro)
+    else:
+        raise AssertionError("esperava ValueError")
