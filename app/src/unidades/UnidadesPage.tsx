@@ -1,4 +1,5 @@
-import { Link, useParams } from "react-router";
+import { useEffect } from "react";
+import { Link, useLocation, useParams } from "react-router";
 import { campsSchema, unidadeSchema, unidadesSchema, type UnidadeResumo } from "../data/schemas";
 import { Indisponivel, useData } from "../data/useData";
 import { agruparUnidades } from "./ficha";
@@ -10,6 +11,11 @@ const ROTULO_LADO = { radiant: "Radiant", dire: "Dire", neutro: "Neutro" } as co
 
 function FichaCarregada({ id }: { id: string }) {
   const ficha = useData(`/data/unidades/${id}.json`, unidadeSchema);
+  const { hash } = useLocation();
+  // A ficha chega depois da navegação, então o navegador não acha a âncora sozinho: rolar quando ela existir.
+  useEffect(() => {
+    if (ficha.estado === "ok" && hash) document.getElementById(hash.slice(1))?.scrollIntoView();
+  }, [ficha.estado, hash]);
   if (ficha.estado === "carregando") return <p>Carregando…</p>;
   if (ficha.estado === "indisponivel") return <Indisponivel motivo={ficha.motivo} />;
   return <FichaUnidade unidade={ficha.dados} />;

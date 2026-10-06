@@ -1,4 +1,4 @@
-import { buscar, construirIndice, sugerir } from "./index";
+import { buscar, construirIndice, docsDeUnidades, sugerir } from "./index";
 
 const termos = [
   { id: "roshan", titulo: "Roshan", patch: "7.41", fontes: [], secoes: { basico: "Chefe neutro do rio.", avancado: null }, origem: { basico: null, avancado: null }, links: [], extras: {} },
@@ -57,4 +57,12 @@ it.each([
 ])("busca $consulta acha $tipo", ({ consulta, tipo, link }) => {
   const indice = construirIndice({ rotas: [], objetivos: [], termos: [], unidades });
   expect(buscar(indice, consulta)[0]).toMatchObject({ tipo, link });
+});
+
+it("habilidade repetida entra uma vez e aponta para a primeira unidade", () => {
+  const golpe = { id: "golpe", nome: "Golpe", nome_en: "Bash" };
+  const comum = { grupo: "selva" as const, papel: "", lado: "neutro" as const, camps: [] };
+  const docs = docsDeUnidades([{ ...comum, id: "a", nome: "A", modelo: "a", habilidades: [golpe] },
+    { ...comum, id: "b", nome: "B", modelo: "b", habilidades: [golpe] }]);
+  expect(docs.filter((d) => d.tipo === "habilidade")).toEqual([expect.objectContaining({ id: "golpe", link: "/glossario/unidades/a#golpe" })]);
 });

@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router";
 import { UnidadesPage } from "./UnidadesPage";
 
-vi.mock("./FichaUnidade", () => ({ FichaUnidade: ({ unidade }: { unidade: { nome: string } }) => `ficha de ${unidade.nome}` }));
+vi.mock("./FichaUnidade", () => ({ FichaUnidade: ({ unidade }: { unidade: { nome: string } }) => <p id="kobold_golpe">ficha de {unidade.nome}</p> }));
 
 const resumo = (id: string, nome: string, grupo: string, camps: string[] = []) => ({ id, nome, grupo, papel: "", lado: "neutro", modelo: id, camps, habilidades: [] });
 const arquivos: Record<string, unknown> = {
@@ -46,4 +46,13 @@ it("sem camps.json mostra dados indisponíveis em vez de agrupar a selva errado"
   abrir("/glossario/unidades");
   expect(await screen.findByRole("alert")).toHaveTextContent("Dados indisponíveis");
   expect(screen.queryByRole("heading", { name: "Selva: pequeno" })).not.toBeInTheDocument();
+});
+
+it("link com âncora rola até a habilidade quando a ficha chega", async () => {
+  const rolar = vi.fn();
+  Element.prototype.scrollIntoView = rolar;
+  abrir("/glossario/unidades/kobold#kobold_golpe");
+  const alvo = await screen.findByText("ficha de Kobold");
+  expect(rolar).toHaveBeenCalledOnce();
+  expect(rolar.mock.contexts[0]).toBe(alvo);
 });
