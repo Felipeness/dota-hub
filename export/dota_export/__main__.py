@@ -1,6 +1,10 @@
-"""python -m dota_export: gera todos os arquivos de dados do app em app/public/data/."""
+"""python -m dota_export: gera todos os arquivos de dados do app em app/public/data/.
+
+    python -m dota_export --rotas   # só as rotas, o resumo e o índice (não precisa do jogo nem do Source 2 Viewer)
+"""
 import json
 import shutil
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -34,14 +38,24 @@ def _gravar_rotas(todas: list[dict]) -> None:
     (DESTINO / "rotas.json").unlink(missing_ok=True)
 
 
+def gerar_rotas() -> list[dict]:
+    todas = rotas.carregar_rotas()
+    _gravar_rotas(todas)
+    for nome, dados in (("rotas_resumo", rotas.resumo(todas)), ("indice", rotas.indice())):
+        validar.validar(nome, dados)
+        _gravar(f"{nome}.json", dados)
+    return todas
+
+
 def main() -> None:
     DESTINO.mkdir(parents=True, exist_ok=True)
+    if sys.argv[1:] == ["--rotas"]:
+        print(f"ok: {len(gerar_rotas())} rotas")
+        return
     for tamanho in (2048, 4096):
         mapa.textura_alinhada(tamanho).save(DESTINO / f"mapa_{tamanho}.jpg", **mapa.JPEG)
-    todas_rotas = rotas.carregar_rotas()
-    _gravar_rotas(todas_rotas)
-    pacotes = {"objetivos": mapa.objetos(), "rotas_resumo": rotas.resumo(todas_rotas),
-               "indice": rotas.indice(),
+    todas_rotas = gerar_rotas()
+    pacotes = {"objetivos": mapa.objetos(),
                "objetivos_conteudo": conteudo.carregar(RAIZ / "content" / "objetivos"),
                "glossario": conteudo.carregar(RAIZ / "content" / "glossario")}
     altura = relevo.relevo()
