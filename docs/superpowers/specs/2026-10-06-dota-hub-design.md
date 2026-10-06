@@ -13,9 +13,9 @@ Um app web interativo que junta tudo o que já foi produzido nos projetos de an�
 | Quem usa | Felipe e amigos; link aberto, sem login (login talvez depois). |
 | Mapa | 2.5D agora, com a camada do mapa isolada para trocar por um mapa mais detalhado depois. |
 | Dados | Fase 1: retrato estático do que já existe. Fase 2 (fora deste spec): busca ao vivo no OpenDota com backend. |
-| Stack | React + Vite + TypeScript + Three.js (react-three-fiber). Site estático. |
+| Tecnologia | Site leve, sem servidor, que abre no navegador do PC e do celular. A escolha técnica está registrada em `docs/superpowers/decisions/2026-10-06-stack.md`. |
 | Imagens e textos do jogo | Uso liberado pelo Felipe. |
-| AWS, deploy, infra | Fora desta fase; fica para depois. A fase 1 roda local (`npm run dev` e build estático). |
+| Publicação na internet | Fora desta fase; fica para depois. A fase 1 roda no PC do Felipe. |
 
 ## Fora do escopo da fase 1
 
@@ -32,14 +32,38 @@ Busca ao vivo, backend, login, AWS, mapa 3D detalhado, contas de usuário, ediç
 
 O app é em português do Brasil e funciona no celular (layout responsivo, mapa com toque).
 
-## Arquitetura
+## Organização (o que existe e como se liga)
 
-- **Repositório**: `Desktop/dota-hub`, git privado (GitHub privado depois, quando o Felipe quiser).
-- **`export/` (Python)**: lê os projetos `Desktop/dota-imortal`, `dota-hane`, `dota-leonardo`, `dota-yuma` e gera `app/public/data/*.json` com formato fixo, validado por JSON Schema (`export/schemas/`). Nenhum dado é digitado à mão no app. Trajetórias de replay são reduzidas (amostragem e simplificação de linha) para ficarem leves no celular.
-- **`content/` (Markdown com frontmatter)**: textos escritos do glossário e do básico e avançado de cada objetivo, versionados, cada número com fonte e patch, cada recomendação marcada como "recomendado" ou "visto em replay <id>".
-- **`app/` (React + Vite + TS)**: só lê os JSON e o conteúdo. Módulos por domínio: `map/`, `routes/`, `heroes/`, `players/`, `glossary/`, `search/`.
-- **Camada do mapa isolada**: o resto do app só fala com o mapa por uma interface pequena (coordenadas normalizadas do mapa, lista de objetos, lista de camadas, evento de clique). Trocar o 2.5D por um mapa detalhado depois não muda as telas.
-- **Coordenadas**: as mesmas normalizadas já calibradas nos projetos (`basemap.py`; grade do OpenDota x=(gx−57)/142).
+- **Exportação de dados**: um passo que lê os projetos `Desktop/dota-imortal`, `dota-hane`, `dota-leonardo` e `dota-yuma` e gera os arquivos de dados do app com formato fixo e validado. Nenhum dado é digitado à mão no app. Trajetórias de replay são reduzidas para ficarem leves no celular.
+- **Conteúdo escrito**: glossário e textos básico e avançado de cada objetivo, versionados, cada número com fonte e patch, cada recomendação marcada como "recomendado" ou "visto em replay <id>".
+- **App**: só lê os dados exportados e o conteúdo. Organizado por domínio: mapa, rotas, heróis, jogadores, glossário, busca.
+- **Camada do mapa isolada**: o resto do app só fala com o mapa por uma interface pequena (coordenadas do mapa, objetos, camadas, clique). Trocar o 2.5D por um mapa detalhado depois não muda as telas.
+- **Coordenadas**: as mesmas já calibradas nos projetos de análise.
+
+Entidades principais e relações: Objetivo (posição, básico, avançado, fontes); Rota (lado, minuto, situação, passos com alvo no mapa, fuga, próximas rotas); Herói (guia, rotas do herói, números dos pros); Jogador (análises, partidas, trajetórias de replay); Time (jogadores); Termo do glossário (liga a objetivo, rota ou herói). Uma rota pertence a um lado e a uma situação e aponta para objetivos do mapa; um jogador tem partidas e trajetórias que aparecem como camada no mapa.
+
+## Critérios de sucesso (mensuráveis)
+
+1. Achar qualquer rota a partir de "minuto + situação + lado" em no máximo 3 toques ou cliques, em menos de 10 segundos.
+2. A busca global devolve resultado enquanto se digita (menos de 0,3 s por tecla) para heróis, jogadores, times, rotas, objetivos e termos.
+3. A primeira tela abre em menos de 3 segundos num celular comum com 4G, e o mapa gira e aproxima sem travar (pelo menos 30 quadros por segundo em celular intermediário).
+4. 100% dos objetivos clicáveis têm aba Básico; Roshan, Tormentor, torres e runas têm aba Avançado na fase 1; cada número tem fonte e patch.
+5. 100% das rotas dos PDFs 03 e 06 aparecem no app com os mesmos passos e minutos.
+6. As análises de Felipe, Leonardo, Hane e Yuma aparecem com os números dos relatórios (conferidos por amostra de pelo menos 20 números).
+7. O Felipe e um amigo conseguem achar uma rota, um herói e um termo sem explicação prévia.
+
+## Estados de erro e situações de borda
+
+- Arquivo de dados ausente ou fora do formato: o app mostra "dados indisponíveis" na seção afetada e o resto continua funcionando.
+- Objetivo sem texto avançado ainda: a aba mostra "ainda não escrito" em vez de ficar vazia.
+- Busca sem resultado: sugere termos parecidos.
+- Celular sem suporte a 3D: o mapa cai para a imagem plana com os mesmos objetos clicáveis.
+
+## Requisitos não funcionais
+
+- Desempenho: ver critérios 2 e 3.
+- Segurança e privacidade: só dados públicos de partidas (OpenDota, datdota, replays da Valve) e análises que o Felipe decidiu compartilhar; nenhum dado pessoal além de nome de jogador e id de conta pública; link aberto sem login nesta fase.
+- Rastreabilidade: o app mostra a data da exportação e o patch dos dados no rodapé.
 
 ## Conteúdo novo a produzir
 
