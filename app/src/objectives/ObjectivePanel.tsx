@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import type { ConteudoItem, Marca, Objetivo } from "../data/schemas";
 
@@ -40,9 +40,9 @@ const ABAS = [
   { id: "avancado", rotulo: "Avançado" },
 ] as const satisfies ReadonlyArray<{ id: Aba; rotulo: string }>;
 
-type Props = { objetivo: Objetivo; conteudo: ConteudoItem[]; onFechar: () => void };
+type Props = { objetivo: Objetivo; conteudo: ConteudoItem[]; onFechar: () => void; children?: ReactNode };
 
-export function ObjectivePanel({ objetivo, conteudo, onFechar }: Props) {
+export function ObjectivePanel({ objetivo, conteudo, onFechar, children }: Props) {
   const [aba, setAba] = useState<Aba>("basico");
   const item = conteudoDoObjetivo(objetivo, conteudo);
   const texto = item?.secoes[aba] ?? null;
@@ -69,6 +69,7 @@ export function ObjectivePanel({ objetivo, conteudo, onFechar }: Props) {
         {!texto && "Ainda não escrito."}
         {texto && aba === "basico" && <div><ReactMarkdown>{texto}</ReactMarkdown></div>}
         {texto && aba === "avancado" && <Cartoes texto={texto} />}
+        {aba === "avancado" && children}
       </div>
       {item && (
         <footer>

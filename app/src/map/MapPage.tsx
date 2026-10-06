@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router";
 import type { Objetivo } from "../data/schemas";
 import { conteudoSchema, objetivosSchema } from "../data/schemas";
-import { Indisponivel, useData } from "../data/useData";
+import { dadosOuVazio, Indisponivel, useData } from "../data/useData";
 import { ObjectivePanel } from "../objectives/ObjectivePanel";
+import { SoloRoshan } from "../roshan/SoloRoshan";
 import { MapaComCamadas } from "../replays/MapaComCamadas";
 import { SeletorReplay } from "../replays/SeletorReplay";
 import { objetivoDaUrl } from "./objetivoDaUrl";
@@ -31,6 +32,7 @@ function contagemPorTipo(objetivos: Objetivo[]): [string, number][] {
 export function MapPage() {
   const objetivos = useData("/data/objetivos.json", objetivosSchema);
   const conteudo = useData("/data/objetivos_conteudo.json", conteudoSchema);
+  const solos = useData("/data/roshan_solo.json", conteudoSchema);
   const { id } = useParams();
   const navigate = useNavigate();
   const [params, setParams] = useSearchParams();
@@ -94,7 +96,9 @@ export function MapPage() {
       </div>
       {id && !aberto && <p role="alert">Objetivo {id} não encontrado.</p>}
       {aberto
-        ? <ObjectivePanel key={aberto.id} objetivo={aberto} conteudo={textos} onFechar={() => navigate({ pathname: "/", search: params.toString() })} />
+        ? <ObjectivePanel key={aberto.id} objetivo={aberto} conteudo={textos} onFechar={() => navigate({ pathname: "/", search: params.toString() })}>
+            {aberto.tipo === "roshan" && <SoloRoshan solos={dadosOuVazio(solos)} />}
+          </ObjectivePanel>
         : <aside className="painel painel-vazio"><p>Toque num marcador para ver o objetivo.</p></aside>}
     </section>
   );

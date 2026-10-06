@@ -352,6 +352,16 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .termo-texto { font-size: 18px; line-height: 1.65; color: var(--cor-texto-leitura); max-width: 62ch; }
 .termo-texto p { margin: 0 0 0.8em; }
 .fonte { font-family: var(--fonte-num); font-size: 11px; color: var(--cor-texto-3); }
+.termo-titulo { display: flex; flex-wrap: wrap; align-items: center; gap: var(--espaco-3); }
+.filtro-categorias { display: flex; flex-wrap: wrap; gap: 6px; }
+.filtro-categorias button { min-height: 32px; padding: 0 12px; border-radius: var(--raio-pilula); font-size: 12px; }
+
+/* Solo de Roshan */
+.solo-roshan { display: flex; flex-direction: column; gap: var(--espaco-2); margin-top: var(--espaco-4); }
+.solo-lista { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--espaco-2); }
+.solo-lista details { border: 1px solid var(--cor-linha); border-radius: var(--raio); padding: var(--espaco-3); }
+.solo-lista summary { cursor: pointer; min-height: var(--alvo-toque); display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.selo-replay { border-color: transparent; background: rgba(79, 195, 232, 0.14); color: var(--cor-info); }
 
 /* Heróis */
 .herois, .ficha-heroi { display: flex; flex-direction: column; gap: 18px; padding: 28px var(--espaco-6) 40px; max-width: 1100px; }
@@ -422,6 +432,8 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
   .seletor-minutos { flex-basis: 100%; }
   .rota-lateral { max-width: none; }
   .glossario-lista { max-width: none; border-right: 0; border-bottom: 1px solid var(--cor-linha); }
+  .filtro-categorias { flex-wrap: nowrap; overflow-x: auto; margin: 0 calc(-1 * var(--espaco-5)); padding: 0 var(--espaco-5); }
+  .filtro-categorias button { flex-shrink: 0; }
   .termo { order: -1; padding: 28px var(--espaco-4); }
   .termo h1 { font-size: 44px; }
   .herois, .ficha-heroi { padding: 20px var(--espaco-4) 28px; }
