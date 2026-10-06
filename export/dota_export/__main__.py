@@ -3,7 +3,7 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
-from . import conteudo, herois, jogadores, mapa, rotas, validar
+from . import amigos, conteudo, herois, jogadores, mapa, rotas, validar
 
 RAIZ = Path(__file__).resolve().parents[2]
 DESTINO = RAIZ / "app" / "public" / "data"
@@ -32,7 +32,7 @@ def main() -> None:
     _gravar_colecao("herois", "heroi", fichas)
     pacotes["herois"] = herois.indice(fichas)
     paineis = [jogadores.felipe(), *(jogadores.pro_compare(c) for c in ("satanic", "yatoro", "watson")),
-               *jogadores.pros_de_replay()]
+               *jogadores.pros_de_replay(), amigos.leonardo(), amigos.hane(), amigos.yuma()]
     _gravar_colecao("jogadores", "painel", paineis)
     pacotes["jogadores"] = jogadores.indice(paineis)
     pacotes["times"] = jogadores.times(paineis)
