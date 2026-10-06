@@ -40,9 +40,9 @@ const ABAS = [
   { id: "avancado", rotulo: "Avançado" },
 ] as const satisfies ReadonlyArray<{ id: Aba; rotulo: string }>;
 
-type Props = { objetivo: Objetivo; conteudo: ConteudoItem[]; onFechar: () => void; children?: ReactNode };
+type Props = { objetivo: Objetivo; conteudo: ConteudoItem[]; onFechar: () => void; unidade?: ReactNode; children?: ReactNode };
 
-export function ObjectivePanel({ objetivo, conteudo, onFechar, children }: Props) {
+export function ObjectivePanel({ objetivo, conteudo, onFechar, unidade, children }: Props) {
   const [aba, setAba] = useState<Aba>("basico");
   const item = conteudoDoObjetivo(objetivo, conteudo);
   const texto = item?.secoes[aba] ?? null;
@@ -65,6 +65,7 @@ export function ObjectivePanel({ objetivo, conteudo, onFechar, children }: Props
         ))}
       </div>
       <div role="tabpanel" className="painel-texto">
+        {aba === "basico" && unidade}
         {aba === "basico" && <GradeNumeros numeros={numerosDoObjetivo(objetivo.detalhes)} />}
         {!texto && "Ainda não escrito."}
         {texto && aba === "basico" && <div><ReactMarkdown>{texto}</ReactMarkdown></div>}
