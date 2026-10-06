@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router";
 import type { Indice, Rota } from "../data/schemas";
 import { RoutesPage } from "./RoutesPage";
@@ -29,5 +29,5 @@ it("abre a rota da célula em três toques", async () => {
   expect(await screen.findByRole("heading", { name: rota.pergunta })).toBeInTheDocument();
   expect(screen.getByText("vindo do triângulo: MA-R-08")).toBeInTheDocument();
   expect(screen.getByText("ROTA REAL · replay 8123")).toBeInTheDocument();
-  expect(screen.getByRole("cell", { name: "Saia da caixa." })).toBeInTheDocument();
+  expect(within(screen.getByRole("list", { name: "Passos da rota" })).getByText(/Saia da caixa./)).toBeInTheDocument();
 });

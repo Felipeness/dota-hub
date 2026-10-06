@@ -14,23 +14,31 @@ const CAMPOS_ESTADO = [
 
 export function RouteDetail({ rota, objetivos, onIrPara }: Props) {
   const [selecionado, setSelecionado] = useState<string | null>(null);
+  const desvios: Desvio[] = [...rota.interrupcao, ...rota.se];
   return (
     <article className="rota">
-      <h2>{rota.pergunta}</h2>
-      <p className="rota-titulo">{rota.id} · {rota.titulo}</p>
-      {rota.origem === "real" && <p className="selo-real">ROTA REAL · replay {rota.replay}</p>}
-      <FaixaEstado estado={rota.estado} />
-      <MapView objetivos={objetivos} rota={rota} selecionado={selecionado} onSelecionar={setSelecionado} />
-      <TabelaPassos rota={rota} />
-      {rota.fuga && <p className="fuga">Fuga a partir do passo {rota.fuga.de_passo}: {rota.fuga.rotulo}</p>}
-      <ListaDesvios titulo="Interrupções" itens={rota.interrupcao} onIrPara={onIrPara} />
-      <ListaDesvios titulo="Se acontecer" itens={rota.se} onIrPara={onIrPara} />
-      {rota.porque && <p className="porque">{rota.porque}</p>}
-      {rota.proxima.length > 0 && (
-        <nav aria-label="Próximas rotas">
-          {rota.proxima.map((id) => <button key={id} onClick={() => onIrPara(id)}>Próxima: {id}</button>)}
-        </nav>
-      )}
+      <div className="rota-principal">
+        <div className="pilulas">
+          <span className="selo selo-destaque">{rota.id}</span>
+          <span className="selo">{rota.origem === "real" ? `ROTA REAL · replay ${rota.replay}` : "ROTA RECOMENDADA"}</span>
+        </div>
+        <h2>{rota.pergunta}</h2>
+        <p className="rota-titulo">{rota.titulo}</p>
+        <div className="rota-mapa">
+          <MapView objetivos={objetivos} rota={rota} selecionado={selecionado} onSelecionar={setSelecionado} />
+          {rota.proxima.length > 0 && (
+            <nav aria-label="Próximas rotas" className="proximas">
+              {rota.proxima.map((id) => <button key={id} className="selo-proxima" onClick={() => onIrPara(id)}>PRÓXIMA → {id}</button>)}
+            </nav>
+          )}
+        </div>
+      </div>
+      <aside className="rota-lateral">
+        <FaixaEstado estado={rota.estado} />
+        <ListaPassos rota={rota} />
+        <SeOMapaMudar itens={desvios} onIrPara={onIrPara} />
+        {rota.porque && <p className="porque">{rota.porque}</p>}
+      </aside>
     </article>
   );
 }
@@ -39,7 +47,7 @@ function FaixaEstado({ estado }: { estado: Rota["estado"] }) {
   if (!estado) return null;
   const itens = CAMPOS_ESTADO.filter(([campo]) => estado[campo] != null);
   return (
-    <dl className="faixa-estado">
+    <dl className="grade-numeros grade-3">
       {itens.map(([campo, rotulo]) => (
         <div key={campo}><dt>{rotulo}</dt><dd>{String(estado[campo])}</dd></div>
       ))}
@@ -47,31 +55,31 @@ function FaixaEstado({ estado }: { estado: Rota["estado"] }) {
   );
 }
 
-function TabelaPassos({ rota }: { rota: Rota }) {
+function ListaPassos({ rota }: { rota: Rota }) {
   return (
-    <table className="passos">
-      <thead><tr><th>#</th><th>Minuto</th><th>Onde</th><th>O que fazer</th></tr></thead>
-      <tbody>
-        {rota.passos.map((p) => (
-          <tr key={p.n} className={`passo-${p.risco}`}>
-            <td>{p.n}</td><td>{p.minuto}</td><td>{p.rotulo}</td><td>{p.acao}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <ol className="passos" aria-label="Passos da rota">
+      {rota.passos.map((p) => (
+        <li key={p.n}>
+          <span className={`passo passo-${p.risco}`}>{p.n}</span>
+          <span className="numero">{p.minuto}</span>
+          <span><strong>{p.rotulo}</strong> · {p.acao}</span>
+        </li>
+      ))}
+      {rota.fuga && <li className="fuga"><span className="passo passo-fuga">↩</span><span /><span><strong>{rota.fuga.rotulo}</strong> · a partir do passo {rota.fuga.de_passo}</span></li>}
+    </ol>
   );
 }
 
-function ListaDesvios({ titulo, itens, onIrPara }: { titulo: string; itens: Desvio[]; onIrPara: (id: string) => void }) {
+function SeOMapaMudar({ itens, onIrPara }: { itens: Desvio[]; onIrPara: (id: string) => void }) {
   if (itens.length === 0) return null;
   return (
-    <section>
-      <h3>{titulo}</h3>
+    <section className="caixa-alerta" aria-label="Se o mapa mudar">
+      <h3 className="sobretitulo">Se o mapa mudar</h3>
       <ul>
         {itens.map(({ condicao, acao, rota: destino }) => (
           <li key={condicao}>
-            {condicao}{acao && `: ${acao}`}
-            {destino && <> <button onClick={() => onIrPara(destino)}>{destino}</button></>}
+            {condicao}{acao && ` → ${acao}`}
+            {destino && <> · <button className="link" onClick={() => onIrPara(destino)}>{destino}</button></>}
           </li>
         ))}
       </ul>

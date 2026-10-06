@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router";
 import { Indisponivel, useData } from "../data/useData";
 import { conteudoSchema, objetivosSchema, rotasSchema } from "../data/schemas";
@@ -10,17 +10,35 @@ const ETIQUETA = { rota: "Rota", objetivo: "Objetivo", termo: "Termo" } as const
 export function SearchBox() {
   const [ativa, setAtiva] = useState(false);
   const [consulta, setConsulta] = useState("");
+  const campo = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    const focarComBarra = (e: KeyboardEvent) => {
+      if (e.key !== "/" || estaDigitando(e.target)) return;
+      e.preventDefault();
+      campo.current?.focus();
+    };
+    document.addEventListener("keydown", focarComBarra);
+    return () => document.removeEventListener("keydown", focarComBarra);
+  }, []);
   return (
     <div className="busca">
-      <input
-        type="search" role="searchbox" value={consulta}
-        aria-label="Buscar herói, rota, objetivo ou termo" placeholder="Buscar herói, rota, objetivo ou termo"
-        onFocus={() => setAtiva(true)}
-        onChange={(e) => setConsulta(e.target.value)}
-      />
+      <label className="busca-campo">
+        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="7" /><path d="M20 20l-4-4" /></svg>
+        <input
+          ref={campo} type="search" role="searchbox" value={consulta}
+          aria-label="Buscar herói, rota, objetivo ou termo" placeholder="Buscar herói, rota, objetivo ou termo"
+          onFocus={() => setAtiva(true)}
+          onChange={(e) => setConsulta(e.target.value)}
+        />
+        <kbd aria-hidden="true">/</kbd>
+      </label>
       {ativa && <Resultados consulta={consulta} limpar={() => setConsulta("")} />}
     </div>
   );
+}
+
+function estaDigitando(alvo: EventTarget | null): boolean {
+  return alvo instanceof HTMLElement && (alvo.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(alvo.tagName));
 }
 
 function Resultados({ consulta, limpar }: { consulta: string; limpar: () => void }) {

@@ -8,17 +8,28 @@ import { destinoDoLink } from "./destino";
 
 const porTitulo = (a: ConteudoItem, b: ConteudoItem) => a.titulo.localeCompare(b.titulo, "pt-BR");
 
+// ponytail: agrupa pela letra até a Task 6 trazer a categoria de cada termo.
+export function agruparPorLetra(termos: ConteudoItem[]): [string, ConteudoItem[]][] {
+  const grupos = new Map<string, ConteudoItem[]>();
+  for (const t of termos.toSorted(porTitulo)) {
+    const letra = normalizar(t.titulo).charAt(0).toUpperCase();
+    grupos.set(letra, [...(grupos.get(letra) ?? []), t]);
+  }
+  return [...grupos.entries()];
+}
+
 function TermoAberto({ termo, termos }: { termo: ConteudoItem; termos: ConteudoItem[] }) {
   return (
-    <article>
-      <h2>{termo.titulo}</h2>
-      <ReactMarkdown>{termo.secoes.basico}</ReactMarkdown>
+    <article className="termo">
+      <span className="sobretitulo">Termo</span>
+      <h1>{termo.titulo}</h1>
+      <div className="termo-texto"><ReactMarkdown>{termo.secoes.basico}</ReactMarkdown></div>
       {termo.links.length > 0 && (
-        <ul aria-label="Relacionados">
-          {termo.links.map((link) => destinoDoLink(link, termos)).map(({ to, rotulo }) => <li key={to}><Link to={to}>{rotulo}</Link></li>)}
+        <ul aria-label="Relacionados" className="pilulas">
+          {termo.links.map((link) => destinoDoLink(link, termos)).map(({ to, rotulo }) => <li key={to}><Link className="pilula" to={to}>{rotulo}</Link></li>)}
         </ul>
       )}
-      <footer>Patch {termo.patch}. Fontes: {termo.fontes.join("; ")}</footer>
+      <footer className="fonte">Patch {termo.patch} · Fontes: {termo.fontes.join("; ")}</footer>
     </article>
   );
 }
@@ -33,19 +44,29 @@ export function GlossaryPage() {
 
   const termo = dados.dados.find((t) => t.id === id);
   const texto = normalizar(filtro);
-  const lista = dados.dados.filter((t) => normalizar(t.titulo).includes(texto)).toSorted(porTitulo);
+  const grupos = agruparPorLetra(dados.dados.filter((t) => normalizar(t.titulo).includes(texto)));
 
   return (
     <section className="glossario">
-      <h1>Glossário</h1>
-      <input
-        type="search" value={filtro} aria-label="Filtrar termos"
-        placeholder="Filtrar termos" onChange={(e) => setFiltro(e.target.value)}
-      />
-      <ul>
-        {lista.map((t) => <li key={t.id}><Link to={`/glossario/${t.id}`}>{t.titulo}</Link></li>)}
-      </ul>
-      {id && (termo ? <TermoAberto termo={termo} termos={dados.dados} /> : <p>Termo não encontrado.</p>)}
+      <aside className="glossario-lista">
+        <label className="campo">
+          <span>Filtrar termos</span>
+          <input type="search" value={filtro} placeholder="stack, pull, BKB…" onChange={(e) => setFiltro(e.target.value)} />
+        </label>
+        {grupos.map(([letra, itens]) => (
+          <section key={letra} aria-label={`Letra ${letra}`}>
+            <h2 className="sobretitulo">{letra}</h2>
+            <ul>{itens.map((t) => <li key={t.id}><Link to={`/glossario/${t.id}`} aria-current={t.id === id ? "page" : undefined}>{t.titulo}</Link></li>)}</ul>
+          </section>
+        ))}
+      </aside>
+      {termo && <TermoAberto termo={termo} termos={dados.dados} />}
+      {!termo && (
+        <article className="termo">
+          <span className="sobretitulo">Glossário</span>
+          <h1>{id ? "Termo não encontrado." : "Escolha um termo."}</h1>
+        </article>
+      )}
     </section>
   );
 }

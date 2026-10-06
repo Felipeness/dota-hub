@@ -41,25 +41,27 @@ function Rotas({ rotas, indice, objetivos }: { rotas: Rota[]; indice: Indice; ob
 
   return (
     <section className="rotas">
-      <Seletor rotulo="Lado" opcoes={LADOS.map((l) => ({ valor: l.id, rotulo: l.rotulo }))} atual={selecao.lado}
-        onEscolher={(lado) => setSelecao({ lado })} />
-      {selecao.lado && (
-        <Seletor rotulo="Minuto" opcoes={MINUTOS.map((m) => ({ valor: m, rotulo: String(m) }))} atual={selecao.minuto}
+      <header className="rotas-topo">
+        <span className="sobretitulo">GPS de farm · 3 toques</span>
+        <h1>Que horas são e o que o jogo mostra?</h1>
+      </header>
+      <div className="seletores">
+        <Seletor rotulo="1 · Lado" estilo="botoes" opcoes={LADOS.map((l) => ({ valor: l.id, rotulo: l.rotulo }))} atual={selecao.lado}
+          onEscolher={(lado) => setSelecao({ ...selecao, lado })} />
+        <Seletor rotulo="2 · Minuto" estilo="minutos" opcoes={MINUTOS.map((m) => ({ valor: m, rotulo: String(m) }))} atual={selecao.minuto}
           onEscolher={(minuto) => setSelecao({ ...selecao, minuto })} />
-      )}
-      {selecao.minuto !== undefined && (
-        <Seletor rotulo="Situação" opcoes={indice.colunas.map((c) => ({ valor: c, rotulo: c }))} onEscolher={escolherSituacao} />
-      )}
+      </div>
+      <Seletor rotulo="3 · Situação" estilo="pilulas" opcoes={indice.colunas.map((c) => ({ valor: c, rotulo: c }))} onEscolher={escolherSituacao} />
       {nota && <p className="nota-celula">{nota}</p>}
       {id && !aberta && <p role="alert">Rota {id} não encontrada.</p>}
       {aberta && <RouteDetail rota={aberta} objetivos={objetivos} onIrPara={irPara} />}
-      <label>
-        Procurar rota
+      <label className="campo">
+        <span>Procurar rota</span>
         <input type="search" value={texto} onChange={(e) => setTexto(e.target.value)} />
       </label>
       <ul className="lista-rotas">
         {filtrarRotas(rotas, { ...selecao, texto }).map((r) => (
-          <li key={r.id}><Link to={`/rotas/${r.id}`}>{r.id} · {r.pergunta}</Link></li>
+          <li key={r.id}><Link to={`/rotas/${r.id}`}><span className="numero">{r.id}</span> {r.pergunta}</Link></li>
         ))}
       </ul>
     </section>
@@ -67,15 +69,17 @@ function Rotas({ rotas, indice, objetivos }: { rotas: Rota[]; indice: Indice; ob
 }
 
 type Opcao<T> = { valor: T; rotulo: string };
-type SeletorProps<T> = { rotulo: string; opcoes: Opcao<T>[]; atual?: T; onEscolher: (valor: T) => void };
+type SeletorProps<T> = { rotulo: string; estilo: "botoes" | "minutos" | "pilulas"; opcoes: Opcao<T>[]; atual?: T; onEscolher: (valor: T) => void };
 
-function Seletor<T extends string | number>({ rotulo, opcoes, atual, onEscolher }: SeletorProps<T>) {
+function Seletor<T extends string | number>({ rotulo, estilo, opcoes, atual, onEscolher }: SeletorProps<T>) {
   return (
-    <fieldset className="seletor">
+    <fieldset className={`seletor seletor-${estilo}`}>
       <legend>{rotulo}</legend>
-      {opcoes.map((o) => (
-        <button key={o.valor} aria-pressed={o.valor === atual} onClick={() => onEscolher(o.valor)}>{o.rotulo}</button>
-      ))}
+      <div className="seletor-opcoes">
+        {opcoes.map((o) => (
+          <button key={o.valor} aria-pressed={o.valor === atual} onClick={() => onEscolher(o.valor)}>{o.rotulo}</button>
+        ))}
+      </div>
     </fieldset>
   );
 }
