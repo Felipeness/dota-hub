@@ -3,7 +3,7 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
-from . import amigos, conteudo, fontes, herois, jogadores, mapa, roshan, rotas, trajetorias, validar
+from . import amigos, conteudo, fontes, herois, jogadores, mapa, relevo, roshan, rotas, trajetorias, validar
 
 RAIZ = Path(__file__).resolve().parents[2]
 DESTINO = RAIZ / "app" / "public" / "data"
@@ -28,6 +28,9 @@ def main() -> None:
     pacotes = {"objetivos": mapa.objetos(), "rotas": rotas.carregar_rotas(), "indice": rotas.indice(),
                "objetivos_conteudo": conteudo.carregar(RAIZ / "content" / "objetivos"),
                "glossario": conteudo.carregar(RAIZ / "content" / "glossario")}
+    altura = relevo.relevo()
+    altura.save(DESTINO / "relevo_512.png")
+    pacotes["relevo"] = relevo.grade(altura)
     fichas = herois.todos(frozenset(r["id"] for r in pacotes["rotas"]))
     _gravar_colecao("herois", "heroi", fichas)
     pacotes["herois"] = herois.indice(fichas)
