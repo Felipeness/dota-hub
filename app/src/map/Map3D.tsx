@@ -1,6 +1,6 @@
 import { Html, Line, MapControls } from "@react-three/drei";
 import { Canvas, useLoader, type ThreeEvent } from "@react-three/fiber";
-import { useEffect, useRef, useState, type ComponentRef } from "react";
+import { useEffect, useRef, useState, type ComponentRef, type CSSProperties } from "react";
 import { PerspectiveCamera, TextureLoader } from "three";
 import { relevoSchema, type Objetivo } from "../data/schemas";
 import { useData } from "../data/useData";
@@ -10,7 +10,7 @@ import { caixaDoFoco, distanciaParaEnquadrar, foiArraste, posicaoDaCamera, prend
 import { SeloDaRota } from "./SeloDaRota";
 import { caminhoDaFuga, selosDaRota, trechosDaRota } from "./selos";
 import { texturaDoMapa } from "./textura";
-import { opacidadeDaMancha, type Marca, type Trilha } from "./trilhas";
+import { opacidadeDaMancha, type Desenho, type Marca, type Trilha } from "./trilhas";
 
 type Vetor = [number, number, number];
 type NoChao = (p: Ponto, acima: number) => Vetor;
@@ -131,6 +131,37 @@ function Marcas({ marcas, noChao }: { marcas: Marca[]; noChao: NoChao }) {
   ));
 }
 
+// No 3D o pino clicável é HTML de tamanho fixo na tela: o raio só decide entre pequeno e grande.
+const estiloDoPino = (raio: number, opacidade: number, cor: string): CSSProperties & Record<"--cor-desenho", string> =>
+  ({ width: Math.round(Math.min(40, Math.max(14, raio * 900))), opacity: opacidade, "--cor-desenho": cor });
+
+function Desenhos({ desenhos, selecionado, noChao, onSelecionar }: { desenhos: readonly Desenho[]; selecionado?: string | null; noChao: NoChao; onSelecionar: (id: string) => void }) {
+  return desenhos.map((d) => {
+    const cor = corDoToken(`--cor-${d.cor}`);
+    if (d.tipo === "linha") {
+      return d.pontos.length >= 2 && <Line key={d.id} points={d.pontos.map((p) => noChao(p, 0.5))} color={cor} lineWidth={Math.max(1.5, d.espessura * 700)} />;
+    }
+    if (!d.clicavel) {
+      return (
+        <mesh key={d.id} position={noChao([d.x, d.y], 0.2)} rotation={[-Math.PI / 2, 0, 0]}>
+          <circleGeometry args={[d.raio * TAMANHO, 16]} />
+          <meshBasicMaterial color={cor} transparent opacity={d.opacidade} depthWrite={false} />
+        </mesh>
+      );
+    }
+    const ativo = d.id === selecionado;
+    return (
+      <Html key={d.id} position={noChao([d.x, d.y], 1.2)} center zIndexRange={[12, 0]}>
+        <span className="pino-3d">
+          <button className={`pino${ativo ? " ativo" : ""}`} aria-label={d.rotulo} title={d.rotulo} aria-pressed={ativo}
+            style={estiloDoPino(d.raio, d.opacidade, cor)} onClick={() => onSelecionar(d.id)} />
+          {d.texto && <span className="pino-texto">{d.texto}</span>}
+        </span>
+      </Html>
+    );
+  });
+}
+
 type Controles = ComponentRef<typeof MapControls>;
 
 function enquadrar(controles: Controles, caixa: Caixa) {
@@ -172,7 +203,7 @@ function Navegacao({ caixa, pedido }: { caixa: Caixa; pedido: number }) {
   );
 }
 
-export function Map3D({ objetivos, rota, trilhas = [], marcas = [], manchas = [], selecionado, onSelecionar, children }: MapViewProps) {
+export function Map3D({ objetivos, rota, trilhas = [], marcas = [], manchas = [], desenhos = [], selecionado, onSelecionar, children }: MapViewProps) {
   const noChao = useNoChao();
   const [pedidoDeCentralizar, setPedidoDeCentralizar] = useState(0);
   const caixa = rota ? caixaDoFoco(pontosDaRota(rota), TAMANHO) : TABULEIRO_INTEIRO;
@@ -198,6 +229,7 @@ export function Map3D({ objetivos, rota, trilhas = [], marcas = [], manchas = []
             <meshBasicMaterial color={destaque} transparent opacity={opacidadeDaMancha(m.peso)} />
           </mesh>
         ))}
+        <Desenhos desenhos={desenhos} selecionado={selecionado} noChao={noChao} onSelecionar={onSelecionar} />
         <Navegacao caixa={caixa} pedido={pedidoDeCentralizar} />
       </Canvas>
       <button className="botao-centralizar" onClick={() => setPedidoDeCentralizar((n) => n + 1)}>Centralizar</button>

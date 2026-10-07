@@ -1,0 +1,579 @@
+{
+ "id": "time-exemplo-a",
+ "nome": "Time Exemplo A",
+ "tag": "EXA",
+ "roster": [
+  {
+   "nick": "Exemplo1",
+   "account_id": 1001,
+   "pos": 1
+  },
+  {
+   "nick": "Exemplo2",
+   "account_id": 1002,
+   "pos": 2
+  },
+  {
+   "nick": "Exemplo3",
+   "account_id": 1003,
+   "pos": 3
+  },
+  {
+   "nick": "Exemplo4",
+   "account_id": 1004,
+   "pos": 4
+  },
+  {
+   "nick": "Exemplo5",
+   "account_id": 1005,
+   "pos": 5
+  }
+ ],
+ "amostra": {
+  "partidas": 40,
+  "replays": 32,
+  "vitorias": 24,
+  "nivel": "ok"
+ },
+ "resumo": "EXEMPLO, dados fictícios. O Time Exemplo A é um time inventado para testar a tela: joga em volta do mid, faz smoke cedo e prepara Roshan com visão fundo.",
+ "secoes": [
+  {
+   "id": "draft",
+   "titulo": "Draft",
+   "texto_md": "EXEMPLO. O **Time Exemplo A** abre com suporte flex e guarda o mid para a segunda fase.\n\n- pick rate do primeiro pick: 40% (n=40)\n- bans repetidos: dois heróis de iniciação",
+   "confianca": "alta"
+  },
+  {
+   "id": "smoke",
+   "titulo": "Smoke",
+   "texto_md": "EXEMPLO. Smoke entre 8 e 12 minutos quase sempre segue um ward fundo na selva inimiga.",
+   "confianca": "media"
+  },
+  {
+   "id": "red_team",
+   "titulo": "Red team",
+   "texto_md": "EXEMPLO. Com amostra pequena contra Tier 1, o padrão de smoke pode ser efeito do hero pool e não escolha.",
+   "confianca": "baixa"
+  }
+ ],
+ "assinatura_temporal": [
+  {
+   "janela": "0-5",
+   "texto": "EXEMPLO: lane segura, suporte puxa camp."
+  },
+  {
+   "janela": "5-10",
+   "texto": "EXEMPLO: primeira rotação do pos 4."
+  },
+  {
+   "janela": "10-15",
+   "texto": "EXEMPLO: smoke para a selva inimiga."
+  },
+  {
+   "janela": "30+",
+   "texto": "EXEMPLO: joga por Roshan e buyback."
+  }
+ ],
+ "mapa": {
+  "zonas": [
+   {
+    "zona": "triangulo_inimigo",
+    "rotulo": "Triângulo inimigo",
+    "x": 0.72,
+    "y": 0.7,
+    "tempo_pct": 0.18,
+    "janela": "todas"
+   },
+   {
+    "zona": "rio_meio",
+    "rotulo": "Rio do meio",
+    "x": 0.5,
+    "y": 0.5,
+    "tempo_pct": 0.12,
+    "janela": "10-15"
+   },
+   {
+    "zona": "selva_propria",
+    "rotulo": "Selva própria",
+    "x": 0.3,
+    "y": 0.32,
+    "tempo_pct": 0.25,
+    "janela": "todas"
+   }
+  ],
+  "calor": {
+   "janela": "todas",
+   "grade": 16,
+   "valores": [
+    [
+     0.0,
+     0.0,
+     0.0,
+     0.001,
+     0.001,
+     0.001,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.003,
+     0.008,
+     0.014,
+     0.012,
+     0.006,
+     0.001,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.003,
+     0.016,
+     0.052,
+     0.087,
+     0.076,
+     0.035,
+     0.008,
+     0.001,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.001,
+     0.008,
+     0.052,
+     0.166,
+     0.28,
+     0.246,
+     0.113,
+     0.028,
+     0.004,
+     0.001,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.001,
+     0.014,
+     0.087,
+     0.28,
+     0.472,
+     0.416,
+     0.196,
+     0.057,
+     0.018,
+     0.007,
+     0.002,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.001,
+     0.012,
+     0.076,
+     0.246,
+     0.416,
+     0.375,
+     0.21,
+     0.124,
+     0.089,
+     0.044,
+     0.012,
+     0.002,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.006,
+     0.035,
+     0.113,
+     0.196,
+     0.21,
+     0.238,
+     0.328,
+     0.313,
+     0.162,
+     0.045,
+     0.007,
+     0.001,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.001,
+     0.008,
+     0.028,
+     0.057,
+     0.124,
+     0.328,
+     0.599,
+     0.596,
+     0.315,
+     0.094,
+     0.023,
+     0.008,
+     0.002,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.001,
+     0.004,
+     0.018,
+     0.089,
+     0.313,
+     0.596,
+     0.604,
+     0.347,
+     0.164,
+     0.102,
+     0.055,
+     0.017,
+     0.003,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     0.001,
+     0.007,
+     0.044,
+     0.162,
+     0.315,
+     0.347,
+     0.314,
+     0.377,
+     0.385,
+     0.226,
+     0.07,
+     0.011,
+     0.001
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.002,
+     0.012,
+     0.045,
+     0.094,
+     0.164,
+     0.377,
+     0.739,
+     0.83,
+     0.492,
+     0.152,
+     0.025,
+     0.002
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.002,
+     0.007,
+     0.023,
+     0.102,
+     0.385,
+     0.83,
+     0.943,
+     0.56,
+     0.174,
+     0.028,
+     0.002
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.001,
+     0.008,
+     0.055,
+     0.226,
+     0.492,
+     0.56,
+     0.333,
+     0.103,
+     0.017,
+     0.001
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.002,
+     0.017,
+     0.07,
+     0.152,
+     0.174,
+     0.103,
+     0.032,
+     0.005,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.003,
+     0.011,
+     0.025,
+     0.028,
+     0.017,
+     0.005,
+     0.001,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.001,
+     0.002,
+     0.002,
+     0.001,
+     0.0,
+     0.0,
+     0.0
+    ]
+   ]
+  },
+  "wards": [
+   {
+    "x": 0.62,
+    "y": 0.66,
+    "tipo": "obs",
+    "janela": "10-15",
+    "peso": 0.9,
+    "intencao": "roshan",
+    "texto": "EXEMPLO: ward alto antes de Roshan."
+   },
+   {
+    "x": 0.45,
+    "y": 0.58,
+    "tipo": "sen",
+    "janela": "10-15",
+    "peso": 0.5,
+    "intencao": "smoke",
+    "texto": "EXEMPLO: sentry no caminho do smoke."
+   },
+   {
+    "x": 0.25,
+    "y": 0.75,
+    "tipo": "obs",
+    "janela": "0-5",
+    "peso": 0.4,
+    "intencao": "farm",
+    "texto": "EXEMPLO: ward de lane."
+   }
+  ],
+  "smokes": [
+   {
+    "x": 0.38,
+    "y": 0.4,
+    "destino_x": 0.68,
+    "destino_y": 0.68,
+    "janela": "10-15",
+    "n": 7,
+    "resultado": {
+     "kill": 0.43,
+     "objetivo": 0.29,
+     "nada": 0.14,
+     "falhou": 0.14
+    },
+    "texto": "EXEMPLO: smoke da selva própria para o triângulo inimigo."
+   },
+   {
+    "x": 0.55,
+    "y": 0.3,
+    "destino_x": 0.8,
+    "destino_y": 0.45,
+    "janela": "20-25",
+    "n": 3,
+    "resultado": {
+     "kill": 0.0,
+     "objetivo": 0.33,
+     "nada": 0.0,
+     "falhou": 0.67
+    },
+    "texto": "EXEMPLO: smoke para a lane de baixo que costuma falhar."
+   }
+  ],
+  "objetivos": [
+   {
+    "tipo": "roshan",
+    "x": 0.4,
+    "y": 0.62,
+    "preparo": [
+     {
+      "t_rel_s": -150,
+      "acao": "push",
+      "x": 0.25,
+      "y": 0.8
+     },
+     {
+      "t_rel_s": -90,
+      "acao": "ward",
+      "x": 0.45,
+      "y": 0.66
+     },
+     {
+      "t_rel_s": -45,
+      "acao": "smoke",
+      "x": 0.35,
+      "y": 0.52
+     }
+    ],
+    "texto": "EXEMPLO: empurra a lane de cima, coloca visão e entra de smoke."
+   },
+   {
+    "tipo": "tormentor",
+    "x": 0.8,
+    "y": 0.2,
+    "preparo": [
+     {
+      "t_rel_s": -60,
+      "acao": "ward",
+      "x": 0.75,
+      "y": 0.25
+     }
+    ],
+    "texto": "EXEMPLO: tormentor com visão mínima."
+   }
+  ],
+  "lutas": [
+   {
+    "x": 0.6,
+    "y": 0.62,
+    "janela": "15-20",
+    "n": 9,
+    "vitoria_pct": 0.67,
+    "texto": "EXEMPLO: luta perto de Roshan."
+   },
+   {
+    "x": 0.3,
+    "y": 0.2,
+    "janela": "25-30",
+    "n": 4,
+    "vitoria_pct": 0.25,
+    "texto": "EXEMPLO: luta defendendo a lane de baixo."
+   }
+  ],
+  "farm": {
+   "pos1": [
+    {
+     "t": "3:30",
+     "x": 0.8,
+     "y": 0.12,
+     "rotulo": "lane"
+    },
+    {
+     "t": "4:20",
+     "x": 0.72,
+     "y": 0.25,
+     "rotulo": "camp pequeno"
+    },
+    {
+     "t": "5:00",
+     "x": 0.62,
+     "y": 0.3,
+     "rotulo": "camp grande"
+    },
+    {
+     "t": "6:20",
+     "x": 0.55,
+     "y": 0.4,
+     "rotulo": "triângulo"
+    }
+   ],
+   "pos2": [
+    {
+     "t": "4:00",
+     "x": 0.5,
+     "y": 0.5,
+     "rotulo": "mid"
+    },
+    {
+     "t": "7:00",
+     "x": 0.42,
+     "y": 0.6,
+     "rotulo": "runa"
+    },
+    {
+     "t": "11:00",
+     "x": 0.65,
+     "y": 0.7,
+     "rotulo": "rotação"
+    }
+   ]
+  }
+ },
+ "gameplan_contra": {
+  "draft": "EXEMPLO: banir o iniciador favorito do pos 4.",
+  "laning": "EXEMPLO: pressionar a safelane nos primeiros 5 minutos.",
+  "economia": "EXEMPLO: atrasar o pos 2.",
+  "mapa": "EXEMPLO: negar a selva superior.",
+  "visao": "EXEMPLO: sentries nas entradas do triângulo.",
+  "smoke": "EXEMPLO: esperar movimento perto dos 10 minutos.",
+  "objetivos": "EXEMPLO: conceder o primeiro Tormentor.",
+  "lutas": "EXEMPLO: matar o pos 4 primeiro.",
+  "win_condition": "EXEMPLO: não deixar o time chegar aos 20 minutos à frente em ouro."
+ }
+}

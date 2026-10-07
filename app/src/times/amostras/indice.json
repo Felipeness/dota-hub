@@ -1,0 +1,52 @@
+{
+ "gerado_em": "2026-10-06",
+ "periodo": "EXEMPLO, dados fictícios para desenvolvimento",
+ "patch": "7.41",
+ "times": [
+  {
+   "id": "time-exemplo-a",
+   "nome": "Time Exemplo A",
+   "tag": "EXA",
+   "partidas": 40,
+   "replays": 32,
+   "amostra": "ok",
+   "estilo": "EXEMPLO: ritmo alto e smoke cedo",
+   "eixos": {
+    "ritmo": 0.82,
+    "visao": 0.64,
+    "dependencia_hc": 0.35
+   }
+  },
+  {
+   "id": "time-exemplo-b",
+   "nome": "Time Exemplo B",
+   "tag": "EXB",
+   "partidas": 9,
+   "replays": 6,
+   "amostra": "low",
+   "estilo": "EXEMPLO: farm longo do carry",
+   "eixos": {
+    "ritmo": 0.28,
+    "visao": 0.41,
+    "dependencia_hc": 0.88
+   }
+  }
+ ],
+ "eixos": [
+  {
+   "id": "ritmo",
+   "rotulo": "Ritmo",
+   "explicacao": "EXEMPLO: quanto o time luta e se move antes dos 20 minutos."
+  },
+  {
+   "id": "visao",
+   "rotulo": "Controle de visão",
+   "explicacao": "EXEMPLO: wards por minuto ponderadas pela profundidade."
+  },
+  {
+   "id": "dependencia_hc",
+   "rotulo": "Dependência do carry",
+   "explicacao": "EXEMPLO: parte do ouro do time que vai para o pos 1."
+  }
+ ]
+}

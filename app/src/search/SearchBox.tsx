@@ -2,11 +2,12 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router";
 import { dadosOuVazio, Indisponivel, useData } from "../data/useData";
 import { conteudoSchema, heroisSchema, jogadoresSchema, objetivosSchema, rotasResumoSchema, timesSchema, unidadesSchema } from "../data/schemas";
+import { CAMINHO_INDICE, indiceAtlasSchema } from "../times/schemas";
 import { AtalhoAoVivo } from "./AtalhoAoVivo";
 import { type Achado, buscar, construirIndice, sugerir } from "./index";
 
 const ETIQUETA = {
-  rota: "Rota", objetivo: "Objetivo", termo: "Termo", heroi: "Herói", jogador: "Jogador", time: "Time", unidade: "Unidade", habilidade: "Habilidade",
+  rota: "Rota", objetivo: "Objetivo", termo: "Termo", heroi: "Herói", jogador: "Jogador", time: "Time", atlas: "Atlas", unidade: "Unidade", habilidade: "Habilidade",
 } as const satisfies Record<Achado["tipo"], string>;
 
 // Os dados da busca só baixam quando a pessoa vai buscar, para não pesar na primeira tela.
@@ -54,17 +55,18 @@ function Resultados({ consulta, limpar }: { consulta: string; limpar: () => void
   const jogadores = useData("/data/jogadores.json", jogadoresSchema);
   const times = useData("/data/times.json", timesSchema);
   const unidades = useData("/data/unidades.json", unidadesSchema);
-  const opcionaisProntos = [herois, jogadores, times, unidades].every((e) => e.estado !== "carregando");
+  const atlas = useData(CAMINHO_INDICE, indiceAtlasSchema);
+  const opcionaisProntos = [herois, jogadores, times, unidades, atlas].every((e) => e.estado !== "carregando");
 
   const busca = useMemo(
     () => rotas.estado === "ok" && objetivos.estado === "ok" && termos.estado === "ok" && opcionaisProntos
       ? construirIndice({
         rotas: rotas.dados, objetivos: objetivos.dados, termos: termos.dados,
         herois: dadosOuVazio(herois), jogadores: dadosOuVazio(jogadores), times: dadosOuVazio(times),
-        unidades: dadosOuVazio(unidades),
+        unidades: dadosOuVazio(unidades), atlas: atlas.estado === "ok" ? atlas.dados.times : [],
       })
       : null,
-    [rotas, objetivos, termos, herois, jogadores, times, unidades, opcionaisProntos],
+    [rotas, objetivos, termos, herois, jogadores, times, unidades, atlas, opcionaisProntos],
   );
 
   const indisponivel = [rotas, objetivos, termos].find((e) => e.estado === "indisponivel");

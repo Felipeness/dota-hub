@@ -43,7 +43,7 @@ it("acha herói, jogador e time", () => {
   });
   expect(buscar(b, "medu")[0]).toMatchObject({ tipo: "heroi", link: "/herois/medusa" });
   expect(buscar(b, "skit")[0]).toMatchObject({ tipo: "jogador", link: "/jogadores/skiter" });
-  expect(buscar(b, "spirit")[0]).toMatchObject({ tipo: "time", link: "/times/team-spirit" });
+  expect(buscar(b, "spirit")[0]).toMatchObject({ tipo: "time", link: "/jogadores/times/team-spirit" });
 });
 
 const unidades = [{ id: "roshan", nome: "Roshan", grupo: "chefe" as const, papel: "chefe neutro", lado: "neutro" as const, modelo: "roshan", camps: [],

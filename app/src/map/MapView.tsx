@@ -1,7 +1,7 @@
 import { lazy, Suspense, type ReactNode } from "react";
 import type { Objetivo, Rota } from "../data/schemas";
 import { MapFlat } from "./MapFlat";
-import type { Mancha, Marca, Trilha } from "./trilhas";
+import type { Desenho, Mancha, Marca, Trilha } from "./trilhas";
 import { hasWebGL } from "./webgl";
 
 const Map3D = lazy(() => import("./Map3D").then((m) => ({ default: m.Map3D })));
@@ -15,6 +15,8 @@ export type MapViewProps = {
   trilhas?: Trilha[];
   marcas?: Marca[];
   manchas?: readonly Mancha[];
+  // Linhas e pinos livres; um pino clicável chama onSelecionar com o próprio id.
+  desenhos?: readonly Desenho[];
   selecionado?: string | null;
   onSelecionar: (id: string) => void;
   forcarPlano?: boolean;
