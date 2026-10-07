@@ -618,8 +618,9 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .frescor { font-size: 0.85rem; color: var(--cor-texto-3); }
 .frescor.vencido { color: var(--cor-destaque); }
 .partidas { list-style: none; padding: 0; display: grid; gap: var(--espaco-1); }
-.partidas > li > button { width: 100%; min-height: var(--alvo-toque); text-align: left; }
-.rota-aproximada .aviso { font-size: 0.85rem; color: var(--cor-texto-3); }
+.partidas > li > a { display: flex; align-items: center; flex-wrap: wrap; gap: 0 4px; min-height: var(--alvo-toque); padding: var(--espaco-2) var(--espaco-3); border: 1px solid var(--cor-linha); border-radius: var(--raio-pequeno); background: var(--cor-superficie); color: var(--cor-texto-2); text-decoration: none; }
+.partidas > li > a strong { color: var(--cor-texto); }
+.partidas > li > a:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .busca li.busca-nada { display: block; padding: var(--espaco-3); font-size: 14px; }
 .busca li.busca-nada:hover { background: none; }
 .busca li.atalho-ao-vivo { grid-template-columns: minmax(0, 1fr); border-top: 1px solid var(--cor-linha); }

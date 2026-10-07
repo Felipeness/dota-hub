@@ -1,5 +1,3 @@
-import type { Mancha } from "../map/trilhas";
-
 export type Frescor = Readonly<{ buscadoEm: number; vencido: boolean }>;
 export type Lane = "safe" | "mid" | "off" | "selva";
 
@@ -20,11 +18,6 @@ export type ResumoConta = Readonly<{
   partidas: readonly PartidaDaConta[];
   temDadosPublicos: boolean;
   frescor: Frescor;
-}>;
-
-export type RotaAproximada = Readonly<{
-  partida: string; conta: number; analisada: boolean; manchas: readonly Mancha[];
-  laneDasManchas: Lane | null; laneRegistrada: Lane | null; frescor: Frescor;
 }>;
 
 export type PartidaDoTime = Readonly<{

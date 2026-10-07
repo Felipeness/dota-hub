@@ -1,10 +1,9 @@
-import { Link, useParams, useSearchParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { lerId, resumoDaConta } from "./contas";
 import { erroAoVivo, mensagemDoErro } from "./erros";
 import { ErroAoVivoView } from "./ErroAoVivo";
 import { dataCurta, minutos, nomeDaLane, porcentagem, textoDoResultado } from "./formato";
 import { FrescorView } from "./Frescor";
-import { RotaDaPartida } from "./RotaDaPartida";
 import type { PartidaDaConta } from "./tipos";
 import { useAoVivo } from "./useAoVivo";
 
@@ -16,13 +15,10 @@ export function ContaPage() {
 }
 
 function ContaAoVivo({ id }: { id: number }) {
-  const [params, setParams] = useSearchParams();
-  const partidaAberta = params.get("partida");
   const conta = useAoVivo(`conta:${id}`, (consultar) => resumoDaConta(consultar, id));
   if (conta.estado === "parado" || conta.estado === "carregando") return <p>Buscando a conta no OpenDota…</p>;
   if (conta.estado === "erro") return <ErroAoVivoView erro={conta.erro} contexto="conta" onTentar={conta.tentarDeNovo} />;
   const { dados } = conta;
-  const alternar = (partida: string) => setParams(partidaAberta === partida ? {} : { partida });
   return (
     <article className="conta-ao-vivo">
       <header>
@@ -46,25 +42,22 @@ function ContaAoVivo({ id }: { id: number }) {
       </table>
       <h2>Últimas partidas</h2>
       {dados.temDadosPublicos
-        ? <ListaDePartidas partidas={dados.partidas} aberta={partidaAberta} conta={dados.conta.id} onAlternar={alternar} />
+        ? <ListaDePartidas partidas={dados.partidas} conta={dados.conta.id} />
         : <p role="status">Esta conta não mostra partidas públicas. No Dota, ative "Expor dados públicos de partidas".</p>}
       <p><Link to="/ao-vivo">Nova busca</Link></p>
     </article>
   );
 }
 
-type ListaProps = { partidas: readonly PartidaDaConta[]; aberta: string | null; conta: number; onAlternar: (partida: string) => void };
-
-function ListaDePartidas({ partidas, aberta, conta, onAlternar }: ListaProps) {
+function ListaDePartidas({ partidas, conta }: { partidas: readonly PartidaDaConta[]; conta: number }) {
   return (
     <ul className="partidas" aria-label="Últimas partidas">
       {partidas.map((p) => (
         <li key={p.id}>
-          <button type="button" aria-expanded={aberta === p.id} onClick={() => onAlternar(p.id)}>
+          <Link to={`/ao-vivo/partidas/${p.id}?conta=${conta}`}>
             <strong>{p.heroi}</strong> {textoDoResultado(p.venceu)} · {p.abates}/{p.mortes}/{p.assistencias}
             {" · "}{minutos(p.duracaoS)} · {nomeDaLane(p.lane)} · {dataCurta(p.inicio)}
-          </button>
-          {aberta === p.id && <RotaDaPartida partida={p.id} conta={conta} />}
+          </Link>
         </li>
       ))}
     </ul>

@@ -8,7 +8,7 @@ const partida = (slot: number, radiantWin: boolean | null, extra = {}) => ({
   match_id: 1, player_slot: slot, radiant_win: radiantWin, hero_id: 8, start_time: 100, duration: 1800,
   kills: 5, deaths: 2, assists: 7, lane_role: 1, version: 21, ...extra,
 });
-const nomes = { "8": { id: 8, localized_name: "Juggernaut" }, "1": { id: 1, localized_name: "Anti-Mage" } };
+const nomes = { "8": { id: 8, name: "npc_dota_hero_juggernaut", localized_name: "Juggernaut" }, "1": { id: 1, name: "npc_dota_hero_antimage", localized_name: "Anti-Mage" } };
 
 it.each([
   { slot: 0, radiantWin: true, esperado: true },
