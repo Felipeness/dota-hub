@@ -25,6 +25,7 @@ export function Shell() {
           <NavLink to="/herois">Heróis</NavLink>
           <NavLink to="/jogadores">Jogadores</NavLink>
           <NavLink to="/glossario">Glossário</NavLink>
+          <NavLink to="/ao-vivo">Ao vivo</NavLink>
         </nav>
         <SearchBox />
       </header>

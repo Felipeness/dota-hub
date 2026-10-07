@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
 import { GlossaryPage } from "./glossary/GlossaryPage";
 import { Shell } from "./layout/Shell";
+import { ProvedorAoVivo } from "./live/ProvedorAoVivo";
 import { MapPage } from "./map/MapPage";
 import { RoutesPage } from "./routes/RoutesPage";
 
@@ -22,11 +23,25 @@ const router = createBrowserRouter([
       { path: "/jogadores", hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./players/PlayersPage")).PlayersPage }) },
       { path: "/jogadores/:id", hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./players/PlayerPage")).PlayerPage }) },
       { path: "/times/:id", hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./players/TeamPage")).TeamPage }) },
+      {
+        path: "/ao-vivo",
+        hydrateFallbackElement: <Carregando />,
+        lazy: async () => ({ Component: (await import("./live/AoVivoLayout")).AoVivoLayout }),
+        children: [
+          { index: true, lazy: async () => ({ Component: (await import("./live/AoVivoPage")).AoVivoPage }) },
+          { path: "contas/:id", lazy: async () => ({ Component: (await import("./live/ContaPage")).ContaPage }) },
+          { path: "times/:id", lazy: async () => ({ Component: (await import("./live/TimeAoVivoPage")).TimeAoVivoPage }) },
+        ],
+      },
     ],
   },
   { path: "/poster/:modelo", hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./unidades/PaginaPoster")).PaginaPoster }) },
 ]);
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <ProvedorAoVivo>
+      <RouterProvider router={router} />
+    </ProvedorAoVivo>
+  );
 }
