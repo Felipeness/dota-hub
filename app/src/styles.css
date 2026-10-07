@@ -811,11 +811,18 @@ button.pino:hover { transform: translate(-50%, -50%) scale(1.2); }
   .atlas-time .atlas-cabecalho { grid-column: 2; grid-row: 1; }
   .atlas-time .atlas-cabecalho h1 { font-size: 40px; }
   .atlas-corpo { display: contents; }
-  .atlas-mapa-coluna { grid-column: 1; grid-row: 1 / -1; min-height: 0; gap: var(--espaco-2); }
+  /* A leitura fica numa coluna estreita ao lado do mapa, sempre à vista. */
+  .atlas-mapa-coluna {
+    grid-column: 1; grid-row: 1 / -1; min-height: 0; display: grid; gap: var(--espaco-2) var(--espaco-3);
+    grid-template-columns: minmax(0, 1fr) 252px; grid-template-rows: auto minmax(0, 1fr);
+  }
+  .atlas-controles { grid-column: 1 / -1; }
+  .atlas-mapa { grid-column: 1; grid-row: 2; }
+  .atlas-leitura { grid-column: 2; grid-row: 2; }
   .atlas-time .atlas-texto { grid-column: 2; grid-row: 2; }
   .atlas-controles .pilula { min-height: 34px; padding: 0 11px; font-size: 12px; }
-  .atlas-leitura { position: absolute; top: 12px; left: 12px; z-index: 5; width: min(360px, calc(100% - 24px)); max-height: 52%; overflow-y: auto; margin: 0; background: rgb(14 21 26 / 0.94); box-shadow: 0 20px 40px rgb(0 0 0 / 0.5); }
-  .atlas-leitura:not([open]) { width: auto; padding: 6px 12px; }
+  .atlas-leitura { margin: 0; min-height: 0; overflow-y: auto; }
+  .atlas-leitura:not([open]) { padding: 6px 12px; }
   .atlas-mapa { flex: 1; min-height: 0; }
   .atlas-mapa > .mapa-plano, .atlas-mapa > .mapa-3d { height: 100%; aspect-ratio: auto; }
   .atlas-dica { position: absolute; left: 12px; bottom: 12px; z-index: 2; margin: 0; padding: 6px 10px; border-radius: 6px; background: rgb(10 14 17 / 0.85); }

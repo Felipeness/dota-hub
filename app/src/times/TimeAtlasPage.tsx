@@ -116,8 +116,8 @@ function AtlasDoTime({ time }: { time: TimeAtlas }) {
             {item
               ? <PainelDoItem item={item} onFechar={() => setAberto(null)} />
               : <p className="atlas-dica">{itens.length} marcadores nesta janela. Clique num deles para ler o padrão.</p>}
-            <LeituraDoMapa mapa={time.mapa} camadas={camadas} janela={janela} />
           </div>
+          <LeituraDoMapa mapa={time.mapa} camadas={camadas} janela={janela} />
         </div>
         <div className="atlas-texto">
           <p className="abertura">{time.resumo}</p>
