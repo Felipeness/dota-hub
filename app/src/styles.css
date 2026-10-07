@@ -614,9 +614,10 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
   border-radius: 50%; border: 2px solid rgb(10 14 17 / 0.9); background: var(--cor-desenho);
   box-shadow: 0 4px 10px rgb(0 0 0 / 0.5); transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+.pino.por-cima { z-index: 2; }
 button.pino::after { content: ""; position: absolute; inset: -10px; border-radius: 50%; }
 button.pino:hover { transform: translate(-50%, -50%) scale(1.2); }
-.pino.ativo { z-index: 3; border-color: var(--cor-texto); box-shadow: 0 0 0 5px rgb(242 181 68 / 0.35), 0 6px 14px rgb(0 0 0 / 0.6); }
+.pino.ativo { z-index: 3; border-color: var(--cor-texto); background: var(--cor-desenho); box-shadow: 0 0 0 5px rgb(242 181 68 / 0.35), 0 6px 14px rgb(0 0 0 / 0.6); }
 .pino-mancha { min-width: 0; border: 0; box-shadow: none; pointer-events: none; background: radial-gradient(circle, var(--cor-desenho) 30%, transparent 70%); }
 .pino-texto {
   position: absolute; transform: translate(10px, -130%); pointer-events: none; white-space: nowrap;
@@ -688,6 +689,8 @@ button.pino:hover { transform: translate(-50%, -50%) scale(1.2); }
 .atlas-linha-controles select { min-height: var(--alvo-toque); }
 .atlas-linha-controles .alternador { min-width: 180px; margin-left: auto; }
 .atlas-mapa { position: relative; width: 100%; }
+/* Os pinos HTML do 3D têm z-index próprio; isolados, eles não passam por cima do painel. */
+.atlas-mapa > .mapa-3d { isolation: isolate; }
 .atlas-dica { margin: var(--espaco-2) 0 0; font-size: 13px; color: var(--cor-texto-3); }
 .atlas-painel {
   margin-top: var(--espaco-3); display: flex; flex-direction: column; gap: 14px; padding: 18px;
@@ -726,10 +729,19 @@ button.pino:hover { transform: translate(-50%, -50%) scale(1.2); }
 
 /* Telas largas: o mapa fica preso à esquerda enquanto o texto rola à direita; o painel flutua sobre o mapa. */
 @media (min-width: 1100px) {
-  .atlas-corpo { grid-template-columns: minmax(0, 1.15fr) minmax(380px, 1fr); align-items: start; }
-  .atlas-mapa-coluna { position: sticky; top: 96px; }
-  .atlas-mapa { width: min(100%, calc(100dvh - 330px)); min-width: 420px; }
-  .atlas-painel { position: absolute; left: 12px; bottom: 12px; z-index: 4; width: min(380px, calc(100% - 24px)); max-height: 62%; overflow-y: auto; margin: 0; box-shadow: 0 20px 40px rgb(0 0 0 / 0.55); }
+  .shell:has(.atlas-time) { height: 100vh; height: 100dvh; min-height: 0; }
+  .shell > main:has(> .atlas-time) { display: flex; flex-direction: column; min-height: 0; }
+  .atlas-time { flex: 1; min-height: 0; gap: var(--espaco-4); padding-top: 16px; padding-bottom: 16px; }
+  .atlas-time .atlas-cabecalho h1 { font-size: 44px; }
+  .atlas-corpo { flex: 1; min-height: 0; grid-template-columns: minmax(0, 1.2fr) minmax(380px, 1fr); grid-template-rows: minmax(0, 1fr); }
+  .atlas-mapa-coluna { min-height: 0; }
+  .atlas-controles { flex-direction: row; flex-wrap: wrap; align-items: flex-end; gap: var(--espaco-3) var(--espaco-4); }
+  .atlas-linha-controles { margin-left: auto; }
+  .atlas-mapa { flex: 1; min-height: 0; }
+  .atlas-mapa > .mapa-plano, .atlas-mapa > .mapa-3d { height: 100%; aspect-ratio: auto; }
+  .atlas-dica { position: absolute; left: 12px; bottom: 12px; z-index: 2; margin: 0; padding: 6px 10px; border-radius: 6px; background: rgb(10 14 17 / 0.85); }
+  .atlas-texto { min-height: 0; overflow-y: auto; padding-right: var(--espaco-3); }
+  .atlas-painel { position: absolute; left: 12px; bottom: 12px; z-index: 4; width: min(360px, calc(100% - 24px)); max-height: 58%; overflow-y: auto; margin: 0; box-shadow: 0 20px 40px rgb(0 0 0 / 0.55); }
 }
 @media (max-width: 720px) {
   .atlas { padding: 20px var(--espaco-4) 28px; }

@@ -81,3 +81,8 @@ it("a cor do smoke segue o resultado mais comum", () => {
 it("a ponta da seta termina no destino", () => {
   expect(pontaDaSeta([0, 0], [1, 0])[1]).toEqual([1, 0]);
 });
+
+it("o marcador do objetivo fica por cima dos outros pinos", () => {
+  const desenhos = pinos(desenhosDoMapa(mapa, filtro(["objetivos", "farm"]), null));
+  expect(desenhos.filter((p) => p.porCima).map((p) => p.id)).toEqual(["objetivos:0", "objetivos:1"]);
+});

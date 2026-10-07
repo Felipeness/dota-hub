@@ -90,7 +90,7 @@ describe("tela do time", () => {
     fireEvent.click(await screen.findByRole("button", { name: "Preparo de roshan" }));
     const painel = screen.getByRole("complementary", { name: "Preparo de roshan" });
     const passos = within(painel).getAllByRole("listitem").map((li) => li.textContent);
-    expect(passos).toEqual(["T-150 spush", "T-90 sward", "T-45 ssmoke", "T=0objetivo"]);
+    expect(passos).toEqual(["T-150spush", "T-90sward", "T-45ssmoke", "T=0objetivo"]);
   });
 
   it("a janela de tempo tira os marcadores de fora dela", async () => {

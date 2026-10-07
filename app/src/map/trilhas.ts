@@ -54,4 +54,4 @@ export type CorDesenho = "destaque" | "info" | "radiant" | "dire" | "neutro" | "
 /** Camada livre sobre o mapa (atlas dos times). Raio e espessura são frações do lado do tabuleiro. */
 export type Desenho =
   | Readonly<{ tipo: "linha"; id: string; pontos: readonly Ponto[]; cor: CorDesenho; espessura: number }>
-  | Readonly<{ tipo: "pino"; id: string; x: number; y: number; cor: CorDesenho; raio: number; opacidade: number; rotulo: string; clicavel: boolean; texto?: string }>;
+  | Readonly<{ tipo: "pino"; id: string; x: number; y: number; cor: CorDesenho; raio: number; opacidade: number; rotulo: string; clicavel: boolean; texto?: string; porCima?: boolean }>;

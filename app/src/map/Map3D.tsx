@@ -1,7 +1,7 @@
 import { Html, Line, MapControls } from "@react-three/drei";
 import { Canvas, useLoader, type ThreeEvent } from "@react-three/fiber";
 import { useEffect, useRef, useState, type ComponentRef, type CSSProperties } from "react";
-import { PerspectiveCamera, TextureLoader } from "three";
+import { CanvasTexture, PerspectiveCamera, TextureLoader, type Texture } from "three";
 import { relevoSchema, type Objetivo } from "../data/schemas";
 import { useData } from "../data/useData";
 import type { MapViewProps, Tracado } from "./MapView";
@@ -135,7 +135,22 @@ function Marcas({ marcas, noChao }: { marcas: Marca[]; noChao: NoChao }) {
 const estiloDoPino = (raio: number, opacidade: number, cor: string): CSSProperties & Record<"--cor-desenho", string> =>
   ({ width: Math.round(Math.min(40, Math.max(14, raio * 900))), opacity: opacidade, "--cor-desenho": cor });
 
+// Degradê radial branco que some na borda: tingido pela cor do material, vira a mancha de calor do plano.
+function criarTexturaDaMancha(): Texture | null {
+  const tela = document.createElement("canvas");
+  tela.width = tela.height = 64;
+  const contexto = tela.getContext("2d");
+  if (!contexto) return null;
+  const degrade = contexto.createRadialGradient(32, 32, 0, 32, 32, 32);
+  degrade.addColorStop(0.3, "rgba(255,255,255,1)");
+  degrade.addColorStop(1, "rgba(255,255,255,0)");
+  contexto.fillStyle = degrade;
+  contexto.fillRect(0, 0, 64, 64);
+  return new CanvasTexture(tela);
+}
+
 function Desenhos({ desenhos, selecionado, noChao, onSelecionar }: { desenhos: readonly Desenho[]; selecionado?: string | null; noChao: NoChao; onSelecionar: (id: string) => void }) {
+  const [mancha] = useState(criarTexturaDaMancha);
   return desenhos.map((d) => {
     const cor = corDoToken(`--cor-${d.cor}`);
     if (d.tipo === "linha") {
@@ -144,14 +159,15 @@ function Desenhos({ desenhos, selecionado, noChao, onSelecionar }: { desenhos: r
     if (!d.clicavel) {
       return (
         <mesh key={d.id} position={noChao([d.x, d.y], 0.2)} rotation={[-Math.PI / 2, 0, 0]}>
-          <circleGeometry args={[d.raio * TAMANHO, 16]} />
-          <meshBasicMaterial color={cor} transparent opacity={d.opacidade} depthWrite={false} />
+          <planeGeometry args={[d.raio * TAMANHO * 2.5, d.raio * TAMANHO * 2.5]} />
+          <meshBasicMaterial color={cor} map={mancha} transparent opacity={d.opacidade} depthWrite={false} />
+          {d.texto && <Html center zIndexRange={[12, 12]}><span className="pino-texto">{d.texto}</span></Html>}
         </mesh>
       );
     }
     const ativo = d.id === selecionado;
     return (
-      <Html key={d.id} position={noChao([d.x, d.y], 1.2)} center zIndexRange={[12, 0]}>
+      <Html key={d.id} position={noChao([d.x, d.y], 1.2)} center zIndexRange={d.porCima ? [14, 14] : [13, 13]}>
         <span className="pino-3d">
           <button className={`pino${ativo ? " ativo" : ""}`} aria-label={d.rotulo} title={d.rotulo} aria-pressed={ativo}
             style={estiloDoPino(d.raio, d.opacidade, cor)} onClick={() => onSelecionar(d.id)} />

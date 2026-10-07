@@ -158,7 +158,7 @@ function LinhaDoPreparo({ preparo }: { preparo: readonly Preparo[] }) {
         <span className="atlas-preparo-fim" />
       </div>
       <ol className="linha-do-tempo">
-        {preparo.map((p, k) => <li key={k}><span className="tempo">T{p.t_rel_s} s</span><strong>{p.acao}</strong></li>)}
+        {preparo.map((p, k) => <li key={k}><span className="tempo">T{p.t_rel_s}s</span><strong>{p.acao}</strong></li>)}
         <li><span className="tempo">T=0</span><strong>objetivo</strong></li>
       </ol>
     </figure>
@@ -191,7 +191,7 @@ function AssinaturaTemporal({ assinatura }: { assinatura: TimeAtlas["assinatura_
 }
 
 const LEGENDA = [
-  ["destaque", "Observer, calor, farm pos 1"], ["info", "Sentry, zona, farm pos 2, smoke com objetivo"],
+  ["destaque", "Observer, calor"], ["texto", "Farm pos 1"], ["info", "Sentry, zona, farm pos 2, smoke com objetivo"],
   ["radiant", "Smoke com kill, luta vencida"], ["dire", "Smoke que falhou, luta perdida"], ["neutro", "Objetivo, smoke sem resultado"],
 ] as const;
 

@@ -35,7 +35,7 @@ const COR_WARD = { obs: "destaque", sen: "info" } as const satisfies Record<keyo
 const RESULTADOS = ["kill", "objetivo", "nada", "falhou"] as const;
 type Resultado = Record<(typeof RESULTADOS)[number], number>;
 const COR_RESULTADO = { kill: "radiant", objetivo: "info", nada: "neutro", falhou: "dire" } as const satisfies Record<keyof Resultado, CorDesenho>;
-const COR_FARM = { pos1: "destaque", pos2: "info" } as const satisfies Record<string, CorDesenho>;
+const COR_FARM = { pos1: "texto", pos2: "info" } as const satisfies Record<string, CorDesenho>;
 
 export const resultadoPrincipal = (r: Resultado): keyof Resultado =>
   RESULTADOS.reduce<keyof Resultado>((melhor, chave) => (r[chave] > r[melhor] ? chave : melhor), "kill");
@@ -80,7 +80,7 @@ export const itensDoMapa = (mapa: MapaAtlas, filtro: Filtro): ItemDoMapa[] =>
 
 /* Desenhos */
 
-const pino = (id: string, [x, y]: Ponto, cor: CorDesenho, raio: number, rotulo: string, extra: Partial<Pick<Extract<Desenho, { tipo: "pino" }>, "texto" | "opacidade" | "clicavel">> = {}): Desenho =>
+const pino = (id: string, [x, y]: Ponto, cor: CorDesenho, raio: number, rotulo: string, extra: Partial<Pick<Extract<Desenho, { tipo: "pino" }>, "texto" | "opacidade" | "clicavel" | "porCima">> = {}): Desenho =>
   ({ tipo: "pino", id, x, y, cor, raio, rotulo, clicavel: true, opacidade: 1, ...extra });
 
 // Duas asas curtas no fim da linha, para a seta funcionar igual no SVG e no 3D.
@@ -108,7 +108,8 @@ function desenhosDoCalor(mapa: MapaAtlas, filtro: Filtro): Desenho[] {
 function desenhosDoObjetivo(mapa: MapaAtlas, item: ItemDoMapa, aberto: boolean): Desenho[] {
   const o = mapa.objetivos[Number(item.id.split(":")[1])];
   if (!o) return [];
-  const marcador = pino(item.id, [o.x, o.y], "neutro", 0.02, item.titulo);
+  // Por cima: o objetivo não pode ficar embaixo de um ponto de farm no mesmo lugar.
+  const marcador = pino(item.id, [o.x, o.y], "neutro", 0.02, item.titulo, { porCima: true });
   if (!aberto || !item.preparo) return [marcador];
   const passos = item.preparo.map((p, k) => pino(`${item.id}:preparo:${k}`, [p.x, p.y], "destaque", 0.012, `${p.acao} em T${p.t_rel_s} s`, { clicavel: false, texto: `${p.t_rel_s}s ${p.acao}` }));
   const trajeto: Desenho = { tipo: "linha", id: `${item.id}:trajeto`, pontos: [...item.preparo.map((p): Ponto => [p.x, p.y]), [o.x, o.y]], cor: "destaque", espessura: 0.003 };

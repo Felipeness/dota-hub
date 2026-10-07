@@ -68,7 +68,7 @@ function PinoPlano({ pino, ativo, onSelecionar }: { pino: Pino; ativo: boolean; 
   if (!pino.clicavel) return <><span className="pino pino-mancha" style={estilo} />{texto}</>;
   return (
     <>
-      <button className={`pino${ativo ? " ativo" : ""}`} style={estilo} aria-label={pino.rotulo} title={pino.rotulo} aria-pressed={ativo} onClick={() => onSelecionar(pino.id)} />
+      <button className={`pino${pino.porCima ? " por-cima" : ""}${ativo ? " ativo" : ""}`} style={estilo} aria-label={pino.rotulo} title={pino.rotulo} aria-pressed={ativo} onClick={() => onSelecionar(pino.id)} />
       {texto}
     </>
   );
