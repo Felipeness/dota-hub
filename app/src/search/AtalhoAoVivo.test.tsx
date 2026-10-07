@@ -11,3 +11,8 @@ it("com menos de 2 letras não aparece", () => {
   render(<MemoryRouter><ul><AtalhoAoVivo consulta="a" onIr={() => {}} /></ul></MemoryRouter>);
   expect(screen.queryByRole("link")).toBeNull();
 });
+
+it("número de conta leva direto para a conta, sem passar pela busca", () => {
+  render(<MemoryRouter><ul><AtalhoAoVivo consulta=" 123456789 " onIr={() => {}} /></ul></MemoryRouter>);
+  expect(screen.getByRole("link", { name: "Buscar ao vivo: “123456789”" })).toHaveAttribute("href", "/ao-vivo/contas/123456789");
+});
