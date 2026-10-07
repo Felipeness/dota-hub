@@ -69,33 +69,30 @@ function AtlasDoTime({ time }: { time: TimeAtlas }) {
                 <button key={c} className="pilula" aria-pressed={camadas.has(c)} onClick={() => alternar(c)}>{ROTULO_CAMADA[c]}</button>
               ))}
             </div>
-            <fieldset className="seletor atlas-janelas">
-              <legend>Janela de tempo (min)</legend>
-              <div className="seletor-opcoes">
-                {(["todas", ...JANELAS] as const).map((j) => (
-                  <button key={j} aria-pressed={janela === j} onClick={() => setJanela(j)}>{j === "todas" ? "Todas" : j}</button>
-                ))}
-              </div>
-            </fieldset>
-            <div className="atlas-linha-controles">
-              {camadas.has("wards") && (
-                <label className="campo">
-                  Intenção dos wards
-                  <select value={intencao} onChange={(e) => setIntencao(e.target.value)}>
-                    <option value={TODAS_AS_INTENCOES}>Todas</option>
-                    {intencoesDosWards(time.mapa).map((i) => <option key={i} value={i}>{i}</option>)}
-                  </select>
-                </label>
-              )}
-              <div className="alternador" role="group" aria-label="Vista">
-                <button aria-pressed={vista === "2.5d"} onClick={() => setVista("2.5d")}>2.5D</button>
-                <button aria-pressed={vista === "plano"} onClick={() => setVista("plano")}>Plano</button>
-              </div>
+            <div className="atlas-janelas" role="group" aria-label="Janela de tempo em minutos">
+              <span aria-hidden="true">min</span>
+              {(["todas", ...JANELAS] as const).map((j) => (
+                <button key={j} aria-pressed={janela === j} onClick={() => setJanela(j)}>{j === "todas" ? "Todas" : j}</button>
+              ))}
             </div>
+            {camadas.has("wards") && (
+              <label className="atlas-intencao">
+                Intenção dos wards
+                <select value={intencao} onChange={(e) => setIntencao(e.target.value)}>
+                  <option value={TODAS_AS_INTENCOES}>Todas</option>
+                  {intencoesDosWards(time.mapa).map((i) => <option key={i} value={i}>{i}</option>)}
+                </select>
+              </label>
+            )}
           </div>
           <div className="atlas-mapa">
             <MapView objetivos={[]} desenhos={desenhosDoMapa(time.mapa, filtro, aberto)} selecionado={aberto}
-              onSelecionar={(novo) => setAberto((atual) => (atual === novo ? null : novo))} forcarPlano={vista === "plano"} />
+              onSelecionar={(novo) => setAberto((atual) => (atual === novo ? null : novo))} forcarPlano={vista === "plano"}>
+              <div className="alternador atlas-vista" role="group" aria-label="Vista">
+                <button aria-pressed={vista === "2.5d"} onClick={() => setVista("2.5d")}>2.5D</button>
+                <button aria-pressed={vista === "plano"} onClick={() => setVista("plano")}>Plano</button>
+              </div>
+            </MapView>
             {item
               ? <PainelDoItem item={item} onFechar={() => setAberto(null)} />
               : <p className="atlas-dica">{itens.length} marcadores nesta janela. Clique num deles para ler o padrão.</p>}
