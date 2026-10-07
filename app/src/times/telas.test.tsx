@@ -92,7 +92,7 @@ describe("como vencer", () => {
     expect(within(lone).getByLabelText("Vitórias por situação")).toHaveTextContent("vs counter 1-1como azarão 2-0lane perdida 0-1");
     expect(within(lone).getByRole("img", { name: "Bans contra eles por mês: jul 10%, ago 60%, set 25%" })).toBeInTheDocument();
     expect(lone).toHaveTextContent("último pick 28/09; banido contra eles em 60% dos jogos de ago");
-    expect(lone).toHaveTextContent("indícioban não confirmado");
+    expect(lone).toHaveTextContent("indícioban não confirmadoresiste ao contexto");
     expect(pango).toHaveTextContent("indícioban não testado");
     expect(pango).not.toHaveTextContent("banido pelo adversário");
     const vitoria = within(bloco).getByRole("region", { name: "Aumenta a chance de vitória deles" });

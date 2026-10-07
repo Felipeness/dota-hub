@@ -41,6 +41,12 @@ const ROTULO_CONTEXTO: Readonly<Record<string, string>> = {
   vs_counter: "vs counter", sem_counter: "sem counter", como_azarao: "como azarão", como_favorito: "como favorito",
   lane_perdida: "lane perdida", atras_15: "atrás aos 15", pickado_por_ultimo: "último pick",
 };
+// forca_contexto: a vantagem do herói se mantém nos jogos ruins (resiste) ou só aparece nos bons (favoravel).
+const SELO_DO_CONTEXTO = {
+  resiste: { classe: "chave-selo-confirmado", texto: "resiste ao contexto" },
+  favoravel: { classe: "chave-selo-indicio", texto: "vence pelo contexto" },
+  indefinido: { classe: "chave-selo-nao", texto: "contexto indefinido" },
+} as const satisfies Record<NonNullable<Ban["forca_contexto"]>, { classe: string; texto: string }>;
 const MESES = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
 const nomeDoMes = (anoMes: string) => MESES[Number(anoMes.slice(5, 7)) - 1] ?? anoMes;
 const dataCurta = (iso: string) => `${iso.slice(8, 10)}/${iso.slice(5, 7)}`;
@@ -89,6 +95,7 @@ function CartaoBanir({ ban, destaque }: { ban: Ban; destaque: boolean }) {
         <span className="chave-selos">
           <span className="chave-selo chave-selo-indicio">{ban.ban_confirma === true ? "confirmado" : "indício"}</span>
           {ban.ban_confirma !== true && <span className={`chave-selo ${selo.classe}`}>{selo.texto}</span>}
+          {ban.forca_contexto && <span className={`chave-selo ${SELO_DO_CONTEXTO[ban.forca_contexto].classe}`}>{SELO_DO_CONTEXTO[ban.forca_contexto].texto}</span>}
         </span>
         <SeloConfianca confianca={ban.confianca} n={ban.n_com} />
       </div>
