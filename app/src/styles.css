@@ -849,6 +849,15 @@ button.pino:hover { transform: translate(-50%, -50%) scale(1.2); }
 .chave-fatores li .chave-confianca { grid-column: 1 / -1; }
 .chave-vazio, .chave-ausente { margin: 0; font-size: 13px; color: var(--cor-texto-3); }
 .chave-papel { color: var(--cor-texto-3); }
+.chave-placar { align-self: flex-start; padding: 1px 8px; border-radius: var(--raio-pilula); background: var(--cor-destaque-fundo); font-size: 15px; font-weight: 700; color: var(--cor-destaque); }
+.chave-meses { display: flex; flex-direction: column; gap: 2px; }
+.chave-meses-barras { display: flex; align-items: flex-end; gap: 2px; height: 22px; }
+.chave-meses-barras i { width: 8px; border-radius: 2px 2px 0 0; background: var(--cor-dire); opacity: 0.8; }
+.chave-contexto { display: flex; flex-wrap: wrap; gap: 3px; }
+.chave-chip { padding: 1px 6px; border-radius: var(--raio-pilula); background: var(--cor-superficie-3); font-family: var(--fonte-num); font-size: 10px; color: var(--cor-texto-2); }
+.chave-leitura { font-size: 11px; line-height: 1.4; color: var(--cor-texto-3); }
+.chave-mais { align-self: flex-start; margin-top: var(--espaco-2); min-height: 36px; padding: 0 14px; border-radius: var(--raio-pilula); font-size: 13px; }
+.chave-historico { align-self: flex-start; border-style: dashed; color: var(--cor-texto-2); }
 .chave-heroi-destaque { border-color: rgb(242 181 68 / 0.45); }
 .chave-queda { font-size: 13px; color: var(--cor-texto); }
 .chave-queda b { font-family: var(--fonte-num); font-size: 16px; color: var(--cor-destaque); }
@@ -867,6 +876,32 @@ button.pino:hover { transform: translate(-50%, -50%) scale(1.2); }
 .chave-faixa .chave-faixa-com { width: 8px; height: 8px; top: 1px; margin-left: -4px; border-radius: 50%; background: var(--cor-texto); }
 .chave-fator em { font-style: normal; color: var(--cor-texto-3); }
 .chave-nota { margin: 0; font-size: 12px; line-height: 1.5; color: var(--cor-texto-3); }
+
+/* Quando eles perdem uma lane: um cartão por lane e jogador */
+.lanes { display: flex; flex-direction: column; gap: var(--espaco-3); }
+.lanes h2 { margin: 0; font-family: var(--fonte-display); font-size: 24px; }
+.lanes-lista { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--espaco-3); }
+.lane-cartao { padding: var(--espaco-4); border-radius: var(--raio); background: var(--cor-superficie); border: 1px solid var(--cor-linha-forte); }
+.lane-cartao > section { display: flex; flex-direction: column; gap: var(--espaco-3); }
+.lane-historico { opacity: 0.75; border-style: dashed; }
+.lane-topo { display: flex; align-items: center; gap: var(--espaco-3); }
+.lane-topo h3 { margin: 0; font-family: var(--fonte-display); font-size: 19px; color: var(--cor-texto); }
+.lane-selos { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.lane-avatar { flex-shrink: 0; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--cor-superficie-3); border: 1px solid var(--cor-linha-pilula); font-family: var(--fonte-display); font-size: 18px; font-weight: 700; color: var(--cor-texto-2); }
+.lane-barras { display: flex; flex-direction: column; gap: 6px; }
+.lane-barra { display: grid; grid-template-columns: 92px minmax(0, 1fr) 84px; align-items: center; gap: var(--espaco-2); font-size: 12px; color: var(--cor-texto-2); }
+.lane-barra small { color: var(--cor-texto-3); }
+.lane-trilho { height: 8px; border-radius: var(--raio-pilula); background: var(--cor-linha); overflow: hidden; }
+.lane-trilho i { display: block; height: 100%; }
+.lane-ganha .lane-trilho i { background: var(--cor-radiant); }
+.lane-perdida .lane-trilho i { background: var(--cor-dire); }
+.lane-liga { margin: 0; font-size: 12px; color: var(--cor-texto-3); }
+.lane-contra { margin: 0; padding: var(--espaco-3); border-left: 3px solid var(--cor-destaque); background: var(--cor-destaque-fundo); font-size: 14px; line-height: 1.5; color: var(--cor-texto); }
+.lane-lista h4 { margin: 0 0 4px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cor-texto-3); }
+.lane-lista ul { margin: 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: 4px; font-size: 13px; line-height: 1.45; color: var(--cor-texto-2); }
+.lane-lista summary, .lane-detalhe summary { cursor: pointer; font-size: 12px; color: var(--cor-texto-3); }
+.lane-lista .lane-matchups { list-style: none; padding: 0; flex-direction: row; flex-wrap: wrap; }
+.lane-matchups li { padding: 2px 8px; border-radius: var(--raio-pilula); background: var(--cor-superficie-3); font-size: 12px; }
 
 /* Telas largas: o mapa fica preso à esquerda enquanto o texto rola à direita; o painel flutua sobre o mapa. */
 @media (min-width: 1100px) {

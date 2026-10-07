@@ -4,7 +4,8 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { chavesSchema, indiceAtlasSchema, timeAtlasSchema } from "../src/times/schemas.ts";
+import type { ZodType } from "zod";
+import { chavesSchema, indiceAtlasSchema, lanesSchema, timeAtlasSchema } from "../src/times/schemas.ts";
 
 type Equipe = { id: string; chave: string; classificacao: "tier1" | "fronteira" };
 
@@ -74,20 +75,29 @@ function nomesDosClusters(sintese: Sintese): Record<string, string> {
   return nomes;
 }
 
-// chaves.json é opcional enquanto a síntese não termina: falta vira registro, formato errado derruba a publicação.
-function publicarChaves(id: string) {
-  const origemDasChaves = join(origem, "equipes", id, "chaves.json");
-  if (!existsSync(origemDasChaves)) {
-    registro.push(`${id}: sem chaves.json, a tela mostra o aviso no lugar de "Como vencer"`);
-    return;
+// Arquivos extras de cada equipe (chaves, lanes): opcionais enquanto a síntese não termina. Falta vira registro,
+// formato errado derruba a publicação.
+type Extra = { arquivo: string; sufixo: string; schema: ZodType };
+const EXTRAS: readonly Extra[] = [
+  { arquivo: "chaves.json", sufixo: "chaves", schema: chavesSchema },
+  { arquivo: "lanes_perdidas.json", sufixo: "lanes", schema: lanesSchema },
+];
+
+function publicarExtras(id: string) {
+  for (const { arquivo, sufixo, schema } of EXTRAS) {
+    const caminho = join(origem, "equipes", id, arquivo);
+    if (!existsSync(caminho)) {
+      registro.push(`${id}: sem ${arquivo}, a tela mostra o aviso no lugar do bloco`);
+      continue;
+    }
+    const dados = lerJson<Json>(caminho);
+    const analise = schema.safeParse(dados);
+    if (!analise.success) {
+      const problemas = analise.error.issues.slice(0, 5).map((i) => `${i.path.map(String).join(".")}: ${i.message}`).join("; ");
+      throw new Error(`${id}/${arquivo}: ${problemas}`);
+    }
+    writeFileSync(join(destino, `${id}.${sufixo}.json`), JSON.stringify(dados));
   }
-  const chaves = lerJson<Json>(origemDasChaves);
-  const analise = chavesSchema.safeParse(chaves);
-  if (!analise.success) {
-    const problemas = analise.error.issues.slice(0, 5).map((i) => `${i.path.join(".")}: ${i.message}`).join("; ");
-    throw new Error(`${id}/chaves.json: ${problemas}`);
-  }
-  writeFileSync(join(destino, `${id}.chaves.json`), JSON.stringify(chaves));
 }
 
 function publicarTime(equipe: Equipe) {
@@ -100,7 +110,7 @@ function publicarTime(equipe: Equipe) {
   }
   if (analise.data.id !== equipe.id) throw new Error(`${equipe.id}: o arquivo diz id ${analise.data.id}`);
   writeFileSync(join(destino, `${equipe.id}.json`), JSON.stringify(time));
-  publicarChaves(equipe.id);
+  publicarExtras(equipe.id);
   return analise.data;
 }
 

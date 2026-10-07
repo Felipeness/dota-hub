@@ -9,8 +9,9 @@ import {
   type Camada, type Filtro, type FiltroJanela, type ItemDoMapa, type Preparo,
 } from "./camadas";
 import { ComoVencer } from "./ComoVencer";
+import { LanesPerdidas } from "./LanesPerdidas";
 import { LeituraDoMapa } from "./LeituraDoMapa";
-import { chavesSchema, timeAtlasSchema, type Confianca, type Secao, type TimeAtlas } from "./schemas";
+import { chavesSchema, lanesSchema, timeAtlasSchema, type Confianca, type Secao, type TimeAtlas } from "./schemas";
 import { ordenarSecoes } from "./secoes";
 import { SeloAmostra, SeloFronteira } from "./TimesPage";
 
@@ -122,6 +123,7 @@ function AtlasDoTime({ time }: { time: TimeAtlas }) {
         </div>
         <div className="atlas-texto">
           <ChavesDoTime id={time.id} nome={time.nome} />
+          <LanesDoTime id={time.id} nome={time.nome} />
           <p className="abertura">{time.resumo}</p>
           <ComoJogarContra gameplan={time.gameplan_contra} />
           {ordenarSecoes(time.secoes).map((bloco) => (bloco.tipo === "assinatura"
@@ -196,6 +198,14 @@ function ChavesDoTime({ id, nome }: { id: string; nome: string }) {
   if (chaves.estado === "carregando") return null;
   if (chaves.estado === "indisponivel") return <p className="chave-ausente">Como vencer: {chaves.motivo}</p>;
   return <ComoVencer chaves={chaves.dados} nome={nome} />;
+}
+
+// Lanes perdidas também vêm à parte; sem o arquivo a página diz o motivo, como nas chaves.
+function LanesDoTime({ id, nome }: { id: string; nome: string }) {
+  const lanes = useData(`/data/times_atlas/${encodeURIComponent(id)}.lanes.json`, lanesSchema);
+  if (lanes.estado === "carregando") return null;
+  if (lanes.estado === "indisponivel") return <p className="chave-ausente">Lanes perdidas: {lanes.motivo}</p>;
+  return <LanesPerdidas lanes={lanes.dados} nome={nome} />;
 }
 
 function SecaoDoTime({ secao }: { secao: Secao }) {

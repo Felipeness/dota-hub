@@ -109,12 +109,18 @@ const fatorSchema = z.object({
 });
 export const chavesSchema = z.object({
   resumo_para_vencer: z.string(),
+  historico: z.boolean().optional(),
   contexto_liga: z.string().nullable().optional(),
   recorte: z.string().nullable().optional(),
   banir: z.array(z.object({
     heroi: z.string(), papel: z.string().optional(), wr_com: fracao, n_com: z.number().int(), wr_sem: fracao, n_sem: z.number().int(),
     efeito_pp: z.number(), quando_banido_pelo_adv_wr: fracao.nullable().optional(), n_banido: z.number().int().nullable().optional(),
     ban_confirma: z.boolean().nullable().optional(), quem_joga: z.string().optional(), placar_60d: z.string().optional(),
+    // Por herói × jogador (CONTRATO_CHAVES.md): placar dele com o herói, último pick e por que sumiu (bans por mês).
+    placar_jogador: z.string().optional(), ultimo_pick: z.string().optional(),
+    bans_contra_por_mes: z.record(z.string(), z.object({ n: z.number().int(), jogos: z.number().int(), pct: fracao })).optional(),
+    contexto_vitorias: z.record(z.string(), z.string()).optional(), leitura_contexto: z.string().optional(),
+    forca_contexto: z.enum(["resiste", "favoravel", "indefinido"]).optional(),
     ...textoComConfianca, ...intervalo,
   })).default([]),
   herois_contra: z.array(z.object({
@@ -129,3 +135,18 @@ export const chavesSchema = z.object({
 });
 export type Chaves = z.infer<typeof chavesSchema>;
 export type FatorChave = z.infer<typeof fatorSchema>;
+
+// lanes_perdidas.json: o que acontece quando o time perde cada lane (publicado como <id>.lanes.json).
+// A confiança chega como o semáforo do pedido (🟢 🟡 🔴); vira a mesma escala das seções.
+const SEMAFORO = { "🟢": "alta", "🟡": "media", "🔴": "baixa" } as const;
+const confiancaDaLane = z.union([confiancaSchema, z.enum(["🟢", "🟡", "🔴"]).transform((cor) => SEMAFORO[cor])]);
+export const lanesSchema = z.object({
+  lanes: z.array(z.object({
+    lane: z.string(), jogador: z.string(), jogador_atual: z.boolean(),
+    n_perdida: z.number().int(), wr_perdida: fracao, ic: z.tuple([fracao, fracao]).nullable().optional(),
+    n_ganha: z.number().int(), wr_ganha: fracao, efeito_ajustado_pp: z.number().nullable().optional(), liga_wr_perdida: fracao.nullable().optional(),
+    o_que_acontece: z.array(z.string()).default([]), recuperacao: z.array(z.string()).default([]), matchups: z.array(z.string()).default([]),
+    o_que_fazer_contra: z.string(), confianca: confiancaDaLane, texto_md: z.string().default(""),
+  })),
+});
+export type Lanes = z.infer<typeof lanesSchema>;

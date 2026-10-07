@@ -4,6 +4,7 @@ import indice from "./amostras/indice.json";
 import exemploA from "./amostras/time-exemplo-a.json";
 import exemploB from "./amostras/time-exemplo-b.json";
 import chavesA from "./amostras/time-exemplo-a.chaves.json";
+import lanesA from "./amostras/time-exemplo-a.lanes.json";
 import { TimeAtlasPage } from "./TimeAtlasPage";
 import { TimesPage } from "./TimesPage";
 
@@ -12,6 +13,7 @@ const ARQUIVOS: Readonly<Record<string, unknown>> = {
   "/data/times_atlas/time-exemplo-a.json": exemploA,
   "/data/times_atlas/time-exemplo-b.json": exemploB,
   "/data/times_atlas/time-exemplo-a.chaves.json": chavesA,
+  "/data/times_atlas/time-exemplo-a.lanes.json": lanesA,
 };
 
 function abrir(caminho: string, arquivos = ARQUIVOS) {
@@ -85,7 +87,11 @@ describe("como vencer", () => {
     expect(within(bans).getByText("Nenhum ban passa no teste estatístico com esta amostra; estes são os heróis com mais sinal.")).toBeInTheDocument();
     const [lone, pango] = within(bans).getAllByRole("listitem");
     expect(lone).toHaveTextContent("banido pelo adversário: vence 40% (n=20)");
-    expect(lone).toHaveTextContent("Exemplo1 9-5 · últimos 60 dias 4-1");
+    expect(within(lone).getByText("Lone Druid do Exemplo1")).toBeInTheDocument();
+    expect(within(lone).getByText("9-5")).toHaveClass("chave-placar");
+    expect(within(lone).getByLabelText("Vitórias por situação")).toHaveTextContent("vs counter 1-1como azarão 2-0lane perdida 0-1");
+    expect(within(lone).getByRole("img", { name: "Bans contra eles por mês: jul 10%, ago 60%, set 25%" })).toBeInTheDocument();
+    expect(lone).toHaveTextContent("último pick 28/09; banido contra eles em 60% dos jogos de ago");
     expect(lone).toHaveTextContent("indícioban não confirmado");
     expect(pango).toHaveTextContent("indícioban não testado");
     expect(pango).not.toHaveTextContent("banido pelo adversário");
@@ -98,6 +104,28 @@ describe("como vencer", () => {
     const derrota = within(bloco).getByRole("region", { name: "Aumenta a chance de derrota deles" });
     expect(derrota).toHaveTextContent("mais forte para eles que para a liga: -3,1 pp");
     expect(within(bloco).getByText("Padrão da liga.")).toBeInTheDocument();
+  });
+
+  it("mostra seis bans e o resto atrás de ver mais", async () => {
+    abrir("/times/time-exemplo-a");
+    const bans = await screen.findByRole("region", { name: "Bans sugeridos" });
+    expect(within(bans).getAllByRole("listitem").filter((li) => li.classList.contains("chave-heroi"))).toHaveLength(6);
+    fireEvent.click(within(bans).getByRole("button", { name: "Ver mais 2 bans" }));
+    expect(within(bans).getAllByRole("listitem").filter((li) => li.classList.contains("chave-heroi"))).toHaveLength(8);
+  });
+
+  it("quando eles perdem uma lane: vitória ganha × perdida, o que fazer contra e jogador histórico", async () => {
+    abrir("/times/time-exemplo-a");
+    const bloco = await screen.findByRole("region", { name: "Quando a Time Exemplo A perde uma lane" });
+    const safe = within(bloco).getByRole("region", { name: "Safe lane do Exemplo1" });
+    expect(safe).toHaveTextContent("Lane ganha69%");
+    expect(safe).toHaveTextContent("Lane perdida36%");
+    expect(safe).toHaveTextContent("Liga com a lane perdida: 40%");
+    expect(safe).toHaveTextContent("O que fazer contra: EXEMPLO: ganhe a safe lane");
+    expect(within(safe).getByText("Confiança alta")).toBeInTheDocument();
+    expect(within(safe).getByText("mais 1")).toBeInTheDocument();
+    const off = within(bloco).getByRole("region", { name: "Offlane do Exemplo9" });
+    expect(within(off).getByText("histórico")).toBeInTheDocument();
   });
 
   it("lista de fatores vazia diz que não há evidência suficiente", async () => {

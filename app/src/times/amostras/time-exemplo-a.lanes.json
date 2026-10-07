@@ -1,0 +1,52 @@
+{
+ "lanes": [
+  {
+   "lane": "safe",
+   "jogador": "Exemplo1",
+   "jogador_atual": true,
+   "n_perdida": 14,
+   "wr_perdida": 0.36,
+   "ic": [
+    0.16,
+    0.61
+   ],
+   "n_ganha": 26,
+   "wr_ganha": 0.69,
+   "efeito_ajustado_pp": -28.0,
+   "liga_wr_perdida": 0.4,
+   "o_que_acontece": [
+    "EXEMPLO: o pos 1 vai para a jungle própria",
+    "EXEMPLO: o mid recebe mais ouro",
+    "EXEMPLO: o time recua para a metade própria",
+    "EXEMPLO: menos smokes antes dos 20 min"
+   ],
+   "recuperacao": [
+    "EXEMPLO: vence quando pega o 1º Roshan"
+   ],
+   "matchups": [
+    "Exemplo contra Exemplo (2x)"
+   ],
+   "o_que_fazer_contra": "EXEMPLO: ganhe a safe lane e prenda o carry na jungle própria.",
+   "confianca": "🟢",
+   "texto_md": "- EXEMPLO: leitura completa da **safe lane**."
+  },
+  {
+   "lane": "offlane",
+   "jogador": "Exemplo9",
+   "jogador_atual": false,
+   "n_perdida": 8,
+   "wr_perdida": 0.5,
+   "ic": null,
+   "n_ganha": 12,
+   "wr_ganha": 0.58,
+   "efeito_ajustado_pp": null,
+   "liga_wr_perdida": null,
+   "o_que_acontece": [],
+   "recuperacao": [],
+   "matchups": [],
+   "o_que_fazer_contra": "EXEMPLO: jogador que saiu do time.",
+   "confianca": "🔴",
+   "texto_md": ""
+  }
+ ]
+}

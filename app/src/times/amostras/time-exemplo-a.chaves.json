@@ -18,8 +18,34 @@
    "ban_confirma": false,
    "ic_baixo": 0.45,
    "ic_alto": 0.85,
-   "quem_joga": "Exemplo1 9-5",
-   "placar_60d": "4-1"
+   "quem_joga": "Exemplo1",
+   "placar_60d": "4-1",
+   "placar_jogador": "9-5",
+   "ultimo_pick": "2026-09-28",
+   "bans_contra_por_mes": {
+    "2026-07": {
+     "n": 1,
+     "jogos": 10,
+     "pct": 0.1
+    },
+    "2026-08": {
+     "n": 9,
+     "jogos": 15,
+     "pct": 0.6
+    },
+    "2026-09": {
+     "n": 2,
+     "jogos": 8,
+     "pct": 0.25
+    }
+   },
+   "contexto_vitorias": {
+    "vs_counter": "1-1",
+    "como_azarao": "2-0",
+    "lane_perdida": "0-1"
+   },
+   "leitura_contexto": "EXEMPLO: a vantagem se mantém quando o jogo está ruim.",
+   "forca_contexto": "resiste"
   },
   {
    "heroi": "Pangolier",
@@ -34,6 +60,102 @@
    "confianca": "baixa",
    "texto": "EXEMPLO: indício fraco.",
    "ban_confirma": null
+  },
+  {
+   "heroi": "Io",
+   "papel": "mid, pos 2 (9 jogos)",
+   "wr_com": 0.64,
+   "n_com": 9,
+   "wr_sem": 0.53,
+   "n_sem": 31,
+   "efeito_pp": 6.1,
+   "quando_banido_pelo_adv_wr": null,
+   "n_banido": null,
+   "confianca": "baixa",
+   "texto": "EXEMPLO: indício fraco.",
+   "ban_confirma": null,
+   "quem_joga": "Exemplo4",
+   "placar_jogador": "5-1"
+  },
+  {
+   "heroi": "Tiny",
+   "papel": "mid, pos 2 (9 jogos)",
+   "wr_com": 0.64,
+   "n_com": 9,
+   "wr_sem": 0.53,
+   "n_sem": 31,
+   "efeito_pp": 6.1,
+   "quando_banido_pelo_adv_wr": null,
+   "n_banido": null,
+   "confianca": "baixa",
+   "texto": "EXEMPLO: indício fraco.",
+   "ban_confirma": null,
+   "quem_joga": "Exemplo3",
+   "placar_jogador": "4-2"
+  },
+  {
+   "heroi": "Mars",
+   "papel": "mid, pos 2 (9 jogos)",
+   "wr_com": 0.64,
+   "n_com": 9,
+   "wr_sem": 0.53,
+   "n_sem": 31,
+   "efeito_pp": 6.1,
+   "quando_banido_pelo_adv_wr": null,
+   "n_banido": null,
+   "confianca": "baixa",
+   "texto": "EXEMPLO: indício fraco.",
+   "ban_confirma": null,
+   "quem_joga": "Exemplo3",
+   "placar_jogador": "3-1"
+  },
+  {
+   "heroi": "Puck",
+   "papel": "mid, pos 2 (9 jogos)",
+   "wr_com": 0.64,
+   "n_com": 9,
+   "wr_sem": 0.53,
+   "n_sem": 31,
+   "efeito_pp": 6.1,
+   "quando_banido_pelo_adv_wr": null,
+   "n_banido": null,
+   "confianca": "baixa",
+   "texto": "EXEMPLO: indício fraco.",
+   "ban_confirma": null,
+   "quem_joga": "Exemplo2",
+   "placar_jogador": "5-2"
+  },
+  {
+   "heroi": "Lion",
+   "papel": "mid, pos 2 (9 jogos)",
+   "wr_com": 0.64,
+   "n_com": 9,
+   "wr_sem": 0.53,
+   "n_sem": 31,
+   "efeito_pp": 6.1,
+   "quando_banido_pelo_adv_wr": null,
+   "n_banido": null,
+   "confianca": "baixa",
+   "texto": "EXEMPLO: indício fraco.",
+   "ban_confirma": null,
+   "quem_joga": "Exemplo5",
+   "placar_jogador": "4-1"
+  },
+  {
+   "heroi": "Doom",
+   "papel": "mid, pos 2 (9 jogos)",
+   "wr_com": 0.64,
+   "n_com": 9,
+   "wr_sem": 0.53,
+   "n_sem": 31,
+   "efeito_pp": 6.1,
+   "quando_banido_pelo_adv_wr": null,
+   "n_banido": null,
+   "confianca": "baixa",
+   "texto": "EXEMPLO: indício fraco.",
+   "ban_confirma": null,
+   "quem_joga": "Exemplo3",
+   "placar_jogador": "3-2"
   }
  ],
  "herois_contra": [

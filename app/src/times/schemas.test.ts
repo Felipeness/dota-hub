@@ -2,7 +2,8 @@ import indice from "./amostras/indice.json";
 import exemploA from "./amostras/time-exemplo-a.json";
 import exemploB from "./amostras/time-exemplo-b.json";
 import chavesA from "./amostras/time-exemplo-a.chaves.json";
-import { chavesSchema, indiceAtlasSchema, timeAtlasSchema } from "./schemas";
+import lanesA from "./amostras/time-exemplo-a.lanes.json";
+import { chavesSchema, indiceAtlasSchema, lanesSchema, timeAtlasSchema } from "./schemas";
 
 it("lê o índice de exemplo com os eixos vindos dos dados", () => {
   const lido = indiceAtlasSchema.parse(indice);
@@ -49,7 +50,13 @@ it("aceita presença sem posição no preparo e smoke sem a chave farm", () => {
 });
 
 it("lê as chaves de exemplo e recusa efeito sem n", () => {
-  expect(chavesSchema.parse(chavesA).banir.map((b) => b.heroi)).toEqual(["Lone Druid", "Pangolier"]);
+  expect(chavesSchema.parse(chavesA).banir.map((b) => b.heroi).slice(0, 3)).toEqual(["Lone Druid", "Pangolier", "Io"]);
   const semN = { ...chavesA, fatores_vitoria: [{ fator: "x", wr_com: 0.5, wr_sem: 0.4, n_sem: 3, efeito_pp: 3, confianca: "alta", texto: "" }] };
   expect(chavesSchema.safeParse(semN).success).toBe(false);
+});
+
+it("lê as lanes e troca o semáforo da confiança pela escala do app", () => {
+  const lidas = lanesSchema.parse(lanesA).lanes;
+  expect(lidas.map((l) => l.confianca)).toEqual(["alta", "baixa"]);
+  expect(lanesSchema.safeParse({ lanes: [{ ...lanesA.lanes[0], confianca: "verde" }] }).success).toBe(false);
 });

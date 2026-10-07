@@ -5,6 +5,7 @@ import type { Chaves, Confianca, FatorChave } from "./schemas";
 const ROTULO_CONFIANCA = { alta: "alta", media: "média", baixa: "baixa" } as const satisfies Record<Confianca, string>;
 // Os 3 primeiros bans trazem a queda quando o adversário bane em destaque; os demais, em linha.
 const BANS_EM_DESTAQUE = 3;
+const BANS_VISIVEIS = 6;
 
 // "Nature's Prophet" vira natures_prophet, o nome do arquivo de retrato.
 const slugDoHeroi = (nome: string) => nome.toLowerCase().replaceAll("'", "").replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, "");
@@ -36,14 +37,40 @@ const SELO_DO_BAN = (confirma: Ban["ban_confirma"]) =>
     : confirma === false ? { classe: "chave-selo-nao", texto: "ban não confirmado" }
       : { classe: "chave-selo-nao", texto: "ban não testado" };
 
+const ROTULO_CONTEXTO: Readonly<Record<string, string>> = {
+  vs_counter: "vs counter", sem_counter: "sem counter", como_azarao: "como azarão", como_favorito: "como favorito",
+  lane_perdida: "lane perdida", atras_15: "atrás aos 15", pickado_por_ultimo: "último pick",
+};
+const MESES = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
+const nomeDoMes = (anoMes: string) => MESES[Number(anoMes.slice(5, 7)) - 1] ?? anoMes;
+const dataCurta = (iso: string) => `${iso.slice(8, 10)}/${iso.slice(5, 7)}`;
+
+// Barras por mês da taxa de jogos em que o herói foi banido contra eles; explica por que o pick sumiu.
+function BansPorMes({ meses, ultimoPick }: { meses: NonNullable<Ban["bans_contra_por_mes"]>; ultimoPick: string | undefined }) {
+  const ordenados = Object.entries(meses).toSorted(([a], [b]) => a.localeCompare(b));
+  const pico = ordenados.reduce<[string, number] | null>((melhor, [mes, m]) => (!melhor || m.pct > melhor[1] ? [mes, m.pct] : melhor), null);
+  const nota = [ultimoPick && `último pick ${dataCurta(ultimoPick)}`, pico && pico[1] > 0 && `banido contra eles em ${pct(pico[1])} dos jogos de ${nomeDoMes(pico[0])}`]
+    .filter(Boolean).join("; ");
+  return (
+    <span className="chave-meses">
+      <span className="chave-meses-barras" role="img" aria-label={`Bans contra eles por mês: ${ordenados.map(([mes, m]) => `${nomeDoMes(mes)} ${pct(m.pct)}`).join(", ")}`}>
+        {ordenados.map(([mes, m]) => <i key={mes} title={`${nomeDoMes(mes)}: ${m.n} de ${m.jogos} jogos`} style={{ height: `${Math.max(6, m.pct * 100)}%` }} />)}
+      </span>
+      {nota && <span className="chave-papel">{nota}</span>}
+    </span>
+  );
+}
+
 function CartaoBanir({ ban, destaque }: { ban: Ban; destaque: boolean }) {
   const banido = ban.quando_banido_pelo_adv_wr;
   const selo = SELO_DO_BAN(ban.ban_confirma);
+  const contexto = Object.entries(ban.contexto_vitorias ?? {});
   return (
     <li className={`chave-heroi${destaque ? " chave-heroi-destaque" : ""}`} title={ban.texto}>
       <RetratoDoHeroi nome={ban.heroi} />
       <div>
-        <strong>{ban.heroi}</strong>
+        <strong>{ban.heroi}{ban.quem_joga ? ` do ${ban.quem_joga}` : ""}</strong>
+        {ban.placar_jogador && <span className="chave-placar numero">{ban.placar_jogador}</span>}
         {ban.papel && <span className="chave-papel">{ban.papel}</span>}
         {temValor(banido) && (
           <span className={destaque ? "chave-queda" : "chave-wr numero"}>
@@ -51,7 +78,14 @@ function CartaoBanir({ ban, destaque }: { ban: Ban; destaque: boolean }) {
           </span>
         )}
         <span className="chave-wr numero">com ele {pct(ban.wr_com)} · sem {pct(ban.wr_sem)} ({pp(ban.efeito_pp)})</span>
-        {ban.quem_joga && <span className="chave-papel">{ban.quem_joga}{ban.placar_60d ? ` · últimos 60 dias ${ban.placar_60d}` : ""}</span>}
+        {ban.placar_60d && <span className="chave-papel">últimos 60 dias {ban.placar_60d}</span>}
+        {ban.bans_contra_por_mes && <BansPorMes meses={ban.bans_contra_por_mes} ultimoPick={ban.ultimo_pick} />}
+        {contexto.length > 0 && (
+          <span className="chave-contexto" aria-label="Vitórias por situação">
+            {contexto.map(([chave, placar]) => <span key={chave} className="chave-chip">{ROTULO_CONTEXTO[chave] ?? chave.replaceAll("_", " ")} {placar}</span>)}
+          </span>
+        )}
+        {ban.leitura_contexto && <span className="chave-leitura">{ban.leitura_contexto}</span>}
         <span className="chave-selos">
           <span className="chave-selo chave-selo-indicio">{ban.ban_confirma === true ? "confirmado" : "indício"}</span>
           {ban.ban_confirma !== true && <span className={`chave-selo ${selo.classe}`}>{selo.texto}</span>}
@@ -59,6 +93,24 @@ function CartaoBanir({ ban, destaque }: { ban: Ban; destaque: boolean }) {
         <SeloConfianca confianca={ban.confianca} n={ban.n_com} />
       </div>
     </li>
+  );
+}
+
+// Seis bans à vista; o resto atrás de "ver mais" (o arquivo traz até 12, herói × jogador).
+function BansSugeridos({ bans }: { bans: readonly Ban[] }) {
+  const [todos, setTodos] = useState(false);
+  const visiveis = todos ? bans : bans.slice(0, BANS_VISIVEIS);
+  return (
+    <>
+      <ul className="chave-herois">
+        {visiveis.map((b, k) => <CartaoBanir key={`${b.heroi}:${b.quem_joga ?? ""}`} ban={b} destaque={k < BANS_EM_DESTAQUE} />)}
+      </ul>
+      {bans.length > BANS_VISIVEIS && (
+        <button type="button" className="chave-mais" aria-expanded={todos} onClick={() => setTodos((t) => !t)}>
+          {todos ? "Ver menos" : `Ver mais ${bans.length - BANS_VISIVEIS} bans`}
+        </button>
+      )}
+    </>
   );
 }
 
@@ -133,12 +185,13 @@ export function ComoVencer({ chaves, nome }: { chaves: Chaves; nome: string }) {
   return (
     <section className="chave" aria-labelledby="titulo-vencer">
       <h2 id="titulo-vencer">Como vencer a {nome}</h2>
+      {chaves.historico && <span className="selo chave-historico">histórico: roster de antes da TI</span>}
       <p className="chave-resumo">{chaves.resumo_para_vencer}</p>
       {chaves.banir.length > 0 && (
         <section aria-label="Bans sugeridos">
           <h3>Bans sugeridos</h3>
           {!algumConfirmado && <p className="chave-aviso">Nenhum ban passa no teste estatístico com esta amostra; estes são os heróis com mais sinal.</p>}
-          <ul className="chave-herois">{chaves.banir.map((b, k) => <CartaoBanir key={b.heroi} ban={b} destaque={k < BANS_EM_DESTAQUE} />)}</ul>
+          <BansSugeridos bans={chaves.banir} />
         </section>
       )}
       <div className="chave-colunas">
