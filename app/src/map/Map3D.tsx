@@ -10,7 +10,7 @@ import { caixaDoFoco, distanciaParaEnquadrar, foiArraste, posicaoDaCamera, prend
 import { SeloDaRota } from "./SeloDaRota";
 import { caminhoDaFuga, selosDaRota, trechosDaRota } from "./selos";
 import { texturaDoMapa } from "./textura";
-import type { Marca, Trilha } from "./trilhas";
+import { opacidadeDaMancha, type Marca, type Trilha } from "./trilhas";
 
 type Vetor = [number, number, number];
 type NoChao = (p: Ponto, acima: number) => Vetor;
@@ -172,7 +172,7 @@ function Navegacao({ caixa, pedido }: { caixa: Caixa; pedido: number }) {
   );
 }
 
-export function Map3D({ objetivos, rota, trilhas = [], marcas = [], selecionado, onSelecionar, children }: MapViewProps) {
+export function Map3D({ objetivos, rota, trilhas = [], marcas = [], manchas = [], selecionado, onSelecionar, children }: MapViewProps) {
   const noChao = useNoChao();
   const [pedidoDeCentralizar, setPedidoDeCentralizar] = useState(0);
   const caixa = rota ? caixaDoFoco(pontosDaRota(rota), TAMANHO) : TABULEIRO_INTEIRO;
@@ -192,6 +192,12 @@ export function Map3D({ objetivos, rota, trilhas = [], marcas = [], selecionado,
         {rota && <TracadoRota rota={rota} cor={destaque} noChao={noChao} />}
         <Trilhas trilhas={trilhas} corLado={corLado} destaque={destaque} noChao={noChao} />
         <Marcas marcas={marcas} noChao={noChao} />
+        {manchas.map((m) => (
+          <mesh key={`mancha-${m.x}-${m.y}`} position={noChao([m.x, m.y], 0.3)} rotation={[-Math.PI / 2, 0, 0]}>
+            <circleGeometry args={[0.9, 16]} />
+            <meshBasicMaterial color={destaque} transparent opacity={opacidadeDaMancha(m.peso)} />
+          </mesh>
+        ))}
         <Navegacao caixa={caixa} pedido={pedidoDeCentralizar} />
       </Canvas>
       <button className="botao-centralizar" onClick={() => setPedidoDeCentralizar((n) => n + 1)}>Centralizar</button>

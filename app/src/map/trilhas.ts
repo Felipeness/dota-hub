@@ -41,3 +41,9 @@ export function marcasNoTempo(replay: Trajetoria, t: number): Marca[] {
     .map((m): Marca => ({ id: `morte-${m.t}-${m.heroi}`, x: m.x, y: m.y, tipo: "morte", lado: m.lado, rotulo: `Morte de ${m.heroi}` }));
   return [...wards, ...mortes];
 }
+
+/** Ponto da rota aproximada da busca ao vivo; peso de 0 a 1 (1 = onde o jogador mais ficou). */
+export type Mancha = Readonly<{ x: number; y: number; peso: number }>;
+
+/** Peso 0 ainda aparece um pouco; peso 1 fica cheio. */
+export const opacidadeDaMancha = (peso: number) => Math.round((0.2 + 0.8 * peso) * 100) / 100;

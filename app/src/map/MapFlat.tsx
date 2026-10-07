@@ -7,10 +7,11 @@ import {
   VISTA_PLANA_INICIAL, arrastarVista, fatorDaRoda, foiArraste, pontoNoTabuleiro, zoomNoPonto,
   type Ponto2, type VistaPlana,
 } from "./navegacao";
+import { opacidadeDaMancha } from "./trilhas";
 
 const pontosSvg = (pontos: readonly Ponto[]) => pontos.map(([x, y]) => `${x},${1 - y}`).join(" ");
 
-export function MapFlat({ objetivos, rota, trilhas = [], marcas = [], selecionado, onSelecionar, children }: MapViewProps) {
+export function MapFlat({ objetivos, rota, trilhas = [], marcas = [], manchas = [], selecionado, onSelecionar, children }: MapViewProps) {
   const { area, vista, centralizar, gestos } = useNavegacaoPlana();
   const estilo: CSSProperties & Record<"--escala" | "--dx" | "--dy", number | string> = { "--escala": vista.escala, "--dx": `${vista.x}px`, "--dy": `${vista.y}px` };
   return (
@@ -41,6 +42,13 @@ export function MapFlat({ objetivos, rota, trilhas = [], marcas = [], selecionad
           <span key={m.id} role="img" aria-label={m.rotulo} title={m.rotulo}
             className={`marca marca-${m.tipo} marca-${m.lado}`} style={normToPercent([m.x, m.y])} />
         ))}
+        {manchas.length > 0 && (
+          <div className="manchas" aria-label="Rota aproximada">
+            {manchas.map((m) => (
+              <span key={`${m.x}-${m.y}`} className="mancha" style={{ ...normToPercent([m.x, m.y]), opacity: opacidadeDaMancha(m.peso) }} />
+            ))}
+          </div>
+        )}
       </div>
       <button className="botao-centralizar" onClick={centralizar}>Centralizar</button>
       {children}

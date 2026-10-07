@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router";
 import { dadosOuVazio, Indisponivel, useData } from "../data/useData";
 import { conteudoSchema, heroisSchema, jogadoresSchema, objetivosSchema, rotasResumoSchema, timesSchema, unidadesSchema } from "../data/schemas";
+import { AtalhoAoVivo } from "./AtalhoAoVivo";
 import { type Achado, buscar, construirIndice, sugerir } from "./index";
 
 const ETIQUETA = {
@@ -74,7 +75,13 @@ function Resultados({ consulta, limpar }: { consulta: string; limpar: () => void
   const achados = buscar(busca, consulta);
   if (achados.length === 0) {
     const parecidos = sugerir(busca, consulta);
-    return <p>Nada encontrado.{parecidos.length > 0 && ` Você quis dizer: ${parecidos.join(", ")}?`}</p>;
+    // Uma lista só: a mensagem e o atalho dividem a mesma caixa suspensa.
+    return (
+      <ul onMouseDown={(e) => e.preventDefault()}>
+        <li className="busca-nada">Nada encontrado.{parecidos.length > 0 && ` Você quis dizer: ${parecidos.join(", ")}?`}</li>
+        <AtalhoAoVivo consulta={consulta} onIr={limpar} />
+      </ul>
+    );
   }
   // O Safari não dá foco ao link no clique: o preventDefault mantém o foco no campo e a lista não some antes do click.
   return (
@@ -85,6 +92,7 @@ function Resultados({ consulta, limpar }: { consulta: string; limpar: () => void
           <Link to={a.link} onClick={limpar}>{a.titulo}</Link>
         </li>
       ))}
+      <AtalhoAoVivo consulta={consulta} onIr={limpar} />
     </ul>
   );
 }
