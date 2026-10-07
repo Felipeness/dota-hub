@@ -8,7 +8,7 @@ import {
   CAMADAS, JANELAS, MAXIMO_DE_SMOKES, TODAS_AS_INTENCOES, desenhosDoMapa, intencoesDosWards, itensDoMapa, linhasDoPreparo,
   type Camada, type Filtro, type FiltroJanela, type ItemDoMapa, type Preparo,
 } from "./camadas";
-import { timeAtlasSchema, type Confianca, type TimeAtlas } from "./schemas";
+import { timeAtlasSchema, type Confianca, type Secao, type TimeAtlas } from "./schemas";
 import { ordenarSecoes } from "./secoes";
 import { SeloAmostra, SeloFronteira } from "./TimesPage";
 
@@ -113,16 +113,9 @@ function AtlasDoTime({ time }: { time: TimeAtlas }) {
         <div className="atlas-texto">
           <p className="abertura">{time.resumo}</p>
           <ComoJogarContra gameplan={time.gameplan_contra} />
-          <AssinaturaTemporal assinatura={time.assinatura_temporal} />
-          {ordenarSecoes(time.secoes).map((s) => (
-            <section key={s.id} className="atlas-secao" aria-labelledby={`secao-${s.id}`}>
-              <div className="atlas-secao-topo">
-                <h2 id={`secao-${s.id}`}>{s.titulo}</h2>
-                <span className={`selo selo-confianca-${s.confianca}`}>{ROTULO_CONFIANCA[s.confianca]}</span>
-              </div>
-              <div className="painel-texto atlas-md"><ReactMarkdown remarkPlugins={[remarkGfm]} components={MARKDOWN}>{s.texto_md}</ReactMarkdown></div>
-            </section>
-          ))}
+          {ordenarSecoes(time.secoes).map((bloco) => (bloco.tipo === "assinatura"
+            ? <AssinaturaTemporal key="assinatura" assinatura={time.assinatura_temporal} />
+            : <SecaoDoTime key={bloco.secao.id} secao={bloco.secao} />))}
           {time.roster.length > 0 && <section className="atlas-secao">
             <h2>Roster</h2>
             <ul className="atlas-roster">{time.roster.toSorted((a, b) => a.pos - b.pos).map((j) => (
@@ -182,6 +175,18 @@ function ComoJogarContra({ gameplan }: { gameplan: TimeAtlas["gameplan_contra"] 
       <dl>
         {[...conhecidas, ...novas].map((k) => <div key={k}><dt>{ROTULO_GAMEPLAN[k] ?? k.replaceAll("_", " ")}</dt><dd>{gameplan[k]}</dd></div>)}
       </dl>
+    </section>
+  );
+}
+
+function SecaoDoTime({ secao }: { secao: Secao }) {
+  return (
+    <section className="atlas-secao" aria-labelledby={`secao-${secao.id}`}>
+      <div className="atlas-secao-topo">
+        <h2 id={`secao-${secao.id}`}>{secao.titulo}</h2>
+        <span className={`selo selo-confianca-${secao.confianca}`}>{ROTULO_CONFIANCA[secao.confianca]}</span>
+      </div>
+      <div className="painel-texto atlas-md"><ReactMarkdown remarkPlugins={[remarkGfm]} components={MARKDOWN}>{secao.texto_md}</ReactMarkdown></div>
     </section>
   );
 }

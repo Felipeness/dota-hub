@@ -9,6 +9,10 @@ const CATALOGO = [
 ];
 const FECHAMENTO = ["confianca", "correcoes", "metodo", "limitacoes"];
 const CONHECIDAS = [...ABERTURA, ...CATALOGO];
+// Seções em texto que repetem um bloco estruturado da página: o bloco fica no lugar delas e o texto sai.
+const SUBSTITUIDAS_POR_BLOCO = new Set(["assinatura", "assinatura_temporal"]);
+
+export type Bloco = { tipo: "secao"; secao: Secao } | { tipo: "assinatura" };
 
 // Seção nova (id fora das listas) entra antes do fechamento, na ordem em que veio no arquivo.
 function peso(id: string, posicaoNoArquivo: number): number {
@@ -19,5 +23,10 @@ function peso(id: string, posicaoNoArquivo: number): number {
   return 1000 + posicaoNoArquivo;
 }
 
-export const ordenarSecoes = (secoes: readonly Secao[]): Secao[] =>
-  secoes.map((s, k) => ({ s, p: peso(s.id, k) })).toSorted((a, b) => a.p - b.p).map(({ s }) => s);
+export function ordenarSecoes(secoes: readonly Secao[]): Bloco[] {
+  const blocos = secoes
+    .filter((s) => !SUBSTITUIDAS_POR_BLOCO.has(s.id))
+    .map((s, k): { bloco: Bloco; p: number } => ({ bloco: { tipo: "secao", secao: s }, p: peso(s.id, k) }));
+  const assinatura = { bloco: { tipo: "assinatura" } satisfies Bloco, p: CONHECIDAS.indexOf("assinatura") };
+  return [...blocos, assinatura].toSorted((a, b) => a.p - b.p).map(({ bloco }) => bloco);
+}
