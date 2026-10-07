@@ -1,18 +1,33 @@
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import { Link } from "react-router";
 import { Indisponivel, useData } from "../data/useData";
-import { CAMINHO_INDICE, indiceAtlasSchema, type Eixo, type IndiceAtlas, type TimeNoIndice } from "./schemas";
+import { CAMINHO_INDICE, indiceAtlasSchema, type Classificacao, type Cluster, type Eixo, type IndiceAtlas, type TimeNoIndice } from "./schemas";
 
 export function SeloAmostra({ nivel }: { nivel: TimeNoIndice["amostra"] }) {
   if (nivel !== "low") return null;
   return <span className="selo selo-amostra-baixa" title="Poucas partidas: confiança reduzida">LOW SAMPLE</span>;
 }
 
+export function SeloFronteira({ classificacao }: { classificacao: Classificacao }) {
+  if (classificacao !== "fronteira") return null;
+  return <span className="selo selo-fronteira" title="Entre o Tier 1 e o Tier 2: conclusões com um nível a menos de confiança">fronteira</span>;
+}
+
+// Cores dos clusters na ordem do índice; passou de cinco, a paleta recomeça.
+const CORES_CLUSTER = ["info", "radiant", "destaque", "neutro", "dire"] as const;
+type EstiloCluster = CSSProperties & Record<"--cor-cluster", string>;
+
+function corDoCluster(clusters: readonly Cluster[], id: string | undefined): EstiloCluster | undefined {
+  const posicao = clusters.findIndex((c) => c.id === id);
+  if (posicao < 0) return undefined;
+  return { "--cor-cluster": `var(--cor-${CORES_CLUSTER[posicao % CORES_CLUSTER.length] ?? "destaque"})` };
+}
+
 export function TimesPage() {
   const indice = useData(CAMINHO_INDICE, indiceAtlasSchema);
   if (indice.estado === "carregando") return <p>Carregando times…</p>;
   if (indice.estado === "indisponivel") return <section className="atlas"><Indisponivel motivo={indice.motivo} /></section>;
-  const { times, eixos, periodo, patch, gerado_em } = indice.dados;
+  const { times, eixos, clusters, periodo, patch, gerado_em } = indice.dados;
   return (
     <section className="atlas">
       <header className="rotas-topo">
@@ -22,20 +37,22 @@ export function TimesPage() {
       </header>
       {times.length === 0
         ? <p className="atlas-sub">O índice ainda não tem times.</p>
-        : <ul className="atlas-grade">{times.map((t) => <CartaoTime key={t.id} time={t} />)}</ul>}
+        : <ul className="atlas-grade">{times.map((t) => <CartaoTime key={t.id} time={t} cor={corDoCluster(clusters, t.cluster)} />)}</ul>}
       <MapaDeEstilos indice={indice.dados} eixos={eixos} />
     </section>
   );
 }
 
-function CartaoTime({ time }: { time: TimeNoIndice }) {
+function CartaoTime({ time, cor }: { time: TimeNoIndice; cor: EstiloCluster | undefined }) {
   return (
     <li>
-      <Link to={`/times/${time.id}`} className="atlas-cartao">
+      <Link to={`/times/${time.id}`} className="atlas-cartao" style={cor}>
         <span className="atlas-tag">{time.tag}</span>
         <strong>{time.nome}</strong>
         <span className="atlas-estilo">{time.estilo}</span>
-        <span className="atlas-amostra numero">{time.partidas} partidas · {time.replays} replays <SeloAmostra nivel={time.amostra} /></span>
+        <span className="atlas-amostra numero">
+          {time.partidas} partidas · {time.replays} replays <SeloAmostra nivel={time.amostra} /> <SeloFronteira classificacao={time.classificacao} />
+        </span>
       </Link>
     </li>
   );
@@ -71,12 +88,18 @@ function MapaDeEstilos({ indice, eixos }: { indice: IndiceAtlas; eixos: Eixo[] }
         <SeletorDeEixo rotulo="Eixo horizontal" eixos={eixos} valor={idX} onMudar={setIdX} />
         <SeletorDeEixo rotulo="Eixo vertical" eixos={eixos} valor={idY} onMudar={setIdY} />
       </div>
+      {indice.clusters.length > 0 && (
+        <ul className="atlas-clusters" aria-label="Clusters">
+          {indice.clusters.map((c) => <li key={c.id} style={corDoCluster(indice.clusters, c.id)}><i />{c.id} {c.nome}</li>)}
+        </ul>
+      )}
       <div className="atlas-plano" role="group" aria-label={`Times por ${eixoX?.rotulo ?? idX} e ${eixoY?.rotulo ?? idY}`}>
-        <span className="atlas-plano-eixo atlas-plano-x">{eixoX?.rotulo} →</span>
-        <span className="atlas-plano-eixo atlas-plano-y">{eixoY?.rotulo} →</span>
+        <PolosDoEixo eixo={eixoX} direcao="x" />
+        <PolosDoEixo eixo={eixoY} direcao="y" />
         {comValores.map(({ time, x, y }) => (
-          <Link key={time.id} to={`/times/${time.id}`} className="atlas-ponto" title={`${time.nome}: ${x} × ${y}`}
-            style={{ left: `${posicaoNoEixo(x, xs) * 100}%`, top: `${(1 - posicaoNoEixo(y, ys)) * 100}%` }}>
+          <Link key={time.id} to={`/times/${time.id}`} className={`atlas-ponto${time.classificacao === "fronteira" ? " atlas-ponto-fronteira" : ""}`}
+            title={`${time.nome}: ${x} × ${y}${time.classificacao === "fronteira" ? " (fronteira)" : ""}`}
+            style={{ ...corDoCluster(indice.clusters, time.cluster), left: `${posicaoNoEixo(x, xs) * 100}%`, top: `${(1 - posicaoNoEixo(y, ys)) * 100}%` }}>
             {time.tag}
           </Link>
         ))}
@@ -85,6 +108,19 @@ function MapaDeEstilos({ indice, eixos }: { indice: IndiceAtlas; eixos: Eixo[] }
         {[eixoX, eixoY].map((e) => e && <div key={e.id}><dt>{e.rotulo}</dt><dd>{e.explicacao}</dd></div>)}
       </dl>
     </section>
+  );
+}
+
+// Com polos, cada ponta do eixo diz o que significa; sem eles, só o nome do eixo na ponta positiva.
+function PolosDoEixo({ eixo, direcao }: { eixo: Eixo | undefined; direcao: "x" | "y" }) {
+  if (!eixo) return null;
+  const [antes, depois] = direcao === "x" ? ["←", "→"] : ["↓", "↑"];
+  if (!eixo.polo_negativo || !eixo.polo_positivo) return <span className={`atlas-plano-eixo atlas-polo-${direcao}-mais`}>{eixo.rotulo} {depois}</span>;
+  return (
+    <>
+      <span className={`atlas-plano-eixo atlas-polo-${direcao}-menos`}>{antes} {eixo.polo_negativo}</span>
+      <span className={`atlas-plano-eixo atlas-polo-${direcao}-mais`}>{eixo.polo_positivo} {depois}</span>
+    </>
   );
 }
 

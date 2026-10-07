@@ -1,0 +1,117 @@
+// Publica o atlas Tier 1 na tela Times: copia o hub.json de cada equipe, monta o indice.json com os eixos e clusters
+// da síntese e valida tudo com os schemas do app. Corrige só formato, nunca conteúdo, e registra cada correção.
+// Uso: npm run publicar-atlas [-- <pasta work do dota-tier1>]
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { dirname, join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+import { indiceAtlasSchema, timeAtlasSchema } from "../src/times/schemas.ts";
+
+type Equipe = { id: string; chave: string; classificacao: "tier1" | "fronteira" };
+
+// chave = nome da equipe em sintese/eixos.json; fronteira segundo data/derivados/mapa_por_equipe/indice_base.json.
+const EQUIPES: readonly Equipe[] = [
+  { id: "team-spirit", chave: "Spirit", classificacao: "tier1" },
+  { id: "yandex", chave: "Yandex", classificacao: "tier1" },
+  { id: "parivision", chave: "PARIVISION", classificacao: "tier1" },
+  { id: "betboom", chave: "BetBoom", classificacao: "tier1" },
+  { id: "aurora", chave: "Aurora", classificacao: "tier1" },
+  { id: "falcons", chave: "Falcons", classificacao: "tier1" },
+  { id: "liquid", chave: "Liquid", classificacao: "tier1" },
+  { id: "1win", chave: "1win", classificacao: "tier1" },
+  { id: "lgd", chave: "LGD", classificacao: "fronteira" },
+  { id: "nigma", chave: "Nigma", classificacao: "tier1" },
+  { id: "navi", chave: "NAVI", classificacao: "tier1" },
+  { id: "xtreme", chave: "Xtreme", classificacao: "fronteira" },
+];
+
+type Sintese = {
+  nomes: Record<string, string>;
+  variancia_explicada: number[];
+  posicoes: Record<string, Record<string, number>>;
+  clusters: Record<string, number>;
+  nomes_clusters: Record<string, string>;
+};
+type Base = { patch: string; periodo: string };
+type Json = Record<string, unknown>;
+
+const app = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const origem = resolve(process.argv[2] ?? join(app, "../../dota-tier1/work"));
+const destino = join(app, "public/data/times_atlas");
+const registro: string[] = [];
+
+const lerJson = <T>(caminho: string): T => JSON.parse(readFileSync(caminho, "utf-8"));
+const ehObjeto = (v: unknown): v is Json => typeof v === "object" && v !== null && !Array.isArray(v);
+
+// Única correção conhecida: marcar a fronteira no arquivo do time (o schema assume tier1 quando falta).
+function corrigirFormato(id: string, time: Json, equipe: Equipe): Json {
+  const amostra = ehObjeto(time.amostra) ? time.amostra : {};
+  const atual = amostra.classificacao ?? "tier1";
+  if (atual === equipe.classificacao) return time;
+  registro.push(`${id}: amostra.classificacao ${JSON.stringify(amostra.classificacao)} -> "${equipe.classificacao}" (lista de fronteira)`);
+  return { ...time, amostra: { ...amostra, classificacao: equipe.classificacao } };
+}
+
+// "E1 Projeção territorial (-) x Jogo em casa (+)" vira rótulo e os dois polos.
+function eixoDaSintese(id: string, nome: string, variancia: number | undefined) {
+  const partes = /^E\d+\s+(.+?)\s*\(-\)\s*x\s*(.+?)\s*\(\+\)$/.exec(nome);
+  if (!partes?.[1] || !partes[2]) throw new Error(`eixo ${id} fora do formato esperado: ${nome}`);
+  const [negativo, positivo] = [partes[1], partes[2]];
+  const parte = variancia === undefined ? "" : ` Explica ${Math.round(variancia * 100)}% da variação entre as 12.`;
+  return {
+    id, rotulo: `${id} ${negativo} ↔ ${positivo}`, polo_negativo: negativo, polo_positivo: positivo,
+    explicacao: `Negativo: ${negativo}. Positivo: ${positivo}.${parte}`,
+  };
+}
+
+function publicarTime(equipe: Equipe) {
+  const bruto = lerJson<Json>(join(origem, "equipes", equipe.id, "hub.json"));
+  const time = corrigirFormato(equipe.id, bruto, equipe);
+  const analise = timeAtlasSchema.safeParse(time);
+  if (!analise.success) {
+    const problemas = analise.error.issues.slice(0, 5).map((i) => `${i.path.join(".")}: ${i.message}`).join("; ");
+    throw new Error(`${equipe.id}: ${problemas}`);
+  }
+  if (analise.data.id !== equipe.id) throw new Error(`${equipe.id}: o arquivo diz id ${analise.data.id}`);
+  writeFileSync(join(destino, `${equipe.id}.json`), JSON.stringify(time));
+  return analise.data;
+}
+
+function montarIndice(times: ReturnType<typeof publicarTime>[]) {
+  const sintese = lerJson<Sintese>(join(origem, "sintese/eixos.json"));
+  const base = lerJson<Base>(join(origem, "../data/derivados/mapa_por_equipe/indice_base.json"));
+  const idsDosEixos = Object.keys(sintese.nomes);
+  const eixos = idsDosEixos.map((id, k) => eixoDaSintese(id, sintese.nomes[id] ?? id, sintese.variancia_explicada[k]));
+  const clusters = Object.entries(sintese.nomes_clusters).map(([n, nome]) => ({ id: `C${n}`, nome }));
+  const indice = {
+    gerado_em: new Date().toISOString().slice(0, 10), periodo: base.periodo, patch: base.patch, eixos, clusters,
+    times: times.map((t, k) => {
+      const equipe = EQUIPES[k];
+      if (!equipe) throw new Error(`equipe ${t.id} sem configuração`);
+      const posicao = sintese.posicoes[equipe.chave];
+      const cluster = sintese.clusters[equipe.chave];
+      if (!posicao || cluster === undefined) throw new Error(`${t.id}: ${equipe.chave} não está em sintese/eixos.json`);
+      return {
+        id: t.id, nome: t.nome, tag: t.tag, partidas: t.amostra.partidas, replays: t.amostra.replays, amostra: t.amostra.nivel,
+        estilo: sintese.nomes_clusters[String(cluster)] ?? `C${cluster}`, cluster: `C${cluster}`,
+        classificacao: equipe.classificacao, eixos: posicao,
+      };
+    }),
+  };
+  const analise = indiceAtlasSchema.safeParse(indice);
+  if (!analise.success) throw new Error(`indice.json: ${analise.error.issues.map((i) => `${i.path.join(".")}: ${i.message}`).join("; ")}`);
+  writeFileSync(join(destino, "indice.json"), JSON.stringify(indice));
+  return analise.data;
+}
+
+mkdirSync(destino, { recursive: true });
+const times = EQUIPES.map(publicarTime);
+const indice = montarIndice(times);
+const linhas = [
+  `Atlas publicado em ${destino} a partir de ${origem}`,
+  `${indice.times.length} equipes, ${indice.eixos.length} eixos, ${indice.clusters.length} clusters`,
+  ...indice.times.map((t) => `  ${t.id} (${t.tag}): ${t.estilo}${t.classificacao === "fronteira" ? ", fronteira" : ""}, amostra ${t.amostra}`),
+  registro.length ? "Correções de formato:" : "Nenhuma correção de formato.",
+  ...registro.map((r) => `  ${r}`),
+];
+writeFileSync(join(destino, "registro.txt"), `${linhas.join("\n")}\n`);
+console.log(linhas.join("\n"));

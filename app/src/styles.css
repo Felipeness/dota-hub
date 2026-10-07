@@ -642,7 +642,7 @@ button.pino:hover { transform: translate(-50%, -50%) scale(1.2); }
   border-radius: var(--raio); background: var(--cor-superficie-2); border: 1px solid var(--cor-linha-forte);
   color: var(--cor-texto-2); text-decoration: none; font-size: 13px; line-height: 1.45;
 }
-.atlas-cartao::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--cor-destaque); opacity: 0.55; }
+.atlas-cartao::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--cor-cluster, var(--cor-destaque)); opacity: 0.7; }
 .atlas-cartao:hover { border-color: var(--cor-destaque); color: var(--cor-texto-2); }
 .atlas-cartao:hover::before { opacity: 1; }
 .atlas-cartao strong { font-family: var(--fonte-display); font-size: 26px; line-height: 1; color: var(--cor-texto); }
@@ -663,15 +663,33 @@ button.pino:hover { transform: translate(-50%, -50%) scale(1.2); }
     var(--cor-superficie);
 }
 .atlas-plano-eixo { position: absolute; font-family: var(--fonte-display); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cor-texto-3); }
-.atlas-plano-x { right: 0; bottom: -26px; }
-.atlas-plano-y { left: -26px; top: 0; transform: rotate(-90deg) translateX(-100%); transform-origin: 0 0; white-space: nowrap; }
+.atlas-polo-x-menos { left: 0; bottom: -26px; }
+.atlas-polo-x-mais { right: 0; bottom: -26px; }
+.atlas-polo-y-menos { left: -26px; bottom: 0; transform: rotate(-90deg); transform-origin: 0 0; white-space: nowrap; }
+.atlas-polo-y-mais { left: -26px; top: 0; transform: rotate(-90deg) translateX(-100%); transform-origin: 0 0; white-space: nowrap; }
 .atlas-ponto {
   position: absolute; transform: translate(-50%, -50%); display: grid; place-items: center;
   min-width: var(--alvo-toque); min-height: 32px; padding: 0 8px; border-radius: var(--raio-pilula);
-  background: var(--cor-destaque-fundo); border: 1px solid var(--cor-destaque);
-  font-family: var(--fonte-num); font-size: 12px; font-weight: 700; color: var(--cor-destaque); text-decoration: none;
+  background: var(--cor-superficie-2); border: 1px solid var(--cor-cluster, var(--cor-destaque));
+  font-family: var(--fonte-num); font-size: 12px; font-weight: 700; color: var(--cor-cluster, var(--cor-destaque)); text-decoration: none;
 }
-.atlas-ponto:hover { background: var(--cor-destaque); color: var(--cor-fundo); }
+.atlas-ponto:hover { background: var(--cor-cluster, var(--cor-destaque)); color: var(--cor-fundo); }
+.atlas-ponto-fronteira { border-style: dashed; }
+.atlas-clusters { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--cor-texto-2); }
+.atlas-clusters i { display: inline-block; width: 10px; height: 10px; margin-right: 6px; border-radius: 50%; background: var(--cor-cluster); }
+.selo-fronteira { border-style: dashed; border-color: var(--cor-linha-ativa); color: var(--cor-texto-2); vertical-align: middle; }
+.atlas-nota { margin: var(--espaco-1) 0 0; max-width: 72ch; font-size: 13px; color: var(--cor-texto-3); }
+.atlas-md h3, .atlas-md h4, .atlas-md h5 { margin: 1.2em 0 0.4em; font-family: var(--fonte-display); color: var(--cor-texto); }
+.atlas-md h3 { font-size: 20px; }
+.atlas-md h4 { font-size: 17px; }
+.atlas-md h5 { font-size: 15px; color: var(--cor-texto-2); }
+.atlas-md strong { color: var(--cor-texto); }
+.atlas-tabela { max-width: 100%; overflow-x: auto; margin: 0 0 1em; border: 1px solid var(--cor-linha); border-radius: var(--raio-pequeno); }
+.atlas-tabela:focus-visible { outline: 2px solid var(--cor-destaque); }
+.atlas-tabela table { border-collapse: collapse; min-width: 100%; font-size: 13px; font-variant-numeric: tabular-nums; }
+.atlas-tabela th, .atlas-tabela td { padding: 6px 10px; border-bottom: 1px solid var(--cor-linha); text-align: left; white-space: nowrap; }
+.atlas-tabela th { background: var(--cor-superficie-2); color: var(--cor-texto-3); font-weight: 600; }
+.atlas-tabela tr:last-child td { border-bottom: 0; }
 .atlas-legenda-eixos { margin: 0; display: grid; gap: var(--espaco-2); font-size: 13px; }
 .atlas-legenda-eixos dt { color: var(--cor-texto); font-weight: 600; }
 .atlas-legenda-eixos dd { margin: 0; color: var(--cor-texto-2); }

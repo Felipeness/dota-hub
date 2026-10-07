@@ -1,5 +1,6 @@
 import { useState } from "react";
-import ReactMarkdown from "react-markdown";
+import ReactMarkdown, { type Components } from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Link, useParams } from "react-router";
 import { Indisponivel, useData } from "../data/useData";
 import { MapView } from "../map/MapView";
@@ -8,7 +9,8 @@ import {
   type Camada, type Filtro, type FiltroJanela, type ItemDoMapa, type Preparo,
 } from "./camadas";
 import { timeAtlasSchema, type Confianca, type TimeAtlas } from "./schemas";
-import { SeloAmostra } from "./TimesPage";
+import { ordenarSecoes } from "./secoes";
+import { SeloAmostra, SeloFronteira } from "./TimesPage";
 
 const ROTULO_CAMADA = {
   calor: "Calor", zonas: "Zonas", wards: "Wards", smokes: "Smokes", objetivos: "Objetivos", lutas: "Lutas", farm: "Farm pos 1 e 2",
@@ -20,6 +22,14 @@ const ROTULO_GAMEPLAN: Readonly<Record<string, string>> = {
   smoke: "Smoke", objetivos: "Objetivos", lutas: "Lutas", win_condition: "Win condition",
 };
 const INICIO_PREPARO_S = -180;
+
+// Títulos do Markdown descem dois níveis (a seção já é h2) e tabela ganha rolagem própria em vez de alargar a página.
+const MARKDOWN: Components = {
+  h1: ({ node: _node, ...props }) => <h3 {...props} />,
+  h2: ({ node: _node, ...props }) => <h4 {...props} />,
+  h3: ({ node: _node, ...props }) => <h5 {...props} />,
+  table: ({ node: _node, ...props }) => <div className="atlas-tabela" role="region" aria-label="Tabela" tabIndex={0}><table {...props} /></div>,
+};
 
 type Vista = "2.5d" | "plano";
 
@@ -58,8 +68,9 @@ function AtlasDoTime({ time }: { time: TimeAtlas }) {
       <header className="atlas-cabecalho">
         <Link to="/times" className="atlas-voltar">← Times</Link>
         <span className="sobretitulo">{time.tag} · atlas operacional</span>
-        <h1>{time.nome} <SeloAmostra nivel={amostra.nivel} /></h1>
+        <h1>{time.nome} <SeloAmostra nivel={amostra.nivel} /> <SeloFronteira classificacao={amostra.classificacao} /></h1>
         <p className="atlas-sub numero">{amostra.partidas} partidas · {amostra.replays} replays · {amostra.vitorias} vitórias</p>
+        {amostra.nota && <p className="atlas-nota">{amostra.nota}</p>}
       </header>
       <div className="atlas-corpo">
         <div className="atlas-mapa-coluna">
@@ -103,13 +114,13 @@ function AtlasDoTime({ time }: { time: TimeAtlas }) {
           <p className="abertura">{time.resumo}</p>
           <ComoJogarContra gameplan={time.gameplan_contra} />
           <AssinaturaTemporal assinatura={time.assinatura_temporal} />
-          {time.secoes.map((s) => (
+          {ordenarSecoes(time.secoes).map((s) => (
             <section key={s.id} className="atlas-secao" aria-labelledby={`secao-${s.id}`}>
               <div className="atlas-secao-topo">
                 <h2 id={`secao-${s.id}`}>{s.titulo}</h2>
                 <span className={`selo selo-confianca-${s.confianca}`}>{ROTULO_CONFIANCA[s.confianca]}</span>
               </div>
-              <div className="painel-texto"><ReactMarkdown>{s.texto_md}</ReactMarkdown></div>
+              <div className="painel-texto atlas-md"><ReactMarkdown remarkPlugins={[remarkGfm]} components={MARKDOWN}>{s.texto_md}</ReactMarkdown></div>
             </section>
           ))}
           {time.roster.length > 0 && <section className="atlas-secao">

@@ -15,7 +15,8 @@
     "ritmo": 0.82,
     "visao": 0.64,
     "dependencia_hc": 0.35
-   }
+   },
+   "cluster": "C1"
   },
   {
    "id": "time-exemplo-b",
@@ -29,14 +30,18 @@
     "ritmo": 0.28,
     "visao": 0.41,
     "dependencia_hc": 0.88
-   }
+   },
+   "cluster": "C2",
+   "classificacao": "fronteira"
   }
  ],
  "eixos": [
   {
    "id": "ritmo",
    "rotulo": "Ritmo",
-   "explicacao": "EXEMPLO: quanto o time luta e se move antes dos 20 minutos."
+   "explicacao": "EXEMPLO: quanto o time luta e se move antes dos 20 minutos.",
+   "polo_negativo": "Jogo lento",
+   "polo_positivo": "Jogo rápido"
   },
   {
    "id": "visao",
@@ -47,6 +52,16 @@
    "id": "dependencia_hc",
    "rotulo": "Dependência do carry",
    "explicacao": "EXEMPLO: parte do ouro do time que vai para o pos 1."
+  }
+ ],
+ "clusters": [
+  {
+   "id": "C1",
+   "nome": "EXEMPLO Ritmo"
+  },
+  {
+   "id": "C2",
+   "nome": "EXEMPLO Farm"
   }
  ]
 }

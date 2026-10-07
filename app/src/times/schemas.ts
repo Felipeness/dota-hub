@@ -13,14 +13,21 @@ const janela = z.string();
 export const nivelAmostraSchema = z.enum(["ok", "low"]);
 export const confiancaSchema = z.enum(["alta", "media", "baixa"]);
 
-export const eixoSchema = z.object({ id: z.string(), rotulo: z.string(), explicacao: z.string() });
+export const classificacaoSchema = z.enum(["tier1", "fronteira"]);
+// Polos: o que significa cada ponta do eixo (negativo à esquerda ou embaixo, positivo à direita ou em cima).
+export const eixoSchema = z.object({
+  id: z.string(), rotulo: z.string(), explicacao: z.string(),
+  polo_negativo: z.string().optional(), polo_positivo: z.string().optional(),
+});
+export const clusterSchema = z.object({ id: z.string(), nome: z.string() });
 export const timeNoIndiceSchema = z.object({
   id: z.string(), nome: z.string(), tag: z.string(), partidas: z.number().int(), replays: z.number().int(),
   amostra: nivelAmostraSchema, estilo: z.string(), eixos: z.record(z.string(), z.number()),
+  cluster: z.string().optional(), classificacao: classificacaoSchema.default("tier1"),
 });
 export const indiceAtlasSchema = z.object({
   gerado_em: z.string(), periodo: z.string(), patch: z.string(),
-  times: z.array(timeNoIndiceSchema), eixos: z.array(eixoSchema),
+  times: z.array(timeNoIndiceSchema), eixos: z.array(eixoSchema), clusters: z.array(clusterSchema).default([]),
 });
 
 const zonaSchema = z.object({ zona: z.string(), rotulo: z.string(), ...coordenada, tempo_pct: fracao, janela });
@@ -67,7 +74,10 @@ export const mapaAtlasSchema = z.object({
 export const timeAtlasSchema = z.object({
   id: z.string(), nome: z.string(), tag: z.string(),
   roster: z.array(z.object({ nick: z.string(), account_id: z.number().int(), pos: z.number().int().min(1).max(5) })),
-  amostra: z.object({ partidas: z.number().int(), replays: z.number().int(), vitorias: z.number().int(), nivel: nivelAmostraSchema }),
+  amostra: z.object({
+    partidas: z.number().int(), replays: z.number().int(), vitorias: z.number().int(), nivel: nivelAmostraSchema,
+    classificacao: classificacaoSchema.default("tier1"), nota: z.string().optional(),
+  }),
   resumo: z.string(),
   secoes: z.array(z.object({ id: z.string(), titulo: z.string(), texto_md: z.string(), confianca: confiancaSchema })),
   assinatura_temporal: z.array(z.object({ janela, texto: z.string() })),
@@ -78,6 +88,9 @@ export const timeAtlasSchema = z.object({
 export type IndiceAtlas = z.infer<typeof indiceAtlasSchema>;
 export type TimeNoIndice = z.infer<typeof timeNoIndiceSchema>;
 export type Eixo = z.infer<typeof eixoSchema>;
+export type Cluster = z.infer<typeof clusterSchema>;
+export type Classificacao = z.infer<typeof classificacaoSchema>;
+export type Secao = TimeAtlas["secoes"][number];
 export type TimeAtlas = z.infer<typeof timeAtlasSchema>;
 export type MapaAtlas = z.infer<typeof mapaAtlasSchema>;
 export type Confianca = z.infer<typeof confiancaSchema>;

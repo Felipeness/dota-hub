@@ -64,7 +64,34 @@ it("arquivo do time fora do contrato vira erro legível, não tela quebrada", as
   expect(await screen.findByRole("alert")).toHaveTextContent("formato inesperado em /data/times_atlas/time-exemplo-a.json");
 });
 
+it("o mapa de estilos pinta por cluster, mostra os polos e marca a fronteira", async () => {
+  abrir("/times");
+  const clusters = await screen.findByRole("list", { name: "Clusters" });
+  expect(within(clusters).getAllByRole("listitem").map((li) => li.textContent)).toEqual(["C1 EXEMPLO Ritmo", "C2 EXEMPLO Farm"]);
+  expect(screen.getByText("← Jogo lento")).toBeInTheDocument();
+  expect(screen.getByText("Jogo rápido →")).toBeInTheDocument();
+  expect(within(screen.getByRole("link", { name: /Time Exemplo B/ })).getByText("fronteira")).toBeInTheDocument();
+  expect(screen.getByRole("link", { name: "EXB" })).toHaveClass("atlas-ponto-fronteira");
+});
+
 describe("tela do time", () => {
+  it("ordena as seções, rebaixa os títulos do Markdown e põe a tabela numa área com rolagem própria", async () => {
+    abrir("/times/time-exemplo-a");
+    const secoes = await screen.findAllByRole("region");
+    const titulos = secoes.map((r) => r.getAttribute("aria-labelledby")).filter((id) => id?.startsWith("secao-"));
+    expect(titulos[0]).toBe("secao-dna");
+    expect(titulos.at(-1)).toBe("secao-correcoes");
+    const dna = screen.getByRole("region", { name: "DNA" });
+    expect(within(dna).getByRole("heading", { level: 4, name: "Cadeia" })).toBeInTheDocument();
+    expect(within(within(dna).getByRole("region", { name: "Tabela" })).getByRole("columnheader", { name: "Kills" })).toBeInTheDocument();
+  });
+
+  it("time de fronteira mostra o selo e a nota da amostra", async () => {
+    abrir("/times/time-exemplo-b");
+    expect(await screen.findByRole("heading", { level: 1, name: /Time Exemplo B/ })).toHaveTextContent("fronteira");
+    expect(screen.getByText("EXEMPLO: roster montado no meio do período.")).toBeInTheDocument();
+  });
+
   it("mostra resumo, como jogar contra, assinatura e seções com o selo de confiança", async () => {
     abrir("/times/time-exemplo-b");
     expect(await screen.findByRole("heading", { level: 1, name: /Time Exemplo B/ })).toHaveTextContent("LOW SAMPLE");

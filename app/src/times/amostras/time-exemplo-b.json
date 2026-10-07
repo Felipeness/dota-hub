@@ -33,7 +33,9 @@
   "partidas": 9,
   "replays": 6,
   "vitorias": 4,
-  "nivel": "low"
+  "nivel": "low",
+  "classificacao": "fronteira",
+  "nota": "EXEMPLO: roster montado no meio do período."
  },
  "resumo": "EXEMPLO, dados fictícios. O Time Exemplo B é um time inventado para testar a tela: joga em volta do mid, faz smoke cedo e prepara Roshan com visão fundo.",
  "secoes": [

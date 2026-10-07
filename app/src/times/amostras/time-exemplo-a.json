@@ -38,6 +38,12 @@
  "resumo": "EXEMPLO, dados fictícios. O Time Exemplo A é um time inventado para testar a tela: joga em volta do mid, faz smoke cedo e prepara Roshan com visão fundo.",
  "secoes": [
   {
+   "id": "correcoes",
+   "titulo": "Correções",
+   "texto_md": "EXEMPLO. Nada a corrigir.",
+   "confianca": "alta"
+  },
+  {
    "id": "draft",
    "titulo": "Draft",
    "texto_md": "EXEMPLO. O **Time Exemplo A** abre com suporte flex e guarda o mid para a segunda fase.\n\n- pick rate do primeiro pick: 40% (n=40)\n- bans repetidos: dois heróis de iniciação",
@@ -54,6 +60,12 @@
    "titulo": "Red team",
    "texto_md": "EXEMPLO. Com amostra pequena contra Tier 1, o padrão de smoke pode ser efeito do hero pool e não escolha.",
    "confianca": "baixa"
+  },
+  {
+   "id": "dna",
+   "titulo": "DNA",
+   "texto_md": "## Cadeia\n\nEXEMPLO.\n\n| Fase | Kills | n |\n|---|---|---|\n| 0-10 | 4,1 | 40 |\n| 10-20 | 6,3 | 40 |",
+   "confianca": "alta"
   }
  ],
  "assinatura_temporal": [
