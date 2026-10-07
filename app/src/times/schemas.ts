@@ -95,30 +95,35 @@ export type TimeAtlas = z.infer<typeof timeAtlasSchema>;
 export type MapaAtlas = z.infer<typeof mapaAtlasSchema>;
 export type Confianca = z.infer<typeof confiancaSchema>;
 
-// chaves.json: o que fazer para vencer o time (gerado pela síntese em work/equipes/<id>/chaves.json).
+// chaves.json: o que fazer para vencer o time (contrato em dota-tier1/work/CONTRATO_CHAVES.md).
 const textoComConfianca = { confianca: confiancaSchema, texto: z.string() };
+// IC 95% de Wilson do win rate principal do item; pode faltar.
+const intervalo = { ic_baixo: fracao.nullable().optional(), ic_alto: fracao.nullable().optional() };
+const fatorSchema = z.object({
+  fator: z.string(), wr_com: fracao, n_com: z.number().int(), wr_sem: fracao, n_sem: z.number().int(), efeito_pp: z.number(),
+  causalidade: z.string().optional(), padrao_da_liga: z.boolean().optional(), ...textoComConfianca, ...intervalo,
+  efeito_bruto_pp: z.number().nullable().optional(), efeito_liga_pp: z.number().nullable().optional(),
+  vs_liga_pp: z.number().nullable().optional(), efeito_dentro_estado_pp: z.number().nullable().optional(),
+});
 export const chavesSchema = z.object({
   resumo_para_vencer: z.string(),
-  contexto_liga: z.string().optional(),
-  recorte: z.string().optional(),
+  contexto_liga: z.string().nullable().optional(),
+  recorte: z.string().nullable().optional(),
   banir: z.array(z.object({
     heroi: z.string(), papel: z.string().optional(), wr_com: fracao, n_com: z.number().int(), wr_sem: fracao, n_sem: z.number().int(),
-    efeito_pp: z.number(), quando_banido_pelo_adv_wr: fracao.nullable().optional(), n_banido: z.number().int().optional(), ...textoComConfianca,
+    efeito_pp: z.number(), quando_banido_pelo_adv_wr: fracao.nullable().optional(), n_banido: z.number().int().nullable().optional(),
+    ban_confirma: z.boolean().nullable().optional(), quem_joga: z.string().optional(), placar_60d: z.string().optional(),
+    ...textoComConfianca, ...intervalo,
   })).default([]),
   herois_contra: z.array(z.object({
-    heroi: z.string(), wr_equipe_contra: fracao, n: z.number().int(), esperado: fracao.optional(), efeito_pp: z.number(), ...textoComConfianca,
+    heroi: z.string(), wr_equipe_contra: fracao, n: z.number().int(), esperado: fracao.nullable().optional(), efeito_pp: z.number(),
+    ...textoComConfianca, ...intervalo,
   })).default([]),
   estilos_contra: z.array(z.object({
-    cluster: z.string(), wr: fracao, esperado_elo: fracao, n: z.number().int(), excesso_pp: z.number(), texto: z.string(),
-  })).default([]),
-  fatores_vitoria: z.array(z.object({
-    fator: z.string(), wr_com: fracao, n_com: z.number().int(), wr_sem: fracao, n_sem: z.number().int(), efeito_pp: z.number(),
-    causalidade: z.string().optional(), padrao_da_liga: z.boolean().optional(), ...textoComConfianca,
-  })).default([]),
-  fatores_derrota: z.array(z.object({
-    fator: z.string(), wr_com: fracao, n_com: z.number().int(), wr_sem: fracao, n_sem: z.number().int(), efeito_pp: z.number(),
-    causalidade: z.string().optional(), padrao_da_liga: z.boolean().optional(), ...textoComConfianca,
-  })).default([]),
+    cluster: z.string(), wr: fracao, esperado_elo: fracao.nullable(), n: z.number().int(), excesso_pp: z.number().nullable().optional(), texto: z.string(),
+  })).max(3).default([]),
+  fatores_vitoria: z.array(fatorSchema).max(8).default([]),
+  fatores_derrota: z.array(fatorSchema).max(8).default([]),
 });
 export type Chaves = z.infer<typeof chavesSchema>;
-export type FatorChave = Chaves["fatores_vitoria"][number];
+export type FatorChave = z.infer<typeof fatorSchema>;

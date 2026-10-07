@@ -14,7 +14,12 @@
    "quando_banido_pelo_adv_wr": 0.4,
    "n_banido": 20,
    "confianca": "media",
-   "texto": "EXEMPLO: quando o adversário bane Lone Druid, ela vence 40%."
+   "texto": "EXEMPLO: quando o adversário bane Lone Druid, ela vence 40%.",
+   "ban_confirma": false,
+   "ic_baixo": 0.45,
+   "ic_alto": 0.85,
+   "quem_joga": "Exemplo1 9-5",
+   "placar_60d": "4-1"
   },
   {
    "heroi": "Pangolier",
@@ -24,10 +29,11 @@
    "wr_sem": 0.53,
    "n_sem": 31,
    "efeito_pp": 6.1,
-   "quando_banido_pelo_adv_wr": 0.45,
-   "n_banido": 11,
+   "quando_banido_pelo_adv_wr": null,
+   "n_banido": null,
    "confianca": "baixa",
-   "texto": "EXEMPLO: indício fraco."
+   "texto": "EXEMPLO: indício fraco.",
+   "ban_confirma": null
   }
  ],
  "herois_contra": [
@@ -45,7 +51,7 @@
   {
    "cluster": "C1 EXEMPLO Ritmo",
    "wr": 0.41,
-   "esperado_elo": 0.5,
+   "esperado_elo": null,
    "n": 17,
    "excesso_pp": -9,
    "texto": "EXEMPLO: contra o cluster Ritmo vence 41% com 50% esperado."
@@ -82,7 +88,12 @@
    "causalidade": "provavel",
    "padrao_da_liga": false,
    "confianca": "alta",
-   "texto": "EXEMPLO."
+   "texto": "EXEMPLO.",
+   "ic_baixo": 0.55,
+   "ic_alto": 0.91,
+   "vs_liga_pp": 6.2,
+   "efeito_liga_pp": 14.8,
+   "efeito_dentro_estado_pp": null
   }
  ],
  "fatores_derrota": [
@@ -96,7 +107,8 @@
    "causalidade": "provavel",
    "padrao_da_liga": true,
    "confianca": "alta",
-   "texto": "EXEMPLO."
+   "texto": "EXEMPLO.",
+   "vs_liga_pp": -3.1
   }
  ]
 }

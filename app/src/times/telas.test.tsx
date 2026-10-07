@@ -77,22 +77,38 @@ it("o mapa de estilos pinta por cluster, mostra os polos e marca a fronteira", a
 });
 
 describe("como vencer", () => {
-  it("abre a coluna do texto com banir, pickar, estilo, fatores ordenados e o resumo", async () => {
+  it("abre a coluna do texto com o resumo, bans sugeridos como indício e fatores ordenados", async () => {
     abrir("/times/time-exemplo-a");
     const bloco = await screen.findByRole("region", { name: "Como vencer a Time Exemplo A" });
     expect(within(bloco).getByText(/banir Lone Druid \(ela cai para 40%/)).toBeInTheDocument();
-    const banir = within(bloco).getByRole("region", { name: "Banir" });
-    expect(within(banir).getAllByRole("listitem")[0]).toHaveTextContent("Lone Druidcarry, pos 1 (14 jogos)banido: vence 40% (n=20)com 68% · sem 51%+12,5 pp com elen=14 · confiança média");
+    const bans = within(bloco).getByRole("region", { name: "Bans sugeridos" });
+    expect(within(bans).getByText("Nenhum ban passa no teste estatístico com esta amostra; estes são os heróis com mais sinal.")).toBeInTheDocument();
+    const [lone, pango] = within(bans).getAllByRole("listitem");
+    expect(lone).toHaveTextContent("banido pelo adversário: vence 40% (n=20)");
+    expect(lone).toHaveTextContent("Exemplo1 9-5 · últimos 60 dias 4-1");
+    expect(lone).toHaveTextContent("indícioban não confirmado");
+    expect(pango).toHaveTextContent("indícioban não testado");
+    expect(pango).not.toHaveTextContent("banido pelo adversário");
     const vitoria = within(bloco).getByRole("region", { name: "Aumenta a chance de vitória deles" });
     expect(within(vitoria).getAllByRole("listitem").map((li) => li.querySelector(".chave-fator")?.textContent)).toEqual([
       "EXEMPLO: offlane deles com +1k aos 10:00", "EXEMPLO: 1º Roshan antes dos 20 min · padrão da liga",
     ]);
-    expect(within(bloco).getByRole("region", { name: "Aumenta a chance de derrota deles" })).toHaveTextContent("-16 pp");
+    expect(vitoria).toHaveTextContent("mais forte para eles que para a liga: +6,2 pp");
+    expect(within(vitoria).getByRole("img", { name: "vence 78% com o fator, IC 95% 55% a 91%; 48% sem" })).toBeInTheDocument();
+    const derrota = within(bloco).getByRole("region", { name: "Aumenta a chance de derrota deles" });
+    expect(derrota).toHaveTextContent("mais forte para eles que para a liga: -3,1 pp");
+    expect(within(bloco).getByText("Padrão da liga.")).toBeInTheDocument();
+  });
+
+  it("lista de fatores vazia diz que não há evidência suficiente", async () => {
+    abrir("/times/time-exemplo-a", { ...ARQUIVOS, "/data/times_atlas/time-exemplo-a.chaves.json": { ...chavesA, fatores_derrota: [] } });
+    const derrota = await screen.findByRole("region", { name: "Aumenta a chance de derrota deles" });
+    expect(derrota).toHaveTextContent("Nenhum fator com evidência suficiente.");
   });
 
   it("herói sem retrato no app mostra as iniciais", async () => {
     abrir("/times/time-exemplo-a");
-    const banir = await screen.findByRole("region", { name: "Banir" });
+    const banir = await screen.findByRole("region", { name: "Bans sugeridos" });
     const retratos = banir.querySelectorAll("img");
     expect(retratos[0]).toHaveAttribute("src", "/data/retratos/herois/lone_druid.webp");
     const pangolier = retratos[1];
