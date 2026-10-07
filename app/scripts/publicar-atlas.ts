@@ -29,7 +29,7 @@ type Sintese = {
   variancia_explicada: number[];
   posicoes: Record<string, Record<string, number>>;
   clusters: Record<string, number>;
-  nomes_clusters: Record<string, string>;
+  nomes_clusters?: Record<string, string> | null;
 };
 type Base = { patch: string; periodo: string };
 type Json = Record<string, unknown>;
@@ -63,6 +63,17 @@ function eixoDaSintese(id: string, nome: string, variancia: number | undefined) 
   };
 }
 
+// A síntese regenerada pode vir sem nomes_clusters; os nomes então saem da tabela "| **C3 Casa e farm** |" de eixos.md.
+function nomesDosClusters(sintese: Sintese): Record<string, string> {
+  if (sintese.nomes_clusters) return sintese.nomes_clusters;
+  const md = readFileSync(join(origem, "sintese/eixos.md"), "utf-8");
+  const nomes = Object.fromEntries([...md.matchAll(/^\|\s*\*\*C(\d+)\s+(.+?)\*\*\s*\|/gm)].map(([, n, nome]) => [n, nome]));
+  const faltando = [...new Set(Object.values(sintese.clusters))].filter((n) => !nomes[String(n)]);
+  if (faltando.length) throw new Error(`clusters sem nome em eixos.json e eixos.md: ${faltando.join(", ")}`);
+  registro.push("nomes dos clusters lidos de sintese/eixos.md (eixos.json veio sem nomes_clusters)");
+  return nomes;
+}
+
 function publicarTime(equipe: Equipe) {
   const bruto = lerJson<Json>(join(origem, "equipes", equipe.id, "hub.json"));
   const time = corrigirFormato(equipe.id, bruto, equipe);
@@ -81,7 +92,8 @@ function montarIndice(times: ReturnType<typeof publicarTime>[]) {
   const base = lerJson<Base>(join(origem, "../data/derivados/mapa_por_equipe/indice_base.json"));
   const idsDosEixos = Object.keys(sintese.nomes);
   const eixos = idsDosEixos.map((id, k) => eixoDaSintese(id, sintese.nomes[id] ?? id, sintese.variancia_explicada[k]));
-  const clusters = Object.entries(sintese.nomes_clusters).map(([n, nome]) => ({ id: `C${n}`, nome }));
+  const nomesClusters = nomesDosClusters(sintese);
+  const clusters = Object.entries(nomesClusters).map(([n, nome]) => ({ id: `C${n}`, nome }));
   const indice = {
     gerado_em: new Date().toISOString().slice(0, 10), periodo: base.periodo, patch: base.patch, eixos, clusters,
     times: times.map((t, k) => {
@@ -92,7 +104,7 @@ function montarIndice(times: ReturnType<typeof publicarTime>[]) {
       if (!posicao || cluster === undefined) throw new Error(`${t.id}: ${equipe.chave} não está em sintese/eixos.json`);
       return {
         id: t.id, nome: t.nome, tag: t.tag, partidas: t.amostra.partidas, replays: t.amostra.replays, amostra: t.amostra.nivel,
-        estilo: sintese.nomes_clusters[String(cluster)] ?? `C${cluster}`, cluster: `C${cluster}`,
+        estilo: nomesClusters[String(cluster)] ?? `C${cluster}`, cluster: `C${cluster}`,
         classificacao: equipe.classificacao, eixos: posicao,
       };
     }),
