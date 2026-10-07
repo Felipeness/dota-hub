@@ -22,6 +22,11 @@ export const ROTAS_GRAVADAS: Readonly<Record<string, string>> = {
   [`/teams/${SPIRIT}/players`]: "jogadores-do-time",
   [`/teams/${SPIRIT}/matches`]: "partidas-do-time",
   "/constants/heroes": "nomes-de-herois",
+  // Constantes gravadas em 03/10/2026 e podadas para os itens e habilidades desta partida.
+  "/constants/items": "itens",
+  "/constants/ability_ids": "ids-de-habilidades",
+  "/constants/abilities": "habilidades",
+  "/benchmarks?hero_id=93": "benchmarks",
 };
 
 export const amostra = (nome: string): unknown => JSON.parse(readFileSync(`src/live/fonte/amostras/${nome}.json`, "utf-8"));

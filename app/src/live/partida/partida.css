@@ -1,0 +1,152 @@
+/* Página da partida da busca ao vivo. Cada janela de tempo tem uma cor, a mesma no seletor, na faixa das curvas e na trilha do mapa. */
+.ao-vivo:has(> .partida) { max-width: 1200px; }
+.partida { display: grid; gap: var(--espaco-5); min-width: 0; }
+.partida h2 {
+  margin: 0 0 var(--espaco-3); font-family: var(--fonte-display); font-size: 15px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--cor-texto-3);
+}
+.partida h3 { margin: 0 0 var(--espaco-2); font-family: var(--fonte-display); font-size: 20px; font-weight: 600; color: var(--cor-texto); }
+.partida-aviso, .partida-vazio { margin: 0; font-size: 13px; line-height: 1.5; color: var(--cor-texto-3); max-width: 75ch; }
+.partida-aviso strong { color: var(--cor-destaque); }
+.iniciais {
+  display: inline-grid; place-items: center; background: var(--cor-superficie-3); color: var(--cor-texto-2);
+  font-family: var(--fonte-num); font-weight: 700; letter-spacing: 0.02em;
+}
+
+/* Cabeçalho: retrato, herói e placar */
+.partida-cabeca { display: flex; gap: var(--espaco-4); align-items: center; }
+.partida-retrato { width: 128px; height: 72px; border-radius: var(--raio-pequeno); object-fit: cover; flex: none; font-size: 28px; border: 1px solid var(--cor-linha-forte); }
+.partida-cabeca h1 { margin: 0; font-family: var(--fonte-display); font-size: 44px; line-height: 1; letter-spacing: 0.01em; }
+.partida-sobre { margin: 0 0 2px; font-family: var(--fonte-num); font-size: 12px; color: var(--cor-texto-3); }
+.partida-placar { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 6px 0 0; font-family: var(--fonte-num); font-size: 14px; color: var(--cor-texto-2); }
+.partida-resultado { font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+.resultado-vitoria { color: var(--cor-radiant); }
+.resultado-derrota { color: var(--cor-dire); }
+
+/* Resumo: as frases geradas por regra, como lide de matéria */
+.partida-resumo {
+  margin: 0; padding: var(--espaco-4) var(--espaco-5); list-style: none; display: grid; gap: var(--espaco-2);
+  border-left: 3px solid var(--cor-destaque); background: linear-gradient(90deg, var(--cor-destaque-fundo), transparent 70%);
+  border-radius: 0 var(--raio) var(--raio) 0; font-size: 16px; line-height: 1.5; color: var(--cor-texto-leitura);
+}
+.partida-resumo li:first-child { font-family: var(--fonte-display); font-size: 22px; line-height: 1.25; color: var(--cor-texto); }
+
+/* Seletor de janela: fica preso no topo enquanto a página rola pelas curvas e pelo mapa */
+.partida-janelas {
+  /* Altura do .topo da casca no desktop. */
+  position: sticky; top: 83px; z-index: 4; display: flex; flex-wrap: wrap; gap: var(--espaco-2);
+  padding: var(--espaco-2) 0; background: var(--cor-fundo);
+}
+.partida-janelas button { --cor-janela: var(--cor-texto-2); border-radius: var(--raio-pilula); font-family: var(--fonte-num); font-size: 13px; padding: 0 var(--espaco-4); }
+.partida-janelas button:nth-child(1) { --cor-janela: var(--cor-radiant); }
+.partida-janelas button:nth-child(2) { --cor-janela: var(--cor-info); }
+.partida-janelas button:nth-child(3) { --cor-janela: var(--cor-destaque); }
+.partida-janelas button:nth-child(4) { --cor-janela: var(--cor-dire); }
+.partida-janelas button:last-child { --cor-janela: var(--cor-texto); }
+.partida-janelas button::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 8px; border-radius: 50%; background: var(--cor-janela); }
+.partida-janelas button[aria-pressed="true"] { border-color: var(--cor-janela); background: var(--cor-superficie-3); color: var(--cor-texto); }
+
+/* Curvas de ouro e last hits (SVG próprio, cores dos tokens) */
+.partida-curvas-grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: var(--espaco-4); }
+.curva { margin: 0; padding: var(--espaco-3); border: 1px solid var(--cor-linha); border-radius: var(--raio); background: var(--cor-superficie); min-width: 0; }
+.curva figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--espaco-2); margin-bottom: var(--espaco-2); }
+.curva-titulo { font-family: var(--fonte-display); font-size: 18px; font-weight: 600; }
+.curva-legenda { display: flex; flex-wrap: wrap; gap: var(--espaco-3); font-size: 12px; color: var(--cor-texto-2); }
+.curva-chave::before { content: ""; display: inline-block; width: 16px; height: 0; margin-right: 6px; vertical-align: middle; border-top: 2px solid; }
+.curva-chave.curva-jogador::before { border-color: var(--cor-destaque); }
+.curva-chave.curva-adversario::before { border-color: var(--cor-dire); border-top-style: dashed; }
+.curva-chave.curva-referencia::before { border-color: var(--cor-texto-3); border-top-style: dotted; }
+.curva-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.curva-grade line { stroke: var(--cor-linha); stroke-width: 1; }
+.curva-grade text, .curva-eixo { fill: var(--cor-texto-3); font-family: var(--fonte-num); font-size: 11px; }
+.curva-janela { fill: var(--cor-destaque-fundo); }
+.curva-linha { fill: none; stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.curva-linha.curva-jogador { stroke: var(--cor-destaque); stroke-width: 3; }
+.curva-linha.curva-adversario { stroke: var(--cor-dire); stroke-dasharray: 6 4; }
+.curva-linha.curva-referencia { stroke: var(--cor-texto-3); stroke-dasharray: 2 4; stroke-width: 2; }
+.curva-guia { stroke: var(--cor-linha-ativa); stroke-dasharray: 2 3; }
+.curva-evento path { stroke-width: 2; }
+.curva-evento-item path { fill: var(--cor-destaque); }
+.curva-evento-abate path { fill: var(--cor-radiant); }
+.curva-evento-morte path { fill: none; stroke: var(--cor-dire); }
+.curva-evento-roshan path { fill: var(--cor-neutro); }
+.curva-rodape { margin: var(--espaco-2) 0 0; font-size: 12px; color: var(--cor-texto-3); display: flex; flex-wrap: wrap; gap: 4px 12px; }
+.curva-marca-legenda::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 5px; vertical-align: middle; }
+.curva-marca-legenda.curva-evento-item::before { background: var(--cor-destaque); }
+.curva-marca-legenda.curva-evento-abate::before { background: var(--cor-radiant); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.curva-marca-legenda.curva-evento-morte::before { background: var(--cor-dire); clip-path: polygon(20% 0, 50% 30%, 80% 0, 100% 20%, 70% 50%, 100% 80%, 80% 100%, 50% 70%, 20% 100%, 0 80%, 30% 50%, 0 20%); }
+.curva-marca-legenda.curva-evento-roshan::before { background: var(--cor-neutro); rotate: 45deg; }
+
+/* Rota: mapa e lista de eventos numerados lado a lado no desktop */
+.partida-rota { display: grid; gap: var(--espaco-3); min-width: 0; }
+/* O botão do pino é redondo; o min-height de .ao-vivo button o esticaria. */
+.partida .pino { min-height: 0; }
+.partida-rota-grade { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: var(--espaco-4); align-items: start; }
+.partida-eventos { display: grid; gap: var(--espaco-2); max-height: 560px; overflow: hidden auto; }
+.partida-eventos ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; }
+.partida-eventos li button.link {
+  display: grid; grid-template-columns: 26px 46px minmax(0, 1fr) auto; align-items: center; gap: var(--espaco-2);
+  width: 100%; min-height: 36px; padding: 4px var(--espaco-2); border-radius: var(--raio-pequeno); text-align: left; color: var(--cor-texto-2);
+}
+.partida-eventos li button.link:disabled { cursor: default; }
+/* O alvo de toque extra de button.link vazaria da lista rolável; aqui o botão já tem 36 px. */
+.partida-eventos button.link { text-decoration: none; }
+.partida-eventos button.link::after { content: none; }
+.partida-eventos button.link:not(:disabled) .evento-texto { text-decoration: underline; text-underline-offset: 3px; }
+.partida-eventos li button.link:not(:disabled):hover, .partida-eventos li[aria-current="true"] button.link { background: var(--cor-superficie-3); color: var(--cor-texto); }
+.evento-numero {
+  display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; font-family: var(--fonte-num); font-size: 11px; font-weight: 700;
+  background: var(--cor-evento, var(--cor-texto-3)); color: var(--cor-fundo);
+}
+.evento-tempo { font-family: var(--fonte-num); font-size: 12px; color: var(--cor-texto-3); }
+.evento-sem-ponto { font-size: 11px; color: var(--cor-texto-3); }
+.evento-abate { --cor-evento: var(--cor-radiant); }
+.evento-morte, .evento-buyback { --cor-evento: var(--cor-dire); }
+.evento-item { --cor-evento: var(--cor-texto); }
+.evento-roshan, .evento-smoke { --cor-evento: var(--cor-neutro); }
+.evento-observer { --cor-evento: var(--cor-destaque); }
+.evento-sentry, .evento-runa { --cor-evento: var(--cor-info); }
+.partida-gerar { display: grid; gap: var(--espaco-2); justify-items: start; }
+.partida-gerar button { border-color: var(--cor-destaque); color: var(--cor-destaque); font-weight: 600; padding: 0 var(--espaco-4); }
+
+/* Build: compras, motivo de cada item, neutros e skill build */
+.partida-build { display: grid; gap: var(--espaco-5); }
+.build-bloco { display: grid; gap: var(--espaco-2); min-width: 0; }
+.build-compras { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: var(--espaco-2); }
+.build-compras li {
+  display: grid; grid-template-columns: 32px auto; grid-template-rows: auto auto; column-gap: var(--espaco-2); align-items: center;
+  padding: 4px 10px 4px 4px; border: 1px solid var(--cor-linha); border-radius: var(--raio-pequeno); background: var(--cor-superficie);
+}
+.build-compras li.grande { border-color: rgb(242 181 68 / 0.55); background: var(--cor-destaque-fundo); }
+.build-compras .build-icone { grid-row: span 2; }
+.build-icone { width: 32px; height: 24px; border-radius: 4px; object-fit: cover; font-size: 11px; }
+.build-nome { font-size: 13px; color: var(--cor-texto); }
+.build-tempo { font-family: var(--fonte-num); font-size: 11px; color: var(--cor-texto-3); }
+.build-porque { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: var(--espaco-3); }
+.build-porque li { padding: var(--espaco-3); border: 1px solid var(--cor-linha); border-radius: var(--raio); background: var(--cor-superficie); }
+.build-porque p { margin: var(--espaco-2) 0 0; font-size: 14px; line-height: 1.45; color: var(--cor-texto-2); }
+.build-porque-cabeca { display: flex; align-items: center; gap: var(--espaco-2); }
+.build-porque-cabeca .build-tempo { margin-left: auto; }
+.build-motivo { padding-left: var(--espaco-2); border-left: 2px solid var(--cor-info); color: var(--cor-texto-leitura); }
+.build-skills { overflow-x: auto; border: 1px solid var(--cor-linha); border-radius: var(--raio); }
+.build-skills table { width: max-content; min-width: 100%; }
+.ao-vivo .build-skills th, .ao-vivo .build-skills td { padding: 4px 6px; text-align: center; font-size: 12px; }
+.ao-vivo .build-skills th[scope="row"] { text-align: left; position: sticky; left: 0; background: var(--cor-superficie); }
+.build-habilidade { display: inline-flex; align-items: center; gap: var(--espaco-2); white-space: nowrap; color: var(--cor-texto); font-size: 13px; }
+.build-habilidade .iniciais { width: 26px; height: 26px; border-radius: 4px; font-size: 10px; }
+.build-ponto { color: var(--cor-destaque); }
+.build-talentos { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; font-size: 13px; color: var(--cor-texto-2); }
+
+@media (max-width: 760px) {
+  /* O botão do pino é redondo; o min-height de .ao-vivo button o esticaria. */
+.partida .pino { min-height: 0; }
+.partida-rota-grade { grid-template-columns: minmax(0, 1fr); }
+  .partida-eventos { max-height: none; }
+  .partida-cabeca h1 { font-size: 34px; }
+  .partida-retrato { width: 96px; height: 54px; }
+  .partida-resumo { padding: var(--espaco-3) var(--espaco-4); }
+  .partida-resumo li:first-child { font-size: 19px; }
+  /* No celular o seletor ocupa 3 linhas: preso no topo, comeria a tela. */
+  .partida-janelas { position: static; gap: 6px; }
+  .partida-janelas button { flex: 1 1 auto; padding: 0 var(--espaco-2); font-size: 12px; }
+}

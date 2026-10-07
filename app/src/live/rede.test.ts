@@ -5,7 +5,7 @@ import { cacheIndexedDb } from "./cache";
 import { criarConsulta } from "./consulta";
 import { buscar, resumoDaConta } from "./contas";
 import { criarFonte } from "./fonte/opendota";
-import { rotaDaPartida } from "./rotaAproximada";
+import { detalheDaPartida } from "./partida/detalhe";
 import { PARTIDA, SPIRIT, YATORO, filaSemIntervalo, fonteGravada } from "./teste/gravados";
 import { resumoDoTime } from "./times";
 
@@ -41,7 +41,7 @@ it("critério 8: a jornada completa só chama api.opendota.com, sem chave", asyn
   const consultar = abrirApp(`rede-${(bancosCriados += 1)}`, Date.now, enderecos);
   await buscar(consultar, "yatoro");
   await resumoDaConta(consultar, YATORO);
-  await rotaDaPartida(consultar, String(PARTIDA), YATORO);
+  await detalheDaPartida(consultar, String(PARTIDA), YATORO);
   await buscar(consultar, "spirit");
   await resumoDoTime(consultar, SPIRIT);
 

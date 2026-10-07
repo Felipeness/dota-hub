@@ -4,11 +4,10 @@ import { AoVivoPage } from "./AoVivoPage";
 import { ContaPage } from "./ContaPage";
 import type { Consultar } from "./consulta";
 import { ok } from "./erros";
-import { jogadorFonte, partidaFonte, partidasRecentesFonte, timeFonte } from "./fonte/schemas";
+import { jogadorFonte, partidasRecentesFonte, timeFonte } from "./fonte/schemas";
 import { ProvedorAoVivo } from "./ProvedorAoVivo";
-import { RotaDaPartida } from "./RotaDaPartida";
 import type { ServicosAoVivo } from "./servicos";
-import { PARTIDA, SPIRIT, YATORO, amostra, filaSemIntervalo, servicosGravados } from "./teste/gravados";
+import { SPIRIT, YATORO, amostra, filaSemIntervalo, servicosGravados } from "./teste/gravados";
 import { TimeAoVivoPage } from "./TimeAoVivoPage";
 
 function abrir(caminho: string, servicos: ServicosAoVivo = servicosGravados()) {
@@ -110,7 +109,9 @@ it("conta pública mostra nome, medalha, 10 heróis e as partidas das respostas 
   expect(await screen.findByRole("heading", { level: 1, name: nome })).toBeInTheDocument();
   expect(within(screen.getByRole("table")).getAllByRole("row")).toHaveLength(11);
   const recentes = partidasRecentesFonte.parse(amostra("partidas-recentes"));
-  expect(within(screen.getByRole("list", { name: "Últimas partidas" })).getAllByRole("listitem")).toHaveLength(recentes.length);
+  const partidas = within(screen.getByRole("list", { name: "Últimas partidas" }));
+  expect(partidas.getAllByRole("listitem")).toHaveLength(recentes.length);
+  expect(partidas.getAllByRole("link")[0]).toHaveAttribute("href", `/ao-vivo/partidas/${recentes[0]?.match_id}?conta=${YATORO}`);
   expect(container.querySelector("img")).toBeNull();
 });
 
@@ -134,25 +135,4 @@ it("time real gravado mostra nome, jogadores com link e partidas", async () => {
 it("time que não existe diz que não encontrou", async () => {
   abrir("/ao-vivo/times/1");
   expect(await screen.findByRole("alert")).toHaveTextContent("Time não encontrado.");
-});
-
-it("rota da partida gravada desenha manchas no mapa e mostra o aviso de aproximação", async () => {
-  const jogador = partidaFonte.parse(amostra("partida")).players.find((p) => p.account_id && p.lane_pos);
-  const { container } = render(
-    <ProvedorAoVivo servicos={servicosGravados()}>
-      <RotaDaPartida partida={String(PARTIDA)} conta={jogador?.account_id ?? 0} />
-    </ProvedorAoVivo>,
-  );
-  expect(await screen.findByText("Rota aproximada: posições de lane dos primeiros 10 minutos.")).toBeInTheDocument();
-  expect(container.querySelectorAll(".mancha").length).toBeGreaterThan(0);
-});
-
-it("partida sem análise mostra a mensagem no lugar do mapa", async () => {
-  const semAnalise = { match_id: PARTIDA, players: [{ account_id: 7, player_slot: 0, hero_id: 1, lane_pos: null, lane_role: null }] };
-  render(
-    <ProvedorAoVivo servicos={servicosGravados({ [`/matches/${PARTIDA}`]: semAnalise })}>
-      <RotaDaPartida partida={String(PARTIDA)} conta={7} />
-    </ProvedorAoVivo>,
-  );
-  expect(await screen.findByText("Esta partida não foi analisada pela fonte; a rota não está disponível.")).toBeInTheDocument();
 });

@@ -33,6 +33,7 @@ const router = createBrowserRouter([
           { index: true, lazy: async () => ({ Component: (await import("./live/AoVivoPage")).AoVivoPage }) },
           { path: "contas/:id", lazy: async () => ({ Component: (await import("./live/ContaPage")).ContaPage }) },
           { path: "times/:id", lazy: async () => ({ Component: (await import("./live/TimeAoVivoPage")).TimeAoVivoPage }) },
+          { path: "partidas/:id", lazy: async () => ({ Component: (await import("./live/partida/PartidaPage")).PartidaPage }) },
         ],
       },
     ],
