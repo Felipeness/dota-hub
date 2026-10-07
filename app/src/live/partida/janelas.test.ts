@@ -36,6 +36,12 @@ it("a trilha quebra na morte e muda de cor quando muda de janela", () => {
   expect(trechosDaTrilha(trilha, "0-10")).toHaveLength(1);
 });
 
+it("teleporte (salto grande em 5 s) corta a linha", () => {
+  const trilha = [{ t: 5, ponto: [0.1, 0.1] }, { t: 10, ponto: [0.12, 0.1] }, { t: 15, ponto: [0.9, 0.9] }, { t: 20, ponto: [0.91, 0.9] }]
+    .map((a) => ({ t: a.t, ponto: [a.ponto[0] ?? 0, a.ponto[1] ?? 0] as [number, number] }));
+  expect(trechosDaTrilha(trilha, "0-10").map((t) => t.tipo === "linha" && t.pontos.length)).toEqual([2, 2]);
+});
+
 it("o mapa de calor da lane só aparece na janela de 0 a 10 e na partida toda", () => {
   const manchas = [{ x: 0.5, y: 0.5, peso: 1 }];
   expect(manchasDaJanela(manchas, "0-10")).toBe(manchas);

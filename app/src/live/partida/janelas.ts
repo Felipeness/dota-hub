@@ -15,12 +15,14 @@ export type IdJanela = Janela["id"] | "toda";
 export type EventoNumerado = EventoDaPartida & Readonly<{ n: number }>;
 
 const MARCA_DE_MINUTO_S = 120;
+/** Andando, ninguém cruza 15% do mapa em 5 s: um salto maior é TP, blink longo ou renascer, e a linha não liga os pontos. */
+const SALTO_MAXIMO = 0.15;
 const RAIO_DO_EVENTO = 0.013;
-const RAIO_DO_CAMP = 0.006;
+const RAIO_DO_CAMP = 0.012;
 
 const COR_DO_EVENTO: Record<TipoDeEvento, CorDesenho> = {
   abate: "radiant", morte: "dire", item: "texto", roshan: "neutro", observer: "destaque", sentry: "info",
-  runa: "info", buyback: "dire", smoke: "neutro", camp: "texto-3",
+  runa: "info", buyback: "dire", smoke: "neutro", camp: "texto",
 };
 const FORMA_DO_EVENTO: Partial<Record<TipoDeEvento, FormaPino>> = { observer: "losango", sentry: "losango", camp: "quadrado" };
 
@@ -50,16 +52,18 @@ function pinoDoEvento(e: EventoNumerado & { ponto: Ponto }): Desenho {
 
 const temPonto = <T extends { ponto: Ponto | null }>(e: T): e is T & { ponto: Ponto } => e.ponto !== null;
 
-/** Trechos contínuos (a morte corta a linha), cada um na cor da janela em que está. */
+const saltou = (a: Ponto, b: Ponto) => Math.hypot(a[0] - b[0], a[1] - b[1]) > SALTO_MAXIMO;
+
+/** Trechos contínuos (morte e teleporte cortam a linha), cada um na cor da janela em que está. */
 export function trechosDaTrilha(trilha: readonly AmostraDaTrilha[], janela: IdJanela): Desenho[] {
   const trechos: { cor: CorDesenho; pontos: Ponto[] }[] = [];
   let anterior: AmostraDaTrilha | null = null;
   for (const amostra of trilha) {
     if (amostra.t < 0 || !estaNaJanela(janela, amostra.t)) { anterior = null; continue; }
     const cor = janelaDoTempo(amostra.t).cor;
-    const continua = anterior?.ponto && amostra.ponto && janelaDoTempo(anterior.t).cor === cor;
+    const continua = anterior?.ponto && amostra.ponto && janelaDoTempo(anterior.t).cor === cor && !saltou(anterior.ponto, amostra.ponto);
     if (amostra.ponto && continua) trechos.at(-1)?.pontos.push(amostra.ponto);
-    else if (amostra.ponto) trechos.push({ cor, pontos: anterior?.ponto ? [anterior.ponto, amostra.ponto] : [amostra.ponto] });
+    else if (amostra.ponto) trechos.push({ cor, pontos: anterior?.ponto && !saltou(anterior.ponto, amostra.ponto) ? [anterior.ponto, amostra.ponto] : [amostra.ponto] });
     anterior = amostra;
   }
   return trechos.map((t, i) => ({ tipo: "linha", id: `trilha-${i}`, pontos: t.pontos, cor: t.cor, espessura: 0.004 }));

@@ -39,7 +39,7 @@ function dadosPro(heroi: Heroi): DadosPro {
 }
 
 function Partida({ detalhe, onAtualizar }: { detalhe: DetalheDaPartida; onAtualizar: () => void }) {
-  const [janela, setJanela] = useState<IdJanela>("toda");
+  const [janela, setJanela] = useState<IdJanela>("0-10");
   const ficha = useData(`/data/herois/${detalhe.heroi.retrato}.json`, heroiSchema);
   const pro = ficha.estado === "ok" ? dadosPro(ficha.dados) : null;
   return (

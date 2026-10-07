@@ -1,4 +1,5 @@
 /* Página da partida da busca ao vivo. Cada janela de tempo tem uma cor, a mesma no seletor, na faixa das curvas e na trilha do mapa. */
+.ao-vivo:has(> .partida) { max-width: 1200px; }
 .partida { display: grid; gap: var(--espaco-5); min-width: 0; }
 .partida h2 {
   margin: 0 0 var(--espaco-3); font-family: var(--fonte-display); font-size: 15px; font-weight: 600;
@@ -32,7 +33,8 @@
 
 /* Seletor de janela: fica preso no topo enquanto a página rola pelas curvas e pelo mapa */
 .partida-janelas {
-  position: sticky; top: 0; z-index: 4; display: flex; flex-wrap: wrap; gap: var(--espaco-2);
+  /* Altura do .topo da casca no desktop. */
+  position: sticky; top: 83px; z-index: 4; display: flex; flex-wrap: wrap; gap: var(--espaco-2);
   padding: var(--espaco-2) 0; background: var(--cor-fundo);
 }
 .partida-janelas button { --cor-janela: var(--cor-texto-2); border-radius: var(--raio-pilula); font-family: var(--fonte-num); font-size: 13px; padding: 0 var(--espaco-4); }
@@ -77,14 +79,20 @@
 
 /* Rota: mapa e lista de eventos numerados lado a lado no desktop */
 .partida-rota { display: grid; gap: var(--espaco-3); min-width: 0; }
+/* O botão do pino é redondo; o min-height de .ao-vivo button o esticaria. */
+.partida .pino { min-height: 0; }
 .partida-rota-grade { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: var(--espaco-4); align-items: start; }
-.partida-eventos { display: grid; gap: var(--espaco-2); max-height: 560px; overflow-y: auto; }
+.partida-eventos { display: grid; gap: var(--espaco-2); max-height: 560px; overflow: hidden auto; }
 .partida-eventos ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; }
 .partida-eventos li button.link {
   display: grid; grid-template-columns: 26px 46px minmax(0, 1fr) auto; align-items: center; gap: var(--espaco-2);
   width: 100%; min-height: 36px; padding: 4px var(--espaco-2); border-radius: var(--raio-pequeno); text-align: left; color: var(--cor-texto-2);
 }
 .partida-eventos li button.link:disabled { cursor: default; }
+/* O alvo de toque extra de button.link vazaria da lista rolável; aqui o botão já tem 36 px. */
+.partida-eventos button.link { text-decoration: none; }
+.partida-eventos button.link::after { content: none; }
+.partida-eventos button.link:not(:disabled) .evento-texto { text-decoration: underline; text-underline-offset: 3px; }
 .partida-eventos li button.link:not(:disabled):hover, .partida-eventos li[aria-current="true"] button.link { background: var(--cor-superficie-3); color: var(--cor-texto); }
 .evento-numero {
   display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; font-family: var(--fonte-num); font-size: 11px; font-weight: 700;
@@ -130,12 +138,15 @@
 .build-talentos { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; font-size: 13px; color: var(--cor-texto-2); }
 
 @media (max-width: 760px) {
-  .partida-rota-grade { grid-template-columns: minmax(0, 1fr); }
+  /* O botão do pino é redondo; o min-height de .ao-vivo button o esticaria. */
+.partida .pino { min-height: 0; }
+.partida-rota-grade { grid-template-columns: minmax(0, 1fr); }
   .partida-eventos { max-height: none; }
   .partida-cabeca h1 { font-size: 34px; }
   .partida-retrato { width: 96px; height: 54px; }
   .partida-resumo { padding: var(--espaco-3) var(--espaco-4); }
   .partida-resumo li:first-child { font-size: 19px; }
-  .partida-janelas { flex-wrap: nowrap; overflow-x: auto; }
-  .partida-janelas button { flex: none; }
+  /* No celular o seletor ocupa 3 linhas: preso no topo, comeria a tela. */
+  .partida-janelas { position: static; gap: 6px; }
+  .partida-janelas button { flex: 1 1 auto; padding: 0 var(--espaco-2); font-size: 12px; }
 }

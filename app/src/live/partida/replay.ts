@@ -22,11 +22,12 @@ export function trilhaDoJogador(replay: ReplayDaPartida, slot: number): AmostraD
   return Array.from({ length: heroi.xy.length / 2 }, (_, i) => ({ t: replay.inicio_s + i * replay.passo_s, ponto: pontoEm(heroi.xy, i) }));
 }
 
+/** Amostra mais perto do tempo; se o jogador estava morto nela, a última posição viva logo antes (até 2 amostras). */
 export function pontoNoTempo(trilha: readonly AmostraDaTrilha[], t: number): Ponto | null {
   const [primeira, segunda] = trilha;
   if (!primeira || !segunda) return null;
-  const indice = Math.round((t - primeira.t) / (segunda.t - primeira.t));
-  return trilha[Math.min(Math.max(indice, 0), trilha.length - 1)]?.ponto ?? null;
+  const indice = Math.min(Math.max(Math.round((t - primeira.t) / (segunda.t - primeira.t)), 0), trilha.length - 1);
+  return [0, -1, -2, 1, 2].map((d) => trilha[indice + d]?.ponto).find((p) => p != null) ?? null;
 }
 
 export function comPosicaoDoReplay(eventos: readonly EventoDaPartida[], trilha: readonly AmostraDaTrilha[]): EventoDaPartida[] {

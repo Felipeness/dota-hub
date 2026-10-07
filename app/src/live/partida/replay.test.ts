@@ -13,11 +13,12 @@ it("trilha do jogador traz o tempo de cada amostra e null quando morto", () => {
   expect(trilhaDoJogador(replay, 1)).toEqual([]);
 });
 
-it("ponto no tempo usa a amostra mais perto e fica dentro da partida", () => {
+it("ponto no tempo usa a amostra mais perto, a última viva se estava morto, e fica dentro da partida", () => {
   const trilha = trilhaDoJogador(replay, 129);
   expect(pontoNoTempo(trilha, 9)).toEqual([0.3, 0.4]);
   expect(pontoNoTempo(trilha, 999)).toEqual([0.3, 0.4]);
-  expect(pontoNoTempo(trilha, 6)).toBeNull();
+  expect(pontoNoTempo(trilha, 6)).toEqual([0.1, 0.2]);
+  expect(pontoNoTempo([{ t: 0, ponto: null }, { t: 5, ponto: null }], 0)).toBeNull();
 });
 
 it("abate sem posição ganha a do replay; ward mantém a do OpenDota", () => {

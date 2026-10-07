@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { objetivosSchema } from "../../data/schemas";
 import { useData } from "../../data/useData";
 import { MapView } from "../../map/MapView";
 import { nomeDaLane } from "../formato";
@@ -15,7 +14,6 @@ export function RotaPorTempo({ detalhe, janela }: Props) {
   const [versao, setVersao] = useState(0);
   const [selecionado, setSelecionado] = useState<string | null>(null);
   const replay = useData(`${urlDoReplay(detalhe.partida)}?v=${versao}`, replayDaPartidaSchema);
-  const objetivos = useData("/data/objetivos.json", objetivosSchema);
   const temReplay = replay.estado === "ok";
   const trilha = temReplay ? trilhaDoJogador(replay.dados, detalhe.slot) : [];
   const todos = temReplay
@@ -30,7 +28,7 @@ export function RotaPorTempo({ detalhe, janela }: Props) {
       <div className="partida-rota-grade">
         <MapView
           forcarPlano
-          objetivos={objetivos.estado === "ok" ? objetivos.dados : []}
+          objetivos={[]}
           manchas={temReplay ? [] : manchasDaJanela(detalhe.manchasDaLane, janela)}
           desenhos={desenhosDaRota({ eventos, camps, trilha, janela })}
           selecionado={selecionado}
