@@ -75,7 +75,7 @@ def main() -> None:
     pacotes["roshan_replays"] = roshan.todas()
     pacotes["roshan_solo"] = conteudo.carregar(RAIZ / "content" / "roshan_solo")
     arquivo_vpk = jogo.vpk()
-    retratos.atualizar_herois(arquivo_vpk, retratos.nomes_no_jogo(fichas), DESTINO / "retratos" / "herois")
+    retratos.atualizar_herois(arquivo_vpk, retratos.nomes_no_jogo(fichas) | retratos.todos_os_herois(), DESTINO / "retratos" / "herois")
     itens_do_glossario = {t["extras"]["item"] for t in pacotes["glossario"] if "item" in t["extras"]}
     retratos.atualizar_itens(arquivo_vpk, itens_do_glossario, DESTINO / "retratos" / "itens")
     base = unidades.Jogo.dos_arquivos(jogo.textos(arquivo_vpk), icones.disponiveis(arquivo_vpk))

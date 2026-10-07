@@ -1,5 +1,7 @@
 """Retrato dos heróis e ícone dos itens: decodificados do jogo instalado e gravados em webp."""
 import json
+import re
+import sys
 import tempfile
 from pathlib import Path
 
@@ -21,6 +23,18 @@ def nomes_no_jogo(fichas: list[dict]) -> dict[str, str]:
     if faltando:
         raise ValueError(f"herói sem nome no jogo: {', '.join(faltando)}")
     return {f["id"]: por_numero[f["hero_id"]] for f in fichas}
+
+
+def id_no_app(nome_localizado: str) -> str:
+    """Nome do herói vira o id usado no app: "Nature's Prophet" -> natures_prophet, "Anti-Mage" -> anti_mage."""
+    sem_apostrofo = nome_localizado.lower().replace("'", "")
+    return re.sub(r"[^a-z0-9]+", "_", sem_apostrofo).strip("_")
+
+
+def todos_os_herois() -> dict[str, str]:
+    """Todos os heróis da lista da OpenDota, não só os que têm ficha no app: cards de ban e pick usam qualquer um."""
+    herois = json.loads(fontes.HEROIS_OPENDOTA.read_text(encoding="utf-8"))
+    return {id_no_app(h["localized_name"]): h["name"] for h in herois}
 
 
 def _converter(arquivo_vpk: Path, pasta: str, saida_por_nome: dict[str, Path], tamanho: tuple[int, int]) -> None:
@@ -46,3 +60,10 @@ def atualizar_herois(arquivo_vpk: Path, nomes: dict[str, str], destino: Path) ->
 
 def atualizar_itens(arquivo_vpk: Path, itens: set[str], destino: Path) -> None:
     _converter(arquivo_vpk, PASTA_ITENS, {item: destino / f"{item}.webp" for item in itens}, TAMANHO_ITEM)
+
+
+if __name__ == "__main__":
+    # python -m dota_export.retratos [pasta]: só os retratos de todos os heróis, sem rodar o export inteiro.
+    destino = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).resolve().parents[2] / "app" / "public" / "data" / "retratos" / "herois"
+    atualizar_herois(jogo.vpk(), todos_os_herois(), destino)
+    print(f"ok: {len(list(destino.glob('*.webp')))} retratos em {destino}")

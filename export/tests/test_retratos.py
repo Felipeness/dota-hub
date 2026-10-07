@@ -26,3 +26,16 @@ def test_grava_retrato_do_heroi_e_icone_do_item(tmp_path):
 def test_imagem_que_falta_no_jogo_diz_qual(tmp_path):
     with pytest.raises(ValueError, match="sem imagem no jogo: item_que_nao_existe"):
         retratos.atualizar_itens(jogo.vpk(), {"item_que_nao_existe"}, tmp_path)
+
+
+@pytest.mark.parametrize(("nome", "esperado"), [
+    ("Anti-Mage", "anti_mage"), ("Nature's Prophet", "natures_prophet"), ("Queen of Pain", "queen_of_pain"), ("Kez", "kez"),
+])
+def test_id_no_app_segue_o_nome_localizado(nome, esperado):
+    assert retratos.id_no_app(nome) == esperado
+
+
+def test_todos_os_herois_cobre_a_lista_da_opendota():
+    nomes = retratos.todos_os_herois()
+    assert nomes["anti_mage"] == "npc_dota_hero_antimage"
+    assert len(nomes) >= 127
