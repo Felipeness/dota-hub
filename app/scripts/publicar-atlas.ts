@@ -1,10 +1,10 @@
 // Publica o atlas Tier 1 na tela Times: copia o hub.json de cada equipe, monta o indice.json com os eixos e clusters
 // da síntese e valida tudo com os schemas do app. Corrige só formato, nunca conteúdo, e registra cada correção.
 // Uso: npm run publicar-atlas [-- <pasta work do dota-tier1>]
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { indiceAtlasSchema, timeAtlasSchema } from "../src/times/schemas.ts";
+import { chavesSchema, indiceAtlasSchema, timeAtlasSchema } from "../src/times/schemas.ts";
 
 type Equipe = { id: string; chave: string; classificacao: "tier1" | "fronteira" };
 
@@ -74,6 +74,22 @@ function nomesDosClusters(sintese: Sintese): Record<string, string> {
   return nomes;
 }
 
+// chaves.json é opcional enquanto a síntese não termina: falta vira registro, formato errado derruba a publicação.
+function publicarChaves(id: string) {
+  const origemDasChaves = join(origem, "equipes", id, "chaves.json");
+  if (!existsSync(origemDasChaves)) {
+    registro.push(`${id}: sem chaves.json, a tela mostra o aviso no lugar de "Como vencer"`);
+    return;
+  }
+  const chaves = lerJson<Json>(origemDasChaves);
+  const analise = chavesSchema.safeParse(chaves);
+  if (!analise.success) {
+    const problemas = analise.error.issues.slice(0, 5).map((i) => `${i.path.join(".")}: ${i.message}`).join("; ");
+    throw new Error(`${id}/chaves.json: ${problemas}`);
+  }
+  writeFileSync(join(destino, `${id}.chaves.json`), JSON.stringify(chaves));
+}
+
 function publicarTime(equipe: Equipe) {
   const bruto = lerJson<Json>(join(origem, "equipes", equipe.id, "hub.json"));
   const time = corrigirFormato(equipe.id, bruto, equipe);
@@ -84,6 +100,7 @@ function publicarTime(equipe: Equipe) {
   }
   if (analise.data.id !== equipe.id) throw new Error(`${equipe.id}: o arquivo diz id ${analise.data.id}`);
   writeFileSync(join(destino, `${equipe.id}.json`), JSON.stringify(time));
+  publicarChaves(equipe.id);
   return analise.data;
 }
 
@@ -122,7 +139,7 @@ const linhas = [
   `Atlas publicado em ${destino} a partir de ${origem}`,
   `${indice.times.length} equipes, ${indice.eixos.length} eixos, ${indice.clusters.length} clusters`,
   ...indice.times.map((t) => `  ${t.id} (${t.tag}): ${t.estilo}${t.classificacao === "fronteira" ? ", fronteira" : ""}, amostra ${t.amostra}`),
-  registro.length ? "Correções de formato:" : "Nenhuma correção de formato.",
+  registro.length ? "Registro (correções de formato e arquivos que faltam):" : "Nenhuma correção de formato.",
   ...registro.map((r) => `  ${r}`),
 ];
 writeFileSync(join(destino, "registro.txt"), `${linhas.join("\n")}\n`);

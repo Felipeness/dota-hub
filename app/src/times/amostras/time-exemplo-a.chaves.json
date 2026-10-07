@@ -1,0 +1,102 @@
+{
+ "resumo_para_vencer": "EXEMPLO: banir Lone Druid (ela cai para 40% quando o adversário o bane, n=20). Atacar a offlane até 10 min. Negar o 1º Roshan.",
+ "contexto_liga": "EXEMPLO: 1º Roshan e +2k de NW às 15:00 são padrão da liga, não identidade.",
+ "recorte": "EXEMPLO: período inteiro do patch, 40 partidas.",
+ "banir": [
+  {
+   "heroi": "Lone Druid",
+   "papel": "carry, pos 1 (14 jogos)",
+   "wr_com": 0.68,
+   "n_com": 14,
+   "wr_sem": 0.51,
+   "n_sem": 26,
+   "efeito_pp": 12.5,
+   "quando_banido_pelo_adv_wr": 0.4,
+   "n_banido": 20,
+   "confianca": "media",
+   "texto": "EXEMPLO: quando o adversário bane Lone Druid, ela vence 40%."
+  },
+  {
+   "heroi": "Pangolier",
+   "papel": "mid, pos 2 (9 jogos)",
+   "wr_com": 0.64,
+   "n_com": 9,
+   "wr_sem": 0.53,
+   "n_sem": 31,
+   "efeito_pp": 6.1,
+   "quando_banido_pelo_adv_wr": 0.45,
+   "n_banido": 11,
+   "confianca": "baixa",
+   "texto": "EXEMPLO: indício fraco."
+  }
+ ],
+ "herois_contra": [
+  {
+   "heroi": "Anti-Mage",
+   "wr_equipe_contra": 0.38,
+   "n": 13,
+   "esperado": 0.55,
+   "efeito_pp": -11.2,
+   "confianca": "baixa",
+   "texto": "EXEMPLO: contra Anti-Mage ela vence 38%."
+  }
+ ],
+ "estilos_contra": [
+  {
+   "cluster": "C1 EXEMPLO Ritmo",
+   "wr": 0.41,
+   "esperado_elo": 0.5,
+   "n": 17,
+   "excesso_pp": -9,
+   "texto": "EXEMPLO: contra o cluster Ritmo vence 41% com 50% esperado."
+  },
+  {
+   "cluster": "C2 EXEMPLO Farm",
+   "wr": 0.62,
+   "esperado_elo": 0.52,
+   "n": 23,
+   "excesso_pp": 10,
+   "texto": "EXEMPLO: contra o cluster Farm vence 62%."
+  }
+ ],
+ "fatores_vitoria": [
+  {
+   "fator": "EXEMPLO: 1º Roshan antes dos 20 min",
+   "wr_com": 0.7,
+   "n_com": 20,
+   "wr_sem": 0.55,
+   "n_sem": 20,
+   "efeito_pp": 9,
+   "causalidade": "correlacao",
+   "padrao_da_liga": true,
+   "confianca": "media",
+   "texto": "EXEMPLO."
+  },
+  {
+   "fator": "EXEMPLO: offlane deles com +1k aos 10:00",
+   "wr_com": 0.78,
+   "n_com": 18,
+   "wr_sem": 0.48,
+   "n_sem": 22,
+   "efeito_pp": 21,
+   "causalidade": "provavel",
+   "padrao_da_liga": false,
+   "confianca": "alta",
+   "texto": "EXEMPLO."
+  }
+ ],
+ "fatores_derrota": [
+  {
+   "fator": "EXEMPLO: mid deles perde a lane",
+   "wr_com": 0.35,
+   "n_com": 20,
+   "wr_sem": 0.75,
+   "n_sem": 20,
+   "efeito_pp": -16,
+   "causalidade": "provavel",
+   "padrao_da_liga": true,
+   "confianca": "alta",
+   "texto": "EXEMPLO."
+  }
+ ]
+}

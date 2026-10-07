@@ -1,7 +1,8 @@
 import indice from "./amostras/indice.json";
 import exemploA from "./amostras/time-exemplo-a.json";
 import exemploB from "./amostras/time-exemplo-b.json";
-import { indiceAtlasSchema, timeAtlasSchema } from "./schemas";
+import chavesA from "./amostras/time-exemplo-a.chaves.json";
+import { chavesSchema, indiceAtlasSchema, timeAtlasSchema } from "./schemas";
 
 it("lê o índice de exemplo com os eixos vindos dos dados", () => {
   const lido = indiceAtlasSchema.parse(indice);
@@ -45,4 +46,10 @@ it("aceita presença sem posição no preparo e smoke sem a chave farm", () => {
   const lido = timeAtlasSchema.parse({ ...exemploA, mapa: { objetivos: [objetivo], smokes: [smoke] } });
   expect(lido.mapa.objetivos[0]?.preparo[0]).toEqual({ t_rel_s: -150, acao: "presenca", herois_perto_medio: 0.43 });
   expect(lido.mapa.smokes[0]?.resultado.farm).toBe(0);
+});
+
+it("lê as chaves de exemplo e recusa efeito sem n", () => {
+  expect(chavesSchema.parse(chavesA).banir.map((b) => b.heroi)).toEqual(["Lone Druid", "Pangolier"]);
+  const semN = { ...chavesA, fatores_vitoria: [{ fator: "x", wr_com: 0.5, wr_sem: 0.4, n_sem: 3, efeito_pp: 3, confianca: "alta", texto: "" }] };
+  expect(chavesSchema.safeParse(semN).success).toBe(false);
 });

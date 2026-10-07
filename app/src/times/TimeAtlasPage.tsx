@@ -8,8 +8,9 @@ import {
   CAMADAS, JANELAS, SETAS_POR_PADRAO, TODAS_AS_INTENCOES, desenhosDoMapa, intencoesDosWards, itensDoMapa, linhasDoPreparo, smokesDaJanela,
   type Camada, type Filtro, type FiltroJanela, type ItemDoMapa, type Preparo,
 } from "./camadas";
+import { ComoVencer } from "./ComoVencer";
 import { LeituraDoMapa } from "./LeituraDoMapa";
-import { timeAtlasSchema, type Confianca, type Secao, type TimeAtlas } from "./schemas";
+import { chavesSchema, timeAtlasSchema, type Confianca, type Secao, type TimeAtlas } from "./schemas";
 import { ordenarSecoes } from "./secoes";
 import { SeloAmostra, SeloFronteira } from "./TimesPage";
 
@@ -120,6 +121,7 @@ function AtlasDoTime({ time }: { time: TimeAtlas }) {
           <LeituraDoMapa mapa={time.mapa} camadas={camadas} janela={janela} />
         </div>
         <div className="atlas-texto">
+          <ChavesDoTime id={time.id} nome={time.nome} />
           <p className="abertura">{time.resumo}</p>
           <ComoJogarContra gameplan={time.gameplan_contra} />
           {ordenarSecoes(time.secoes).map((bloco) => (bloco.tipo === "assinatura"
@@ -186,6 +188,14 @@ function ComoJogarContra({ gameplan }: { gameplan: TimeAtlas["gameplan_contra"] 
       </dl>
     </section>
   );
+}
+
+// As chaves vêm num arquivo à parte; sem ele a página segue sem o bloco, com o motivo à vista.
+function ChavesDoTime({ id, nome }: { id: string; nome: string }) {
+  const chaves = useData(`/data/times_atlas/${encodeURIComponent(id)}.chaves.json`, chavesSchema);
+  if (chaves.estado === "carregando") return null;
+  if (chaves.estado === "indisponivel") return <p className="chave-ausente">Como vencer: {chaves.motivo}</p>;
+  return <ComoVencer chaves={chaves.dados} nome={nome} />;
 }
 
 function SecaoDoTime({ secao }: { secao: Secao }) {

@@ -799,6 +799,40 @@ button.pino:hover { transform: translate(-50%, -50%) scale(1.2); }
 .atlas-roster li { padding: 6px 12px; border-radius: var(--raio-pilula); background: var(--cor-superficie-2); border: 1px solid var(--cor-linha-forte); color: var(--cor-texto); font-size: 14px; }
 .atlas-roster .numero { font-size: 11px; color: var(--cor-texto-3); }
 
+/* Como vencer: o bloco de decisão no topo da página do time */
+.chave {
+  display: flex; flex-direction: column; gap: var(--espaco-4); padding: var(--espaco-5);
+  border-radius: var(--raio); border: 1px solid rgb(91 191 122 / 0.45);
+  background: linear-gradient(180deg, rgb(91 191 122 / 0.12), rgb(91 191 122 / 0.03));
+}
+.chave h2 { margin: 0; font-family: var(--fonte-display); font-size: 26px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--cor-radiant); }
+.chave h3 { margin: 0 0 var(--espaco-2); font-family: var(--fonte-display); font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cor-texto-2); }
+.chave-resumo { margin: 0; padding: var(--espaco-3) var(--espaco-4); border-left: 3px solid var(--cor-radiant); background: rgb(10 14 17 / 0.45); font-size: 17px; line-height: 1.5; color: var(--cor-texto); }
+.chave-herois { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: var(--espaco-2); }
+.chave-heroi { display: flex; gap: 10px; padding: 10px; border-radius: var(--raio-pequeno); background: var(--cor-superficie-2); border: 1px solid var(--cor-linha-forte); font-size: 12px; }
+.chave-heroi > div { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.chave-heroi strong { font-size: 14px; color: var(--cor-texto); }
+.chave-heroi p { margin: 2px 0 0; color: var(--cor-texto-3); }
+.chave-retrato { flex-shrink: 0; width: 64px; height: 36px; border-radius: 4px; object-fit: cover; background: var(--cor-superficie-3); }
+.chave-iniciais { display: grid; place-items: center; font-family: var(--fonte-display); font-size: 18px; font-weight: 700; color: var(--cor-texto-2); }
+.chave-wr { color: var(--cor-texto-2); }
+.chave-efeito { font-weight: 700; color: var(--cor-destaque); }
+.chave-confianca { font-family: var(--fonte-num); font-size: 11px; border: 0; padding: 0; }
+.chave-estilos { margin: 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: var(--cor-texto-leitura); }
+.chave-colunas { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--espaco-4); }
+.chave-fatores ol { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.chave-fatores li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 8px; font-size: 13px; color: var(--cor-texto-leitura); }
+.chave-fator { grid-column: 1 / -1; }
+.chave-barra { height: 6px; align-self: center; border-radius: var(--raio-pilula); background: var(--cor-linha); overflow: hidden; }
+.chave-barra i { display: block; height: 100%; border-radius: inherit; }
+.chave-fatores-vitoria .chave-barra i { background: var(--cor-dire); }
+.chave-fatores-derrota .chave-barra i { background: var(--cor-radiant); }
+.chave-fatores li .chave-confianca { grid-column: 1 / -1; }
+.chave-vazio, .chave-ausente { margin: 0; font-size: 13px; color: var(--cor-texto-3); }
+.chave-papel { color: var(--cor-texto-3); }
+.chave-fator em { font-style: normal; color: var(--cor-texto-3); }
+.chave-nota { margin: 0; font-size: 12px; line-height: 1.5; color: var(--cor-texto-3); }
+
 /* Telas largas: o mapa fica preso à esquerda enquanto o texto rola à direita; o painel flutua sobre o mapa. */
 @media (min-width: 1100px) {
   .shell:has(.atlas-time) { height: 100vh; height: 100dvh; min-height: 0; }

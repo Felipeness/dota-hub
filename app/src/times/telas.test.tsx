@@ -3,6 +3,7 @@ import { MemoryRouter, Route, Routes } from "react-router";
 import indice from "./amostras/indice.json";
 import exemploA from "./amostras/time-exemplo-a.json";
 import exemploB from "./amostras/time-exemplo-b.json";
+import chavesA from "./amostras/time-exemplo-a.chaves.json";
 import { TimeAtlasPage } from "./TimeAtlasPage";
 import { TimesPage } from "./TimesPage";
 
@@ -10,6 +11,7 @@ const ARQUIVOS: Readonly<Record<string, unknown>> = {
   "/data/times_atlas/indice.json": indice,
   "/data/times_atlas/time-exemplo-a.json": exemploA,
   "/data/times_atlas/time-exemplo-b.json": exemploB,
+  "/data/times_atlas/time-exemplo-a.chaves.json": chavesA,
 };
 
 function abrir(caminho: string, arquivos = ARQUIVOS) {
@@ -72,6 +74,37 @@ it("o mapa de estilos pinta por cluster, mostra os polos e marca a fronteira", a
   expect(screen.getByText("Jogo rápido →")).toBeInTheDocument();
   expect(within(screen.getByRole("link", { name: /Time Exemplo B/ })).getByText("fronteira")).toBeInTheDocument();
   expect(screen.getByRole("link", { name: "EXB" })).toHaveClass("atlas-ponto-fronteira");
+});
+
+describe("como vencer", () => {
+  it("abre a coluna do texto com banir, pickar, estilo, fatores ordenados e o resumo", async () => {
+    abrir("/times/time-exemplo-a");
+    const bloco = await screen.findByRole("region", { name: "Como vencer a Time Exemplo A" });
+    expect(within(bloco).getByText(/banir Lone Druid \(ela cai para 40%/)).toBeInTheDocument();
+    const banir = within(bloco).getByRole("region", { name: "Banir" });
+    expect(within(banir).getAllByRole("listitem")[0]).toHaveTextContent("Lone Druidcarry, pos 1 (14 jogos)banido: vence 40% (n=20)com 68% · sem 51%+12,5 pp com elen=14 · confiança média");
+    const vitoria = within(bloco).getByRole("region", { name: "Aumenta a chance de vitória deles" });
+    expect(within(vitoria).getAllByRole("listitem").map((li) => li.querySelector(".chave-fator")?.textContent)).toEqual([
+      "EXEMPLO: offlane deles com +1k aos 10:00", "EXEMPLO: 1º Roshan antes dos 20 min · padrão da liga",
+    ]);
+    expect(within(bloco).getByRole("region", { name: "Aumenta a chance de derrota deles" })).toHaveTextContent("-16 pp");
+  });
+
+  it("herói sem retrato no app mostra as iniciais", async () => {
+    abrir("/times/time-exemplo-a");
+    const banir = await screen.findByRole("region", { name: "Banir" });
+    const retratos = banir.querySelectorAll("img");
+    expect(retratos[0]).toHaveAttribute("src", "/data/retratos/herois/lone_druid.webp");
+    const pangolier = retratos[1];
+    if (!pangolier) throw new Error("sem retrato do Pangolier");
+    fireEvent.error(pangolier);
+    expect(within(banir).getByText("PA")).toBeInTheDocument();
+  });
+
+  it("sem o arquivo de chaves a página segue e diz o motivo", async () => {
+    abrir("/times/time-exemplo-b");
+    expect(await screen.findByText(/Como vencer: arquivo \/data\/times_atlas\/time-exemplo-b.chaves.json não encontrado/)).toBeInTheDocument();
+  });
 });
 
 describe("tela do time", () => {
