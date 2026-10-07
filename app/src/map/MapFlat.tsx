@@ -7,11 +7,11 @@ import {
   VISTA_PLANA_INICIAL, arrastarVista, fatorDaRoda, foiArraste, pontoNoTabuleiro, zoomNoPonto,
   type Ponto2, type VistaPlana,
 } from "./navegacao";
-import { opacidadeDaMancha } from "./trilhas";
+import { opacidadeDaMancha, type Desenho } from "./trilhas";
 
 const pontosSvg = (pontos: readonly Ponto[]) => pontos.map(([x, y]) => `${x},${1 - y}`).join(" ");
 
-export function MapFlat({ objetivos, rota, trilhas = [], marcas = [], manchas = [], selecionado, onSelecionar, children }: MapViewProps) {
+export function MapFlat({ objetivos, rota, trilhas = [], marcas = [], manchas = [], desenhos = [], selecionado, onSelecionar, children }: MapViewProps) {
   const { area, vista, centralizar, gestos } = useNavegacaoPlana();
   const estilo: CSSProperties & Record<"--escala" | "--dx" | "--dy", number | string> = { "--escala": vista.escala, "--dx": `${vista.x}px`, "--dy": `${vista.y}px` };
   return (
@@ -23,6 +23,9 @@ export function MapFlat({ objetivos, rota, trilhas = [], marcas = [], manchas = 
           {rota && <polyline className="fuga-linha" points={pontosSvg(caminhoDaFuga(rota))} />}
           {trilhas.map((t) => (
             <polyline key={t.id} className={`trilha trilha-${t.lado}${t.destaque ? " destaque" : ""}`} points={pontosSvg(t.rastro)} />
+          ))}
+          {desenhos.map((d) => d.tipo === "linha" && (
+            <polyline key={d.id} className="desenho-linha" points={pontosSvg(d.pontos)} style={{ stroke: `var(--cor-${d.cor})`, strokeWidth: d.espessura }} />
           ))}
         </svg>
         {objetivos.map((o) => (
@@ -42,6 +45,7 @@ export function MapFlat({ objetivos, rota, trilhas = [], marcas = [], manchas = 
           <span key={m.id} role="img" aria-label={m.rotulo} title={m.rotulo}
             className={`marca marca-${m.tipo} marca-${m.lado}`} style={normToPercent([m.x, m.y])} />
         ))}
+        {desenhos.map((d) => d.tipo === "pino" && <PinoPlano key={d.id} pino={d} ativo={d.id === selecionado} onSelecionar={onSelecionar} />)}
         {manchas.length > 0 && (
           <div className="manchas" aria-label="Rota aproximada">
             {manchas.map((m) => (
@@ -53,6 +57,20 @@ export function MapFlat({ objetivos, rota, trilhas = [], marcas = [], manchas = 
       <button className="botao-centralizar" onClick={centralizar}>Centralizar</button>
       {children}
     </div>
+  );
+}
+
+type Pino = Extract<Desenho, { tipo: "pino" }>;
+
+function PinoPlano({ pino, ativo, onSelecionar }: { pino: Pino; ativo: boolean; onSelecionar: (id: string) => void }) {
+  const estilo: CSSProperties & Record<"--cor-desenho", string> = { ...normToPercent([pino.x, pino.y]), width: `${pino.raio * 200}%`, opacity: pino.opacidade, "--cor-desenho": `var(--cor-${pino.cor})` };
+  const texto = pino.texto && <span className="pino-texto" style={normToPercent([pino.x, pino.y])}>{pino.texto}</span>;
+  if (!pino.clicavel) return <><span className="pino pino-mancha" style={estilo} />{texto}</>;
+  return (
+    <>
+      <button className={`pino${pino.porCima ? " por-cima" : ""}${ativo ? " ativo" : ""}`} style={estilo} aria-label={pino.rotulo} title={pino.rotulo} aria-pressed={ativo} onClick={() => onSelecionar(pino.id)} />
+      {texto}
+    </>
   );
 }
 

@@ -24,3 +24,9 @@ it("vira indisponível quando o corpo não é JSON", async () => {
   const r = await loadJson("/data/meta.json", metaSchema, html);
   expect(r).toEqual({ ok: false, motivo: "JSON inválido em /data/meta.json" });
 });
+
+it("página HTML no lugar do JSON conta como arquivo que falta", async () => {
+  const spa = (async () => new Response("<!doctype html>", { status: 200, headers: { "content-type": "text/html" } })) as unknown as typeof fetch;
+  const r = await loadJson("/data/times_atlas/nao-existe.json", metaSchema, spa);
+  expect(r).toEqual({ ok: false, motivo: "arquivo /data/times_atlas/nao-existe.json não encontrado" });
+});

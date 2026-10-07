@@ -47,3 +47,11 @@ export type Mancha = Readonly<{ x: number; y: number; peso: number }>;
 
 /** Peso 0 ainda aparece um pouco; peso 1 fica cheio. */
 export const opacidadeDaMancha = (peso: number) => Math.round((0.2 + 0.8 * peso) * 100) / 100;
+
+/** Cor de um desenho livre: o nome do token --cor-<nome>, para o plano e o 3D usarem a mesma paleta. */
+export type CorDesenho = "destaque" | "info" | "radiant" | "dire" | "neutro" | "texto";
+
+/** Camada livre sobre o mapa (atlas dos times). Raio e espessura são frações do lado do tabuleiro. */
+export type Desenho =
+  | Readonly<{ tipo: "linha"; id: string; pontos: readonly Ponto[]; cor: CorDesenho; espessura: number }>
+  | Readonly<{ tipo: "pino"; id: string; x: number; y: number; cor: CorDesenho; raio: number; opacidade: number; rotulo: string; clicavel: boolean; texto?: string; porCima?: boolean }>;

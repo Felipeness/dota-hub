@@ -13,7 +13,7 @@ export function PainelJogador({ painel }: { painel: Painel }) {
       <header>
         <span className="sobretitulo">{painel.tipo === "pro" ? "Profissional" : "Amigo"}</span>
         <h1>{painel.nome}</h1>
-        {painel.time && <p><Link to={`/times/${idDoTime(painel.time)}`}>{painel.time}</Link></p>}
+        {painel.time && <p><Link to={`/jogadores/times/${idDoTime(painel.time)}`}>{painel.time}</Link></p>}
         <p className="amostra">{painel.amostra}</p>
       </header>
       <dl className="destaques">

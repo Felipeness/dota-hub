@@ -1,3 +1,5 @@
+import indice from "../times/amostras/indice.json";
+import { indiceAtlasSchema } from "../times/schemas";
 import { buscar, construirIndice, docsDeUnidades, sugerir } from "./index";
 
 const termos = [
@@ -43,7 +45,14 @@ it("acha herói, jogador e time", () => {
   });
   expect(buscar(b, "medu")[0]).toMatchObject({ tipo: "heroi", link: "/herois/medusa" });
   expect(buscar(b, "skit")[0]).toMatchObject({ tipo: "jogador", link: "/jogadores/skiter" });
-  expect(buscar(b, "spirit")[0]).toMatchObject({ tipo: "time", link: "/times/team-spirit" });
+  expect(buscar(b, "spirit")[0]).toMatchObject({ tipo: "time", link: "/jogadores/times/team-spirit" });
+});
+
+it("acha o time do atlas pelo nome e pela tag", () => {
+  const atlas = indiceAtlasSchema.parse(indice).times;
+  const b = construirIndice({ rotas: [], objetivos: [], termos: [], atlas });
+  expect(buscar(b, "exemplo b")[0]).toMatchObject({ tipo: "atlas", link: "/times/time-exemplo-b" });
+  expect(buscar(b, "EXA")[0]).toMatchObject({ tipo: "atlas", titulo: "Time Exemplo A (EXA)" });
 });
 
 const unidades = [{ id: "roshan", nome: "Roshan", grupo: "chefe" as const, papel: "chefe neutro", lado: "neutro" as const, modelo: "roshan", camps: [],

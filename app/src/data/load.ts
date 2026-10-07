@@ -10,6 +10,8 @@ export async function loadJson<T>(path: string, schema: z.ZodType<T>, fetcher: t
     return { ok: false, motivo: `falha de rede ao buscar ${path}: ${String(erro)}` };
   }
   if (!resposta.ok) return { ok: false, motivo: `arquivo ${path} não encontrado (${resposta.status})` };
+  // O servidor de SPA responde 200 com o index.html para um arquivo que não existe.
+  if (resposta.headers.get("content-type")?.includes("text/html")) return { ok: false, motivo: `arquivo ${path} não encontrado` };
   let corpo: unknown;
   try {
     corpo = await resposta.json();

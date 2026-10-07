@@ -1,19 +1,20 @@
 import MiniSearch, { type SearchResult } from "minisearch";
 import type { ConteudoItem, HeroiResumo, JogadorResumo, Objetivo, RotaResumo, Time, UnidadeResumo } from "../data/schemas";
 import { normalizar } from "../routes/filtros";
+import type { TimeNoIndice } from "../times/schemas";
 
-const TIPOS = ["rota", "objetivo", "termo", "heroi", "jogador", "time", "unidade", "habilidade"] as const;
+const TIPOS = ["rota", "objetivo", "termo", "heroi", "jogador", "time", "atlas", "unidade", "habilidade"] as const;
 export type Achado = { tipo: (typeof TIPOS)[number]; id: string; titulo: string; link: string };
 export type Doc = Achado & { chave: string; texto: string };
 export type Busca = MiniSearch<Doc>;
 
 type Fontes = {
   rotas: Pick<RotaResumo, "id" | "pergunta" | "titulo">[]; objetivos: Objetivo[]; termos: ConteudoItem[];
-  herois?: HeroiResumo[]; jogadores?: JogadorResumo[]; times?: Time[];
+  herois?: HeroiResumo[]; jogadores?: JogadorResumo[]; times?: Time[]; atlas?: readonly TimeNoIndice[];
   unidades?: readonly UnidadeResumo[];
 };
 
-export function construirIndice({ rotas, objetivos, termos, herois = [], jogadores = [], times = [], unidades = [] }: Fontes): Busca {
+export function construirIndice({ rotas, objetivos, termos, herois = [], jogadores = [], times = [], atlas = [], unidades = [] }: Fontes): Busca {
   const busca: Busca = new MiniSearch<Doc>({
     idField: "chave", fields: ["titulo", "texto"], storeFields: ["tipo", "id", "titulo", "link"],
     processTerm: normalizar, searchOptions: { prefix: true, boost: { titulo: 3 } },
@@ -24,7 +25,8 @@ export function construirIndice({ rotas, objetivos, termos, herois = [], jogador
     ...termos.map((t) => ({ chave: `termo:${t.id}`, tipo: "termo" as const, id: t.id, titulo: t.titulo, texto: t.secoes.basico, link: `/glossario/${t.id}` })),
     ...herois.map((h) => ({ chave: `heroi:${h.id}`, tipo: "heroi" as const, id: h.id, titulo: h.nome, texto: h.resumo, link: `/herois/${h.id}` })),
     ...jogadores.map((j) => ({ chave: `jogador:${j.id}`, tipo: "jogador" as const, id: j.id, titulo: j.nome, texto: `${j.time ?? ""} ${j.amostra}`, link: `/jogadores/${j.id}` })),
-    ...times.map((t) => ({ chave: `time:${t.id}`, tipo: "time" as const, id: t.id, titulo: t.nome, texto: t.jogadores.join(" "), link: `/times/${t.id}` })),
+    ...times.map((t) => ({ chave: `time:${t.id}`, tipo: "time" as const, id: t.id, titulo: t.nome, texto: t.jogadores.join(" "), link: `/jogadores/times/${t.id}` })),
+    ...atlas.map((t) => ({ chave: `atlas:${t.id}`, tipo: "atlas" as const, id: t.id, titulo: `${t.nome} (${t.tag})`, texto: `${t.tag} ${t.estilo}`, link: `/times/${t.id}` })),
     ...docsDeUnidades(unidades),
   ]);
   return busca;
