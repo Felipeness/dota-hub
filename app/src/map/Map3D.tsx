@@ -221,6 +221,9 @@ function Navegacao({ caixa, pedido }: { caixa: Caixa; pedido: number }) {
 
 export function Map3D({ objetivos, rota, trilhas = [], marcas = [], manchas = [], desenhos = [], selecionado, onSelecionar, children }: MapViewProps) {
   const noChao = useNoChao();
+  // Os rótulos HTML (drei Html) só entram depois que o Canvas existe: montados junto com ele, o destino deles muda
+  // no meio da montagem e cada um desmonta a própria raiz React durante a renderização (aviso no console).
+  const [canvasPronto, setCanvasPronto] = useState(false);
   const [pedidoDeCentralizar, setPedidoDeCentralizar] = useState(0);
   const caixa = rota ? caixaDoFoco(pontosDaRota(rota), TAMANHO) : TABULEIRO_INTEIRO;
   const corLado: Record<Objetivo["lado"], string> = { radiant: corDoToken("--cor-radiant"), dire: corDoToken("--cor-dire"), neutro: corDoToken("--cor-neutro") };
@@ -228,7 +231,7 @@ export function Map3D({ objetivos, rota, trilhas = [], marcas = [], manchas = []
   // O Canvas põe height: 100% em linha no próprio elemento; o tamanho do quadro vem do div em volta.
   return (
     <div className="mapa-3d">
-      <Canvas camera={CAMERA} dpr={[1, 2]}>
+      <Canvas camera={CAMERA} dpr={[1, 2]} onCreated={() => setCanvasPronto(true)}>
         <color attach="background" args={[corDoToken("--cor-fundo")]} />
         <ambientLight intensity={1.1} />
         <directionalLight position={[30, 60, 20]} intensity={0.6} />
@@ -236,16 +239,16 @@ export function Map3D({ objetivos, rota, trilhas = [], marcas = [], manchas = []
         {objetivos.map((o) => (
           <Gota key={o.id} objetivo={o} ativo={o.id === selecionado} cor={o.id === selecionado ? destaque : corLado[o.lado]} noChao={noChao} onSelecionar={onSelecionar} />
         ))}
-        {rota && <TracadoRota rota={rota} cor={destaque} noChao={noChao} />}
+        {rota && canvasPronto && <TracadoRota rota={rota} cor={destaque} noChao={noChao} />}
         <Trilhas trilhas={trilhas} corLado={corLado} destaque={destaque} noChao={noChao} />
-        <Marcas marcas={marcas} noChao={noChao} />
+        {canvasPronto && <Marcas marcas={marcas} noChao={noChao} />}
         {manchas.map((m) => (
           <mesh key={`mancha-${m.x}-${m.y}`} position={noChao([m.x, m.y], 0.3)} rotation={[-Math.PI / 2, 0, 0]}>
             <circleGeometry args={[0.9, 16]} />
             <meshBasicMaterial color={destaque} transparent opacity={opacidadeDaMancha(m.peso)} />
           </mesh>
         ))}
-        <Desenhos desenhos={desenhos} selecionado={selecionado} noChao={noChao} onSelecionar={onSelecionar} />
+        {canvasPronto && <Desenhos desenhos={desenhos} selecionado={selecionado} noChao={noChao} onSelecionar={onSelecionar} />}
         <Navegacao caixa={caixa} pedido={pedidoDeCentralizar} />
       </Canvas>
       <button className="botao-centralizar" onClick={() => setPedidoDeCentralizar((n) => n + 1)}>Centralizar</button>
