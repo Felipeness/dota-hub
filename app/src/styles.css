@@ -826,7 +826,7 @@ button.pino:hover { transform: translate(-50%, -50%) scale(1.2); }
 .chave h2 { margin: 0; font-family: var(--fonte-display); font-size: 26px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--cor-radiant); }
 .chave h3 { margin: 0 0 var(--espaco-2); font-family: var(--fonte-display); font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cor-texto-2); }
 .chave-resumo { margin: 0; padding: var(--espaco-3) var(--espaco-4); border-left: 3px solid var(--cor-radiant); background: rgb(10 14 17 / 0.45); font-size: 17px; line-height: 1.5; color: var(--cor-texto); }
-.chave-herois { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: var(--espaco-2); }
+.chave-herois { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: var(--espaco-2); }
 .chave-heroi { display: flex; gap: 10px; padding: 10px; border-radius: var(--raio-pequeno); background: var(--cor-superficie-2); border: 1px solid var(--cor-linha-forte); font-size: 12px; }
 .chave-heroi > div { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .chave-heroi strong { font-size: 14px; color: var(--cor-texto); }
@@ -854,7 +854,7 @@ button.pino:hover { transform: translate(-50%, -50%) scale(1.2); }
 .chave-meses-barras { display: flex; align-items: flex-end; gap: 2px; height: 22px; }
 .chave-meses-barras i { width: 8px; border-radius: 2px 2px 0 0; background: var(--cor-dire); opacity: 0.8; }
 .chave-contexto { display: flex; flex-wrap: wrap; gap: 3px; }
-.chave-chip { padding: 1px 6px; border-radius: var(--raio-pilula); background: var(--cor-superficie-3); font-family: var(--fonte-num); font-size: 10px; color: var(--cor-texto-2); }
+.chave-chip { white-space: nowrap; padding: 1px 6px; border-radius: var(--raio-pilula); background: var(--cor-superficie-3); font-family: var(--fonte-num); font-size: 10px; color: var(--cor-texto-2); }
 .chave-leitura { font-size: 11px; line-height: 1.4; color: var(--cor-texto-3); }
 .chave-mais { align-self: flex-start; margin-top: var(--espaco-2); min-height: 36px; padding: 0 14px; border-radius: var(--raio-pilula); font-size: 13px; }
 .chave-historico { align-self: flex-start; border-style: dashed; color: var(--cor-texto-2); }
