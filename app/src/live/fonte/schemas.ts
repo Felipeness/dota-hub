@@ -47,7 +47,8 @@ export const itensFonte = z.record(z.string(), z.object({
   id: z.number(), dname: texto, cost: z.number().nullable().optional().transform((v) => v ?? null),
   tier: z.number().nullable().optional().transform((v) => v ?? null),
   // Só o que importa é se o item é montado; a lista de peças fica de fora.
-  components: z.array(z.string()).nullable().optional().transform((v) => (v ?? []).length > 0),
+  // O cache guarda a saída do schema e a lê de novo com ele: o booleano já reduzido também precisa passar.
+  components: z.union([z.boolean(), z.array(z.string()).nullable().optional().transform((v) => (v ?? []).length > 0)]),
 }));
 export const idsDeHabilidadesFonte = z.record(z.string(), z.string());
 export const habilidadesFonte = z.record(z.string(), z.object({ dname: texto }));
