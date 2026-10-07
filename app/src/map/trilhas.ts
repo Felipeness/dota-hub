@@ -49,9 +49,24 @@ export type Mancha = Readonly<{ x: number; y: number; peso: number }>;
 export const opacidadeDaMancha = (peso: number) => Math.round((0.2 + 0.8 * peso) * 100) / 100;
 
 /** Cor de um desenho livre: o nome do token --cor-<nome>, para o plano e o 3D usarem a mesma paleta. */
-export type CorDesenho = "destaque" | "info" | "radiant" | "dire" | "neutro" | "texto";
+export type CorDesenho = "destaque" | "info" | "radiant" | "dire" | "neutro" | "texto" | "texto-2" | "texto-3";
+
+/** Forma do pino: cada camada do atlas tem a sua, para a cor ficar livre para o resultado. */
+export type FormaPino = "circulo" | "losango" | "quadrado" | "roshan" | "tormentor" | "torre";
+
+export type Pino = Readonly<{
+  tipo: "pino"; id: string; x: number; y: number; cor: CorDesenho; raio: number; opacidade: number; rotulo: string; clicavel: boolean;
+  forma?: FormaPino;
+  /** Só o contorno, sem preenchimento (sentry, zona). */
+  vazado?: boolean;
+  /** Texto curto dentro do pino (% da luta, número do passo). */
+  conteudo?: string;
+  /** Rótulo ao lado do pino. */
+  texto?: string;
+  porCima?: boolean;
+}>;
 
 /** Camada livre sobre o mapa (atlas dos times). Raio e espessura são frações do lado do tabuleiro. */
 export type Desenho =
-  | Readonly<{ tipo: "linha"; id: string; pontos: readonly Ponto[]; cor: CorDesenho; espessura: number }>
-  | Readonly<{ tipo: "pino"; id: string; x: number; y: number; cor: CorDesenho; raio: number; opacidade: number; rotulo: string; clicavel: boolean; texto?: string; porCima?: boolean }>;
+  | Readonly<{ tipo: "linha"; id: string; pontos: readonly Ponto[]; cor: CorDesenho; espessura: number; tracejada?: boolean }>
+  | Pino;

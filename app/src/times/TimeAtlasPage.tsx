@@ -5,9 +5,10 @@ import { Link, useParams } from "react-router";
 import { Indisponivel, useData } from "../data/useData";
 import { MapView } from "../map/MapView";
 import {
-  CAMADAS, JANELAS, MAXIMO_DE_SMOKES, TODAS_AS_INTENCOES, desenhosDoMapa, intencoesDosWards, itensDoMapa, linhasDoPreparo,
+  CAMADAS, JANELAS, SETAS_POR_PADRAO, TODAS_AS_INTENCOES, desenhosDoMapa, intencoesDosWards, itensDoMapa, linhasDoPreparo, smokesDaJanela,
   type Camada, type Filtro, type FiltroJanela, type ItemDoMapa, type Preparo,
 } from "./camadas";
+import { LeituraDoMapa } from "./LeituraDoMapa";
 import { timeAtlasSchema, type Confianca, type Secao, type TimeAtlas } from "./schemas";
 import { ordenarSecoes } from "./secoes";
 import { SeloAmostra, SeloFronteira } from "./TimesPage";
@@ -49,12 +50,15 @@ export function TimeAtlasPage() {
 }
 
 function AtlasDoTime({ time }: { time: TimeAtlas }) {
-  const [camadas, setCamadas] = useState<ReadonlySet<Camada>>(new Set(["calor", "smokes", "objetivos"]));
+  // Abre com uma camada só: Smokes é a que mais conta do time; as outras entram quando a pessoa pede.
+  const [camadas, setCamadas] = useState<ReadonlySet<Camada>>(new Set(["smokes"]));
+  const [todasAsSetas, setTodasAsSetas] = useState(false);
   const [janela, setJanela] = useState<FiltroJanela>("todas");
   const [intencao, setIntencao] = useState(TODAS_AS_INTENCOES);
   const [aberto, setAberto] = useState<string | null>(null);
   const [vista, setVista] = useState<Vista>("2.5d");
-  const filtro: Filtro = { camadas, janela, intencao };
+  const filtro: Filtro = { camadas, janela, intencao, maximoDeSetas: todasAsSetas ? null : SETAS_POR_PADRAO };
+  const totalDeSmokes = smokesDaJanela(time.mapa, janela).length;
   const itens = itensDoMapa(time.mapa, filtro);
   const item = itens.find((i) => i.id === aberto) ?? null;
   const alternar = (camada: Camada) => setCamadas((atual) => {
@@ -86,6 +90,11 @@ function AtlasDoTime({ time }: { time: TimeAtlas }) {
                 <button key={j} aria-pressed={janela === j} onClick={() => setJanela(j)}>{j === "todas" ? "Todas" : j}</button>
               ))}
             </div>
+            {camadas.has("smokes") && totalDeSmokes > SETAS_POR_PADRAO && (
+              <button className="atlas-setas" aria-pressed={todasAsSetas} onClick={() => setTodasAsSetas((todas) => !todas)}>
+                {todasAsSetas ? `Só as ${SETAS_POR_PADRAO} setas mais repetidas` : `Mostrar todas as ${totalDeSmokes} setas`}
+              </button>
+            )}
             {camadas.has("wards") && (
               <label className="atlas-intencao">
                 Intenção dos wards
@@ -106,9 +115,9 @@ function AtlasDoTime({ time }: { time: TimeAtlas }) {
             </MapView>
             {item
               ? <PainelDoItem item={item} onFechar={() => setAberto(null)} />
-              : <p className="atlas-dica">{itens.length} marcadores nesta janela{camadas.has("smokes") ? ` (smokes: os ${MAXIMO_DE_SMOKES} mais repetidos)` : ""}. Clique num deles para ler o padrão.</p>}
+              : <p className="atlas-dica">{itens.length} marcadores nesta janela. Clique num deles para ler o padrão.</p>}
+            <LeituraDoMapa mapa={time.mapa} camadas={camadas} janela={janela} />
           </div>
-          <Legenda />
         </div>
         <div className="atlas-texto">
           <p className="abertura">{time.resumo}</p>
@@ -202,14 +211,3 @@ function AssinaturaTemporal({ assinatura }: { assinatura: TimeAtlas["assinatura_
     </section>
   );
 }
-
-const LEGENDA = [
-  ["destaque", "Observer, calor"], ["texto", "Farm pos 1"], ["info", "Sentry, zona, farm pos 2, smoke com objetivo"],
-  ["radiant", "Smoke com kill, luta vencida"], ["dire", "Smoke que falhou, luta perdida"], ["neutro", "Objetivo, smoke sem resultado"],
-] as const;
-
-const Legenda = () => (
-  <ul className="atlas-legenda" aria-label="Legenda do mapa do time">
-    {LEGENDA.map(([cor, texto]) => <li key={cor}><i className="atlas-cor" style={{ background: `var(--cor-${cor})` }} />{texto}</li>)}
-  </ul>
-);

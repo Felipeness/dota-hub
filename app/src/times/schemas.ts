@@ -43,7 +43,7 @@ const smokeSchema = z.object({
   // Destino nulo: o Smoke não quebrou em nenhum lugar registrado; só a origem vai para o mapa.
   ...coordenada, destino_x: fracao.nullable(), destino_y: fracao.nullable(), janela, n: z.number().int().nonnegative(),
   resultado: z.object({ kill: fracao, objetivo: fracao, farm: fracao.default(0), nada: fracao, falhou: fracao }), texto: z.string(),
-  herois_medio: z.number().optional(),
+  herois_medio: z.number().optional(), origem_zona: z.string().optional(), destino_zona: z.string().optional(),
 });
 // Presença (heróis perto do objetivo) não tem posição: x e y só vêm em ward e smoke.
 const preparoSchema = z.object({
@@ -54,7 +54,7 @@ const objetivoAtlasSchema = z.object({
   tipo: z.string(), ...coordenada, preparo: z.array(preparoSchema), texto: z.string(),
   grupo: z.string().optional(), n: z.number().int().optional(), minuto_mediano: z.number().optional(),
 });
-const lutaSchema = z.object({ ...coordenada, janela, n: z.number().int().nonnegative(), vitoria_pct: fracao, texto: z.string(), iniciou_pct: fracao.optional() });
+const lutaSchema = z.object({ ...coordenada, janela, n: z.number().int().nonnegative(), vitoria_pct: fracao, texto: z.string(), iniciou_pct: fracao.optional(), zona: z.string().optional() });
 const pontoFarmSchema = z.object({
   t: z.string().regex(/^\d+:\d{2}$/), ...coordenada, rotulo: z.string(),
   zona_pct: fracao.optional(), atividade: z.string().optional(), n: z.number().int().optional(),

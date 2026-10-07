@@ -1,6 +1,6 @@
 import type { Desenho } from "../map/trilhas";
 import exemploA from "./amostras/time-exemplo-a.json";
-import { CAMADAS, MAXIMO_DE_SMOKES, TODAS_AS_INTENCOES, desenhosDoMapa, itensDoMapa, janelaDoTempo, linhasDoPreparo, naJanela, nomeDoObjetivo, pontaDaSeta, resultadoPrincipal, type Camada, type Filtro, type FiltroJanela } from "./camadas";
+import { CAMADAS, COR_DESFECHO, SETAS_POR_PADRAO, TODAS_AS_INTENCOES, desfechoDaLuta, desfechoDaWard, desfechoDoSmoke, desenhosDoMapa, itensDoMapa, janelaDoTempo, linhasDoPreparo, naJanela, nomeDoObjetivo, pontaDaSeta, type Camada, type Filtro, type FiltroJanela } from "./camadas";
 import { mapaAtlasSchema, type MapaAtlas } from "./schemas";
 
 const mapa = mapaAtlasSchema.parse(exemploA.mapa);
@@ -72,11 +72,39 @@ it("o calor usa a grade da janela escolhida e some na janela sem grade", () => {
   expect(desenhosDoMapa(mapa, filtro(["calor"], "0-5"), null)).toEqual([]);
 });
 
-it("mostra só os smokes mais repetidos da janela", () => {
-  const muitos = Array.from({ length: MAXIMO_DE_SMOKES + 5 }, (_, n) => ({ ...mapa.smokes[0], janela: "todas", n }));
+it("por padrão mostra só os smokes mais repetidos, e todos quando pedido", () => {
+  const muitos = Array.from({ length: SETAS_POR_PADRAO + 5 }, (_, n) => ({ ...mapa.smokes[0], janela: "todas", n: n + 1 }));
   const smokes = ids({ ...mapa, smokes: muitos }, filtro(["smokes"]));
-  expect(smokes).toHaveLength(MAXIMO_DE_SMOKES);
-  expect(smokes[0]).toBe(`smokes:${MAXIMO_DE_SMOKES + 4}`);
+  expect(smokes).toHaveLength(SETAS_POR_PADRAO);
+  expect(smokes[0]).toBe(`smokes:${SETAS_POR_PADRAO + 4}`);
+  expect(ids({ ...mapa, smokes: muitos }, { ...filtro(["smokes"]), maximoDeSetas: null })).toHaveLength(SETAS_POR_PADRAO + 5);
+});
+
+it("a seta mais repetida é a mais grossa e a linha do smoke é tracejada", () => {
+  const smokes = [{ ...mapa.smokes[0], janela: "todas", n: 10 }, { ...mapa.smokes[0], janela: "todas", n: 2 }];
+  const linhas = desenhosDoMapa({ ...mapa, smokes }, filtro(["smokes"]), null).flatMap((d) => (d.tipo === "linha" && d.id.endsWith(":rastro") ? [d] : []));
+  expect(linhas.map((l) => l.tracejada)).toEqual([true, true]);
+  expect(linhas[0]?.espessura).toBeGreaterThan(4 * (linhas[1]?.espessura ?? 1) / 2);
+});
+
+it.each([
+  { camada: "wards", forma: "losango" }, { camada: "objetivos", forma: "roshan" }, { camada: "farm", forma: "quadrado" },
+] as const)("cada camada tem a sua forma: $camada vira $forma", ({ camada, forma }) => {
+  expect(pinos(desenhosDoMapa(mapa, filtro([camada], camada === "wards" ? "10-15" : "todas"), null))[0]?.forma).toBe(forma);
+});
+
+it("a sentry é o losango vazado e a cor da ward vem de quanto ela é destruída", () => {
+  const [obs, sen] = pinos(desenhosDoMapa(mapa, filtro(["wards"], "10-15"), null));
+  expect([obs?.vazado, sen?.vazado]).toEqual([false, true]);
+  expect(desfechoDaWard(0.2)).toBe("certo");
+  expect(desfechoDaWard(0.8)).toBe("errado");
+  expect(desfechoDaWard(undefined)).toBe("neutro");
+});
+
+it("a luta traz a % dentro e a cor pela vitória, com faixa neutra perto de 50%", () => {
+  const [luta] = pinos(desenhosDoMapa(mapa, filtro(["lutas"]), null));
+  expect(luta).toMatchObject({ conteudo: "62%", cor: COR_DESFECHO.certo });
+  expect([desfechoDaLuta(0.7), desfechoDaLuta(0.5), desfechoDaLuta(0.3)]).toEqual(["certo", "neutro", "errado"]);
 });
 
 it("o objetivo só desenha o preparo quando está aberto", () => {
@@ -99,9 +127,10 @@ it("a linha do tempo junta as ações de cada faixa e fecha no objetivo", () => 
   expect(linhasDoPreparo([{ t_rel_s: 0, acao: "smoke", freq: 0.2 }])).toEqual([{ t: 0, texto: "smoke 20% · objetivo" }]);
 });
 
-it("a cor do smoke segue o resultado mais comum", () => {
-  expect(resultadoPrincipal({ kill: 0.1, objetivo: 0.2, farm: 0, nada: 0.1, falhou: 0.6 })).toBe("falhou");
-  expect(resultadoPrincipal({ kill: 0.2, objetivo: 0.1, farm: 0.5, nada: 0.1, falhou: 0.1 })).toBe("farm");
+it("a cor do smoke junta kill e objetivo como certo, falhou como errado, farm e nada como neutro", () => {
+  expect(desfechoDoSmoke({ kill: 0.1, objetivo: 0.2, farm: 0, nada: 0.1, falhou: 0.6 })).toBe("errado");
+  expect(desfechoDoSmoke({ kill: 0.3, objetivo: 0.2, farm: 0.2, nada: 0.2, falhou: 0.1 })).toBe("certo");
+  expect(desfechoDoSmoke({ kill: 0.1, objetivo: 0.1, farm: 0.4, nada: 0.3, falhou: 0.1 })).toBe("neutro");
 });
 
 it.each([

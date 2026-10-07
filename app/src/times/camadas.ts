@@ -1,8 +1,9 @@
 import type { Ponto } from "../map/coords";
-import type { CorDesenho, Desenho } from "../map/trilhas";
+import type { CorDesenho, Desenho, FormaPino, Pino } from "../map/trilhas";
 import type { MapaAtlas } from "./schemas";
 
 // Lógica pura do mapa do time: o que cada camada desenha e o que o painel mostra ao clicar.
+// Linguagem visual: a FORMA diz a camada e a COR diz o desfecho, na mesma escala em todas as camadas.
 
 export const JANELAS = ["0-5", "5-10", "10-15", "15-20", "20-25", "25-30", "30+"] as const;
 export type FiltroJanela = (typeof JANELAS)[number] | "todas";
@@ -10,8 +11,10 @@ export type FiltroJanela = (typeof JANELAS)[number] | "todas";
 export const CAMADAS = ["calor", "zonas", "wards", "smokes", "objetivos", "lutas", "farm"] as const;
 export type Camada = (typeof CAMADAS)[number];
 
-export type Filtro = Readonly<{ camadas: ReadonlySet<Camada>; janela: FiltroJanela; intencao: string }>;
+// maximoDeSetas: quantos smokes viram seta (os mais repetidos); null mostra todos.
+export type Filtro = Readonly<{ camadas: ReadonlySet<Camada>; janela: FiltroJanela; intencao: string; maximoDeSetas?: number | null }>;
 export const TODAS_AS_INTENCOES = "todas";
+export const SETAS_POR_PADRAO = 10;
 
 export type Preparo = MapaAtlas["objetivos"][number]["preparo"][number];
 export type ItemDoMapa = Readonly<{
@@ -29,19 +32,31 @@ export function janelaDoTempo(tempo: string): FiltroJanela {
   return JANELAS[Math.floor(minuto / 5)] ?? "todas";
 }
 
+/* Desfecho: a única coisa que a cor comunica */
+
+export type Desfecho = "certo" | "errado" | "neutro";
+export const COR_DESFECHO = { certo: "radiant", errado: "dire", neutro: "texto-3" } as const satisfies Record<Desfecho, CorDesenho>;
+
+type Resultado = MapaAtlas["smokes"][number]["resultado"];
+
+// Smoke deu certo com kill ou objetivo, errado quando falhou; farm e nada são neutros. Vence a maior fatia.
+export function desfechoDoSmoke(r: Resultado): Desfecho {
+  const certo = r.kill + r.objetivo;
+  const neutro = r.farm + r.nada;
+  if (certo >= r.falhou && certo >= neutro) return "certo";
+  return r.falhou >= neutro ? "errado" : "neutro";
+}
+
+const MARGEM_DA_LUTA = 0.05;
+export const desfechoDaLuta = (vitoria: number): Desfecho =>
+  vitoria >= 0.5 + MARGEM_DA_LUTA ? "certo" : vitoria <= 0.5 - MARGEM_DA_LUTA ? "errado" : "neutro";
+
+// Ward que sobrevive cumpriu o papel; a que quase sempre cai foi posta onde o adversário limpa.
+export const desfechoDaWard = (destruida: number | undefined): Desfecho =>
+  destruida === undefined ? "neutro" : destruida <= 0.35 ? "certo" : destruida >= 0.6 ? "errado" : "neutro";
+
 const pct = (v: number) => `${Math.round(v * 100)}%`;
 const ROTULO_WARD = { obs: "Observer", sen: "Sentry" } as const;
-const COR_WARD = { obs: "destaque", sen: "info" } as const satisfies Record<keyof typeof ROTULO_WARD, CorDesenho>;
-const RESULTADOS = ["kill", "objetivo", "farm", "nada", "falhou"] as const;
-type Resultado = Record<(typeof RESULTADOS)[number], number>;
-const COR_RESULTADO = { kill: "radiant", objetivo: "info", farm: "neutro", nada: "neutro", falhou: "dire" } as const satisfies Record<keyof Resultado, CorDesenho>;
-const COR_FARM = { pos1: "texto", pos2: "info" } as const satisfies Record<string, CorDesenho>;
-
-export const resultadoPrincipal = (r: Resultado): keyof Resultado =>
-  RESULTADOS.reduce<keyof Resultado>((melhor, chave) => (r[chave] > r[melhor] ? chave : melhor), "kill");
-
-// ponytail: só os smokes mais repetidos da janela viram seta; o arquivo traz mais de 150 por janela e o resto vira ruído.
-export const MAXIMO_DE_SMOKES = 25;
 
 const ROTULO_POS = { pos1: "Pos 1", pos2: "Pos 2" } as const;
 const ROTULO_GRUPO: Readonly<Record<string, string>> = {
@@ -65,6 +80,10 @@ const distribuicao = (partes: Readonly<Record<string, number>> | undefined): str
 
 export const intencoesDosWards = (mapa: MapaAtlas): string[] => [...new Set(mapa.wards.map((w) => w.intencao))].sort();
 
+/** Smokes da janela, do mais repetido ao menos, com a posição no arquivo. */
+export const smokesDaJanela = (mapa: MapaAtlas, janela: FiltroJanela) =>
+  mapa.smokes.flatMap((s, i) => (naJanela(s.janela, janela) ? [{ s, i }] : [])).toSorted((a, b) => b.s.n - a.s.n);
+
 /* Itens clicáveis: o id é camada:posição no arquivo, estável qualquer que seja o filtro. */
 
 const ITENS: Record<Camada, (mapa: MapaAtlas, filtro: Filtro) => ItemDoMapa[]> = {
@@ -78,14 +97,15 @@ const ITENS: Record<Camada, (mapa: MapaAtlas, filtro: Filtro) => ItemDoMapa[]> =
     numeros: [["Tipo", ROTULO_WARD[w.tipo]], ...opcional("n", w.n), ["Por partida", numero(w.peso)], ["Janela", w.janela],
       ...opcional("Destruída", w.destruida_pct, pct), ...opcional("Duração mediana", w.duracao_mediana_s, (v) => `${Math.round(v)} s`)],
   }] : [])),
-  smokes: (mapa, filtro) => mapa.smokes
-    .flatMap((s, i) => (naJanela(s.janela, filtro.janela) ? [{ s, i }] : []))
-    .toSorted((a, b) => b.s.n - a.s.n).slice(0, MAXIMO_DE_SMOKES)
-    .map(({ s, i }) => ({
+  smokes: (mapa, filtro) => {
+    const todos = smokesDaJanela(mapa, filtro.janela);
+    const limite = filtro.maximoDeSetas === undefined ? SETAS_POR_PADRAO : filtro.maximoDeSetas;
+    return (limite === null ? todos : todos.slice(0, limite)).map(({ s, i }) => ({
       id: `smokes:${i}`, camada: "smokes", titulo: `Smoke, ${s.n} vezes`, texto: s.texto,
       numeros: [["n", String(s.n)], ["Kill", pct(s.resultado.kill)], ["Objetivo", pct(s.resultado.objetivo)], ["Farm", pct(s.resultado.farm)],
         ["Nada", pct(s.resultado.nada)], ["Falhou", pct(s.resultado.falhou)], ["Janela", s.janela], ...opcional("Heróis juntos", s.herois_medio)],
-    })),
+    }));
+  },
   objetivos: (mapa) => mapa.objetivos.map((o, i) => ({
     id: `objetivos:${i}`, camada: "objetivos", titulo: `Preparo de ${nomeDoObjetivo(o.tipo, o.grupo)}`, texto: o.texto,
     numeros: [...opcional("n", o.n), ...opcional("Minuto mediano", o.minuto_mediano), ["Passos de preparo", String(o.preparo.length)]],
@@ -125,7 +145,9 @@ export const itensDoMapa = (mapa: MapaAtlas, filtro: Filtro): ItemDoMapa[] =>
 
 /* Desenhos */
 
-const pino = (id: string, [x, y]: Ponto, cor: CorDesenho, raio: number, rotulo: string, extra: Partial<Pick<Extract<Desenho, { tipo: "pino" }>, "texto" | "opacidade" | "clicavel" | "porCima">> = {}): Desenho =>
+type Extra = Partial<Pick<Pino, "texto" | "opacidade" | "clicavel" | "porCima" | "forma" | "vazado" | "conteudo">>;
+
+const pino = (id: string, [x, y]: Ponto, cor: CorDesenho, raio: number, rotulo: string, extra: Extra = {}): Pino =>
   ({ tipo: "pino", id, x, y, cor, raio, rotulo, clicavel: true, opacidade: 1, ...extra });
 
 // Duas asas curtas no fim da linha, para a seta funcionar igual no SVG e no 3D.
@@ -150,72 +172,89 @@ function desenhosDoCalor(mapa: MapaAtlas, filtro: Filtro): Desenho[] {
   }));
 }
 
+const FORMA_DO_OBJETIVO: Readonly<Record<string, FormaPino>> = { roshan: "roshan", tormentor: "tormentor", torre: "torre" };
+const FORMA_DO_PASSO: Readonly<Record<string, FormaPino>> = { ward: "losango", smoke: "circulo" };
+
 function desenhosDoObjetivo(mapa: MapaAtlas, item: ItemDoMapa, aberto: boolean): Desenho[] {
   const o = mapa.objetivos[Number(item.id.split(":")[1])];
   if (!o) return [];
   // Por cima: o objetivo não pode ficar embaixo de um ponto de farm no mesmo lugar.
-  const marcador = pino(item.id, [o.x, o.y], "neutro", 0.02, item.titulo, { porCima: true });
+  const marcador = pino(item.id, [o.x, o.y], "texto-2", 0.02, item.titulo, { porCima: true, forma: FORMA_DO_OBJETIVO[o.tipo] ?? "circulo" });
   if (!aberto || !item.preparo) return [marcador];
   // Presença não tem lugar no mapa: só ward e smoke com posição viram ponto.
   const comLugar = item.preparo.flatMap((p) => (p.x === undefined || p.y === undefined ? [] : [{ ...p, ponto: [p.x, p.y] satisfies Ponto }]));
   const passos = comLugar.map((p, k) => pino(`${item.id}:preparo:${k}`, p.ponto, "destaque", 0.012, `${p.acao} em T${p.t_rel_s} s`,
-    { clicavel: false, texto: `${p.t_rel_s}s ${p.acao}${p.freq === undefined ? "" : ` ${pct(p.freq)}`}` }));
-  const trajeto: Desenho = { tipo: "linha", id: `${item.id}:trajeto`, pontos: [...comLugar.map((p) => p.ponto), [o.x, o.y]], cor: "destaque", espessura: 0.003 };
+    { clicavel: false, forma: FORMA_DO_PASSO[p.acao] ?? "circulo", texto: `${p.t_rel_s}s ${p.acao}${p.freq === undefined ? "" : ` ${pct(p.freq)}`}` }));
+  const trajeto: Desenho = { tipo: "linha", id: `${item.id}:trajeto`, pontos: [...comLugar.map((p) => p.ponto), [o.x, o.y]], cor: "destaque", espessura: 0.003, tracejada: true };
   return [trajeto, ...passos, marcador];
 }
 
 const ZONA_COM_ROTULO = 0.08;
 const indice = (id: string) => Number(id.split(":").at(-1));
 
-const DESENHOS: Record<Exclude<Camada, "calor" | "objetivos">, (mapa: MapaAtlas, item: ItemDoMapa) => Desenho[]> = {
+// Escalas que dependem do conjunto visível (o smoke mais repetido define a seta mais grossa).
+type Escala = { maiorN: number; maiorPeso: number };
+
+const DESENHOS: Record<Exclude<Camada, "calor" | "objetivos">, (mapa: MapaAtlas, item: ItemDoMapa, escala: Escala) => Desenho[]> = {
   zonas: (mapa, item) => {
     const z = mapa.zonas[indice(item.id)];
     // Só as zonas com tempo de verdade ganham rótulo; com 24 zonas por janela, todos os rótulos cobririam o mapa.
-    return z ? [pino(item.id, [z.x, z.y], "info", 0.012 + 0.03 * z.tempo_pct, item.titulo, z.tempo_pct >= ZONA_COM_ROTULO ? { texto: z.rotulo } : {})] : [];
+    return z ? [pino(item.id, [z.x, z.y], "texto-3", 0.012 + 0.03 * z.tempo_pct, item.titulo, { vazado: true, ...(z.tempo_pct >= ZONA_COM_ROTULO ? { texto: z.rotulo } : {}) })] : [];
   },
-  wards: (mapa, item) => {
+  wards: (mapa, item, { maiorPeso }) => {
     const w = mapa.wards[indice(item.id)];
-    const maiorPeso = Math.max(1e-9, ...mapa.wards.map((x) => x.peso));
-    return w ? [pino(item.id, [w.x, w.y], COR_WARD[w.tipo], 0.008 + 0.008 * (w.peso / maiorPeso), item.titulo)] : [];
+    if (!w) return [];
+    const cor = COR_DESFECHO[desfechoDaWard(w.destruida_pct)];
+    return [pino(item.id, [w.x, w.y], cor, 0.009 + 0.008 * (w.peso / maiorPeso), item.titulo, { forma: "losango", vazado: w.tipo === "sen" })];
   },
-  smokes: (mapa, item) => {
+  smokes: (mapa, item, { maiorN }) => {
     const s = mapa.smokes[indice(item.id)];
     if (!s) return [];
     const de: Ponto = [s.x, s.y];
-    const cor = COR_RESULTADO[resultadoPrincipal(s.resultado)];
-    if (s.destino_x === null || s.destino_y === null) return [pino(item.id, de, cor, 0.011, item.titulo)];
+    const cor = COR_DESFECHO[desfechoDoSmoke(s.resultado)];
+    const origem = pino(item.id, de, cor, 0.009, item.titulo);
+    if (s.destino_x === null || s.destino_y === null) return [origem];
     const para: Ponto = [s.destino_x, s.destino_y];
-    const espessura = Math.min(0.012, 0.002 + 0.0008 * s.n);
+    // Espessura proporcional ao n: o smoke mais repetido da tela tem a seta mais grossa.
+    const espessura = 0.0018 + 0.0072 * (s.n / maiorN);
     return [
-      { tipo: "linha", id: `${item.id}:rastro`, pontos: [de, para], cor, espessura },
-      { tipo: "linha", id: `${item.id}:seta`, pontos: pontaDaSeta(de, para), cor, espessura },
-      pino(item.id, de, cor, 0.011, item.titulo),
+      { tipo: "linha", id: `${item.id}:rastro`, pontos: [de, para], cor, espessura, tracejada: true },
+      { tipo: "linha", id: `${item.id}:seta`, pontos: pontaDaSeta(de, para, 0.024 + espessura), cor, espessura: Math.max(espessura, 0.004) },
+      origem,
     ];
   },
   lutas: (mapa, item) => {
     const l = mapa.lutas[indice(item.id)];
-    return l ? [pino(item.id, [l.x, l.y], l.vitoria_pct >= 0.5 ? "radiant" : "dire", 0.01 + 0.004 * Math.sqrt(l.n), item.titulo, { texto: pct(l.vitoria_pct) })] : [];
+    const raio = Math.min(0.03, 0.015 + 0.003 * Math.sqrt(l?.n ?? 0));
+    return l ? [pino(item.id, [l.x, l.y], COR_DESFECHO[desfechoDaLuta(l.vitoria_pct)], raio, item.titulo, { conteudo: pct(l.vitoria_pct) })] : [];
   },
   farm: (mapa, item) => {
     const pos = item.id.split(":")[1] === "pos2" ? "pos2" : "pos1";
     const p = mapa.farm[pos][indice(item.id)];
-    return p ? [pino(item.id, [p.x, p.y], COR_FARM[pos], 0.009, item.titulo, { texto: p.t })] : [];
+    // O número dentro é o minuto: a trilha se lê 0, 1, 2… sem rótulo ao lado.
+    return p ? [pino(item.id, [p.x, p.y], "texto-2", 0.011, item.titulo, { forma: pos === "pos1" ? "quadrado" : "circulo", conteudo: p.t.split(":")[0] })] : [];
   },
 };
 
 function rotasDeFarm(itens: readonly ItemDoMapa[], mapa: MapaAtlas): Desenho[] {
   return (["pos1", "pos2"] as const).flatMap((pos): Desenho[] => {
     const pontos = itens.filter((i) => i.id.startsWith(`farm:${pos}:`)).map((i) => mapa.farm[pos][indice(i.id)]).flatMap((p): Ponto[] => (p ? [[p.x, p.y]] : []));
-    return pontos.length >= 2 ? [{ tipo: "linha", id: `farm:${pos}:rota`, pontos, cor: COR_FARM[pos], espessura: 0.004 }] : [];
+    return pontos.length >= 2 ? [{ tipo: "linha", id: `farm:${pos}:rota`, pontos, cor: "texto-2", espessura: 0.003, tracejada: pos === "pos2" }] : [];
   });
+}
+
+function escalaDosItens(itens: readonly ItemDoMapa[], mapa: MapaAtlas): Escala {
+  const ns = itens.filter((i) => i.camada === "smokes").map((i) => mapa.smokes[indice(i.id)]?.n ?? 0);
+  return { maiorN: Math.max(1, ...ns), maiorPeso: Math.max(1e-9, ...mapa.wards.map((w) => w.peso)) };
 }
 
 export function desenhosDoMapa(mapa: MapaAtlas, filtro: Filtro, aberto: string | null): Desenho[] {
   const itens = itensDoMapa(mapa, filtro);
+  const escala = escalaDosItens(itens, mapa);
   const calor = filtro.camadas.has("calor") ? desenhosDoCalor(mapa, filtro) : [];
   const marcadores = itens.flatMap((item) =>
     item.camada === "objetivos" ? desenhosDoObjetivo(mapa, item, item.id === aberto)
       : item.camada === "calor" ? []
-        : DESENHOS[item.camada](mapa, item));
+        : DESENHOS[item.camada](mapa, item, escala));
   return [...calor, ...rotasDeFarm(itens, mapa), ...marcadores];
 }

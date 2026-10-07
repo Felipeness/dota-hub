@@ -7,7 +7,8 @@ import {
   VISTA_PLANA_INICIAL, arrastarVista, fatorDaRoda, foiArraste, pontoNoTabuleiro, zoomNoPonto,
   type Ponto2, type VistaPlana,
 } from "./navegacao";
-import { opacidadeDaMancha, type Desenho } from "./trilhas";
+import { BotaoDoPino } from "./BotaoDoPino";
+import { opacidadeDaMancha, type Pino } from "./trilhas";
 
 const pontosSvg = (pontos: readonly Ponto[]) => pontos.map(([x, y]) => `${x},${1 - y}`).join(" ");
 
@@ -25,7 +26,7 @@ export function MapFlat({ objetivos, rota, trilhas = [], marcas = [], manchas = 
             <polyline key={t.id} className={`trilha trilha-${t.lado}${t.destaque ? " destaque" : ""}`} points={pontosSvg(t.rastro)} />
           ))}
           {desenhos.map((d) => d.tipo === "linha" && (
-            <polyline key={d.id} className="desenho-linha" points={pontosSvg(d.pontos)} style={{ stroke: `var(--cor-${d.cor})`, strokeWidth: d.espessura }} />
+            <polyline key={d.id} className={`desenho-linha${d.tracejada ? " tracejada" : ""}`} points={pontosSvg(d.pontos)} style={{ stroke: `var(--cor-${d.cor})`, strokeWidth: d.espessura }} />
           ))}
         </svg>
         {objetivos.map((o) => (
@@ -60,15 +61,13 @@ export function MapFlat({ objetivos, rota, trilhas = [], marcas = [], manchas = 
   );
 }
 
-type Pino = Extract<Desenho, { tipo: "pino" }>;
-
 function PinoPlano({ pino, ativo, onSelecionar }: { pino: Pino; ativo: boolean; onSelecionar: (id: string) => void }) {
   const estilo: CSSProperties & Record<"--cor-desenho", string> = { ...normToPercent([pino.x, pino.y]), width: `${pino.raio * 200}%`, opacity: pino.opacidade, "--cor-desenho": `var(--cor-${pino.cor})` };
   const texto = pino.texto && <span className="pino-texto" style={normToPercent([pino.x, pino.y])}>{pino.texto}</span>;
   if (!pino.clicavel) return <><span className="pino pino-mancha" style={estilo} />{texto}</>;
   return (
     <>
-      <button className={`pino${pino.porCima ? " por-cima" : ""}${ativo ? " ativo" : ""}`} style={estilo} aria-label={pino.rotulo} title={pino.rotulo} aria-pressed={ativo} onClick={() => onSelecionar(pino.id)} />
+      <BotaoDoPino pino={pino} ativo={ativo} estilo={estilo} onSelecionar={onSelecionar} />
       {texto}
     </>
   );

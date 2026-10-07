@@ -75,6 +75,19 @@ it("o mapa de estilos pinta por cluster, mostra os polos e marca a fronteira", a
 });
 
 describe("tela do time", () => {
+  it("abre só com Smokes e a leitura do mapa explica a camada com os dados da janela", async () => {
+    abrir("/times/time-exemplo-a");
+    expect(await screen.findByRole("button", { name: "Smokes" })).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByRole("button", { name: "Calor" })).toHaveAttribute("aria-pressed", "false");
+    const leitura = screen.getByText("O que este mapa mostra").closest("details");
+    if (!leitura) throw new Error("sem o painel de leitura");
+    expect(within(leitura).getByRole("heading", { name: "Smokes" })).toBeInTheDocument();
+    expect(within(leitura).queryByRole("heading", { name: "Wards" })).toBeNull();
+    expect(leitura).toHaveTextContent("Na partida inteira: 10 smokes em 1 trajetos. 70% terminam em kill ou objetivo e 10% falham.");
+    fireEvent.click(screen.getByRole("button", { name: "Wards" }));
+    expect(within(leitura).getByRole("list", { name: "Símbolos de Wards" })).toHaveTextContent("sentry");
+  });
+
   it("ordena as seções, rebaixa os títulos do Markdown e põe a tabela numa área com rolagem própria", async () => {
     abrir("/times/time-exemplo-a");
     const secoes = await screen.findAllByRole("region");
@@ -115,7 +128,8 @@ describe("tela do time", () => {
 
   it("clicar num objetivo mostra a linha do tempo do preparo até T=0", async () => {
     abrir("/times/time-exemplo-a");
-    fireEvent.click(await screen.findByRole("button", { name: "Preparo de Roshan (fosso de cima)" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Objetivos" }));
+    fireEvent.click(screen.getByRole("button", { name: "Preparo de Roshan (fosso de cima)" }));
     const painel = screen.getByRole("complementary", { name: "Preparo de Roshan (fosso de cima)" });
     const passos = within(painel).getAllByRole("listitem").map((li) => li.textContent);
     expect(passos).toEqual(["T-150spush", "T-90sward 40% · presença 1,5 heróis", "T-45ssmoke 30%", "T=0objetivo"]);
@@ -124,6 +138,7 @@ describe("tela do time", () => {
   it("a janela de tempo tira os marcadores de fora dela", async () => {
     abrir("/times/time-exemplo-a");
     expect(await screen.findByRole("button", { name: "Smoke, 10 vezes" })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Objetivos" }));
     fireEvent.click(screen.getByRole("button", { name: "10-15" }));
     expect(screen.queryByRole("button", { name: "Smoke, 10 vezes" })).toBeNull();
     expect(screen.getByRole("button", { name: "Smoke, 7 vezes" })).toBeInTheDocument();

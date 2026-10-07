@@ -7,6 +7,7 @@ import { useData } from "../data/useData";
 import type { MapViewProps, Tracado } from "./MapView";
 import { alturaEm, normToWorld, type Ponto } from "./coords";
 import { caixaDoFoco, distanciaParaEnquadrar, foiArraste, posicaoDaCamera, prenderAlvo, type Caixa } from "./navegacao";
+import { BotaoDoPino } from "./BotaoDoPino";
 import { SeloDaRota } from "./SeloDaRota";
 import { caminhoDaFuga, selosDaRota, trechosDaRota } from "./selos";
 import { texturaDoMapa } from "./textura";
@@ -154,7 +155,7 @@ function Desenhos({ desenhos, selecionado, noChao, onSelecionar }: { desenhos: r
   return desenhos.map((d) => {
     const cor = corDoToken(`--cor-${d.cor}`);
     if (d.tipo === "linha") {
-      return d.pontos.length >= 2 && <Line key={d.id} points={d.pontos.map((p) => noChao(p, 0.5))} color={cor} lineWidth={Math.max(1.5, d.espessura * 700)} />;
+      return d.pontos.length >= 2 && <Line key={d.id} points={d.pontos.map((p) => noChao(p, 0.5))} color={cor} lineWidth={Math.max(1.5, d.espessura * 700)} dashed={d.tracejada} dashSize={1.6} gapSize={1.1} />;
     }
     if (!d.clicavel) {
       return (
@@ -169,8 +170,7 @@ function Desenhos({ desenhos, selecionado, noChao, onSelecionar }: { desenhos: r
     return (
       <Html key={d.id} position={noChao([d.x, d.y], 1.2)} center zIndexRange={d.porCima ? [14, 14] : [13, 13]}>
         <span className="pino-3d">
-          <button className={`pino${ativo ? " ativo" : ""}`} aria-label={d.rotulo} title={d.rotulo} aria-pressed={ativo}
-            style={estiloDoPino(d.raio, d.opacidade, cor)} onClick={() => onSelecionar(d.id)} />
+          <BotaoDoPino pino={d} ativo={ativo} estilo={estiloDoPino(d.raio, d.opacidade, cor)} onSelecionar={onSelecionar} />
           {d.texto && <span className="pino-texto">{d.texto}</span>}
         </span>
       </Html>
