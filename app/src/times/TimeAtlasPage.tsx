@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router";
 import { Indisponivel, useData } from "../data/useData";
 import { MapView } from "../map/MapView";
 import {
-  CAMADAS, JANELAS, TODAS_AS_INTENCOES, desenhosDoMapa, intencoesDosWards, itensDoMapa,
+  CAMADAS, JANELAS, MAXIMO_DE_SMOKES, TODAS_AS_INTENCOES, desenhosDoMapa, intencoesDosWards, itensDoMapa, linhasDoPreparo,
   type Camada, type Filtro, type FiltroJanela, type ItemDoMapa, type Preparo,
 } from "./camadas";
 import { timeAtlasSchema, type Confianca, type TimeAtlas } from "./schemas";
@@ -95,7 +95,7 @@ function AtlasDoTime({ time }: { time: TimeAtlas }) {
             </MapView>
             {item
               ? <PainelDoItem item={item} onFechar={() => setAberto(null)} />
-              : <p className="atlas-dica">{itens.length} marcadores nesta janela. Clique num deles para ler o padrão.</p>}
+              : <p className="atlas-dica">{itens.length} marcadores nesta janela{camadas.has("smokes") ? ` (smokes: os ${MAXIMO_DE_SMOKES} mais repetidos)` : ""}. Clique num deles para ler o padrão.</p>}
           </div>
           <Legenda />
         </div>
@@ -112,12 +112,12 @@ function AtlasDoTime({ time }: { time: TimeAtlas }) {
               <div className="painel-texto"><ReactMarkdown>{s.texto_md}</ReactMarkdown></div>
             </section>
           ))}
-          <section className="atlas-secao">
+          {time.roster.length > 0 && <section className="atlas-secao">
             <h2>Roster</h2>
             <ul className="atlas-roster">{time.roster.toSorted((a, b) => a.pos - b.pos).map((j) => (
               <li key={j.account_id}><span className="numero">pos {j.pos}</span> {j.nick}</li>
             ))}</ul>
-          </section>
+          </section>}
         </div>
       </div>
     </section>
@@ -151,12 +151,11 @@ function LinhaDoPreparo({ preparo }: { preparo: readonly Preparo[] }) {
     <figure className="atlas-preparo">
       <figcaption>Preparo, de T-180 s até o objetivo</figcaption>
       <div className="atlas-preparo-barra" aria-hidden="true">
-        {preparo.map((p, k) => <span key={k} className="atlas-preparo-ponto" style={{ left: posicaoNoPreparo(p.t_rel_s) }} title={p.acao} />)}
+        {preparo.map((p, k) => <span key={k} className="atlas-preparo-ponto" style={{ left: posicaoNoPreparo(p.t_rel_s) }} />)}
         <span className="atlas-preparo-fim" />
       </div>
       <ol className="linha-do-tempo">
-        {preparo.map((p, k) => <li key={k}><span className="tempo">T{p.t_rel_s}s</span><strong>{p.acao}</strong></li>)}
-        <li><span className="tempo">T=0</span><strong>objetivo</strong></li>
+        {linhasDoPreparo(preparo).map(({ t, texto }) => <li key={t}><span className="tempo">{t === 0 ? "T=0" : `T${t}s`}</span><strong>{texto}</strong></li>)}
       </ol>
     </figure>
   );
@@ -165,6 +164,7 @@ function LinhaDoPreparo({ preparo }: { preparo: readonly Preparo[] }) {
 function ComoJogarContra({ gameplan }: { gameplan: TimeAtlas["gameplan_contra"] }) {
   const conhecidas = Object.keys(ROTULO_GAMEPLAN).filter((k) => gameplan[k]);
   const novas = Object.keys(gameplan).filter((k) => !(k in ROTULO_GAMEPLAN));
+  if (conhecidas.length + novas.length === 0) return null;
   return (
     <section className="atlas-contra" aria-labelledby="titulo-contra">
       <h2 id="titulo-contra">Como jogar contra</h2>

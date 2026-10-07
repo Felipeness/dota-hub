@@ -22,7 +22,7 @@ it.each([
 it("completa camadas ausentes com listas vazias", () => {
   const { mapa: _mapa, ...resto } = exemploA;
   const lido = timeAtlasSchema.parse({ ...resto, mapa: {} });
-  expect(lido.mapa).toEqual({ zonas: [], calor: null, wards: [], smokes: [], objetivos: [], lutas: [], farm: { pos1: [], pos2: [] } });
+  expect(lido.mapa).toEqual({ zonas: [], calor: null, calor_por_janela: [], wards: [], smokes: [], objetivos: [], lutas: [], farm: { pos1: [], pos2: [] } });
 });
 
 it.each([
@@ -37,4 +37,12 @@ it.each([
 it("recusa confiança fora de alta, média e baixa", () => {
   const secoes = [{ ...exemploA.secoes[0], confianca: "certeza" }];
   expect(timeAtlasSchema.safeParse({ ...exemploA, secoes }).success).toBe(false);
+});
+
+it("aceita presença sem posição no preparo e smoke sem a chave farm", () => {
+  const objetivo = { ...exemploA.mapa.objetivos[0], preparo: [{ t_rel_s: -150, acao: "presenca", herois_perto_medio: 0.43 }] };
+  const smoke = { ...exemploA.mapa.smokes[0], resultado: { kill: 0.5, objetivo: 0, nada: 0.5, falhou: 0 } };
+  const lido = timeAtlasSchema.parse({ ...exemploA, mapa: { objetivos: [objetivo], smokes: [smoke] } });
+  expect(lido.mapa.objetivos[0]?.preparo[0]).toEqual({ t_rel_s: -150, acao: "presenca", herois_perto_medio: 0.43 });
+  expect(lido.mapa.smokes[0]?.resultado.farm).toBe(0);
 });

@@ -77,28 +77,30 @@ describe("tela do time", () => {
 
   it("clicar no marcador do smoke abre o painel com o texto e o n", async () => {
     abrir("/times/time-exemplo-a");
-    fireEvent.click(await screen.findByRole("button", { name: "Smoke, 7 vezes" }));
-    const painel = screen.getByRole("complementary", { name: "Smoke, 7 vezes" });
-    expect(within(painel).getByText("EXEMPLO: smoke da selva própria para o triângulo inimigo.")).toBeInTheDocument();
-    expect(within(painel).getByText("n").nextSibling).toHaveTextContent("7");
+    fireEvent.click(await screen.findByRole("button", { name: "Smoke, 10 vezes" }));
+    const painel = screen.getByRole("complementary", { name: "Smoke, 10 vezes" });
+    expect(within(painel).getByText("EXEMPLO: agregado de todas as janelas.")).toBeInTheDocument();
+    expect(within(painel).getByText("n").nextSibling).toHaveTextContent("10");
+    expect(within(painel).getByText("Farm").nextSibling).toHaveTextContent("10%");
     fireEvent.click(within(painel).getByRole("button", { name: "Fechar" }));
-    expect(screen.queryByRole("complementary", { name: "Smoke, 7 vezes" })).toBeNull();
+    expect(screen.queryByRole("complementary", { name: "Smoke, 10 vezes" })).toBeNull();
   });
 
   it("clicar num objetivo mostra a linha do tempo do preparo até T=0", async () => {
     abrir("/times/time-exemplo-a");
-    fireEvent.click(await screen.findByRole("button", { name: "Preparo de roshan" }));
-    const painel = screen.getByRole("complementary", { name: "Preparo de roshan" });
+    fireEvent.click(await screen.findByRole("button", { name: "Preparo de Roshan (fosso de cima)" }));
+    const painel = screen.getByRole("complementary", { name: "Preparo de Roshan (fosso de cima)" });
     const passos = within(painel).getAllByRole("listitem").map((li) => li.textContent);
-    expect(passos).toEqual(["T-150spush", "T-90sward", "T-45ssmoke", "T=0objetivo"]);
+    expect(passos).toEqual(["T-150spush", "T-90sward 40% · presença 1,5 heróis", "T-45ssmoke 30%", "T=0objetivo"]);
   });
 
   it("a janela de tempo tira os marcadores de fora dela", async () => {
     abrir("/times/time-exemplo-a");
-    expect(await screen.findByRole("button", { name: "Smoke, 7 vezes" })).toBeInTheDocument();
-    fireEvent.click(screen.getByRole("button", { name: "0-5" }));
-    expect(screen.queryByRole("button", { name: "Smoke, 7 vezes" })).toBeNull();
-    expect(screen.getByRole("button", { name: "Preparo de roshan" })).toBeInTheDocument();
+    expect(await screen.findByRole("button", { name: "Smoke, 10 vezes" })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "10-15" }));
+    expect(screen.queryByRole("button", { name: "Smoke, 10 vezes" })).toBeNull();
+    expect(screen.getByRole("button", { name: "Smoke, 7 vezes" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Preparo de Roshan (fosso de cima)" })).toBeInTheDocument();
   });
 
   it("ligar a camada de lutas desenha os marcadores dela", async () => {
@@ -106,6 +108,6 @@ describe("tela do time", () => {
     const botao = await screen.findByRole("button", { name: "Lutas" });
     expect(botao).toHaveAttribute("aria-pressed", "false");
     fireEvent.click(botao);
-    expect(screen.getByRole("button", { name: "Luta, 67% de vitória" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Luta, 62% de vitória" })).toBeInTheDocument();
   });
 });

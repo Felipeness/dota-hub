@@ -26,21 +26,37 @@ export const indiceAtlasSchema = z.object({
 const zonaSchema = z.object({ zona: z.string(), rotulo: z.string(), ...coordenada, tempo_pct: fracao, janela });
 // valores[j][i]: j é a linha a partir de baixo (y) e i a coluna (x), na mesma orientação das coordenadas.
 const calorSchema = z.object({ janela, grade: z.number().int().positive(), valores: z.array(z.array(z.number().min(0))) });
+// Os campos opcionais vêm do agregado real (dota-tier1/data/ESQUEMA.md); o contrato mínimo não os exige.
 const wardSchema = z.object({
   ...coordenada, tipo: z.enum(["obs", "sen"]), janela, peso: z.number().min(0), intencao: z.string(), texto: z.string(),
+  n: z.number().int().optional(), intencoes: z.record(z.string(), fracao).optional(),
+  destruida_pct: fracao.optional(), duracao_mediana_s: z.number().optional(),
 });
 const smokeSchema = z.object({
-  ...coordenada, destino_x: fracao, destino_y: fracao, janela, n: z.number().int().nonnegative(),
-  resultado: z.object({ kill: fracao, objetivo: fracao, nada: fracao, falhou: fracao }), texto: z.string(),
+  // Destino nulo: o Smoke não quebrou em nenhum lugar registrado; só a origem vai para o mapa.
+  ...coordenada, destino_x: fracao.nullable(), destino_y: fracao.nullable(), janela, n: z.number().int().nonnegative(),
+  resultado: z.object({ kill: fracao, objetivo: fracao, farm: fracao.default(0), nada: fracao, falhou: fracao }), texto: z.string(),
+  herois_medio: z.number().optional(),
 });
-const preparoSchema = z.object({ t_rel_s: z.number().max(0), acao: z.string(), ...coordenada });
-const objetivoAtlasSchema = z.object({ tipo: z.string(), ...coordenada, preparo: z.array(preparoSchema), texto: z.string() });
-const lutaSchema = z.object({ ...coordenada, janela, n: z.number().int().nonnegative(), vitoria_pct: fracao, texto: z.string() });
-const pontoFarmSchema = z.object({ t: z.string().regex(/^\d+:\d{2}$/), ...coordenada, rotulo: z.string() });
+// Presença (heróis perto do objetivo) não tem posição: x e y só vêm em ward e smoke.
+const preparoSchema = z.object({
+  t_rel_s: z.number().max(0), acao: z.string(), x: fracao.optional(), y: fracao.optional(),
+  freq: fracao.optional(), herois_perto_medio: z.number().optional(),
+});
+const objetivoAtlasSchema = z.object({
+  tipo: z.string(), ...coordenada, preparo: z.array(preparoSchema), texto: z.string(),
+  grupo: z.string().optional(), n: z.number().int().optional(), minuto_mediano: z.number().optional(),
+});
+const lutaSchema = z.object({ ...coordenada, janela, n: z.number().int().nonnegative(), vitoria_pct: fracao, texto: z.string(), iniciou_pct: fracao.optional() });
+const pontoFarmSchema = z.object({
+  t: z.string().regex(/^\d+:\d{2}$/), ...coordenada, rotulo: z.string(),
+  zona_pct: fracao.optional(), atividade: z.string().optional(), n: z.number().int().optional(),
+});
 
 export const mapaAtlasSchema = z.object({
   zonas: z.array(zonaSchema).default([]),
   calor: calorSchema.nullable().default(null),
+  calor_por_janela: z.array(calorSchema).default([]),
   wards: z.array(wardSchema).default([]),
   smokes: z.array(smokeSchema).default([]),
   objetivos: z.array(objetivoAtlasSchema).default([]),
