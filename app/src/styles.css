@@ -594,6 +594,24 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .ao-vivo table { border-collapse: collapse; font-variant-numeric: tabular-nums; }
 .ao-vivo th, .ao-vivo td { padding: var(--espaco-1) var(--espaco-3); border-bottom: 1px solid var(--cor-linha); text-align: left; }
 .ao-vivo a { color: var(--cor-info); }
+.ao-vivo h1 { font-weight: 700; font-size: 40px; }
+.ao-vivo-explicacao { display: flex; flex-direction: column; gap: var(--espaco-2); max-width: 70ch; color: var(--cor-texto-2); font-size: 15px; line-height: 1.55; }
+.ao-vivo-explicacao p { margin: 0; color: var(--cor-texto-leitura); }
+.ao-vivo-explicacao dl { margin: 0; display: grid; gap: var(--espaco-1); }
+.ao-vivo-explicacao dt { display: inline; font-weight: 600; color: var(--cor-texto); }
+.ao-vivo-explicacao dt::after { content: ": "; }
+.ao-vivo-explicacao dd { display: inline; margin: 0; }
+.ao-vivo-exemplos { display: flex; flex-direction: column; gap: var(--espaco-2); }
+.ao-vivo-exemplos h2 { margin: 0; font-family: var(--fonte-display); font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cor-texto-3); }
+.ao-vivo-exemplos .pilula { gap: 8px; cursor: pointer; }
+.ao-vivo-exemplos .pilula:hover { border-color: var(--cor-destaque); }
+.ao-vivo-exemplo-detalhe { font-size: 11px; color: var(--cor-texto-3); }
+.ao-vivo-dica { margin: 0; font-size: 13px; color: var(--cor-texto-3); }
+.ao-vivo-dica strong { color: var(--cor-texto-2); }
+.ao-vivo-carregando { color: var(--cor-texto-2); }
+.ao-vivo-vazio { margin: 0; padding: var(--espaco-3) var(--espaco-4); border-radius: var(--raio); background: var(--cor-superficie); border: 1px solid var(--cor-linha); color: var(--cor-texto-2); }
+.ao-vivo-time { display: flex; flex-direction: column; gap: var(--espaco-1); }
+.cartoes .ao-vivo-atlas { padding: var(--espaco-2) var(--espaco-3); flex-direction: row; justify-content: center; font-size: 13px; font-weight: 600; color: var(--cor-destaque); border-color: rgb(242 181 68 / 0.45); background: var(--cor-destaque-fundo); }
 .aviso-da-fonte { border-left: 4px solid var(--cor-destaque); padding: var(--espaco-2) var(--espaco-3); background: var(--cor-superficie-2); }
 .erro-ao-vivo { border-left: 4px solid var(--cor-dire); padding: var(--espaco-2) var(--espaco-3); background: var(--cor-superficie); }
 .erro-ao-vivo button, .frescor button { min-height: var(--alvo-toque); min-width: var(--alvo-toque); }

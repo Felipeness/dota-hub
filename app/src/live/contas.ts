@@ -29,6 +29,14 @@ export function lerId(texto: string, maximoDeDigitos = 12): number | null {
   return new RegExp(`^\\d{1,${maximoDeDigitos}}$`).test(limpo) ? Number(limpo) : null;
 }
 
+// Número da conta puro ou o link do perfil no Dotabuff, OpenDota ou STRATZ (…/players/<número>).
+const LINK_DE_PERFIL = /^(?:https?:\/\/)?(?:www\.)?(?:dotabuff\.com|opendota\.com|stratz\.com)\/players\/(\d{1,12})(?:[/?#].*)?$/i;
+
+export function lerConta(texto: string): number | null {
+  const doLink = LINK_DE_PERFIL.exec(texto.trim())?.[1];
+  return doLink ? Number(doLink) : lerId(texto);
+}
+
 export function nomeDaMedalha(rankTier: number | null | undefined): string | null {
   if (!rankTier) return null;
   const medalha = MEDALHAS[Math.floor(rankTier / 10) - 1];

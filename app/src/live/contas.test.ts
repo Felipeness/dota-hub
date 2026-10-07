@@ -1,5 +1,5 @@
 import type { Consultar } from "./consulta";
-import { buscar, consultaDeBusca, lerId, montarResumo, nomeDaMedalha, resumoDaConta, venceu } from "./contas";
+import { buscar, consultaDeBusca, lerConta, lerId, montarResumo, nomeDaMedalha, resumoDaConta, venceu } from "./contas";
 import { ok } from "./erros";
 import { YATORO, consultaGravada } from "./teste/gravados";
 
@@ -30,6 +30,17 @@ it.each([
   { texto: " 321580662 ", id: 321580662 }, { texto: "abc", id: null }, { texto: "1".repeat(13), id: null }, { texto: "", id: null },
 ])("lerId('$texto') = $id", ({ texto, id }) => {
   expect(lerId(texto)).toBe(id);
+});
+
+it.each([
+  { texto: "321580662", id: 321580662 },
+  { texto: "https://www.dotabuff.com/players/321580662", id: 321580662 },
+  { texto: "opendota.com/players/106305042/matches", id: 106305042 },
+  { texto: "https://stratz.com/players/103735745?x=1", id: 103735745 },
+  { texto: "https://www.dotabuff.com/esports/teams/7119388", id: null },
+  { texto: "Yatoro", id: null },
+])("lerConta('$texto') = $id", ({ texto, id }) => {
+  expect(lerConta(texto)).toBe(id);
 });
 
 it("monta o resumo com 10 heróis, nomes, medalha, lane e partidas sem análise", () => {

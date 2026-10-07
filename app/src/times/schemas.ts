@@ -24,6 +24,8 @@ export const timeNoIndiceSchema = z.object({
   id: z.string(), nome: z.string(), tag: z.string(), partidas: z.number().int(), replays: z.number().int(),
   amostra: nivelAmostraSchema, estilo: z.string(), eixos: z.record(z.string(), z.number()),
   cluster: z.string().optional(), classificacao: classificacaoSchema.default("tier1"),
+  // Ids do time no OpenDota (rosters.csv): ligam a busca ao vivo à análise do atlas.
+  team_ids: z.array(z.number().int()).default([]),
 });
 export const indiceAtlasSchema = z.object({
   gerado_em: z.string(), periodo: z.string(), patch: z.string(),

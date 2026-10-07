@@ -54,7 +54,48 @@ it("texto de uma letra mostra a mensagem de entrada e não consulta", async () =
 
 it("busca sem resultado diz o texto buscado", async () => {
   abrir("/ao-vivo?q=zzzz", servicosCom(async ({ schema }) => ok({ valor: schema.parse([]), frescor })));
-  expect(await screen.findByText("Nada encontrado para zzzz.")).toBeInTheDocument();
+  expect(await screen.findByText(/^Nada encontrado para zzzz\. Tente o nome exato do perfil/)).toBeInTheDocument();
+});
+
+it("antes de buscar explica a busca e mostra exemplos que preenchem e buscam", async () => {
+  const { consultar, caminhos } = gravador();
+  abrir("/ao-vivo", servicosCom(consultar));
+  expect(screen.getByText(/Consulta o OpenDota agora, sem cadastro/)).toBeInTheDocument();
+  expect(screen.getByRole("searchbox")).toHaveAttribute("placeholder", "Nome do jogador, número da conta ou time");
+  expect(screen.getByText(/ID de amigo/)).toBeInTheDocument();
+  fireEvent.click(screen.getByRole("button", { name: /^Yatoro/ }));
+  expect(await screen.findByText("Buscando a conta no OpenDota…")).toBeInTheDocument();
+  expect(caminhos).toContain(`/players/${YATORO}`);
+});
+
+it("exemplo de time preenche o campo e busca pelo nome", async () => {
+  const { consultar, caminhos } = gravador();
+  abrir("/ao-vivo", servicosCom(consultar));
+  fireEvent.click(screen.getByRole("button", { name: /^Team Spirit/ }));
+  expect(screen.getByRole("searchbox")).toHaveValue("Team Spirit");
+  expect(await screen.findByRole("status")).toHaveTextContent("Buscando no OpenDota…");
+  expect(caminhos.some((c) => c.includes("Team"))).toBe(true);
+  expect(screen.queryByRole("heading", { name: "Experimente" })).toBeNull();
+});
+
+it("time do resultado que está no atlas ganha o atalho para a análise", async () => {
+  const indice = { gerado_em: "", periodo: "", patch: "7.41", eixos: [], times: [
+    { id: "team-spirit", nome: "Team Spirit", tag: "TS", partidas: 1, replays: 1, amostra: "ok", estilo: "Contato", eixos: {}, team_ids: [SPIRIT] },
+  ] };
+  vi.stubGlobal("fetch", () => Promise.resolve(new Response(JSON.stringify(indice))));
+  abrir("/ao-vivo?q=spirit", servicosGravados({ "/search?q=spirit": [] }));
+  const times = await screen.findByRole("list", { name: "Times" });
+  expect(await within(times).findByRole("link", { name: "Ver análise do time" })).toHaveAttribute("href", "/times/team-spirit");
+  vi.unstubAllGlobals();
+});
+
+it("link do perfil no Dotabuff vai direto para a conta", async () => {
+  const { consultar, caminhos } = gravador();
+  abrir("/ao-vivo", servicosCom(consultar));
+  fireEvent.change(screen.getByRole("searchbox"), { target: { value: `https://www.dotabuff.com/players/${YATORO}` } });
+  fireEvent.submit(screen.getByRole("search"));
+  expect(await screen.findByText("Buscando a conta no OpenDota…")).toBeInTheDocument();
+  expect(caminhos).toContain(`/players/${YATORO}`);
 });
 
 it("busca real gravada lista contas com link para a conta", async () => {

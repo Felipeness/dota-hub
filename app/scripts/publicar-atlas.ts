@@ -104,9 +104,27 @@ function publicarTime(equipe: Equipe) {
   return analise.data;
 }
 
+// rosters.csv liga o nome da organização (o mesmo nome do hub.json) aos ids do time no OpenDota.
+function idsDosTimes(): Map<string, number[]> {
+  const [cabecalho, ...linhas] = readFileSync(join(origem, "../data/tier1/rosters.csv"), "utf-8").trim().split(/\r?\n/);
+  const colunas = cabecalho?.split(",") ?? [];
+  const [org, teamId] = [colunas.indexOf("org"), colunas.indexOf("team_id")];
+  if (org < 0 || teamId < 0) throw new Error("rosters.csv sem as colunas org e team_id");
+  const ids = new Map<string, number[]>();
+  for (const linha of linhas) {
+    // org pode ter vírgula? Não nos dados de hoje; o nome vem antes de team_id, que é sempre numérico.
+    const campos = linha.split(",");
+    const nome = campos[org] ?? "";
+    const id = Number(campos[teamId]);
+    if (Number.isInteger(id)) ids.set(nome, [...new Set([...(ids.get(nome) ?? []), id])]);
+  }
+  return ids;
+}
+
 function montarIndice(times: ReturnType<typeof publicarTime>[]) {
   const sintese = lerJson<Sintese>(join(origem, "sintese/eixos.json"));
   const base = lerJson<Base>(join(origem, "../data/derivados/mapa_por_equipe/indice_base.json"));
+  const idsPorNome = idsDosTimes();
   const idsDosEixos = Object.keys(sintese.nomes);
   const eixos = idsDosEixos.map((id, k) => eixoDaSintese(id, sintese.nomes[id] ?? id, sintese.variancia_explicada[k]));
   const nomesClusters = nomesDosClusters(sintese);
@@ -122,7 +140,7 @@ function montarIndice(times: ReturnType<typeof publicarTime>[]) {
       return {
         id: t.id, nome: t.nome, tag: t.tag, partidas: t.amostra.partidas, replays: t.amostra.replays, amostra: t.amostra.nivel,
         estilo: nomesClusters[String(cluster)] ?? `C${cluster}`, cluster: `C${cluster}`,
-        classificacao: equipe.classificacao, eixos: posicao,
+        classificacao: equipe.classificacao, eixos: posicao, team_ids: idsPorNome.get(t.nome) ?? [],
       };
     }),
   };
@@ -138,7 +156,7 @@ const indice = montarIndice(times);
 const linhas = [
   `Atlas publicado em ${destino} a partir de ${origem}`,
   `${indice.times.length} equipes, ${indice.eixos.length} eixos, ${indice.clusters.length} clusters`,
-  ...indice.times.map((t) => `  ${t.id} (${t.tag}): ${t.estilo}${t.classificacao === "fronteira" ? ", fronteira" : ""}, amostra ${t.amostra}`),
+  ...indice.times.map((t) => `  ${t.id} (${t.tag}): ${t.estilo}${t.classificacao === "fronteira" ? ", fronteira" : ""}, amostra ${t.amostra}, OpenDota ${t.team_ids.join("/") || "sem id"}`),
   registro.length ? "Registro (correções de formato e arquivos que faltam):" : "Nenhuma correção de formato.",
   ...registro.map((r) => `  ${r}`),
 ];
