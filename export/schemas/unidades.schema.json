@@ -1,4 +1,4 @@
 {"$schema": "https://json-schema.org/draft/2020-12/schema", "type": "array", "minItems": 71,
  "items": {"type": "object", "required": ["id", "nome", "grupo", "papel", "lado", "modelo", "camps", "habilidades"],
    "properties": {"grupo": {"enum": ["chefe", "lane", "selva"]}, "camps": {"type": "array", "items": {"type": "string"}},
-     "habilidades": {"type": "array", "items": {"type": "object", "required": ["id", "nome", "nome_en"]}}}}}
+     "habilidades": {"type": "array", "items": {"type": "object", "required": ["id", "nome", "nome_en", "icone"]}}}}}

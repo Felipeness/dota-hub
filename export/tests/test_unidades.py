@@ -79,6 +79,8 @@ def test_fichas_indice_e_camps_validos(fichas):
     validar.validar("camps", tipos)
     kobold = next(u for u in indice if u["id"] == "kobold")
     assert kobold["camps"] == ["kobold"] and kobold["habilidades"][0]["nome"]
+    roshan = next(u for u in indice if u["id"] == "roshan")
+    assert any(h["icone"] == "roshan_slam" for h in roshan["habilidades"])
 
 
 def test_conteudo_de_habilidade_inexistente_falha(base):

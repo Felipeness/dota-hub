@@ -152,7 +152,7 @@ def indice(fichas: list[dict], tipos: list[dict]) -> list[dict]:
     campos = ("id", "nome", "grupo", "papel", "lado", "modelo")
     return [{c: f[c] for c in campos} | {
         "camps": camps.get(f["id"], []),
-        "habilidades": [{"id": h["id"], "nome": h["nome"], "nome_en": h["nome_en"]} for h in f["habilidades"]],
+        "habilidades": [{"id": h["id"], "nome": h["nome"], "nome_en": h["nome_en"], "icone": h["icone"]} for h in f["habilidades"]],
     } for f in fichas]
 
 
