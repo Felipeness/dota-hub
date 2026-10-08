@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { adicionar, estaNoDraft, ladoCheio, LIMITES, remover, type Lado } from "./estado";
 import type { HeroId } from "./guia";
+import { PosicaoDoSlot } from "./PosicaoDoSlot";
+import type { PosicaoId, SlotDeHeroi } from "./posicoesPro";
 import { ATRIBUTOS, NOME_DO_ATRIBUTO, type Atributo, type Draft, type HeroiDraft } from "./pontuacao";
 import { Retrato } from "./Retrato";
 
@@ -16,14 +18,22 @@ function funcoesPresentes(herois: readonly HeroiDraft[]): string[] {
 
 const paraAtributo = (valor: string): Atributo | typeof TODOS => ATRIBUTOS.find((a) => a === valor) ?? TODOS;
 
+/** Posição e lane de cada herói do time, pela ficha de pro; ausente enquanto a ficha de pro não carregou. */
+export type PosicoesPorLado = Readonly<Partial<Record<"aliados" | "inimigos", readonly SlotDeHeroi[]>>>;
+export type TrocarPosicao = (lado: "aliados" | "inimigos", heroId: HeroId, posicao: PosicaoId) => void;
+
 type Props = Readonly<{
   herois: readonly HeroiDraft[];
   porId: ReadonlyMap<HeroId, HeroiDraft>;
   draft: Draft;
   onMudar: (draft: Draft) => void;
+  posicoes?: PosicoesPorLado;
+  onTrocarPosicao?: TrocarPosicao;
 }>;
 
-function Fileira({ lado, draft, porId, onMudar }: Omit<Props, "herois"> & { lado: Lado }) {
+function Fileira({ lado, draft, porId, onMudar, slots, onTrocarPosicao }: Omit<Props, "herois" | "posicoes" | "onTrocarPosicao"> & {
+  lado: Lado; slots?: readonly SlotDeHeroi[]; onTrocarPosicao?: (heroId: HeroId, posicao: PosicaoId) => void;
+}) {
   const vagas = lado === "bans" ? [] : Array.from({ length: LIMITES[lado] - draft[lado].length });
   return (
     <div className={`draft-fileira draft-${lado}`}>
@@ -32,12 +42,14 @@ function Fileira({ lado, draft, porId, onMudar }: Omit<Props, "herois"> & { lado
         {draft[lado].map((id) => {
           const heroi = porId.get(id);
           if (!heroi) return null;
+          const slot = slots?.find((s) => s.heroId === id);
           return (
             <li key={id}>
               <button type="button" className="draft-vaga" onClick={() => onMudar(remover(draft, id))} aria-label={`Tirar ${heroi.nome} de ${ROTULO[lado]}`}>
                 <Retrato heroi={heroi} />
                 <span>{heroi.nome}</span>
               </button>
+              {slot && onTrocarPosicao && <PosicaoDoSlot slot={slot} onTrocar={(posicao) => onTrocarPosicao(id, posicao)} />}
             </li>
           );
         })}
@@ -48,7 +60,7 @@ function Fileira({ lado, draft, porId, onMudar }: Omit<Props, "herois"> & { lado
   );
 }
 
-export function Tabuleiro({ herois, porId, draft, onMudar }: Props) {
+export function Tabuleiro({ herois, porId, draft, onMudar, posicoes, onTrocarPosicao }: Props) {
   const [ladoAtivo, setLadoAtivo] = useState<Lado>("inimigos");
   const [filtro, setFiltro] = useState("");
   const [funcao, setFuncao] = useState<string>(TODOS);
@@ -63,7 +75,18 @@ export function Tabuleiro({ herois, porId, draft, onMudar }: Props) {
   return (
     <section className="draft-tabuleiro" aria-label="Draft">
       <div className="draft-times">
-        {LADOS.map((lado) => <Fileira key={lado} lado={lado} draft={draft} porId={porId} onMudar={onMudar} />)}
+        {LADOS.map((lado) => {
+          if (lado === "bans") return <Fileira key={lado} lado={lado} draft={draft} porId={porId} onMudar={onMudar} />;
+          const onTrocarPosicaoDoLado = onTrocarPosicao
+            ? (heroId: HeroId, posicao: PosicaoId) => onTrocarPosicao(lado, heroId, posicao)
+            : undefined;
+          return (
+            <Fileira
+              key={lado} lado={lado} draft={draft} porId={porId} onMudar={onMudar}
+              slots={posicoes?.[lado]} onTrocarPosicao={onTrocarPosicaoDoLado}
+            />
+          );
+        })}
       </div>
       <div className="draft-escolha">
         <div className="draft-alternador" role="group" aria-label="Adicionar o herói tocado em">

@@ -1,0 +1,6611 @@
+{
+ "gerado_em": "2026-10-08",
+ "fonte": "OpenDota explorer (api.opendota.com/api/explorer), partidas profissionais (leagueid) dos patches 7.40 e 7.41",
+ "metodo": "OpenDota explorer (api.opendota.com/api/explorer), duas consultas SQL sobre o dataset publico, cada uma retornando todos os herois de uma vez (sem precisar de uma chamada por heroi). Partidas: profissionais (matches.leagueid IS NOT NULL) nos patches 7.40 e 7.41 (match_patch.patch IN ('7.40','7.41')), 15.958 partidas no total (7.943 em 7.40 e 8.015 em 7.41 por match_patch). Posicao por partida: lane_role do OpenDota (1 safelane, 2 mid, 3 offlane; linhas sem lane_role classificado ficam fora). Na safelane, o jogador do time com maior gold_per_min vira pos1 e o de menor gpm vira pos5; na offlane, maior gpm = pos3 e menor = pos4; lane_role=2 (mid) e sempre pos2. Quando a safelane ou offlane do time tem mais de 2 jogadores classificados (laning atipico, ex. dual lane), o(s) jogador(es) do meio do ranking de gpm ficam fora da distribuicao (nem pos1/5 nem pos3/4), entao posicoes.n_total pode ser menor que o total de partidas do heroi no periodo. fracao = n da posicao dividido por posicoes.n_total. is_roaming nao foi usado para separar posicao porque nao distingue pos4 de pos5 sozinho; fica implicito no efeito sobre o gpm do jogador. Forca por heroi: media simples por partida-jogador (todas as posicoes juntas) de gold_per_min, tower_damage, hero_damage, hero_healing e stuns (colunas do OpenDota). duracao_media_vitorias_min = duracao media (em minutos) das partidas que esse heroi venceu. vitoria_por_duracao agrupa a duracao da partida (matches.duration) em menos de 30 min, 30 a 40 min e mais de 40 min, com taxa de vitoria e n em cada faixa. slug de cada heroi = constants/heroes.json (OpenDota) com o prefixo npc_dota_hero_ removido, igual ao usado em content/pro_dados.",
+ "herois": [
+  {
+   "hero_id": 1,
+   "slug": "antimage",
+   "posicoes": {
+    "n_total": 441,
+    "distribuicao": {
+     "pos1": {
+      "n": 403,
+      "fracao": 0.9138
+     },
+     "pos2": {
+      "n": 6,
+      "fracao": 0.0136
+     },
+     "pos3": {
+      "n": 30,
+      "fracao": 0.068
+     },
+     "pos4": {
+      "n": 0,
+      "fracao": 0.0
+     },
+     "pos5": {
+      "n": 2,
+      "fracao": 0.0045
+     }
+    }
+   },
+   "forca": {
+    "n": 442,
+    "gpm_medio": 643.6629,
+    "dano_torre_medio": 5053.6991,
+    "dano_heroi_medio": 17934.3416,
+    "cura_media": 10.2805,
+    "stuns_medio_s": 8.0035,
+    "duracao_media_vitorias_min": 32.8494,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 190,
+      "taxa": 0.4895
+     },
+     "entre_30_40min": {
+      "n": 174,
+      "taxa": 0.4598
+     },
+     "mais_40min": {
+      "n": 78,
+      "taxa": 0.5128
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 2,
+   "slug": "axe",
+   "posicoes": {
+    "n_total": 2014,
+    "distribuicao": {
+     "pos1": {
+      "n": 3,
+      "fracao": 0.0015
+     },
+     "pos2": {
+      "n": 14,
+      "fracao": 0.007
+     },
+     "pos3": {
+      "n": 1909,
+      "fracao": 0.9479
+     },
+     "pos4": {
+      "n": 63,
+      "fracao": 0.0313
+     },
+     "pos5": {
+      "n": 25,
+      "fracao": 0.0124
+     }
+    }
+   },
+   "forca": {
+    "n": 2019,
+    "gpm_medio": 516.6127,
+    "dano_torre_medio": 703.2556,
+    "dano_heroi_medio": 20336.6459,
+    "cura_media": 37.3735,
+    "stuns_medio_s": 42.444,
+    "duracao_media_vitorias_min": 34.7445,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 785,
+      "taxa": 0.4981
+     },
+     "entre_30_40min": {
+      "n": 705,
+      "taxa": 0.5191
+     },
+     "mais_40min": {
+      "n": 529,
+      "taxa": 0.4896
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 3,
+   "slug": "bane",
+   "posicoes": {
+    "n_total": 851,
+    "distribuicao": {
+     "pos1": {
+      "n": 0,
+      "fracao": 0.0
+     },
+     "pos2": {
+      "n": 25,
+      "fracao": 0.0294
+     },
+     "pos3": {
+      "n": 0,
+      "fracao": 0.0
+     },
+     "pos4": {
+      "n": 123,
+      "fracao": 0.1445
+     },
+     "pos5": {
+      "n": 703,
+      "fracao": 0.8261
+     }
+    }
+   },
+   "forca": {
+    "n": 857,
+    "gpm_medio": 289.4212,
+    "dano_torre_medio": 188.5531,
+    "dano_heroi_medio": 10074.7631,
+    "cura_media": 170.993,
+    "stuns_medio_s": 82.6624,
+    "duracao_media_vitorias_min": 38.4163,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 201,
+      "taxa": 0.5672
+     },
+     "entre_30_40min": {
+      "n": 298,
+      "taxa": 0.5772
+     },
+     "mais_40min": {
+      "n": 358,
+      "taxa": 0.5196
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 4,
+   "slug": "bloodseeker",
+   "posicoes": {
+    "n_total": 166,
+    "distribuicao": {
+     "pos1": {
+      "n": 147,
+      "fracao": 0.8855
+     },
+     "pos2": {
+      "n": 5,
+      "fracao": 0.0301
+     },
+     "pos3": {
+      "n": 13,
+      "fracao": 0.0783
+     },
+     "pos4": {
+      "n": 1,
+      "fracao": 0.006
+     },
+     "pos5": {
+      "n": 0,
+      "fracao": 0.0
+     }
+    }
+   },
+   "forca": {
+    "n": 166,
+    "gpm_medio": 603.5723,
+    "dano_torre_medio": 3779.8554,
+    "dano_heroi_medio": 24209.3193,
+    "cura_media": 30.3072,
+    "stuns_medio_s": 2.1273,
+    "duracao_media_vitorias_min": 33.9763,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 79,
+      "taxa": 0.481
+     },
+     "entre_30_40min": {
+      "n": 46,
+      "taxa": 0.413
+     },
+     "mais_40min": {
+      "n": 41,
+      "taxa": 0.5122
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 5,
+   "slug": "crystal_maiden",
+   "posicoes": {
+    "n_total": 1331,
+    "distribuicao": {
+     "pos1": {
+      "n": 0,
+      "fracao": 0.0
+     },
+     "pos2": {
+      "n": 6,
+      "fracao": 0.0045
+     },
+     "pos3": {
+      "n": 2,
+      "fracao": 0.0015
+     },
+     "pos4": {
+      "n": 57,
+      "fracao": 0.0428
+     },
+     "pos5": {
+      "n": 1266,
+      "fracao": 0.9512
+     }
+    }
+   },
+   "forca": {
+    "n": 1342,
+    "gpm_medio": 296.7615,
+    "dano_torre_medio": 239.2548,
+    "dano_heroi_medio": 10439.8316,
+    "cura_media": 91.5708,
+    "stuns_medio_s": 50.6869,
+    "duracao_media_vitorias_min": 30.2548,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 748,
+      "taxa": 0.4973
+     },
+     "entre_30_40min": {
+      "n": 469,
+      "taxa": 0.5203
+     },
+     "mais_40min": {
+      "n": 125,
+      "taxa": 0.424
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 6,
+   "slug": "drow_ranger",
+   "posicoes": {
+    "n_total": 1003,
+    "distribuicao": {
+     "pos1": {
+      "n": 983,
+      "fracao": 0.9801
+     },
+     "pos2": {
+      "n": 13,
+      "fracao": 0.013
+     },
+     "pos3": {
+      "n": 3,
+      "fracao": 0.003
+     },
+     "pos4": {
+      "n": 0,
+      "fracao": 0.0
+     },
+     "pos5": {
+      "n": 4,
+      "fracao": 0.004
+     }
+    }
+   },
+   "forca": {
+    "n": 1009,
+    "gpm_medio": 622.8404,
+    "dano_torre_medio": 6586.775,
+    "dano_heroi_medio": 23754.1269,
+    "cura_media": 25.0932,
+    "stuns_medio_s": 0.1255,
+    "duracao_media_vitorias_min": 36.1703,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 338,
+      "taxa": 0.4941
+     },
+     "entre_30_40min": {
+      "n": 351,
+      "taxa": 0.49
+     },
+     "mais_40min": {
+      "n": 320,
+      "taxa": 0.4875
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 7,
+   "slug": "earthshaker",
+   "posicoes": {
+    "n_total": 415,
+    "distribuicao": {
+     "pos1": {
+      "n": 4,
+      "fracao": 0.0096
+     },
+     "pos2": {
+      "n": 246,
+      "fracao": 0.5928
+     },
+     "pos3": {
+      "n": 94,
+      "fracao": 0.2265
+     },
+     "pos4": {
+      "n": 68,
+      "fracao": 0.1639
+     },
+     "pos5": {
+      "n": 3,
+      "fracao": 0.0072
+     }
+    }
+   },
+   "forca": {
+    "n": 418,
+    "gpm_medio": 502.8349,
+    "dano_torre_medio": 1084.8421,
+    "dano_heroi_medio": 21632.2249,
+    "cura_media": 92.0215,
+    "stuns_medio_s": 110.8631,
+    "duracao_media_vitorias_min": 36.7214,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 158,
+      "taxa": 0.4114
+     },
+     "entre_30_40min": {
+      "n": 132,
+      "taxa": 0.4924
+     },
+     "mais_40min": {
+      "n": 128,
+      "taxa": 0.4453
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 8,
+   "slug": "juggernaut",
+   "posicoes": {
+    "n_total": 961,
+    "distribuicao": {
+     "pos1": {
+      "n": 956,
+      "fracao": 0.9948
+     },
+     "pos2": {
+      "n": 0,
+      "fracao": 0.0
+     },
+     "pos3": {
+      "n": 3,
+      "fracao": 0.0031
+     },
+     "pos4": {
+      "n": 1,
+      "fracao": 0.001
+     },
+     "pos5": {
+      "n": 1,
+      "fracao": 0.001
+     }
+    }
+   },
+   "forca": {
+    "n": 965,
+    "gpm_medio": 639.5078,
+    "dano_torre_medio": 6824.3938,
+    "dano_heroi_medio": 18857.1285,
+    "cura_media": 6183.3212,
+    "stuns_medio_s": 0.7597,
+    "duracao_media_vitorias_min": 32.4974,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 472,
+      "taxa": 0.4682
+     },
+     "entre_30_40min": {
+      "n": 320,
+      "taxa": 0.5719
+     },
+     "mais_40min": {
+      "n": 173,
+      "taxa": 0.5087
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 9,
+   "slug": "mirana",
+   "posicoes": {
+    "n_total": 794,
+    "distribuicao": {
+     "pos1": {
+      "n": 35,
+      "fracao": 0.0441
+     },
+     "pos2": {
+      "n": 80,
+      "fracao": 0.1008
+     },
+     "pos3": {
+      "n": 10,
+      "fracao": 0.0126
+     },
+     "pos4": {
+      "n": 281,
+      "fracao": 0.3539
+     },
+     "pos5": {
+      "n": 388,
+      "fracao": 0.4887
+     }
+    }
+   },
+   "forca": {
+    "n": 801,
+    "gpm_medio": 374.4894,
+    "dano_torre_medio": 632.1411,
+    "dano_heroi_medio": 16036.9988,
+    "cura_media": 1131.8789,
+    "stuns_medio_s": 36.2346,
+    "duracao_media_vitorias_min": 38.8371,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 216,
+      "taxa": 0.4861
+     },
+     "entre_30_40min": {
+      "n": 282,
+      "taxa": 0.5035
+     },
+     "mais_40min": {
+      "n": 303,
+      "taxa": 0.5842
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 10,
+   "slug": "morphling",
+   "posicoes": {
+    "n_total": 871,
+    "distribuicao": {
+     "pos1": {
+      "n": 767,
+      "fracao": 0.8806
+     },
+     "pos2": {
+      "n": 102,
+      "fracao": 0.1171
+     },
+     "pos3": {
+      "n": 1,
+      "fracao": 0.0011
+     },
+     "pos4": {
+      "n": 0,
+      "fracao": 0.0
+     },
+     "pos5": {
+      "n": 1,
+      "fracao": 0.0011
+     }
+    }
+   },
+   "forca": {
+    "n": 872,
+    "gpm_medio": 614.7064,
+    "dano_torre_medio": 7141.4989,
+    "dano_heroi_medio": 20304.7385,
+    "cura_media": 848.2305,
+    "stuns_medio_s": 13.534,
+    "duracao_media_vitorias_min": 33.616,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 376,
+      "taxa": 0.3963
+     },
+     "entre_30_40min": {
+      "n": 329,
+      "taxa": 0.538
+     },
+     "mais_40min": {
+      "n": 167,
+      "taxa": 0.509
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 11,
+   "slug": "nevermore",
+   "posicoes": {
+    "n_total": 3990,
+    "distribuicao": {
+     "pos1": {
+      "n": 2261,
+      "fracao": 0.5667
+     },
+     "pos2": {
+      "n": 1715,
+      "fracao": 0.4298
+     },
+     "pos3": {
+      "n": 8,
+      "fracao": 0.002
+     },
+     "pos4": {
+      "n": 3,
+      "fracao": 0.0008
+     },
+     "pos5": {
+      "n": 3,
+      "fracao": 0.0008
+     }
+    }
+   },
+   "forca": {
+    "n": 3996,
+    "gpm_medio": 657.7162,
+    "dano_torre_medio": 6292.9057,
+    "dano_heroi_medio": 23531.6957,
+    "cura_media": 80.966,
+    "stuns_medio_s": 4.0242,
+    "duracao_media_vitorias_min": 32.2534,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 1826,
+      "taxa": 0.529
+     },
+     "entre_30_40min": {
+      "n": 1435,
+      "taxa": 0.4962
+     },
+     "mais_40min": {
+      "n": 735,
+      "taxa": 0.4476
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 12,
+   "slug": "phantom_lancer",
+   "posicoes": {
+    "n_total": 499,
+    "distribuicao": {
+     "pos1": {
+      "n": 496,
+      "fracao": 0.994
+     },
+     "pos2": {
+      "n": 1,
+      "fracao": 0.002
+     },
+     "pos3": {
+      "n": 2,
+      "fracao": 0.004
+     },
+     "pos4": {
+      "n": 0,
+      "fracao": 0.0
+     },
+     "pos5": {
+      "n": 0,
+      "fracao": 0.0
+     }
+    }
+   },
+   "forca": {
+    "n": 500,
+    "gpm_medio": 622.888,
+    "dano_torre_medio": 5513.424,
+    "dano_heroi_medio": 23035.96,
+    "cura_media": 3.538,
+    "stuns_medio_s": 0.7023,
+    "duracao_media_vitorias_min": 35.2402,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 208,
+      "taxa": 0.3798
+     },
+     "entre_30_40min": {
+      "n": 176,
+      "taxa": 0.5398
+     },
+     "mais_40min": {
+      "n": 116,
+      "taxa": 0.5259
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 13,
+   "slug": "puck",
+   "posicoes": {
+    "n_total": 1792,
+    "distribuicao": {
+     "pos1": {
+      "n": 6,
+      "fracao": 0.0033
+     },
+     "pos2": {
+      "n": 1782,
+      "fracao": 0.9944
+     },
+     "pos3": {
+      "n": 1,
+      "fracao": 0.0006
+     },
+     "pos4": {
+      "n": 2,
+      "fracao": 0.0011
+     },
+     "pos5": {
+      "n": 1,
+      "fracao": 0.0006
+     }
+    }
+   },
+   "forca": {
+    "n": 1799,
+    "gpm_medio": 585.1012,
+    "dano_torre_medio": 2153.9605,
+    "dano_heroi_medio": 29316.3091,
+    "cura_media": 29.3369,
+    "stuns_medio_s": 10.5585,
+    "duracao_media_vitorias_min": 38.6413,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 431,
+      "taxa": 0.4988
+     },
+     "entre_30_40min": {
+      "n": 667,
+      "taxa": 0.4678
+     },
+     "mais_40min": {
+      "n": 701,
+      "taxa": 0.5435
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 14,
+   "slug": "pudge",
+   "posicoes": {
+    "n_total": 1756,
+    "distribuicao": {
+     "pos1": {
+      "n": 90,
+      "fracao": 0.0513
+     },
+     "pos2": {
+      "n": 310,
+      "fracao": 0.1765
+     },
+     "pos3": {
+      "n": 531,
+      "fracao": 0.3024
+     },
+     "pos4": {
+      "n": 517,
+      "fracao": 0.2944
+     },
+     "pos5": {
+      "n": 308,
+      "fracao": 0.1754
+     }
+    }
+   },
+   "forca": {
+    "n": 1766,
+    "gpm_medio": 413.0991,
+    "dano_torre_medio": 657.9139,
+    "dano_heroi_medio": 16007.5453,
+    "cura_media": 46.7899,
+    "stuns_medio_s": 46.577,
+    "duracao_media_vitorias_min": 31.5306,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 856,
+      "taxa": 0.5129
+     },
+     "entre_30_40min": {
+      "n": 680,
+      "taxa": 0.4882
+     },
+     "mais_40min": {
+      "n": 230,
+      "taxa": 0.5304
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 15,
+   "slug": "razor",
+   "posicoes": {
+    "n_total": 1413,
+    "distribuicao": {
+     "pos1": {
+      "n": 538,
+      "fracao": 0.3808
+     },
+     "pos2": {
+      "n": 267,
+      "fracao": 0.189
+     },
+     "pos3": {
+      "n": 581,
+      "fracao": 0.4112
+     },
+     "pos4": {
+      "n": 18,
+      "fracao": 0.0127
+     },
+     "pos5": {
+      "n": 9,
+      "fracao": 0.0064
+     }
+    }
+   },
+   "forca": {
+    "n": 1417,
+    "gpm_medio": 569.9746,
+    "dano_torre_medio": 2820.0042,
+    "dano_heroi_medio": 25888.0692,
+    "cura_media": 1223.9711,
+    "stuns_medio_s": 0.77,
+    "duracao_media_vitorias_min": 34.6536,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 500,
+      "taxa": 0.48
+     },
+     "entre_30_40min": {
+      "n": 521,
+      "taxa": 0.5163
+     },
+     "mais_40min": {
+      "n": 396,
+      "taxa": 0.4798
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 16,
+   "slug": "sand_king",
+   "posicoes": {
+    "n_total": 747,
+    "distribuicao": {
+     "pos1": {
+      "n": 6,
+      "fracao": 0.008
+     },
+     "pos2": {
+      "n": 484,
+      "fracao": 0.6479
+     },
+     "pos3": {
+      "n": 246,
+      "fracao": 0.3293
+     },
+     "pos4": {
+      "n": 11,
+      "fracao": 0.0147
+     },
+     "pos5": {
+      "n": 0,
+      "fracao": 0.0
+     }
+    }
+   },
+   "forca": {
+    "n": 748,
+    "gpm_medio": 536.7273,
+    "dano_torre_medio": 471.3061,
+    "dano_heroi_medio": 26186.4492,
+    "cura_media": 57.4278,
+    "stuns_medio_s": 37.8552,
+    "duracao_media_vitorias_min": 37.6529,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 174,
+      "taxa": 0.4598
+     },
+     "entre_30_40min": {
+      "n": 292,
+      "taxa": 0.4692
+     },
+     "mais_40min": {
+      "n": 282,
+      "taxa": 0.4894
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 17,
+   "slug": "storm_spirit",
+   "posicoes": {
+    "n_total": 2208,
+    "distribuicao": {
+     "pos1": {
+      "n": 68,
+      "fracao": 0.0308
+     },
+     "pos2": {
+      "n": 2136,
+      "fracao": 0.9674
+     },
+     "pos3": {
+      "n": 0,
+      "fracao": 0.0
+     },
+     "pos4": {
+      "n": 3,
+      "fracao": 0.0014
+     },
+     "pos5": {
+      "n": 1,
+      "fracao": 0.0005
+     }
+    }
+   },
+   "forca": {
+    "n": 2217,
+    "gpm_medio": 580.7515,
+    "dano_torre_medio": 1638.5029,
+    "dano_heroi_medio": 24893.2373,
+    "cura_media": 492.0744,
+    "stuns_medio_s": 25.7574,
+    "duracao_media_vitorias_min": 36.5866,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 714,
+      "taxa": 0.4804
+     },
+     "entre_30_40min": {
+      "n": 802,
+      "taxa": 0.52
+     },
+     "mais_40min": {
+      "n": 701,
+      "taxa": 0.5193
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 18,
+   "slug": "sven",
+   "posicoes": {
+    "n_total": 714,
+    "distribuicao": {
+     "pos1": {
+      "n": 705,
+      "fracao": 0.9874
+     },
+     "pos2": {
+      "n": 1,
+      "fracao": 0.0014
+     },
+     "pos3": {
+      "n": 4,
+      "fracao": 0.0056
+     },
+     "pos4": {
+      "n": 2,
+      "fracao": 0.0028
+     },
+     "pos5": {
+      "n": 2,
+      "fracao": 0.0028
+     }
+    }
+   },
+   "forca": {
+    "n": 714,
+    "gpm_medio": 655.9272,
+    "dano_torre_medio": 4692.0238,
+    "dano_heroi_medio": 21432.0336,
+    "cura_media": 4.3529,
+    "stuns_medio_s": 26.9921,
+    "duracao_media_vitorias_min": 34.7801,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 292,
+      "taxa": 0.4521
+     },
+     "entre_30_40min": {
+      "n": 255,
+      "taxa": 0.5059
+     },
+     "mais_40min": {
+      "n": 167,
+      "taxa": 0.479
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 19,
+   "slug": "tiny",
+   "posicoes": {
+    "n_total": 3118,
+    "distribuicao": {
+     "pos1": {
+      "n": 1089,
+      "fracao": 0.3493
+     },
+     "pos2": {
+      "n": 1047,
+      "fracao": 0.3358
+     },
+     "pos3": {
+      "n": 192,
+      "fracao": 0.0616
+     },
+     "pos4": {
+      "n": 733,
+      "fracao": 0.2351
+     },
+     "pos5": {
+      "n": 57,
+      "fracao": 0.0183
+     }
+    }
+   },
+   "forca": {
+    "n": 3135,
+    "gpm_medio": 514.5974,
+    "dano_torre_medio": 3135.629,
+    "dano_heroi_medio": 21275.8606,
+    "cura_media": 51.9917,
+    "stuns_medio_s": 33.8605,
+    "duracao_media_vitorias_min": 36.0493,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 895,
+      "taxa": 0.552
+     },
+     "entre_30_40min": {
+      "n": 1200,
+      "taxa": 0.5008
+     },
+     "mais_40min": {
+      "n": 1040,
+      "taxa": 0.4538
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 20,
+   "slug": "vengefulspirit",
+   "posicoes": {
+    "n_total": 766,
+    "distribuicao": {
+     "pos1": {
+      "n": 99,
+      "fracao": 0.1292
+     },
+     "pos2": {
+      "n": 17,
+      "fracao": 0.0222
+     },
+     "pos3": {
+      "n": 34,
+      "fracao": 0.0444
+     },
+     "pos4": {
+      "n": 259,
+      "fracao": 0.3381
+     },
+     "pos5": {
+      "n": 357,
+      "fracao": 0.4661
+     }
+    }
+   },
+   "forca": {
+    "n": 766,
+    "gpm_medio": 314.3081,
+    "dano_torre_medio": 1322.1358,
+    "dano_heroi_medio": 10940.6762,
+    "cura_media": 485.0796,
+    "stuns_medio_s": 28.7014,
+    "duracao_media_vitorias_min": 31.6704,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 379,
+      "taxa": 0.5092
+     },
+     "entre_30_40min": {
+      "n": 292,
+      "taxa": 0.4863
+     },
+     "mais_40min": {
+      "n": 95,
+      "taxa": 0.4632
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 21,
+   "slug": "windrunner",
+   "posicoes": {
+    "n_total": 2591,
+    "distribuicao": {
+     "pos1": {
+      "n": 1067,
+      "fracao": 0.4118
+     },
+     "pos2": {
+      "n": 241,
+      "fracao": 0.093
+     },
+     "pos3": {
+      "n": 294,
+      "fracao": 0.1135
+     },
+     "pos4": {
+      "n": 914,
+      "fracao": 0.3528
+     },
+     "pos5": {
+      "n": 75,
+      "fracao": 0.0289
+     }
+    }
+   },
+   "forca": {
+    "n": 2606,
+    "gpm_medio": 492.4639,
+    "dano_torre_medio": 3896.8872,
+    "dano_heroi_medio": 20616.8108,
+    "cura_media": 284.581,
+    "stuns_medio_s": 43.1742,
+    "duracao_media_vitorias_min": 36.6371,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 860,
+      "taxa": 0.4988
+     },
+     "entre_30_40min": {
+      "n": 902,
+      "taxa": 0.5111
+     },
+     "mais_40min": {
+      "n": 844,
+      "taxa": 0.5024
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 22,
+   "slug": "zuus",
+   "posicoes": {
+    "n_total": 1161,
+    "distribuicao": {
+     "pos1": {
+      "n": 16,
+      "fracao": 0.0138
+     },
+     "pos2": {
+      "n": 433,
+      "fracao": 0.373
+     },
+     "pos3": {
+      "n": 50,
+      "fracao": 0.0431
+     },
+     "pos4": {
+      "n": 505,
+      "fracao": 0.435
+     },
+     "pos5": {
+      "n": 157,
+      "fracao": 0.1352
+     }
+    }
+   },
+   "forca": {
+    "n": 1163,
+    "gpm_medio": 429.0645,
+    "dano_torre_medio": 467.3345,
+    "dano_heroi_medio": 25784.3801,
+    "cura_media": 45.0774,
+    "stuns_medio_s": 13.4261,
+    "duracao_media_vitorias_min": 32.2912,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 589,
+      "taxa": 0.4669
+     },
+     "entre_30_40min": {
+      "n": 424,
+      "taxa": 0.4741
+     },
+     "mais_40min": {
+      "n": 150,
+      "taxa": 0.52
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 23,
+   "slug": "kunkka",
+   "posicoes": {
+    "n_total": 892,
+    "distribuicao": {
+     "pos1": {
+      "n": 42,
+      "fracao": 0.0471
+     },
+     "pos2": {
+      "n": 468,
+      "fracao": 0.5247
+     },
+     "pos3": {
+      "n": 378,
+      "fracao": 0.4238
+     },
+     "pos4": {
+      "n": 4,
+      "fracao": 0.0045
+     },
+     "pos5": {
+      "n": 0,
+      "fracao": 0.0
+     }
+    }
+   },
+   "forca": {
+    "n": 894,
+    "gpm_medio": 581.3725,
+    "dano_torre_medio": 1610.3691,
+    "dano_heroi_medio": 23024.9284,
+    "cura_media": 56.9362,
+    "stuns_medio_s": 41.5039,
+    "duracao_media_vitorias_min": 34.8782,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 314,
+      "taxa": 0.5096
+     },
+     "entre_30_40min": {
+      "n": 360,
+      "taxa": 0.5472
+     },
+     "mais_40min": {
+      "n": 220,
+      "taxa": 0.5273
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 25,
+   "slug": "lina",
+   "posicoes": {
+    "n_total": 1477,
+    "distribuicao": {
+     "pos1": {
+      "n": 152,
+      "fracao": 0.1029
+     },
+     "pos2": {
+      "n": 1264,
+      "fracao": 0.8558
+     },
+     "pos3": {
+      "n": 6,
+      "fracao": 0.0041
+     },
+     "pos4": {
+      "n": 41,
+      "fracao": 0.0278
+     },
+     "pos5": {
+      "n": 14,
+      "fracao": 0.0095
+     }
+    }
+   },
+   "forca": {
+    "n": 1481,
+    "gpm_medio": 627.3687,
+    "dano_torre_medio": 4276.2228,
+    "dano_heroi_medio": 23667.6144,
+    "cura_media": 19.7833,
+    "stuns_medio_s": 28.4805,
+    "duracao_media_vitorias_min": 32.6332,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 743,
+      "taxa": 0.4818
+     },
+     "entre_30_40min": {
+      "n": 478,
+      "taxa": 0.5042
+     },
+     "mais_40min": {
+      "n": 260,
+      "taxa": 0.45
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 26,
+   "slug": "lion",
+   "posicoes": {
+    "n_total": 2775,
+    "distribuicao": {
+     "pos1": {
+      "n": 5,
+      "fracao": 0.0018
+     },
+     "pos2": {
+      "n": 181,
+      "fracao": 0.0652
+     },
+     "pos3": {
+      "n": 17,
+      "fracao": 0.0061
+     },
+     "pos4": {
+      "n": 1862,
+      "fracao": 0.671
+     },
+     "pos5": {
+      "n": 710,
+      "fracao": 0.2559
+     }
+    }
+   },
+   "forca": {
+    "n": 2779,
+    "gpm_medio": 286.1367,
+    "dano_torre_medio": 302.8751,
+    "dano_heroi_medio": 9403.9917,
+    "cura_media": 63.3998,
+    "stuns_medio_s": 83.2539,
+    "duracao_media_vitorias_min": 33.9289,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 1158,
+      "taxa": 0.4508
+     },
+     "entre_30_40min": {
+      "n": 1064,
+      "taxa": 0.5301
+     },
+     "mais_40min": {
+      "n": 557,
+      "taxa": 0.5045
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 27,
+   "slug": "shadow_shaman",
+   "posicoes": {
+    "n_total": 1849,
+    "distribuicao": {
+     "pos1": {
+      "n": 1,
+      "fracao": 0.0005
+     },
+     "pos2": {
+      "n": 67,
+      "fracao": 0.0362
+     },
+     "pos3": {
+      "n": 8,
+      "fracao": 0.0043
+     },
+     "pos4": {
+      "n": 960,
+      "fracao": 0.5192
+     },
+     "pos5": {
+      "n": 813,
+      "fracao": 0.4397
+     }
+    }
+   },
+   "forca": {
+    "n": 1865,
+    "gpm_medio": 297.0193,
+    "dano_torre_medio": 1901.266,
+    "dano_heroi_medio": 9063.8756,
+    "cura_media": 69.6751,
+    "stuns_medio_s": 80.269,
+    "duracao_media_vitorias_min": 33.628,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 785,
+      "taxa": 0.4815
+     },
+     "entre_30_40min": {
+      "n": 694,
+      "taxa": 0.4986
+     },
+     "mais_40min": {
+      "n": 386,
+      "taxa": 0.4948
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 28,
+   "slug": "slardar",
+   "posicoes": {
+    "n_total": 2063,
+    "distribuicao": {
+     "pos1": {
+      "n": 11,
+      "fracao": 0.0053
+     },
+     "pos2": {
+      "n": 525,
+      "fracao": 0.2545
+     },
+     "pos3": {
+      "n": 1470,
+      "fracao": 0.7126
+     },
+     "pos4": {
+      "n": 55,
+      "fracao": 0.0267
+     },
+     "pos5": {
+      "n": 2,
+      "fracao": 0.001
+     }
+    }
+   },
+   "forca": {
+    "n": 2068,
+    "gpm_medio": 491.1983,
+    "dano_torre_medio": 1154.1214,
+    "dano_heroi_medio": 14824.9966,
+    "cura_media": 23.3424,
+    "stuns_medio_s": 38.196,
+    "duracao_media_vitorias_min": 35.5103,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 713,
+      "taxa": 0.4797
+     },
+     "entre_30_40min": {
+      "n": 756,
+      "taxa": 0.5146
+     },
+     "mais_40min": {
+      "n": 599,
+      "taxa": 0.5008
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 29,
+   "slug": "tidehunter",
+   "posicoes": {
+    "n_total": 2450,
+    "distribuicao": {
+     "pos1": {
+      "n": 11,
+      "fracao": 0.0045
+     },
+     "pos2": {
+      "n": 13,
+      "fracao": 0.0053
+     },
+     "pos3": {
+      "n": 2361,
+      "fracao": 0.9637
+     },
+     "pos4": {
+      "n": 61,
+      "fracao": 0.0249
+     },
+     "pos5": {
+      "n": 4,
+      "fracao": 0.0016
+     }
+    }
+   },
+   "forca": {
+    "n": 2457,
+    "gpm_medio": 514.4782,
+    "dano_torre_medio": 1243.9023,
+    "dano_heroi_medio": 17523.9194,
+    "cura_media": 1118.9174,
+    "stuns_medio_s": 34.2422,
+    "duracao_media_vitorias_min": 34.9779,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 929,
+      "taxa": 0.4769
+     },
+     "entre_30_40min": {
+      "n": 868,
+      "taxa": 0.5069
+     },
+     "mais_40min": {
+      "n": 660,
+      "taxa": 0.4606
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 30,
+   "slug": "witch_doctor",
+   "posicoes": {
+    "n_total": 765,
+    "distribuicao": {
+     "pos1": {
+      "n": 3,
+      "fracao": 0.0039
+     },
+     "pos2": {
+      "n": 5,
+      "fracao": 0.0065
+     },
+     "pos3": {
+      "n": 3,
+      "fracao": 0.0039
+     },
+     "pos4": {
+      "n": 115,
+      "fracao": 0.1503
+     },
+     "pos5": {
+      "n": 639,
+      "fracao": 0.8353
+     }
+    }
+   },
+   "forca": {
+    "n": 765,
+    "gpm_medio": 311.6863,
+    "dano_torre_medio": 267.2,
+    "dano_heroi_medio": 14617.3778,
+    "cura_media": 5763.0614,
+    "stuns_medio_s": 31.0481,
+    "duracao_media_vitorias_min": 34.8885,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 288,
+      "taxa": 0.4514
+     },
+     "entre_30_40min": {
+      "n": 284,
+      "taxa": 0.5176
+     },
+     "mais_40min": {
+      "n": 193,
+      "taxa": 0.487
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 31,
+   "slug": "lich",
+   "posicoes": {
+    "n_total": 1634,
+    "distribuicao": {
+     "pos1": {
+      "n": 2,
+      "fracao": 0.0012
+     },
+     "pos2": {
+      "n": 9,
+      "fracao": 0.0055
+     },
+     "pos3": {
+      "n": 4,
+      "fracao": 0.0024
+     },
+     "pos4": {
+      "n": 149,
+      "fracao": 0.0912
+     },
+     "pos5": {
+      "n": 1470,
+      "fracao": 0.8996
+     }
+    }
+   },
+   "forca": {
+    "n": 1653,
+    "gpm_medio": 306.591,
+    "dano_torre_medio": 231.1434,
+    "dano_heroi_medio": 13943.3382,
+    "cura_media": 104.2148,
+    "stuns_medio_s": 17.5445,
+    "duracao_media_vitorias_min": 35.3298,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 638,
+      "taxa": 0.4436
+     },
+     "entre_30_40min": {
+      "n": 633,
+      "taxa": 0.4834
+     },
+     "mais_40min": {
+      "n": 382,
+      "taxa": 0.5366
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 32,
+   "slug": "riki",
+   "posicoes": {
+    "n_total": 154,
+    "distribuicao": {
+     "pos1": {
+      "n": 46,
+      "fracao": 0.2987
+     },
+     "pos2": {
+      "n": 84,
+      "fracao": 0.5455
+     },
+     "pos3": {
+      "n": 12,
+      "fracao": 0.0779
+     },
+     "pos4": {
+      "n": 9,
+      "fracao": 0.0584
+     },
+     "pos5": {
+      "n": 3,
+      "fracao": 0.0195
+     }
+    }
+   },
+   "forca": {
+    "n": 154,
+    "gpm_medio": 495.5325,
+    "dano_torre_medio": 1494.7727,
+    "dano_heroi_medio": 22026.2597,
+    "cura_media": 42.487,
+    "stuns_medio_s": 2.2563,
+    "duracao_media_vitorias_min": 34.5632,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 62,
+      "taxa": 0.4355
+     },
+     "entre_30_40min": {
+      "n": 59,
+      "taxa": 0.4407
+     },
+     "mais_40min": {
+      "n": 33,
+      "taxa": 0.4242
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 33,
+   "slug": "enigma",
+   "posicoes": {
+    "n_total": 410,
+    "distribuicao": {
+     "pos1": {
+      "n": 7,
+      "fracao": 0.0171
+     },
+     "pos2": {
+      "n": 29,
+      "fracao": 0.0707
+     },
+     "pos3": {
+      "n": 328,
+      "fracao": 0.8
+     },
+     "pos4": {
+      "n": 35,
+      "fracao": 0.0854
+     },
+     "pos5": {
+      "n": 11,
+      "fracao": 0.0268
+     }
+    }
+   },
+   "forca": {
+    "n": 416,
+    "gpm_medio": 524.6034,
+    "dano_torre_medio": 4438.7692,
+    "dano_heroi_medio": 21901.6947,
+    "cura_media": 369.5601,
+    "stuns_medio_s": 34.1143,
+    "duracao_media_vitorias_min": 37.2408,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 99,
+      "taxa": 0.6869
+     },
+     "entre_30_40min": {
+      "n": 154,
+      "taxa": 0.5779
+     },
+     "mais_40min": {
+      "n": 163,
+      "taxa": 0.5706
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 34,
+   "slug": "tinker",
+   "posicoes": {
+    "n_total": 440,
+    "distribuicao": {
+     "pos1": {
+      "n": 14,
+      "fracao": 0.0318
+     },
+     "pos2": {
+      "n": 373,
+      "fracao": 0.8477
+     },
+     "pos3": {
+      "n": 8,
+      "fracao": 0.0182
+     },
+     "pos4": {
+      "n": 10,
+      "fracao": 0.0227
+     },
+     "pos5": {
+      "n": 35,
+      "fracao": 0.0795
+     }
+    }
+   },
+   "forca": {
+    "n": 441,
+    "gpm_medio": 614.2109,
+    "dano_torre_medio": 213.6485,
+    "dano_heroi_medio": 28079.5986,
+    "cura_media": 2465.449,
+    "stuns_medio_s": 10.7391,
+    "duracao_media_vitorias_min": 35.229,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 161,
+      "taxa": 0.441
+     },
+     "entre_30_40min": {
+      "n": 170,
+      "taxa": 0.4647
+     },
+     "mais_40min": {
+      "n": 110,
+      "taxa": 0.4
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 35,
+   "slug": "sniper",
+   "posicoes": {
+    "n_total": 1401,
+    "distribuicao": {
+     "pos1": {
+      "n": 291,
+      "fracao": 0.2077
+     },
+     "pos2": {
+      "n": 1075,
+      "fracao": 0.7673
+     },
+     "pos3": {
+      "n": 6,
+      "fracao": 0.0043
+     },
+     "pos4": {
+      "n": 27,
+      "fracao": 0.0193
+     },
+     "pos5": {
+      "n": 2,
+      "fracao": 0.0014
+     }
+    }
+   },
+   "forca": {
+    "n": 1402,
+    "gpm_medio": 605.5378,
+    "dano_torre_medio": 4379.2718,
+    "dano_heroi_medio": 24878.0749,
+    "cura_media": 7.4294,
+    "stuns_medio_s": 2.4573,
+    "duracao_media_vitorias_min": 30.8368,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 740,
+      "taxa": 0.5392
+     },
+     "entre_30_40min": {
+      "n": 513,
+      "taxa": 0.5341
+     },
+     "mais_40min": {
+      "n": 149,
+      "taxa": 0.4631
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 36,
+   "slug": "necrolyte",
+   "posicoes": {
+    "n_total": 1032,
+    "distribuicao": {
+     "pos1": {
+      "n": 339,
+      "fracao": 0.3285
+     },
+     "pos2": {
+      "n": 417,
+      "fracao": 0.4041
+     },
+     "pos3": {
+      "n": 270,
+      "fracao": 0.2616
+     },
+     "pos4": {
+      "n": 5,
+      "fracao": 0.0048
+     },
+     "pos5": {
+      "n": 1,
+      "fracao": 0.001
+     }
+    }
+   },
+   "forca": {
+    "n": 1037,
+    "gpm_medio": 639.5853,
+    "dano_torre_medio": 1733.6297,
+    "dano_heroi_medio": 29458.8149,
+    "cura_media": 6485.3462,
+    "stuns_medio_s": 10.6268,
+    "duracao_media_vitorias_min": 35.6623,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 380,
+      "taxa": 0.5105
+     },
+     "entre_30_40min": {
+      "n": 377,
+      "taxa": 0.4642
+     },
+     "mais_40min": {
+      "n": 280,
+      "taxa": 0.4929
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 37,
+   "slug": "warlock",
+   "posicoes": {
+    "n_total": 2135,
+    "distribuicao": {
+     "pos1": {
+      "n": 7,
+      "fracao": 0.0033
+     },
+     "pos2": {
+      "n": 67,
+      "fracao": 0.0314
+     },
+     "pos3": {
+      "n": 3,
+      "fracao": 0.0014
+     },
+     "pos4": {
+      "n": 159,
+      "fracao": 0.0745
+     },
+     "pos5": {
+      "n": 1899,
+      "fracao": 0.8895
+     }
+    }
+   },
+   "forca": {
+    "n": 2179,
+    "gpm_medio": 328.9068,
+    "dano_torre_medio": 1473.033,
+    "dano_heroi_medio": 14165.5769,
+    "cura_media": 8126.0367,
+    "stuns_medio_s": 8.0456,
+    "duracao_media_vitorias_min": 34.1613,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 866,
+      "taxa": 0.4607
+     },
+     "entre_30_40min": {
+      "n": 799,
+      "taxa": 0.4793
+     },
+     "mais_40min": {
+      "n": 514,
+      "taxa": 0.4805
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 38,
+   "slug": "beastmaster",
+   "posicoes": {
+    "n_total": 1975,
+    "distribuicao": {
+     "pos1": {
+      "n": 339,
+      "fracao": 0.1716
+     },
+     "pos2": {
+      "n": 636,
+      "fracao": 0.322
+     },
+     "pos3": {
+      "n": 990,
+      "fracao": 0.5013
+     },
+     "pos4": {
+      "n": 10,
+      "fracao": 0.0051
+     },
+     "pos5": {
+      "n": 0,
+      "fracao": 0.0
+     }
+    }
+   },
+   "forca": {
+    "n": 1978,
+    "gpm_medio": 616.2735,
+    "dano_torre_medio": 4489.2189,
+    "dano_heroi_medio": 22349.7184,
+    "cura_media": 67.9499,
+    "stuns_medio_s": 41.1292,
+    "duracao_media_vitorias_min": 34.5296,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 677,
+      "taxa": 0.5894
+     },
+     "entre_30_40min": {
+      "n": 724,
+      "taxa": 0.4959
+     },
+     "mais_40min": {
+      "n": 577,
+      "taxa": 0.4697
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 39,
+   "slug": "queenofpain",
+   "posicoes": {
+    "n_total": 2224,
+    "distribuicao": {
+     "pos1": {
+      "n": 120,
+      "fracao": 0.054
+     },
+     "pos2": {
+      "n": 1969,
+      "fracao": 0.8853
+     },
+     "pos3": {
+      "n": 74,
+      "fracao": 0.0333
+     },
+     "pos4": {
+      "n": 35,
+      "fracao": 0.0157
+     },
+     "pos5": {
+      "n": 26,
+      "fracao": 0.0117
+     }
+    }
+   },
+   "forca": {
+    "n": 2228,
+    "gpm_medio": 571.6531,
+    "dano_torre_medio": 1749.5601,
+    "dano_heroi_medio": 32153.7406,
+    "cura_media": 86.1836,
+    "stuns_medio_s": 0.9489,
+    "duracao_media_vitorias_min": 35.4512,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 811,
+      "taxa": 0.4673
+     },
+     "entre_30_40min": {
+      "n": 814,
+      "taxa": 0.4644
+     },
+     "mais_40min": {
+      "n": 603,
+      "taxa": 0.4942
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 40,
+   "slug": "venomancer",
+   "posicoes": {
+    "n_total": 837,
+    "distribuicao": {
+     "pos1": {
+      "n": 11,
+      "fracao": 0.0131
+     },
+     "pos2": {
+      "n": 35,
+      "fracao": 0.0418
+     },
+     "pos3": {
+      "n": 56,
+      "fracao": 0.0669
+     },
+     "pos4": {
+      "n": 173,
+      "fracao": 0.2067
+     },
+     "pos5": {
+      "n": 562,
+      "fracao": 0.6714
+     }
+    }
+   },
+   "forca": {
+    "n": 854,
+    "gpm_medio": 386.055,
+    "dano_torre_medio": 1033.6358,
+    "dano_heroi_medio": 20282.1405,
+    "cura_media": 1170.1557,
+    "stuns_medio_s": 1.3406,
+    "duracao_media_vitorias_min": 34.9283,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 275,
+      "taxa": 0.5673
+     },
+     "entre_30_40min": {
+      "n": 345,
+      "taxa": 0.4841
+     },
+     "mais_40min": {
+      "n": 234,
+      "taxa": 0.4786
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 41,
+   "slug": "faceless_void",
+   "posicoes": {
+    "n_total": 853,
+    "distribuicao": {
+     "pos1": {
+      "n": 731,
+      "fracao": 0.857
+     },
+     "pos2": {
+      "n": 17,
+      "fracao": 0.0199
+     },
+     "pos3": {
+      "n": 29,
+      "fracao": 0.034
+     },
+     "pos4": {
+      "n": 60,
+      "fracao": 0.0703
+     },
+     "pos5": {
+      "n": 16,
+      "fracao": 0.0188
+     }
+    }
+   },
+   "forca": {
+    "n": 859,
+    "gpm_medio": 568.2969,
+    "dano_torre_medio": 4011.092,
+    "dano_heroi_medio": 19391.7707,
+    "cura_media": 73.9907,
+    "stuns_medio_s": 15.2689,
+    "duracao_media_vitorias_min": 36.3167,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 266,
+      "taxa": 0.4211
+     },
+     "entre_30_40min": {
+      "n": 342,
+      "taxa": 0.4971
+     },
+     "mais_40min": {
+      "n": 251,
+      "taxa": 0.5458
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 42,
+   "slug": "skeleton_king",
+   "posicoes": {
+    "n_total": 541,
+    "distribuicao": {
+     "pos1": {
+      "n": 243,
+      "fracao": 0.4492
+     },
+     "pos2": {
+      "n": 0,
+      "fracao": 0.0
+     },
+     "pos3": {
+      "n": 289,
+      "fracao": 0.5342
+     },
+     "pos4": {
+      "n": 9,
+      "fracao": 0.0166
+     },
+     "pos5": {
+      "n": 0,
+      "fracao": 0.0
+     }
+    }
+   },
+   "forca": {
+    "n": 542,
+    "gpm_medio": 555.5812,
+    "dano_torre_medio": 3814.048,
+    "dano_heroi_medio": 20355.7823,
+    "cura_media": 39.3727,
+    "stuns_medio_s": 27.4273,
+    "duracao_media_vitorias_min": 30.5979,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 284,
+      "taxa": 0.5106
+     },
+     "entre_30_40min": {
+      "n": 216,
+      "taxa": 0.4769
+     },
+     "mais_40min": {
+      "n": 42,
+      "taxa": 0.4524
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 43,
+   "slug": "death_prophet",
+   "posicoes": {
+    "n_total": 572,
+    "distribuicao": {
+     "pos1": {
+      "n": 10,
+      "fracao": 0.0175
+     },
+     "pos2": {
+      "n": 268,
+      "fracao": 0.4685
+     },
+     "pos3": {
+      "n": 265,
+      "fracao": 0.4633
+     },
+     "pos4": {
+      "n": 17,
+      "fracao": 0.0297
+     },
+     "pos5": {
+      "n": 12,
+      "fracao": 0.021
+     }
+    }
+   },
+   "forca": {
+    "n": 573,
+    "gpm_medio": 531.4311,
+    "dano_torre_medio": 3989.4066,
+    "dano_heroi_medio": 22624.836,
+    "cura_media": 443.7749,
+    "stuns_medio_s": 6.9313,
+    "duracao_media_vitorias_min": 33.0464,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 249,
+      "taxa": 0.4779
+     },
+     "entre_30_40min": {
+      "n": 187,
+      "taxa": 0.4866
+     },
+     "mais_40min": {
+      "n": 137,
+      "taxa": 0.4088
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 44,
+   "slug": "phantom_assassin",
+   "posicoes": {
+    "n_total": 519,
+    "distribuicao": {
+     "pos1": {
+      "n": 515,
+      "fracao": 0.9923
+     },
+     "pos2": {
+      "n": 0,
+      "fracao": 0.0
+     },
+     "pos3": {
+      "n": 1,
+      "fracao": 0.0019
+     },
+     "pos4": {
+      "n": 0,
+      "fracao": 0.0
+     },
+     "pos5": {
+      "n": 3,
+      "fracao": 0.0058
+     }
+    }
+   },
+   "forca": {
+    "n": 519,
+    "gpm_medio": 600.7341,
+    "dano_torre_medio": 3790.8671,
+    "dano_heroi_medio": 18765.1445,
+    "cura_media": 5.6744,
+    "stuns_medio_s": 3.3824,
+    "duracao_media_vitorias_min": 32.7803,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 242,
+      "taxa": 0.3843
+     },
+     "entre_30_40min": {
+      "n": 204,
+      "taxa": 0.5196
+     },
+     "mais_40min": {
+      "n": 73,
+      "taxa": 0.4795
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 45,
+   "slug": "pugna",
+   "posicoes": {
+    "n_total": 423,
+    "distribuicao": {
+     "pos1": {
+      "n": 3,
+      "fracao": 0.0071
+     },
+     "pos2": {
+      "n": 33,
+      "fracao": 0.078
+     },
+     "pos3": {
+      "n": 6,
+      "fracao": 0.0142
+     },
+     "pos4": {
+      "n": 161,
+      "fracao": 0.3806
+     },
+     "pos5": {
+      "n": 220,
+      "fracao": 0.5201
+     }
+    }
+   },
+   "forca": {
+    "n": 427,
+    "gpm_medio": 336.8782,
+    "dano_torre_medio": 3378.7728,
+    "dano_heroi_medio": 16677.6089,
+    "cura_media": 4525.2951,
+    "stuns_medio_s": 0.3731,
+    "duracao_media_vitorias_min": 32.1069,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 198,
+      "taxa": 0.5051
+     },
+     "entre_30_40min": {
+      "n": 137,
+      "taxa": 0.4964
+     },
+     "mais_40min": {
+      "n": 92,
+      "taxa": 0.4239
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 46,
+   "slug": "templar_assassin",
+   "posicoes": {
+    "n_total": 1681,
+    "distribuicao": {
+     "pos1": {
+      "n": 1410,
+      "fracao": 0.8388
+     },
+     "pos2": {
+      "n": 266,
+      "fracao": 0.1582
+     },
+     "pos3": {
+      "n": 2,
+      "fracao": 0.0012
+     },
+     "pos4": {
+      "n": 1,
+      "fracao": 0.0006
+     },
+     "pos5": {
+      "n": 2,
+      "fracao": 0.0012
+     }
+    }
+   },
+   "forca": {
+    "n": 1683,
+    "gpm_medio": 679.7195,
+    "dano_torre_medio": 6292.6661,
+    "dano_heroi_medio": 22475.4587,
+    "cura_media": 6.2519,
+    "stuns_medio_s": 0.8123,
+    "duracao_media_vitorias_min": 32.9721,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 746,
+      "taxa": 0.5214
+     },
+     "entre_30_40min": {
+      "n": 631,
+      "taxa": 0.4485
+     },
+     "mais_40min": {
+      "n": 306,
+      "taxa": 0.5425
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 47,
+   "slug": "viper",
+   "posicoes": {
+    "n_total": 1425,
+    "distribuicao": {
+     "pos1": {
+      "n": 135,
+      "fracao": 0.0947
+     },
+     "pos2": {
+      "n": 904,
+      "fracao": 0.6344
+     },
+     "pos3": {
+      "n": 368,
+      "fracao": 0.2582
+     },
+     "pos4": {
+      "n": 13,
+      "fracao": 0.0091
+     },
+     "pos5": {
+      "n": 5,
+      "fracao": 0.0035
+     }
+    }
+   },
+   "forca": {
+    "n": 1427,
+    "gpm_medio": 547.3455,
+    "dano_torre_medio": 3239.9657,
+    "dano_heroi_medio": 24791.48,
+    "cura_media": 145.035,
+    "stuns_medio_s": 1.8614,
+    "duracao_media_vitorias_min": 35.5621,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 457,
+      "taxa": 0.5142
+     },
+     "entre_30_40min": {
+      "n": 520,
+      "taxa": 0.5
+     },
+     "mais_40min": {
+      "n": 450,
+      "taxa": 0.4556
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 48,
+   "slug": "luna",
+   "posicoes": {
+    "n_total": 1971,
+    "distribuicao": {
+     "pos1": {
+      "n": 1966,
+      "fracao": 0.9975
+     },
+     "pos2": {
+      "n": 3,
+      "fracao": 0.0015
+     },
+     "pos3": {
+      "n": 0,
+      "fracao": 0.0
+     },
+     "pos4": {
+      "n": 2,
+      "fracao": 0.001
+     },
+     "pos5": {
+      "n": 0,
+      "fracao": 0.0
+     }
+    }
+   },
+   "forca": {
+    "n": 1973,
+    "gpm_medio": 695.2884,
+    "dano_torre_medio": 8121.2575,
+    "dano_heroi_medio": 23778.5666,
+    "cura_media": 7.6645,
+    "stuns_medio_s": 12.4104,
+    "duracao_media_vitorias_min": 33.0657,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 834,
+      "taxa": 0.4808
+     },
+     "entre_30_40min": {
+      "n": 774,
+      "taxa": 0.5065
+     },
+     "mais_40min": {
+      "n": 365,
+      "taxa": 0.4685
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 49,
+   "slug": "dragon_knight",
+   "posicoes": {
+    "n_total": 1709,
+    "distribuicao": {
+     "pos1": {
+      "n": 704,
+      "fracao": 0.4119
+     },
+     "pos2": {
+      "n": 634,
+      "fracao": 0.371
+     },
+     "pos3": {
+      "n": 364,
+      "fracao": 0.213
+     },
+     "pos4": {
+      "n": 4,
+      "fracao": 0.0023
+     },
+     "pos5": {
+      "n": 3,
+      "fracao": 0.0018
+     }
+    }
+   },
+   "forca": {
+    "n": 1710,
+    "gpm_medio": 583.3187,
+    "dano_torre_medio": 5492.8515,
+    "dano_heroi_medio": 19206.6333,
+    "cura_media": 10.6345,
+    "stuns_medio_s": 34.9174,
+    "duracao_media_vitorias_min": 32.2881,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 838,
+      "taxa": 0.4761
+     },
+     "entre_30_40min": {
+      "n": 554,
+      "taxa": 0.5
+     },
+     "mais_40min": {
+      "n": 318,
+      "taxa": 0.4497
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 50,
+   "slug": "dazzle",
+   "posicoes": {
+    "n_total": 627,
+    "distribuicao": {
+     "pos1": {
+      "n": 1,
+      "fracao": 0.0016
+     },
+     "pos2": {
+      "n": 24,
+      "fracao": 0.0383
+     },
+     "pos3": {
+      "n": 17,
+      "fracao": 0.0271
+     },
+     "pos4": {
+      "n": 70,
+      "fracao": 0.1116
+     },
+     "pos5": {
+      "n": 515,
+      "fracao": 0.8214
+     }
+    }
+   },
+   "forca": {
+    "n": 629,
+    "gpm_medio": 302.6916,
+    "dano_torre_medio": 369.407,
+    "dano_heroi_medio": 7772.7854,
+    "cura_media": 11939.159,
+    "stuns_medio_s": 12.0603,
+    "duracao_media_vitorias_min": 35.1961,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 224,
+      "taxa": 0.5491
+     },
+     "entre_30_40min": {
+      "n": 222,
+      "taxa": 0.5135
+     },
+     "mais_40min": {
+      "n": 183,
+      "taxa": 0.5082
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 51,
+   "slug": "rattletrap",
+   "posicoes": {
+    "n_total": 1537,
+    "distribuicao": {
+     "pos1": {
+      "n": 1,
+      "fracao": 0.0007
+     },
+     "pos2": {
+      "n": 61,
+      "fracao": 0.0397
+     },
+     "pos3": {
+      "n": 26,
+      "fracao": 0.0169
+     },
+     "pos4": {
+      "n": 666,
+      "fracao": 0.4333
+     },
+     "pos5": {
+      "n": 783,
+      "fracao": 0.5094
+     }
+    }
+   },
+   "forca": {
+    "n": 1554,
+    "gpm_medio": 300.5412,
+    "dano_torre_medio": 147.7149,
+    "dano_heroi_medio": 14486.6898,
+    "cura_media": 242.6525,
+    "stuns_medio_s": 58.1451,
+    "duracao_media_vitorias_min": 37.4062,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 405,
+      "taxa": 0.5556
+     },
+     "entre_30_40min": {
+      "n": 564,
+      "taxa": 0.5
+     },
+     "mais_40min": {
+      "n": 585,
+      "taxa": 0.506
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 52,
+   "slug": "leshrac",
+   "posicoes": {
+    "n_total": 660,
+    "distribuicao": {
+     "pos1": {
+      "n": 55,
+      "fracao": 0.0833
+     },
+     "pos2": {
+      "n": 554,
+      "fracao": 0.8394
+     },
+     "pos3": {
+      "n": 24,
+      "fracao": 0.0364
+     },
+     "pos4": {
+      "n": 17,
+      "fracao": 0.0258
+     },
+     "pos5": {
+      "n": 10,
+      "fracao": 0.0152
+     }
+    }
+   },
+   "forca": {
+    "n": 662,
+    "gpm_medio": 581.7085,
+    "dano_torre_medio": 4064.9698,
+    "dano_heroi_medio": 27711.6782,
+    "cura_media": 1127.6269,
+    "stuns_medio_s": 23.3686,
+    "duracao_media_vitorias_min": 34.4108,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 252,
+      "taxa": 0.5
+     },
+     "entre_30_40min": {
+      "n": 236,
+      "taxa": 0.4492
+     },
+     "mais_40min": {
+      "n": 174,
+      "taxa": 0.5747
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 53,
+   "slug": "furion",
+   "posicoes": {
+    "n_total": 912,
+    "distribuicao": {
+     "pos1": {
+      "n": 364,
+      "fracao": 0.3991
+     },
+     "pos2": {
+      "n": 256,
+      "fracao": 0.2807
+     },
+     "pos3": {
+      "n": 128,
+      "fracao": 0.1404
+     },
+     "pos4": {
+      "n": 111,
+      "fracao": 0.1217
+     },
+     "pos5": {
+      "n": 53,
+      "fracao": 0.0581
+     }
+    }
+   },
+   "forca": {
+    "n": 921,
+    "gpm_medio": 652.9088,
+    "dano_torre_medio": 6014.8078,
+    "dano_heroi_medio": 27440.2389,
+    "cura_media": 254.9967,
+    "stuns_medio_s": 4.3134,
+    "duracao_media_vitorias_min": 34.3679,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 334,
+      "taxa": 0.497
+     },
+     "entre_30_40min": {
+      "n": 341,
+      "taxa": 0.5161
+     },
+     "mais_40min": {
+      "n": 246,
+      "taxa": 0.4593
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 54,
+   "slug": "life_stealer",
+   "posicoes": {
+    "n_total": 1288,
+    "distribuicao": {
+     "pos1": {
+      "n": 1278,
+      "fracao": 0.9922
+     },
+     "pos2": {
+      "n": 1,
+      "fracao": 0.0008
+     },
+     "pos3": {
+      "n": 8,
+      "fracao": 0.0062
+     },
+     "pos4": {
+      "n": 0,
+      "fracao": 0.0
+     },
+     "pos5": {
+      "n": 1,
+      "fracao": 0.0008
+     }
+    }
+   },
+   "forca": {
+    "n": 1294,
+    "gpm_medio": 600.609,
+    "dano_torre_medio": 5934.8199,
+    "dano_heroi_medio": 23278.4034,
+    "cura_media": 1383.3099,
+    "stuns_medio_s": 4.9673,
+    "duracao_media_vitorias_min": 36.2923,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 425,
+      "taxa": 0.4376
+     },
+     "entre_30_40min": {
+      "n": 514,
+      "taxa": 0.4903
+     },
+     "mais_40min": {
+      "n": 355,
+      "taxa": 0.5211
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 55,
+   "slug": "dark_seer",
+   "posicoes": {
+    "n_total": 623,
+    "distribuicao": {
+     "pos1": {
+      "n": 4,
+      "fracao": 0.0064
+     },
+     "pos2": {
+      "n": 7,
+      "fracao": 0.0112
+     },
+     "pos3": {
+      "n": 606,
+      "fracao": 0.9727
+     },
+     "pos4": {
+      "n": 5,
+      "fracao": 0.008
+     },
+     "pos5": {
+      "n": 1,
+      "fracao": 0.0016
+     }
+    }
+   },
+   "forca": {
+    "n": 624,
+    "gpm_medio": 569.6939,
+    "dano_torre_medio": 1078.7484,
+    "dano_heroi_medio": 23535.8173,
+    "cura_media": 1841.3606,
+    "stuns_medio_s": 20.0087,
+    "duracao_media_vitorias_min": 39.0414,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 162,
+      "taxa": 0.4691
+     },
+     "entre_30_40min": {
+      "n": 215,
+      "taxa": 0.5023
+     },
+     "mais_40min": {
+      "n": 247,
+      "taxa": 0.4737
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 56,
+   "slug": "clinkz",
+   "posicoes": {
+    "n_total": 1137,
+    "distribuicao": {
+     "pos1": {
+      "n": 1037,
+      "fracao": 0.912
+     },
+     "pos2": {
+      "n": 74,
+      "fracao": 0.0651
+     },
+     "pos3": {
+      "n": 12,
+      "fracao": 0.0106
+     },
+     "pos4": {
+      "n": 9,
+      "fracao": 0.0079
+     },
+     "pos5": {
+      "n": 5,
+      "fracao": 0.0044
+     }
+    }
+   },
+   "forca": {
+    "n": 1139,
+    "gpm_medio": 628.1089,
+    "dano_torre_medio": 8881.4179,
+    "dano_heroi_medio": 30149.2371,
+    "cura_media": 8.9192,
+    "stuns_medio_s": 0.5262,
+    "duracao_media_vitorias_min": 35.384,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 424,
+      "taxa": 0.5094
+     },
+     "entre_30_40min": {
+      "n": 390,
+      "taxa": 0.5
+     },
+     "mais_40min": {
+      "n": 325,
+      "taxa": 0.5538
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 57,
+   "slug": "omniknight",
+   "posicoes": {
+    "n_total": 437,
+    "distribuicao": {
+     "pos1": {
+      "n": 72,
+      "fracao": 0.1648
+     },
+     "pos2": {
+      "n": 39,
+      "fracao": 0.0892
+     },
+     "pos3": {
+      "n": 212,
+      "fracao": 0.4851
+     },
+     "pos4": {
+      "n": 21,
+      "fracao": 0.0481
+     },
+     "pos5": {
+      "n": 93,
+      "fracao": 0.2128
+     }
+    }
+   },
+   "forca": {
+    "n": 438,
+    "gpm_medio": 464.9703,
+    "dano_torre_medio": 1444.1279,
+    "dano_heroi_medio": 15992.1301,
+    "cura_media": 2958.1735,
+    "stuns_medio_s": 0.2932,
+    "duracao_media_vitorias_min": 32.9616,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 205,
+      "taxa": 0.5366
+     },
+     "entre_30_40min": {
+      "n": 136,
+      "taxa": 0.4853
+     },
+     "mais_40min": {
+      "n": 97,
+      "taxa": 0.5052
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 58,
+   "slug": "enchantress",
+   "posicoes": {
+    "n_total": 822,
+    "distribuicao": {
+     "pos1": {
+      "n": 1,
+      "fracao": 0.0012
+     },
+     "pos2": {
+      "n": 39,
+      "fracao": 0.0474
+     },
+     "pos3": {
+      "n": 10,
+      "fracao": 0.0122
+     },
+     "pos4": {
+      "n": 111,
+      "fracao": 0.135
+     },
+     "pos5": {
+      "n": 661,
+      "fracao": 0.8041
+     }
+    }
+   },
+   "forca": {
+    "n": 836,
+    "gpm_medio": 341.183,
+    "dano_torre_medio": 2541.5359,
+    "dano_heroi_medio": 12039.5849,
+    "cura_media": 3373.0861,
+    "stuns_medio_s": 10.9793,
+    "duracao_media_vitorias_min": 36.5505,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 238,
+      "taxa": 0.6092
+     },
+     "entre_30_40min": {
+      "n": 306,
+      "taxa": 0.4837
+     },
+     "mais_40min": {
+      "n": 292,
+      "taxa": 0.5411
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 59,
+   "slug": "huskar",
+   "posicoes": {
+    "n_total": 768,
+    "distribuicao": {
+     "pos1": {
+      "n": 87,
+      "fracao": 0.1133
+     },
+     "pos2": {
+      "n": 576,
+      "fracao": 0.75
+     },
+     "pos3": {
+      "n": 79,
+      "fracao": 0.1029
+     },
+     "pos4": {
+      "n": 10,
+      "fracao": 0.013
+     },
+     "pos5": {
+      "n": 16,
+      "fracao": 0.0208
+     }
+    }
+   },
+   "forca": {
+    "n": 772,
+    "gpm_medio": 566.3899,
+    "dano_torre_medio": 5135.6062,
+    "dano_heroi_medio": 21417.1179,
+    "cura_media": 4.3782,
+    "stuns_medio_s": 4.7781,
+    "duracao_media_vitorias_min": 31.9922,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 337,
+      "taxa": 0.5608
+     },
+     "entre_30_40min": {
+      "n": 273,
+      "taxa": 0.5385
+     },
+     "mais_40min": {
+      "n": 162,
+      "taxa": 0.5185
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 60,
+   "slug": "night_stalker",
+   "posicoes": {
+    "n_total": 708,
+    "distribuicao": {
+     "pos1": {
+      "n": 10,
+      "fracao": 0.0141
+     },
+     "pos2": {
+      "n": 48,
+      "fracao": 0.0678
+     },
+     "pos3": {
+      "n": 619,
+      "fracao": 0.8743
+     },
+     "pos4": {
+      "n": 29,
+      "fracao": 0.041
+     },
+     "pos5": {
+      "n": 2,
+      "fracao": 0.0028
+     }
+    }
+   },
+   "forca": {
+    "n": 710,
+    "gpm_medio": 489.2451,
+    "dano_torre_medio": 1933.8718,
+    "dano_heroi_medio": 17642.8085,
+    "cura_media": 34.6282,
+    "stuns_medio_s": 3.5239,
+    "duracao_media_vitorias_min": 35.5942,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 241,
+      "taxa": 0.5145
+     },
+     "entre_30_40min": {
+      "n": 262,
+      "taxa": 0.4275
+     },
+     "mais_40min": {
+      "n": 207,
+      "taxa": 0.5072
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 61,
+   "slug": "broodmother",
+   "posicoes": {
+    "n_total": 328,
+    "distribuicao": {
+     "pos1": {
+      "n": 167,
+      "fracao": 0.5091
+     },
+     "pos2": {
+      "n": 82,
+      "fracao": 0.25
+     },
+     "pos3": {
+      "n": 77,
+      "fracao": 0.2348
+     },
+     "pos4": {
+      "n": 0,
+      "fracao": 0.0
+     },
+     "pos5": {
+      "n": 2,
+      "fracao": 0.0061
+     }
+    }
+   },
+   "forca": {
+    "n": 328,
+    "gpm_medio": 642.0091,
+    "dano_torre_medio": 8064.8841,
+    "dano_heroi_medio": 18532.5976,
+    "cura_media": 25.4634,
+    "stuns_medio_s": 0.2304,
+    "duracao_media_vitorias_min": 30.7809,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 151,
+      "taxa": 0.6159
+     },
+     "entre_30_40min": {
+      "n": 117,
+      "taxa": 0.4957
+     },
+     "mais_40min": {
+      "n": 60,
+      "taxa": 0.45
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 62,
+   "slug": "bounty_hunter",
+   "posicoes": {
+    "n_total": 404,
+    "distribuicao": {
+     "pos1": {
+      "n": 1,
+      "fracao": 0.0025
+     },
+     "pos2": {
+      "n": 54,
+      "fracao": 0.1337
+     },
+     "pos3": {
+      "n": 24,
+      "fracao": 0.0594
+     },
+     "pos4": {
+      "n": 302,
+      "fracao": 0.7475
+     },
+     "pos5": {
+      "n": 23,
+      "fracao": 0.0569
+     }
+    }
+   },
+   "forca": {
+    "n": 410,
+    "gpm_medio": 386.2244,
+    "dano_torre_medio": 330.0732,
+    "dano_heroi_medio": 10319.5073,
+    "cura_media": 631.3683,
+    "stuns_medio_s": 23.7127,
+    "duracao_media_vitorias_min": 35.4316,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 146,
+      "taxa": 0.5753
+     },
+     "entre_30_40min": {
+      "n": 149,
+      "taxa": 0.5503
+     },
+     "mais_40min": {
+      "n": 115,
+      "taxa": 0.5652
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 63,
+   "slug": "weaver",
+   "posicoes": {
+    "n_total": 994,
+    "distribuicao": {
+     "pos1": {
+      "n": 722,
+      "fracao": 0.7264
+     },
+     "pos2": {
+      "n": 18,
+      "fracao": 0.0181
+     },
+     "pos3": {
+      "n": 38,
+      "fracao": 0.0382
+     },
+     "pos4": {
+      "n": 169,
+      "fracao": 0.17
+     },
+     "pos5": {
+      "n": 47,
+      "fracao": 0.0473
+     }
+    }
+   },
+   "forca": {
+    "n": 997,
+    "gpm_medio": 558.3831,
+    "dano_torre_medio": 5018.4915,
+    "dano_heroi_medio": 23936.6469,
+    "cura_media": 105.7242,
+    "stuns_medio_s": 2.0277,
+    "duracao_media_vitorias_min": 34.8791,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 354,
+      "taxa": 0.4576
+     },
+     "entre_30_40min": {
+      "n": 372,
+      "taxa": 0.4301
+     },
+     "mais_40min": {
+      "n": 271,
+      "taxa": 0.4649
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 64,
+   "slug": "jakiro",
+   "posicoes": {
+    "n_total": 2888,
+    "distribuicao": {
+     "pos1": {
+      "n": 8,
+      "fracao": 0.0028
+     },
+     "pos2": {
+      "n": 62,
+      "fracao": 0.0215
+     },
+     "pos3": {
+      "n": 26,
+      "fracao": 0.009
+     },
+     "pos4": {
+      "n": 466,
+      "fracao": 0.1614
+     },
+     "pos5": {
+      "n": 2326,
+      "fracao": 0.8054
+     }
+    }
+   },
+   "forca": {
+    "n": 2917,
+    "gpm_medio": 314.9212,
+    "dano_torre_medio": 2151.712,
+    "dano_heroi_medio": 13175.3366,
+    "cura_media": 593.7936,
+    "stuns_medio_s": 34.5195,
+    "duracao_media_vitorias_min": 35.0253,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 1040,
+      "taxa": 0.5192
+     },
+     "entre_30_40min": {
+      "n": 1100,
+      "taxa": 0.4645
+     },
+     "mais_40min": {
+      "n": 777,
+      "taxa": 0.5148
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 65,
+   "slug": "batrider",
+   "posicoes": {
+    "n_total": 1331,
+    "distribuicao": {
+     "pos1": {
+      "n": 26,
+      "fracao": 0.0195
+     },
+     "pos2": {
+      "n": 193,
+      "fracao": 0.145
+     },
+     "pos3": {
+      "n": 709,
+      "fracao": 0.5327
+     },
+     "pos4": {
+      "n": 263,
+      "fracao": 0.1976
+     },
+     "pos5": {
+      "n": 140,
+      "fracao": 0.1052
+     }
+    }
+   },
+   "forca": {
+    "n": 1340,
+    "gpm_medio": 474.0037,
+    "dano_torre_medio": 1341.7896,
+    "dano_heroi_medio": 20530.3843,
+    "cura_media": 59.6754,
+    "stuns_medio_s": 43.1332,
+    "duracao_media_vitorias_min": 36.6801,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 351,
+      "taxa": 0.5556
+     },
+     "entre_30_40min": {
+      "n": 527,
+      "taxa": 0.5541
+     },
+     "mais_40min": {
+      "n": 462,
+      "taxa": 0.5173
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 66,
+   "slug": "chen",
+   "posicoes": {
+    "n_total": 488,
+    "distribuicao": {
+     "pos1": {
+      "n": 1,
+      "fracao": 0.002
+     },
+     "pos2": {
+      "n": 10,
+      "fracao": 0.0205
+     },
+     "pos3": {
+      "n": 3,
+      "fracao": 0.0061
+     },
+     "pos4": {
+      "n": 54,
+      "fracao": 0.1107
+     },
+     "pos5": {
+      "n": 420,
+      "fracao": 0.8607
+     }
+    }
+   },
+   "forca": {
+    "n": 517,
+    "gpm_medio": 382.118,
+    "dano_torre_medio": 2645.8975,
+    "dano_heroi_medio": 6871.0116,
+    "cura_media": 9965.2398,
+    "stuns_medio_s": 3.7889,
+    "duracao_media_vitorias_min": 33.5939,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 175,
+      "taxa": 0.7029
+     },
+     "entre_30_40min": {
+      "n": 190,
+      "taxa": 0.5421
+     },
+     "mais_40min": {
+      "n": 152,
+      "taxa": 0.5
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 67,
+   "slug": "spectre",
+   "posicoes": {
+    "n_total": 249,
+    "distribuicao": {
+     "pos1": {
+      "n": 240,
+      "fracao": 0.9639
+     },
+     "pos2": {
+      "n": 3,
+      "fracao": 0.012
+     },
+     "pos3": {
+      "n": 4,
+      "fracao": 0.0161
+     },
+     "pos4": {
+      "n": 0,
+      "fracao": 0.0
+     },
+     "pos5": {
+      "n": 2,
+      "fracao": 0.008
+     }
+    }
+   },
+   "forca": {
+    "n": 250,
+    "gpm_medio": 573.108,
+    "dano_torre_medio": 3203.452,
+    "dano_heroi_medio": 34013.22,
+    "cura_media": 42.272,
+    "stuns_medio_s": 2.1703,
+    "duracao_media_vitorias_min": 37.6818,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 70,
+      "taxa": 0.3714
+     },
+     "entre_30_40min": {
+      "n": 97,
+      "taxa": 0.4227
+     },
+     "mais_40min": {
+      "n": 83,
+      "taxa": 0.5181
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 68,
+   "slug": "ancient_apparition",
+   "posicoes": {
+    "n_total": 758,
+    "distribuicao": {
+     "pos1": {
+      "n": 0,
+      "fracao": 0.0
+     },
+     "pos2": {
+      "n": 15,
+      "fracao": 0.0198
+     },
+     "pos3": {
+      "n": 4,
+      "fracao": 0.0053
+     },
+     "pos4": {
+      "n": 82,
+      "fracao": 0.1082
+     },
+     "pos5": {
+      "n": 657,
+      "fracao": 0.8668
+     }
+    }
+   },
+   "forca": {
+    "n": 761,
+    "gpm_medio": 312.2707,
+    "dano_torre_medio": 202.4731,
+    "dano_heroi_medio": 12898.8423,
+    "cura_media": 217.205,
+    "stuns_medio_s": 26.1867,
+    "duracao_media_vitorias_min": 35.6668,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 265,
+      "taxa": 0.4981
+     },
+     "entre_30_40min": {
+      "n": 284,
+      "taxa": 0.4331
+     },
+     "mais_40min": {
+      "n": 212,
+      "taxa": 0.4858
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 69,
+   "slug": "doom_bringer",
+   "posicoes": {
+    "n_total": 1445,
+    "distribuicao": {
+     "pos1": {
+      "n": 190,
+      "fracao": 0.1315
+     },
+     "pos2": {
+      "n": 15,
+      "fracao": 0.0104
+     },
+     "pos3": {
+      "n": 1223,
+      "fracao": 0.8464
+     },
+     "pos4": {
+      "n": 11,
+      "fracao": 0.0076
+     },
+     "pos5": {
+      "n": 6,
+      "fracao": 0.0042
+     }
+    }
+   },
+   "forca": {
+    "n": 1455,
+    "gpm_medio": 606.0186,
+    "dano_torre_medio": 1226.2089,
+    "dano_heroi_medio": 19060.5966,
+    "cura_media": 53.9773,
+    "stuns_medio_s": 19.1182,
+    "duracao_media_vitorias_min": 37.8381,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 403,
+      "taxa": 0.4839
+     },
+     "entre_30_40min": {
+      "n": 533,
+      "taxa": 0.5366
+     },
+     "mais_40min": {
+      "n": 519,
+      "taxa": 0.5607
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 70,
+   "slug": "ursa",
+   "posicoes": {
+    "n_total": 1641,
+    "distribuicao": {
+     "pos1": {
+      "n": 1621,
+      "fracao": 0.9878
+     },
+     "pos2": {
+      "n": 5,
+      "fracao": 0.003
+     },
+     "pos3": {
+      "n": 12,
+      "fracao": 0.0073
+     },
+     "pos4": {
+      "n": 2,
+      "fracao": 0.0012
+     },
+     "pos5": {
+      "n": 1,
+      "fracao": 0.0006
+     }
+    }
+   },
+   "forca": {
+    "n": 1645,
+    "gpm_medio": 624.4413,
+    "dano_torre_medio": 3502.8432,
+    "dano_heroi_medio": 21665.6924,
+    "cura_media": 18.1058,
+    "stuns_medio_s": 8.7589,
+    "duracao_media_vitorias_min": 34.7369,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 666,
+      "taxa": 0.4459
+     },
+     "entre_30_40min": {
+      "n": 567,
+      "taxa": 0.4586
+     },
+     "mais_40min": {
+      "n": 412,
+      "taxa": 0.4976
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 71,
+   "slug": "spirit_breaker",
+   "posicoes": {
+    "n_total": 1698,
+    "distribuicao": {
+     "pos1": {
+      "n": 7,
+      "fracao": 0.0041
+     },
+     "pos2": {
+      "n": 141,
+      "fracao": 0.083
+     },
+     "pos3": {
+      "n": 289,
+      "fracao": 0.1702
+     },
+     "pos4": {
+      "n": 919,
+      "fracao": 0.5412
+     },
+     "pos5": {
+      "n": 342,
+      "fracao": 0.2014
+     }
+    }
+   },
+   "forca": {
+    "n": 1712,
+    "gpm_medio": 354.8604,
+    "dano_torre_medio": 355.7173,
+    "dano_heroi_medio": 12824.7792,
+    "cura_media": 109.6618,
+    "stuns_medio_s": 72.8492,
+    "duracao_media_vitorias_min": 33.1743,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 707,
+      "taxa": 0.5064
+     },
+     "entre_30_40min": {
+      "n": 684,
+      "taxa": 0.5219
+     },
+     "mais_40min": {
+      "n": 321,
+      "taxa": 0.4766
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 72,
+   "slug": "gyrocopter",
+   "posicoes": {
+    "n_total": 1180,
+    "distribuicao": {
+     "pos1": {
+      "n": 1100,
+      "fracao": 0.9322
+     },
+     "pos2": {
+      "n": 4,
+      "fracao": 0.0034
+     },
+     "pos3": {
+      "n": 6,
+      "fracao": 0.0051
+     },
+     "pos4": {
+      "n": 39,
+      "fracao": 0.0331
+     },
+     "pos5": {
+      "n": 31,
+      "fracao": 0.0263
+     }
+    }
+   },
+   "forca": {
+    "n": 1181,
+    "gpm_medio": 643.5047,
+    "dano_torre_medio": 6443.8044,
+    "dano_heroi_medio": 27910.3091,
+    "cura_media": 41.7197,
+    "stuns_medio_s": 19.7487,
+    "duracao_media_vitorias_min": 34.2909,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 447,
+      "taxa": 0.4676
+     },
+     "entre_30_40min": {
+      "n": 452,
+      "taxa": 0.4934
+     },
+     "mais_40min": {
+      "n": 282,
+      "taxa": 0.461
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 73,
+   "slug": "alchemist",
+   "posicoes": {
+    "n_total": 793,
+    "distribuicao": {
+     "pos1": {
+      "n": 594,
+      "fracao": 0.7491
+     },
+     "pos2": {
+      "n": 66,
+      "fracao": 0.0832
+     },
+     "pos3": {
+      "n": 86,
+      "fracao": 0.1084
+     },
+     "pos4": {
+      "n": 18,
+      "fracao": 0.0227
+     },
+     "pos5": {
+      "n": 29,
+      "fracao": 0.0366
+     }
+    }
+   },
+   "forca": {
+    "n": 799,
+    "gpm_medio": 768.0476,
+    "dano_torre_medio": 4595.2703,
+    "dano_heroi_medio": 18015.7472,
+    "cura_media": 28.7159,
+    "stuns_medio_s": 37.9196,
+    "duracao_media_vitorias_min": 36.8737,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 247,
+      "taxa": 0.4899
+     },
+     "entre_30_40min": {
+      "n": 311,
+      "taxa": 0.5241
+     },
+     "mais_40min": {
+      "n": 241,
+      "taxa": 0.5975
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 74,
+   "slug": "invoker",
+   "posicoes": {
+    "n_total": 2023,
+    "distribuicao": {
+     "pos1": {
+      "n": 6,
+      "fracao": 0.003
+     },
+     "pos2": {
+      "n": 1918,
+      "fracao": 0.9481
+     },
+     "pos3": {
+      "n": 7,
+      "fracao": 0.0035
+     },
+     "pos4": {
+      "n": 69,
+      "fracao": 0.0341
+     },
+     "pos5": {
+      "n": 23,
+      "fracao": 0.0114
+     }
+    }
+   },
+   "forca": {
+    "n": 2032,
+    "gpm_medio": 563.9498,
+    "dano_torre_medio": 3717.6176,
+    "dano_heroi_medio": 26054.4242,
+    "cura_media": 27.3863,
+    "stuns_medio_s": 61.828,
+    "duracao_media_vitorias_min": 34.8306,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 800,
+      "taxa": 0.4512
+     },
+     "entre_30_40min": {
+      "n": 765,
+      "taxa": 0.5399
+     },
+     "mais_40min": {
+      "n": 467,
+      "taxa": 0.5632
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 75,
+   "slug": "silencer",
+   "posicoes": {
+    "n_total": 1168,
+    "distribuicao": {
+     "pos1": {
+      "n": 13,
+      "fracao": 0.0111
+     },
+     "pos2": {
+      "n": 42,
+      "fracao": 0.036
+     },
+     "pos3": {
+      "n": 2,
+      "fracao": 0.0017
+     },
+     "pos4": {
+      "n": 382,
+      "fracao": 0.3271
+     },
+     "pos5": {
+      "n": 729,
+      "fracao": 0.6241
+     }
+    }
+   },
+   "forca": {
+    "n": 1172,
+    "gpm_medio": 304.3387,
+    "dano_torre_medio": 448.5896,
+    "dano_heroi_medio": 11255.0299,
+    "cura_media": 179.9735,
+    "stuns_medio_s": 0.4074,
+    "duracao_media_vitorias_min": 34.0378,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 497,
+      "taxa": 0.4728
+     },
+     "entre_30_40min": {
+      "n": 398,
+      "taxa": 0.4573
+     },
+     "mais_40min": {
+      "n": 277,
+      "taxa": 0.4765
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 76,
+   "slug": "obsidian_destroyer",
+   "posicoes": {
+    "n_total": 394,
+    "distribuicao": {
+     "pos1": {
+      "n": 11,
+      "fracao": 0.0279
+     },
+     "pos2": {
+      "n": 379,
+      "fracao": 0.9619
+     },
+     "pos3": {
+      "n": 1,
+      "fracao": 0.0025
+     },
+     "pos4": {
+      "n": 0,
+      "fracao": 0.0
+     },
+     "pos5": {
+      "n": 3,
+      "fracao": 0.0076
+     }
+    }
+   },
+   "forca": {
+    "n": 394,
+    "gpm_medio": 537.3071,
+    "dano_torre_medio": 1933.6421,
+    "dano_heroi_medio": 23478.9036,
+    "cura_media": 2.8934,
+    "stuns_medio_s": 70.7971,
+    "duracao_media_vitorias_min": 34.9431,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 181,
+      "taxa": 0.4033
+     },
+     "entre_30_40min": {
+      "n": 128,
+      "taxa": 0.4453
+     },
+     "mais_40min": {
+      "n": 85,
+      "taxa": 0.5529
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 77,
+   "slug": "lycan",
+   "posicoes": {
+    "n_total": 384,
+    "distribuicao": {
+     "pos1": {
+      "n": 22,
+      "fracao": 0.0573
+     },
+     "pos2": {
+      "n": 30,
+      "fracao": 0.0781
+     },
+     "pos3": {
+      "n": 330,
+      "fracao": 0.8594
+     },
+     "pos4": {
+      "n": 1,
+      "fracao": 0.0026
+     },
+     "pos5": {
+      "n": 1,
+      "fracao": 0.0026
+     }
+    }
+   },
+   "forca": {
+    "n": 386,
+    "gpm_medio": 596.0285,
+    "dano_torre_medio": 6972.2798,
+    "dano_heroi_medio": 16173.8938,
+    "cura_media": 538.9922,
+    "stuns_medio_s": 5.4783,
+    "duracao_media_vitorias_min": 33.8921,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 144,
+      "taxa": 0.5833
+     },
+     "entre_30_40min": {
+      "n": 126,
+      "taxa": 0.4841
+     },
+     "mais_40min": {
+      "n": 116,
+      "taxa": 0.4655
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 78,
+   "slug": "brewmaster",
+   "posicoes": {
+    "n_total": 852,
+    "distribuicao": {
+     "pos1": {
+      "n": 18,
+      "fracao": 0.0211
+     },
+     "pos2": {
+      "n": 7,
+      "fracao": 0.0082
+     },
+     "pos3": {
+      "n": 805,
+      "fracao": 0.9448
+     },
+     "pos4": {
+      "n": 13,
+      "fracao": 0.0153
+     },
+     "pos5": {
+      "n": 9,
+      "fracao": 0.0106
+     }
+    }
+   },
+   "forca": {
+    "n": 852,
+    "gpm_medio": 519.9507,
+    "dano_torre_medio": 3155.9589,
+    "dano_heroi_medio": 17716.858,
+    "cura_media": 259.0082,
+    "stuns_medio_s": 52.9282,
+    "duracao_media_vitorias_min": 38.3595,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 214,
+      "taxa": 0.4486
+     },
+     "entre_30_40min": {
+      "n": 307,
+      "taxa": 0.5016
+     },
+     "mais_40min": {
+      "n": 331,
+      "taxa": 0.5227
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 79,
+   "slug": "shadow_demon",
+   "posicoes": {
+    "n_total": 2013,
+    "distribuicao": {
+     "pos1": {
+      "n": 0,
+      "fracao": 0.0
+     },
+     "pos2": {
+      "n": 152,
+      "fracao": 0.0755
+     },
+     "pos3": {
+      "n": 9,
+      "fracao": 0.0045
+     },
+     "pos4": {
+      "n": 1319,
+      "fracao": 0.6552
+     },
+     "pos5": {
+      "n": 533,
+      "fracao": 0.2648
+     }
+    }
+   },
+   "forca": {
+    "n": 2025,
+    "gpm_medio": 313.9328,
+    "dano_torre_medio": 375.6044,
+    "dano_heroi_medio": 13368.6153,
+    "cura_media": 1011.637,
+    "stuns_medio_s": 33.3089,
+    "duracao_media_vitorias_min": 35.3055,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 647,
+      "taxa": 0.5611
+     },
+     "entre_30_40min": {
+      "n": 776,
+      "taxa": 0.5026
+     },
+     "mais_40min": {
+      "n": 602,
+      "taxa": 0.5349
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 80,
+   "slug": "lone_druid",
+   "posicoes": {
+    "n_total": 568,
+    "distribuicao": {
+     "pos1": {
+      "n": 454,
+      "fracao": 0.7993
+     },
+     "pos2": {
+      "n": 52,
+      "fracao": 0.0915
+     },
+     "pos3": {
+      "n": 47,
+      "fracao": 0.0827
+     },
+     "pos4": {
+      "n": 4,
+      "fracao": 0.007
+     },
+     "pos5": {
+      "n": 11,
+      "fracao": 0.0194
+     }
+    }
+   },
+   "forca": {
+    "n": 568,
+    "gpm_medio": 685.6514,
+    "dano_torre_medio": 9861.6074,
+    "dano_heroi_medio": 22782.9173,
+    "cura_media": 27.5511,
+    "stuns_medio_s": 62.9554,
+    "duracao_media_vitorias_min": 38.4824,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 148,
+      "taxa": 0.6486
+     },
+     "entre_30_40min": {
+      "n": 216,
+      "taxa": 0.5417
+     },
+     "mais_40min": {
+      "n": 204,
+      "taxa": 0.6618
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 81,
+   "slug": "chaos_knight",
+   "posicoes": {
+    "n_total": 574,
+    "distribuicao": {
+     "pos1": {
+      "n": 218,
+      "fracao": 0.3798
+     },
+     "pos2": {
+      "n": 6,
+      "fracao": 0.0105
+     },
+     "pos3": {
+      "n": 333,
+      "fracao": 0.5801
+     },
+     "pos4": {
+      "n": 13,
+      "fracao": 0.0226
+     },
+     "pos5": {
+      "n": 4,
+      "fracao": 0.007
+     }
+    }
+   },
+   "forca": {
+    "n": 574,
+    "gpm_medio": 540.899,
+    "dano_torre_medio": 3004.6707,
+    "dano_heroi_medio": 17330.3676,
+    "cura_media": 11.378,
+    "stuns_medio_s": 28.9716,
+    "duracao_media_vitorias_min": 30.2905,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 319,
+      "taxa": 0.4828
+     },
+     "entre_30_40min": {
+      "n": 215,
+      "taxa": 0.4558
+     },
+     "mais_40min": {
+      "n": 40,
+      "taxa": 0.475
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 82,
+   "slug": "meepo",
+   "posicoes": {
+    "n_total": 229,
+    "distribuicao": {
+     "pos1": {
+      "n": 90,
+      "fracao": 0.393
+     },
+     "pos2": {
+      "n": 132,
+      "fracao": 0.5764
+     },
+     "pos3": {
+      "n": 7,
+      "fracao": 0.0306
+     },
+     "pos4": {
+      "n": 0,
+      "fracao": 0.0
+     },
+     "pos5": {
+      "n": 0,
+      "fracao": 0.0
+     }
+    }
+   },
+   "forca": {
+    "n": 231,
+    "gpm_medio": 638.0952,
+    "dano_torre_medio": 5488.1385,
+    "dano_heroi_medio": 16466.3074,
+    "cura_media": 32.1169,
+    "stuns_medio_s": 54.5927,
+    "duracao_media_vitorias_min": 30.53,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 96,
+      "taxa": 0.5
+     },
+     "entre_30_40min": {
+      "n": 105,
+      "taxa": 0.5714
+     },
+     "mais_40min": {
+      "n": 30,
+      "taxa": 0.2333
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 83,
+   "slug": "treant",
+   "posicoes": {
+    "n_total": 1393,
+    "distribuicao": {
+     "pos1": {
+      "n": 5,
+      "fracao": 0.0036
+     },
+     "pos2": {
+      "n": 25,
+      "fracao": 0.0179
+     },
+     "pos3": {
+      "n": 24,
+      "fracao": 0.0172
+     },
+     "pos4": {
+      "n": 157,
+      "fracao": 0.1127
+     },
+     "pos5": {
+      "n": 1182,
+      "fracao": 0.8485
+     }
+    }
+   },
+   "forca": {
+    "n": 1407,
+    "gpm_medio": 301.0711,
+    "dano_torre_medio": 303.6766,
+    "dano_heroi_medio": 8390.7441,
+    "cura_media": 4513.747,
+    "stuns_medio_s": 53.9633,
+    "duracao_media_vitorias_min": 35.5572,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 422,
+      "taxa": 0.6611
+     },
+     "entre_30_40min": {
+      "n": 518,
+      "taxa": 0.6023
+     },
+     "mais_40min": {
+      "n": 467,
+      "taxa": 0.5782
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 84,
+   "slug": "ogre_magi",
+   "posicoes": {
+    "n_total": 2152,
+    "distribuicao": {
+     "pos1": {
+      "n": 5,
+      "fracao": 0.0023
+     },
+     "pos2": {
+      "n": 27,
+      "fracao": 0.0125
+     },
+     "pos3": {
+      "n": 130,
+      "fracao": 0.0604
+     },
+     "pos4": {
+      "n": 226,
+      "fracao": 0.105
+     },
+     "pos5": {
+      "n": 1764,
+      "fracao": 0.8197
+     }
+    }
+   },
+   "forca": {
+    "n": 2158,
+    "gpm_medio": 315.3197,
+    "dano_torre_medio": 439.2317,
+    "dano_heroi_medio": 11154.8142,
+    "cura_media": 231.7317,
+    "stuns_medio_s": 32.006,
+    "duracao_media_vitorias_min": 31.065,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 1156,
+      "taxa": 0.4715
+     },
+     "entre_30_40min": {
+      "n": 774,
+      "taxa": 0.5065
+     },
+     "mais_40min": {
+      "n": 228,
+      "taxa": 0.5175
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 85,
+   "slug": "undying",
+   "posicoes": {
+    "n_total": 1063,
+    "distribuicao": {
+     "pos1": {
+      "n": 35,
+      "fracao": 0.0329
+     },
+     "pos2": {
+      "n": 22,
+      "fracao": 0.0207
+     },
+     "pos3": {
+      "n": 275,
+      "fracao": 0.2587
+     },
+     "pos4": {
+      "n": 66,
+      "fracao": 0.0621
+     },
+     "pos5": {
+      "n": 665,
+      "fracao": 0.6256
+     }
+    }
+   },
+   "forca": {
+    "n": 1070,
+    "gpm_medio": 378.714,
+    "dano_torre_medio": 547.0832,
+    "dano_heroi_medio": 12104.9579,
+    "cura_media": 4387.8308,
+    "stuns_medio_s": 0.874,
+    "duracao_media_vitorias_min": 37.3564,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 302,
+      "taxa": 0.457
+     },
+     "entre_30_40min": {
+      "n": 392,
+      "taxa": 0.4694
+     },
+     "mais_40min": {
+      "n": 376,
+      "taxa": 0.4681
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 86,
+   "slug": "rubick",
+   "posicoes": {
+    "n_total": 3978,
+    "distribuicao": {
+     "pos1": {
+      "n": 3,
+      "fracao": 0.0008
+     },
+     "pos2": {
+      "n": 717,
+      "fracao": 0.1802
+     },
+     "pos3": {
+      "n": 98,
+      "fracao": 0.0246
+     },
+     "pos4": {
+      "n": 2686,
+      "fracao": 0.6752
+     },
+     "pos5": {
+      "n": 474,
+      "fracao": 0.1192
+     }
+    }
+   },
+   "forca": {
+    "n": 3999,
+    "gpm_medio": 373.6309,
+    "dano_torre_medio": 521.1018,
+    "dano_heroi_medio": 15984.0173,
+    "cura_media": 557.1883,
+    "stuns_medio_s": 41.3514,
+    "duracao_media_vitorias_min": 34.1623,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 1575,
+      "taxa": 0.5422
+     },
+     "entre_30_40min": {
+      "n": 1467,
+      "taxa": 0.4833
+     },
+     "mais_40min": {
+      "n": 957,
+      "taxa": 0.5078
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 87,
+   "slug": "disruptor",
+   "posicoes": {
+    "n_total": 2511,
+    "distribuicao": {
+     "pos1": {
+      "n": 0,
+      "fracao": 0.0
+     },
+     "pos2": {
+      "n": 62,
+      "fracao": 0.0247
+     },
+     "pos3": {
+      "n": 1,
+      "fracao": 0.0004
+     },
+     "pos4": {
+      "n": 358,
+      "fracao": 0.1426
+     },
+     "pos5": {
+      "n": 2090,
+      "fracao": 0.8323
+     }
+    }
+   },
+   "forca": {
+    "n": 2524,
+    "gpm_medio": 278.9283,
+    "dano_torre_medio": 134.1624,
+    "dano_heroi_medio": 10268.3074,
+    "cura_media": 153.9037,
+    "stuns_medio_s": 0.1337,
+    "duracao_media_vitorias_min": 33.3542,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 1054,
+      "taxa": 0.4696
+     },
+     "entre_30_40min": {
+      "n": 968,
+      "taxa": 0.4897
+     },
+     "mais_40min": {
+      "n": 502,
+      "taxa": 0.4661
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 88,
+   "slug": "nyx_assassin",
+   "posicoes": {
+    "n_total": 916,
+    "distribuicao": {
+     "pos1": {
+      "n": 1,
+      "fracao": 0.0011
+     },
+     "pos2": {
+      "n": 103,
+      "fracao": 0.1124
+     },
+     "pos3": {
+      "n": 27,
+      "fracao": 0.0295
+     },
+     "pos4": {
+      "n": 706,
+      "fracao": 0.7707
+     },
+     "pos5": {
+      "n": 79,
+      "fracao": 0.0862
+     }
+    }
+   },
+   "forca": {
+    "n": 925,
+    "gpm_medio": 322.3049,
+    "dano_torre_medio": 241.5449,
+    "dano_heroi_medio": 16602.2659,
+    "cura_media": 140.0259,
+    "stuns_medio_s": 85.5865,
+    "duracao_media_vitorias_min": 36.5323,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 268,
+      "taxa": 0.5112
+     },
+     "entre_30_40min": {
+      "n": 381,
+      "taxa": 0.5302
+     },
+     "mais_40min": {
+      "n": 276,
+      "taxa": 0.587
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 89,
+   "slug": "naga_siren",
+   "posicoes": {
+    "n_total": 305,
+    "distribuicao": {
+     "pos1": {
+      "n": 245,
+      "fracao": 0.8033
+     },
+     "pos2": {
+      "n": 6,
+      "fracao": 0.0197
+     },
+     "pos3": {
+      "n": 6,
+      "fracao": 0.0197
+     },
+     "pos4": {
+      "n": 2,
+      "fracao": 0.0066
+     },
+     "pos5": {
+      "n": 46,
+      "fracao": 0.1508
+     }
+    }
+   },
+   "forca": {
+    "n": 308,
+    "gpm_medio": 703.6558,
+    "dano_torre_medio": 6433.5584,
+    "dano_heroi_medio": 19448.2955,
+    "cura_media": 202.2532,
+    "stuns_medio_s": 48.8697,
+    "duracao_media_vitorias_min": 36.3178,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 94,
+      "taxa": 0.5638
+     },
+     "entre_30_40min": {
+      "n": 111,
+      "taxa": 0.5225
+     },
+     "mais_40min": {
+      "n": 103,
+      "taxa": 0.5922
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 90,
+   "slug": "keeper_of_the_light",
+   "posicoes": {
+    "n_total": 1241,
+    "distribuicao": {
+     "pos1": {
+      "n": 2,
+      "fracao": 0.0016
+     },
+     "pos2": {
+      "n": 526,
+      "fracao": 0.4239
+     },
+     "pos3": {
+      "n": 18,
+      "fracao": 0.0145
+     },
+     "pos4": {
+      "n": 631,
+      "fracao": 0.5085
+     },
+     "pos5": {
+      "n": 64,
+      "fracao": 0.0516
+     }
+    }
+   },
+   "forca": {
+    "n": 1249,
+    "gpm_medio": 443.3323,
+    "dano_torre_medio": 376.4924,
+    "dano_heroi_medio": 16665.8359,
+    "cura_media": 11004.6157,
+    "stuns_medio_s": 3.9532,
+    "duracao_media_vitorias_min": 34.7893,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 399,
+      "taxa": 0.6591
+     },
+     "entre_30_40min": {
+      "n": 443,
+      "taxa": 0.5711
+     },
+     "mais_40min": {
+      "n": 407,
+      "taxa": 0.457
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 91,
+   "slug": "wisp",
+   "posicoes": {
+    "n_total": 438,
+    "distribuicao": {
+     "pos1": {
+      "n": 41,
+      "fracao": 0.0936
+     },
+     "pos2": {
+      "n": 41,
+      "fracao": 0.0936
+     },
+     "pos3": {
+      "n": 9,
+      "fracao": 0.0205
+     },
+     "pos4": {
+      "n": 147,
+      "fracao": 0.3356
+     },
+     "pos5": {
+      "n": 200,
+      "fracao": 0.4566
+     }
+    }
+   },
+   "forca": {
+    "n": 438,
+    "gpm_medio": 363.6553,
+    "dano_torre_medio": 1197.3196,
+    "dano_heroi_medio": 11289.4749,
+    "cura_media": 12797.0342,
+    "stuns_medio_s": 1.4808,
+    "duracao_media_vitorias_min": 34.3289,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 161,
+      "taxa": 0.528
+     },
+     "entre_30_40min": {
+      "n": 166,
+      "taxa": 0.5602
+     },
+     "mais_40min": {
+      "n": 111,
+      "taxa": 0.5405
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 92,
+   "slug": "visage",
+   "posicoes": {
+    "n_total": 194,
+    "distribuicao": {
+     "pos1": {
+      "n": 10,
+      "fracao": 0.0515
+     },
+     "pos2": {
+      "n": 31,
+      "fracao": 0.1598
+     },
+     "pos3": {
+      "n": 118,
+      "fracao": 0.6082
+     },
+     "pos4": {
+      "n": 23,
+      "fracao": 0.1186
+     },
+     "pos5": {
+      "n": 12,
+      "fracao": 0.0619
+     }
+    }
+   },
+   "forca": {
+    "n": 195,
+    "gpm_medio": 485.7282,
+    "dano_torre_medio": 6149.0923,
+    "dano_heroi_medio": 18174.2615,
+    "cura_media": 1197.0,
+    "stuns_medio_s": 28.2617,
+    "duracao_media_vitorias_min": 32.3801,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 83,
+      "taxa": 0.4699
+     },
+     "entre_30_40min": {
+      "n": 67,
+      "taxa": 0.4776
+     },
+     "mais_40min": {
+      "n": 45,
+      "taxa": 0.4667
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 93,
+   "slug": "slark",
+   "posicoes": {
+    "n_total": 844,
+    "distribuicao": {
+     "pos1": {
+      "n": 716,
+      "fracao": 0.8483
+     },
+     "pos2": {
+      "n": 81,
+      "fracao": 0.096
+     },
+     "pos3": {
+      "n": 14,
+      "fracao": 0.0166
+     },
+     "pos4": {
+      "n": 25,
+      "fracao": 0.0296
+     },
+     "pos5": {
+      "n": 8,
+      "fracao": 0.0095
+     }
+    }
+   },
+   "forca": {
+    "n": 848,
+    "gpm_medio": 551.0483,
+    "dano_torre_medio": 3454.0625,
+    "dano_heroi_medio": 19287.0519,
+    "cura_media": 14.1627,
+    "stuns_medio_s": 1.0152,
+    "duracao_media_vitorias_min": 34.5212,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 310,
+      "taxa": 0.5258
+     },
+     "entre_30_40min": {
+      "n": 326,
+      "taxa": 0.4601
+     },
+     "mais_40min": {
+      "n": 212,
+      "taxa": 0.5472
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 94,
+   "slug": "medusa",
+   "posicoes": {
+    "n_total": 503,
+    "distribuicao": {
+     "pos1": {
+      "n": 498,
+      "fracao": 0.9901
+     },
+     "pos2": {
+      "n": 0,
+      "fracao": 0.0
+     },
+     "pos3": {
+      "n": 5,
+      "fracao": 0.0099
+     },
+     "pos4": {
+      "n": 0,
+      "fracao": 0.0
+     },
+     "pos5": {
+      "n": 0,
+      "fracao": 0.0
+     }
+    }
+   },
+   "forca": {
+    "n": 504,
+    "gpm_medio": 683.8234,
+    "dano_torre_medio": 7103.9643,
+    "dano_heroi_medio": 24707.7401,
+    "cura_media": 13.5298,
+    "stuns_medio_s": 21.767,
+    "duracao_media_vitorias_min": 35.7709,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 190,
+      "taxa": 0.3947
+     },
+     "entre_30_40min": {
+      "n": 196,
+      "taxa": 0.4082
+     },
+     "mais_40min": {
+      "n": 118,
+      "taxa": 0.5169
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 95,
+   "slug": "troll_warlord",
+   "posicoes": {
+    "n_total": 536,
+    "distribuicao": {
+     "pos1": {
+      "n": 526,
+      "fracao": 0.9813
+     },
+     "pos2": {
+      "n": 8,
+      "fracao": 0.0149
+     },
+     "pos3": {
+      "n": 1,
+      "fracao": 0.0019
+     },
+     "pos4": {
+      "n": 0,
+      "fracao": 0.0
+     },
+     "pos5": {
+      "n": 1,
+      "fracao": 0.0019
+     }
+    }
+   },
+   "forca": {
+    "n": 536,
+    "gpm_medio": 622.6698,
+    "dano_torre_medio": 6469.8638,
+    "dano_heroi_medio": 19921.931,
+    "cura_media": 10.4608,
+    "stuns_medio_s": 34.1868,
+    "duracao_media_vitorias_min": 32.0411,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 268,
+      "taxa": 0.5522
+     },
+     "entre_30_40min": {
+      "n": 185,
+      "taxa": 0.3946
+     },
+     "mais_40min": {
+      "n": 83,
+      "taxa": 0.5542
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 96,
+   "slug": "centaur",
+   "posicoes": {
+    "n_total": 1968,
+    "distribuicao": {
+     "pos1": {
+      "n": 3,
+      "fracao": 0.0015
+     },
+     "pos2": {
+      "n": 38,
+      "fracao": 0.0193
+     },
+     "pos3": {
+      "n": 1871,
+      "fracao": 0.9507
+     },
+     "pos4": {
+      "n": 52,
+      "fracao": 0.0264
+     },
+     "pos5": {
+      "n": 4,
+      "fracao": 0.002
+     }
+    }
+   },
+   "forca": {
+    "n": 1971,
+    "gpm_medio": 508.7438,
+    "dano_torre_medio": 1728.6971,
+    "dano_heroi_medio": 15775.2598,
+    "cura_media": 25.5967,
+    "stuns_medio_s": 41.0855,
+    "duracao_media_vitorias_min": 36.4998,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 599,
+      "taxa": 0.4691
+     },
+     "entre_30_40min": {
+      "n": 763,
+      "taxa": 0.5216
+     },
+     "mais_40min": {
+      "n": 609,
+      "taxa": 0.5255
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 97,
+   "slug": "magnataur",
+   "posicoes": {
+    "n_total": 586,
+    "distribuicao": {
+     "pos1": {
+      "n": 27,
+      "fracao": 0.0461
+     },
+     "pos2": {
+      "n": 145,
+      "fracao": 0.2474
+     },
+     "pos3": {
+      "n": 304,
+      "fracao": 0.5188
+     },
+     "pos4": {
+      "n": 80,
+      "fracao": 0.1365
+     },
+     "pos5": {
+      "n": 30,
+      "fracao": 0.0512
+     }
+    }
+   },
+   "forca": {
+    "n": 590,
+    "gpm_medio": 466.4356,
+    "dano_torre_medio": 1229.9441,
+    "dano_heroi_medio": 14970.2424,
+    "cura_media": 216.4593,
+    "stuns_medio_s": 42.8342,
+    "duracao_media_vitorias_min": 34.5019,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 248,
+      "taxa": 0.4677
+     },
+     "entre_30_40min": {
+      "n": 213,
+      "taxa": 0.5399
+     },
+     "mais_40min": {
+      "n": 129,
+      "taxa": 0.5426
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 98,
+   "slug": "shredder",
+   "posicoes": {
+    "n_total": 1465,
+    "distribuicao": {
+     "pos1": {
+      "n": 23,
+      "fracao": 0.0157
+     },
+     "pos2": {
+      "n": 184,
+      "fracao": 0.1256
+     },
+     "pos3": {
+      "n": 1246,
+      "fracao": 0.8505
+     },
+     "pos4": {
+      "n": 11,
+      "fracao": 0.0075
+     },
+     "pos5": {
+      "n": 1,
+      "fracao": 0.0007
+     }
+    }
+   },
+   "forca": {
+    "n": 1470,
+    "gpm_medio": 587.0653,
+    "dano_torre_medio": 1162.3197,
+    "dano_heroi_medio": 23740.7571,
+    "cura_media": 99.1816,
+    "stuns_medio_s": 7.9655,
+    "duracao_media_vitorias_min": 36.897,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 422,
+      "taxa": 0.4716
+     },
+     "entre_30_40min": {
+      "n": 578,
+      "taxa": 0.4896
+     },
+     "mais_40min": {
+      "n": 470,
+      "taxa": 0.5021
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 99,
+   "slug": "bristleback",
+   "posicoes": {
+    "n_total": 1380,
+    "distribuicao": {
+     "pos1": {
+      "n": 156,
+      "fracao": 0.113
+     },
+     "pos2": {
+      "n": 36,
+      "fracao": 0.0261
+     },
+     "pos3": {
+      "n": 1176,
+      "fracao": 0.8522
+     },
+     "pos4": {
+      "n": 11,
+      "fracao": 0.008
+     },
+     "pos5": {
+      "n": 1,
+      "fracao": 0.0007
+     }
+    }
+   },
+   "forca": {
+    "n": 1383,
+    "gpm_medio": 564.914,
+    "dano_torre_medio": 4177.1851,
+    "dano_heroi_medio": 24159.1576,
+    "cura_media": 26.8612,
+    "stuns_medio_s": 1.6858,
+    "duracao_media_vitorias_min": 34.7577,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 478,
+      "taxa": 0.4728
+     },
+     "entre_30_40min": {
+      "n": 541,
+      "taxa": 0.4473
+     },
+     "mais_40min": {
+      "n": 364,
+      "taxa": 0.4863
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 100,
+   "slug": "tusk",
+   "posicoes": {
+    "n_total": 2933,
+    "distribuicao": {
+     "pos1": {
+      "n": 1,
+      "fracao": 0.0003
+     },
+     "pos2": {
+      "n": 199,
+      "fracao": 0.0678
+     },
+     "pos3": {
+      "n": 12,
+      "fracao": 0.0041
+     },
+     "pos4": {
+      "n": 1433,
+      "fracao": 0.4886
+     },
+     "pos5": {
+      "n": 1288,
+      "fracao": 0.4391
+     }
+    }
+   },
+   "forca": {
+    "n": 2962,
+    "gpm_medio": 299.8322,
+    "dano_torre_medio": 229.0064,
+    "dano_heroi_medio": 10700.4345,
+    "cura_media": 183.9402,
+    "stuns_medio_s": 35.2135,
+    "duracao_media_vitorias_min": 35.4177,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 916,
+      "taxa": 0.5109
+     },
+     "entre_30_40min": {
+      "n": 1133,
+      "taxa": 0.5207
+     },
+     "mais_40min": {
+      "n": 913,
+      "taxa": 0.4666
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 101,
+   "slug": "skywrath_mage",
+   "posicoes": {
+    "n_total": 1871,
+    "distribuicao": {
+     "pos1": {
+      "n": 1,
+      "fracao": 0.0005
+     },
+     "pos2": {
+      "n": 194,
+      "fracao": 0.1037
+     },
+     "pos3": {
+      "n": 39,
+      "fracao": 0.0208
+     },
+     "pos4": {
+      "n": 1456,
+      "fracao": 0.7782
+     },
+     "pos5": {
+      "n": 181,
+      "fracao": 0.0967
+     }
+    }
+   },
+   "forca": {
+    "n": 1883,
+    "gpm_medio": 332.1848,
+    "dano_torre_medio": 431.9448,
+    "dano_heroi_medio": 17795.461,
+    "cura_media": 104.7366,
+    "stuns_medio_s": 4.539,
+    "duracao_media_vitorias_min": 33.35,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 828,
+      "taxa": 0.4541
+     },
+     "entre_30_40min": {
+      "n": 665,
+      "taxa": 0.4827
+     },
+     "mais_40min": {
+      "n": 390,
+      "taxa": 0.4564
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 102,
+   "slug": "abaddon",
+   "posicoes": {
+    "n_total": 719,
+    "distribuicao": {
+     "pos1": {
+      "n": 414,
+      "fracao": 0.5758
+     },
+     "pos2": {
+      "n": 2,
+      "fracao": 0.0028
+     },
+     "pos3": {
+      "n": 212,
+      "fracao": 0.2949
+     },
+     "pos4": {
+      "n": 33,
+      "fracao": 0.0459
+     },
+     "pos5": {
+      "n": 58,
+      "fracao": 0.0807
+     }
+    }
+   },
+   "forca": {
+    "n": 722,
+    "gpm_medio": 551.0693,
+    "dano_torre_medio": 3875.4889,
+    "dano_heroi_medio": 20428.0831,
+    "cura_media": 1224.9889,
+    "stuns_medio_s": 1.6489,
+    "duracao_media_vitorias_min": 34.3107,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 273,
+      "taxa": 0.5165
+     },
+     "entre_30_40min": {
+      "n": 264,
+      "taxa": 0.4848
+     },
+     "mais_40min": {
+      "n": 185,
+      "taxa": 0.4973
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 103,
+   "slug": "elder_titan",
+   "posicoes": {
+    "n_total": 110,
+    "distribuicao": {
+     "pos1": {
+      "n": 7,
+      "fracao": 0.0636
+     },
+     "pos2": {
+      "n": 4,
+      "fracao": 0.0364
+     },
+     "pos3": {
+      "n": 19,
+      "fracao": 0.1727
+     },
+     "pos4": {
+      "n": 7,
+      "fracao": 0.0636
+     },
+     "pos5": {
+      "n": 73,
+      "fracao": 0.6636
+     }
+    }
+   },
+   "forca": {
+    "n": 112,
+    "gpm_medio": 333.4643,
+    "dano_torre_medio": 666.6071,
+    "dano_heroi_medio": 14759.2679,
+    "cura_media": 191.0089,
+    "stuns_medio_s": 54.5493,
+    "duracao_media_vitorias_min": 37.7467,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 35,
+      "taxa": 0.3429
+     },
+     "entre_30_40min": {
+      "n": 40,
+      "taxa": 0.4
+     },
+     "mais_40min": {
+      "n": 37,
+      "taxa": 0.4595
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 104,
+   "slug": "legion_commander",
+   "posicoes": {
+    "n_total": 587,
+    "distribuicao": {
+     "pos1": {
+      "n": 9,
+      "fracao": 0.0153
+     },
+     "pos2": {
+      "n": 14,
+      "fracao": 0.0239
+     },
+     "pos3": {
+      "n": 539,
+      "fracao": 0.9182
+     },
+     "pos4": {
+      "n": 25,
+      "fracao": 0.0426
+     },
+     "pos5": {
+      "n": 0,
+      "fracao": 0.0
+     }
+    }
+   },
+   "forca": {
+    "n": 587,
+    "gpm_medio": 489.138,
+    "dano_torre_medio": 1837.6371,
+    "dano_heroi_medio": 20317.5315,
+    "cura_media": 1633.5451,
+    "stuns_medio_s": 29.4083,
+    "duracao_media_vitorias_min": 33.3983,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 252,
+      "taxa": 0.4603
+     },
+     "entre_30_40min": {
+      "n": 230,
+      "taxa": 0.5
+     },
+     "mais_40min": {
+      "n": 105,
+      "taxa": 0.5714
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 105,
+   "slug": "techies",
+   "posicoes": {
+    "n_total": 1236,
+    "distribuicao": {
+     "pos1": {
+      "n": 4,
+      "fracao": 0.0032
+     },
+     "pos2": {
+      "n": 101,
+      "fracao": 0.0817
+     },
+     "pos3": {
+      "n": 51,
+      "fracao": 0.0413
+     },
+     "pos4": {
+      "n": 776,
+      "fracao": 0.6278
+     },
+     "pos5": {
+      "n": 304,
+      "fracao": 0.246
+     }
+    }
+   },
+   "forca": {
+    "n": 1242,
+    "gpm_medio": 365.4895,
+    "dano_torre_medio": 559.4042,
+    "dano_heroi_medio": 24082.1071,
+    "cura_media": 495.6184,
+    "stuns_medio_s": 17.8002,
+    "duracao_media_vitorias_min": 36.3385,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 406,
+      "taxa": 0.5197
+     },
+     "entre_30_40min": {
+      "n": 423,
+      "taxa": 0.487
+     },
+     "mais_40min": {
+      "n": 413,
+      "taxa": 0.4455
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 106,
+   "slug": "ember_spirit",
+   "posicoes": {
+    "n_total": 2700,
+    "distribuicao": {
+     "pos1": {
+      "n": 48,
+      "fracao": 0.0178
+     },
+     "pos2": {
+      "n": 2605,
+      "fracao": 0.9648
+     },
+     "pos3": {
+      "n": 34,
+      "fracao": 0.0126
+     },
+     "pos4": {
+      "n": 11,
+      "fracao": 0.0041
+     },
+     "pos5": {
+      "n": 2,
+      "fracao": 0.0007
+     }
+    }
+   },
+   "forca": {
+    "n": 2709,
+    "gpm_medio": 558.1329,
+    "dano_torre_medio": 1176.1019,
+    "dano_heroi_medio": 31957.2075,
+    "cura_media": 173.2049,
+    "stuns_medio_s": 80.0772,
+    "duracao_media_vitorias_min": 36.3391,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 772,
+      "taxa": 0.5803
+     },
+     "entre_30_40min": {
+      "n": 988,
+      "taxa": 0.5223
+     },
+     "mais_40min": {
+      "n": 949,
+      "taxa": 0.5047
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 107,
+   "slug": "earth_spirit",
+   "posicoes": {
+    "n_total": 1023,
+    "distribuicao": {
+     "pos1": {
+      "n": 1,
+      "fracao": 0.001
+     },
+     "pos2": {
+      "n": 690,
+      "fracao": 0.6745
+     },
+     "pos3": {
+      "n": 50,
+      "fracao": 0.0489
+     },
+     "pos4": {
+      "n": 246,
+      "fracao": 0.2405
+     },
+     "pos5": {
+      "n": 36,
+      "fracao": 0.0352
+     }
+    }
+   },
+   "forca": {
+    "n": 1029,
+    "gpm_medio": 466.1341,
+    "dano_torre_medio": 670.2624,
+    "dano_heroi_medio": 23912.6492,
+    "cura_media": 335.3129,
+    "stuns_medio_s": 22.1147,
+    "duracao_media_vitorias_min": 36.2309,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 336,
+      "taxa": 0.5714
+     },
+     "entre_30_40min": {
+      "n": 359,
+      "taxa": 0.5404
+     },
+     "mais_40min": {
+      "n": 334,
+      "taxa": 0.524
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 108,
+   "slug": "abyssal_underlord",
+   "posicoes": {
+    "n_total": 1889,
+    "distribuicao": {
+     "pos1": {
+      "n": 20,
+      "fracao": 0.0106
+     },
+     "pos2": {
+      "n": 18,
+      "fracao": 0.0095
+     },
+     "pos3": {
+      "n": 1831,
+      "fracao": 0.9693
+     },
+     "pos4": {
+      "n": 17,
+      "fracao": 0.009
+     },
+     "pos5": {
+      "n": 3,
+      "fracao": 0.0016
+     }
+    }
+   },
+   "forca": {
+    "n": 1893,
+    "gpm_medio": 524.9208,
+    "dano_torre_medio": 2140.6635,
+    "dano_heroi_medio": 18558.6513,
+    "cura_media": 402.4517,
+    "stuns_medio_s": 117.6996,
+    "duracao_media_vitorias_min": 36.8638,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 609,
+      "taxa": 0.468
+     },
+     "entre_30_40min": {
+      "n": 662,
+      "taxa": 0.4411
+     },
+     "mais_40min": {
+      "n": 622,
+      "taxa": 0.4759
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 109,
+   "slug": "terrorblade",
+   "posicoes": {
+    "n_total": 887,
+    "distribuicao": {
+     "pos1": {
+      "n": 871,
+      "fracao": 0.982
+     },
+     "pos2": {
+      "n": 1,
+      "fracao": 0.0011
+     },
+     "pos3": {
+      "n": 13,
+      "fracao": 0.0147
+     },
+     "pos4": {
+      "n": 1,
+      "fracao": 0.0011
+     },
+     "pos5": {
+      "n": 1,
+      "fracao": 0.0011
+     }
+    }
+   },
+   "forca": {
+    "n": 889,
+    "gpm_medio": 700.9494,
+    "dano_torre_medio": 11287.144,
+    "dano_heroi_medio": 23257.982,
+    "cura_media": 27.5996,
+    "stuns_medio_s": 1.5148,
+    "duracao_media_vitorias_min": 36.3267,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 258,
+      "taxa": 0.5155
+     },
+     "entre_30_40min": {
+      "n": 348,
+      "taxa": 0.4971
+     },
+     "mais_40min": {
+      "n": 283,
+      "taxa": 0.4912
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 110,
+   "slug": "phoenix",
+   "posicoes": {
+    "n_total": 2225,
+    "distribuicao": {
+     "pos1": {
+      "n": 2,
+      "fracao": 0.0009
+     },
+     "pos2": {
+      "n": 112,
+      "fracao": 0.0503
+     },
+     "pos3": {
+      "n": 416,
+      "fracao": 0.187
+     },
+     "pos4": {
+      "n": 397,
+      "fracao": 0.1784
+     },
+     "pos5": {
+      "n": 1298,
+      "fracao": 0.5834
+     }
+    }
+   },
+   "forca": {
+    "n": 2252,
+    "gpm_medio": 405.6679,
+    "dano_torre_medio": 339.5697,
+    "dano_heroi_medio": 20101.0617,
+    "cura_media": 3073.5022,
+    "stuns_medio_s": 7.9549,
+    "duracao_media_vitorias_min": 36.2117,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 637,
+      "taxa": 0.54
+     },
+     "entre_30_40min": {
+      "n": 874,
+      "taxa": 0.5469
+     },
+     "mais_40min": {
+      "n": 741,
+      "taxa": 0.5101
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 111,
+   "slug": "oracle",
+   "posicoes": {
+    "n_total": 338,
+    "distribuicao": {
+     "pos1": {
+      "n": 0,
+      "fracao": 0.0
+     },
+     "pos2": {
+      "n": 7,
+      "fracao": 0.0207
+     },
+     "pos3": {
+      "n": 1,
+      "fracao": 0.003
+     },
+     "pos4": {
+      "n": 46,
+      "fracao": 0.1361
+     },
+     "pos5": {
+      "n": 284,
+      "fracao": 0.8402
+     }
+    }
+   },
+   "forca": {
+    "n": 340,
+    "gpm_medio": 287.7618,
+    "dano_torre_medio": 174.0294,
+    "dano_heroi_medio": 7653.7853,
+    "cura_media": 12048.2853,
+    "stuns_medio_s": 39.4318,
+    "duracao_media_vitorias_min": 36.054,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 123,
+      "taxa": 0.4797
+     },
+     "entre_30_40min": {
+      "n": 121,
+      "taxa": 0.4959
+     },
+     "mais_40min": {
+      "n": 96,
+      "taxa": 0.5208
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 112,
+   "slug": "winter_wyvern",
+   "posicoes": {
+    "n_total": 945,
+    "distribuicao": {
+     "pos1": {
+      "n": 3,
+      "fracao": 0.0032
+     },
+     "pos2": {
+      "n": 22,
+      "fracao": 0.0233
+     },
+     "pos3": {
+      "n": 17,
+      "fracao": 0.018
+     },
+     "pos4": {
+      "n": 118,
+      "fracao": 0.1249
+     },
+     "pos5": {
+      "n": 785,
+      "fracao": 0.8307
+     }
+    }
+   },
+   "forca": {
+    "n": 955,
+    "gpm_medio": 306.5058,
+    "dano_torre_medio": 277.8503,
+    "dano_heroi_medio": 14881.1487,
+    "cura_media": 5111.0754,
+    "stuns_medio_s": 27.4415,
+    "duracao_media_vitorias_min": 36.7513,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 273,
+      "taxa": 0.5201
+     },
+     "entre_30_40min": {
+      "n": 337,
+      "taxa": 0.5519
+     },
+     "mais_40min": {
+      "n": 345,
+      "taxa": 0.4348
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 113,
+   "slug": "arc_warden",
+   "posicoes": {
+    "n_total": 157,
+    "distribuicao": {
+     "pos1": {
+      "n": 11,
+      "fracao": 0.0701
+     },
+     "pos2": {
+      "n": 145,
+      "fracao": 0.9236
+     },
+     "pos3": {
+      "n": 0,
+      "fracao": 0.0
+     },
+     "pos4": {
+      "n": 1,
+      "fracao": 0.0064
+     },
+     "pos5": {
+      "n": 0,
+      "fracao": 0.0
+     }
+    }
+   },
+   "forca": {
+    "n": 157,
+    "gpm_medio": 714.5159,
+    "dano_torre_medio": 5056.4522,
+    "dano_heroi_medio": 27050.121,
+    "cura_media": 7.5987,
+    "stuns_medio_s": 2.5565,
+    "duracao_media_vitorias_min": 33.6972,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 87,
+      "taxa": 0.5057
+     },
+     "entre_30_40min": {
+      "n": 46,
+      "taxa": 0.5217
+     },
+     "mais_40min": {
+      "n": 24,
+      "taxa": 0.6667
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 114,
+   "slug": "monkey_king",
+   "posicoes": {
+    "n_total": 1099,
+    "distribuicao": {
+     "pos1": {
+      "n": 677,
+      "fracao": 0.616
+     },
+     "pos2": {
+      "n": 348,
+      "fracao": 0.3167
+     },
+     "pos3": {
+      "n": 31,
+      "fracao": 0.0282
+     },
+     "pos4": {
+      "n": 35,
+      "fracao": 0.0318
+     },
+     "pos5": {
+      "n": 8,
+      "fracao": 0.0073
+     }
+    }
+   },
+   "forca": {
+    "n": 1106,
+    "gpm_medio": 571.6329,
+    "dano_torre_medio": 4064.8192,
+    "dano_heroi_medio": 24583.5814,
+    "cura_media": 24.9123,
+    "stuns_medio_s": 27.1843,
+    "duracao_media_vitorias_min": 35.9038,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 360,
+      "taxa": 0.55
+     },
+     "entre_30_40min": {
+      "n": 427,
+      "taxa": 0.5012
+     },
+     "mais_40min": {
+      "n": 319,
+      "taxa": 0.5549
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 119,
+   "slug": "dark_willow",
+   "posicoes": {
+    "n_total": 1604,
+    "distribuicao": {
+     "pos1": {
+      "n": 2,
+      "fracao": 0.0012
+     },
+     "pos2": {
+      "n": 82,
+      "fracao": 0.0511
+     },
+     "pos3": {
+      "n": 5,
+      "fracao": 0.0031
+     },
+     "pos4": {
+      "n": 1324,
+      "fracao": 0.8254
+     },
+     "pos5": {
+      "n": 191,
+      "fracao": 0.1191
+     }
+    }
+   },
+   "forca": {
+    "n": 1614,
+    "gpm_medio": 312.5781,
+    "dano_torre_medio": 323.7639,
+    "dano_heroi_medio": 14830.8098,
+    "cura_media": 210.5415,
+    "stuns_medio_s": 130.648,
+    "duracao_media_vitorias_min": 37.6275,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 444,
+      "taxa": 0.4662
+     },
+     "entre_30_40min": {
+      "n": 590,
+      "taxa": 0.4661
+     },
+     "mais_40min": {
+      "n": 580,
+      "taxa": 0.5017
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 120,
+   "slug": "pangolier",
+   "posicoes": {
+    "n_total": 1830,
+    "distribuicao": {
+     "pos1": {
+      "n": 4,
+      "fracao": 0.0022
+     },
+     "pos2": {
+      "n": 1169,
+      "fracao": 0.6388
+     },
+     "pos3": {
+      "n": 652,
+      "fracao": 0.3563
+     },
+     "pos4": {
+      "n": 4,
+      "fracao": 0.0022
+     },
+     "pos5": {
+      "n": 1,
+      "fracao": 0.0005
+     }
+    }
+   },
+   "forca": {
+    "n": 1836,
+    "gpm_medio": 561.146,
+    "dano_torre_medio": 1056.1198,
+    "dano_heroi_medio": 22610.0779,
+    "cura_media": 54.5659,
+    "stuns_medio_s": 30.5856,
+    "duracao_media_vitorias_min": 36.8854,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 490,
+      "taxa": 0.5286
+     },
+     "entre_30_40min": {
+      "n": 703,
+      "taxa": 0.5064
+     },
+     "mais_40min": {
+      "n": 643,
+      "taxa": 0.4666
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 121,
+   "slug": "grimstroke",
+   "posicoes": {
+    "n_total": 910,
+    "distribuicao": {
+     "pos1": {
+      "n": 0,
+      "fracao": 0.0
+     },
+     "pos2": {
+      "n": 59,
+      "fracao": 0.0648
+     },
+     "pos3": {
+      "n": 5,
+      "fracao": 0.0055
+     },
+     "pos4": {
+      "n": 551,
+      "fracao": 0.6055
+     },
+     "pos5": {
+      "n": 295,
+      "fracao": 0.3242
+     }
+    }
+   },
+   "forca": {
+    "n": 915,
+    "gpm_medio": 328.2022,
+    "dano_torre_medio": 343.2415,
+    "dano_heroi_medio": 12696.2656,
+    "cura_media": 464.3869,
+    "stuns_medio_s": 18.5814,
+    "duracao_media_vitorias_min": 35.7049,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 323,
+      "taxa": 0.483
+     },
+     "entre_30_40min": {
+      "n": 338,
+      "taxa": 0.5207
+     },
+     "mais_40min": {
+      "n": 254,
+      "taxa": 0.5039
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 123,
+   "slug": "hoodwink",
+   "posicoes": {
+    "n_total": 2896,
+    "distribuicao": {
+     "pos1": {
+      "n": 4,
+      "fracao": 0.0014
+     },
+     "pos2": {
+      "n": 143,
+      "fracao": 0.0494
+     },
+     "pos3": {
+      "n": 30,
+      "fracao": 0.0104
+     },
+     "pos4": {
+      "n": 2318,
+      "fracao": 0.8004
+     },
+     "pos5": {
+      "n": 401,
+      "fracao": 0.1385
+     }
+    }
+   },
+   "forca": {
+    "n": 2926,
+    "gpm_medio": 342.58,
+    "dano_torre_medio": 358.4207,
+    "dano_heroi_medio": 15537.9511,
+    "cura_media": 516.8237,
+    "stuns_medio_s": 51.6925,
+    "duracao_media_vitorias_min": 38.288,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 702,
+      "taxa": 0.5199
+     },
+     "entre_30_40min": {
+      "n": 1053,
+      "taxa": 0.509
+     },
+     "mais_40min": {
+      "n": 1171,
+      "taxa": 0.4962
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 126,
+   "slug": "void_spirit",
+   "posicoes": {
+    "n_total": 1609,
+    "distribuicao": {
+     "pos1": {
+      "n": 44,
+      "fracao": 0.0273
+     },
+     "pos2": {
+      "n": 1475,
+      "fracao": 0.9167
+     },
+     "pos3": {
+      "n": 40,
+      "fracao": 0.0249
+     },
+     "pos4": {
+      "n": 44,
+      "fracao": 0.0273
+     },
+     "pos5": {
+      "n": 6,
+      "fracao": 0.0037
+     }
+    }
+   },
+   "forca": {
+    "n": 1618,
+    "gpm_medio": 534.7225,
+    "dano_torre_medio": 1478.7509,
+    "dano_heroi_medio": 24290.1669,
+    "cura_media": 187.9394,
+    "stuns_medio_s": 2.7211,
+    "duracao_media_vitorias_min": 36.6226,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 451,
+      "taxa": 0.4789
+     },
+     "entre_30_40min": {
+      "n": 594,
+      "taxa": 0.4832
+     },
+     "mais_40min": {
+      "n": 573,
+      "taxa": 0.4398
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 128,
+   "slug": "snapfire",
+   "posicoes": {
+    "n_total": 2448,
+    "distribuicao": {
+     "pos1": {
+      "n": 5,
+      "fracao": 0.002
+     },
+     "pos2": {
+      "n": 519,
+      "fracao": 0.212
+     },
+     "pos3": {
+      "n": 225,
+      "fracao": 0.0919
+     },
+     "pos4": {
+      "n": 1119,
+      "fracao": 0.4571
+     },
+     "pos5": {
+      "n": 580,
+      "fracao": 0.2369
+     }
+    }
+   },
+   "forca": {
+    "n": 2461,
+    "gpm_medio": 412.8472,
+    "dano_torre_medio": 756.631,
+    "dano_heroi_medio": 19044.5993,
+    "cura_media": 1017.8769,
+    "stuns_medio_s": 20.3867,
+    "duracao_media_vitorias_min": 34.0546,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 1019,
+      "taxa": 0.5132
+     },
+     "entre_30_40min": {
+      "n": 885,
+      "taxa": 0.5153
+     },
+     "mais_40min": {
+      "n": 557,
+      "taxa": 0.4865
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 129,
+   "slug": "mars",
+   "posicoes": {
+    "n_total": 2340,
+    "distribuicao": {
+     "pos1": {
+      "n": 9,
+      "fracao": 0.0038
+     },
+     "pos2": {
+      "n": 69,
+      "fracao": 0.0295
+     },
+     "pos3": {
+      "n": 2203,
+      "fracao": 0.9415
+     },
+     "pos4": {
+      "n": 56,
+      "fracao": 0.0239
+     },
+     "pos5": {
+      "n": 3,
+      "fracao": 0.0013
+     }
+    }
+   },
+   "forca": {
+    "n": 2345,
+    "gpm_medio": 487.0989,
+    "dano_torre_medio": 901.5642,
+    "dano_heroi_medio": 16247.4128,
+    "cura_media": 605.7838,
+    "stuns_medio_s": 63.4259,
+    "duracao_media_vitorias_min": 34.5541,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 869,
+      "taxa": 0.4649
+     },
+     "entre_30_40min": {
+      "n": 885,
+      "taxa": 0.452
+     },
+     "mais_40min": {
+      "n": 591,
+      "taxa": 0.4822
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 131,
+   "slug": "ringmaster",
+   "posicoes": {
+    "n_total": 1786,
+    "distribuicao": {
+     "pos1": {
+      "n": 1,
+      "fracao": 0.0006
+     },
+     "pos2": {
+      "n": 96,
+      "fracao": 0.0538
+     },
+     "pos3": {
+      "n": 7,
+      "fracao": 0.0039
+     },
+     "pos4": {
+      "n": 874,
+      "fracao": 0.4894
+     },
+     "pos5": {
+      "n": 808,
+      "fracao": 0.4524
+     }
+    }
+   },
+   "forca": {
+    "n": 1796,
+    "gpm_medio": 315.1609,
+    "dano_torre_medio": 197.6476,
+    "dano_heroi_medio": 14389.7895,
+    "cura_media": 425.2032,
+    "stuns_medio_s": 34.5762,
+    "duracao_media_vitorias_min": 37.5507,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 508,
+      "taxa": 0.4823
+     },
+     "entre_30_40min": {
+      "n": 681,
+      "taxa": 0.4611
+     },
+     "mais_40min": {
+      "n": 607,
+      "taxa": 0.5074
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 135,
+   "slug": "dawnbreaker",
+   "posicoes": {
+    "n_total": 1381,
+    "distribuicao": {
+     "pos1": {
+      "n": 27,
+      "fracao": 0.0196
+     },
+     "pos2": {
+      "n": 31,
+      "fracao": 0.0224
+     },
+     "pos3": {
+      "n": 1292,
+      "fracao": 0.9356
+     },
+     "pos4": {
+      "n": 16,
+      "fracao": 0.0116
+     },
+     "pos5": {
+      "n": 15,
+      "fracao": 0.0109
+     }
+    }
+   },
+   "forca": {
+    "n": 1393,
+    "gpm_medio": 542.1831,
+    "dano_torre_medio": 1573.0345,
+    "dano_heroi_medio": 19504.7538,
+    "cura_media": 4206.5413,
+    "stuns_medio_s": 18.5779,
+    "duracao_media_vitorias_min": 34.9688,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 503,
+      "taxa": 0.4851
+     },
+     "entre_30_40min": {
+      "n": 501,
+      "taxa": 0.483
+     },
+     "mais_40min": {
+      "n": 389,
+      "taxa": 0.4756
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 136,
+   "slug": "marci",
+   "posicoes": {
+    "n_total": 788,
+    "distribuicao": {
+     "pos1": {
+      "n": 68,
+      "fracao": 0.0863
+     },
+     "pos2": {
+      "n": 83,
+      "fracao": 0.1053
+     },
+     "pos3": {
+      "n": 106,
+      "fracao": 0.1345
+     },
+     "pos4": {
+      "n": 299,
+      "fracao": 0.3794
+     },
+     "pos5": {
+      "n": 232,
+      "fracao": 0.2944
+     }
+    }
+   },
+   "forca": {
+    "n": 800,
+    "gpm_medio": 365.3562,
+    "dano_torre_medio": 1619.9175,
+    "dano_heroi_medio": 12956.0263,
+    "cura_media": 651.46,
+    "stuns_medio_s": 49.5327,
+    "duracao_media_vitorias_min": 33.5813,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 297,
+      "taxa": 0.5118
+     },
+     "entre_30_40min": {
+      "n": 288,
+      "taxa": 0.4826
+     },
+     "mais_40min": {
+      "n": 215,
+      "taxa": 0.414
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 137,
+   "slug": "primal_beast",
+   "posicoes": {
+    "n_total": 899,
+    "distribuicao": {
+     "pos1": {
+      "n": 4,
+      "fracao": 0.0044
+     },
+     "pos2": {
+      "n": 296,
+      "fracao": 0.3293
+     },
+     "pos3": {
+      "n": 590,
+      "fracao": 0.6563
+     },
+     "pos4": {
+      "n": 9,
+      "fracao": 0.01
+     },
+     "pos5": {
+      "n": 0,
+      "fracao": 0.0
+     }
+    }
+   },
+   "forca": {
+    "n": 903,
+    "gpm_medio": 504.0698,
+    "dano_torre_medio": 942.7497,
+    "dano_heroi_medio": 21406.835,
+    "cura_media": 28.9646,
+    "stuns_medio_s": 60.9408,
+    "duracao_media_vitorias_min": 36.9361,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 276,
+      "taxa": 0.4529
+     },
+     "entre_30_40min": {
+      "n": 357,
+      "taxa": 0.4874
+     },
+     "mais_40min": {
+      "n": 270,
+      "taxa": 0.5556
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 138,
+   "slug": "muerta",
+   "posicoes": {
+    "n_total": 1374,
+    "distribuicao": {
+     "pos1": {
+      "n": 938,
+      "fracao": 0.6827
+     },
+     "pos2": {
+      "n": 124,
+      "fracao": 0.0902
+     },
+     "pos3": {
+      "n": 8,
+      "fracao": 0.0058
+     },
+     "pos4": {
+      "n": 289,
+      "fracao": 0.2103
+     },
+     "pos5": {
+      "n": 15,
+      "fracao": 0.0109
+     }
+    }
+   },
+   "forca": {
+    "n": 1380,
+    "gpm_medio": 583.679,
+    "dano_torre_medio": 5892.6203,
+    "dano_heroi_medio": 26347.6739,
+    "cura_media": 49.4681,
+    "stuns_medio_s": 26.858,
+    "duracao_media_vitorias_min": 37.0402,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 408,
+      "taxa": 0.4804
+     },
+     "entre_30_40min": {
+      "n": 483,
+      "taxa": 0.5052
+     },
+     "mais_40min": {
+      "n": 489,
+      "taxa": 0.5072
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 145,
+   "slug": "kez",
+   "posicoes": {
+    "n_total": 1429,
+    "distribuicao": {
+     "pos1": {
+      "n": 1080,
+      "fracao": 0.7558
+     },
+     "pos2": {
+      "n": 330,
+      "fracao": 0.2309
+     },
+     "pos3": {
+      "n": 16,
+      "fracao": 0.0112
+     },
+     "pos4": {
+      "n": 2,
+      "fracao": 0.0014
+     },
+     "pos5": {
+      "n": 1,
+      "fracao": 0.0007
+     }
+    }
+   },
+   "forca": {
+    "n": 1437,
+    "gpm_medio": 637.7509,
+    "dano_torre_medio": 5293.7829,
+    "dano_heroi_medio": 26348.4057,
+    "cura_media": 61.3681,
+    "stuns_medio_s": 8.8312,
+    "duracao_media_vitorias_min": 36.4923,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 438,
+      "taxa": 0.5388
+     },
+     "entre_30_40min": {
+      "n": 543,
+      "taxa": 0.5285
+     },
+     "mais_40min": {
+      "n": 456,
+      "taxa": 0.5132
+     }
+    }
+   }
+  },
+  {
+   "hero_id": 155,
+   "slug": "largo",
+   "posicoes": {
+    "n_total": 1531,
+    "distribuicao": {
+     "pos1": {
+      "n": 10,
+      "fracao": 0.0065
+     },
+     "pos2": {
+      "n": 107,
+      "fracao": 0.0699
+     },
+     "pos3": {
+      "n": 955,
+      "fracao": 0.6238
+     },
+     "pos4": {
+      "n": 222,
+      "fracao": 0.145
+     },
+     "pos5": {
+      "n": 237,
+      "fracao": 0.1548
+     }
+    }
+   },
+   "forca": {
+    "n": 1536,
+    "gpm_medio": 462.2448,
+    "dano_torre_medio": 504.0221,
+    "dano_heroi_medio": 15729.4225,
+    "cura_media": 7876.3652,
+    "stuns_medio_s": 10.035,
+    "duracao_media_vitorias_min": 37.329,
+    "vitoria_por_duracao": {
+     "menos_30min": {
+      "n": 483,
+      "taxa": 0.528
+     },
+     "entre_30_40min": {
+      "n": 526,
+      "taxa": 0.5247
+     },
+     "mais_40min": {
+      "n": 527,
+      "taxa": 0.5825
+     }
+    }
+   }
+  }
+ ]
+}

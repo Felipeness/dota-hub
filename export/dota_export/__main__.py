@@ -8,8 +8,8 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-from . import (amigos, confrontos, conteudo, fontes, herois, icones, jogadores, jogo, mapa, modelos, porque_itens, relevo, retratos,
-               roshan, rotas, trajetorias, unidades, validar)
+from . import (amigos, confrontos, conteudo, fontes, herois, icones, jogadores, jogo, mapa, modelos, porque_itens, pro_posicoes, relevo,
+               retratos, roshan, rotas, trajetorias, unidades, validar)
 from . import fichas as fichas_por_posicao
 
 RAIZ = Path(__file__).resolve().parents[2]
@@ -53,12 +53,19 @@ def main() -> None:
     if sys.argv[1:] == ["--rotas"]:
         print(f"ok: {len(gerar_rotas())} rotas")
         return
+    if sys.argv[1:] == ["--posicoes"]:
+        dados = pro_posicoes.carregar(RAIZ / "content")
+        validar.validar("pro_posicoes", dados)
+        _gravar("pro_posicoes.json", dados)
+        print(f"ok: {len(dados['herois'])} herois com posicao e forca de pro")
+        return
     for tamanho in (2048, 4096):
         mapa.textura_alinhada(tamanho).save(DESTINO / f"mapa_{tamanho}.jpg", **mapa.JPEG)
     todas_rotas = gerar_rotas()
     pacotes = {"objetivos": mapa.objetos(),
                "objetivos_conteudo": conteudo.carregar(RAIZ / "content" / "objetivos"),
-               "glossario": conteudo.carregar(RAIZ / "content" / "glossario")}
+               "glossario": conteudo.carregar(RAIZ / "content" / "glossario"),
+               "pro_posicoes": pro_posicoes.carregar(RAIZ / "content")}
     altura = relevo.relevo()
     altura.save(DESTINO / "relevo_512.png")
     pacotes["relevo"] = relevo.grade(altura)
