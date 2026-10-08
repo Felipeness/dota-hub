@@ -32,6 +32,9 @@
 .draft-retrato { width: 100%; max-width: 64px; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 4px; background: var(--cor-superficie-3); }
 
 .draft-escolha { display: flex; flex-direction: column; gap: var(--espaco-2); }
+.draft-filtros { display: flex; flex-wrap: wrap; gap: var(--espaco-2); }
+.draft-filtros input[type="search"] { flex: 1 1 140px; }
+.draft-filtros select { flex: 1 1 120px; min-height: var(--alvo-toque); }
 .draft-grade {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 4px;
   max-height: 300px; overflow-y: auto; margin: 0; padding: 0; list-style: none;
