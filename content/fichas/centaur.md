@@ -68,26 +68,31 @@ Centaur Warrunner é tanque de força que inicia luta e segura linha de frente: 
 ### Situacionais
 
 #### Aghanim's Shard (aghanims_shard)
+- porque: transforma Double Edge em fonte de força crescente, cada herói acertado empilha bônus que também potencializa Retaliate e Stampede.
 - contra: lutas longas em grupo, onde acertar vários heróis com Double Edge compensa o autodano.
 - detalhe: Double Edge já não mata o próprio Centaur mesmo sem o Shard (isso é da habilidade base, não um efeito do Shard); o que o Shard adiciona é uma stack de bônus de força por herói inimigo acertado na área, com a duração da stack se renovando a cada acerto novo. Ou seja, numa teamfight que se arrasta, Centaur fica mais forte a cada Double Edge acertado, o que também aumenta o dano de Retaliate e de Stampede (ambos escalam com força). Tem 20 contagens na fase do meio no OpenDota, bem abaixo dos itens-base da build (Blink 88, Ring of Tarrasque 77, Reaver 63).
 - fonte: constants_abilities.json (centaur_double_edge); OpenDota itemPopularity
 
 #### Shiva's Guard (shivas_guard)
+- porque: corta a velocidade de ataque e de movimento do time inimigo, neutralizando composições de hit rápido ou exércitos de ilusão e invocação.
 - contra: times com dano físico de ataque rápido ou exércitos de ilusão/invocação, porque a aura passiva tira 45 de velocidade de ataque de todo inimigo próximo e o Arctic Blast ativo acerta em área (825 de raio) com dano mágico e -40% de velocidade de movimento.
 - detalhe: é o terceiro item mais comum da fase tardia de Centaur no OpenDota (38 contagens).
 - fonte: OpenDota itemPopularity; items.json
 
 #### Lotus Orb (lotus_orb)
+- porque: devolve pro inimigo o controle forte lançado em Centaur, mantendo ele vivo pra iniciar e segurar a frente de luta.
 - contra: habilidade de alvo único forte lançada em Centaur (silence, hex, root de herói), porque Echo Shell devolve a maioria dos feitiços direcionados pro lançador.
 - detalhe: também dá 10 de armadura e regen de vida/mana, então nunca é um item puramente defensivo perdido. Tem 25 contagens na fase do meio no OpenDota (atrás dos itens-base da build) e também aparece na fase tardia, com 13 contagens, empatado com Overwhelming Blink.
 - fonte: OpenDota itemPopularity; items.json
 
 #### Pipe of Insight (pipe)
+- porque: reduz o nuke em área que mataria o time na iniciação, dando resistência mágica e barreira pro grupo sobreviver ao burst.
 - contra: composições com dano mágico em área (nukes de teamfight), porque a aura dá 8% de resistência mágica pro time e o ativo cria uma barreira de 425 de dano mágico em 1200 de raio.
 - detalhe: contagem menor que os outros situacionais no OpenDota (9 na fase do meio, 5 na tardia), ou seja, é opção condicional, não padrão.
 - fonte: OpenDota itemPopularity; items.json
 
 #### Overwhelming Blink (overwhelming_blink)
+- porque: upgrade de quem já tem Blink e Reaver do Heart, o blink passa a estourar dano e lentidão em área, travando o grupo todo na luta.
 - contra: lutas em grupo onde só o stun do Hoof Stomp não é suficiente de área; o upgrade do Blink com Reaver dá uma explosão de dano e lentidão em 800 de raio ao usar o blink.
 - detalhe: 13 contagens na fase tardia no OpenDota, mesmo nível do Lotus Orb tardio; upgrade natural de quem já tem Blink Dagger e constrói o Reaver do Heart pro lado ofensivo.
 - fonte: OpenDota itemPopularity; items.json

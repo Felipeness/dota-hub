@@ -66,6 +66,7 @@ são o "farm core" padrão do herói (chain lightning + alcance de 730 pra não 
 (2 de 3) soma lifesteal físico pra sustentar a vida enquanto o Roshan bate de volta. Manta Style apareceu só no solo confirmado
 (1 de 3), mas é a razão mecânica mais forte desse caso específico: o Maelstrom/Mjollnir do herói tem `illusion_multiplier_pct = 100`
 nas constantes do jogo, ou seja, as ilusões do Manta procam chain lightning com a mesma chance e o mesmo dano do herói real,
-multiplicando o DPS no Roshan sem gastar nenhuma skill. Butterfly (3 de 3) soma evasão, que por regra geral do jogo funciona
-contra qualquer ataque básico (não achei fonte que confirme se vale especificamente contra o ataque do Roshan, então trate
-como hipótese, não como fato).
+multiplicando o DPS no Roshan sem gastar nenhuma skill. Butterfly (3 de 3) soma evasão, que funciona contra o ataque básico
+do Roshan: ele não tem True Strike nem evasão na lista de habilidades (Spell Block, Bash, Slam, Roar of Retribution, Grab
+and Throw, Teleport; confirmado em constants_abilities.json e no Liquipedia/Dota 2 Wiki), então a evasão da Butterfly
+reduz os acertos dele, igual no combo do Morphling.

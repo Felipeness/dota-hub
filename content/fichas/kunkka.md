@@ -78,6 +78,7 @@ Kunkka é Carry/Support/Disabler/Initiator/Durable/Nuker (papéis oficiais do Op
 
 #### Aghanim's Shard (aghanims_shard)
 - minuto: 29
+- porque: o Tidal Wave arrasta o time disperso pro mesmo ponto antes do Torrent e do Ghostship caírem.
 - contra: lineup espalhado, onde falta um jeito de arrastar todo mundo pro mesmo ponto antes do Ghostship.
 - detalhe: comprado em 6 de 18 partidas (33%, compras.parquet). 1400 de custo, dá a habilidade Tidal Wave: onda que nasce atrás do Kunkka, 180 de dano e arrasta inimigos por 1s, não deixando atacar durante o arrasto.
 - combo: usa o Tidal Wave pra puxar quem está disperso pra dentro da área do Torrent/Ghostship antes de abrir o resto do combo.
@@ -85,24 +86,28 @@ Kunkka é Carry/Support/Disabler/Initiator/Durable/Nuker (papéis oficiais do Op
 
 #### Sange and Yasha (sange_and_yasha)
 - minuto: 30
+- porque: junta HP, status resistance e velocidade de ataque num só item, segurando o combo contra disables em sequência.
 - contra: jogo que precisa de mais sustain e status resistance pra engajar de novo sem recall, quando o time inimigo tem muito disable de curta duração.
 - detalhe: comprado em 7 de 18 partidas (39%, compras.parquet). 4200 de custo, +16 força, +16 agilidade, +16% de status resistance, +20% de velocidade de ataque.
 - fonte: C:/Users/felip/Desktop/dota-tier1/data/derivados/compras.parquet; C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 
 #### Aghanim's Scepter (ultimate_scepter)
 - minuto: 47
+- porque: dá atributos e HP/mana em bloco pro late game, quando não sobra item mais específico pra comprar.
 - contra: jogo que estica, pra ganhar stats brutos (atributos e HP/mana) num slot que já ia ser gasto de qualquer forma.
 - detalhe: comprado em 6 de 18 partidas (33%, compras.parquet), bem tarde na amostra. 4200 de custo, +10 em todos os atributos, +175 de vida e mana. Não achei fonte confiável nesta sessão pro efeito exato do upgrade de Aghanim no Ghostship (dota2protracker e Liquipedia fora do ar na checagem), então a ficha não afirma nada sobre o navio virar dois.
 - fonte: C:/Users/felip/Desktop/dota-tier1/data/derivados/compras.parquet; C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 
 #### Satanic (satanic)
 - minuto: 43
+- porque: o lifesteal passivo e o Unholy Rage sustentam Kunkka trocando golpe de perto contra alvo tanque.
 - contra: jogo tanque, onde o Tidebringer sozinho não mata e falta sustain pra ficar trocando golpe de perto.
 - detalhe: comprado em 5 de 18 partidas (28%, compras.parquet). 5050 de custo, lifesteal passivo e Unholy Rage ativo (175% de lifesteal por 6s, dispel básico ao ativar).
 - fonte: C:/Users/felip/Desktop/dota-tier1/data/derivados/compras.parquet; C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 
 #### Reaver (reaver)
 - minuto: 44
+- porque: statstick puro de força pro late, quando já não sobra item com interação melhor pra comprar.
 - contra: sem interação específica, é statstick de força puro pra quando o jogo passa dos 40min e não tem outro item melhor pra comprar.
 - detalhe: comprado em 7 de 18 partidas (39%, compras.parquet). 2800 de custo, +25 de força, sem habilidade.
 - fonte: C:/Users/felip/Desktop/dota-tier1/data/derivados/compras.parquet; C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
@@ -148,30 +153,35 @@ Kunkka é Carry/Support/Disabler/Initiator/Durable/Nuker (papéis oficiais do Op
 
 #### Shiva's Guard (shivas_guard)
 - minuto: 27
+- porque: a aura reduz a velocidade de ataque de quem chega perto, travando o DPS de carries físicos rápidos.
 - contra: carry de dano físico de ataque rápido; a aura corta 45 de velocidade de ataque de quem está perto, travando o DPS deles.
 - detalhe: comprado em 5 de 9 partidas (56%, compras.parquet), bem perto do minuto ~22 e dos 55% de pick citados pelo dota2protracker pos 3. 4500 de custo, +17 de armadura, Arctic Blast (260 de dano e -40% de movimento em área).
 - fonte: C:/Users/felip/Desktop/dota-tier1/data/derivados/compras.parquet; https://dota2protracker.com/builds/kunkka-pos3-1; C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 
 #### Aghanim's Shard (aghanims_shard)
 - minuto: 26
+- porque: mesmo efeito do Shard na mid, o Tidal Wave arrasta o time disperso pra dentro do combo.
 - contra: lineup espalhado, mesma lógica da mid: usa o Tidal Wave pra arrastar quem está disperso pra dentro do combo.
 - detalhe: comprado em 6 de 9 partidas (67%, compras.parquet). Ver mecânica no bloco de Aghanim's Shard da Pos 2.
 - fonte: C:/Users/felip/Desktop/dota-tier1/data/derivados/compras.parquet; C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 
 #### Lotus Orb (lotus_orb)
 - minuto: 15
+- porque: o Echo Shell devolve um disable de alvo único pro lançador, protegendo o combo antes dele começar.
 - contra: disable de alvo único em cima de você ou de aliado antes do combo começar; o Echo Shell devolve o feitiço pro lançador.
 - detalhe: comprado em 4 de 9 partidas (44%, compras.parquet), e nessas partidas o item saiu bem rápido (13 a 25min, mediana 15min), cedo pra um item de 3850g, o que sugere compra reativa contra disable específico ainda na fase de lane em vez de item de late game. 3850 de custo, +10 de armadura, Echo Shell dispelável que recasta o feitiço no lançador por 5s.
 - fonte: C:/Users/felip/Desktop/dota-tier1/data/derivados/compras.parquet; C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 
 #### Pipe of Insight (pipe)
 - minuto: 25
+- porque: a Barrier absorve nuke mágico em área pro time inteiro, segurando burst coordenado do inimigo.
 - contra: time inimigo com nuke mágico em área (ulti de burst coordenado); a Barrier absorve 425 de dano mágico pra linha toda.
 - detalhe: comprado em 3 de 9 partidas (33%, compras.parquet). 3725 de custo, Barrier (425 de dano mágico absorvido, raio 1200, 8s), aura de 8% de resistência mágica pro time.
 - fonte: C:/Users/felip/Desktop/dota-tier1/data/derivados/compras.parquet; C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 
 #### Aghanim's Scepter (ultimate_scepter)
 - minuto: 37
+- porque: mesmo motivo da mid, dá atributos em bloco quando o jogo estica e falta item mais específico.
 - contra: mesma lógica da mid, jogo que estica e falta stat bruto no slot final.
 - detalhe: comprado em 3 de 9 partidas (33%, compras.parquet), amostra pequena. Ver stats no bloco de Aghanim's Scepter da Pos 2.
 - fonte: C:/Users/felip/Desktop/dota-tier1/data/derivados/compras.parquet; C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json

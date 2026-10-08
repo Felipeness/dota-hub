@@ -78,35 +78,41 @@ Dawnbreaker é melee de Força e o OpenDota a classifica como Carry/Durable, mas
 
 #### Assault Cuirass (assault)
 - minuto: 33,6
+- porque: a armadura em área protege o time inteiro na troca grupal que ela inicia, e a redução de armadura inimiga acelera o abate.
 - detalhe: Assault Cuirass (buckler + hyperstone + platemail, 5.125) dá +10 de armadura, +30 de velocidade de ataque e aura em 1200 de raio (+30 de velocidade de ataque e +5 de armadura pros aliados, -5 de armadura pros inimigos), atravessando Black King Bar inimigo. Comprado em 38 das 75 partidas (51%), mediana 33:38.
 - contra: times com dano físico pesado e pouco dano mágico (vários carries de auto-ataque): a redução de armadura inimiga reforça o dano físico do time inteiro, e o buff ajuda quem está lutando perto dela.
 - fonte: Atlas tier1, replay local (mediana 33,63 min, n=38/75); items.json (Assault Cuirass)
 
 #### Skull Basher (basher)
 - minuto: 32,9
+- porque: o bash passivo trava quem tenta fugir depois do Starbreaker, sem precisar acertar o combo de novo.
 - detalhe: Skull Basher (mithril_hammer + belt_of_strength, 2.875) dá +30 de dano, +10 Força e 25% de chance de bash em corpo a corpo (atordoa 1,2s e causa 100 de dano extra), atravessando BKB. Comprado em 41 das 75 partidas (55%), mediana 32,94 min; 24 dessas 41 completam o Abyssal Blade depois.
 - contra: heróis difíceis de prender (alta mobilidade, dash ou blink próprio) ganham um atordoador confiável; não funciona contra Spirit Breaker, Faceless Void, Slardar nem Kez em modo Sai, que bloqueiam bash por regra do próprio item.
 - fonte: items.json (Skull Basher); Atlas tier1, replay local (mediana 32,94 min, n=41/75)
 
 #### Abyssal Blade (abyssal_blade)
 - minuto: 39,8
+- porque: o Overwhelm ativo garante o atordoamento mesmo quando o bash passivo falha contra quem está fugindo.
 - detalhe: Abyssal Blade (Skull Basher + Sange, 6.250) soma +35 de dano, +26 Força, 30% de resistência a lentidão e um Overwhelm ativo (atordoa 1,6s, atravessa imunidade a debuff). Upgrade de luxo pra quando o bash passivo não basta contra quem some da luta. Comprado em 24 das 75 partidas (32%), mediana 39:45.
 - contra: heróis que dependem de uma janela de fuga ou invulnerabilidade comum pra sobreviver (o Overwhelm ignora imunidade a debuff, mas não imunidade a feitiço tipo BKB).
 - fonte: items.json (Abyssal Blade); Atlas tier1, replay local (mediana 39,75 min, n=24/75)
 
 #### Nullifier (nullifier)
 - minuto: 35,6
+- porque: o dispel contínuo cancela buffs de fuga ou invisibilidade recorrentes que o combo de giro sozinho não resolve.
 - detalhe: Nullifier (Sacred Relic + Splintmail, 4.350) aplica dispel básico e um debuff de 4s que redispela e desacelera continuamente, além de +75 de dano e +10 de armadura; pode ser lançado em unidades invulneráveis. Comprado em 19 das 75 partidas (25%), mediana 35:38.
 - contra: heróis que dependem de um buff de fuga ou invisibilidade recorrente, ou de canalizações: o dispel contínuo reaplica a cada intervalo, então o alvo não consegue manter o buff nem terminar a canalização em paz.
 - fonte: items.json (Nullifier); Atlas tier1, replay local (mediana 35,63 min, n=19/75)
 
 #### Satanic (satanic)
 - minuto: 45,6
+- porque: o lifesteal ativo sustenta ela sozinha em troca longa de corpo a corpo, sem depender só da cura da Luminosity.
 - detalhe: Satanic (Reaver + Claymore + Morbid Mask, 5.050) dá +25 Força, +25 de dano, 30% de lifesteal passivo e Unholy Rage (175% de lifesteal por 6s, recarga 30s). Item de jogo já decidido no corpo a corpo, raro nessa amostra: 11 das 75 partidas (15%), mediana 45:38.
 - fonte: items.json (Satanic); Atlas tier1, replay local (mediana 45,63 min, n=11/75)
 
 #### Overwhelming Blink (overwhelming_blink)
 - minuto: 60,1
+- porque: o blink de 1.200 de alcance inicia de longe sem precisar correr até o alvo com a Fase.
 - detalhe: Overwhelming Blink (Blink Dagger + Reaver, 6.800) dá blink de 1.200 de distância com uma onda de dano em área na chegada, pra iniciar de longe quando o time não precisa mais dela chegar a pé. Item de jogo muito longo: 9 das 75 partidas (12%), mediana 60,09 min.
 - fonte: items.json (Overwhelming Blink); Atlas tier1, replay local (mediana 60,09 min, n=9/75)
 

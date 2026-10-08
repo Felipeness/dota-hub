@@ -54,18 +54,21 @@ Elder Titan é um iniciador e disabler de Força: manda o Astral Spirit pra fren
 ### Situacionais
 
 #### Solar Crest (solar_crest, via Pavise)
+- porque: dá ao carry do time o empurrão de armadura e dano pra fechar a troca que o Natural Order já abriu, sem gastar ouro num item de dano próprio.
 - minuto: 20:09 (Pavise) e 24:26 (upgrade completo), 4 de 14 jogos pos5; nos 4 jogos que compraram Pavise, todos upgradaram pra Solar Crest
 - contra: time inimigo com um carry ou pos2 que precisa de empurrão de dano/armadura pra vencer a troca depois que o Natural Order já tirou a resistência do alvo adversário.
 - detalhe: o ativo "Shine" dá +5 de armadura, +60 de velocidade de ataque, +15% de movimento e uma barreira de 350 de dano físico por 7s, mas só funciona em aliado (não dá bônus em você mesmo, só a barreira). Use no carry do seu time, não em você.
 - fonte: compras.parquet (4/14 jogos pos5, Pavise 20:09 → Solar Crest 24:26); items.json (solar_crest: bonus_armor 7, attrib self_movement nulo pra bônus de combate; pavise components: wizard_hat, fluffy_hat, ring_of_protection; solar_crest components: pavise, chainmail, wind_lace)
 
 #### Glimmer Cape (glimmer_cape)
+- porque: barreira de 375 de dano mágico absorve o burst que mataria você ou o aliado, e a invisibilidade te leva até o Echo Stomp sem ser visto.
 - minuto: 22:47 (mediana, 3 de 14 jogos pos5)
 - contra: combos de burst mágico de alvo único contra você ou contra o aliado que você precisa salvar no meio de uma luta.
 - detalhe: invisibilidade + 20 de velocidade de movimento + barreira de 375 de dano mágico por 5s, com 0,5s de atraso. Pode ser usado em você mesmo pra andar invisível até o alcance de 500 do Echo Stomp sem ser visto chegando.
 - fonte: compras.parquet (3/14 jogos pos5, mediana 22:47); items.json (glimmer_cape: initial_fade_delay 0.5, duration 5, bonus_magical_armor); constants_abilities.json (elder_titan_echo_stomp: abilitycastrange 500)
 
 #### Aghanim's Shard (aghanims_shard)
+- porque: o alt-cast troca sua posição com o espírito no stomp, chega a 1.200 de alcance sem precisar de Blink Dagger contra grupo fora de alcance.
 - minuto: 38:25 (mediana, 5 de 14 jogos pos5)
 - contra: time que se agrupa longe do alcance de 500 do Echo Stomp ou atrás de visão, onde um blink normal não chegaria.
 - detalhe: reduz a recarga do Echo Stomp e habilita o alt-cast: Elder Titan troca de lugar com o Astral Spirit no momento em que o stomp completa. Manda o espírito pra dentro do grupo inimigo (alcance de 1.200, atravessa unidades) e alt-cast o Echo Stomp de lá: você teleporta pro lugar do espírito e estoura o stomp no meio deles, sem precisar de Blink Dagger.
@@ -73,18 +76,21 @@ Elder Titan é um iniciador e disabler de Força: manda o Astral Spirit pra fren
 - fonte: compras.parquet (5/14 jogos pos5, mediana 38:25); dotacoach.gg/en/heroes/elder-titan (efeito do Shard: reduz recarga do Echo Stomp e habilita troca de posição com o espírito no alt-cast); constants_abilities.json (elder_titan_echo_stomp: sleep_duration 2/2.8/3.6/4.4; elder_titan_earth_splitter: crack_time 2.7182)
 
 #### Rod of Atos (rod_of_atos)
+- porque: prende o alvo fujão dentro do raio de 475 do Echo Stomp ou da faixa de 315 do Earth Splitter até o dano estourar.
 - minuto: 36:23 (mediana, 4 de 14 jogos pos5)
 - contra: herói com fuga rápida (dash, teleporte curto) que escaparia da rachadura do Earth Splitter antes dela implodir.
 - detalhe: raiz de 2s em alvo único; trava o inimigo dentro do raio de 475 do Echo Stomp ou dentro da faixa de 315 do Earth Splitter até o dano estourar.
 - fonte: compras.parquet (4/14 jogos pos5, mediana 36:23); items.json (rod_of_atos: duration 2.0)
 
 #### Lotus Orb (lotus_orb)
+- porque: dispela e devolve o disable de alvo único que quebraria o canal de 1,3s do Echo Stomp antes dele completar.
 - minuto: 44:02 (mediana, 4 de 14 jogos pos5)
 - contra: disable de alvo único forte lançado em você (hex, root, silence que corte o canal de 1,3s do Echo Stomp).
 - detalhe: dispel básico ao ativar em você mesmo e devolve o próximo feitiço de alvo único contra o lançador; o Echo Stomp é canalizado (1,3s de canal, 1,7s de cast total), então qualquer silence ou stun curto já quebra o combo se não houver uma forma de limpar ou evitar.
 - fonte: compras.parquet (4/14 jogos pos5, mediana 44:02); constants_abilities.json (elder_titan_echo_stomp: behavior Channeled, abilitychanneltime 1.3)
 
 #### Gleipnir (gungir)
+- porque: rooteia o grupo inteiro enquanto a rachadura do Earth Splitter implode, melhor que o Rod de alvo único contra time que luta agrupado.
 - minuto: 49:49 (mediana, 3 de 14 jogos pos5)
 - contra: grupo que tenta se espalhar assim que vê o cast do Earth Splitter, antes da rachadura implodir.
 - detalhe: raiz em área de 350 de raio por 2s; rooteia o grupo todo no lugar enquanto o crack_time de 2,72s do Earth Splitter passa, garantindo que ninguém saia da faixa de 315 de largura.
@@ -109,8 +115,9 @@ Elder Titan é um iniciador e disabler de Força: manda o Astral Spirit pra fren
 - fonte: compras.parquet (1 jogo pos4, 16:40); items.json (urn_of_shadows: duration 8, "Lasts 8 seconds", "Gains charges every time an enemy hero dies within 1500 units")
 
 #### Glimmer Cape (glimmer_cape)
+- porque: invisibilidade pra chegar sem ser visto no roam e uma barreira de 375 de dano mágico pra sobreviver ao burst da troca inicial da gank.
 - minuto: 23:14 (nesse jogo; n=1)
-- fonte: compras.parquet (1 jogo pos4, 23:14)
+- fonte: compras.parquet (1 jogo pos4, 23:14); items.json (glimmer_cape: initial_fade_delay 0.5, duration 5, barrier_block 375)
 
 #### Blink Dagger (blink)
 - minuto: 41:26 (nesse jogo; n=1)
@@ -121,9 +128,10 @@ Elder Titan é um iniciador e disabler de Força: manda o Astral Spirit pra fren
 ### Situacionais
 
 #### Aghanim's Shard (aghanims_shard)
+- porque: mesma lógica do pos5 (ver seção Pos 5): o alt-cast troca sua posição com o espírito, útil pra iniciar mesmo fazendo roam longe do time.
 - minuto: 54:01 (nesse jogo; n=1)
 - contra: mesma lógica do pos5 (ver seção Pos 5), usado aqui bem mais tarde no jogo.
-- fonte: compras.parquet (1 jogo pos4, 54:01)
+- fonte: compras.parquet (1 jogo pos4, 54:01); constants_abilities.json (elder_titan_echo_stomp: sleep_duration 2/2.8/3.6/4.4)
 
 ## Pos 3 (offlane)
 
@@ -138,8 +146,9 @@ Elder Titan é um iniciador e disabler de Força: manda o Astral Spirit pra fren
 - fonte: compras.parquet (1 jogo pos3, 7:16)
 
 #### Null Talisman (null_talisman)
+- porque: atributos baratos de lane; o mana regen e o bônus de mana ajudam a manter o Astral Spirit (80 a 110 de mana) saindo sem secar o pool cedo.
 - minuto: 2:23 (nesse jogo; n=1)
-- fonte: compras.parquet (1 jogo pos3, 2:23)
+- fonte: compras.parquet (1 jogo pos3, 2:23); items.json (null_talisman: bonus_mana_regen 1.0, bonus_max_mana_percentage 3); constants_abilities.json (elder_titan_ancestral_spirit: mc 80/90/100/110)
 
 #### Chainmail (chainmail)
 - minuto: 6:41 (nesse jogo; n=1)
@@ -149,17 +158,20 @@ Elder Titan é um iniciador e disabler de Força: manda o Astral Spirit pra fren
 ### Situacionais
 
 #### Aghanim's Scepter (ultimate_scepter)
+- porque: fica imune a debuff e ganha resistência mágica ao retorno do espírito, evitando ser desarmado pelo disable do time antes do combo.
 - minuto: 17:25 (nesse jogo; n=1)
 - contra: time que empilha debuff/stun em cima de você antes de você conseguir travar o Echo Stomp.
 - detalhe: ao retornar, o Astral Spirit torna Elder Titan imune a debuff e dá 50% de resistência mágica por 2s para cada herói inimigo afetado, facilitando entrar na luta sem ser imediatamente desarmado.
 - fonte: compras.parquet (1 jogo pos3, 17:25); dotacoach.gg/en/heroes/elder-titan (efeito do Scepter: "debuff immune and gain 50% magic resistance" por herói inimigo afetado no retorno do espírito)
 
 #### Aghanim's Shard (aghanims_shard)
+- porque: mesma lógica do pos5 (ver seção Pos 5): reduz a recarga do Echo Stomp e habilita o alt-cast de troca de posição com o espírito.
 - minuto: 21:32 (nesse jogo; n=1)
 - contra: mesma lógica do pos5 (ver seção Pos 5); raro ter os dois upgrades (Scepter e Shard) no mesmo jogo, mas foi o que esse jogo comprou.
-- fonte: compras.parquet (1 jogo pos3, 21:32)
+- fonte: compras.parquet (1 jogo pos3, 21:32); constants_abilities.json (elder_titan_echo_stomp: sleep_duration 2/2.8/3.6/4.4)
 
 #### Orb of Blight (blight_stone)
+- porque: empilha redução de armadura com o Natural Order, um flat e outro percentual, pra acelerar o abate em luta contra alvo tanque.
 - minuto: 24:10 (nesse jogo; n=1)
 - contra: alvo que precisa de redução de armadura extra em cima do que o Natural Order já tira, pra acelerar o abate em luta.
 - detalhe: -2 de armadura por 3s a cada ataque; empilha com a redução percentual do Natural Order em vez de competir com ela (um é flat, o outro é percentual sobre a base).

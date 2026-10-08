@@ -69,7 +69,8 @@ fontes:
 - porque: Contra herói de dano físico, a evasão e o dano extra seguram você viva na troca e ainda sobem seu DPS.
 - detalhe: +35 Agilidade, +25 de dano, +20% de velocidade de ataque base e 35% de evasão (5450 de ouro). D2PT: 22,4% das builds aos 40 min, 37% dos inventários finais de 6 slots.
 - contra: Axe, Ursa, Drow Ranger, Sniper, Gyrocopter: heróis de dano físico direto, onde a evasão de fato reduz o dano que você recebe.
-- fonte: spectre.json (itens_situacionais.butterfly); items.json (butterfly)
+- combo: a mesma evasão também reduz os acertos de Roshan num Roshan de time: ele não tem True Strike nem evasão na lista de habilidades (Spell Block, Bash, Slam, Roar of Retribution, Grab and Throw, Teleport), confirmado em constants_abilities.json e no Liquipedia/Dota 2 Wiki.
+- fonte: spectre.json (itens_situacionais.butterfly); items.json (butterfly); dota-roshan-solo/data/abilities.json; https://liquipedia.net/dota2/Evasion
 
 ## Nullifier (nullifier)
 - porque: O mute de 4 s cancela o item ou feitiço de fuga do alvo antes dele escapar do seu Haunt.

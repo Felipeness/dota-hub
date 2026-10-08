@@ -56,11 +56,13 @@ Slardar é Carry/Durable/Initiator/Disabler/Escape (heroes.json) e existe pra ab
 ### Situacionais
 
 #### Soul Ring (soul_ring)
+- porque: converte vida em mana de graça, sem gastar ouro em regen, pra bancar o gasto alto de Crush e Corrosive Haze no early.
 - contra: lane pesada em gasto de mana, quando o custo de Slithereen Crush e Corrosive Haze aperta o sustain antes de fechar a bota.
 - detalhe: 805 de custo, +6 de força, +2 de armadura, converte 170 de vida em mana por 10 segundos.
 - fonte: https://api.opendota.com/api/heroes/28/itemPopularity (early_game_items, alternativa ao Bracer); items.json
 
 #### Assault Cuirass (assault)
+- porque: dá armadura e velocidade de ataque em área pro time inteiro, reforçando a troca que o Corrosive Haze já abre.
 - contra: times com dano físico de auto-ataque alto que furam na troca corpo a corpo. A aura de -5 de armadura no inimigo empilha com os -10/-15/-20 do Corrosive Haze.
 - detalhe: 5125 de custo (via Hyperstone + Buckler + Platemail), +30 de velocidade de ataque, +10 de armadura, aura de +30 de velocidade de ataque e +5 de armadura pro time, -5 de armadura pro inimigo num raio de 1200.
 - fonte: https://api.opendota.com/api/heroes/28/itemPopularity (late_game_items); items.json
@@ -71,6 +73,7 @@ Slardar é Carry/Durable/Initiator/Disabler/Escape (heroes.json) e existe pra ab
 - fonte: https://api.opendota.com/api/heroes/28/itemPopularity (late_game_items, via Sacred Relic); items.json
 
 #### Harpoon (harpoon)
+- porque: o gancho ativo resolve sozinho o alvo fugindo, sem precisar gastar um segundo Blink Dagger pra alcançar de novo.
 - contra: herói que corre pra fora do alcance do combo antes do Bash completar o ciclo de 3 ataques.
 - detalhe: 4700 de custo (via Echo Sabre + Diadem), +25 de força, +10 de agilidade, +10 de inteligência, +25 de dano. O gancho ativo puxa o alvo (35% da distância, alcance de lançamento de 700) de volta pro raio de ataque.
 - combo: puxa o alvo fugindo de volta pro alcance, deixando o Bash of the Deep fechar o resto sem precisar gastar outro Blink Dagger.

@@ -78,41 +78,48 @@ Legion Commander é uma iniciadora e disabler de Força: trava um herói inimigo
 ### Situacionais
 
 #### Crystalys (lesser_crit)
+- porque: no Duel, as duas só se atacam por tempo fixo; o crit bruto decide a troca antes do alvo de HP alto reverter o placar.
 - minuto: 25:26 (1 de 7 Tier 1); no público, 26:31 (76 de 366 ≈ 21%, OpenDota Explorer)
 - contra: duelos travados contra alvo com HP alto e pouca armadura, quando falta dano puro pra fechar o Duel dentro dos 4 a 5s de duração.
 - detalhe: 30% de chance de bater com 160% de dano. Como o Duel obriga as duas a só se atacar, qualquer stat de ataque puro vale em dobro pro resultado do confronto.
 - fonte: compras.parquet (1/7 Tier 1); api.opendota.com/api/explorer (SQL purchase_log, público: lesser_crit em 76 de 366 jogos, média 26:31); api.opendota.com/heroes/104/itemPopularity (mid_game_items: lesser_crit); items.json (lesser_crit: crit_chance 30, crit_multiplier 160); constants_abilities.json (legion_commander_duel: duration 4/4.5/5)
 
 #### Aghanim's Scepter (ultimate_scepter)
+- porque: dá atributos e vida/mana pra ela aguentar mais, e os campos team_duel da habilidade sugerem alcance além de um alvo só.
 - minuto: 38:50 (mediana, 3 de 7 Tier 1); no público, 29:25 (75 de 366 ≈ 20%, OpenDota Explorer)
 - contra: jogos em que só travar um alvo não resolve a luta: quando o time inimigo tem mais de um carregador de dano pra segurar o resto da equipe enquanto ela duela.
 - detalhe: dá +10 em todos os atributos e +175 de vida/mana (texto genérico do item, válido pra qualquer herói). Os dados oficiais do Duel já trazem os atributos team_duel, team_duel_damage_pct e team_duel_radius na lista de valores da habilidade (zerados na tabela base), o que indica que o Scepter muda o Duel pra uma versão em grupo: mas o valor exato não está documentado nas fontes locais, então não vai afirmação de número aqui.
 - fonte: compras.parquet (3/7 Tier 1, mediana 38:50); api.opendota.com/api/explorer (SQL purchase_log, público: ultimate_scepter em 75 de 366 jogos, média 29:25); items.json (ultimate_scepter: bonus_all_stats 10, bonus_health 175, bonus_mana 175); constants_abilities.json (legion_commander_duel: atributos team_duel / team_duel_damage_pct / team_duel_radius presentes na habilidade)
 
 #### Hand of Midas (hand_of_midas)
+- porque: converte farm parado em ouro quando falta alvo seguro pra puxar, acelerando o resto do build sem perder tempo de jogo.
 - minuto: 32:18 (1 de 7 Tier 1)
 - contra: jogo tranquilo em que ela fica sem alvo seguro pra duelar e precisa converter farm sobrando em ouro pra alcançar o resto do build mais rápido.
 - detalhe: mata um creep não-herói por 160 de ouro e dá 35 de velocidade de ataque. Amostra de 1 jogo em 7: é exceção pontual, não padrão de build.
 - fonte: compras.parquet (1/7 Tier 1); items.json (hand_of_midas: bonus_gold 160, bonus_attack_speed 35)
 
 #### Silver Edge (silver_edge)
+- porque: o break desliga a passiva que sustenta o alvo antes do Duel, tirando a defesa que decidiria a troca.
 - minuto: 31:13 (23 de 366 ≈ 6%, público, OpenDota Explorer; não aparece na amostra Tier 1 de 7 jogos)
 - contra: heróis cuja defesa depende de uma passiva (ex.: evasão, regeneração ou dano passivo): o golpe que revela a invisibilidade desliga a passiva do alvo por 5s.
 - detalhe: 17s de invisibilidade pra escolher o ângulo de entrada, e o ataque que termina a invisibilidade ainda soma 300 de dano físico bônus.
 - fonte: api.opendota.com/api/explorer (SQL purchase_log, público: silver_edge em 23 de 366 jogos, média 31:13); api.opendota.com/heroes/104/itemPopularity (late_game_items: silver_edge); items.json (silver_edge: windwalk_duration 17.0, windwalk_bonus_damage 300, backstab_duration 5, texto do item: "disable their passive abilities for 5 seconds")
 
 #### Assault Cuirass (assault)
+- porque: depois que o Duel termina, a aura segura o resto da luta em grupo, dando armadura pro time e tirando do inimigo.
 - minuto: 34:50 (50 de 366 ≈ 14%, público, OpenDota Explorer; não aparece na amostra Tier 1 de 7 jogos)
 - contra: times que seguram com dano físico sustentado em grupo depois que o Duel já terminou: a aura dá 5 de armadura pros aliados e tira 5 dos inimigos num raio de 1200.
 - fonte: api.opendota.com/api/explorer (SQL purchase_log, público: assault em 50 de 366 jogos, média 34:50); api.opendota.com/heroes/104/itemPopularity (late_game_items: assault); items.json (assault: aura_positive_armor 5, aura_negative_armor -5, aura_radius 1200)
 
 #### Nullifier (nullifier)
+- porque: o dispel tira o buff de fuga do alvo marcado antes dela travar o Duel, então ele não escapa do raio de cast.
 - minuto: 63:27 (1 de 7 Tier 1, jogo de mais de 1h); no público, 42:42 (13 de 366 ≈ 4%, OpenDota Explorer)
 - contra: heróis com buff de fuga dispelável ou resistência a lentidão tentando escapar do raio do Duel antes dela travar.
 - detalhe: o Nullify aplica dispel básico no alvo e segue dispelando e lentificando por 4s. Item raro pra ela nas duas fontes: só compensa em jogos muito longos, com o resto do build já fechado.
 - fonte: compras.parquet (1/7 Tier 1, 63:27); api.opendota.com/api/explorer (SQL purchase_log, público: nullifier em 13 de 366 jogos, média 42:42); api.opendota.com/heroes/104/itemPopularity (late_game_items: nullifier); items.json (nullifier: mute_duration 4.0, slow_pct 10)
 
 #### Diffusal Blade (diffusal_blade)
+- porque: o Manabreak seca a mana de quem depende de feitiço pra fugir, então o alvo não escapa antes dela puxar o Duel.
 - minuto: 37:15 (1 de 7 Tier 1); no público, 40:34 (8 de 366 ≈ 2%, OpenDota Explorer)
 - contra: heróis que dependem de mana pra lançar o próprio feitiço de fuga: o Manabreak queima 40 de mana por ataque e vira dano físico extra.
 - detalhe: amostra mínima nas duas fontes (1 jogo Tier 1, 8 jogos no público): tratar como escolha pontual, não como padrão de build.

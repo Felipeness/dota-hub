@@ -62,27 +62,32 @@ Sand King é Initiator/Disabler/Support/Nuker/Escape (papéis oficiais do OpenDo
 ### Situacionais
 
 #### Veil of Discord (veil_of_discord)
+- porque: amplifica o dano mágico que o Epicenter e o Stinger já acertam em área, maximizando o burst do time no combo.
 - contra: lineup em que você precisa amplificar o dano mágico do time inteiro em cima do que o Epicenter e o Stinger acertam.
 - detalhe: 1700 de custo, +10 de inteligência, +175 de vida, aura de +10% de dano mágico recebido em quem é atingido por feitiço num raio de 900.
-- fonte: dota2protracker build pos2 (situacional); items.json
+- fonte: dota2protracker build pos2 (situacional); items.json; dota2protips.com (mecânica do Epicenter/Stinger)
 
 #### Shiva's Guard (shivas_guard)
 - minuto: 33
+- porque: a aura de -45% de velocidade de ataque neutraliza o DPS desses carries bem na hora em que seu combo já foi gasto.
 - contra: carries de dano físico de auto-ataque rápido que furam você depois que o combo já foi gasto. A aura corta 45% da velocidade de ataque deles.
 - detalhe: 4500 de custo, +17 de armadura, Arctic Blast (260 de dano e slow de movimento em área). Pick rate de 24% e 35% de vitória na build pro pos2.
 - fonte: dota2protracker build pos2 (situacional, minuto 33, 24% pick, 35% WR); items.json
 
 #### Aghanim's Shard (aghanims_shard)
+- porque: dá pulso de Epicenter passivo a cada 3s perto de você, mantendo pressão em área sem gastar mana nem recanalizar a ulti.
 - contra: jogo em que você precisa manter pressão de área perto de você sem depender de canalizar o Epicenter de novo.
 - detalhe: 1400 de custo. Dá um pulso de Epicenter pequeno e passivo ao redor do Sand King a cada 3s, mesmo fora do cast da ulti (shard_interval, constants_abilities.json). Em amostra pro apareceu em cerca de 42% dos jogos com 53% de vitória, mais raro que o Scepter.
 - fonte: dota2protracker (patches/7.41d, pick rate de Shard); constants_abilities.json (shard_interval do Epicenter); dota2protips.com (efeito passivo do Shard)
 
 #### Bloodstone (bloodstone)
+- porque: o lifesteal de feitiço e o pool grande de vida/mana sustentam você pra abrir luta de novo sem voltar à base.
 - contra: jogo que estica e você precisa continuar abrindo luta várias vezes sem voltar para a base.
 - detalhe: 4700 de custo, +650 de vida, +450 de mana, 20% de lifesteal de feitiço (60% por alguns segundos ao ativar).
 - fonte: dota2protracker build pos2 (situacional); items.json
 
 #### Refresher Orb (refresher)
+- porque: reseta o Blink e o Epicenter pra abrir uma segunda rodada de iniciação na mesma teamfight.
 - combo: reseta o Blink Dagger e o Epicenter para abrir uma segunda rodada de teamfight na mesma luta.
 - detalhe: 5000 de custo, recarga de 180s para resetar cooldowns e cargas de item.
 - fonte: dota2protracker build pos2 (situacional); items.json
@@ -123,21 +128,25 @@ Sand King é Initiator/Disabler/Support/Nuker/Escape (papéis oficiais do OpenDo
 ### Situacionais
 
 #### Shiva's Guard (shivas_guard)
+- porque: a aura de -45% de velocidade de ataque neutraliza o DPS do time inimigo logo depois do seu combo.
 - contra: time inimigo com dano físico de auto-ataque alto.
 - detalhe: ver detalhe no bloco de Shiva's Guard da Pos 2.
 - fonte: dota2protracker build pos3 (situacional)
 
 #### Force Staff (force_staff)
+- porque: te tira do alcance de disable de alvo único antes que te prendam parado canalizando o Epicenter.
 - contra: disable de alvo único que te pega parado no channel do Epicenter. Te empurra para fora do alcance ou te tira de uma burst.
 - detalhe: 2200 de custo, +10 de inteligência, +175 de vida, empurra 600 de distância em 0,5s e não interrompe a ação do alvo.
 - fonte: dota2protracker build pos3 (situacional); items.json
 
 #### Boots of Travel (travel_boots)
+- porque: rotaciona rápido entre lanes e defende torre em jogo que estica, sem perder o timing de chegar com o Epicenter.
 - contra: jogo que estica e você precisa defender torre ou rotear rápido para o Epicenter chegar em outra lane a tempo.
 - detalhe: 2500 de custo, +90 de velocidade de movimento, teleporte com alcance de 800 e recarga de scroll de 40s.
 - fonte: dota2protracker build pos3 (situacional); items.json
 
 #### Abyssal Blade (abyssal_blade)
+- porque: o bash de 25% trava quem foge do seu combo ou te persegue tentando furar seu disable.
 - contra: alvo que te persegue ou foge do seu combo. O bash trava quem está tentando te furar ou escapar.
 - detalhe: 6250 de custo, +35 de dano, +26 de força, 25% de chance de bash corpo a corpo com stun de 1,2s.
 - fonte: dota2protracker build pos3 (situacional); items.json

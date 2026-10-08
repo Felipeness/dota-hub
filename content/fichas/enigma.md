@@ -74,11 +74,13 @@ Enigma é Disabler/Initiator/Pusher (papéis oficiais do OpenDota, heroes.json):
 
 #### Chasm Stone (chasm_stone)
 - minuto: 32.1
+- porque: os +40 de raio somam direto no Black Hole e no Midnight Pulse, então a luta em grupo grande fica mais fácil de prender ou queimar inteira.
 - contra: lutas em grupo grande, onde um Black Hole ou Midnight Pulse maior pega mais gente de uma vez.
 - detalhe: 800 de custo, +40 de área de efeito somada a qualquer habilidade sua que tenha raio (items.json). O Black Hole tem raio 420 e o Midnight Pulse tem raio 600 (constants_abilities.json); o item não empilha com outro igual ou com upgrade dele.
 - fonte: dota-tier1/data/derivados/compras.parquet (hero=enigma, posicao=3, n=23); items.json; constants_abilities.json
 
 #### Ring of Tarrasque (ring_of_tarrasque)
+- porque: +12 de regen de vida de graça segura a lane contra poke físico sem gastar mana, que você precisa inteira pro combo de Black Hole.
 - contra: lane ou pré-luta com harass físico constante, tipo poke de auto-ataque ou nuke repetido que te mantém sangrando antes do combo sair.
 - detalhe: 1700 de custo, +12 de regeneração de vida, sem bônus de mana.
 - fonte: dota-tier1/data/derivados/compras.parquet (hero=enigma, posicao=3, n=23); items.json

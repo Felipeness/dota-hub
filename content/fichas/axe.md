@@ -35,7 +35,6 @@ Axe é um iniciador e tanque de Força: trava todo mundo perto dele com Berserke
 
 #### Phase Boots (phase_boots)
 - minuto: 6:54 (mediana, 133 de 137 jogos pos 3 analisados)
-- porque: velocidade de ataque e deslocamento pra alcançar o raio de 315 do Call e perseguir o Culling Blade.
 - detalhe: o Phase ativo remove colisão com unidades, então fecha distância sem rota alternativa até o herói que vai receber o taunt. O bônus de velocidade de movimento também ajuda a chegar antes no range de 315 de Berserker's Call.
 - fonte: compras.parquet (133/137, mediana 6:54)
 
@@ -73,32 +72,38 @@ Axe é um iniciador e tanque de Força: trava todo mundo perto dele com Berserke
 
 #### Soul Ring (soul_ring)
 - minuto: 16:24 (mediana, 79 de 137 jogos)
+- porque: devolve 170 de mana por 10s trocando vida que sobra, dando combustível barato pro combo sem gastar ouro de carry.
 - contra: lane ou jogo sem flask/regen suficiente pra manter o combo Call + Battle Hunger + Counter Helix sem secar de mana.
-- fonte: compras.parquet (79/137 = 58%)
+- fonte: compras.parquet (79/137 = 58%); items.json (soul_ring: mana_gain 170, duration 10)
 
 #### Lotus Orb (lotus_orb)
 - minuto: 32:36 (mediana, 36 de 137 jogos)
+- porque: dá a Axe uma forma de virar o combo contra quem tenta neutralizá-lo primeiro, sem gastar o slot num item só ofensivo.
 - contra: ultimates e disables de alvo único fortes (ex. Doom, hex): o ativo (Echo Shell) devolve o próximo feitiço de alvo único lançado contra Axe pro próprio lançador, embora o Axe ainda sofra o efeito original.
 - detalhe: a reflexão só vale pra feitiços lançados depois do ativo; não bloqueia, só devolve.
 - fonte: compras.parquet (36/137 = 26%); liquipedia.net/dota2/Spell_Reflection
 
 #### Shiva's Guard (shivas_guard)
 - minuto: 38:06 (mediana, 44 de 137 jogos)
+- porque: a aura de -45 de velocidade de ataque reduz o dano que Axe toma segurando o Call, e o estouro limpa onda de creep rápido.
 - contra: carries de ataque rápido (a aura reduz 45 de velocidade de ataque em raio 1200) e grupos de ilusão/creep, que o estouro de 260 de dano em área (raio 825) e mais a mana pra Counter Helix/Battle Hunger limpam de uma vez.
 - fonte: compras.parquet (44/137 = 32%); items.json (shivas_guard: aura_attack_speed -45, blast_damage 260, blast_radius 825)
 
 #### Crimson Guard (crimson_guard)
 - minuto: 24:54 (mediana, 5 de 137 jogos)
+- porque: dá sobrevivência em área pro time logo na fase de luta de grupo, quando Axe tanka mas os aliados ainda não têm item defensivo.
 - contra: composições de dano físico pesado e cedo (vários atacantes rápidos): bloqueia 75 de dano melee / 50 ranged com 60% de chance passiva (100% e 70 no ativo por 7s) pra toda a equipe num raio de 1200.
 - fonte: compras.parquet (5/137 = 4%); items.json (crimson_guard: block_damage_melee 75, block_damage_ranged 50, block_chance 60, duration 7)
 
 #### Pipe of Insight (pipe)
 - minuto: 35:48 (mediana, 14 de 137 jogos)
+- porque: barreira e resistência mágica em área protegem o time inteiro no momento em que Axe trava todo mundo com o Call.
 - contra: equipes de dano mágico pesado: aura de 8% de resistência mágica (o +20% do item é só pra quem carrega) e barreira de 425 de dano mágico por 8s pra equipe toda em raio 1200.
 - fonte: compras.parquet (14/137 = 10%); items.json (pipe: magic_resistance_aura 8, barrier_block 425, barrier_duration 8.0, aura_radius 1200)
 
 #### Manta Style (manta)
 - minuto: 32:12 (mediana, 14 de 137 jogos)
+- porque: o dispel básico limpa o debuff que travaria Axe antes de iniciar ou de usar Culling Blade na hora certa.
 - contra: silence, hex e lentidão de alvo único: o dispel básico do ativo limpa a maioria dos debuffs negativos (mas não impede o efeito original de algo como Doom se já estiver ativo).
 - fonte: compras.parquet (14/137 = 10%); dotacoach.gg/en/items/manta-style (dispel básico confirmado no 7.41f)
 
@@ -109,6 +114,7 @@ Axe é um iniciador e tanque de Força: trava todo mundo perto dele com Berserke
 
 #### Heart of Tarrasque (heart)
 - minuto: 38:30 (mediana, 14 de 137 jogos)
+- porque: a vida e regen extra deixam Axe tankar sozinho por mais tempo quando não há suporte pra sustentá-lo em lutas longas.
 - contra: jogos longos em que Axe precisa segurar sozinho ou splitar sem apoio: 40 de Força e 1% de regen sobre a vida máxima seguram ele de pé enquanto o One Man Army (passivo oculto: metade da armadura em Força, só sem aliado em raio 700) soma vida extra longe do time.
 - fonte: compras.parquet (14/137 = 10%); items.json (heart: bonus_strength 40, hp_regen 1%); constants_abilities.json (axe_one_man_army: armor_pct_as_strength 50, radius 700)
 

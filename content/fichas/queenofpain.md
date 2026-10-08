@@ -76,6 +76,7 @@ Queen of Pain é uma mage de burst mid (pos 2): Blink pra entrar e sair, Shadow 
 
 #### Bloodstone (bloodstone)
 - minuto: 33.6
+- porque: +650 de vida e lifesteal em feitiço dão sustain pra ela segurar troca longa, e a aura de dano de feitiço recebido ajuda todo o time de magos, não só ela.
 - quando: jogo que estica e ela precisa ficar na frente da troca sem morrer, trocando burst isolado por sustain.
 - detalhe: +650 de vida, 20% de lifesteal em feitiço (60% por 5s quando ativado) e aura de +12% de dano de feitiço recebido pelo time inimigo num raio de 1.200, que ajuda todo o time de magos, não só ela.
 - contra: times sem burst de alvo único forte o bastante pra furar 650 de vida extra numa troca só.
@@ -83,30 +84,35 @@ Queen of Pain é uma mage de burst mid (pos 2): Blink pra entrar e sair, Shadow 
 
 #### Shiva's Guard (shivas_guard)
 - minuto: 36.1
+- porque: Arctic Blast desacelera e a aura passiva reduz velocidade de ataque do time inimigo, neutralizando carry físico que depende de attack speed alto.
 - contra: carries de ataque físico que dependem de velocidade de ataque alta pra fazer dano (crit, ataque rápido em sequência).
 - detalhe: Arctic Blast causa 260 de dano mágico e -40% de velocidade de movimento num raio de 825; a aura passiva reduz -45 de velocidade de ataque de todo inimigo em 1.200 de raio.
 - fonte: items.json (shivas_guard); compras locais (25 de 66 jogos, 38%)
 
 #### Linken's Sphere (sphere)
 - minuto: 35.5
+- porque: bloqueia o primeiro feitiço de alvo único a cada 14s, barrando o disable que mais a mata antes de ela conseguir usar o Blink pra entrar ou sair da troca.
 - contra: disable de alvo único forte apontado direto nela (hex, stun ou silence de alvo), porque bloqueia o primeiro feitiço desse tipo a cada 14s.
 - detalhe: também dá 16 de todos os atributos. Item raro nesse recorte, só aparece quando o time inimigo tem um disable específico demais pra ignorar.
 - fonte: items.json (sphere); compras locais (10 de 66 jogos, 15%)
 
 #### Octarine Core (octarine_core)
 - minuto: 41.9
+- porque: -25% de recarga em todas as habilidades deixa Blink, Shadow Strike e Scream voltando mais rápido pra ela aguentar troca prolongada de jogo longo.
 - quando: jogo muito longo, pra recarregar Blink, Shadow Strike e Scream mais rápido e aguentar troca prolongada.
 - detalhe: -25% de recarga em todas as habilidades, +450 de vida e +450 de mana. Item claramente de late game nesse recorte.
 - fonte: items.json (octarine_core); compras locais (26 de 66 jogos, 39%)
 
 #### Eul's Scepter of Divinity (cyclone)
 - minuto: 50.7
+- porque: dispel básico em si mesma e 2,5s de invulnerabilidade dão uma saída segura quando ela já levou um debuff antes de entrar na troca.
 - quando: precisa se dispelar de um debuff ou ficar invulnerável por 2,5s antes de entrar na troca.
 - detalhe: Cyclone em si mesma é dispel básico; usada nela, não no inimigo, quando ela precisa de uma saída rápida de um disable que já pegou.
 - fonte: items.json (cyclone); compras locais (6 de 66 jogos, 9%)
 
 #### Scythe of Vyse (sheepstick)
 - minuto: 50.6
+- porque: trava a maior ameaça do time inimigo por 2,8s sem atacar, usar magia ou se mover rápido, abrindo o Hex into Sonic Wave pra fechar o kill sem reação.
 - contra: a maior ameaça do time inimigo (carry ou iniciador), travando por 2,8s sem atacar, usar magia ou se mover rápido.
 - detalhe: item raro nesse recorte, só em jogo que passa dos 45-50 minutos.
 - combo: Hex no alvo prioritário e Sonic Wave em seguida fecha o kill sem ele conseguir reagir.

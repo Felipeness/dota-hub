@@ -66,21 +66,25 @@ Primal Beast é um str Initiator/Durable/Disabler (OpenDota) que abre luta com O
 ### Situacionais
 
 #### Shiva's Guard (shivas_guard)
+- porque: +17 de armadura e -45 de velocidade de ataque da aura cortam o dano físico sustentado que PB toma ao entrar na frente da luta.
 - contra: carries de ataque físico rápido e contínuo (ex.: Troll Warlord, Phantom Assassin), porque a aura passiva tira 45 de velocidade de ataque de quem está perto e o Arctic Blast ativo soma -40% de velocidade de movimento em 825 de raio, o que também trava o alvo pro Trample alcançar de novo.
 - detalhe: item mais comprado por Primal Beast na fase tardia no OpenDota (42 contagens, bem na frente do segundo colocado).
 - fonte: OpenDota itemPopularity; items.json (shivas_guard)
 
 #### Heart of Tarrasque (heart)
+- porque: soma +40 de força e regenera vida proporcional à que falta, dando a PB fôlego pra aguentar poke até o combo valer a pena.
 - contra: lineups de poke/sustain de dano que tentam desgastar Primal Beast de fora do alcance dele antes da luta.
 - detalhe: Vida de Behemoth regenera 1,5% da vida que falta por segundo; junto da vida base alta de str, deixa o herói difícil de desgastar fora de luta. Aparece com 12 contagens na fase tardia no OpenDota.
 - fonte: OpenDota itemPopularity; items.json (heart)
 
 #### Linken's Sphere (sphere)
+- porque: bloqueia o disable de alvo único que cancelaria o combo de iniciação antes dele começar, já que PB não tem dispel próprio.
 - contra: disable de alvo único direcionado que interrompe o kit, como a Astral Imprisonment do Outworld Devourer, que segundo a dotacoach interrompe o canal de Pulverize.
 - detalhe: Spellblock bloqueia o próximo feitiço direcionado a cada 14s; não ajuda contra área (Doom em alvo único ainda passa, já que Doom é um debuff que a Sphere também bloquearia na teoria, mas o matchup citado pela dotacoach é especificamente sobre interromper o Pulverize, não sobre Doom). 10 contagens na fase tardia no OpenDota.
 - fonte: OpenDota itemPopularity; items.json (sphere); dotacoach.gg/heroes/counters/primal-beast
 
 #### Boots of Travel (travel_boots)
+- porque: troca a mobilidade de curta distância do Phase por mapa inteiro, pra PB chegar a tempo em rotas longas e defender torres.
 - contra: jogos que estiram e exigem que PB alcance lutas em rotas longas ou defenda torres em várias lanes, trocando a mobilidade de curta distância do Phase por mapa inteiro.
 - detalhe: 7 contagens de Boots of Travel e 6 de Boots of Travel 2 na fase tardia no OpenDota, abaixo de Shiva's e Scepter mas ainda recorrente.
 - fonte: OpenDota itemPopularity; items.json (travel_boots)

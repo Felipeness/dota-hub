@@ -61,14 +61,15 @@ Dragon Knight é um herói de força corpo a corpo que vira tanque de dano em á
 - fonte: constants_abilities.json (dragon_knight_fireball); constants_hero_abilities.json (lista de abilities do Dragon Knight, confirma Fireball como a 6ª habilidade); dotacoach.gg/en/heroes/dragon-knight (confirma Fireball como a habilidade liberada pelo Shard); OpenDota itemPopularity (mid_game_items, aghanims_shard 74 ocorrências)
 
 #### Heaven's Halberd (heavens_halberd)
+- porque: soma armadura, evasão e regeneração que ajudam Dragon Knight, já tanque na forma de dragão, a bancar dano na frente de luta.
 - contra: heróis que dependem do ataque corpo a corpo pra fazer dano (Disarm impede atacar por 3,5s).
 - detalhe: baixa frequência na amostra (2 ocorrências), ou seja, é escolha pontual, não padrão.
-- fonte: items.json (ability "Disarm"); OpenDota itemPopularity (late_game_items)
+- fonte: items.json (ability "Disarm", attrib bonus_armor/bonus_evasion/bonus_health_regen); OpenDota itemPopularity (late_game_items)
 
 #### Hurricane Pike (hurricane_pike)
 - contra: inimigo de iniciação corpo a corpo (empurra os dois 425 de distância e dá 5 ataques sem restrição de alcance por 6s, então serve pra escapar de um gap-closer e ainda bater).
 - detalhe: 16 ocorrências no late game da amostra.
-- fonte: items.json (ability "Hurricane Thrust"); OpenDota itemPopularity (late_game_items)
+- fonte: items.json (ability "Hurricane Thrust", attrib bonus_strength/bonus_agility/bonus_health); OpenDota itemPopularity (late_game_items)
 
 #### Shiva's Guard (shivas_guard)
 - porque: a onda (260 de dano mágico, -40% de velocidade em área de 825) e a aura (-45 de velocidade de ataque em 1200 de raio) combinam com a forma de dragão pra travar um grupo inteiro.
@@ -82,9 +83,10 @@ Dragon Knight é um herói de força corpo a corpo que vira tanque de dano em á
 - fonte: items.json (ability "Overwhelming Blink"); OpenDota itemPopularity (late_game_items)
 
 #### Bloodthorn (bloodthorn)
+- porque: soma velocidade de ataque e silencia o alvo por 5s, travando disable e cura do inimigo durante a iniciação de Dragon Knight.
 - contra: heróis com evasão (garante acerto, "Pierce" 40% de chance de ignorar evasão) ou que dependem de cura/sustain em luta alongada (silencia 5s e devolve 60% do dano recebido no período como dano mágico ao final).
 - detalhe: 10 ocorrências no late game.
-- fonte: items.json (abilities "Soul Rend" e "Pierce"); OpenDota itemPopularity (late_game_items)
+- fonte: items.json (abilities "Soul Rend" e "Pierce", attrib bonus_attack_speed); OpenDota itemPopularity (late_game_items)
 
 ## Pos 1 (carry)
 - quando pegar: é a posição secundária e mais rara do herói no 7.41: 9 de 37 picks pro no recorte local, com 22,2% de vitórias (2 de 9), amostra pequena pra confiar na taxa. Ainda assim é pick real: o pos 1 rincyq (Nigma) jogou Dragon Knight 3 vezes em 28 partidas na posição (`work/equipes/nigma/analise.md`).

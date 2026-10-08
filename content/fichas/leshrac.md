@@ -84,12 +84,13 @@ Leshrac é um int de dano mágico puro: Lightning Storm é barato e recarrega em
 #### Shiva's Guard (shivas_guard)
 - minuto: 33:15
 - contra: times de ataque rápido (a aura tira 45 de velocidade de ataque em raio 1200) e grupos de ilusão/creep que o estouro de 260 de dano em raio 825 limpa de uma vez.
-- fonte: compras.parquet (5/15 = 33%, mediana 33:15); items.json (shivas_guard: aura_attack_speed -45, blast_damage 260, blast_radius 825)
+- fonte: compras.parquet (5/15 = 33%, mediana 33:15); items.json (shivas_guard: bonus_armor 17, aura_attack_speed -45, blast_damage 260, blast_radius 825)
 
 #### Scythe of Vyse (sheepstick)
 - minuto: 37:02
+- porque: +30 de Intelecto amplia o próprio Defilement, e o Hex de 2,8s garante o pick que o atordoamento curto do Split Earth sozinho não garante.
 - contra: um alvo prioritário com fuga própria (blink, dash) que o atordoamento curto (1,7s) do Split Earth não prende sozinho; o hex de 2,8s tira esse alvo da luta por completo.
-- fonte: compras.parquet (4/15 = 27%, mediana 37:02); items.json (sheepstick: sheep_duration 2.8); constants_abilities.json (leshrac_split_earth duration 1.7)
+- fonte: compras.parquet (4/15 = 27%, mediana 37:02); items.json (sheepstick: bonus_intellect 30, sheep_duration 2.8); constants_abilities.json (leshrac_split_earth duration 1.7)
 
 #### Consecrated Wraps (consecrated_wraps)
 - minuto: 16:55
@@ -134,7 +135,7 @@ Leshrac é um int de dano mágico puro: Lightning Storm é barato e recarrega em
 #### Shiva's Guard (shivas_guard)
 - minuto: 32:25
 - contra: times de ataque rápido, pela mesma aura de -45 de velocidade de ataque; nesse slot serve mais pra proteger o time do que pra ele carregar dano.
-- fonte: compras.parquet (2/5 = 40%, mediana 32:25); items.json (shivas_guard: aura_attack_speed -45)
+- fonte: compras.parquet (2/5 = 40%, mediana 32:25); items.json (shivas_guard: bonus_armor 17, aura_attack_speed -45)
 
 ## Roshan
 

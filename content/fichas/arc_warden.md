@@ -104,24 +104,29 @@ Arc Warden é um mid de item: Flux isola e desgasta um único alvo, Spark Wraith
 ### Situacionais
 
 #### Blink Dagger (blink)
+- porque: blinka até 1200 de distância na hora, cobrindo o reposicionamento que falta sem Hurricane Pike: fecha em alvo isolado pro Flux ou foge.
 - contra: jogos sem Hurricane Pike pronto a tempo, quando falta um jeito rápido de reposicionar antes de uma iniciação inimiga ou de fechar em cima de um alvo isolado pro Flux.
 - fonte: api.opendota.com/heroes/113/itemPopularity (mid_game_items, blink=15); items.json (blink: blink_range 1200)
 
 #### Shadow Blade (invis_sword)
+- porque: 17s de invisibilidade, que só quebra ao atacar ou lançar magia, deixa chegar perto de um alvo isolado sem ser visto antes do Flux.
 - contra: linhas de visão inimigas carregadas (wards, Observer) que impedem o Arc Warden de se aproximar sem ser visto pra isolar um alvo com Flux; os 17s de invisibilidade também servem pra puxar Roshan ou fugir sem ser perseguido.
 - fonte: api.opendota.com/heroes/113/itemPopularity (mid_game_items invis_sword=6, late_game_items invis_sword=3); items.json (invis_sword: windwalk_duration 17.0)
 
 #### Monkey King Bar (monkey_king_bar)
+- porque: fura evasão alta (80% de chance, +70 de dano mágico por ataque) antes do Bloodthorn sair, mantendo os procs de Mjollnir/Maelstrom relevantes.
 - contra: carries de evasão alta quando o Arc Warden ainda não tem Bloodthorn no inventário; 80% de chance de ignorar a evasão e somar 70 de dano mágico por ataque.
 - fonte: api.opendota.com/heroes/113/itemPopularity (mid_game_items monkey_king_bar=7, late_game_items=3); items.json (monkey_king_bar: bonus_chance 80, bonus_chance_damage 70)
 
 #### Butterfly (butterfly)
+- porque: +30 Agilidade, +30 de dano e 35% de evasão (valor 7.41f) dão a sobrevivência que falta pro Arc Warden enquanto ele ainda monta o resto do build.
 - contra: composições de dano físico pesado tentando focar o Arc Warden, que é item-dependente e sem fuga própria fora do Blink/Hurricane Pike; no patch 7.41f dá +30 de Agilidade, +30 de dano e 35% de evasão (valor vigente, o items.json local ainda traz o número antigo de +35 Agi/+25 dano).
 - fonte: dotacoach.gg/en/items/butterfly (valor 7.41f: +30 Agi/+30 dano/35% evasão); api.opendota.com/heroes/113/itemPopularity (late_game_items, butterfly=4)
 
 #### Scythe of Vyse (sheepstick)
+- porque: os 2,8s de Hex travam esse herói específico na hora certa, da iniciação ou da channel da Tempest Double, e resistem a dispel fraco.
 - contra: o único herói do time inimigo capaz de fugir ou cancelar a Tempest Double antes dela render (transforma em critter por 2,8s, mudo e desarmado, e destrói ilusões na hora).
-- fonte: api.opendota.com/heroes/113/itemPopularity (late_game_items, sheepstick=14); items.json (sheepstick: sheep_duration 2.8)
+- fonte: api.opendota.com/heroes/113/itemPopularity (late_game_items, sheepstick=14); items.json (sheepstick: sheep_duration 2.8, dispellable "Strong Dispels Only")
 
 ## Roshan
 

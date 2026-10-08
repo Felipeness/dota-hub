@@ -65,11 +65,12 @@ Silencer é um suporte de inteligência que vive de calar o inimigo: Last Word e
 #### Aghanim's Shard (aghanims_shard)
 - contra: linhas com dois suportes ou carry que fica colado em aliado: o ricochete de Glaives of Wisdom rouba intelecto de um segundo alvo no mesmo acerto.
 - combo: Glaives of Wisdom com Shard ricocheteia 1 vez pra um inimigo aleatório a até 450 de distância e rouba +1 de intelecto extra, empilhando o dano mágico de Glaives em dois heróis de uma vez.
-- fonte: https://dotacoach.gg/en/heroes/silencer
+- fonte: https://dotacoach.gg/en/heroes/silencer (dano de Glaives escala com Intelecto, Shard aumenta o roubo); C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 
 #### Blink Dagger (blink)
+- porque: fecha a distância num instante, entrando no alcance de 900 do Last Word antes que o alvo use a fuga e escape da enchante.
 - contra: alvos com fuga ou escape rápido fora do alcance de 900 do Last Word: o blink fecha a distância pra acertar antes que eles saiam.
-- fonte: https://api.opendota.com/api/heroes/75/itemPopularity (late_game_items, 1 ocorrência registrada na amostra: item raro, mas aparece; a API não informa o total de inventários amostrados)
+- fonte: https://api.opendota.com/api/heroes/75/itemPopularity (late_game_items, 1 ocorrência registrada na amostra: item raro, mas aparece; a API não informa o total de inventários amostrados); C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json (blink_range 1200); C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json (Last Word, abilitycastrange 900)
 
 ## Pos 5 (suporte duro)
 
@@ -113,8 +114,9 @@ Silencer é um suporte de inteligência que vive de calar o inimigo: Last Word e
 - fonte: https://api.opendota.com/api/heroes/75/itemPopularity (6 ocorrências na fase intermediária, 9 na tardia); C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 
 #### Ghost Scepter (ghost)
+- porque: item barato de 1.500 que dá imunidade a dano físico por 4 s, a única forma de aguentar o burst sem gastar o ativo de Glimmer ou Force Staff.
 - contra: carry de dano físico puro sem magia relevante (ex.: Phantom Assassin, Juggernaut): 4 s de imunidade a dano físico pra sobreviver ao burst, mas você fica -30% mais vulnerável a dano mágico e não ataca enquanto durar, então só vale contra quem bate de perto.
-- fonte: https://api.opendota.com/api/heroes/75/itemPopularity (5 ocorrências na fase intermediária); C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- fonte: https://api.opendota.com/api/heroes/75/itemPopularity (5 ocorrências na fase intermediária); C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json (custo 1.500, duração 4.0, -30% dano mágico)
 
 ## Roshan
 

@@ -69,21 +69,25 @@ Na prática ela não é carry nem mid no competitivo atual: nos 11 picks dela em
 ### Situacionais
 
 #### Solar Crest (solar_crest)
+- porque: a ativa dá armadura e vida pro aliado puxado pelo combo, ou tira armadura do tank que ela quer abrir primeiro.
 - contra: time que precisa proteger um carry squishy em troca, ou pra tirar armadura de um tank inimigo bem antes de engajar.
 - detalhe: +7 de armadura, +25 de velocidade de movimento, +200 de vida e mana quando usado num aliado (ou o inverso num inimigo); compartilha recarga com Pavise.
 - fonte: items.json; api.opendota.com/api/heroes/136/itemPopularity (16 no mid game, 8 no late game)
 
 #### Pavise (pavise)
+- porque: dá escudo e vida pro aliado de farm sem gastar ouro dela em item pessoal, sustentando a lane de roam.
 - contra: lane dura onde o aliado de farm precisa de escudo e vida cedo pra não perder a troca.
 - detalhe: +3 de armadura, +175 de vida e mana; escudo que absorve dano por um tempo.
 - fonte: items.json; api.opendota.com/api/heroes/136/itemPopularity (23 no mid game, bem mais presente que a maioria dos itens dessa fase)
 
 #### Glimmer Cape (glimmer_cape)
+- porque: resistência mágica e a invisibilidade curta tiram o aliado focado do alcance antes do nuke decidir a troca.
 - contra: time inimigo com muito poke mágico ou foco de magia numa troca.
 - detalhe: +20% de resistência mágica, mais invisibilidade curta pra escapar ou reposicionar antes do combo.
 - fonte: items.json; api.opendota.com/api/heroes/136/itemPopularity (8 no late game)
 
 #### Vladmir's Offering (vladmir)
+- porque: aura de lifesteal e dano sustenta o grupo em escaramuça de roam prolongada sem gastar regen individual.
 - contra: lane de roam onde o grupo precisa de sustain extra pra ficar brigando sem voltar na fonte.
 - detalhe: aura (1200 de raio) dá 20% de lifesteal e +18 de dano pros aliados perto, mais +2 de armadura e +1 de regeneração de mana aura; pra quem carrega, soma +1 de armadura e +0,75 de regeneração de mana próprios. Lifesteal da aura cai pra 12% contra creep.
 - fonte: items.json; api.opendota.com/api/heroes/136/itemPopularity (6 no late game)
@@ -135,21 +139,25 @@ Na prática ela não é carry nem mid no competitivo atual: nos 11 picks dela em
 ### Situacionais
 
 #### Solar Crest (solar_crest)
+- porque: a ativa dá armadura pro carry que ela protege, ou tira armadura do alvo que o carry já está focando.
 - contra: carry do próprio time que precisa de armadura extra pra sustentar troca, ou pra tirar armadura de quem o carry está batendo.
 - detalhe: +7 de armadura, +25 de velocidade de movimento, +200 de vida e mana quando usado num aliado.
 - fonte: items.json; api.opendota.com/api/heroes/136/itemPopularity (16 no mid game, 8 no late game)
 
 #### Glimmer Cape (glimmer_cape)
+- porque: resistência mágica e invisibilidade curta tiram o carry do alcance do poke antes do nuke decisivo.
 - contra: time inimigo com poke mágico focado no carry que ela está protegendo.
 - detalhe: +20% de resistência mágica e invisibilidade curta.
 - fonte: items.json; api.opendota.com/api/heroes/136/itemPopularity (8 no late game)
 
 #### Skull Basher (basher) → Abyssal Blade (abyssal_blade)
+- porque: trava o alvo que tentaria escapar do stun do Rebound, segurando a troca até o time fechar o kill.
 - contra: alvo que depende de fugir depois do stun do Rebound (iniciador ou carry mobile). Heróis que não recebem o bash: Spirit Breaker, Faceless Void, Slardar e Kez (modo Sai).
 - detalhe: Basher +30 de dano e +10 de força; Abyssal soma +35 de dano, +26 de força e +30% de resistência a slow.
-- fonte: items.json; api.opendota.com/api/heroes/136/itemPopularity (basher em 26 e abyssal_blade em 13 dos inventários de late game)
+- fonte: items.json; constants_abilities.json (mecânica de stun do Rebound); api.opendota.com/api/heroes/136/itemPopularity (basher em 26 e abyssal_blade em 13 dos inventários de late game)
 
 #### Vladmir's Offering (vladmir)
+- porque: aura de lifesteal e dano sustenta o grupo na troca sem custar mana ou cooldown de cura de ninguém.
 - contra: lane em grupo que precisa de sustain extra sem gastar recurso em cura individual.
 - detalhe: aura (1200 de raio) dá 20% de lifesteal e +18 de dano pros aliados perto, mais +2 de armadura e +1 de regeneração de mana aura; lifesteal cai pra 12% contra creep.
 - fonte: items.json; api.opendota.com/api/heroes/136/itemPopularity (6 no late game)

@@ -67,6 +67,7 @@ Phantom Assassin é carry de agilidade pos1 puro: farma rápido com Battle Fury,
 ### Situacionais
 
 #### Manta Style (manta)
+- porque: o dispel ativo limpa controle curto e as imagens dobram a farm quando a luta não compensa pra ela entrar sozinha.
 - minuto: 22:06 (mediana de 3 dos 7 jogos pro, via Yasha ~19:21; alternativa ao Desolator na mesma janela)
 - contra: silence, hex e root de curta duração, e também pra farmar mais rápido num mapa sem contato (as imagens limpam wave ou camp enquanto ela limpa outro).
 - detalhe: o ativo tem 0,1s de invulnerabilidade e aplica dispel básico; as imagens melee causam 33% do dano dela e tomam 300% de volta, então servem pra farm e pra puxar torre, não pra entrar em luta sozinhas. Escolhido em vez do Desolator quando o inimigo tem mais disable de curta duração do que dano físico pesado pra punir a troca de item defensivo por item de farm.
@@ -79,23 +80,27 @@ Phantom Assassin é carry de agilidade pos1 puro: farma rápido com Battle Fury,
 - fonte: compras.parquet (1/7 jogos pro, 33:00); items.json (monkey_king_bar: bonus_chance 80, bonus_chance_damage 70)
 
 #### Linken's Sphere (sphere)
+- porque: bloqueia o disable de alvo único que a travaria antes de chegar perto pra bater, sem gastar o BKB nisso.
 - minuto: 33:18 (1 dos 7 jogos pro; dado de 1 partida só, baixa confiança)
 - contra: disable forte de alvo único que a travaria antes de ela chegar perto pra bater (hex, laguna blade, finger of death e afins).
 - detalhe: o Spellblock bloqueia o próximo feitiço de alvo único a cada 14s; não ajuda contra área (Static Storm do Disruptor, por exemplo, que é em raio e também revela invisível).
 - fonte: compras.parquet (1/7 jogos pro, 33:18); items.json (sphere: block_cooldown 14.0)
 
 #### Nullifier (nullifier)
+- porque: o dispel contínuo com silence e slow impede o alvo de fugir ou dispellar o combo antes dela fechar a janela de crítico.
 - minuto: 24:42 (1 dos 7 jogos pro; dado de 1 partida só, baixa confiança)
 - contra: alvo que foge ou se protege com buff/dispel bem na hora que ela ia fechar o combo (BKB, Ghost Scepter, haste, invisibilidade de item).
 - detalhe: a ativa aplica dispel básico contínuo por 4s e ainda silencia e desacelera o alvo, então mesmo um inimigo que já ligou BKB fica preso pra ela chegar e bater.
 - fonte: compras.parquet (1/7 jogos pro, 24:42); items.json (nullifier: mute_duration 4.0, slow_pct 10)
 
 #### Abyssal Blade (abyssal_blade)
+- porque: o stun garantido do Overwhelm trava o alvo corpo a corpo na hora certa pro crítico de Coup de Grace, sem depender só do bash.
 - contra: alvos móveis e esguios que ela precisa travar no corpo a corpo pra garantir a janela de crítico; o stun do Overwhelm atravessa imunidade a debuff.
 - detalhe: o bash passivo (25% de chance melee) não funciona contra Spirit Breaker, Faceless Void e Slardar (lista oficial do item); contra o resto, dá 1,6s de stun garantido com o ativo Overwhelm mais 25% de chance de bash melee a cada acerto depois disso. Não apareceu nos 7 jogos pro do lote local (amostra pequena), mas é item late comum no pub: aparece junto de Skull Basher e Sange nas compras tardias registradas pelo OpenDota (hero 44).
 - fonte: items.json (abyssal_blade: stun_duration 1.6, bash_chance_melee 25, "cannot trigger Bash" em Spirit Breaker/Faceless Void/Slardar); api.opendota.com/heroes/44/itemPopularity (late_game_items: basher 32, sange 18, abyssal_blade 15 compras)
 
 #### Aghanim's Scepter (ultimate_scepter, concede Fan of Knives)
+- porque: Fan of Knives dá dano em área com Break, abrindo sozinha quem ela não fura no 1x1 e lidando com grupos de ilusão ou invocação.
 - contra: backline de lifesteal, armadura alta ou regeneração passiva que ela não consegue abrir sozinha batendo, e grupos de ilusão/invocação que precisam de dano em área.
 - detalhe: o Scepter de Phantom Assassin concede Fan of Knives: dano em área igual a 30% da vida máxima de cada vítima mais 4s de Break (desliga habilidade e item ativo/passivo). Confirmado direto no patch atual (dotacoach.gg, 7.41f) com os mesmos números das constantes locais (30% de dano inicial, 4s de Break, raio 550, 14s de cooldown, 80 de mana). Isso é exatamente a resposta pro pior matchup dela no pub, Lifestealer (34,0% de vitória, OpenDota matchups), porque o Break tira o Open Wounds e a sustentação dele antes da troca.
 - fonte: compras.parquet (2/7 jogos pro, usado como item late); constants_abilities.json (phantom_assassin_fan_of_knives: pct_health_damage_initial 30%, duration 4, radius 550, mc 80, cd 14); dotacoach.gg/heroes/phantom-assassin (fetch direto, 7.41f: confirma que é o Scepter que concede a habilidade, mesmos números); liquipedia.net/dota2/Phantom_Assassin/Changelogs (via busca, corrobora); api.opendota.com/heroes/44/matchups (Lifestealer 34,0% em 50 jogos)

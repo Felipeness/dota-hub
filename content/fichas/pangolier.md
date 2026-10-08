@@ -52,7 +52,6 @@ Pangolier é um herói corpo a corpo all-around (Carry/Nuker/Disabler/Durable/Es
 
 #### Aghanim's Scepter (ultimate_scepter)
 - minuto: 25:37
-- porque: com a Scepter, o Shield Crash dispara um Swashbuckle menor atrás de Pangolier, dobrando a área de dano e barreira do mesmo cast.
 - detalhe: o texto exato do upgrade vem da wiki da Liquipedia ("With Aghanim's Scepter, it also casts a lesser Swashbuckle behind him"). É o 3º item mais comum do Tier 1 nessa posição (153 de 168 jogos com dado de item rastreado, mediana 25:37) e o único upgrade de habilidade confirmado em fonte de texto, já que o dado local (constants_abilities.json) só tem o número "scepter_damage_outgoing_tooltip: 75" sem a descrição.
 - combo: Shield Crash com Scepter cobre a frente e as costas de Pangolier ao mesmo tempo, útil pra limpar duas ondas de inimigos cercando ele numa luta em grupo.
 - fonte: itens_chave.parquet (dota-tier1, mediana pos 2); liquipedia.net/dota2/Pangolier (wikitext via api.php)
@@ -65,12 +64,14 @@ Pangolier é um herói corpo a corpo all-around (Carry/Nuker/Disabler/Durable/Es
 ### Situacionais
 #### Mage Slayer (mage_slayer)
 - minuto: 13:09
+- porque: Swashbuckle já bate 3 vezes on hit, então o debuff do Mage Slayer entra sozinho dentro do combo, sem gastar auto attack à parte.
 - contra: lineups com muito dano mágico e feitiço de controle, porque o debuff do Mage Slayer corta 40% do dano de feitiço do alvo por 3s a cada acerto, em cima do que o Swashbuckle já aplica 3 vezes.
 - detalhe: entrou em 29 das 168 partidas de pos 2 do Tier 1 com dado de item rastreado, com mediana de compra bem cedo (13:09), quase junto com o Diffusal, o que mostra que às vezes substitui o Diffusal contra lineup de magos.
-- fonte: itens_chave.parquet (dota-tier1, pos 2); items.json (Mage Slayer)
+- fonte: itens_chave.parquet (dota-tier1, pos 2); items.json (Mage Slayer); constants_abilities.json (Swashbuckle, procs_onhit_effects)
 
 #### Skull Basher / Abyssal Blade (basher)
 - minuto: 35:00
+- porque: as 3 strikes do Swashbuckle empilham chance de bash, quase 58% numa dash só (ver detalhe), o que ajuda a travar quem foge da luta.
 - contra: alvos com blink ou boots pra fugir da luta corpo a corpo, porque o Basher trava o alvo no lugar.
 - detalhe: com 25% de chance de bash por strike melee, as 3 strikes do Swashbuckle dão cerca de 58% de chance de pelo menos 1 bash numa dash só (cálculo em cima da chance de 25% documentada no item, 1 menos 0,75³; não é número medido em partida real). Comprado em 76 de 168 jogos pos 2 com dado de item rastreado (mediana 35:00); evoluiu pra Abyssal Blade em 15 desses jogos (mediana 50:35).
 - combo: Swashbuckle com Basher: a própria dash já trava o alvo antes de fechar com Rolling Thunder.
@@ -78,30 +79,35 @@ Pangolier é um herói corpo a corpo all-around (Carry/Nuker/Disabler/Durable/Es
 
 #### Octarine Core (octarine_core)
 - minuto: 37:01
+- porque: a redução de 25% de recarga tira tempo do cooldown de Rolling Thunder e Shield Crash, as duas habilidades que sustentam a luta longa.
 - contra: jogo que vira troca de habilidade contínua, porque a redução de 25% de recarga deixa o Rolling Thunder e o Shield Crash saindo de novo mais rápido.
 - detalhe: comprado em 64 de 168 jogos pos 2 com dado de item rastreado (mediana 37:01), geralmente depois do Soul Booster (mediana 34:28, componente do item).
 - fonte: itens_chave.parquet (dota-tier1, pos 2); items.json (Octarine Core)
 
 #### Shiva's Guard (shivas_guard)
 - minuto: 36:06
+- porque: a Freezing Aura e o Arctic Blast dão controle de área sem gastar o combo de Swashbuckle, útil quando a iniciação já foi usada.
 - contra: lineup de dano físico contínuo (right click), porque a Freezing Aura reduz 45 de velocidade de ataque de quem está perto e o Arctic Blast ainda desacelera 40% em área por 4s (não atordoa, só slow).
 - detalhe: comprado em 29 de 168 jogos pos 2 com dado de item rastreado (mediana 36:06).
 - fonte: itens_chave.parquet (dota-tier1, pos 2); items.json (Shiva's Guard)
 
 #### Disperser (disperser, via Eaglesong)
 - minuto: 39:12
+- porque: junta o Manabreak do Diffusal com um dispel ativo (Suppress), que livra Pangolier de debuff antes de entrar em Rolling Thunder ou Roll Up.
 - contra: debuffs que travam Pangolier antes dele entrar em Rolling Thunder ou Roll Up, porque o Suppress dispela o próprio Pangolier e ainda queima mana do inimigo no corpo a corpo.
 - detalhe: Eaglesong sozinho (puro dano em agilidade) aparece em 52 de 168 jogos pos 2 com dado de item rastreado (mediana 38:59) e evolui pra Disperser, que junta o Manabreak do Diffusal com um dispel ativo, em outros 52 jogos (mediana 39:12).
 - fonte: itens_chave.parquet (dota-tier1, pos 2); items.json (Disperser)
 
 #### Linken's Sphere (sphere)
 - minuto: 33:28
+- porque: o Spellblock bloqueia o primeiro feitiço de alvo único a cada 14s, dando a Pangolier uma iniciação sem levar o disable que travaria o combo.
 - contra: feitiço de alvo único forte, como o Sharpshooter do Hoodwink: Hoodwink é o pior matchup de Pangolier entre os heróis com mais jogos no dado de matchup (45,7% de vitória em 416 partidas), e o Spellblock do Linken's bloqueia a maioria dos feitiços de alvo único a cada 14s.
 - detalhe: comprado em 20 de 168 jogos pos 2 com dado de item rastreado (mediana 33:28).
 - fonte: itens_chave.parquet (dota-tier1, pos 2); items.json (Linken's Sphere, Spellblock); OpenDota matchups (hero_id 120)
 
 #### Nullifier (nullifier)
 - minuto: 35:25
+- porque: o Nullify dispela buff de fuga do alvo e ainda aplica slow por 4s, dando tempo pro combo de Swashbuckle e Rolling Thunder conectar.
 - contra: buffs de fuga ou de dano que podem ser dispelados, porque o Nullify dispela e ainda deixa o alvo mais lento por 4s.
 - detalhe: comprado em 23 de 168 jogos pos 2 com dado de item rastreado (mediana 35:25).
 - fonte: itens_chave.parquet (dota-tier1, pos 2); items.json (Nullifier)
@@ -133,21 +139,24 @@ Pangolier é um herói corpo a corpo all-around (Carry/Nuker/Disabler/Durable/Es
 ### Situacionais
 #### Mage Slayer (mage_slayer)
 - minuto: 11:38
+- porque: mesma lógica do pos 2, Swashbuckle já bate 3 vezes on hit, então o debuff entra sozinho dentro do combo, sem gastar auto attack à parte.
 - contra: offlane contra lineup de magia pesada, onde o debuff de -40% de dano de feitiço ajuda a aguentar a lane 2x1 ou 2x2.
 - detalhe: comprado em 25 de 54 jogos pos 3 com dado de item rastreado (46%, proporção maior que no pos 2), com mediana bem mais cedo que no pos 2 (11:38 contra 13:09), o que indica que no offlane ele entra como resposta de lane e não só de meio de jogo.
-- fonte: itens_chave.parquet (dota-tier1, mediana pos 3)
+- fonte: itens_chave.parquet (dota-tier1, mediana pos 3); items.json (Mage Slayer); constants_abilities.json (Swashbuckle, procs_onhit_effects)
 
 #### Skull Basher (basher)
 - minuto: 36:53
+- porque: mesma lógica do pos 2, as 3 strikes do Swashbuckle empilham chance de bash, perto de 58% numa dash só, o que ajuda a travar o alvo.
 - contra: mesmo uso do pos 2, travar quem tenta fugir da luta corpo a corpo.
 - detalhe: comprado em 20 de 54 jogos pos 3 com dado de item rastreado.
-- fonte: itens_chave.parquet (dota-tier1, mediana pos 3)
+- fonte: itens_chave.parquet (dota-tier1, mediana pos 3); items.json (Skull Basher, bash_chance_melee)
 
 #### Octarine Core (octarine_core)
 - minuto: 35:41
+- porque: mesma lógica do pos 2, a redução de 25% de recarga tira tempo do cooldown de Rolling Thunder e Shield Crash em lutas longas.
 - contra: mesmo uso do pos 2, luta longa de troca contínua de habilidade.
 - detalhe: comprado em 21 de 54 jogos pos 3 com dado de item rastreado.
-- fonte: itens_chave.parquet (dota-tier1, mediana pos 3)
+- fonte: itens_chave.parquet (dota-tier1, mediana pos 3); items.json (Octarine Core)
 
 ## Roshan
 

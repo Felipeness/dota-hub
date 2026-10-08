@@ -65,30 +65,35 @@ Ursa é Carry/Durable/Disabler (heroes.json): Overpower dá janela de 3 a 6 ataq
 ### Situacionais
 
 #### Monkey King Bar (monkey_king_bar)
+- porque: garante o acerto dos ataques durante a janela do Overpower, que senão erraria boa parte dos hits contra evasão alta.
 - contra: heróis com evasão alta (Phantom Assassin via Imaterial, até 55% de evasão; Windranger com Windrun, 100% de evasão por 3 a 6s), onde o Overpower erraria ataques sem o acerto garantido do MKB.
 - detalhe: 5000 de custo, +50 de dano, +50 de velocidade de ataque, 80% de chance de acerto garantido.
-- fonte: https://api.opendota.com/api/heroes/70/itemPopularity (late_game_items); items.json
+- fonte: https://api.opendota.com/api/heroes/70/itemPopularity (late_game_items); items.json; constants_abilities.json
 
 #### Satanic (satanic)
+- porque: o lifesteal ativo (até 175%) sustenta a vida de Ursa na troca corpo a corpo prolongada do Overpower, sem depender de cura de outra fonte.
 - contra: comps de dano físico alto e burst, onde o lifesteal ativo sustenta Ursa durante a troca.
 - detalhe: 5050 de custo, +25 de força, +25 de dano, 30% de lifesteal passivo e até 175% por 6s com o ativo.
 - combo: Enrage (dispel forte no cast + 50% de resistência a status, -80% de dano recebido) junto com o ativo de Satanic cria uma janela de 4 a 6s quase impossível de derrubar.
 - fonte: https://api.opendota.com/api/heroes/70/itemPopularity (late_game_items); items.json
 
 #### Nullifier (nullifier)
+- porque: o ativo trava quem foge do alcance curto de ataque do Ursa mesmo atravessando invulnerabilidade, já que o único gap closer do herói é o salto de 250 do Earthshock.
 - contra: spellcaster ou herói de mobilidade que escapa sem BKB: o ativo silencia 4s e desacelera 10%, e pode ser lançado mesmo em unidade invulnerável.
 - detalhe: 4350 de custo, +75 de dano, +10 de armadura, projétil de 1800 de velocidade.
-- fonte: https://api.opendota.com/api/heroes/70/itemPopularity (late_game_items); items.json
+- fonte: https://api.opendota.com/api/heroes/70/itemPopularity (late_game_items); items.json; constants_abilities.json
 
 #### Diffusal Blade (diffusal_blade)
+- porque: prende e desacelera as cópias de ilusão, dando tempo de separar o herói real antes do Overpower gastar a janela de ataques na cópia errada.
 - contra: heróis de clone/ilusão (Naga Siren, Terrorblade, Phantom Lancer, Spectre): cada ataque prende a cópia por 3s e desacelera por 4s (a queima de mana do Manabreak não afeta ilusões, só o herói real).
 - detalhe: 2500 de custo, +15 de agilidade, +10 de inteligência, 40 de mana queimada por acerto.
-- fonte: https://api.opendota.com/api/heroes/70/itemPopularity (mid_game_items); items.json
+- fonte: https://api.opendota.com/api/heroes/70/itemPopularity (mid_game_items); items.json; constants_abilities.json
 
 #### Sange (sange)
+- porque: mantém os 25% de resistência a lentidão que protegem a janela de ataques do Overpower, mesmo contra kite e slow em cadeia do time adversário.
 - contra: times de kite e slow em cadeia, onde perder a resistência a lentidão custa a janela de Overpower.
 - detalhe: 2100 de custo, +16 de força, 25% de resistência a lentidão, +16% de restauração de vida. Item isolado mais comum na fase final da amostra pública, provavelmente como statstick barato em vez de completar Sange and Yasha.
-- fonte: https://api.opendota.com/api/heroes/70/itemPopularity (late_game_items, maior contagem da fase); items.json
+- fonte: https://api.opendota.com/api/heroes/70/itemPopularity (late_game_items, maior contagem da fase); items.json; constants_abilities.json
 
 ## Roshan
 

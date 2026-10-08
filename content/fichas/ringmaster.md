@@ -62,47 +62,56 @@ Ringmaster é um herói de inteligência à distância, sem cura própria, com u
 ### Situacionais
 
 #### Force Staff (force_staff)
+- porque: reposiciona o aliado focado pra fora do alcance do combo inimigo, ou te leva pro alcance mínimo do Wheel sem gastar o Blink.
 - quando: empurra 600 de distância, em você ou em aliado; use pra reposicionar quem o inimigo focou ou pra chegar no alcance do Wheel sem gastar o Blink.
 - contra: iniciação de alcance curto (Axe, Tusk, Earthshaker) onde empurrar o aliado 600 unidades já tira ele do raio do combo inimigo.
 - fonte: https://api.opendota.com/api/heroes/131/itemPopularity; C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 
 #### Rod of Atos (rod_of_atos)
+- porque: a raiz de 2s sem precisar de alcance curto garante o canal cheio do Tame the Beasts ou o segundo acerto do Impalement antes do alvo fugir.
 - quando: +275 de vida e +12 de inteligência, e a ativa prende o alvo por 2s sem precisar de alcance curto.
 - contra: heróis de fuga rápida sem dispel de raiz, tipo Ember Spirit ou Weaver, onde os 2s de raiz garantem o canal cheio do Tame the Beasts (até 1s) ou o segundo acerto do Impalement.
 - combo: Rod of Atos + Tame the Beasts: raiz por 2s cobre o 1s de canal cheio do whip (dano e medo máximos) sem o alvo sair da área antes do crack.
 - fonte: https://api.opendota.com/api/heroes/131/itemPopularity; C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json; C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 
 #### Eul's Scepter of Divinity (cyclone)
+- porque: o self-cyclone te tira da luta por 2,5s pra escapar de uma iniciação ou pra esperar o momento certo de entrar com o Wheel.
 - quando: ciclone de 2,5s em si mesmo passa por imunidade a feitiço (spell immunity), serve de fuga ou de setup pra entrar com o Wheel depois que o ciclone acaba.
 - contra: silence ou disable de alcance que te pega antes de lançar qualquer coisa; o self-cyclone te tira da linha de visão por 2,5s.
 - fonte: https://api.opendota.com/api/heroes/131/itemPopularity; C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 
 #### Solar Crest (solar_crest)
+- porque: os 7s de armadura extra e a barreira de dano da ativa seguram o carry do seu time contra o dano físico constante do time inimigo.
 - quando: +7 de armadura passiva pra você, sempre. A ativa (Shine) só funciona em aliado: +5 de armadura, +60 de velocidade de ataque, +15% de movimento e barreira de 350 de dano por 7s (não dá esses bônus se usada em si mesmo).
 - contra: time inimigo com dano físico constante (carries de auto-attack), onde os 7s de armadura e a barreira no seu carry decidem a troca; no 7.41 o item não tem mais a ativa de reduzir armadura do inimigo.
 - fonte: https://api.opendota.com/api/heroes/131/itemPopularity; C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 
 #### Ghost Scepter (ghost)
+- porque: a imunidade total a dano físico por 4s tira você da mira de carries de auto-attack puro numa troca.
 - quando: 4s de forma etérea com imunidade total a dano físico; nesse tempo você não ataca e fica 30% mais vulnerável a dano mágico.
 - contra: carries de dano físico puro que estão te matando primeiro na troca (Phantom Assassin, Spectre, Juggernaut); não ajuda contra nuke mágico, porque a troca é justamente ficar mais fraco nisso.
 - fonte: https://api.opendota.com/api/heroes/131/itemPopularity; C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 
 #### Lotus Orb (lotus_orb)
+- porque: devolve pro inimigo o próprio disable de alvo único antes que ele te tire da luta.
 - quando: reflete uma habilidade de alvo único de volta pra quem lançou.
 - contra: disables de alvo único fortes contra suporte (Doom, Lion, Shadow Shaman): reflita antes de eles acertarem o combo em você.
 - fonte: https://api.opendota.com/api/heroes/131/itemPopularity; C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 
 #### Black King Bar (black_king_bar)
+- porque: garante que você sobrevive aos disables em sequência até conseguir lançar o Wheel of Wonder.
 - quando: 9/8/7s de imunidade a feitiço (cai por uso), pra entrar numa troca sem ser desligado antes de usar Wheel of Wonder.
 - contra: times com múltiplos disables em sequência, quando você precisa garantir que vai conseguir lançar o ultimate.
 - fonte: https://api.opendota.com/api/heroes/131/itemPopularity; C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 
 #### Aghanim's Shard (aghanims_shard)
+- porque: é a única forma de detecção de invisível da build, e ainda derrete ilusões com o dano por segundo do Spotlight.
 - quando: destrava Spotlight (3 faróis que varrem uma área de 275 de raio por 8s, 30% de chance de erro pra quem está na luz e revela invisíveis; contra ilusões, retira 30% da vida máxima por segundo). Custo e número de compras baixos no item popularity (1 registro na fase mid), então é pouco usado hoje, mas é a única forma de ter detecção de invisível na build.
 - contra: heróis de invisibilidade (Riki, Clinkz, Weaver) e builds de ilusão (Naga Siren, Phantom Lancer): o Spotlight revela e ainda derrete a ilusão.
 - fonte: https://api.opendota.com/api/heroes/131/itemPopularity; https://liquipedia.net/dota2/api.php?action=parse&page=Ringmaster; C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 
 #### Aghanim's Scepter (ultimate_scepter)
+- porque: transforma o Escape Act de fuga pura em dano de área quando a caixa abre, rentabilizando a "salvada" como jogada ofensiva.
 - quando: upgrade do Escape Act (The Box): troca o cooldown por 2 cargas e, quando a caixa abre, causa 300 de dano mágico em área ao redor do alvo e dispara 8 réplicas do dagger do Impalement Arts em todas as direções, com metade do alcance normal do dagger.
 - combo: Escape Act com Scepter em cima de um aliado no meio da luta inimiga transforma a "salvada" em dano de área na cara de quem cercou ele.
 - detalhe: 14 registros na fase late do item popularity, empatado com Glimmer Cape e atrás de Blink Dagger (36), Aether Lens (25) e Force Staff (20).
@@ -139,21 +148,25 @@ Ringmaster é um herói de inteligência à distância, sem cura própria, com u
 ### Situacionais
 
 #### Solar Crest (solar_crest)
+- porque: o reforço de armadura e a barreira de dano no carry decidem a troca contra um time que bate de dano físico.
 - quando: +armadura pro carry na hora de lutar (a ativa Shine só funciona em aliado, não existe mais a opção de reduzir armadura do inimigo nesse patch).
 - contra: times com foco em dano físico, onde a janela de +5 de armadura, +60 de velocidade de ataque e barreira de 350 no carry (7s) decide uma troca de poucos segundos.
 - fonte: https://api.opendota.com/api/heroes/131/itemPopularity; C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 
 #### Guardian Greaves (guardian_greaves)
+- porque: cobre a falta de cura própria do Ringmaster e do time inteiro em trocas longas quando ninguém no draft tem sustain.
 - quando: cura e mana em área pro time inteiro antes de uma troca, já que o Ringmaster não tem nenhuma cura própria no kit.
 - contra: jogos de troca prolongada onde o time depende de sustain em área porque ninguém no draft tem cura forte.
 - fonte: https://api.opendota.com/api/heroes/131/itemPopularity; C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 
 #### Aeon Disk (aeon_disk)
+- porque: a janela de dano zerado cobre o resto de um combo de burst que te derrubaria abaixo de 70% de vida de uma vez.
 - quando: é passivo e só em você, não protege aliado. Quando sua vida cai abaixo de 70% por dano de herói, aplica dispel forte e te dá 2,5s com todo dano que você causa e recebe zerado, mais 75% de resistência a status; não cura nem devolve mana nesse proc.
 - contra: combos de burst de alvo único (Lina, Lion com itens, Nevermore) que te derrubariam abaixo de 70% de vida de uma vez: a janela de dano zero cobre o resto do combo.
 - fonte: https://api.opendota.com/api/heroes/131/itemPopularity; C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 
 #### Scythe of Vyse (sheepstick)
+- porque: tira do jogo por 2,8s o herói que o time inimigo precisa pra abrir a luta, antes de uma troca decisiva.
 - quando: hex de 2,8s no alvo mais perigoso do time inimigo antes de uma luta decisiva.
 - contra: inicadores ou carries que, sem o disable deles, o time inimigo não consegue abrir a luta.
 - fonte: https://api.opendota.com/api/heroes/131/itemPopularity; C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json

@@ -77,6 +77,7 @@ Night Stalker é Carry/Initiator/Durable/Disabler/Nuker de força, corpo a corpo
 ### Situacionais
 
 #### Harpoon (harpoon)
+- porque: resgata o combo quando o alvo foge do Void de dia, puxando de volta pro alcance de ataque e da Crippling Fear.
 - contra: herói que tenta abrir distância depois de levar o Void (que só dá 50% de lentidão, sem atordoar de dia) em vez de ficar pra trocar.
 - detalhe: 4700 de custo (Echo Sabre + Diadem). Active "Draw Forth" puxa até 35% da distância entre os dois, alcance de 700 contra herói; mantém o Echo Strike (duas batidas, agora com 1s de lentidão).
 - combo: Harpoon puxa, Void atordoa (de noite) e reduz velocidade (de dia), Crippling Fear silencia em área: a sequência tranca quem tentou fugir do combo.
@@ -84,20 +85,23 @@ Night Stalker é Carry/Initiator/Durable/Disabler/Nuker de força, corpo a corpo
 - fonte: items.json
 
 #### Skull Basher (basher)
+- porque: garante o atordoamento físico que falta de dia, prendendo quem escaparia do simples slow do Void.
 - contra: inimigo com mobilidade/dispel que escapa ou limpa o Void de dia, quando ele não atordoa.
 - detalhe: 2875 de custo, 25% de chance corpo a corpo de atordoar 1,2s e causar 100 de dano extra.
 - combo: o stun físico do Basher tapa de dia o buraco que o Void só preenche de noite (mini-stun só em horário noturno, constants_abilities.json).
-- fonte: dota2protracker.com/builds/night-stalker-pos3-1; items.json
+- fonte: dota2protracker.com/builds/night-stalker-pos3-1; items.json; constants_abilities.json
 
 #### Assault Cuirass (assault)
+- porque: a aura de -5 de armadura no inimigo multiplica o dano físico do time todo, compensando a falta de burst do herói.
 - contra: times que fecham com dano físico de auto-ataque sustentado em vez de burst mágico: a armadura e a aura negativa no inimigo pagam mais contra ataque básico repetido.
 - detalhe: 5125 de custo, +30 de velocidade de ataque e +10 de armadura pra você, aura de +5/-5 de armadura em 1200 de raio.
 - fonte: dota2protracker.com/builds/night-stalker-pos3-1; items.json
 
 #### Hand of Midas (hand_of_midas)
+- porque: acelera farm e nível pra chegar na primeira janela de Dark Ascension com vantagem, convertendo folga de lane em power spike.
 - contra: jogos sem contato na offlane (lane sem trade, sem pressão do inimigo): nessas janelas farm e nível valem mais que item de combate imediato.
 - detalhe: 2200 de custo, mata creep neutro ou de lane por 160 de ouro bônus, +35 de velocidade de ataque.
-- fonte: dota2protracker.com/builds/night-stalker-pos3-1; items.json
+- fonte: dota2protracker.com/builds/night-stalker-pos3-1; items.json; constants_abilities.json
 
 ## Pos 2 (mid)
 
@@ -138,19 +142,22 @@ Night Stalker é Carry/Initiator/Durable/Disabler/Nuker de força, corpo a corpo
 ### Situacionais
 
 #### Power Treads (power_treads)
+- porque: troca a mobilidade do Phase por ataque puro quando a lane não exige perseguir nem fugir.
 - contra: jogos sem necessidade de fechar distância (lane fácil, inimigo não fugindo): nessas partidas o Treads dá mais ataque do que o Phase daria de mobilidade.
 - detalhe: 1400 de custo, +25 de velocidade de ataque e +10 no atributo trocado, sem o utility de atravessar unidade.
 - fonte: dota2protracker.com/builds/night-stalker-pos2-1; items.json
 
 #### Soul Ring (soul_ring)
+- porque: converte vida em mana barata pra manter Void e Crippling Fear ativos sem depender de recall.
 - contra: jogos em que o time inimigo obriga recast seguido de Void e Crippling Fear sem tempo de recall pra mana.
 - detalhe: 805 de custo, converte vida em 170 de mana por 10s. Mesma lógica da versão offlane.
 - fonte: dota2protracker.com/builds/night-stalker-pos2-1; items.json
 
 #### Skull Basher (basher)
+- porque: garante o atordoamento físico que falta de dia, tapando o buraco de controle que o Void só cobre à noite.
 - contra: inimigo com mobilidade alta que escapa do slow do Void de dia (sem o mini-stun noturno).
 - detalhe: 2875 de custo, 25% de chance corpo a corpo de atordoar 1,2s. Mesmo papel da versão offlane: tapa o buraco de controle que falta de dia.
-- fonte: dota2protracker.com/builds/night-stalker-pos2-1; items.json
+- fonte: dota2protracker.com/builds/night-stalker-pos2-1; items.json; constants_abilities.json
 
 #### Swift Blink (swift_blink)
 - contra: jogos que passam dos 35-40 min, quando o Blink Dagger comum (recarga de 15s, sem bônus) já não garante reengajar contra time organizado.

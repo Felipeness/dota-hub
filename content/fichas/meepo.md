@@ -78,12 +78,13 @@ Meepo é um carry de Agilidade que se multiplica em até 5 corpos (Divided We St
 - minuto: 25:03 (mediana, 2 de 8 jogos; componente Diffusal Blade aparece sozinho antes, em 2/8, aos 13:15)
 - contra: heróis de ilusão (Naga Siren, Terrorblade, Phantom Lancer, Spectre): a queima de 40 de mana por acerto vira dano direto 1 pra 1 em quem não tem mana pra perder, e ilusões geralmente têm o pool zerado.
 - detalhe: +40 Agilidade e +10 Inteligência cheios por clone, mais a purga (remove buffs do inimigo/debuffs do próprio Meepo) com 3s de raiz no purge.
-- fonte: dota-tier1/data/derivados/compras.parquet (disperser 2/8, mediana 25:03; diffusal_blade 2/8, 13:15); items.json (disperser attrib: mana_burn 40, damage_per_burn 1.0, purge_root_duration 3.0)
+- fonte: dota-tier1/data/derivados/compras.parquet (disperser 2/8, mediana 25:03; diffusal_blade 2/8, 13:15); items.json (disperser attrib: mana_burn 40, damage_per_burn 1.0, purge_root_duration 3.0); constants_abilities.json (meepo_divided_we_stand)
 
 #### Butterfly (butterfly)
 - minuto: 31:20 (mediana, 3 de 8 jogos)
 - contra: carries ou offlaners de ataque físico repetido (ex. Phantom Assassin, Juggernaut, Spectre): 35% de evasão não dilui entre clones (é percentual, não um dos 5 tipos que a Divided We Stand divide), então cada corpo evita 35% dos golpes sozinho.
-- fonte: dota-tier1/data/derivados/compras.parquet (3/8, mediana 31:20); items.json (butterfly attrib: bonus_evasion 35)
+- porque: morte de 1 clone mata todos (Divided We Stand); evasão barata reduz dano recebido em cada corpo sem diluir.
+- fonte: dota-tier1/data/derivados/compras.parquet (3/8, mediana 31:20); items.json (butterfly attrib: bonus_evasion 35); constants_abilities.json (meepo_divided_we_stand: "If any Meepo dies, they all die")
 
 ## Roshan
 

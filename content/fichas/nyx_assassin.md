@@ -81,12 +81,14 @@ Em luta, ele entra primeiro em 57 das 197 teamfights do Tier 1 em que participou
 
 #### Tranquil Boots (`tranquil_boots`)
 - minuto: 10,2
+- porque: mais barato que Arcane e devolve vida rápido numa lane parada, mas quebra ao atacar, então só serve quando sobra mana.
 - detalhe: alternativa ao Arcane Boots quando a lane está mais tranquila e sobra mana; dá 65 de velocidade e 250 de cura em 20s, mas quebra (perde a cura e cai pra +40 de velocidade por 13s) ao atacar ou ser atacado.
 - contra: lanes sem troca de dano constante, onde o regen de vida pesa mais que o de mana.
 - fonte: `items.json` (tranquil_boots); `compras.parquet` (6/30, 10,2 min)
 
 #### Force Staff (`force_staff`)
 - minuto: 35,3
+- porque: abre a distância certa pro combo de Impale antes do inimigo colar no Nyx, ou puxa um aliado pra fora do alcance de kill.
 - detalhe: empurra qualquer unidade (aliada ou inimiga) 600 de distância; não interrompe as ações do alvo nem funciona dentro de Chronosphere, Duel ou Black Hole.
 - contra: melee que precisa ficar colado no Nyx pra acertar o próprio combo, ou pra puxar um aliado fora de uma luta perdida.
 - fonte: `items.json` (force_staff); `compras.parquet` (6/30, 35,3 min)
@@ -99,18 +101,21 @@ Em luta, ele entra primeiro em 57 das 197 teamfights do Tier 1 em que participou
 
 #### Pavise (`pavise`)
 - minuto: 20,1
+- porque: versão barata de proteger o iniciador ou o carry num pick-off, quando o suporte ainda não tem ouro pro Solar Crest.
 - detalhe: versão mais barata do Solar Crest: barreira de 250 de dano físico por 7s num aliado, sem os bônus de atributo.
 - contra: burst físico pontual que o time precisa amortecer antes de uma luta, com menos ouro disponível que o Solar Crest.
 - fonte: `items.json` (pavise); `compras.parquet` (3/30, 20,1 min)
 
 #### Ghost Scepter (`ghost`)
 - minuto: 37,2
+- porque: deixa Nyx imune a ataque básico por 4s pra sobreviver ao burst físico de um carry, mesmo abrindo mão de atacar nesse tempo.
 - detalhe: 4s de imunidade a dano físico, mas sem poder atacar e 30% mais vulnerável a dano mágico nesse tempo; amostra pequena (1 de 30 partidas).
 - contra: carries de ataque básico puro (ex.: Phantom Assassin, Juggernaut) que dependem de dano físico constante pra fechar o kill.
 - fonte: `items.json` (ghost); `compras.parquet` (1/30, 37,2 min)
 
 #### Glimmer Cape (`glimmer_cape`)
 - minuto: 47,0
+- porque: a barreira mágica e a invisibilidade dão folga pra sobreviver a um nuke de abertura ou escapar depois de iniciar a luta.
 - detalhe: depois de 0,5s dá invisibilidade, +20 de velocidade e uma barreira de até 375 de dano mágico por 5s; pode ser lançado em si mesmo ou num aliado, inclusive canalizando outra coisa. Amostra pequena (1 de 30 partidas).
 - contra: nuke mágico de alvo único que tentaria abrir a luta matando o Nyx primeiro.
 - fonte: `items.json` (glimmer_cape); `compras.parquet` (1/30, 47,0 min)
@@ -145,11 +150,13 @@ Em luta, ele entra primeiro em 57 das 197 teamfights do Tier 1 em que participou
 
 #### Blink Dagger (`blink`)
 - minuto: 23,2
+- porque: mesmo raciocínio do pos4, fecha a distância até o Impale; aqui é opcional porque o pos5 tende a ficar junto do time.
 - detalhe: muito menos comum que no pos4 (2 de 6 partidas): o suporte duro costuma ficar perto do time em vez de iniciar sozinho, deixando o blink pro pos4.
 - contra: alvo prioritário fora do alcance de 750 do Impale que precisa ser alcançado rápido.
 - fonte: `items.json` (blink); `compras.parquet` (2/6, 23,2 min)
 
 #### Aghanim's Shard (`aghanims_shard`)
+- porque: mesmo efeito do pos4, estica a invisibilidade da Vendetta pra escapar, farmar runa ou rotacionar sem gastar TP.
 - detalhe: mesmo efeito do pos4 (cooldown menor e passagem livre no início da Vendetta); parte da amostra combinada de 14/36 partidas do herói, sem separação clara por posição com volume suficiente.
 - fonte: dotacoach.gg/heroes/nyx-assassin; liquipedia.net/dota2/7.41b; `compras.parquet`
 

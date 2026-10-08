@@ -75,17 +75,20 @@ Doom é um iniciador e disabler de Força: a ultimate do mesmo nome dispela o al
 ### Situacionais
 
 #### Soul Ring (soul_ring)
+- porque: mana barata sem flask ou recall, pra manter Devour, Scorched Earth e Infernal Blade ligados em lane dura.
 - minuto: 10:33 (mediana, 76 de 145 jogos)
 - contra: jogos sem flask/regen suficiente pra manter Devour, Scorched Earth e Infernal Blade ligados sem secar a mana.
 - detalhe: ativo consome vida pra gerar 170 de mana por 10s; se não usar a mana a tempo ela se perde.
 - fonte: compras.parquet (76/145 = 52%); items.json (soul_ring: mana_gain 170, duration 10)
 
 #### Octarine Core (octarine_core)
+- porque: menos recarga bota a curse de volta mais rápido pra travar o próximo iniciador em jogos longos.
 - minuto: 34:34 (mediana, 31 de 145 jogos)
 - contra: jogos longos (35min+) com vários iniciadores inimigos, quando os 120/130/140s de recarga da ultimate de Doom (e os 35-41s do Scorched Earth) precisam reciclar mais rápido.
 - fonte: compras.parquet (31/145 = 21%); items.json (octarine_core: bonus_cooldown 25%); constants_abilities.json (doom_bringer_doom: cd 140/130/120)
 
 #### Overwhelming Blink (overwhelming_blink)
+- porque: o estouro de dano em área ao redor do blink pune grupos agrupados que o blink comum não alcança.
 - minuto: 40:30 (mediana, 35 de 145 jogos)
 - contra: grupos de alvos frágeis agrupados numa última linha, quando só o blink comum não entrega dano.
 - detalhe: upgrade do Blink (monta de blink + reaver); depois do teleporte, estoura 100 + 50% da força em raio 800, mais 100% do mesmo dano ao longo do tempo, com 50% de lentidão de movimento e ataque por 6s.
@@ -136,22 +139,26 @@ Doom é um iniciador e disabler de Força: a ultimate do mesmo nome dispela o al
 ### Situacionais
 
 #### Soul Ring (soul_ring)
+- porque: mana barata pro 1v1 de farm, sem gastar ouro em flask, mantendo Scorched Earth e Devour ligados.
 - minuto: 8:05 (mediana, 8 de 23 jogos)
 - contra: lane sem regen suficiente pra manter Scorched Earth ligado e ainda farmar com Devour.
 - fonte: compras.parquet (8/23 = 35%); items.json (soul_ring: mana_gain 170, duration 10)
 
 #### Harpoon (harpoon)
+- porque: o puxão do Draw Forth resolve o alcance curto da curse contra quem kita, fechando a distância pro combo.
 - minuto: 29:17 (mediana, 12 de 23 jogos)
 - contra: heróis móveis e de kite que fogem do alcance curto de Doom (400 na curse, 200 no Infernal Blade); o ativo Draw Forth puxa até 35% da distância, ou até distância de corpo a corpo se o lançador for melee (caso de Doom).
 - detalhe: monta de Echo Sabre (65% dos jogos chegam só até aqui, 15/23) + Diadem; a passiva Echo Strike faz o ataque bater 2x com 100% de lentidão por 1s no primeiro golpe.
 - fonte: compras.parquet (12/23 = 52% chegam no item final, mediana 29:17; echo_sabre 15/23 = 65%, mediana 26:57); items.json (harpoon: pull_distance_pct 35, min_distance 100)
 
 #### Assault Cuirass (assault)
+- porque: aura de armadura segura push de creep/estrutura e ainda rouba armadura do time inimigo em luta.
 - minuto: 35:12 (mediana, 6 de 23 jogos)
 - contra: composições de dano físico pesado e exércitos de criatura/estrutura, a aura rouba 5 de armadura do inimigo e dá 5 de armadura + 30 de velocidade de ataque pro time, raio 1200.
 - fonte: compras.parquet (6/23 = 26%); items.json (assault: aura_attack_speed 30, aura_positive_armor 5, aura_negative_armor -5, aura_radius 1200)
 
 #### Overwhelming Blink (overwhelming_blink)
+- porque: mesmo caso do offlane, o estouro de área ao redor do blink pune grupos agrupados que o comum não alcança.
 - minuto: 40:50 (mediana, 6 de 23 jogos)
 - contra: mesmo caso do offlane, grupos agrupados de alvos frágeis quando o blink comum não entrega dano suficiente pra fechar a luta.
 - fonte: compras.parquet (6/23 = 26%); items.json (overwhelming_blink: damage_base 100, radius 800)

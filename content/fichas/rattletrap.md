@@ -82,34 +82,39 @@ Clockwerk é um iniciador e disabler de Força (papéis Initiator/Disabler/Durab
 - minuto: 26:57 (mediana, 40 de 134 jogos)
 - contra: alvo que precisa ficar isolado no ar até o time chegar, ou que está com lentidão/raiz forte o bastante pra não escapar quando o ciclone acabar perto da Power Cogs.
 - detalhe: o ciclone lançado em si mesmo passa por imunidade a feitiço; dá pra usar em si pra reposicionar no ar e cair exatamente quando a Power Cogs ainda está ativa.
-- fonte: items.json (cyclone_duration 2.5, bonus_movement_speed 20); compras.parquet (40/134 = 29,9%, mediana 26:57)
+- fonte: items.json (cyclone_duration 2.5, bonus_movement_speed 20); constants_abilities.json (rattletrap_power_cogs); compras.parquet (40/134 = 29,9%, mediana 26:57)
 
 #### Ghost Scepter (ghost)
 - minuto: 31:29 (mediana, 27 de 134 jogos)
+- porque: fica imune a ataque físico bem na hora de se expor pra abrir o Hookshot, sem perder a brecha de iniciar.
 - contra: carries de ataque físico que focam ele assim que aparece pra iniciar (ex. um Phantom Assassin ou Spectre já fedido).
 - detalhe: vira etéreo por 4s, imune a ataque físico mas levando 30% mais dano mágico nesse tempo; cancela se ele ficar imune a debuff por outro efeito.
 - fonte: items.json (extra_spell_damage_percent -30, duration 4.0); compras.parquet (27/134 = 20,1%, mediana 31:29)
 
 #### Pavise (pavise)
 - minuto: 20:42 (mediana, 15 de 134 jogos)
+- porque: segura o burst físico que mataria ele ou o aliado iniciador antes do combo terminar de sair, por metade do custo do Solar Crest.
 - contra: burst de dano físico de alvo único que mataria ele ou o aliado iniciador antes do combo terminar de sair (a barreira do Pavise só bloqueia dano físico, não mágico).
 - detalhe: absorve 250 de dano físico por 7s em si ou num aliado; compartilha recarga com Solar Crest, então são escolhas alternativas no mesmo cooldown, não dois buffs ao mesmo tempo.
-- fonte: items.json (ability description "physical damage barrier that absorbs 250 damage"; absorb_amount 250, duration 7; nota "Shares cooldown with Pavise" no Solar Crest); compras.parquet (15/134 = 11,2%, mediana 20:42)
+- fonte: items.json (ability description "physical damage barrier that absorbs 250 damage"; absorb_amount 250, duration 7; cost 1350 vs 2575 do Solar Crest; nota "Shares cooldown with Pavise" no Solar Crest); compras.parquet (15/134 = 11,2%, mediana 20:42)
 
 #### Solar Crest (solar_crest)
 - minuto: 26:05 (mediana, 12 de 134 jogos)
+- porque: dá armadura e velocidade pro carry estourar quem ficou preso na Power Cogs mais rápido, ou reduz armadura de quem vai levar o Hookshot.
 - contra: precisa de mais armadura e velocidade de ataque num aliado carry pra limpar quem ficou preso na Power Cogs, ou de reduzir a armadura de quem vai levar o Hookshot.
 - detalhe: dá 5 de armadura e 60 de velocidade de ataque por 7s num aliado (ou reduz armadura e acerto de um inimigo, se usado nele); compartilha recarga com Pavise.
-- fonte: items.json (target_armor 5, target_attack_speed 60, duration 7); dotacoach.gg/en/items/solar-crest (cast em inimigo reduz armadura e acerto, patch 7.41e); compras.parquet (12/134 = 9,0%, mediana 26:05)
+- fonte: items.json (target_armor 5, target_attack_speed 60, duration 7); constants_abilities.json (rattletrap_power_cogs); dotacoach.gg/en/items/solar-crest (cast em inimigo reduz armadura e acerto, patch 7.41e); compras.parquet (12/134 = 9,0%, mediana 26:05)
 
 #### Glimmer Cape (glimmer_cape)
 - minuto: 30:46 (mediana, 13 de 134 jogos)
+- porque: esconde e bloqueia dano mágico bem no momento de se posicionar pra abrir o Hookshot, quando ele fica mais exposto.
 - contra: foco de dano mágico ou projétil bem na hora em que ele se posiciona pra abrir o Hookshot.
 - detalhe: invisibilidade com 0,5s de delay pra ativar e barreira de 375 de dano mágico por 5s; dá pra lançar mesmo durante uma canalização (channeling) de outra habilidade.
 - fonte: items.json (barrier_block 375, duration 5, initial_fade_delay 0.5); compras.parquet (13/134 = 9,7%, mediana 30:46)
 
 #### Aghanim's Scepter (ultimate_scepter)
 - minuto: 55:46 (mediana, 9 de 134 jogos)
+- porque: aumenta Power Cogs, Hookshot, Battery Assault e Rocket Flare de uma vez, pra lutas de 5 longas onde só uma habilidade isolada não resolve.
 - contra: luta de 5 prolongada onde todas as áreas do kit precisam aumentar de uma vez, não só uma habilidade isolada.
 - detalhe: libera Overclocking por 18s: Battery Assault e Power Cogs vão pra raio 330, Hookshot ganha 50% de raio e duração extra de stun, e a Rocket Flare dispara 2 rockets extras pros lados; termina com 3s de lentidão própria "a passo de tartaruga" no movimento e ataque.
 - fonte: dotacoach.gg/en/heroes/clockwerk (detalhamento do Overclocking); constants_abilities.json (rattletrap_overclocking: buff_duration 18, debuff_duration 3, cogs_radius 330, hookshot_duration_bonus_pct 50%, rocket_flare_rockets 2); compras.parquet (9/134 = 6,7%, mediana 55:46)
@@ -161,39 +166,44 @@ Clockwerk é um iniciador e disabler de Força (papéis Initiator/Disabler/Durab
 
 #### Ghost Scepter (ghost)
 - minuto: 36:20 (mediana, 20 de 65 jogos)
+- porque: fica imune a físico logo depois de abrir o Hookshot, pra aguentar o foco do carry em cima dele no meio da luta.
 - contra: carry de ataque físico que vai focar ele no meio da luta depois do Hookshot sair.
 - detalhe: etéreo por 4s, imune a físico mas com 30% mais dano mágico recebido nesse tempo.
 - fonte: items.json (extra_spell_damage_percent -30, duration 4.0); compras.parquet (20/65 = 30,8%, mediana 36:20)
 
 #### Blink Dagger (blink)
 - minuto: 28:21 (mediana, 18 de 65 jogos)
+- porque: entra na luta rápido sem precisar abrir o combo sozinho, pra quando o time já fecha com o que tem.
 - contra: jogo em que o time já consegue fechar a luta sozinho e só falta ele se posicionar rápido pra não ficar de fora do combo.
 - detalhe: 1200 de distância, 3s de bloqueio após dano de herói/Roshan; chega mais tarde e com menos frequência que no pos 4 porque o ouro de suporte duro prioriza ward e Shard primeiro.
 - fonte: compras.parquet (18/65 = 27,7%, mediana 28:21); items.json (mecânica)
 
 #### Glimmer Cape (glimmer_cape)
 - minuto: 31:54 (mediana, 14 de 65 jogos)
+- porque: esconde e bloqueia dano mágico bem no momento de se posicionar pra abrir o Hookshot, quando ele fica mais exposto.
 - contra: foco de dano mágico ou projétil na hora de se posicionar pra abrir o Hookshot.
 - detalhe: invisibilidade com 0,5s de delay e barreira de 375 de dano mágico por 5s.
 - fonte: items.json (barrier_block 375, duration 5); compras.parquet (14/65 = 21,5%, mediana 31:54)
 
 #### Pavise (pavise)
 - minuto: 20:45 (mediana, 14 de 65 jogos)
+- porque: segura o burst físico que mataria ele ou o aliado iniciador antes do combo sair, por metade do custo do Solar Crest.
 - contra: burst de dano físico de alvo único que mataria ele ou o aliado iniciador antes do combo sair (a barreira do Pavise só bloqueia dano físico, não mágico).
 - detalhe: absorve 250 de dano físico por 7s; compartilha recarga com Solar Crest.
-- fonte: items.json (ability description "physical damage barrier that absorbs 250 damage"; absorb_amount 250, duration 7); compras.parquet (14/65 = 21,5%, mediana 20:45)
+- fonte: items.json (ability description "physical damage barrier that absorbs 250 damage"; absorb_amount 250, duration 7; cost 1350 vs 2575 do Solar Crest); compras.parquet (14/65 = 21,5%, mediana 20:45)
 
 #### Solar Crest (solar_crest)
 - minuto: 25:42 (mediana, 13 de 65 jogos)
+- porque: dá armadura e velocidade pro carry estourar quem ficou preso na Power Cogs mais rápido, ou reduz armadura de quem vai levar o Hookshot.
 - contra: precisa de armadura/velocidade extra pro carry limpar quem ficou preso na Power Cogs, ou reduzir armadura de quem vai levar o Hookshot.
 - detalhe: 5 de armadura e 60 de velocidade de ataque por 7s num aliado (ou reduz armadura e acerto de um inimigo, se usado nele); compartilha recarga com Pavise.
-- fonte: items.json (target_armor 5, target_attack_speed 60); dotacoach.gg/en/items/solar-crest (cast em inimigo reduz armadura e acerto, patch 7.41e); compras.parquet (13/65 = 20,0%, mediana 25:42)
+- fonte: items.json (target_armor 5, target_attack_speed 60); constants_abilities.json (rattletrap_power_cogs); dotacoach.gg/en/items/solar-crest (cast em inimigo reduz armadura e acerto, patch 7.41e); compras.parquet (13/65 = 20,0%, mediana 25:42)
 
 #### Eul's Scepter of Divinity (cyclone)
 - minuto: 29:24 (mediana, 12 de 65 jogos)
 - contra: alvo que precisa ficar isolado no ar até o time chegar ou até a Power Cogs ainda estar de pé quando ele descer.
 - detalhe: ciclone em si passa por imunidade a feitiço; chega mais tarde e menos vezes que no pos 4 pelo ouro mais curto.
-- fonte: items.json (cyclone_duration 2.5); compras.parquet (12/65 = 18,5%, mediana 29:24)
+- fonte: items.json (cyclone_duration 2.5); constants_abilities.json (rattletrap_power_cogs); compras.parquet (12/65 = 18,5%, mediana 29:24)
 
 ## Roshan
 

@@ -77,18 +77,21 @@ Largo é um str melee de controle: puxa e dispela com Catchy Lick, trava área c
 
 #### Lotus Orb (lotus_orb)
 - minuto: 27:24 (mediana, 39 de 139 jogos, 28,1%)
+- porque: Largo puxa o aliado pra luta com Catchy Lick e vira alvo prioritário de disable; a Echo Shell devolve o feitiço que travaria essa iniciação.
 - contra: feitiços de alvo único fortes (hex, disables direcionados): o ativo (Echo Shell) devolve o próximo feitiço de alvo único lançado contra Largo pro próprio lançador, embora Largo ainda sofra o efeito original.
-- fonte: compras.parquet (39/139 = 28,1%); items.json (lotus_orb: active_duration 5, cd 15)
+- fonte: compras.parquet (39/139 = 28,1%); items.json (lotus_orb: active_duration 5, cd 15); constants_abilities.json (largo_catchy_lick abilitycastrange 700)
 
 #### Shiva's Guard (shivas_guard)
 - minuto: 38:22 (mediana, 27 de 139 jogos, 19,4%)
+- porque: Largo é melee de 150 de alcance; a Freezing Aura reduz o DPS de carries rápidos e o Arctic Blast em área acerta ilusão/creep de uma vez.
 - contra: carries de ataque rápido e grupos de ilusão/creep: a aura reduz 45 de velocidade de ataque em raio 1200 e o estouro de 260 de dano em área (raio 825) limpa várias unidades de uma vez.
-- fonte: compras.parquet (27/139 = 19,4%); items.json (shivas_guard: aura_attack_speed -45, blast_damage 260, aura_radius 1200)
+- fonte: compras.parquet (27/139 = 19,4%); items.json (shivas_guard: aura_attack_speed -45, blast_damage 260, aura_radius 1200); heroStats.json (attack_range 150)
 
 #### Linken's Sphere (sphere)
 - minuto: 40:11 (mediana, 28 de 139 jogos, 20,1%)
+- porque: garante que a iniciação do Catchy Lick não seja cancelada por um disable isolado mirado em Largo antes de ele puxar o aliado pra luta.
 - contra: nuke ou disable de alvo único isolado e forte: bloqueia o próximo feitiço de alvo único a cada 14s.
-- fonte: compras.parquet (28/139 = 20,1%); items.json (sphere: block_cooldown 14.0)
+- fonte: compras.parquet (28/139 = 20,1%); items.json (sphere: block_cooldown 14.0); constants_abilities.json (largo_catchy_lick abilitycastrange 700)
 
 ## Pos 4 (suporte de roaming)
 
@@ -124,16 +127,18 @@ Largo é um str melee de controle: puxa e dispela com Catchy Lick, trava área c
 ### Situacionais
 
 #### Lotus Orb (lotus_orb)
+- porque: no roaming, Largo é o primeiro alvo de disable ao puxar o aliado pro gank com Catchy Lick; a Echo Shell devolve esse feitiço pro inimigo.
 - contra: feitiços de alvo único fortes: mesmo mecanismo da versão pos 3 (devolve o próximo feitiço de alvo único pro lançador).
-- fonte: dota2protracker.com/builds/largo-pos4-1; items.json (lotus_orb)
+- fonte: dota2protracker.com/builds/largo-pos4-1; items.json (lotus_orb); constants_abilities.json (largo_catchy_lick abilitycastrange 700)
 
 #### Holy Locket (holy_locket)
 - contra: jogos de troca de cura constante: amplifica em 15% toda cura que o próprio Largo aplica (passiva Holy Blessing); a ativa Energy Charge ainda dá +10% de cura recebida por 4s a um aliado e devolve vida/mana por carga, ganhando carga a cada 10s ou sempre que um inimigo visível em 1200 de raio usa uma habilidade.
-- fonte: dota2protracker.com/builds/largo-pos4-1; items.json (holy_locket: heal_increase_passive 15, incoming_heal_increase_active 10, active_buff_duration 4, charge_gain_timer 10, charge_radius 1200)
+- fonte: dota2protracker.com/builds/largo-pos4-1; items.json (holy_locket: heal_increase_passive 15, incoming_heal_increase_active 10, active_buff_duration 4, charge_gain_timer 10, charge_radius 1200); constants_abilities.json (largo_catchy_lick dispel_hp_regen 4/7/10/13, buff_duration 8)
 
 #### Force Staff (force_staff)
+- porque: compensa o alcance curto de Largo (150) pra fechar distância até o Catchy Lick ou puxar um aliado pra fora de perigo no meio do gank.
 - contra: necessidade de reposicionamento rápido: empurra um aliado 600 unidades pra fora de perigo ou o próprio Largo 600 unidades pra dentro do raio 700 do Catchy Lick.
-- fonte: dota2protracker.com/builds/largo-pos4-1; items.json (force_staff: push_length 600)
+- fonte: dota2protracker.com/builds/largo-pos4-1; items.json (force_staff: push_length 600); heroStats.json (attack_range 150)
 
 ## Pos 5 (suporte duro)
 

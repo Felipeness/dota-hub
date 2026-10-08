@@ -90,8 +90,9 @@ Storm Spirit é um mid de mobilidade e iniciação: usa Ball Lightning pra farma
 ### Situacionais
 #### Null Talisman (null_talisman)
 - minuto: ~4
+- porque: dá inteligência e regeneração de mana baratas, enchendo o pool pro combo sem gastar em Bottle ou Soul Ring.
 - contra: lane tranquila sem harass pesado, quando dá pra abrir mão de Bottle/Soul Ring e chegar mais rápido no nível 6 com mana sobrando.
-- fonte: OpenDota itemPopularity (19 em early_game_items); dota2protracker (rota citada em ~2,8% a 3,9% dos jogos)
+- fonte: items.json (attrib bonus_intellect 5, bonus_mana_regen 1.0); OpenDota itemPopularity (19 em early_game_items); dota2protracker (rota citada em ~2,8% a 3,9% dos jogos)
 
 #### Linken's Sphere (sphere)
 - porque: bloqueia o primeiro feitiço de alvo único que vier em cima do Storm a cada 14 segundos.
