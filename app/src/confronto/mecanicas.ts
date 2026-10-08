@@ -1,8 +1,9 @@
 // Motor de regras do confronto: mecânica do inimigo -> por que importa -> itens e habilidades suas que respondem.
 // Tudo sai do texto e dos campos das habilidades e itens do OpenDota; nada de número digitado à mão.
-import { ehPassiva, temDano, temValor, type Habilidade, type Heroi, type Item } from "./modelo";
+import { ehPassiva, temDano, temValor, type Habilidade, type Heroi, type Item, type MecanicaId } from "./modelo";
+import { recursosContra, type Recurso } from "./respostas";
 
-export type MecanicaId = "invisibilidade" | "silencio" | "controle" | "magico" | "puro" | "ilusoes" | "cura" | "evasao" | "fuga" | "passivas";
+export type { MecanicaId };
 
 /** De onde saiu a afirmação: um atributo da habilidade ou a frase da descrição. */
 export type Evidencia = Readonly<{ habilidade: string; trecho: string }>;
@@ -17,6 +18,8 @@ export type Achado = Readonly<{
   observacoes: readonly string[];
   itens: readonly ItemIndicado[];
   trunfos: readonly Evidencia[];
+  /** Desvios no tempo certo e Shard/Scepter seus que respondem a esta mecânica. */
+  recursos: readonly Recurso[];
 }>;
 
 /** `exceto` descarta a frase que fala do contrário (revelar invisível, por exemplo). */
@@ -209,6 +212,7 @@ export function analisarMecanicas(meu: Heroi, inimigo: Heroi, itens: ReadonlyMap
       observacoes: observacoes(achadas),
       itens: regra.respostas.flatMap((r) => indicar(r, { achadas, meu, itens }) ?? []),
       trunfos: provas(meu.habilidades, regra.trunfo).map((e) => ({ ...e.prova, trecho: `${regra.trunfoMotivo}. ${e.prova.trecho}` })),
+      recursos: recursosContra({ mecanica: regra.id, achadas, meu, itens }),
     }];
   });
 }
