@@ -19,7 +19,6 @@
 .condicoes dd { margin: 0; font-family: var(--fonte-num); font-size: 14px; }
 .o-que-muda { border-left: 3px solid var(--cor-destaque); padding-left: var(--espaco-3); }
 .o-que-muda h5 { margin: 0 0 var(--espaco-1); font-family: var(--fonte-display); font-size: 13px; letter-spacing: .14em; color: var(--cor-destaque); text-transform: uppercase; }
-.o-que-muda-vazio { color: var(--cor-texto-3); font-size: 13px; }
 .crescimento-tabela { width: 100%; border-collapse: collapse; font-family: var(--fonte-num); font-size: 13px; }
 .crescimento-tabela caption { text-align: left; font-family: var(--fonte-display); letter-spacing: .14em; color: var(--cor-texto-3); padding-bottom: var(--espaco-2); }
 .crescimento-tabela th, .crescimento-tabela td { padding: var(--espaco-1) var(--espaco-2); border-bottom: 1px solid var(--cor-linha); text-align: right; }

@@ -31,7 +31,7 @@ it("mostra modelo, números, habilidades com condições e o que muda", () => {
   expect(within(porrada).getByText("(Slam)")).toBeInTheDocument();
   expect(within(porrada).getByText("10 s")).toBeInTheDocument();
   expect(within(porrada).getByRole("presentation")).toHaveAttribute("src", "/data/icones/roshan_slam.webp");
-  expect(within(porrada).getByText("O que isso muda para você: ainda não escrito.")).toBeInTheDocument();
+  expect(within(porrada).queryByText(/O que isso muda para você/)).not.toBeInTheDocument();
   const bloq = screen.getByRole("listitem", { name: "Bloqueio de Magias" });
   expect(within(bloq).getByText("texto em inglês")).toBeInTheDocument();
   expect(within(bloq).getByText("Gaste uma magia barata antes.")).toBeInTheDocument();
