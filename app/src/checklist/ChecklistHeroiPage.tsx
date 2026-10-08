@@ -26,7 +26,15 @@ function ChecklistLinha({ ok, titulo, porque, onAlternar }: ItemDepois & Partial
       <details>
         <summary>
           <span className="checklist-marca" aria-hidden="true">{simbolo}</span> {titulo}
-          {onAlternar && <button type="button" className="checklist-feito" onClick={onAlternar} aria-pressed={ok === true}>Feito</button>}
+          {onAlternar && (
+            // Botão mora dentro do <summary> pra ficar na mesma linha; sem isso o clique também abre/fecha o <details>.
+            <button
+              type="button" className="checklist-feito" aria-pressed={ok === true}
+              onClick={(e) => { e.preventDefault(); e.stopPropagation(); onAlternar(); }}
+            >
+              Feito
+            </button>
+          )}
         </summary>
         <p>{porque}</p>
       </details>
