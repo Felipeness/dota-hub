@@ -86,11 +86,16 @@ def _item(titulo: str, corpo: str) -> dict:
     slug, nome = _slug_e_nome(titulo)
     campos = _campos(titulo, corpo, CAMPOS_DO_ITEM)
     # Nem todo bloco tem porquê: há situacional só com "contra" e item de amostra pequena só com minuto e fonte.
-    c = {k: sem_caminho_local(v) for k, v in campos.items()}
+    c = {k: _texto_simples(v) for k, v in campos.items()}
     return {"item": slug, "nome": nome, "minuto": c.get("minuto"), "quando": c.get("quando"), "porque": c.get("porque"),
             "detalhe": " ".join(filter(None, (c.get("detalhe"), c.get("nota")))) or None,
             "contra": c.get("contra"), "combo": c.get("combo"),
             "fontes": _fontes(campos.get("fonte", ""))}
+
+
+def _texto_simples(texto: str) -> str:
+    """Campo mostrado como texto puro no site: sem caminho local e sem a crase de código do markdown."""
+    return sem_caminho_local(texto).replace("`", "")
 
 
 def _paragrafos_soltos(texto: str) -> tuple[str, list[str]]:
@@ -112,7 +117,7 @@ def _subsecao(corpo: str) -> tuple[str | None, list[dict]]:
 
 
 def _juntar(paragrafos: list[str | None]) -> str | None:
-    return sem_caminho_local("\n\n".join(filter(None, paragrafos))) or None
+    return _texto_simples("\n\n".join(filter(None, paragrafos))) or None
 
 
 def _nome_do_item(palavra: str) -> str:
@@ -121,9 +126,9 @@ def _nome_do_item(palavra: str) -> str:
 
 def itens_iniciais(texto: str) -> dict:
     """Lista de abertura vira ícones; quando a linha tem mais que a lista, o texto inteiro fica de nota com o nome dos itens."""
-    texto = sem_caminho_local(texto)
+    texto = _texto_simples(texto)
     nota = None if LISTA_DE_SLUGS.match(texto) else PALAVRA.sub(lambda m: _nome_do_item(m[0]), texto)
-    return {"itens": _lista_inicial(texto), "nota": nota}
+    return {"itens": [{"item": s, "nome": _nome_do_item(s)} for s in _lista_inicial(texto)], "nota": nota}
 
 
 def _lista_inicial(texto: str) -> list[str]:
@@ -144,7 +149,7 @@ def _posicao(titulo: str, corpo: str) -> dict:
     if sobra := set(subsecoes) - {"Build", "Situacionais"}:
         raise ValueError(f"{titulo}: subseção desconhecida {sorted(sobra)}")
     campos = _campos(titulo, cabeca, CAMPOS_DA_POSICAO)
-    c = {k: sem_caminho_local(v) for k, v in campos.items()}
+    c = {k: _texto_simples(v) for k, v in campos.items()}
     introducao_build, build = _subsecao(subsecoes.get("Build", ""))
     nota_build = _juntar([c.get("nota"), introducao_build])
     if not build and nota_build is None:
@@ -195,7 +200,7 @@ def itens(fichas: list[dict]) -> set[str]:
     """Slugs com ícone na ficha: build, situacionais e itens iniciais."""
     return {slug for f in fichas for p in f["posicoes"]
             for slug in (*(i["item"] for i in (*p["build"], *p["situacionais"]) if i["item"]),
-                         *(p["itens_iniciais"]["itens"] if p["itens_iniciais"] else ()))}
+                         *(i["item"] for i in (p["itens_iniciais"] or {}).get("itens", ())))}
 
 
 def catalogo(guias: list[dict], fichas: list[dict]) -> list[dict]:

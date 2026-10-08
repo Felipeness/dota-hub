@@ -43,7 +43,7 @@ Axe é um iniciador de Força.
 
 #### Boots of Speed / Arcane Boots (`arcane_boots`)
 - minute: 8
-- porque: mana pro Call.
+- porque: mana pro `Call`.
 
 #### Blink Dagger
 - porque: fecha o alcance curto.
@@ -109,8 +109,9 @@ def test_titulo_do_bloco_aceita_crase_nome_sem_slug_e_passiva(axe, indice, item,
     assert (bloco["item"], bloco["nome"]) == (item, nome)
 
 
-def test_minute_vale_como_minuto(axe):
-    assert axe["posicoes"][0]["build"][1]["minuto"] == "8"
+def test_minute_vale_como_minuto_e_a_crase_some_do_texto(axe):
+    boots = axe["posicoes"][0]["build"][1]
+    assert (boots["minuto"], boots["porque"]) == ("8", "mana pro Call.")
 
 
 def test_paragrafo_solto_vira_nota_da_subsecao(axe):
@@ -125,7 +126,9 @@ def test_situacional_aceita_slug_duplo_e_nota_no_titulo(axe):
 
 def test_itens_iniciais_viram_icones_e_o_comentario_fica_na_nota(axe):
     pos3 = axe["posicoes"][0]
-    assert pos3["itens_iniciais"] == {"itens": ["tango", "circlet", "gauntlets"], "nota": "Tango, Circlet, Gauntlets of Strength (pra 2x Bracer)"}
+    assert pos3["itens_iniciais"] == {
+        "itens": [{"item": "tango", "nome": "Tango"}, {"item": "circlet", "nome": "Circlet"}, {"item": "gauntlets", "nome": "Gauntlets of Strength"}],
+        "nota": "Tango, Circlet, Gauntlets of Strength (pra 2x Bracer)"}
     assert pos3["fontes"] == ["items.json do OpenDota (patch 7.41)"]
 
 
@@ -136,7 +139,7 @@ def test_itens_iniciais_viram_icones_e_o_comentario_fica_na_nota(axe):
 ])
 def test_so_a_lista_que_abre_a_linha_vira_icone(linha, itens, tem_nota):
     resultado = fichas.itens_iniciais(linha)
-    assert resultado["itens"] == itens and (resultado["nota"] is not None) == tem_nota
+    assert [i["item"] for i in resultado["itens"]] == itens and (resultado["nota"] is not None) == tem_nota
 
 
 def test_posicao_sem_build_usa_a_nota(axe):
@@ -157,7 +160,7 @@ def test_ficha_passa_no_schema(axe):
 
 @pytest.mark.parametrize(("velho", "novo", "erro"), [
     ("posicoes: [3, 1]", "posicoes: [3]", "posicoes"),
-    ("- porque: mana pro Call.", "porque: mana pro Call.", "fora do formato"),
+    ("- porque: mana pro `Call`.", "porque: mana pro Call.", "fora do formato"),
     ("#### Blink Dagger\n", "#### Adaga Mágica\n", "sem slug"),
     ("(blade_mail)", "(blade_mal)", "fora do items.json"),
     ("- minute: 8", "- minute: 8\n- minuto: 9", "repetido"),

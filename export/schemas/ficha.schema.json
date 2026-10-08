@@ -14,7 +14,8 @@
       "properties": {"posicao": {"type": "integer", "minimum": 1, "maximum": 5}, "funcao": {"type": "string", "minLength": 1},
         "quando_pegar": {"$ref": "#/$defs/texto_ou_nulo"},
         "itens_iniciais": {"type": ["object", "null"], "required": ["itens", "nota"],
-          "properties": {"itens": {"type": "array", "items": {"type": "string", "pattern": "^[a-z0-9_]+$"}}, "nota": {"$ref": "#/$defs/texto_ou_nulo"}}},
+          "properties": {"itens": {"type": "array", "items": {"type": "object", "required": ["item", "nome"],
+            "properties": {"item": {"type": "string", "pattern": "^[a-z0-9_]+$"}, "nome": {"type": "string"}}}}, "nota": {"$ref": "#/$defs/texto_ou_nulo"}}},
         "fontes": {"$ref": "#/$defs/textos"},
         "nota_build": {"$ref": "#/$defs/texto_ou_nulo"}, "build": {"type": "array", "items": {"$ref": "#/$defs/item"}},
         "nota_situacionais": {"$ref": "#/$defs/texto_ou_nulo"}, "situacionais": {"type": "array", "items": {"$ref": "#/$defs/item"}}}}
