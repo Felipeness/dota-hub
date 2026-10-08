@@ -8,7 +8,6 @@ fontes:
 - content/porque_itens/*.md (campo contra)
 sinonimos:
 - resolve contra
-- contra
 - counter de item
 ---
 ## Básico

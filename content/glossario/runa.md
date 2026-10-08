@@ -20,7 +20,6 @@ sinonimos:
 - runa bounty
 - runa de sabedoria
 links:
-- mid
 - farm
 ---
 ## Básico

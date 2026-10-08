@@ -8,7 +8,6 @@ fontes:
 - dota-tier1/work/sintese/definicoes.md (seção 0, convenções gerais: janelas)
 sinonimos:
 - janela
-- min
 - 0-5
 - 30+
 ---

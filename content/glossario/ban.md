@@ -8,7 +8,6 @@ fontes:
 - https://dota2.fandom.com/wiki/Game_modes#Captains_Mode
 - app/src/live/partida/detalhe.ts (draftDaPartida)
 sinonimos:
-- pick
 - escolha
 - bloqueio
 links:
