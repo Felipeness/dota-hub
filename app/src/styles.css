@@ -533,11 +533,12 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
   .abas {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
     height: var(--altura-barra-celular); gap: 0;
-    display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr);
+    display: grid; grid-auto-flow: column; grid-auto-columns: minmax(72px, 1fr);
+    overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none;
     background: var(--cor-superficie); border-top: 1px solid var(--cor-linha);
   }
-  /* 7 abas em ~360px não cabem numa linha: "Jogadores"/"Glossário" ficam maiores que a célula do grid. */
-  .abas a { justify-content: center; text-align: center; border-radius: 0; font-size: 11px; line-height: 1.2; padding: 2px; white-space: normal; }
+  /* 9 abas não cabem em ~390px: cada aba tem largura mínima legível e a barra rola de lado. */
+  .abas a { justify-content: center; text-align: center; border-radius: 0; font-size: 12px; line-height: 1.2; padding: 2px 4px; white-space: nowrap; }
   .abas a.active { background: none; color: var(--cor-destaque); }
 
   .shell:has(.pagina-mapa) { padding-bottom: 0; height: calc(100dvh - var(--altura-barra-celular)); }
