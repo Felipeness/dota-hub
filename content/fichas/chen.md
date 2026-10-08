@@ -59,8 +59,7 @@ Chen (OpenDota: roles Support, Pusher) é um suporte que vive de buffar e curar,
 #### Aghanim's Scepter (ultimate_scepter)
 - porque: dá +10 em todos os atributos, +175 de vida e +175 de mana, o que segura Chen vivo no meio da luta e sustenta o custo de mana dos casts.
 - detalhe: item mais comprado do late depois do empate Pipe/Guardian Greaves (20 jogos). A Scepter também transforma Hand of God numa habilidade canalizável por até 6s, dando imunidade a debuff (e resistência mágica em área) pros aliados perto de Chen enquanto ele canaliza; os valores exatos de duração e resistência variam entre fontes de patches diferentes, então não entram aqui como número fixo.
-- fonte do efeito da Scepter: dotacoach.gg (build de Chen, patch 7.41f)
-- fonte: items.json (ultimate_scepter); itemPopularity hero 66 late: 20/jogos
+- fonte: items.json (ultimate_scepter); itemPopularity hero 66 late: 20/jogos; dotacoach.gg (efeito da Scepter, build de Chen, patch 7.41f)
 
 ### Situacionais
 #### Pavise (pavise)

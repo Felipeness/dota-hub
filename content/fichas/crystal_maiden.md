@@ -123,7 +123,7 @@ Crystal Maiden é suporte duro de int, sem mobilidade própria e com a vida mais
 - contra: heróis de dano físico alto e burst rápido que a matariam antes de ela conseguir reagir de outra forma.
 - fonte: items.json (cyclone)
 
-#### Black King Bar (situacional antes do core, contra disable pesado)
+#### Black King Bar (black_king_bar, situacional antes do core, contra disable pesado)
 - porque: com 2+ fontes de disable de alvo único no draft inimigo, comprar BKB antes do resto evita que ela seja travada sem lançar nada.
 - detalhe: mesma mecânica do item core, só muda o momento da compra conforme o draft inimigo.
 - contra: drafts com disable em dobro focado em suporte duro.

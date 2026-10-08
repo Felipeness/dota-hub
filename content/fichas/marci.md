@@ -145,9 +145,8 @@ Na prática ela não é carry nem mid no competitivo atual: nos 11 picks dela em
 - fonte: items.json; api.opendota.com/api/heroes/136/itemPopularity (8 no late game)
 
 #### Skull Basher (basher) → Abyssal Blade (abyssal_blade)
-- contra: alvo que depende de fugir depois do stun do Rebound (iniciador ou carry mobile).
+- contra: alvo que depende de fugir depois do stun do Rebound (iniciador ou carry mobile). Heróis que não recebem o bash: Spirit Breaker, Faceless Void, Slardar e Kez (modo Sai).
 - detalhe: Basher +30 de dano e +10 de força; Abyssal soma +35 de dano, +26 de força e +30% de resistência a slow.
-- contra (heróis que não recebem o bash): Spirit Breaker, Faceless Void, Slardar e Kez (modo Sai).
 - fonte: items.json; api.opendota.com/api/heroes/136/itemPopularity (basher em 26 e abyssal_blade em 13 dos inventários de late game)
 
 #### Vladmir's Offering (vladmir)

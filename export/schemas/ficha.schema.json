@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "textos": {"type": "array", "items": {"type": "string"}},
+    "texto_ou_nulo": {"type": ["string", "null"], "minLength": 1},
+    "item": {"type": "object", "additionalProperties": false,
+      "required": ["item", "nome", "minuto", "quando", "porque", "detalhe", "contra", "combo", "fontes"],
+      "properties": {"item": {"type": ["string", "null"], "pattern": "^[a-z0-9_]+$"}, "nome": {"type": "string", "minLength": 1},
+        "minuto": {"$ref": "#/$defs/texto_ou_nulo"}, "quando": {"$ref": "#/$defs/texto_ou_nulo"},
+        "porque": {"$ref": "#/$defs/texto_ou_nulo"}, "detalhe": {"$ref": "#/$defs/texto_ou_nulo"},
+        "contra": {"$ref": "#/$defs/texto_ou_nulo"}, "combo": {"$ref": "#/$defs/texto_ou_nulo"}, "fontes": {"$ref": "#/$defs/textos"}}},
+    "posicao": {"type": "object", "additionalProperties": false,
+      "required": ["posicao", "funcao", "quando_pegar", "itens_iniciais", "fontes", "nota_build", "build", "nota_situacionais", "situacionais"],
+      "properties": {"posicao": {"type": "integer", "minimum": 1, "maximum": 5}, "funcao": {"type": "string", "minLength": 1},
+        "quando_pegar": {"$ref": "#/$defs/texto_ou_nulo"},
+        "itens_iniciais": {"type": ["object", "null"], "required": ["itens", "nota"],
+          "properties": {"itens": {"type": "array", "items": {"type": "string", "pattern": "^[a-z0-9_]+$"}}, "nota": {"$ref": "#/$defs/texto_ou_nulo"}}},
+        "fontes": {"$ref": "#/$defs/textos"},
+        "nota_build": {"$ref": "#/$defs/texto_ou_nulo"}, "build": {"type": "array", "items": {"$ref": "#/$defs/item"}},
+        "nota_situacionais": {"$ref": "#/$defs/texto_ou_nulo"}, "situacionais": {"type": "array", "items": {"$ref": "#/$defs/item"}}}}
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "nome", "nome_interno", "hero_id", "patch", "resumo", "posicoes", "roshan", "extras", "fontes"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z0-9_]+$"},
+    "nome": {"type": "string", "minLength": 1},
+    "patch": {"type": "string"},
+    "nome_interno": {"type": "string", "pattern": "^[a-z0-9_]+$"},
+    "hero_id": {"type": "integer"},
+    "resumo": {"type": "string", "minLength": 1},
+    "posicoes": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/posicao"}},
+    "roshan": {"type": "string", "minLength": 1},
+    "extras": {"type": "array", "items": {"type": "object", "required": ["titulo", "texto"],
+      "properties": {"titulo": {"type": "string"}, "texto": {"type": "string", "minLength": 1}}}},
+    "fontes": {"$ref": "#/$defs/textos"}
+  }
+}
