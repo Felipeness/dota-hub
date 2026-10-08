@@ -10,6 +10,7 @@ const ROTULO_CONFIANCA = { alta: "Confiança alta", media: "Confiança média", 
 const ITENS_A_VISTA = 3;
 
 const pct = (v: number) => `${Math.round(v * 100)}%`;
+const pp = (v: number) => `${v > 0 ? "+" : ""}${v.toLocaleString("pt-BR", { maximumFractionDigits: 1 })} pp`;
 const iniciais = (nome: string) => nome.replace(/[^\p{L}\p{N}]/gu, "").slice(0, 2).toUpperCase();
 
 // O app não tem foto de jogador; o "retrato" é um monograma com as iniciais do nick.
@@ -62,6 +63,9 @@ function CartaoDaLane({ lane }: { lane: Lane }) {
           <BarraDeVitoria rotulo="Lane perdida" valor={lane.wr_perdida} n={lane.n_perdida} classe="lane-perdida" />
           {lane.liga_wr_perdida !== null && lane.liga_wr_perdida !== undefined && (
             <p className="lane-liga">Liga com a lane perdida: {pct(lane.liga_wr_perdida)}{lane.ic ? ` · IC 95% deles ${pct(lane.ic[0])} a ${pct(lane.ic[1])}` : ""}</p>
+          )}
+          {lane.efeito_ajustado_pp !== null && lane.efeito_ajustado_pp !== undefined && (
+            <p className="lane-liga">Perder essa lane custa cerca de {pp(lane.efeito_ajustado_pp)} de chance de vitória, isolando outros fatores.</p>
           )}
         </div>
         <p className="lane-contra"><strong>O que fazer contra:</strong> {lane.o_que_fazer_contra}</p>

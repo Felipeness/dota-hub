@@ -176,6 +176,19 @@ describe("tela do time", () => {
     expect(within(within(dna).getByRole("region", { name: "Tabela" })).getByRole("columnheader", { name: "Kills" })).toBeInTheDocument();
   });
 
+  it("seção longa mostra só o primeiro parágrafo e o resto atrás de Leitura completa", async () => {
+    const resumo = "A".repeat(100);
+    const resto = "B".repeat(450);
+    const secoes = exemploA.secoes.map((s) => (s.id === "dna" ? { ...s, texto_md: `${resumo}\n\n${resto}` } : s));
+    abrir("/times/time-exemplo-a", { ...ARQUIVOS, "/data/times_atlas/time-exemplo-a.json": { ...exemploA, secoes } });
+    const dna = await screen.findByRole("region", { name: "DNA" });
+    expect(within(dna).getByText(resumo)).toBeInTheDocument();
+    const detalhe = within(dna).getByText("Leitura completa").closest("details");
+    if (!detalhe) throw new Error("sem o detalhe da leitura completa");
+    expect(detalhe).not.toHaveAttribute("open");
+    expect(within(detalhe).getByText(resto)).toBeInTheDocument();
+  });
+
   it("time de fronteira mostra o selo e a nota da amostra", async () => {
     abrir("/times/time-exemplo-b");
     expect(await screen.findByRole("heading", { level: 1, name: /Time Exemplo B/ })).toHaveTextContent("fronteira");

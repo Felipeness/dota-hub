@@ -43,13 +43,25 @@ const registro: string[] = [];
 const lerJson = <T>(caminho: string): T => JSON.parse(readFileSync(caminho, "utf-8"));
 const ehObjeto = (v: unknown): v is Json => typeof v === "object" && v !== null && !Array.isArray(v);
 
-// Única correção conhecida: marcar a fronteira no arquivo do time (o schema assume tier1 quando falta).
+// gameplan_contra é só instrução de jogo; metadado como "rotulo" (nota sobre o roster) já aparece em amostra.nota.
+const METADADOS_FORA_DO_GAMEPLAN = ["rotulo"];
+
+// Correções conhecidas de formato: marcar a fronteira no arquivo do time e tirar metadado que vazou para o gameplan.
 function corrigirFormato(id: string, time: Json, equipe: Equipe): Json {
   const amostra = ehObjeto(time.amostra) ? time.amostra : {};
   const atual = amostra.classificacao ?? "tier1";
-  if (atual === equipe.classificacao) return time;
-  registro.push(`${id}: amostra.classificacao ${JSON.stringify(amostra.classificacao)} -> "${equipe.classificacao}" (lista de fronteira)`);
-  return { ...time, amostra: { ...amostra, classificacao: equipe.classificacao } };
+  const corrigida = atual === equipe.classificacao ? time : (() => {
+    registro.push(`${id}: amostra.classificacao ${JSON.stringify(amostra.classificacao)} -> "${equipe.classificacao}" (lista de fronteira)`);
+    return { ...time, amostra: { ...amostra, classificacao: equipe.classificacao } };
+  })();
+
+  const gameplan = ehObjeto(corrigida.gameplan_contra) ? corrigida.gameplan_contra : null;
+  const chavesSoltas = gameplan ? METADADOS_FORA_DO_GAMEPLAN.filter((k) => k in gameplan) : [];
+  if (chavesSoltas.length === 0) return corrigida;
+  registro.push(`${id}: gameplan_contra sem ${chavesSoltas.join(", ")} (metadado, não instrução de jogo)`);
+  const semMetadado = { ...gameplan };
+  for (const k of chavesSoltas) delete semMetadado[k];
+  return { ...corrigida, gameplan_contra: semMetadado };
 }
 
 // "E1 Projeção territorial (-) x Jogo em casa (+)" vira rótulo e os dois polos.

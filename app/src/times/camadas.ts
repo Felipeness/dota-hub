@@ -89,7 +89,7 @@ export const smokesDaJanela = (mapa: MapaAtlas, janela: FiltroJanela) =>
 const ITENS: Record<Camada, (mapa: MapaAtlas, filtro: Filtro) => ItemDoMapa[]> = {
   calor: () => [],
   zonas: (mapa, filtro) => mapa.zonas.flatMap((z, i) => (naJanela(z.janela, filtro.janela) ? [{
-    id: `zonas:${i}`, camada: "zonas", titulo: z.rotulo, texto: `Zona ${z.zona}.`,
+    id: `zonas:${i}`, camada: "zonas", titulo: z.rotulo, texto: `${z.rotulo}.`,
     numeros: [["Tempo do time aqui", pct(z.tempo_pct)], ["Janela", z.janela]],
   }] : [])),
   wards: (mapa, filtro) => mapa.wards.flatMap((w, i) => (naJanela(w.janela, filtro.janela) && aceitaIntencao(w.intencao, filtro) ? [{
