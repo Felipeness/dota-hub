@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["id", "hero_id", "guia"],
+    "properties": {
+      "id": {"type": "string", "pattern": "^[a-z_]+$"},
+      "hero_id": {"type": "integer"},
+      "guia": {
+        "type": "object",
+        "required": ["bom_quando", "evitar_quando", "momento_do_draft", "itens_situacionais"],
+        "properties": {
+          "bom_quando": {"type": "array", "items": {"type": "string"}},
+          "evitar_quando": {"type": "array", "items": {"type": "string"}},
+          "momento_do_draft": {"type": "string"},
+          "itens_situacionais": {"type": "array", "items": {"type": "object", "required": ["item", "nome", "quando"]}}
+        }
+      }
+    }
+  }
+}

@@ -74,3 +74,14 @@ def test_itens_dos_guias_cobre_todos_os_herois_reais(fichas):
     slugs = herois.itens_dos_guias(fichas)
     assert "power_treads" in slugs
     assert len(slugs) > 0
+
+
+def test_draft_resumo_fica_so_com_o_que_o_draft_usa_e_valido(fichas):
+    resumo = herois.draft_resumo(fichas)
+    assert len(resumo) == len(fichas)
+    validar.validar("draft_guias", resumo)
+    for item in resumo:
+        assert set(item["guia"].keys()) == {"bom_quando", "evitar_quando", "momento_do_draft", "itens_situacionais"}
+    tamanho_cheio = len(json.dumps(fichas, ensure_ascii=False))
+    tamanho_enxuto = len(json.dumps(resumo, ensure_ascii=False))
+    assert tamanho_enxuto < tamanho_cheio * 0.3

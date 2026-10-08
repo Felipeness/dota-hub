@@ -64,6 +64,7 @@ def main() -> None:
     fichas = herois.todos(frozenset(r["id"] for r in todas_rotas))
     _gravar_colecao("herois", "heroi", fichas)
     pacotes["herois"] = herois.indice(fichas)
+    pacotes["draft_guias"] = herois.draft_resumo(fichas)
     paineis = [jogadores.felipe(), *(jogadores.pro_compare(c) for c in ("satanic", "yatoro", "watson")),
                *jogadores.pros_de_replay(), amigos.leonardo(), amigos.hane(), amigos.yuma()]
     _gravar_colecao("jogadores", "painel", paineis)

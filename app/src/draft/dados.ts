@@ -6,7 +6,7 @@ import { erroAoVivo, type ErroAoVivo } from "../live/erros";
 import { registrarNoConsole } from "../live/registro";
 import { useServicosAoVivo } from "../live/servicos";
 import type { GuiaDraft, HeroId } from "./guia";
-import type { HeroiDraft, Matchups, Placar } from "./pontuacao";
+import { ATRIBUTOS, type HeroiDraft, type Matchups, type Placar } from "./pontuacao";
 
 // Fronteira com o OpenDota e com os guias: tudo passa pelo zod aqui e sai nos tipos do draft.
 
@@ -19,13 +19,15 @@ export const heroStatsSchema = z.array(z.object({
   name: z.string(),
   localized_name: z.string(),
   roles: z.array(z.string()).default([]),
+  primary_attr: z.enum(ATRIBUTOS).default("all"),
   "7_pick": z.number().nullish(),
   "7_win": z.number().nullish(),
 }));
 
 export const matchupsSchema = z.array(z.object({ hero_id: z.number().int(), games_played: z.number().int(), wins: z.number().int() }));
 
-const guiaArquivoSchema = z.object({
+const draftGuiasSchema = z.array(z.object({
+  id: z.string(),
   hero_id: z.number().int(),
   guia: z.object({
     bom_quando: z.array(z.string()),
@@ -33,15 +35,12 @@ const guiaArquivoSchema = z.object({
     momento_do_draft: z.string(),
     itens_situacionais: z.array(z.object({ nome: z.string(), quando: z.string() })).default([]),
   }),
-}).transform((h): GuiaDraft => ({
-  heroId: h.hero_id, bom: h.guia.bom_quando, evitar: h.guia.evitar_quando,
-  momento: h.guia.momento_do_draft, itensSituacionais: h.guia.itens_situacionais,
 }));
 
 export function paraHeroisDraft(stats: z.infer<typeof heroStatsSchema>): HeroiDraft[] {
   return stats
     .map((h) => ({
-      id: h.id, nome: h.localized_name, npc: h.name.replace(PREFIXO_NPC, ""), funcoes: h.roles,
+      id: h.id, nome: h.localized_name, npc: h.name.replace(PREFIXO_NPC, ""), funcoes: h.roles, atributo: h.primary_attr,
       divine: { jogos: h["7_pick"] ?? 0, vitorias: h["7_win"] ?? 0 },
     }))
     .toSorted((a, b) => a.nome.localeCompare(b.nome));
@@ -69,20 +68,25 @@ export function useGuias(): Guias | null {
   return guias;
 }
 
+/** Um arquivo só com o que o draft usa (~13% do peso dos 22 guias inteiros), em vez de baixar cada ficha de herói. */
 async function carregarGuias(): Promise<Guias> {
   const indice = await loadJson("/data/herois.json", heroisSchema);
+  const resumo = await loadJson("/data/draft_guias.json", draftGuiasSchema);
   if (!indice.ok) {
     registrarNoConsole({ nivel: "warn", operacao: "draft-guias", codigo: null, detalhe: indice.motivo });
     return { guias: [], paginas: new Map(), falhas: 1 };
   }
-  // São 22 arquivos estáticos do próprio site: o paralelismo é limitado pela lista.
-  const resultados = await Promise.all(indice.dados.map((h) => loadJson(`/data/herois/${h.id}.json`, guiaArquivoSchema)));
-  const falhas = resultados.flatMap((r) => (r.ok ? [] : [r.motivo]));
-  falhas.forEach((detalhe) => registrarNoConsole({ nivel: "warn", operacao: "draft-guias", codigo: null, detalhe }));
+  if (!resumo.ok) {
+    registrarNoConsole({ nivel: "warn", operacao: "draft-guias", codigo: null, detalhe: resumo.motivo });
+    return { guias: [], paginas: new Map(indice.dados.map((h) => [h.hero_id, h.id])), falhas: 1 };
+  }
   return {
-    guias: resultados.flatMap((r) => (r.ok ? [r.dados] : [])),
+    guias: resumo.dados.map((h): GuiaDraft => ({
+      heroId: h.hero_id, bom: h.guia.bom_quando, evitar: h.guia.evitar_quando,
+      momento: h.guia.momento_do_draft, itensSituacionais: h.guia.itens_situacionais,
+    })),
     paginas: new Map(indice.dados.map((h) => [h.hero_id, h.id])),
-    falhas: falhas.length,
+    falhas: 0,
   };
 }
 
