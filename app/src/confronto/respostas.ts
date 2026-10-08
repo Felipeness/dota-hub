@@ -62,7 +62,7 @@ function melhoriaCurada(i: Extract<Interacao, { tipo: "melhoria" }>, { achadas, 
   const melhoria = meu.aghanim[i.melhoria];
   if (meu.chave !== i.heroi || !melhoria || !achadas.some((h) => h.chave === i.contra)) return null;
   return {
-    id: i.melhoria, rotulo: `Seu ${NOME[i.melhoria]} (${melhoria.habilidade})`, resumo: i.resumo,
+    id: i.melhoria, rotulo: `Seu ${NOME[i.melhoria]}, no ${melhoria.habilidade}`, resumo: i.resumo,
     detalhes: [i.detalhe], prova: melhoria.descricao, fontes: i.fontes, patch: i.patch,
   };
 }
@@ -81,7 +81,7 @@ function derivados({ mecanica, meu }: Contexto): Recurso[] {
     const melhoria = meu.aghanim[tipo];
     if (!melhoria || !responde.texto.test(melhoria.descricao)) return [];
     return [{
-      id: tipo, rotulo: `Seu ${NOME[tipo]} (${melhoria.habilidade})`,
+      id: tipo, rotulo: `Seu ${NOME[tipo]}, no ${melhoria.habilidade}`,
       resumo: `Libera ${melhoria.habilidade} ${responde.quando}.`,
       detalhes: [], prova: melhoria.descricao, fontes: [AGHS_OPENDOTA], patch: null,
     }];
