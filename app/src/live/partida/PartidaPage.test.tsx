@@ -16,6 +16,8 @@ function abrir(caminho: string, substituicoes: Readonly<Record<string, unknown>>
 
 const caminho = `/ao-vivo/partidas/${PARTIDA}?conta=${YATORO}`;
 
+afterEach(() => vi.unstubAllGlobals());
+
 it("partida real gravada mostra herói, resumo, curvas, rota e build", async () => {
   abrir(caminho);
   expect(await screen.findByRole("heading", { level: 1, name: "Slark" })).toBeInTheDocument();
@@ -58,4 +60,12 @@ it("partida sem análise mostra só o placar e o aviso", async () => {
 it("conta inválida na URL avisa sem consultar", () => {
   abrir(`/ao-vivo/partidas/${PARTIDA}?conta=abc`);
   expect(screen.getByRole("alert")).toBeInTheDocument();
+});
+
+it("título do herói leva à ficha mesmo quando o herói não tem guia completo", async () => {
+  const catalogo = [{ id: "slark", nome: "Slark", hero_id: 93, nome_interno: "slark", atributo: "agi", posicoes: [1], pagina: "ficha", resumo: "Carry de pick-off." }];
+  vi.stubGlobal("fetch", (url: string) =>
+    Promise.resolve(new Response(JSON.stringify(url === "/data/herois_catalogo.json" ? catalogo : null), { status: url === "/data/herois_catalogo.json" ? 200 : 404 })));
+  abrir(caminho);
+  expect(await screen.findByRole("link", { name: "Slark" })).toHaveAttribute("href", "/herois/slark");
 });

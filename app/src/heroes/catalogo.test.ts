@@ -2,7 +2,7 @@ import type { HeroiDoCatalogo } from "../data/schemas";
 import { acharNoCatalogo, agruparPorPosicao, filtrarCatalogo, minutoDoItem, posicaoDoParametro } from "./catalogo";
 
 const heroi = (id: string, nome: string, extra: Partial<HeroiDoCatalogo> = {}): HeroiDoCatalogo => ({
-  id, nome, hero_id: 1, nome_interno: id, atributo: "str", posicoes: [3], pagina: "ficha", ...extra,
+  id, nome, hero_id: 1, nome_interno: id, atributo: "str", posicoes: [3], pagina: "ficha", resumo: `Resumo de ${nome}.`, ...extra,
 });
 
 const catalogo = [

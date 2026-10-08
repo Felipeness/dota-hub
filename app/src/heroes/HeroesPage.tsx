@@ -19,7 +19,7 @@ const atributoDoParametro = (valor: string | null): AtributoDeHeroi | null => AT
 
 type CartaoProps = Readonly<{ heroi: HeroiDoCatalogo; posicao: Posicao; guia: HeroiResumo | undefined }>;
 
-/** Guia completo mostra o resumo; ficha leva direto à aba da posição do grupo em que foi clicada. */
+/** Ficha leva direto à aba da posição do grupo em que foi clicada; guia completo vai sempre pro mesmo lugar. */
 function CartaoDoHeroi({ heroi, posicao, guia }: CartaoProps) {
   const destino = heroi.pagina === "ficha" ? `/herois/${heroi.id}?pos=${posicao}` : `/herois/${heroi.id}`;
   return (
@@ -34,7 +34,7 @@ function CartaoDoHeroi({ heroi, posicao, guia }: CartaoProps) {
               : <span className="selo">ficha por posição</span>}
             {guia?.tem_por_minuto && <span className="selo selo-destaque">minuto a minuto</span>}
           </span>
-          {guia && <span>{resumoCurto(guia.resumo)}</span>}
+          <span>{resumoCurto(heroi.resumo)}</span>
         </span>
       </Link>
     </li>

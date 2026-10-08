@@ -205,16 +205,16 @@ def itens(fichas: list[dict]) -> set[str]:
 
 def catalogo(guias: list[dict], fichas: list[dict]) -> list[dict]:
     """Todos os heróis do heroes.json com a página que abre em /herois/<id>: guia completo (os 22) ou ficha por posição."""
-    paginas = {g["hero_id"]: ("guia", g["id"], list(POSICOES_DOS_GUIAS)) for g in guias}
-    paginas |= {f["hero_id"]: ("ficha", f["id"], [p["posicao"] for p in f["posicoes"]]) for f in fichas}
+    paginas = {g["hero_id"]: ("guia", g["id"], list(POSICOES_DOS_GUIAS), g["resumo"]) for g in guias}
+    paginas |= {f["hero_id"]: ("ficha", f["id"], [p["posicao"] for p in f["posicoes"]], f["resumo"]) for f in fichas}
     entradas = []
     for h in _herois():
         if h["id"] not in paginas:
             raise ValueError(f"herói sem guia nem ficha: {h['localized_name']}")
-        pagina, id_da_pagina, posicoes = paginas[h["id"]]
+        pagina, id_da_pagina, posicoes, resumo = paginas[h["id"]]
         if id_da_pagina != id_no_app(h["localized_name"]):
             raise ValueError(f"id {id_da_pagina} diferente do id do app {id_no_app(h['localized_name'])}")
         entradas.append({"id": id_da_pagina, "nome": h["localized_name"], "hero_id": h["id"],
                          "nome_interno": h["name"].removeprefix("npc_dota_hero_"), "atributo": h["primary_attr"],
-                         "posicoes": posicoes, "pagina": pagina})
+                         "posicoes": posicoes, "pagina": pagina, "resumo": resumo})
     return sorted(entradas, key=lambda e: e["nome"])

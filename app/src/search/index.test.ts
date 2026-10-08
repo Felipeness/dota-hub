@@ -48,8 +48,8 @@ it("acha herói, jogador e time", () => {
   const b = construirIndice({
     rotas: [], objetivos: [], termos: [],
     herois: [
-      { id: "medusa", nome: "Medusa", hero_id: 94, nome_interno: "medusa", atributo: "agi", posicoes: [1], pagina: "guia" },
-      { id: "zeus", nome: "Zeus", hero_id: 22, nome_interno: "zuus", atributo: "int", posicoes: [2], pagina: "ficha" },
+      { id: "medusa", nome: "Medusa", hero_id: 94, nome_interno: "medusa", atributo: "agi", posicoes: [1], pagina: "guia", resumo: "Carry de split push." },
+      { id: "zeus", nome: "Zeus", hero_id: 22, nome_interno: "zuus", atributo: "int", posicoes: [2], pagina: "ficha", resumo: "Mid de dano em área." },
     ],
     jogadores: [{ id: "skiter", nome: "skiter", tipo: "pro", time: null, amostra: "1 replay" }],
     times: [{ id: "team-spirit", nome: "Team Spirit", jogadores: ["yatoro"], fonte: "" }],

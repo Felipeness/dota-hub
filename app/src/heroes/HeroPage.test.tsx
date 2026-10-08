@@ -4,7 +4,7 @@ import { HeroPage } from "./HeroPage";
 
 afterEach(() => vi.unstubAllGlobals());
 
-const catalogo = [{ id: "zeus", nome: "Zeus", hero_id: 22, nome_interno: "zuus", atributo: "int", posicoes: [2], pagina: "ficha" }];
+const catalogo = [{ id: "zeus", nome: "Zeus", hero_id: 22, nome_interno: "zuus", atributo: "int", posicoes: [2], pagina: "ficha", resumo: "Nuker de Inteligência." }];
 const ficha = {
   id: "zeus", nome: "Zeus", nome_interno: "zuus", hero_id: 22, patch: "7.41", resumo: "Nuker de Inteligência.",
   posicoes: [{ posicao: 2, funcao: "mid", quando_pegar: null, itens_iniciais: null, fontes: [], nota_build: "Sem build própria.", build: [], nota_situacionais: null, situacionais: [] }],

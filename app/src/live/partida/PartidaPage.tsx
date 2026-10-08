@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router";
-import { heroiSchema } from "../../data/schemas";
+import { heroisCatalogoSchema, heroiSchema, type HeroiDoCatalogo } from "../../data/schemas";
 import { useData } from "../../data/useData";
+import { acharNoCatalogo } from "../../heroes/catalogo";
 import { urlDoRetrato } from "../../heroes/resumo";
 import { lerId } from "../contas";
 import { erroAoVivo, mensagemDoErro } from "../erros";
@@ -35,14 +36,16 @@ function PartidaAoVivo({ partida, conta }: { partida: string; conta: number }) {
 function Partida({ detalhe, onAtualizar }: { detalhe: DetalheDaPartida; onAtualizar: () => void }) {
   const [janela, setJanela] = useState<IdJanela>("0-10");
   const ficha = useData(`/data/herois/${detalhe.heroi.retrato}.json`, heroiSchema);
+  const catalogo = useData("/data/herois_catalogo.json", heroisCatalogoSchema);
   const pro = ficha.estado === "ok" ? dadosPro(ficha.dados) : null;
+  const herois = catalogo.estado === "ok" ? catalogo.dados : [];
   return (
     <article className="partida">
-      <Cabecalho detalhe={detalhe} temGuia={ficha.estado === "ok"} onAtualizar={onAtualizar} />
+      <Cabecalho detalhe={detalhe} herois={herois} onAtualizar={onAtualizar} />
       <ul className="partida-resumo" aria-label="Resumo da partida">
         {resumoDaPartida(detalhe, pro).map((frase) => <li key={frase}>{frase}</li>)}
       </ul>
-      {detalhe.draft.length > 0 && <DraftDaPartida draft={detalhe.draft} />}
+      {detalhe.draft.length > 0 && <DraftDaPartida draft={detalhe.draft} herois={herois} />}
       {detalhe.analisada ? (
         <>
           <SeletorDeJanela duracaoS={detalhe.duracaoS} janela={janela} onJanela={setJanela} />
@@ -61,15 +64,16 @@ function Partida({ detalhe, onAtualizar }: { detalhe: DetalheDaPartida; onAtuali
   );
 }
 
-function Cabecalho({ detalhe, temGuia, onAtualizar }: { detalhe: DetalheDaPartida; temGuia: boolean; onAtualizar: () => void }) {
+function Cabecalho({ detalhe, herois, onAtualizar }: { detalhe: DetalheDaPartida; herois: readonly HeroiDoCatalogo[]; onAtualizar: () => void }) {
   const resultado = textoDoResultado(detalhe.venceu);
   const { adversario } = detalhe;
+  const heroiDoCatalogo = acharNoCatalogo(herois, detalhe.heroi.retrato);
   return (
     <header className="partida-cabeca">
       <IconeOuIniciais src={detalhe.heroi.retrato ? urlDoRetrato(detalhe.heroi.retrato) : null} nome={detalhe.heroi.nome} classe="partida-retrato" />
       <div>
         <p className="partida-sobre">Partida {detalhe.partida} · {detalhe.lado === "radiant" ? "Radiant" : "Dire"}</p>
-        <h1>{temGuia ? <Link to={`/herois/${detalhe.heroi.retrato}`}>{detalhe.heroi.nome}</Link> : detalhe.heroi.nome}</h1>
+        <h1>{heroiDoCatalogo ? <Link to={`/herois/${heroiDoCatalogo.id}`}>{detalhe.heroi.nome}</Link> : detalhe.heroi.nome}</h1>
         <p className="partida-placar">
           <span className={`partida-resultado resultado-${detalhe.venceu === null ? "nenhum" : detalhe.venceu ? "vitoria" : "derrota"}`}>{resultado}</span>
           <span>{detalhe.abates}/{detalhe.mortes}/{detalhe.assistencias}</span>
@@ -93,18 +97,21 @@ function Cabecalho({ detalhe, temGuia, onAtualizar }: { detalhe: DetalheDaPartid
   );
 }
 
-function DraftDaPartida({ draft }: { draft: DetalheDaPartida["draft"] }) {
+function DraftDaPartida({ draft, herois }: { draft: DetalheDaPartida["draft"]; herois: readonly HeroiDoCatalogo[] }) {
   return (
     <section className="partida-draft" aria-labelledby="titulo-draft">
       <h2 id="titulo-draft">Draft</h2>
       <ol className="partida-draft-lista" aria-label="Ordem do draft">
-        {draft.map((p, i) => (
-          <li key={i} className={p.seuTime ? "seu-time" : "time-inimigo"}>
-            <IconeOuIniciais src={p.heroi.retrato ? urlDoRetrato(p.heroi.retrato) : null} nome={p.heroi.nome} classe="partida-draft-retrato" />
-            <span>{p.heroi.nome}</span>
-            <span className="partida-draft-tipo">{p.pick ? "pick" : "ban"}</span>
-          </li>
-        ))}
+        {draft.map((p, i) => {
+          const heroiDoCatalogo = acharNoCatalogo(herois, p.heroi.retrato);
+          return (
+            <li key={i} className={p.seuTime ? "seu-time" : "time-inimigo"}>
+              <IconeOuIniciais src={p.heroi.retrato ? urlDoRetrato(p.heroi.retrato) : null} nome={p.heroi.nome} classe="partida-draft-retrato" />
+              <span>{heroiDoCatalogo ? <Link to={`/herois/${heroiDoCatalogo.id}`}>{p.heroi.nome}</Link> : p.heroi.nome}</span>
+              <span className="partida-draft-tipo">{p.pick ? "pick" : "ban"}</span>
+            </li>
+          );
+        })}
       </ol>
     </section>
   );
