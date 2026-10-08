@@ -4,10 +4,10 @@ titulo: "Por que cada item: Morphling"
 heroi: Morphling
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/morphling.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/abilities.json
+- app/public/data/herois/morphling.json
+- dota-imortal/data/opendota/items.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-roshan-solo/data/abilities.json
 - https://liquipedia.net/dota2/True_Strike
 - https://www.dota2.com/datafeed/patchnotes?version=7.41e (oficial Valve: Butterfly e Satanic)
 - https://www.dota2.com/datafeed/patchnotes?version=7.41f (oficial Valve: Manta Style e Daedalus)

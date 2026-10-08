@@ -5,17 +5,17 @@ heroi: Leshrac
 patch: 7.41
 posicoes: [2, 4]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-tier1/data/draft.csv
-- C:/Users/felip/Desktop/dota-tier1/data/jogadores_partida.csv
-- C:/Users/felip/Desktop/dota-tier1/data/derivados/compras.parquet
-- C:/Users/felip/Desktop/dota-tier1/data/derivados/itens_chave.parquet
-- C:/Users/felip/Desktop/dota-tier1/data/derivados/jogadores_replay.parquet
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/heroStats.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-tier1/data/draft.csv
+- dota-tier1/data/jogadores_partida.csv
+- dota-tier1/data/derivados/compras.parquet
+- dota-tier1/data/derivados/itens_chave.parquet
+- dota-tier1/data/derivados/jogadores_replay.parquet
+- dota-roshan-solo/data/solos.json
 - https://api.opendota.com/api/heroes/52/itemPopularity
 - https://dota2protracker.com/hero/legacy/Leshrac
 - https://dota2protracker.com/hero/Leshrac
@@ -141,4 +141,4 @@ Leshrac é um int de dano mágico puro: Lightning Storm é barato e recarrega em
 
 Sem abate solo registrado: o dataset de replays de Roshan solo (dota-roshan-solo) não tem nenhum kill solo do Leshrac. Em equipe ele aparece em 16 partidas pro do dataset, sempre com 2 a 4 aliados dentro do fosso (nunca sozinho), entre os minutos 13:10 e 62:51 (mediana 25:50). Nelas ele costuma ser quem mais contribui de dano dentro do grupo (fração mediana de 42% do dano total ao Roshan, variando de 29% a 59%) e chega a dar o golpe final em 4 das 16 vezes (25%); nas outras 12 o abate é creditado a um aliado mesmo com Leshrac puxando a maior parte do dano. Isso bate com o papel que o build mostra: ele entra na luta com Blink e empurra dano em área (Edict/Pulse Nova), mas não é um finalizador solo de Roshan.
 
-Fonte: C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
+Fonte: dota-roshan-solo/data/solos.json

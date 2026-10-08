@@ -16,7 +16,7 @@ heroi: Axe
 patch: 7.41
 posicoes: [3, 1]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- dota-imortal/data/opendota/items.json
 - https://dota2protracker.com/hero/legacy/Axe
 ---
 
@@ -28,7 +28,7 @@ Axe é um iniciador de Força.
 
 - quando pegar: contra lane de ataque automático.
 - itens iniciais: tango, circlet, gauntlets (pra 2x Bracer)
-- fonte: C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- fonte: dota-imortal/data/opendota/items.json
 
 ### Build
 
@@ -73,7 +73,7 @@ Shard também aparece, sem bloco próprio.
 
 Sem solo registrado.
 
-Fonte: C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
+Fonte: dota-roshan-solo/data/solos.json
 """
 
 

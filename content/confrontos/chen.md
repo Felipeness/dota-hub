@@ -3,25 +3,25 @@ id: confrontos-chen
 heroi: Chen
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/chen.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/jakiro.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tusk.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/shadow_demon.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/centaur.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/snapfire.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/warlock.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/hoodwink.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/bounty_hunter.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/disruptor.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/queenofpain.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/monkey_king.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/terrorblade.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/kez.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/abaddon.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/gyrocopter.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
+- dota-hub-conteudo-novo/pro_dados/chen.json
+- dota-hub-conteudo-novo/pro_dados/jakiro.json
+- dota-hub-conteudo-novo/pro_dados/tusk.json
+- dota-hub-conteudo-novo/pro_dados/shadow_demon.json
+- dota-hub-conteudo-novo/pro_dados/centaur.json
+- dota-hub-conteudo-novo/pro_dados/snapfire.json
+- dota-hub-conteudo-novo/pro_dados/warlock.json
+- dota-hub-conteudo-novo/pro_dados/hoodwink.json
+- dota-hub-conteudo-novo/pro_dados/bounty_hunter.json
+- dota-hub-conteudo-novo/pro_dados/disruptor.json
+- dota-hub-conteudo-novo/pro_dados/queenofpain.json
+- dota-hub-conteudo-novo/pro_dados/monkey_king.json
+- dota-hub-conteudo-novo/pro_dados/terrorblade.json
+- dota-hub-conteudo-novo/pro_dados/kez.json
+- dota-hub-conteudo-novo/pro_dados/abaddon.json
+- dota-hub-conteudo-novo/pro_dados/gyrocopter.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/heroes.json
 - https://api.opendota.com/api/constants/aghs_desc
 - https://api.opendota.com/api/explorer (lane_role e purchase_log, partidas de liga 7.40-7.41)
 ---

@@ -5,11 +5,11 @@ heroi: Marci
 patch: 7.41
 posicoes: [4, 5]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-tier1/data/draft.csv
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-tier1/data/draft.csv
 - https://api.opendota.com/api/heroes/136/itemPopularity
 - https://api.opendota.com/api/benchmarks?hero_id=136
 - https://dotacoach.gg/pt-BR/heroes/marci/builds/support

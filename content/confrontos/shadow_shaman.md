@@ -3,25 +3,25 @@ id: confrontos-shadow_shaman
 heroi: Shadow Shaman
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/shadow_shaman.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/nevermore.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/jakiro.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/rubick.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tiny.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/lion.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/warlock.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tusk.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/hoodwink.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/shadow_demon.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/medusa.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/troll_warlord.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/sven.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/beastmaster.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/batrider.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/undying.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
+- dota-hub-conteudo-novo/pro_dados/shadow_shaman.json
+- dota-hub-conteudo-novo/pro_dados/nevermore.json
+- dota-hub-conteudo-novo/pro_dados/jakiro.json
+- dota-hub-conteudo-novo/pro_dados/rubick.json
+- dota-hub-conteudo-novo/pro_dados/tiny.json
+- dota-hub-conteudo-novo/pro_dados/lion.json
+- dota-hub-conteudo-novo/pro_dados/warlock.json
+- dota-hub-conteudo-novo/pro_dados/tusk.json
+- dota-hub-conteudo-novo/pro_dados/hoodwink.json
+- dota-hub-conteudo-novo/pro_dados/shadow_demon.json
+- dota-hub-conteudo-novo/pro_dados/medusa.json
+- dota-hub-conteudo-novo/pro_dados/troll_warlord.json
+- dota-hub-conteudo-novo/pro_dados/sven.json
+- dota-hub-conteudo-novo/pro_dados/beastmaster.json
+- dota-hub-conteudo-novo/pro_dados/batrider.json
+- dota-hub-conteudo-novo/pro_dados/undying.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/heroes.json
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 

@@ -3,24 +3,24 @@ id: confrontos-dazzle
 heroi: Dazzle
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/dazzle.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/jakiro.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/axe.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/mars.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/snapfire.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/nevermore.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/hoodwink.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/disruptor.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/shadow_demon.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/gyrocopter.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/abaddon.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/slardar.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/skywrath_mage.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/clinkz.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/beastmaster.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
+- dota-hub-conteudo-novo/pro_dados/dazzle.json
+- dota-hub-conteudo-novo/pro_dados/jakiro.json
+- dota-hub-conteudo-novo/pro_dados/axe.json
+- dota-hub-conteudo-novo/pro_dados/mars.json
+- dota-hub-conteudo-novo/pro_dados/snapfire.json
+- dota-hub-conteudo-novo/pro_dados/nevermore.json
+- dota-hub-conteudo-novo/pro_dados/hoodwink.json
+- dota-hub-conteudo-novo/pro_dados/disruptor.json
+- dota-hub-conteudo-novo/pro_dados/shadow_demon.json
+- dota-hub-conteudo-novo/pro_dados/gyrocopter.json
+- dota-hub-conteudo-novo/pro_dados/abaddon.json
+- dota-hub-conteudo-novo/pro_dados/slardar.json
+- dota-hub-conteudo-novo/pro_dados/skywrath_mage.json
+- dota-hub-conteudo-novo/pro_dados/clinkz.json
+- dota-hub-conteudo-novo/pro_dados/beastmaster.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/heroes.json
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 

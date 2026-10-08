@@ -3,24 +3,24 @@ id: confrontos-venomancer
 heroi: Venomancer
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/venomancer.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/rubick.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tusk.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/jakiro.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/hoodwink.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/snapfire.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/disruptor.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/rattletrap.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/warlock.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/legion_commander.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/ember_spirit.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/doom_bringer.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/viper.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/dragon_knight.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/nyx_assassin.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
+- dota-hub-conteudo-novo/pro_dados/venomancer.json
+- dota-hub-conteudo-novo/pro_dados/rubick.json
+- dota-hub-conteudo-novo/pro_dados/tusk.json
+- dota-hub-conteudo-novo/pro_dados/jakiro.json
+- dota-hub-conteudo-novo/pro_dados/hoodwink.json
+- dota-hub-conteudo-novo/pro_dados/snapfire.json
+- dota-hub-conteudo-novo/pro_dados/disruptor.json
+- dota-hub-conteudo-novo/pro_dados/rattletrap.json
+- dota-hub-conteudo-novo/pro_dados/warlock.json
+- dota-hub-conteudo-novo/pro_dados/legion_commander.json
+- dota-hub-conteudo-novo/pro_dados/ember_spirit.json
+- dota-hub-conteudo-novo/pro_dados/doom_bringer.json
+- dota-hub-conteudo-novo/pro_dados/viper.json
+- dota-hub-conteudo-novo/pro_dados/dragon_knight.json
+- dota-hub-conteudo-novo/pro_dados/nyx_assassin.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/heroes.json
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 

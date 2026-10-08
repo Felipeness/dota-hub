@@ -3,26 +3,26 @@ id: confrontos-lone_druid
 heroi: Lone Druid
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/lone_druid.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/hoodwink.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/rubick.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/nevermore.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tiny.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/pangolier.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/ember_spirit.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/abyssal_underlord.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/windrunner.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/luna.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/monkey_king.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tidehunter.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/puck.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/keeper_of_the_light.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/necrolyte.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/alchemist.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- dota-hub-conteudo-novo/pro_dados/lone_druid.json
+- dota-hub-conteudo-novo/pro_dados/hoodwink.json
+- dota-hub-conteudo-novo/pro_dados/rubick.json
+- dota-hub-conteudo-novo/pro_dados/nevermore.json
+- dota-hub-conteudo-novo/pro_dados/tiny.json
+- dota-hub-conteudo-novo/pro_dados/pangolier.json
+- dota-hub-conteudo-novo/pro_dados/ember_spirit.json
+- dota-hub-conteudo-novo/pro_dados/abyssal_underlord.json
+- dota-hub-conteudo-novo/pro_dados/windrunner.json
+- dota-hub-conteudo-novo/pro_dados/luna.json
+- dota-hub-conteudo-novo/pro_dados/monkey_king.json
+- dota-hub-conteudo-novo/pro_dados/tidehunter.json
+- dota-hub-conteudo-novo/pro_dados/puck.json
+- dota-hub-conteudo-novo/pro_dados/keeper_of_the_light.json
+- dota-hub-conteudo-novo/pro_dados/necrolyte.json
+- dota-hub-conteudo-novo/pro_dados/alchemist.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/items.json
 - https://api.opendota.com/api/constants/aghs_desc
 - https://dotacoach.gg/en/heroes/lone-druid
 - https://dota2protracker.com/patches/7.41c (via busca web)

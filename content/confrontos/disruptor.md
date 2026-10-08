@@ -3,24 +3,24 @@ id: confrontos-disruptor
 heroi: Disruptor
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/disruptor.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/jakiro.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/nevermore.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tusk.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/ogre_magi.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/lion.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/mars.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/rubick.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/hoodwink.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/shadow_demon.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/phantom_assassin.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/phantom_lancer.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/muerta.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/broodmother.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/wisp.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/enigma.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
+- dota-hub-conteudo-novo/pro_dados/disruptor.json
+- dota-hub-conteudo-novo/pro_dados/jakiro.json
+- dota-hub-conteudo-novo/pro_dados/nevermore.json
+- dota-hub-conteudo-novo/pro_dados/tusk.json
+- dota-hub-conteudo-novo/pro_dados/ogre_magi.json
+- dota-hub-conteudo-novo/pro_dados/lion.json
+- dota-hub-conteudo-novo/pro_dados/mars.json
+- dota-hub-conteudo-novo/pro_dados/rubick.json
+- dota-hub-conteudo-novo/pro_dados/hoodwink.json
+- dota-hub-conteudo-novo/pro_dados/shadow_demon.json
+- dota-hub-conteudo-novo/pro_dados/phantom_assassin.json
+- dota-hub-conteudo-novo/pro_dados/phantom_lancer.json
+- dota-hub-conteudo-novo/pro_dados/muerta.json
+- dota-hub-conteudo-novo/pro_dados/broodmother.json
+- dota-hub-conteudo-novo/pro_dados/wisp.json
+- dota-hub-conteudo-novo/pro_dados/enigma.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/heroes.json
 - https://api.opendota.com/api/constants/aghs_desc
 - https://api.opendota.com/api/explorer (partidas de liga 7.40-7.41, lane_role)
 ---

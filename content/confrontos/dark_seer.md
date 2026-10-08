@@ -3,24 +3,24 @@ id: confrontos-dark_seer
 heroi: Dark Seer
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/dark_seer.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/nevermore.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/hoodwink.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/ember_spirit.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tiny.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/centaur.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/windrunner.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/mars.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/abyssal_underlord.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/slardar.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/axe.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/terrorblade.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/phoenix.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/keeper_of_the_light.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/queenofpain.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
+- dota-hub-conteudo-novo/pro_dados/dark_seer.json
+- dota-hub-conteudo-novo/pro_dados/nevermore.json
+- dota-hub-conteudo-novo/pro_dados/hoodwink.json
+- dota-hub-conteudo-novo/pro_dados/ember_spirit.json
+- dota-hub-conteudo-novo/pro_dados/tiny.json
+- dota-hub-conteudo-novo/pro_dados/centaur.json
+- dota-hub-conteudo-novo/pro_dados/windrunner.json
+- dota-hub-conteudo-novo/pro_dados/mars.json
+- dota-hub-conteudo-novo/pro_dados/abyssal_underlord.json
+- dota-hub-conteudo-novo/pro_dados/slardar.json
+- dota-hub-conteudo-novo/pro_dados/axe.json
+- dota-hub-conteudo-novo/pro_dados/terrorblade.json
+- dota-hub-conteudo-novo/pro_dados/phoenix.json
+- dota-hub-conteudo-novo/pro_dados/keeper_of_the_light.json
+- dota-hub-conteudo-novo/pro_dados/queenofpain.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/heroes.json
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 

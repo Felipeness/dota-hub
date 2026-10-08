@@ -3,24 +3,24 @@ id: confrontos-phantom_lancer
 heroi: Phantom Lancer
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/phantom_lancer.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/nevermore.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/snapfire.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/ogre_magi.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/mars.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tusk.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/rubick.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/terrorblade.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/sven.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/ursa.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/slardar.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/templar_assassin.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/drow_ranger.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/queenofpain.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/spirit_breaker.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
+- dota-hub-conteudo-novo/pro_dados/phantom_lancer.json
+- dota-hub-conteudo-novo/pro_dados/nevermore.json
+- dota-hub-conteudo-novo/pro_dados/snapfire.json
+- dota-hub-conteudo-novo/pro_dados/ogre_magi.json
+- dota-hub-conteudo-novo/pro_dados/mars.json
+- dota-hub-conteudo-novo/pro_dados/tusk.json
+- dota-hub-conteudo-novo/pro_dados/rubick.json
+- dota-hub-conteudo-novo/pro_dados/terrorblade.json
+- dota-hub-conteudo-novo/pro_dados/sven.json
+- dota-hub-conteudo-novo/pro_dados/ursa.json
+- dota-hub-conteudo-novo/pro_dados/slardar.json
+- dota-hub-conteudo-novo/pro_dados/templar_assassin.json
+- dota-hub-conteudo-novo/pro_dados/drow_ranger.json
+- dota-hub-conteudo-novo/pro_dados/queenofpain.json
+- dota-hub-conteudo-novo/pro_dados/spirit_breaker.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/heroes.json
 - https://api.opendota.com/api/constants/aghs_desc
 - https://api.opendota.com/api/explorer (lane_role, duração x vitória, ordem de draft, ability_uses; partidas de liga 7.40-7.41)
 ---

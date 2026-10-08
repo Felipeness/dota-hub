@@ -10,7 +10,7 @@ fontes:
 - replay 8957890399
 - replay 8960577698
 - https://dotacoach.gg/en/items/mask-of-madness
-- C:/Users/felip/Desktop/dota-roshan-solo/work/solos_linha_a_linha.md
+- dota-roshan-solo/work/solos_linha_a_linha.md
 heroi: Shadow Fiend
 solos: 6
 origem: replay

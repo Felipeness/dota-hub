@@ -5,7 +5,10 @@ from pathlib import Path
 ORIGENS = ("recomendado", "replay")
 PADRAO = frozenset({"id", "titulo", "patch", "fontes", "links"})
 SECAO = re.compile(r"^##\s+(Básico|Avançado)\s*$", re.MULTILINE)
-CAMINHO_LOCAL = re.compile(r"(?<![\w/])[A-Za-z]:/[^\s;]+")
+CAMINHO_LOCAL = re.compile(
+    r"(?<![\w/])(?:[A-Za-z]:/[^\s;]+"
+    r"|(?:dota-[\w-]+|app|content|work)/[^\s;]*\.(?:json|md|wiki|txt|jpg))"
+)
 # Domínio citado sem "https://" (ex.: "liquipedia.net/dota2/Roshan"); exige a barra pra não pegar "items.json".
 URL_SEM_ESQUEMA = re.compile(r"(?<![\w./])(?:www\.)?[a-z0-9-]+(?:\.[a-z0-9-]+)*\.(?:com|net|org|gg)/[^\s;]*")
 # O site não mostra caminho da máquina de quem pesquisou: cada arquivo local vira o nome do dado que ele guarda.
@@ -22,7 +25,7 @@ NOMES_LOCAIS = (
     (r"solos_linha_a_linha\.md$", "replays de Roshan solo, linha a linha"),
     (r"solo_roshan\.md$", "estudo de Roshan solo"),
     (r"content/roshan_solo$", "solo de Roshan publicado no Dota Hub"),
-    (r"dota-hub/app/public/data/herois/(\w+)\.json$", r"guia do herói no Dota Hub (\1)"),
+    (r"app/public/data/herois/(\w+)\.json$", r"guia do herói no Dota Hub (\1)"),
     (r"work/hero_(\w+?)(?:_corrigido)?\.json$", r"guia do herói, base do PDF 05 (\1)"),
     (r"liq_(\w+)\.wiki$", r"Liquipedia, página de \1 (cópia local)"),
     (r"pn_(7\.\w+)\.txt$", r"patch notes \1 (cópia local)"),

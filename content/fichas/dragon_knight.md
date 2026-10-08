@@ -5,15 +5,15 @@ heroi: Dragon Knight
 patch: 7.41
 posicoes: [2, 1]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-tier1/data/draft.csv
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/1win/analise.md
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/nigma/analise.md
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/xtreme/analise.md
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/navi/analise.md
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-tier1/data/draft.csv
+- dota-tier1/work/equipes/1win/analise.md
+- dota-tier1/work/equipes/nigma/analise.md
+- dota-tier1/work/equipes/xtreme/analise.md
+- dota-tier1/work/equipes/navi/analise.md
 - https://api.opendota.com/api/heroes/49/itemPopularity
 - https://dotacoach.gg/en/heroes/dragon-knight
 ---

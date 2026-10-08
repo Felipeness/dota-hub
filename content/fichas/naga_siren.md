@@ -5,14 +5,14 @@ heroi: Naga Siren
 patch: 7.41
 posicoes: [1]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-tier1/data/draft.csv
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
-- C:/Users/felip/Desktop/dota-roshan-solo/src/solos.py
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/heroStats.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-tier1/data/draft.csv
+- dota-roshan-solo/data/solos.json
+- dota-roshan-solo/src/solos.py
 - https://api.opendota.com/api/heroes/89/itemPopularity
 - https://api.opendota.com/api/benchmarks?hero_id=89
 - https://api.opendota.com/api/scenarios/itemTimings?item=power_treads&hero_id=89

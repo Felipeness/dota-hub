@@ -3,26 +3,26 @@ id: confrontos-skywrath_mage
 heroi: Skywrath Mage
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/skywrath_mage.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/jakiro.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/rubick.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/nevermore.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/snapfire.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/disruptor.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tusk.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/lion.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/hoodwink.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/shadow_demon.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/dragon_knight.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/queenofpain.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/treant.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/monkey_king.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/ancient_apparition.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/faceless_void.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/aghs_desc_tmp.json
+- dota-hub-conteudo-novo/pro_dados/skywrath_mage.json
+- dota-hub-conteudo-novo/pro_dados/jakiro.json
+- dota-hub-conteudo-novo/pro_dados/rubick.json
+- dota-hub-conteudo-novo/pro_dados/nevermore.json
+- dota-hub-conteudo-novo/pro_dados/snapfire.json
+- dota-hub-conteudo-novo/pro_dados/disruptor.json
+- dota-hub-conteudo-novo/pro_dados/tusk.json
+- dota-hub-conteudo-novo/pro_dados/lion.json
+- dota-hub-conteudo-novo/pro_dados/hoodwink.json
+- dota-hub-conteudo-novo/pro_dados/shadow_demon.json
+- dota-hub-conteudo-novo/pro_dados/dragon_knight.json
+- dota-hub-conteudo-novo/pro_dados/queenofpain.json
+- dota-hub-conteudo-novo/pro_dados/treant.json
+- dota-hub-conteudo-novo/pro_dados/monkey_king.json
+- dota-hub-conteudo-novo/pro_dados/ancient_apparition.json
+- dota-hub-conteudo-novo/pro_dados/faceless_void.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/heroes.json
+- dota-hub-conteudo-novo/aghs_desc_tmp.json
 - https://dotacoach.gg/en/heroes/counters/skywrath-mage
 - https://liquipedia.net/dota2/Skywrath
 ---

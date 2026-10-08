@@ -3,26 +3,26 @@ id: confrontos-hoodwink
 heroi: Hoodwink
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/hoodwink.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/rubick.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tusk.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/snapfire.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/pangolier.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/jakiro.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/ember_spirit.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/disruptor.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/lion.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/dark_willow.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/phoenix.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/shadow_shaman.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/keeper_of_the_light.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/phantom_assassin.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/oracle.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/naga_siren.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/magnataur.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
+- dota-hub-conteudo-novo/pro_dados/hoodwink.json
+- dota-hub-conteudo-novo/pro_dados/rubick.json
+- dota-hub-conteudo-novo/pro_dados/tusk.json
+- dota-hub-conteudo-novo/pro_dados/snapfire.json
+- dota-hub-conteudo-novo/pro_dados/pangolier.json
+- dota-hub-conteudo-novo/pro_dados/jakiro.json
+- dota-hub-conteudo-novo/pro_dados/ember_spirit.json
+- dota-hub-conteudo-novo/pro_dados/disruptor.json
+- dota-hub-conteudo-novo/pro_dados/lion.json
+- dota-hub-conteudo-novo/pro_dados/dark_willow.json
+- dota-hub-conteudo-novo/pro_dados/phoenix.json
+- dota-hub-conteudo-novo/pro_dados/shadow_shaman.json
+- dota-hub-conteudo-novo/pro_dados/keeper_of_the_light.json
+- dota-hub-conteudo-novo/pro_dados/phantom_assassin.json
+- dota-hub-conteudo-novo/pro_dados/oracle.json
+- dota-hub-conteudo-novo/pro_dados/naga_siren.json
+- dota-hub-conteudo-novo/pro_dados/magnataur.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/heroes.json
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 

@@ -5,16 +5,16 @@ heroi: Nyx Assassin
 patch: 7.41
 posicoes: [4, 5]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-tier1/data/draft.csv
-- C:/Users/felip/Desktop/dota-tier1/data/derivados/compras.parquet
-- C:/Users/felip/Desktop/dota-tier1/data/derivados/usos_ult_bkb.parquet
-- C:/Users/felip/Desktop/dota-tier1/data/derivados/teamfight_participantes.parquet
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/heroStats.json
+- dota-imortal/data/opendota/items.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-tier1/data/draft.csv
+- dota-tier1/data/derivados/compras.parquet
+- dota-tier1/data/derivados/usos_ult_bkb.parquet
+- dota-tier1/data/derivados/teamfight_participantes.parquet
+- dota-roshan-solo/data/solos.json
 - https://api.opendota.com/api/heroes/88/itemPopularity
 - https://dotacoach.gg/heroes/nyx-assassin
 - https://liquipedia.net/dota2/7.41b

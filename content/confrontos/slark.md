@@ -3,25 +3,25 @@ id: confrontos-slark
 heroi: Slark
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/slark.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tidehunter.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/ember_spirit.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/jakiro.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/rubick.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/nevermore.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tusk.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/ursa.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tiny.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/dragon_knight.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/morphling.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/muerta.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/sand_king.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/sniper.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/rattletrap.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/juggernaut.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/leshrac.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
+- dota-hub-conteudo-novo/pro_dados/slark.json
+- dota-hub-conteudo-novo/pro_dados/tidehunter.json
+- dota-hub-conteudo-novo/pro_dados/ember_spirit.json
+- dota-hub-conteudo-novo/pro_dados/jakiro.json
+- dota-hub-conteudo-novo/pro_dados/rubick.json
+- dota-hub-conteudo-novo/pro_dados/nevermore.json
+- dota-hub-conteudo-novo/pro_dados/tusk.json
+- dota-hub-conteudo-novo/pro_dados/ursa.json
+- dota-hub-conteudo-novo/pro_dados/tiny.json
+- dota-hub-conteudo-novo/pro_dados/dragon_knight.json
+- dota-hub-conteudo-novo/pro_dados/morphling.json
+- dota-hub-conteudo-novo/pro_dados/muerta.json
+- dota-hub-conteudo-novo/pro_dados/sand_king.json
+- dota-hub-conteudo-novo/pro_dados/sniper.json
+- dota-hub-conteudo-novo/pro_dados/rattletrap.json
+- dota-hub-conteudo-novo/pro_dados/juggernaut.json
+- dota-hub-conteudo-novo/pro_dados/leshrac.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/heroes.json
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 

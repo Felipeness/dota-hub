@@ -3,23 +3,23 @@ id: confrontos-crystal_maiden
 heroi: Crystal Maiden
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/crystal_maiden.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/ogre_magi.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/rubick.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/nevermore.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/disruptor.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/pudge.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/dragon_knight.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/jakiro.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/lion.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/skywrath_mage.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/pugna.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/necrolyte.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/antimage.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/batrider.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/nyx_assassin.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/razor.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
+- dota-hub-conteudo-novo/pro_dados/crystal_maiden.json
+- dota-hub-conteudo-novo/pro_dados/ogre_magi.json
+- dota-hub-conteudo-novo/pro_dados/rubick.json
+- dota-hub-conteudo-novo/pro_dados/nevermore.json
+- dota-hub-conteudo-novo/pro_dados/disruptor.json
+- dota-hub-conteudo-novo/pro_dados/pudge.json
+- dota-hub-conteudo-novo/pro_dados/dragon_knight.json
+- dota-hub-conteudo-novo/pro_dados/jakiro.json
+- dota-hub-conteudo-novo/pro_dados/lion.json
+- dota-hub-conteudo-novo/pro_dados/skywrath_mage.json
+- dota-hub-conteudo-novo/pro_dados/pugna.json
+- dota-hub-conteudo-novo/pro_dados/necrolyte.json
+- dota-hub-conteudo-novo/pro_dados/antimage.json
+- dota-hub-conteudo-novo/pro_dados/batrider.json
+- dota-hub-conteudo-novo/pro_dados/nyx_assassin.json
+- dota-hub-conteudo-novo/pro_dados/razor.json
+- dota-imortal/data/opendota/constants_abilities.json
 ---
 
 ## Por que esses 15 oponentes

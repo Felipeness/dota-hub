@@ -5,12 +5,12 @@ heroi: Abaddon
 patch: 7.41
 posicoes: [3, 4, 5]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
-- C:/Users/felip/Desktop/dota-tier1/data/draft.csv
-- C:/Users/felip/Desktop/dota-tier1/data/jogadores_partida.csv
+- dota-imortal/data/opendota/heroStats.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-roshan-solo/data/solos.json
+- dota-tier1/data/draft.csv
+- dota-tier1/data/jogadores_partida.csv
 - https://dotacoach.gg/en/heroes/abaddon
 - https://dotacoach.gg/en/heroes/abaddon/builds/support
 - https://dotacoach.gg/en/heroes/abaddon/builds/offlane

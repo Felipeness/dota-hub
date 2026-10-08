@@ -3,25 +3,25 @@ id: confrontos-lina
 heroi: Lina
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/lina.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/nevermore.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/rubick.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/ogre_magi.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/snapfire.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/dragon_knight.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/lion.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/queenofpain.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/invoker.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/storm_spirit.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/sand_king.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/void_spirit.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/dazzle.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/keeper_of_the_light.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/muerta.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/leshrac.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
+- dota-hub-conteudo-novo/pro_dados/lina.json
+- dota-hub-conteudo-novo/pro_dados/nevermore.json
+- dota-hub-conteudo-novo/pro_dados/rubick.json
+- dota-hub-conteudo-novo/pro_dados/ogre_magi.json
+- dota-hub-conteudo-novo/pro_dados/snapfire.json
+- dota-hub-conteudo-novo/pro_dados/dragon_knight.json
+- dota-hub-conteudo-novo/pro_dados/lion.json
+- dota-hub-conteudo-novo/pro_dados/queenofpain.json
+- dota-hub-conteudo-novo/pro_dados/invoker.json
+- dota-hub-conteudo-novo/pro_dados/storm_spirit.json
+- dota-hub-conteudo-novo/pro_dados/sand_king.json
+- dota-hub-conteudo-novo/pro_dados/void_spirit.json
+- dota-hub-conteudo-novo/pro_dados/dazzle.json
+- dota-hub-conteudo-novo/pro_dados/keeper_of_the_light.json
+- dota-hub-conteudo-novo/pro_dados/muerta.json
+- dota-hub-conteudo-novo/pro_dados/leshrac.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/heroes.json
 - https://api.opendota.com/api/constants/aghs_desc
 - https://api.opendota.com/api/explorer (lane_role e patch de partidas de liga 7.40-7.41)
 - liquipedia.net (Stun, Invulnerable, Hide, mecânicas gerais de disable e invulnerabilidade)

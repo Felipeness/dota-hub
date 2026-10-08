@@ -3,25 +3,25 @@ id: confrontos-void_spirit
 heroi: Void Spirit
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/void_spirit.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/puck.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/hoodwink.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/jakiro.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tusk.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/mars.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tiny.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/queenofpain.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/invoker.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/storm_spirit.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/ember_spirit.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/zuus.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/witch_doctor.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/weaver.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/nyx_assassin.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/treant.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/phoenix.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-hub-conteudo-novo/pro_dados/void_spirit.json
+- dota-hub-conteudo-novo/pro_dados/puck.json
+- dota-hub-conteudo-novo/pro_dados/hoodwink.json
+- dota-hub-conteudo-novo/pro_dados/jakiro.json
+- dota-hub-conteudo-novo/pro_dados/tusk.json
+- dota-hub-conteudo-novo/pro_dados/mars.json
+- dota-hub-conteudo-novo/pro_dados/tiny.json
+- dota-hub-conteudo-novo/pro_dados/queenofpain.json
+- dota-hub-conteudo-novo/pro_dados/invoker.json
+- dota-hub-conteudo-novo/pro_dados/storm_spirit.json
+- dota-hub-conteudo-novo/pro_dados/ember_spirit.json
+- dota-hub-conteudo-novo/pro_dados/zuus.json
+- dota-hub-conteudo-novo/pro_dados/witch_doctor.json
+- dota-hub-conteudo-novo/pro_dados/weaver.json
+- dota-hub-conteudo-novo/pro_dados/nyx_assassin.json
+- dota-hub-conteudo-novo/pro_dados/treant.json
+- dota-hub-conteudo-novo/pro_dados/phoenix.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 

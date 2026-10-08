@@ -5,14 +5,14 @@ heroi: Muerta
 patch: 7.41
 posicoes: [1]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_patch.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
-- C:/Users/felip/Desktop/dota-tier1/data/draft.csv
-- C:/Users/felip/Desktop/dota-tier1/data/jogadores_partida.csv
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/constants_patch.json
+- dota-imortal/data/opendota/items.json
+- dota-roshan-solo/data/resumo_por_heroi.json
+- dota-tier1/data/draft.csv
+- dota-tier1/data/jogadores_partida.csv
 - https://api.opendota.com/api/heroes/138/itemPopularity
 - https://dota2protracker.com/builds/muerta-pos1-1
 - https://dotacoach.gg/en/heroes/muerta/builds/carry

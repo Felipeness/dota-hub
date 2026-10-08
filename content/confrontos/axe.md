@@ -3,25 +3,25 @@ id: confrontos-axe
 heroi: Axe
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/axe.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/nevermore.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/rubick.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/snapfire.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/jakiro.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/lion.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/hoodwink.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/mars.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/centaur.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/slardar.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/bane.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/monkey_king.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/abaddon.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/faceless_void.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/morphling.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/death_prophet.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- dota-hub-conteudo-novo/pro_dados/axe.json
+- dota-hub-conteudo-novo/pro_dados/nevermore.json
+- dota-hub-conteudo-novo/pro_dados/rubick.json
+- dota-hub-conteudo-novo/pro_dados/snapfire.json
+- dota-hub-conteudo-novo/pro_dados/jakiro.json
+- dota-hub-conteudo-novo/pro_dados/lion.json
+- dota-hub-conteudo-novo/pro_dados/hoodwink.json
+- dota-hub-conteudo-novo/pro_dados/mars.json
+- dota-hub-conteudo-novo/pro_dados/centaur.json
+- dota-hub-conteudo-novo/pro_dados/slardar.json
+- dota-hub-conteudo-novo/pro_dados/bane.json
+- dota-hub-conteudo-novo/pro_dados/monkey_king.json
+- dota-hub-conteudo-novo/pro_dados/abaddon.json
+- dota-hub-conteudo-novo/pro_dados/faceless_void.json
+- dota-hub-conteudo-novo/pro_dados/morphling.json
+- dota-hub-conteudo-novo/pro_dados/death_prophet.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/items.json
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 

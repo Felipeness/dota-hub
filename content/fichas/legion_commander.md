@@ -5,15 +5,15 @@ heroi: Legion Commander
 patch: 7.41
 posicoes: [3]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-tier1/data/draft.csv
-- C:/Users/felip/Desktop/dota-tier1/data/derivados/compras.parquet
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/heroStats.json
+- dota-imortal/data/opendota/items.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-tier1/data/draft.csv
+- dota-tier1/data/derivados/compras.parquet
+- dota-roshan-solo/data/solos.json
+- dota-roshan-solo/data/resumo_por_heroi.json
 - https://api.opendota.com/api/heroes/104/itemPopularity
 - https://api.opendota.com/api/explorer (SQL: player_matches, hero_id=104, lane_role, match_id>8.7e9)
 - https://api.opendota.com/api/explorer (SQL: purchase_log por item, hero_id=104, lane_role=3, match_id>8.7e9: minuto médio e contagem de compra por item no público)
@@ -129,4 +129,4 @@ Legion Commander é uma iniciadora e disabler de Força: trava um herói inimigo
 
 Sem solo registrado: o dataset de replays de Roshan solo (dota-roshan-solo) não tem nenhum abate solo da Legion Commander, e ela nem aparece entre os 22 a 29 heróis resumidos nos arquivos de resumo (resumo_por_heroi.json, resumo_com_suporte.json). Em equipe ela aparece em só 1 partida de todo o dataset (pro, match 8742718833): deu o último golpe aos 29:32, mas só 36,5% do dano total: Huskar (15s) e Nevermore (8s) também estavam no fosso. Amostra de 1 jogo: não dá pra tirar padrão de minuto, nível ou item.
 
-Fonte: C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json; C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
+Fonte: dota-roshan-solo/data/solos.json; dota-roshan-solo/data/resumo_por_heroi.json

@@ -4,9 +4,9 @@ titulo: "Por que cada item: Spectre"
 heroi: Spectre
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/spectre.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
+- app/public/data/herois/spectre.json
+- dota-imortal/data/opendota/items.json
+- dota-imortal/data/opendota/constants_abilities.json
 - https://liquipedia.net/dota2/Radiance
 - https://dota2.fandom.com/wiki/Radiance
 ---

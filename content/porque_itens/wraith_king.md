@@ -4,11 +4,11 @@ titulo: "Por que cada item: Wraith King"
 heroi: Wraith King
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/wraith_king.json
+- app/public/data/herois/wraith_king.json
 - https://www.dota2.com/datafeed/patchnotes?version=7.41f&language=english
 - https://www.dota2.com/datafeed/herodata?language=english&hero_id=42
 - https://www.dota2.com/datafeed/itemdata?language=english&item_id=137
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- dota-imortal/data/opendota/items.json
 - https://liquipedia.net/dota2/Black_King_Bar
 - https://www.oneesports.gg/dota2/black-king-bar-debuff-immunity-7-33/
 - https://liquipedia.net/dota2/Monkey_King_Bar

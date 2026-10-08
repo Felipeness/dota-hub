@@ -3,11 +3,11 @@ id: roshan-solo-terrorblade
 titulo: "Solo de Roshan: Terrorblade"
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_com_suporte.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/candidatos_pro.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/candidatos_pub.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/terrorblade.json
+- dota-roshan-solo/data/solos.json
+- dota-roshan-solo/data/resumo_com_suporte.json
+- dota-roshan-solo/data/candidatos_pro.json
+- dota-roshan-solo/data/candidatos_pub.json
+- app/public/data/herois/terrorblade.json
 heroi: Terrorblade
 solos: 0 puros, 4 com suporte (de 8 kills onde o TB levou o abate)
 origem: replay

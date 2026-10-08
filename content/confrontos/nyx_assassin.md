@@ -3,25 +3,25 @@ id: confrontos-nyx_assassin
 heroi: Nyx Assassin
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/nyx_assassin.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/rubick.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/snapfire.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tusk.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tiny.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/jakiro.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/warlock.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/disruptor.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/hoodwink.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/crystal_maiden.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/lich.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/void_spirit.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/venomancer.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/terrorblade.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/kunkka.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- dota-hub-conteudo-novo/pro_dados/nyx_assassin.json
+- dota-hub-conteudo-novo/pro_dados/rubick.json
+- dota-hub-conteudo-novo/pro_dados/snapfire.json
+- dota-hub-conteudo-novo/pro_dados/tusk.json
+- dota-hub-conteudo-novo/pro_dados/tiny.json
+- dota-hub-conteudo-novo/pro_dados/jakiro.json
+- dota-hub-conteudo-novo/pro_dados/warlock.json
+- dota-hub-conteudo-novo/pro_dados/disruptor.json
+- dota-hub-conteudo-novo/pro_dados/hoodwink.json
+- dota-hub-conteudo-novo/pro_dados/crystal_maiden.json
+- dota-hub-conteudo-novo/pro_dados/lich.json
+- dota-hub-conteudo-novo/pro_dados/void_spirit.json
+- dota-hub-conteudo-novo/pro_dados/venomancer.json
+- dota-hub-conteudo-novo/pro_dados/terrorblade.json
+- dota-hub-conteudo-novo/pro_dados/kunkka.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/items.json
 - https://api.opendota.com/api/explorer (player_matches.lane_role, partidas de liga 7.40+7.41)
 - https://api.opendota.com/api/heroStats (base_health, base_armor)
 - https://api.opendota.com/api/constants/aghs_desc

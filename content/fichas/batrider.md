@@ -5,14 +5,14 @@ heroi: Batrider
 patch: 7.41
 posicoes: [3, 4]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/lgd/hub.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/team-spirit/hub.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-roshan-solo/data/solos.json
+- dota-roshan-solo/data/resumo_por_heroi.json
+- dota-tier1/work/equipes/lgd/hub.json
+- dota-tier1/work/equipes/team-spirit/hub.json
 - https://api.opendota.com/api/heroes/65/itemPopularity
 - https://api.opendota.com/api/benchmarks?hero_id=65
 - https://api.opendota.com/api/heroes/65/matchups

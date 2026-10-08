@@ -4,10 +4,10 @@ titulo: "Por que cada item: Nature's Prophet"
 heroi: Nature's Prophet
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/natures_prophet.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
+- app/public/data/herois/natures_prophet.json
+- dota-imortal/data/opendota/items.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/heroStats.json
 - https://liquipedia.net/dota2/Monkey_King_Bar
 - https://liquipedia.net/dota2/Butterfly
 - https://dota2.fandom.com/wiki/Dispel

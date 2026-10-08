@@ -3,12 +3,12 @@ id: roshan-solo-medusa
 titulo: "Solo de Roshan: Medusa"
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_com_suporte.json
-- C:/Users/felip/Desktop/dota-roshan-solo/work/solo_roshan.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/medusa.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- dota-roshan-solo/data/resumo_por_heroi.json
+- dota-roshan-solo/data/resumo_com_suporte.json
+- dota-roshan-solo/work/solo_roshan.md
+- app/public/data/herois/medusa.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/items.json
 - replay 8743534086
 - replay 8743783853
 - replay 8812826983

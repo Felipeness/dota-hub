@@ -4,9 +4,9 @@ titulo: "Por que cada item: Lifestealer"
 heroi: Lifestealer
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/lifestealer.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-imortal/work/ref/heroi-lifestealer/liq_lifestealer.wiki
+- app/public/data/herois/lifestealer.json
+- dota-imortal/data/opendota/items.json
+- dota-imortal/work/ref/heroi-lifestealer/liq_lifestealer.wiki
 - https://liquipedia.net/dota2/Lifestealer
 ---
 

@@ -3,26 +3,26 @@ id: confrontos-dragon_knight
 heroi: Dragon Knight
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/dragon_knight.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/nevermore.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/jakiro.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/snapfire.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/mars.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/disruptor.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tusk.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/ursa.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/queenofpain.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/morphling.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/venomancer.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/monkey_king.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/bounty_hunter.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/alchemist.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/oracle.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/phantom_lancer.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- dota-hub-conteudo-novo/pro_dados/dragon_knight.json
+- dota-hub-conteudo-novo/pro_dados/nevermore.json
+- dota-hub-conteudo-novo/pro_dados/jakiro.json
+- dota-hub-conteudo-novo/pro_dados/snapfire.json
+- dota-hub-conteudo-novo/pro_dados/mars.json
+- dota-hub-conteudo-novo/pro_dados/disruptor.json
+- dota-hub-conteudo-novo/pro_dados/tusk.json
+- dota-hub-conteudo-novo/pro_dados/ursa.json
+- dota-hub-conteudo-novo/pro_dados/queenofpain.json
+- dota-hub-conteudo-novo/pro_dados/morphling.json
+- dota-hub-conteudo-novo/pro_dados/venomancer.json
+- dota-hub-conteudo-novo/pro_dados/monkey_king.json
+- dota-hub-conteudo-novo/pro_dados/bounty_hunter.json
+- dota-hub-conteudo-novo/pro_dados/alchemist.json
+- dota-hub-conteudo-novo/pro_dados/oracle.json
+- dota-hub-conteudo-novo/pro_dados/phantom_lancer.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/items.json
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 

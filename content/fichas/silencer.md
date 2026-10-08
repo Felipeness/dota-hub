@@ -5,18 +5,18 @@ heroi: Silencer
 patch: 7.41
 posicoes: [4, 5]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/falcons/analise.md
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/falcons/saidas/jogadores.txt
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/falcons/saidas/draft_an.txt
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/team-spirit/analise.md
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/1win/scripts/out/draft_herois.csv
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_com_suporte.json
+- dota-imortal/data/opendota/heroStats.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-tier1/work/equipes/falcons/analise.md
+- dota-tier1/work/equipes/falcons/saidas/jogadores.txt
+- dota-tier1/work/equipes/falcons/saidas/draft_an.txt
+- dota-tier1/work/equipes/team-spirit/analise.md
+- dota-tier1/work/equipes/1win/scripts/out/draft_herois.csv
+- dota-roshan-solo/data/solos.json
+- dota-roshan-solo/data/resumo_com_suporte.json
 - https://api.opendota.com/api/heroes/75/itemPopularity
 - https://dota2protracker.com/hero/Silencer
 - https://dota2protracker.com/builds/silencer-pos4-1
@@ -39,7 +39,7 @@ Silencer é um suporte de inteligência que vive de calar o inimigo: Last Word e
 #### Magic Wand (magic_wand)
 - porque: carrega com os feitiços que o próprio inimigo gasta perto de você, então rende mais em rota de roam do que Magic Stick parado na lane.
 - detalhe: cada carga devolve 15 de vida e mana; soma até 20 cargas. No dota2protracker (7000+ MMR, últimos dias) ele entra por volta dos 7 min na build mais popular do herói.
-- fonte: https://dota2protracker.com/hero/Silencer; C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- fonte: https://dota2protracker.com/hero/Silencer; dota-imortal/data/opendota/items.json
 
 #### Arcane Boots (arcane_boots)
 - minuto: 12
@@ -51,26 +51,26 @@ Silencer é um suporte de inteligência que vive de calar o inimigo: Last Word e
 - porque: depois de iniciar um gank com Last Word, o Glimmer esconde e protege contra o retalho antes de voltar pra wave.
 - detalhe: dá invisibilidade, +20 de velocidade e barreira que absorve até 375 de dano mágico por 5 s; pode ser usado em você ou num aliado, inclusive canalizando.
 - contra: nukes de burst mágico de alcance (ex.: Lina, Zeus): a barreira absorve o estouro inicial e dá tempo de sair da área antes do 2º feitiço.
-- fonte: https://dota2protracker.com/builds/silencer-pos4-1 (3º item da build de pos 4); C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- fonte: https://dota2protracker.com/builds/silencer-pos4-1 (3º item da build de pos 4); dota-imortal/data/opendota/items.json
 
 #### Force Staff (force_staff)
 - minuto: 26
 - porque: empurra você pra perto de quem vai castar (fecha o Last Word) ou te tira do meio de uma iniciação antes do Global Silence.
 - detalhe: empurra 600 unidades na direção que o alvo está olhando, 850 de alcance em inimigo, não interrompe a ação do alvo (não cancela channel).
 - combo: Last Word num inimigo com fuga lenta + Force Staff nele quando ele tenta sair da área força o timer de 4 s a estourar perto de você, garantindo o silence e o dano.
-- fonte: https://dota2protracker.com/builds/silencer-pos4-1 (4º item da build de pos 4, aos 26 min em 37,5% das partidas da amostra; no agregado geral do herói, não exclusivo do pos 4, o item sai aos 23 min em 43% das partidas); C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- fonte: https://dota2protracker.com/builds/silencer-pos4-1 (4º item da build de pos 4, aos 26 min em 37,5% das partidas da amostra; no agregado geral do herói, não exclusivo do pos 4, o item sai aos 23 min em 43% das partidas); dota-imortal/data/opendota/items.json
 
 ### Situacionais
 
 #### Aghanim's Shard (aghanims_shard)
 - contra: linhas com dois suportes ou carry que fica colado em aliado: o ricochete de Glaives of Wisdom rouba intelecto de um segundo alvo no mesmo acerto.
 - combo: Glaives of Wisdom com Shard ricocheteia 1 vez pra um inimigo aleatório a até 450 de distância e rouba +1 de intelecto extra, empilhando o dano mágico de Glaives em dois heróis de uma vez.
-- fonte: https://dotacoach.gg/en/heroes/silencer (dano de Glaives escala com Intelecto, Shard aumenta o roubo); C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
+- fonte: https://dotacoach.gg/en/heroes/silencer (dano de Glaives escala com Intelecto, Shard aumenta o roubo); dota-imortal/data/opendota/constants_abilities.json
 
 #### Blink Dagger (blink)
 - porque: fecha a distância num instante, entrando no alcance de 900 do Last Word antes que o alvo use a fuga e escape da enchante.
 - contra: alvos com fuga ou escape rápido fora do alcance de 900 do Last Word: o blink fecha a distância pra acertar antes que eles saiam.
-- fonte: https://api.opendota.com/api/heroes/75/itemPopularity (late_game_items, 1 ocorrência registrada na amostra: item raro, mas aparece; a API não informa o total de inventários amostrados); C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json (blink_range 1200); C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json (Last Word, abilitycastrange 900)
+- fonte: https://api.opendota.com/api/heroes/75/itemPopularity (late_game_items, 1 ocorrência registrada na amostra: item raro, mas aparece; a API não informa o total de inventários amostrados); dota-imortal/data/opendota/items.json (blink_range 1200); dota-imortal/data/opendota/constants_abilities.json (Last Word, abilitycastrange 900)
 
 ## Pos 5 (suporte duro)
 
@@ -82,7 +82,7 @@ Silencer é um suporte de inteligência que vive de calar o inimigo: Last Word e
 #### Magic Wand (magic_wand)
 - porque: barato e sempre relevante numa dupla lane, carrega enquanto você fica perto do inimigo pra zonear.
 - detalhe: mesma lógica do pos 4; o precursor dele, Magic Stick, é o item mais comprado na fase inicial no OpenDota (itemPopularity, todas as partidas, 32 ocorrências), o que mostra o time todo comprando a linha stick/wand cedo.
-- fonte: https://api.opendota.com/api/heroes/75/itemPopularity; C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- fonte: https://api.opendota.com/api/heroes/75/itemPopularity; dota-imortal/data/opendota/items.json
 
 #### Arcane Boots (arcane_boots)
 - porque: sem gold de farm, Arcane Boots é a forma mais barata de manter o time castando: 150 de mana de volta cobre Dagger de aliado, feitiço de outro suporte e os seus próprios.
@@ -93,13 +93,13 @@ Silencer é um suporte de inteligência que vive de calar o inimigo: Last Word e
 - porque: escudo físico barato pra proteger o carry no all-in antes de ter ouro pra Solar Crest.
 - detalhe: absorve 250 de dano físico por 7 s; compartilha recarga com Solar Crest (não leve os dois ativos ao mesmo tempo, é upgrade, não soma).
 - contra: pick de burst físico (ex.: Phantom Assassin crítico, Faceless Void queda de Chronosphere): a barreira segura o primeiro golpe que mataria o carry.
-- fonte: https://api.opendota.com/api/heroes/75/itemPopularity (13 ocorrências na fase intermediária); C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- fonte: https://api.opendota.com/api/heroes/75/itemPopularity (13 ocorrências na fase intermediária); dota-imortal/data/opendota/items.json
 
 #### Glimmer Cape (glimmer_cape)
 - porque: upgrade do Pavise: some com o aliado perseguido e ainda segura dano mágico.
 - detalhe: invisibilidade + barreira de 375 de dano mágico por 5 s, usável em canalização.
 - combo: Glimmer no aliado que está canalizando um Black Hole ou Chronosphere sob dive inimigo: ele vira invisível no meio do combo e segura o burst que tentaria interromper ou matar na saída.
-- fonte: https://api.opendota.com/api/heroes/75/itemPopularity (17 ocorrências na fase intermediária, mais 17 na tardia); C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- fonte: https://api.opendota.com/api/heroes/75/itemPopularity (17 ocorrências na fase intermediária, mais 17 na tardia); dota-imortal/data/opendota/items.json
 
 ### Situacionais
 
@@ -111,13 +111,13 @@ Silencer é um suporte de inteligência que vive de calar o inimigo: Last Word e
 #### Solar Crest (solar_crest)
 - porque: buff só em aliado (não tem versão pra debuffar inimigo neste patch): +5 de armadura, +60 de velocidade de ataque e barreira de 350 no seu carry pra ganhar a troca de dano físico.
 - contra: carry inimigo que depende de dano físico sustentado em troca curta: o alvo do Solar Crest aguenta mais autos e bate mais forte na resposta.
-- fonte: https://api.opendota.com/api/heroes/75/itemPopularity (6 ocorrências na fase intermediária, 9 na tardia); C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- fonte: https://api.opendota.com/api/heroes/75/itemPopularity (6 ocorrências na fase intermediária, 9 na tardia); dota-imortal/data/opendota/items.json
 
 #### Ghost Scepter (ghost)
 - porque: item barato de 1.500 que dá imunidade a dano físico por 4 s, a única forma de aguentar o burst sem gastar o ativo de Glimmer ou Force Staff.
 - contra: carry de dano físico puro sem magia relevante (ex.: Phantom Assassin, Juggernaut): 4 s de imunidade a dano físico pra sobreviver ao burst, mas você fica -30% mais vulnerável a dano mágico e não ataca enquanto durar, então só vale contra quem bate de perto.
-- fonte: https://api.opendota.com/api/heroes/75/itemPopularity (5 ocorrências na fase intermediária); C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json (custo 1.500, duração 4.0, -30% dano mágico)
+- fonte: https://api.opendota.com/api/heroes/75/itemPopularity (5 ocorrências na fase intermediária); dota-imortal/data/opendota/items.json (custo 1.500, duração 4.0, -30% dano mágico)
 
 ## Roshan
 
-Sem dado de Roshan solo: nos replays locais (1.328 partidas da base), Silencer nunca aparece como o herói que soloa Roshan (0 casos como principal). Ele aparece só 2 vezes dando suporte no fosso enquanto outro carry soloava (Spectre numa partida, Alchemist em outra), amostra pequena demais pra tirar padrão (fonte: C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_com_suporte.json).
+Sem dado de Roshan solo: nos replays locais (1.328 partidas da base), Silencer nunca aparece como o herói que soloa Roshan (0 casos como principal). Ele aparece só 2 vezes dando suporte no fosso enquanto outro carry soloava (Spectre numa partida, Alchemist em outra), amostra pequena demais pra tirar padrão (fonte: dota-roshan-solo/data/resumo_com_suporte.json).

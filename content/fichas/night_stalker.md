@@ -5,13 +5,13 @@ heroi: Night Stalker
 patch: 7.41
 posicoes: [3, 2]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-tier1/data/draft.csv
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/items.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-tier1/data/draft.csv
+- dota-roshan-solo/data/solos.json
+- dota-roshan-solo/data/resumo_por_heroi.json
 - https://dota2protracker.com/builds/night-stalker-pos3-1
 - https://dota2protracker.com/builds/night-stalker-pos2-1
 - https://dota2protracker.com/hero/Night+Stalker

@@ -4,10 +4,10 @@ titulo: "Por que cada item: Lone Druid"
 heroi: Lone Druid
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/lone_druid.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
+- app/public/data/herois/lone_druid.json
+- dota-imortal/data/opendota/items.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-roshan-solo/data/solos.json
 - https://dota2.fandom.com/wiki/Lone_Druid
 - https://dota2protracker.com/builds/lone-druid-pos1-1
 - https://dota2protracker.com/hero/legacy/Lone+Druid

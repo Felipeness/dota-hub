@@ -5,20 +5,20 @@ heroi: Tinker
 patch: 7.41
 posicoes: [2]
 fontes:
-- C:/Users/felip/Desktop/dota-tier1/data/draft.csv
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/xtreme/hub.json
-- C:/Users/felip/Desktop/dota-tier1/data/partidas/8781669218/eventos.jsonl
-- C:/Users/felip/Desktop/dota-tier1/data/partidas/8813156153/eventos.jsonl
-- C:/Users/felip/Desktop/dota-tier1/data/partidas/8813536582/eventos.jsonl
-- C:/Users/felip/Desktop/dota-tier1/data/partidas/8817145578/eventos.jsonl
-- C:/Users/felip/Desktop/dota-tier1/data/partidas/8827492535/eventos.jsonl
-- C:/Users/felip/Desktop/dota-tier1/data/partidas/8924616191/eventos.jsonl
-- C:/Users/felip/Desktop/dota-tier1/data/partidas/8927288399/eventos.jsonl
-- C:/Users/felip/Desktop/dota-tier1/data/partidas/8943143428/eventos.jsonl
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
+- dota-tier1/data/draft.csv
+- dota-tier1/work/equipes/xtreme/hub.json
+- dota-tier1/data/partidas/8781669218/eventos.jsonl
+- dota-tier1/data/partidas/8813156153/eventos.jsonl
+- dota-tier1/data/partidas/8813536582/eventos.jsonl
+- dota-tier1/data/partidas/8817145578/eventos.jsonl
+- dota-tier1/data/partidas/8827492535/eventos.jsonl
+- dota-tier1/data/partidas/8924616191/eventos.jsonl
+- dota-tier1/data/partidas/8927288399/eventos.jsonl
+- dota-tier1/data/partidas/8943143428/eventos.jsonl
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-imortal/data/opendota/heroStats.json
 - https://api.opendota.com/api/heroes/34/itemPopularity
 ---
 

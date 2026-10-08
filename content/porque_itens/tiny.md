@@ -4,15 +4,15 @@ titulo: "Por que cada item: Tiny"
 heroi: Tiny
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/tiny.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/work/ref/heroi-tiny/patch_7.40.json
-- C:/Users/felip/Desktop/dota-imortal/work/ref/heroi-tiny/patch_7.41.json
-- C:/Users/felip/Desktop/dota-imortal/work/ref/heroi-tiny/patch_7.41b.json
-- C:/Users/felip/Desktop/dota-imortal/work/ref/heroi-tiny/patch_7.41c.json
-- C:/Users/felip/Desktop/dota-imortal/work/ref/heroi-tiny/patch_7.41e.json
-- C:/Users/felip/Desktop/dota-imortal/work/ref/heroi-tiny/patch_7.41f.json
+- app/public/data/herois/tiny.json
+- dota-imortal/data/opendota/items.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/work/ref/heroi-tiny/patch_7.40.json
+- dota-imortal/work/ref/heroi-tiny/patch_7.41.json
+- dota-imortal/work/ref/heroi-tiny/patch_7.41b.json
+- dota-imortal/work/ref/heroi-tiny/patch_7.41c.json
+- dota-imortal/work/ref/heroi-tiny/patch_7.41e.json
+- dota-imortal/work/ref/heroi-tiny/patch_7.41f.json
 - https://liquipedia.net/dota2/Tiny
 ---
 

@@ -3,12 +3,12 @@ id: roshan-solo-lifestealer
 titulo: "Solo de Roshan: Lifestealer"
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-roshan-solo/work/solo_roshan.md
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
-- C:/Users/felip/Desktop/dota-imortal/work/ref/heroi-lifestealer/liq_lifestealer.wiki
+- dota-roshan-solo/work/solo_roshan.md
+- dota-roshan-solo/data/resumo_por_heroi.json
+- dota-roshan-solo/data/solos.json
+- dota-imortal/work/ref/heroi-lifestealer/liq_lifestealer.wiki
 - https://liquipedia.net/dota2/Lifestealer
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/lifestealer.json
+- app/public/data/herois/lifestealer.json
 heroi: Lifestealer
 solos: 0
 origem: recomendado

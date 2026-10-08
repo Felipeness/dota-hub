@@ -3,26 +3,26 @@ id: confrontos-primal_beast
 heroi: Primal Beast
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/primal_beast.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/jakiro.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/pangolier.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/hoodwink.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/mars.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tusk.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/warlock.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/axe.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/centaur.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/ember_spirit.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/puck.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tinker.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/shadow_shaman.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/terrorblade.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/sniper.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/largo.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/razor.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
+- dota-hub-conteudo-novo/pro_dados/primal_beast.json
+- dota-hub-conteudo-novo/pro_dados/jakiro.json
+- dota-hub-conteudo-novo/pro_dados/pangolier.json
+- dota-hub-conteudo-novo/pro_dados/hoodwink.json
+- dota-hub-conteudo-novo/pro_dados/mars.json
+- dota-hub-conteudo-novo/pro_dados/tusk.json
+- dota-hub-conteudo-novo/pro_dados/warlock.json
+- dota-hub-conteudo-novo/pro_dados/axe.json
+- dota-hub-conteudo-novo/pro_dados/centaur.json
+- dota-hub-conteudo-novo/pro_dados/ember_spirit.json
+- dota-hub-conteudo-novo/pro_dados/puck.json
+- dota-hub-conteudo-novo/pro_dados/tinker.json
+- dota-hub-conteudo-novo/pro_dados/shadow_shaman.json
+- dota-hub-conteudo-novo/pro_dados/terrorblade.json
+- dota-hub-conteudo-novo/pro_dados/sniper.json
+- dota-hub-conteudo-novo/pro_dados/largo.json
+- dota-hub-conteudo-novo/pro_dados/razor.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/heroes.json
 - https://api.opendota.com/api/constants/aghs_desc
 - OpenDota explorer (match_patch + player_matches, patches 7.40-7.41, lane_role)
 ---

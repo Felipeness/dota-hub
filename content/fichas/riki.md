@@ -5,16 +5,16 @@ heroi: Riki
 patch: 7.41
 posicoes: [1]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_patch.json
-- C:/Users/felip/Desktop/dota-tier1/data/raw/protracker/meta.html
-- C:/Users/felip/Desktop/dota-tier1/data/raw/protracker/pubs-vs-pro.html
-- C:/Users/felip/Desktop/dota-tier1/data/jogadores_partida.csv
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-imortal/data/opendota/constants_patch.json
+- dota-tier1/data/raw/protracker/meta.html
+- dota-tier1/data/raw/protracker/pubs-vs-pro.html
+- dota-tier1/data/jogadores_partida.csv
+- dota-roshan-solo/data/solos.json
+- dota-roshan-solo/data/resumo_por_heroi.json
 - https://api.opendota.com/api/heroes/32/itemPopularity
 - https://api.opendota.com/api/heroes/32/matchups
 ---

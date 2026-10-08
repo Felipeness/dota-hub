@@ -5,15 +5,15 @@ heroi: Ogre Magi
 patch: 7.41
 posicoes: [5]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
-- C:/Users/felip/Desktop/dota-tier1/data/draft.csv
-- C:/Users/felip/Desktop/dota-tier1/data/jogadores_partida.csv
-- C:/Users/felip/Desktop/dota-tier1/data/derivados/compras.parquet
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/heroStats.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-roshan-solo/data/resumo_por_heroi.json
+- dota-tier1/data/draft.csv
+- dota-tier1/data/jogadores_partida.csv
+- dota-tier1/data/derivados/compras.parquet
 - https://api.opendota.com/api/heroes/84/itemPopularity
 - https://dota2protracker.com/m/hero/Ogre%20Magi
 - https://www.gosugamers.net/dota2/news/78166-dota-2-patch-7-41-removes-facets-and-adds-nine-new-items

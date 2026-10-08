@@ -3,25 +3,25 @@ id: confrontos-windrunner
 heroi: Windranger
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/windrunner.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/nevermore.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/rubick.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/snapfire.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/jakiro.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tusk.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tiny.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/ember_spirit.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/dragon_knight.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/luna.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/templar_assassin.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/necrolyte.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/treant.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/morphling.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/weaver.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/alchemist.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
+- dota-hub-conteudo-novo/pro_dados/windrunner.json
+- dota-hub-conteudo-novo/pro_dados/nevermore.json
+- dota-hub-conteudo-novo/pro_dados/rubick.json
+- dota-hub-conteudo-novo/pro_dados/snapfire.json
+- dota-hub-conteudo-novo/pro_dados/jakiro.json
+- dota-hub-conteudo-novo/pro_dados/tusk.json
+- dota-hub-conteudo-novo/pro_dados/tiny.json
+- dota-hub-conteudo-novo/pro_dados/ember_spirit.json
+- dota-hub-conteudo-novo/pro_dados/dragon_knight.json
+- dota-hub-conteudo-novo/pro_dados/luna.json
+- dota-hub-conteudo-novo/pro_dados/templar_assassin.json
+- dota-hub-conteudo-novo/pro_dados/necrolyte.json
+- dota-hub-conteudo-novo/pro_dados/treant.json
+- dota-hub-conteudo-novo/pro_dados/morphling.json
+- dota-hub-conteudo-novo/pro_dados/weaver.json
+- dota-hub-conteudo-novo/pro_dados/alchemist.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/heroes.json
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 

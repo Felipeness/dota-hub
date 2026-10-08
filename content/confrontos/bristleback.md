@@ -3,25 +3,25 @@ id: confrontos-bristleback
 heroi: Bristleback
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/bristleback.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/rubick.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tusk.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/jakiro.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/nevermore.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/hoodwink.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/beastmaster.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/pangolier.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/mars.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tidehunter.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/brewmaster.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/templar_assassin.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/techies.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/nyx_assassin.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/keeper_of_the_light.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/phoenix.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
+- dota-hub-conteudo-novo/pro_dados/bristleback.json
+- dota-hub-conteudo-novo/pro_dados/rubick.json
+- dota-hub-conteudo-novo/pro_dados/tusk.json
+- dota-hub-conteudo-novo/pro_dados/jakiro.json
+- dota-hub-conteudo-novo/pro_dados/nevermore.json
+- dota-hub-conteudo-novo/pro_dados/hoodwink.json
+- dota-hub-conteudo-novo/pro_dados/beastmaster.json
+- dota-hub-conteudo-novo/pro_dados/pangolier.json
+- dota-hub-conteudo-novo/pro_dados/mars.json
+- dota-hub-conteudo-novo/pro_dados/tidehunter.json
+- dota-hub-conteudo-novo/pro_dados/brewmaster.json
+- dota-hub-conteudo-novo/pro_dados/templar_assassin.json
+- dota-hub-conteudo-novo/pro_dados/techies.json
+- dota-hub-conteudo-novo/pro_dados/nyx_assassin.json
+- dota-hub-conteudo-novo/pro_dados/keeper_of_the_light.json
+- dota-hub-conteudo-novo/pro_dados/phoenix.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/heroes.json
 - https://api.opendota.com/api/constants/aghs_desc
 - https://api.opendota.com/api/explorer (lane_role por heroi, partidas de liga 7.40-7.41)
 - liquipedia.net (mecanica de Evasion, via busca)

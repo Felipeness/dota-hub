@@ -4,15 +4,15 @@ titulo: "Por que cada item: Terrorblade"
 heroi: Terrorblade
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/terrorblade.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-imortal/work/ref/mecanicas/items.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/work/ref/heroi-terrorblade/liq_terrorblade.wiki
-- C:/Users/felip/Desktop/dota-imortal/work/ref/mecanicas/pn_7.41.txt
-- C:/Users/felip/Desktop/dota-imortal/work/ref/mecanicas/pn_7.41e.txt
-- C:/Users/felip/Desktop/dota-imortal/work/ref/mecanicas/pn_7.41f.txt
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
+- app/public/data/herois/terrorblade.json
+- dota-imortal/data/opendota/items.json
+- dota-imortal/work/ref/mecanicas/items.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/work/ref/heroi-terrorblade/liq_terrorblade.wiki
+- dota-imortal/work/ref/mecanicas/pn_7.41.txt
+- dota-imortal/work/ref/mecanicas/pn_7.41e.txt
+- dota-imortal/work/ref/mecanicas/pn_7.41f.txt
+- dota-roshan-solo/data/solos.json
 ---
 
 ## Power Treads (power_treads)

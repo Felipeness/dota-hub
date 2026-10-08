@@ -5,14 +5,14 @@ heroi: Queen of Pain
 patch: 7.41
 posicoes: [2]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-tier1/data/draft.csv
-- C:/Users/felip/Desktop/dota-tier1/data/partidas/ (compras e golpes em Roshan das 66 partidas pos2 e 71 partidas totais com Queen of Pain, via draft.csv)
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/heroStats.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-tier1/data/draft.csv
+- dota-tier1/data/partidas/ (compras e golpes em Roshan das 66 partidas pos2 e 71 partidas totais com Queen of Pain, via draft.csv)
+- dota-roshan-solo/data/resumo_por_heroi.json
 - https://api.opendota.com/api/heroes/39/itemPopularity
 - https://dotacoach.gg/en/heroes/queen-of-pain/builds/mid
 - https://dotacoach.gg/en/heroes/queen-of-pain

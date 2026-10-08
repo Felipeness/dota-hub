@@ -5,13 +5,13 @@ heroi: Meepo
 patch: 7.41
 posicoes: [1]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-tier1/data/draft.csv
-- C:/Users/felip/Desktop/dota-tier1/data/derivados/compras.parquet
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-tier1/data/draft.csv
+- dota-tier1/data/derivados/compras.parquet
+- dota-roshan-solo/data/resumo_por_heroi.json
 - https://api.opendota.com/api/heroes/82/itemPopularity
 - https://api.opendota.com/api/explorer
 - https://liquipedia.net/dota2/Meepo
@@ -90,4 +90,4 @@ Meepo é um carry de Agilidade que se multiplica em até 5 corpos (Divided We St
 
 Só 1 solo registrado no dataset local (jogador "yuma", partida tardia): aconteceu aos 35:38, com o Meepo no nível 24, e o inventário era quase idêntico ao build acima montado de forma independente a partir do Tier 1 (Aghanim's Scepter, Sange and Yasha, Eye of Skadi, Power Treads, Wraith Band e Disperser), o que bate com os dois dados concordando sobre o core do herói. O Meepo saiu com a aegis (1/1) e, nos 3 minutos seguintes, o time dele derrubou uma torre (1/1), mas havia um aliado a menos de 2.500 de distância no início do solo (1/1), então não foi um 1v5 isolado longe do time, e sim um solo com apoio próximo enquanto o resto fazia outra coisa no mapa. Amostra de 1 jogo: não dá pra tirar um minuto ou nível medianos confiáveis, só este ponto único.
 
-Fonte: C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
+Fonte: dota-roshan-solo/data/resumo_por_heroi.json

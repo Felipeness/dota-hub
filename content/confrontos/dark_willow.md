@@ -3,25 +3,25 @@ id: confrontos-dark_willow
 heroi: Dark Willow
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/dark_willow.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/hoodwink.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tusk.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/nevermore.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/ember_spirit.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/rubick.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/snapfire.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/disruptor.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/lion.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/spirit_breaker.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/zuus.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/earthshaker.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/bane.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/bounty_hunter.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/treant.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/alchemist.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
+- dota-hub-conteudo-novo/pro_dados/dark_willow.json
+- dota-hub-conteudo-novo/pro_dados/hoodwink.json
+- dota-hub-conteudo-novo/pro_dados/tusk.json
+- dota-hub-conteudo-novo/pro_dados/nevermore.json
+- dota-hub-conteudo-novo/pro_dados/ember_spirit.json
+- dota-hub-conteudo-novo/pro_dados/rubick.json
+- dota-hub-conteudo-novo/pro_dados/snapfire.json
+- dota-hub-conteudo-novo/pro_dados/disruptor.json
+- dota-hub-conteudo-novo/pro_dados/lion.json
+- dota-hub-conteudo-novo/pro_dados/spirit_breaker.json
+- dota-hub-conteudo-novo/pro_dados/zuus.json
+- dota-hub-conteudo-novo/pro_dados/earthshaker.json
+- dota-hub-conteudo-novo/pro_dados/bane.json
+- dota-hub-conteudo-novo/pro_dados/bounty_hunter.json
+- dota-hub-conteudo-novo/pro_dados/treant.json
+- dota-hub-conteudo-novo/pro_dados/alchemist.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/heroes.json
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 

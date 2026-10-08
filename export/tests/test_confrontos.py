@@ -11,7 +11,7 @@ id: confrontos-morphling
 heroi: Morphling
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/morphling.json
+- dota-hub-conteudo-novo/pro_dados/morphling.json
 ---
 
 ## Como essa lista foi montada
@@ -78,7 +78,7 @@ def test_fontes_viram_nome_legivel_sem_caminho_e_sem_repetir():
     ("Soul Ring aos 6 min, ficha earthshaker.md", "Soul Ring aos 6 min, ficha do Earthshaker no Hub"),
     ("GPM 520 (brewmaster.json, confrontos)", "GPM 520 (partidas pro, confrontos)"),
     ("BKB (content/porque_itens/morphling.md)", "BKB (guia do Morphling no Hub)"),
-    ("arquivo C:/Users/x/Desktop/dota-imortal/data/opendota/items.json", "arquivo items.json do OpenDota (patch 7.41)"),
+    ("arquivo dota-imortal/data/opendota/items.json", "arquivo items.json do OpenDota (patch 7.41)"),
     ("Manta (manta.json não é herói)", "Manta (manta.json não é herói)"),
 ])
 def test_texto_troca_arquivo_citado_por_nome_curto(bruto, legivel):

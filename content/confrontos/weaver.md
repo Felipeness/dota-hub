@@ -3,13 +3,13 @@ id: confrontos-weaver
 heroi: Weaver
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/weaver.json (resumo, itens, confrontos)
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tusk.json, shadow_demon.json, jakiro.json, nevermore.json, queenofpain.json, batrider.json, tiny.json, razor.json, ursa.json, crystal_maiden.json, leshrac.json, gyrocopter.json, morphling.json, doom_bringer.json, monkey_king.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- dota-hub-conteudo-novo/pro_dados/weaver.json (resumo, itens, confrontos)
+- dota-hub-conteudo-novo/pro_dados/tusk.json, shadow_demon.json, jakiro.json, nevermore.json, queenofpain.json, batrider.json, tiny.json, razor.json, ursa.json, crystal_maiden.json, leshrac.json, gyrocopter.json, morphling.json, doom_bringer.json, monkey_king.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/heroStats.json
+- dota-imortal/data/opendota/items.json
 - https://api.opendota.com/api/constants/aghs_desc
 - https://liquipedia.net/dota2/Toss (mecânica de debuff immunity pós 7.33: Toss não agarra alvo com Black King Bar ativo)
 ---

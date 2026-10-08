@@ -3,11 +3,11 @@ id: confrontos-slardar
 heroi: Slardar
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/slardar.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/{tusk,hoodwink,jakiro,rubick,pangolier,mars,centaur,tidehunter,queenofpain,storm_spirit,terrorblade,tiny,life_stealer,mirana,dark_seer,void_spirit}.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-hub-conteudo-novo/pro_dados/slardar.json
+- dota-hub-conteudo-novo/pro_dados/{tusk,hoodwink,jakiro,rubick,pangolier,mars,centaur,tidehunter,queenofpain,storm_spirit,terrorblade,tiny,life_stealer,mirana,dark_seer,void_spirit}.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
 - https://api.opendota.com/api/constants/aghs_desc
 - https://api.opendota.com/api/explorer (lane_role e xp_t de partidas de liga 7.40-7.41)
 ---

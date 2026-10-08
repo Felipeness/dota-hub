@@ -5,13 +5,13 @@ heroi: Zeus
 patch: 7.41
 posicoes: [2]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/1win/scripts/out/draft_herois.csv
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/aurora/tmp/draft_pre.csv
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/heroStats.json
+- dota-imortal/data/opendota/items.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-tier1/work/equipes/1win/scripts/out/draft_herois.csv
+- dota-tier1/work/equipes/aurora/tmp/draft_pre.csv
 - https://api.opendota.com/api/heroes/22/itemPopularity
 - https://dotacoach.gg/en/heroes/zeus/builds/mid
 - https://dotacoach.gg/en/heroes/zeus/builds/support

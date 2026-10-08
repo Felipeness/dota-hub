@@ -5,16 +5,16 @@ heroi: Ancient Apparition
 patch: 7.41
 posicoes: [5]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-tier1/data/derivados/compras.parquet
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/1win/scripts/out/draft_herois.csv
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/aurora/tmp/draft_pre.csv
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_com_suporte.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/heroStats.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-tier1/data/derivados/compras.parquet
+- dota-tier1/work/equipes/1win/scripts/out/draft_herois.csv
+- dota-tier1/work/equipes/aurora/tmp/draft_pre.csv
+- dota-roshan-solo/data/resumo_por_heroi.json
+- dota-roshan-solo/data/resumo_com_suporte.json
 - https://api.opendota.com/api/heroes/68/itemPopularity
 - https://dota2protracker.com/hero/Ancient+Apparition
 - https://dota2protracker.com/builds/ancient-apparition-pos5-1

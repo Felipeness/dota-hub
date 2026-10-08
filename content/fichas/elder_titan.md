@@ -5,14 +5,14 @@ heroi: Elder Titan
 patch: 7.41
 posicoes: [3, 4, 5]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-tier1/data/draft.csv
-- C:/Users/felip/Desktop/dota-tier1/data/derivados/compras.parquet
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/heroStats.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-tier1/data/draft.csv
+- dota-tier1/data/derivados/compras.parquet
+- dota-roshan-solo/data/solos.json
 - https://api.opendota.com/api/heroes/103/itemPopularity
 - https://dotacoach.gg/en/heroes/elder-titan
 ---
@@ -181,4 +181,4 @@ Elder Titan é um iniciador e disabler de Força: manda o Astral Spirit pra fren
 
 Sem abate solo registrado: no dataset de replays de Roshan solo (dota-roshan-solo, 1.328 partidas, 2.720 abates de Roshan registrados), Elder Titan nunca aparece como o herói que deu o abate, solo ou em dupla. Ele aparece em 4 desses registros como aliado presente perto do fosso durante o abate de outro herói (nunca como a maior fonte de dano), sempre em abates classificados como "time" de outro herói (nenhum caso de "solo com suporte"). Não há evidência de que ele costume ir sozinho no Roshan; o padrão observado é só acompanhar.
 
-Fonte: C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
+Fonte: dota-roshan-solo/data/solos.json

@@ -45,10 +45,10 @@ def test_extras_guardam_chaves_fora_do_padrao(tmp_path):
     assert item["extras"] == {"origem": "recomendado", "itens": ["BKB"]}
 
 @pytest.mark.parametrize(("fonte", "legivel"), [
-    ("C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json", "items.json do OpenDota (patch 7.41)"),
-    ("C:/Users/felip/Desktop/dota-hub/app/public/data/herois/sven.json (guia.itens_core)", "guia do herói no Dota Hub (sven) (guia.itens_core)"),
-    ("C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json", "replays de Roshan solo (solos.json)"),
-    ("C:/Users/felip/Desktop/qualquer/coisa/nova.json", "nova.json"),
+    ("dota-imortal/data/opendota/items.json", "items.json do OpenDota (patch 7.41)"),
+    ("app/public/data/herois/sven.json (guia.itens_core)", "guia do herói no Dota Hub (sven) (guia.itens_core)"),
+    ("dota-roshan-solo/data/solos.json", "replays de Roshan solo (solos.json)"),
+    ("work/qualquer/coisa/nova.json", "nova.json"),
     ("www.dota2.com/datafeed/patchnotes?version=7.41f (oficial)", "https://www.dota2.com/datafeed/patchnotes?version=7.41f (oficial)"),
     ("https://liquipedia.net/dota2/Roshan", "https://liquipedia.net/dota2/Roshan"),
     ("items.json (sphere.abilities)", "items.json (sphere.abilities)"),
@@ -59,4 +59,4 @@ def test_fonte_legivel_esconde_caminho_local_e_completa_url(fonte, legivel):
 
 def test_roshan_solo_publicado_nao_mostra_caminho_local():
     fontes = [f for c in conteudo.carregar(RAIZ / "roshan_solo") for f in c["fontes"]]
-    assert fontes and not [f for f in fontes if "C:/" in f]
+    assert fontes and not [f for f in fontes if "C:/" in f or "Users/" in f]

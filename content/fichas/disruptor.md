@@ -5,14 +5,14 @@ heroi: Disruptor
 patch: 7.41
 posicoes: [5, 4]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_com_suporte.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/1win/scripts/out/draft_herois.csv
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/heroStats.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-roshan-solo/data/resumo_por_heroi.json
+- dota-roshan-solo/data/resumo_com_suporte.json
+- dota-tier1/work/equipes/1win/scripts/out/draft_herois.csv
 - https://api.opendota.com/api/heroes/87/itemPopularity
 - https://api.opendota.com/api/benchmarks?hero_id=87
 - https://dotacoach.gg/heroes/disruptor

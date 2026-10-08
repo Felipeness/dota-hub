@@ -3,26 +3,26 @@ id: confrontos-batrider
 heroi: Batrider
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/batrider.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/jakiro.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tusk.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/hoodwink.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/disruptor.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/queenofpain.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tiny.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/mars.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tidehunter.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/shadow_demon.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/bristleback.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/weaver.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/medusa.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/enigma.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/oracle.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/bane.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- dota-hub-conteudo-novo/pro_dados/batrider.json
+- dota-hub-conteudo-novo/pro_dados/jakiro.json
+- dota-hub-conteudo-novo/pro_dados/tusk.json
+- dota-hub-conteudo-novo/pro_dados/hoodwink.json
+- dota-hub-conteudo-novo/pro_dados/disruptor.json
+- dota-hub-conteudo-novo/pro_dados/queenofpain.json
+- dota-hub-conteudo-novo/pro_dados/tiny.json
+- dota-hub-conteudo-novo/pro_dados/mars.json
+- dota-hub-conteudo-novo/pro_dados/tidehunter.json
+- dota-hub-conteudo-novo/pro_dados/shadow_demon.json
+- dota-hub-conteudo-novo/pro_dados/bristleback.json
+- dota-hub-conteudo-novo/pro_dados/weaver.json
+- dota-hub-conteudo-novo/pro_dados/medusa.json
+- dota-hub-conteudo-novo/pro_dados/enigma.json
+- dota-hub-conteudo-novo/pro_dados/oracle.json
+- dota-hub-conteudo-novo/pro_dados/bane.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/items.json
 - https://api.opendota.com/api/constants/aghs_desc
 - https://dota2.fandom.com/wiki/Batrider (secao Flaming Lasso: quebra, spell block)
 ---

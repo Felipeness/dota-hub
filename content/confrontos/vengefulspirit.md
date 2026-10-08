@@ -3,26 +3,26 @@ id: confrontos-vengefulspirit
 heroi: Vengeful Spirit
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/vengefulspirit.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/nevermore.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/rubick.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/lion.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/disruptor.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/ogre_magi.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/jakiro.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/luna.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/ursa.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/templar_assassin.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/juggernaut.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/legion_commander.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/morphling.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/lich.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/rattletrap.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/beastmaster.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/doom_bringer.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
+- dota-hub-conteudo-novo/pro_dados/vengefulspirit.json
+- dota-hub-conteudo-novo/pro_dados/nevermore.json
+- dota-hub-conteudo-novo/pro_dados/rubick.json
+- dota-hub-conteudo-novo/pro_dados/lion.json
+- dota-hub-conteudo-novo/pro_dados/disruptor.json
+- dota-hub-conteudo-novo/pro_dados/ogre_magi.json
+- dota-hub-conteudo-novo/pro_dados/jakiro.json
+- dota-hub-conteudo-novo/pro_dados/luna.json
+- dota-hub-conteudo-novo/pro_dados/ursa.json
+- dota-hub-conteudo-novo/pro_dados/templar_assassin.json
+- dota-hub-conteudo-novo/pro_dados/juggernaut.json
+- dota-hub-conteudo-novo/pro_dados/legion_commander.json
+- dota-hub-conteudo-novo/pro_dados/morphling.json
+- dota-hub-conteudo-novo/pro_dados/lich.json
+- dota-hub-conteudo-novo/pro_dados/rattletrap.json
+- dota-hub-conteudo-novo/pro_dados/beastmaster.json
+- dota-hub-conteudo-novo/pro_dados/doom_bringer.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/heroes.json
 - https://liquipedia.net/dota2/Version_7.41e
 ---
 

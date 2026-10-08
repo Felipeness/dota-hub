@@ -3,27 +3,27 @@ id: confrontos-night_stalker
 heroi: Night Stalker
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/night_stalker.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/puck.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/rubick.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/snapfire.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/lion.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/mars.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/hoodwink.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/axe.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/ember_spirit.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/silencer.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/winter_wyvern.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/ursa.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/batrider.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/undying.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/naga_siren.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/luna.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/terrorblade.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- dota-hub-conteudo-novo/pro_dados/night_stalker.json
+- dota-hub-conteudo-novo/pro_dados/puck.json
+- dota-hub-conteudo-novo/pro_dados/rubick.json
+- dota-hub-conteudo-novo/pro_dados/snapfire.json
+- dota-hub-conteudo-novo/pro_dados/lion.json
+- dota-hub-conteudo-novo/pro_dados/mars.json
+- dota-hub-conteudo-novo/pro_dados/hoodwink.json
+- dota-hub-conteudo-novo/pro_dados/axe.json
+- dota-hub-conteudo-novo/pro_dados/ember_spirit.json
+- dota-hub-conteudo-novo/pro_dados/silencer.json
+- dota-hub-conteudo-novo/pro_dados/winter_wyvern.json
+- dota-hub-conteudo-novo/pro_dados/ursa.json
+- dota-hub-conteudo-novo/pro_dados/batrider.json
+- dota-hub-conteudo-novo/pro_dados/undying.json
+- dota-hub-conteudo-novo/pro_dados/naga_siren.json
+- dota-hub-conteudo-novo/pro_dados/luna.json
+- dota-hub-conteudo-novo/pro_dados/terrorblade.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/items.json
 - https://api.opendota.com/api/constants/aghs_desc
 - https://api.opendota.com/api/explorer (lane_role por heroi, partidas de liga 7.40-7.41)
 ---

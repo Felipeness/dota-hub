@@ -7,11 +7,11 @@ fontes:
 - replay 8762678355
 - replay 8768688669
 - replay 8928050264
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_com_suporte.json
-- C:/Users/felip/Desktop/dota-roshan-solo/work/solo_roshan.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/luna.json
+- dota-roshan-solo/data/solos.json
+- dota-roshan-solo/data/resumo_por_heroi.json
+- dota-roshan-solo/data/resumo_com_suporte.json
+- dota-roshan-solo/work/solo_roshan.md
+- app/public/data/herois/luna.json
 heroi: Luna
 solos: 1
 origem: replay

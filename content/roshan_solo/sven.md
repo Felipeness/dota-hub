@@ -3,13 +3,13 @@ id: roshan-solo-sven
 titulo: "Solo de Roshan: Sven"
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_com_suporte.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/candidatos_pro.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/candidatos_pro_tarde.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/candidatos_pub.json
-- C:/Users/felip/Desktop/dota-roshan-solo/work/solo_roshan.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/sven.json
+- dota-roshan-solo/data/resumo_por_heroi.json
+- dota-roshan-solo/data/resumo_com_suporte.json
+- dota-roshan-solo/data/candidatos_pro.json
+- dota-roshan-solo/data/candidatos_pro_tarde.json
+- dota-roshan-solo/data/candidatos_pub.json
+- dota-roshan-solo/work/solo_roshan.md
+- app/public/data/herois/sven.json
 - https://liquipedia.net/dota2/Cleave
 - https://liquipedia.net/dota2/Roshan
 heroi: Sven

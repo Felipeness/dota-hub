@@ -5,15 +5,15 @@ heroi: Shadow Demon
 patch: 7.41
 posicoes: [4, 5]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-tier1/data/draft.csv
-- C:/Users/felip/Desktop/dota-tier1/data/derivados/compras.parquet
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_com_suporte.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/heroStats.json
+- dota-imortal/data/opendota/items.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-tier1/data/draft.csv
+- dota-tier1/data/derivados/compras.parquet
+- dota-roshan-solo/data/resumo_por_heroi.json
+- dota-roshan-solo/data/resumo_com_suporte.json
 - https://api.opendota.com/api/heroes/79/itemPopularity
 - https://dotacoach.gg/en/heroes/shadow-demon/builds/support
 ---
@@ -30,7 +30,7 @@ Shadow Demon é suporte de disable e setup: Disruption bane o alvo por 2,75s e c
 - minuto: 10
 - porque: sustenta a mana do combo Disruption (120) + Shadow Poison (45 por cast) sem gastar Clarity toda hora.
 - detalhe: dá 1 de regeneração de mana em área de 1200 (items.json). Comprado em 75% das partidas pos 4 (36 de 48, mediana no minuto 10,2).
-- fonte: C:/Users/felip/Desktop/dota-tier1/data/derivados/compras.parquet; C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- fonte: dota-tier1/data/derivados/compras.parquet; dota-imortal/data/opendota/items.json
 
 #### Magic Wand (magic_wand)
 - minuto: 9
@@ -60,7 +60,7 @@ Shadow Demon é suporte de disable e setup: Disruption bane o alvo por 2,75s e c
 - minuto: 25
 - porque: segundo item mais comprado depois do Blink, upgrade barato (1400) que dá o Demonic Cleanse, versão de Demonic Purge pra usar em aliado: limpa debuff negativo do aliado e cura ele no final, furando BKB.
 - detalhe: dá a habilidade Demonic Cleanse (alvo só aliado): remove debuffs negativos por 5s e cura 450 ao fim da duração, 800 de alcance, 150 de mana, 60s de recarga, fura Black King Bar/imunidade a feitiço e não pode ser dispelada; aliado sob efeito de Disruption ainda pode receber o Cleanse (constants_abilities.json, entrada `shadow_demon_demonic_cleanse`: `bkbpierce: Yes`, `dispellable: No`, `target_team: Friendly`). Comprado em 47,9% das partidas pos 4 (23/48, mediana 24,9min).
-- fonte: compras.parquet; C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json; dotacoach.gg/en/heroes/shadow-demon (confirma o mesmo efeito e os mesmos números: cura 450, alcance 800, mana 150, recarga 60s)
+- fonte: compras.parquet; dota-imortal/data/opendota/constants_abilities.json; dotacoach.gg/en/heroes/shadow-demon (confirma o mesmo efeito e os mesmos números: cura 450, alcance 800, mana 150, recarga 60s)
 
 #### Glimmer Cape (glimmer_cape)
 - minuto: 29

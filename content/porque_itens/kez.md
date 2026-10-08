@@ -4,10 +4,10 @@ titulo: "Por que cada item: Kez"
 heroi: Kez
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/kez.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
-- C:/Users/felip/Desktop/dota-roshan-solo/content/roshan_solo (kez.md)
+- app/public/data/herois/kez.json
+- dota-imortal/data/opendota/items.json
+- dota-roshan-solo/data/solos.json
+- dota-roshan-solo/content/roshan_solo (kez.md)
 - https://liquipedia.net/dota2/Kez
 - https://dotacoach.gg/en/heroes/kez
 - https://liquipedia.net/dota2/Strong_dispel

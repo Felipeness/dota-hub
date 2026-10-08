@@ -3,11 +3,11 @@ id: roshan-solo-slark
 titulo: "Solo de Roshan: Slark"
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_com_suporte.json
-- C:/Users/felip/Desktop/dota-roshan-solo/work/solo_roshan.md
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
+- dota-roshan-solo/data/solos.json
+- dota-roshan-solo/data/resumo_por_heroi.json
+- dota-roshan-solo/data/resumo_com_suporte.json
+- dota-roshan-solo/work/solo_roshan.md
+- dota-imortal/data/opendota/constants_abilities.json
 heroi: Slark
 solos: 0
 origem: replay

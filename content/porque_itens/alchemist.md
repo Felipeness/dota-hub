@@ -4,9 +4,9 @@ titulo: "Por que cada item: Alchemist"
 heroi: Alchemist
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/alchemist.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
+- app/public/data/herois/alchemist.json
+- dota-imortal/data/opendota/items.json
+- dota-imortal/data/opendota/constants_abilities.json
 - https://dota2protracker.com/patches/7.41a
 - https://rdy.gg/en/dota2/news/dota-2-patch-7-41-a-nerfs-buffs
 - https://liquipedia.net/dota2/Debuff_Immunity

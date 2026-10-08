@@ -5,12 +5,12 @@ heroi: Treant Protector
 patch: 7.41
 posicoes: [5]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/heroStats.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-roshan-solo/data/solos.json
 - https://api.opendota.com/api/heroes/83/itemPopularity
 - https://api.opendota.com/api/benchmarks?hero_id=83
 - https://www.dota2.com/datafeed/patchnotes?version=7.41&language=english

@@ -4,10 +4,10 @@ titulo: "Por que cada item: Monkey King"
 heroi: Monkey King
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/monkey_king.json
-- C:/Users/felip/Desktop/dota-imortal/work/hero_monkey_king_corrigido.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
+- app/public/data/herois/monkey_king.json
+- dota-imortal/work/hero_monkey_king_corrigido.json
+- dota-imortal/data/opendota/items.json
+- dota-imortal/data/opendota/constants_abilities.json
 - https://dotacoach.gg/en/heroes/monkey-king/builds/carry
 ---
 

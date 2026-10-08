@@ -6,9 +6,9 @@ fontes:
 - replay 9022908356
 - replay 8861527029
 - replay 8786866910
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_com_suporte.json
-- C:/Users/felip/Desktop/dota-roshan-solo/work/solos_linha_a_linha.md
+- dota-roshan-solo/data/resumo_por_heroi.json
+- dota-roshan-solo/data/resumo_com_suporte.json
+- dota-roshan-solo/work/solos_linha_a_linha.md
 - https://liquipedia.net/dota2/Roshan
 heroi: Phantom Lancer
 solos: 2

@@ -5,16 +5,16 @@ heroi: Phantom Assassin
 patch: 7.41
 posicoes: [1]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-tier1/data/draft.csv
-- C:/Users/felip/Desktop/dota-tier1/data/jogadores_partida.csv
-- C:/Users/felip/Desktop/dota-tier1/data/derivados/compras.parquet
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/heroStats.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-tier1/data/draft.csv
+- dota-tier1/data/jogadores_partida.csv
+- dota-tier1/data/derivados/compras.parquet
+- dota-roshan-solo/data/solos.json
+- dota-roshan-solo/data/resumo_por_heroi.json
 - https://api.opendota.com/api/heroes/44/itemPopularity
 - https://api.opendota.com/api/heroes/44/matchups
 - https://liquipedia.net/dota2/Phantom_Assassin/Changelogs (via busca: Scepter vira Fan of Knives)
@@ -109,4 +109,4 @@ Phantom Assassin é carry de agilidade pos1 puro: farma rápido com Battle Fury,
 
 Ela soloa Roshan de verdade: os 2 replays pro do dataset local (dota-roshan-solo) são os únicos abates de Roshan do Phantom Assassin registrados, e os dois são dela sozinha. No primeiro (match 8763921209), classificado como "solo com ajuda curta", ela fez 97,3% do dano total (9772 de 10044) com um Lion do lado dela só 6s no fosso sem quase bater; matou no minuto 27:30, 66 golpes, nível 21, com diffusal_blade, power_treads, bfury, desolator e satanic já prontos, vida mínima 2119/2320 (91%) durante o solo. No segundo (match 8778466035), "solo puro", 100% do dano dela, matou no minuto 27:50, 53 golpes, nível 19, com bfury, black_king_bar, desolator, power_treads e lifesteal (Morbid Mask, ainda não virou Satanic), vida mínima 1568/1792 (87%). Os dois jogos foram no fosso de baixo do mapa. O resumo agregado do mesmo dataset (resumo_por_heroi.json) bate com isso: mediana de início 27:08 (faixa 27:03-27:14), nível mediano 20, net worth mediano 17.274, e ela saiu com a aegis nas duas vezes (2/2), sem o time inimigo ver a morte (0/2), fechando torre e abate de herói em até 3 minutos depois do Roshan nas duas partidas (2/2). Amostra pequena (2 jogos), mas os dois concordam: ela soloa sozinha, com o kit básico pronto (Treads + Bfury + BKB + Desolator), sem precisar de Satanic completo pra isso.
 
-Fonte: C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json; C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
+Fonte: dota-roshan-solo/data/solos.json; dota-roshan-solo/data/resumo_por_heroi.json

@@ -4,8 +4,8 @@ titulo: "Por que cada item: Juggernaut"
 heroi: Juggernaut
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/juggernaut.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- app/public/data/herois/juggernaut.json
+- dota-imortal/data/opendota/items.json
 - https://dotacoach.gg/items/power-treads
 - https://dotacoach.gg/en/items/manta-style
 - https://www.strafe.com/articles/read/conquering-dota-2-roshan-essential-tips-and-insights/

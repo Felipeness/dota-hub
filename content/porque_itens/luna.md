@@ -4,8 +4,8 @@ titulo: "Por que cada item: Luna"
 heroi: Luna
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/luna.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- app/public/data/herois/luna.json
+- dota-imortal/data/opendota/items.json
 - https://wiki.cs.money/dota/heroes/drow-ranger
 - https://dotacoach.gg/en/items/manta-style
 - https://esports.net/news/dota/luna-dota-2-guide/

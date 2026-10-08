@@ -3,23 +3,23 @@ id: confrontos-juggernaut
 heroi: Juggernaut
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/juggernaut.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/mars.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/snapfire.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/disruptor.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/nevermore.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/ogre_magi.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/jakiro.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/dragon_knight.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/windrunner.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/gyrocopter.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/ursa.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/faceless_void.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/slark.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/drow_ranger.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/night_stalker.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/morphling.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
+- dota-hub-conteudo-novo/pro_dados/juggernaut.json
+- dota-hub-conteudo-novo/pro_dados/mars.json
+- dota-hub-conteudo-novo/pro_dados/snapfire.json
+- dota-hub-conteudo-novo/pro_dados/disruptor.json
+- dota-hub-conteudo-novo/pro_dados/nevermore.json
+- dota-hub-conteudo-novo/pro_dados/ogre_magi.json
+- dota-hub-conteudo-novo/pro_dados/jakiro.json
+- dota-hub-conteudo-novo/pro_dados/dragon_knight.json
+- dota-hub-conteudo-novo/pro_dados/windrunner.json
+- dota-hub-conteudo-novo/pro_dados/gyrocopter.json
+- dota-hub-conteudo-novo/pro_dados/ursa.json
+- dota-hub-conteudo-novo/pro_dados/faceless_void.json
+- dota-hub-conteudo-novo/pro_dados/slark.json
+- dota-hub-conteudo-novo/pro_dados/drow_ranger.json
+- dota-hub-conteudo-novo/pro_dados/night_stalker.json
+- dota-hub-conteudo-novo/pro_dados/morphling.json
+- dota-imortal/data/opendota/constants_abilities.json
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 

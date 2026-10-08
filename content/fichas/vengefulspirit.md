@@ -11,13 +11,13 @@ fontes:
 - https://dota2protracker.com/builds/vengeful-spirit-pos1-1
 - https://dota2protracker.com/builds/vengeful-spirit-pos4-1
 - https://liquipedia.net/dota2/Vengeful_Spirit
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-tier1/data/draft.csv
-- C:/Users/felip/Desktop/dota-tier1/data/jogadores_partida.csv
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
+- dota-imortal/data/opendota/items.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/heroes.json
+- dota-tier1/data/draft.csv
+- dota-tier1/data/jogadores_partida.csv
+- dota-roshan-solo/data/solos.json
 ---
 
 ## Resumo

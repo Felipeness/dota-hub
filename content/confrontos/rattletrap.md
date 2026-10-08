@@ -3,9 +3,9 @@ id: confrontos-rattletrap
 heroi: Clockwerk
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/{rattletrap,hoodwink,tusk,rubick,tiny,snapfire,nevermore,lion,jakiro,death_prophet,vengefulspirit,tidehunter,lone_druid,clinkz,abaddon}.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
+- dota-hub-conteudo-novo/pro_dados/{rattletrap,hoodwink,tusk,rubick,tiny,snapfire,nevermore,lion,jakiro,death_prophet,vengefulspirit,tidehunter,lone_druid,clinkz,abaddon}.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/heroes.json
 - https://api.opendota.com/api/constants/aghs_desc
 - https://liquipedia.net/dota2/Hookshot
 - https://dota2.fandom.com/wiki/Rubick

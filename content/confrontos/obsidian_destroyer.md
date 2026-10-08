@@ -3,12 +3,12 @@ id: confrontos-obsidian_destroyer
 heroi: Outworld Destroyer
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub/content/pro_dados/obsidian_destroyer.json
-- C:/Users/felip/Desktop/dota-hub/content/pro_dados/{nevermore,rubick,disruptor,snapfire,lion,pudge,invoker,queenofpain,dragon_knight,lich,dark_willow,beastmaster,tusk,templar_assassin,legion_commander}.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- content/pro_dados/obsidian_destroyer.json
+- content/pro_dados/{nevermore,rubick,disruptor,snapfire,lion,pudge,invoker,queenofpain,dragon_knight,lich,dark_willow,beastmaster,tusk,templar_assassin,legion_commander}.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/items.json
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 

@@ -3,11 +3,11 @@ id: confrontos-razor
 heroi: Razor
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub/content/pro_dados/razor.json (confrontos, resumo, itens)
-- C:/Users/felip/Desktop/dota-hub/content/pro_dados/nevermore.json, queenofpain.json, earth_spirit.json, mars.json, tidehunter.json, beastmaster.json, jakiro.json, tusk.json, warlock.json, alchemist.json, gyrocopter.json, tiny.json, crystal_maiden.json, treant.json, enchantress.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- content/pro_dados/razor.json (confrontos, resumo, itens)
+- content/pro_dados/nevermore.json, queenofpain.json, earth_spirit.json, mars.json, tidehunter.json, beastmaster.json, jakiro.json, tusk.json, warlock.json, alchemist.json, gyrocopter.json, tiny.json, crystal_maiden.json, treant.json, enchantress.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/items.json
 ---
 
 ## Contra Shadow Fiend (nevermore)

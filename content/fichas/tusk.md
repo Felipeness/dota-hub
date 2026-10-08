@@ -5,17 +5,17 @@ heroi: Tusk
 patch: 7.41
 posicoes: [4, 5]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_patch.json
-- C:/Users/felip/Desktop/dota-tier1/data/draft.csv
-- C:/Users/felip/Desktop/dota-tier1/data/partidas.csv
-- C:/Users/felip/Desktop/dota-tier1/data/derivados/compras.parquet
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_com_suporte.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/heroStats.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-imortal/data/opendota/constants_patch.json
+- dota-tier1/data/draft.csv
+- dota-tier1/data/partidas.csv
+- dota-tier1/data/derivados/compras.parquet
+- dota-roshan-solo/data/resumo_por_heroi.json
+- dota-roshan-solo/data/resumo_com_suporte.json
 - https://api.opendota.com/api/heroes/100/itemPopularity
 - https://api.opendota.com/api/benchmarks?hero_id=100
 ---
@@ -36,13 +36,13 @@ Tusk é um iniciador str de kit curto: Snowball busca o alvo rolando com aliados
 - porque: fecha a distância que o kit curto não cobre: Walrus Kick alcança só 250 e Walrus Punch 150.
 - detalhe: sem blink o Tusk precisa correr até o alvo antes de travar qualquer parte do combo, o que dá tempo do inimigo reagir. É o primeiro item grande em quase todo jogo na posição: 76 das 79 partidas (96,2%) compraram, mediana aos 19,6 min.
 - combo: blink pro meio do grupo aliado, rola a Snowball puxando os companheiros a até 325 de raio antes de lançar no inimigo-alvo (cada aliado dentro soma dano e duração de stun), ou blinka direto no alvo e ativa Tag Team pra já começar a punir o próximo ataque.
-- fonte: C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json (abilitycastrange de tusk_walrus_kick e tusk_walrus_punch); C:/Users/felip/Desktop/dota-tier1/data/derivados/compras.parquet (96,2% em 79 jogos, mediana 19,6 min)
+- fonte: dota-imortal/data/opendota/constants_abilities.json (abilitycastrange de tusk_walrus_kick e tusk_walrus_punch); dota-tier1/data/derivados/compras.parquet (96,2% em 79 jogos, mediana 19,6 min)
 
 #### Magic Wand (magic_wand)
 - minuto: 9:48
 - porque: carrega HP e mana de graça a cada feitiço inimigo visível por perto, sustenta o roam sem voltar pra base.
 - detalhe: ganha carga sempre que um inimigo visível a até 1200 de distância usa uma habilidade, então rende mais justamente na lane em que o Tusk está roamando e trocando perto de feitiços. Comprado em 54 de 79 jogos (68,4%).
-- fonte: C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json; compras.parquet (68,4%, mediana 9,8 min)
+- fonte: dota-imortal/data/opendota/items.json; compras.parquet (68,4%, mediana 9,8 min)
 
 #### Wind Lace (wind_lace)
 - minuto: 6:36

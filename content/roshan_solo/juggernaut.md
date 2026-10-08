@@ -4,11 +4,11 @@ titulo: "Solo de Roshan: Juggernaut"
 patch: 7.41
 fontes:
 - replay 8758817667
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_com_suporte.json
-- C:/Users/felip/Desktop/dota-roshan-solo/work/solo_roshan.md
-- C:/Users/felip/Desktop/dota-roshan-solo/work/solos_linha_a_linha.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/juggernaut.json
+- dota-roshan-solo/data/resumo_por_heroi.json
+- dota-roshan-solo/data/resumo_com_suporte.json
+- dota-roshan-solo/work/solo_roshan.md
+- dota-roshan-solo/work/solos_linha_a_linha.md
+- app/public/data/herois/juggernaut.json
 - https://www.strafe.com/articles/read/conquering-dota-2-roshan-essential-tips-and-insights/
 heroi: Juggernaut
 solos: 1

@@ -3,12 +3,12 @@ id: roshan-solo-morphling
 titulo: "Solo de Roshan: Morphling"
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_com_suporte.json
-- C:/Users/felip/Desktop/dota-roshan-solo/work/solos_linha_a_linha.md
-- C:/Users/felip/Desktop/dota-roshan-solo/work/solo_roshan.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/morphling.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/abilities.json
+- dota-roshan-solo/data/resumo_por_heroi.json
+- dota-roshan-solo/data/resumo_com_suporte.json
+- dota-roshan-solo/work/solos_linha_a_linha.md
+- dota-roshan-solo/work/solo_roshan.md
+- app/public/data/herois/morphling.json
+- dota-roshan-solo/data/abilities.json
 - replay 8888056358
 - replay 8771950914
 - https://liquipedia.net/dota2/Roshan

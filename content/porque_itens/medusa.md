@@ -4,9 +4,9 @@ titulo: "Por que cada item: Medusa"
 heroi: Medusa
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/medusa.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
+- app/public/data/herois/medusa.json
+- dota-imortal/data/opendota/items.json
+- dota-imortal/data/opendota/constants_abilities.json
 - https://liquipedia.net/dota2/Version_7.41f
 - https://esports.gg/guides/dota-2/dota-2-medusa-guide-for-7-33c-with-slashstrike-indestructible-medusa
 ---

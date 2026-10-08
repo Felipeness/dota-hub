@@ -4,11 +4,11 @@ titulo: "Por que cada item: Shadow Fiend"
 heroi: Shadow Fiend
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/shadow_fiend.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
-- C:/Users/felip/Desktop/dota-roshan-solo/work/solos_linha_a_linha.md
+- app/public/data/herois/shadow_fiend.json
+- dota-imortal/data/opendota/items.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-roshan-solo/data/resumo_por_heroi.json
+- dota-roshan-solo/work/solos_linha_a_linha.md
 - https://dotacoach.gg/en/items/manta-style
 - https://dotacoach.gg/en/items/mask-of-madness
 - https://dotacoach.gg/en/items/satanic
@@ -47,7 +47,7 @@ fontes:
 - porque: As ilusões limpam camp e empurram lane sozinhas enquanto o dono farma, e o dispel ao usar tira debuffs comuns.
 - detalhe: Manta aplica um dispel básico no momento do cast (items.json: "many effects are removed upon using Manta"; dotacoach.gg confirma "Dispel Type: Basic Dispel"). As ilusões de alcance de Shadow Fiend causam 25% do dano (confirmado em dotacoach.gg/en/items/manta-style, patch 7.41f; antes desse nerf eram 28%, e o items.json deste projeto ainda mostra o valor antigo). Ilusão corpo a corpo seria 33%, mas não se aplica aqui porque Shadow Fiend é ranged. Por isso rendem mais empurrando torre e limpando wave do que lutando. Pros compram na mediana de 16,0 min.
 - combo: no replay 8957890399 (Roshan solo, nível 21, ~28:45), o kit Hurricane Pike + Power Treads + Manta Style + Black King Bar foi o usado pra solar sem suporte do time (confirmado em work/solos_linha_a_linha.md, linha 71).
-- fonte: items.json; dotacoach.gg/en/items/manta-style (patch 7.41f); C:/Users/felip/Desktop/dota-roshan-solo/work/solos_linha_a_linha.md (replay 8957890399)
+- fonte: items.json; dotacoach.gg/en/items/manta-style (patch 7.41f); dota-roshan-solo/work/solos_linha_a_linha.md (replay 8957890399)
 
 ## Dragon Lance (dragon_lance)
 - porque: Dá alcance de ataque pra bater de mais longe e evitar troca corpo a corpo.
@@ -80,7 +80,7 @@ fontes:
 - porque: Cura no corpo a corpo e sustenta Shadow Fiend em luta prolongada de late game.
 - detalhe: 25% de roubo de vida passivo e Unholy Rage ativo somando até 175% de roubo de vida por 6 s, recarga 40 s. O patch 7.41f cortou o lifesteal passivo de 30% para 25% (confirmado em dotacoach.gg/en/items/satanic, patch 7.41f, e em coberturas independentes do patch); a recarga de 40 s já vinha do 7.41e. O items.json deste projeto ainda mostra os valores antigos (30% e 30 s). No talento de nível 25, cada Shadowraze passa a aplicar um ataque físico no alvo atingido, o que faz o combo de Raze limpar onda e camp inteiros, e o Satanic devolve vida por esse dano extra.
 - combo: o talento é real e foi usado em replay (special_bonus_unique_nevermore_raze_procsattacks, replay 8960577698 de Roshan solo), não é suposição.
-- fonte: guia local (power spike "Satanic", seção depois_dos_20); dotacoach.gg/en/items/satanic (patch 7.41f); items.json (duração do Unholy Rage); C:/Users/felip/Desktop/dota-roshan-solo/work/solos_linha_a_linha.md (replay 8960577698)
+- fonte: guia local (power spike "Satanic", seção depois_dos_20); dotacoach.gg/en/items/satanic (patch 7.41f); items.json (duração do Unholy Rage); dota-roshan-solo/work/solos_linha_a_linha.md (replay 8960577698)
 
 ## Blink Dagger (blink)
 - porque: Dá entrada ou fuga mais certa que o Silver Edge quando a luta não dá tempo de ficar invisível.

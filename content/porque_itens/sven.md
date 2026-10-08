@@ -4,8 +4,8 @@ titulo: "Por que cada item: Sven"
 heroi: Sven
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/sven.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- app/public/data/herois/sven.json
+- dota-imortal/data/opendota/items.json
 - https://liquipedia.net/dota2/Black_King_Bar
 - https://liquipedia.net/dota2/Monkey_King_Bar
 - https://liquipedia.net/dota2/Cleave

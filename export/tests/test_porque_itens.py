@@ -14,7 +14,7 @@ CORPO = """
 - detalhe: 2 imagens por 18 s.
 - contra: Silencer: o dispel tira o Global Silence.
 - combo: Manta + Vladmir's.
-- fonte: morphling.json (itens_core.manta); C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json; liquipedia.net/dota2/Manta_Style
+- fonte: morphling.json (itens_core.manta); dota-imortal/data/opendota/items.json; liquipedia.net/dota2/Manta_Style
 
 ## Sange and Yasha / Manta Style (sange_and_yasha / manta)
 - porque: Status Resistance contra lentidão.

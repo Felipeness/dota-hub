@@ -6,8 +6,8 @@ fontes:
 - replay 8751339290
 - replay 8752643042
 - replay 8824298325
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_com_suporte.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
+- dota-roshan-solo/data/resumo_com_suporte.json
+- dota-imortal/data/opendota/constants_abilities.json
 - https://liquipedia.net/dota2/Radiance
 - https://dota2.fandom.com/wiki/Radiance
 heroi: Spectre

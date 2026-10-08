@@ -5,13 +5,13 @@ heroi: Venomancer
 patch: 7.41
 posicoes: [5, 4]
 fontes:
-- C:/Users/felip/Desktop/dota-tier1/data/jogadores_partida.csv
-- C:/Users/felip/Desktop/dota-tier1/data/derivados/compras.parquet
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
+- dota-tier1/data/jogadores_partida.csv
+- dota-tier1/data/derivados/compras.parquet
+- dota-imortal/data/opendota/items.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/heroes.json
+- dota-roshan-solo/data/resumo_por_heroi.json
 - https://dotacoach.gg/en/heroes/venomancer
 - https://dotacoach.gg/en/heroes/venomancer/builds/support
 - https://liquipedia.net/dota2/Venomancer/Changelogs

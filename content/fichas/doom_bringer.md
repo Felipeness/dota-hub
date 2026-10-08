@@ -5,14 +5,14 @@ heroi: Doom
 patch: 7.41
 posicoes: [3, 1]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-tier1/data/draft.csv
-- C:/Users/felip/Desktop/dota-tier1/data/derivados/compras.parquet
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_com_suporte.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-tier1/data/draft.csv
+- dota-tier1/data/derivados/compras.parquet
+- dota-roshan-solo/data/resumo_por_heroi.json
+- dota-roshan-solo/data/resumo_com_suporte.json
 - https://api.opendota.com/api/heroes/69/itemPopularity
 ---
 
@@ -167,4 +167,4 @@ Doom é um iniciador e disabler de Força: a ultimate do mesmo nome dispela o al
 
 Sem dado de Roshan solo: o dataset de replays (dota-roshan-solo) não tem nenhuma entrada pra Doom em `resumo_por_heroi.json` nem em `resumo_com_suporte.json`, nem solo nem em equipe. Não dá pra afirmar nada sobre o papel dele no Roshan com fonte verificável.
 
-Fonte: C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json; C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_com_suporte.json
+Fonte: dota-roshan-solo/data/resumo_por_heroi.json; dota-roshan-solo/data/resumo_com_suporte.json

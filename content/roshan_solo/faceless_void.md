@@ -6,11 +6,11 @@ fontes:
 - replay 8750388568
 - replay 8817670980
 - replay 8972926432
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_com_suporte.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
-- C:/Users/felip/Desktop/dota-roshan-solo/work/solo_roshan.md
-- C:/Users/felip/Desktop/dota-roshan-solo/work/solos_linha_a_linha.md
+- dota-roshan-solo/data/resumo_por_heroi.json
+- dota-roshan-solo/data/resumo_com_suporte.json
+- dota-roshan-solo/data/solos.json
+- dota-roshan-solo/work/solo_roshan.md
+- dota-roshan-solo/work/solos_linha_a_linha.md
 - https://liquipedia.net/dota2/Cleave
 heroi: Faceless Void
 solos: 1

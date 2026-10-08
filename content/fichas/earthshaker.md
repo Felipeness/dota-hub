@@ -5,15 +5,15 @@ heroi: Earthshaker
 patch: 7.41
 posicoes: [2, 3, 4, 5]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_com_suporte.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/early_rosh_pro.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/late_rosh_pro.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-roshan-solo/data/solos.json
+- dota-roshan-solo/data/resumo_por_heroi.json
+- dota-roshan-solo/data/resumo_com_suporte.json
+- dota-roshan-solo/data/early_rosh_pro.json
+- dota-roshan-solo/data/late_rosh_pro.json
 - https://api.opendota.com/api/heroes/7/itemPopularity
 - https://dotacoach.gg/en/heroes/earthshaker
 - https://dota2protracker.com/hero/Earthshaker

@@ -3,24 +3,24 @@ id: confrontos-nevermore
 heroi: Shadow Fiend
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/nevermore.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/rubick.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/ogre_magi.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/lion.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/queenofpain.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/disruptor.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/snapfire.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tiny.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/templar_assassin.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/windrunner.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/medusa.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/oracle.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/night_stalker.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/enigma.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/lone_druid.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/alchemist.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
+- dota-hub-conteudo-novo/pro_dados/nevermore.json
+- dota-hub-conteudo-novo/pro_dados/rubick.json
+- dota-hub-conteudo-novo/pro_dados/ogre_magi.json
+- dota-hub-conteudo-novo/pro_dados/lion.json
+- dota-hub-conteudo-novo/pro_dados/queenofpain.json
+- dota-hub-conteudo-novo/pro_dados/disruptor.json
+- dota-hub-conteudo-novo/pro_dados/snapfire.json
+- dota-hub-conteudo-novo/pro_dados/tiny.json
+- dota-hub-conteudo-novo/pro_dados/templar_assassin.json
+- dota-hub-conteudo-novo/pro_dados/windrunner.json
+- dota-hub-conteudo-novo/pro_dados/medusa.json
+- dota-hub-conteudo-novo/pro_dados/oracle.json
+- dota-hub-conteudo-novo/pro_dados/night_stalker.json
+- dota-hub-conteudo-novo/pro_dados/enigma.json
+- dota-hub-conteudo-novo/pro_dados/lone_druid.json
+- dota-hub-conteudo-novo/pro_dados/alchemist.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/heroStats.json
 - https://api.opendota.com/api/constants/aghs_desc
 - https://api.opendota.com/api/explorer (purchase_log e gold_t, partidas de liga 7.40-7.41)
 ---

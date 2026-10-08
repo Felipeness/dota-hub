@@ -5,14 +5,14 @@ heroi: Bristleback
 patch: 7.41
 posicoes: [3]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/falcons/analise.md
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/liquid/scripts/saida/detalhe.txt
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_com_suporte.json
+- dota-imortal/data/opendota/items.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/heroes.json
+- dota-tier1/work/equipes/falcons/analise.md
+- dota-tier1/work/equipes/liquid/scripts/saida/detalhe.txt
+- dota-roshan-solo/data/solos.json
+- dota-roshan-solo/data/resumo_com_suporte.json
 - https://dotacoach.gg/heroes/bristleback
 - https://dotacoach.gg/heroes/bristleback/builds/offlane
 - https://dota2protracker.com/hero/Bristleback

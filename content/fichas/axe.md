@@ -5,14 +5,14 @@ heroi: Axe
 patch: 7.41
 posicoes: [3]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-tier1/data/draft.csv
-- C:/Users/felip/Desktop/dota-tier1/data/derivados/compras.parquet
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/heroStats.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-tier1/data/draft.csv
+- dota-tier1/data/derivados/compras.parquet
+- dota-roshan-solo/data/solos.json
 - https://api.opendota.com/api/heroes/2/itemPopularity
 - https://dota2protracker.com/builds/axe-pos3-1
 - https://dota2protracker.com/hero/legacy/Axe
@@ -122,4 +122,4 @@ Axe é um iniciador e tanque de Força: trava todo mundo perto dele com Berserke
 
 Sem solo registrado: o dataset de replays de Roshan solo (dota-roshan-solo) não tem nenhum abate solo do Axe. Em equipe ele aparece em só 4 partidas do dataset (3 pro, 1 turbo), entre os minutos 16 e 47, sempre classificado como abate em dupla/equipe, nunca solo. Em 2 dessas 3 partidas pro, Axe foi responsável por mais da metade do dano total só com +1 aliado no fosso (55,3% aos 28:55, com Life Stealer; 51,7% aos 26:00, com Viper), o que sugere que ele participa como dano extra numa dupla quando sobra força de lane, não como time inteiro parado esperando. Amostra pequena (4 jogos): não dá pra tirar minuto ou nível medianos confiáveis.
 
-Fonte: C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
+Fonte: dota-roshan-solo/data/solos.json

@@ -5,15 +5,15 @@ heroi: Sniper
 patch: 7.41
 posicoes: [1, 2, 4]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/nigma/hub.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/parivision/explore_out.txt
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/heroStats.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-roshan-solo/data/solos.json
+- dota-roshan-solo/data/resumo_por_heroi.json
+- dota-tier1/work/equipes/nigma/hub.json
+- dota-tier1/work/equipes/parivision/explore_out.txt
 - https://api.opendota.com/api/heroes/35/itemPopularity
 - https://dotacoach.gg/heroes/sniper
 ---

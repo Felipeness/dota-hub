@@ -4,8 +4,8 @@ titulo: "Por que cada item: Drow Ranger"
 heroi: Drow Ranger
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/drow_ranger.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- app/public/data/herois/drow_ranger.json
+- dota-imortal/data/opendota/items.json
 - https://liquipedia.net/dota2/Basic_dispel
 - https://dota2.fandom.com/wiki/Dispel
 - https://dotacoach.gg/en/items/manta-style

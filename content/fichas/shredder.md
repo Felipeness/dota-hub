@@ -5,19 +5,19 @@ heroi: Timbersaw
 patch: 7.41
 posicoes: [3]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_com_suporte.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/early_rosh_pro.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/late_rosh_pro.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/1win/hub.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/falcons/analise.md
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/lgd/analise.md
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/yandex/analise.md
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/aurora/analise.md
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/xtreme/analise.md
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-roshan-solo/data/resumo_por_heroi.json
+- dota-roshan-solo/data/resumo_com_suporte.json
+- dota-roshan-solo/data/solos.json
+- dota-roshan-solo/data/early_rosh_pro.json
+- dota-roshan-solo/data/late_rosh_pro.json
+- dota-tier1/work/equipes/1win/hub.json
+- dota-tier1/work/equipes/falcons/analise.md
+- dota-tier1/work/equipes/lgd/analise.md
+- dota-tier1/work/equipes/yandex/analise.md
+- dota-tier1/work/equipes/aurora/analise.md
+- dota-tier1/work/equipes/xtreme/analise.md
 - https://api.opendota.com/api/heroes/98/itemPopularity
 - https://dotacoach.gg/heroes/timbersaw/builds/offlane
 - https://dotacoach.gg/en/heroes/counters/timbersaw
@@ -78,7 +78,7 @@ Timbersaw é um offlaner tanque de dano puro: Whirling Death e Chakram são dano
 #### Blink Dagger (blink)
 - porque: fecha a iniciação com o Timber Chain, mas não é unanimidade: só sai em metade dos jogos.
 - detalhe: 1200 de alcance, 3 s de recarga após levar dano de herói. Atenção: o dado local do Atlas tier1 é por jogador/posição, não filtrado por herói, então os números abaixo descrevem o offlaner da equipe em geral (qualquer herói que ele jogue), não especificamente as partidas de Timbersaw. Mesmo assim servem de referência de janela: o pos 3 da Falcons (AMMAR_THE_F, roster anterior à TI) comprava Blink em 49% dos jogos, aos 24,3 min em média (média das 12 equipes analisadas: 67% dos jogos); o pos 3 da LGD (Wisper) compra Blink em 82% das partidas (média 67%), sem minuto médio específico de Blink registrado na fonte (o minuto de 26,8 que a fonte dá para esse jogador é do BKB, não do Blink).
-- fonte: items.json (blink); C:/Users/felip/Desktop/dota-tier1/work/equipes/falcons/analise.md; C:/Users/felip/Desktop/dota-tier1/work/equipes/lgd/analise.md
+- fonte: items.json (blink); dota-tier1/work/equipes/falcons/analise.md; dota-tier1/work/equipes/lgd/analise.md
 
 #### Scythe of Vyse (sheepstick)
 - porque: trava o disable ou a fuga do inimigo antes que ele o pegue primeiro, e destrói ilusão na hora.

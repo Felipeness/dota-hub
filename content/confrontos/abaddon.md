@@ -3,24 +3,24 @@ id: confrontos-abaddon
 heroi: Abaddon
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub/content/pro_dados/abaddon.json
-- C:/Users/felip/Desktop/dota-hub/content/pro_dados/jakiro.json
-- C:/Users/felip/Desktop/dota-hub/content/pro_dados/snapfire.json
-- C:/Users/felip/Desktop/dota-hub/content/pro_dados/queenofpain.json
-- C:/Users/felip/Desktop/dota-hub/content/pro_dados/tusk.json
-- C:/Users/felip/Desktop/dota-hub/content/pro_dados/dragon_knight.json
-- C:/Users/felip/Desktop/dota-hub/content/pro_dados/axe.json
-- C:/Users/felip/Desktop/dota-hub/content/pro_dados/mars.json
-- C:/Users/felip/Desktop/dota-hub/content/pro_dados/disruptor.json
-- C:/Users/felip/Desktop/dota-hub/content/pro_dados/troll_warlord.json
-- C:/Users/felip/Desktop/dota-hub/content/pro_dados/terrorblade.json
-- C:/Users/felip/Desktop/dota-hub/content/pro_dados/legion_commander.json
-- C:/Users/felip/Desktop/dota-hub/content/pro_dados/skeleton_king.json
-- C:/Users/felip/Desktop/dota-hub/content/pro_dados/keeper_of_the_light.json
-- C:/Users/felip/Desktop/dota-hub/content/pro_dados/treant.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
+- content/pro_dados/abaddon.json
+- content/pro_dados/jakiro.json
+- content/pro_dados/snapfire.json
+- content/pro_dados/queenofpain.json
+- content/pro_dados/tusk.json
+- content/pro_dados/dragon_knight.json
+- content/pro_dados/axe.json
+- content/pro_dados/mars.json
+- content/pro_dados/disruptor.json
+- content/pro_dados/troll_warlord.json
+- content/pro_dados/terrorblade.json
+- content/pro_dados/legion_commander.json
+- content/pro_dados/skeleton_king.json
+- content/pro_dados/keeper_of_the_light.json
+- content/pro_dados/treant.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/heroes.json
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 

@@ -5,15 +5,15 @@ heroi: Lina
 patch: 7.41
 posicoes: [2, 4]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_com_suporte.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/1win/hub.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/1win/chaves.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/nigma/hub.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-roshan-solo/data/solos.json
+- dota-roshan-solo/data/resumo_com_suporte.json
+- dota-tier1/work/equipes/1win/hub.json
+- dota-tier1/work/equipes/1win/chaves.json
+- dota-tier1/work/equipes/nigma/hub.json
 - https://api.opendota.com/api/heroes/25/itemPopularity
 - https://dotacoach.gg/heroes/lina
 ---

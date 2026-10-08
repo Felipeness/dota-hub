@@ -3,12 +3,12 @@ id: confrontos-silencer
 heroi: Silencer
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/silencer.json (OpenDota /heroes/75/matchups e /itemTimings, partidas de liga 7.40+7.41, n=1170)
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/{rubick,nevermore,snapfire,lion,ogre_magi,disruptor,hoodwink,tusk,phoenix,skywrath_mage,clinkz,lina,primal_beast,treant,night_stalker,keeper_of_the_light}.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- dota-hub-conteudo-novo/pro_dados/silencer.json (OpenDota /heroes/75/matchups e /itemTimings, partidas de liga 7.40+7.41, n=1170)
+- dota-hub-conteudo-novo/pro_dados/{rubick,nevermore,snapfire,lion,ogre_magi,disruptor,hoodwink,tusk,phoenix,skywrath_mage,clinkz,lina,primal_beast,treant,night_stalker,keeper_of_the_light}.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/items.json
 - https://api.opendota.com/api/constants/aghs_desc
 - https://api.opendota.com/api/explorer (consulta lane_role de partidas de liga 7.40+7.41, hero_id 75)
 ---

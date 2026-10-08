@@ -5,21 +5,21 @@ heroi: Beastmaster
 patch: 7.41
 posicoes: [2, 3]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/1win/hub.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/betboom/hub.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/lgd/hub.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/nigma/hub.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/parivision/hub.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/aurora/hub.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/xtreme/hub.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/navi/hub.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/falcons/hub.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/heroStats.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-roshan-solo/data/resumo_por_heroi.json
+- dota-tier1/work/equipes/1win/hub.json
+- dota-tier1/work/equipes/betboom/hub.json
+- dota-tier1/work/equipes/lgd/hub.json
+- dota-tier1/work/equipes/nigma/hub.json
+- dota-tier1/work/equipes/parivision/hub.json
+- dota-tier1/work/equipes/aurora/hub.json
+- dota-tier1/work/equipes/xtreme/hub.json
+- dota-tier1/work/equipes/navi/hub.json
+- dota-tier1/work/equipes/falcons/hub.json
 - https://api.opendota.com/api/heroes/38/itemPopularity
 - https://api.opendota.com/api/benchmarks?hero_id=38
 ---

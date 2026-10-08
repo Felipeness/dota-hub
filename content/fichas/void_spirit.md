@@ -5,14 +5,14 @@ heroi: Void Spirit
 patch: 7.41
 posicoes: [2]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-tier1/data/draft.csv
-- C:/Users/felip/Desktop/dota-tier1/data/heroes.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/heroStats.json
+- dota-imortal/data/opendota/items.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-tier1/data/draft.csv
+- dota-tier1/data/heroes.json
+- dota-roshan-solo/data/resumo_por_heroi.json
 - https://api.opendota.com/api/heroes/126/itemPopularity
 - https://api.opendota.com/api/benchmarks?hero_id=126
 - https://api.opendota.com/api/heroes/126/matchups
@@ -41,7 +41,7 @@ Void Spirit (atributo universal, ataque corpo a corpo) é jogado quase só de mi
 - minuto: 8 a 12
 - porque: cada atributo trocado nos Treads vale mais nele por causa da passiva Intrinsic Edge.
 - detalhe: Intrinsic Edge dá 15% de dano de ataque extra por ponto de qualquer atributo e 30% a mais no bônus secundário do atributo escolhido no swap. Na maior parte do jogo fica em Agilidade (ataque e attack speed); troca pra Força quando vai levar poke pesado ou iniciar sem medo de ficar sem vida.
-- fonte: C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json (power_treads); constants_abilities.json (void_spirit_intrinsic_edge); api.opendota.com/api/heroes/126/itemPopularity (35 compras na fase inicial, 22 na intermediária)
+- fonte: dota-imortal/data/opendota/items.json (power_treads); constants_abilities.json (void_spirit_intrinsic_edge); api.opendota.com/api/heroes/126/itemPopularity (35 compras na fase inicial, 22 na intermediária)
 
 #### Urn of Shadows (urn_of_shadows)
 - minuto: 7

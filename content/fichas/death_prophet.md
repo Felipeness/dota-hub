@@ -5,18 +5,18 @@ heroi: Death Prophet
 patch: 7.41
 posicoes: [2, 3]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_patch.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/patch.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/1win/scripts/out/draft_herois.csv
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/1win/hub.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/aurora/tmp/draft_pre.csv
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/falcons/saidas/jogadores.txt
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/heroStats.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-imortal/data/opendota/constants_patch.json
+- dota-roshan-solo/data/solos.json
+- dota-roshan-solo/data/patch.json
+- dota-tier1/work/equipes/1win/scripts/out/draft_herois.csv
+- dota-tier1/work/equipes/1win/hub.json
+- dota-tier1/work/equipes/aurora/tmp/draft_pre.csv
+- dota-tier1/work/equipes/falcons/saidas/jogadores.txt
 - https://dotacoach.gg/heroes/death-prophet
 - https://api.opendota.com/api/heroes/43/itemPopularity
 - https://api.opendota.com/api/scenarios/itemTimings?item=black_king_bar&hero_id=43

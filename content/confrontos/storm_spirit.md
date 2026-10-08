@@ -6,9 +6,9 @@ fontes:
 - OpenDota /heroes/17/matchups (partidas de liga, patches 7.40 e 7.41) via pro_dados/storm_spirit.json e dos 15 oponentes
 - OpenDota itemPopularity (timings medianos e p25) via pro_dados/*.json
 - OpenDota explorer (consulta direta via API, partidas de liga por leagueid e start_time, patches 7.40 e 7.41): timing de Manta Style do Shadow Fiend e distribuição por lane_role e winrate de Snapfire, Queen of Pain, Void Spirit, Pangolier e Death Prophet
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json (patch 7.41)
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- dota-imortal/data/opendota/constants_abilities.json (patch 7.41)
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/items.json
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 

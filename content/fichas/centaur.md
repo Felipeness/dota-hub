@@ -5,19 +5,19 @@ heroi: Centaur Warrunner
 patch: 7.41
 posicoes: [3]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/yandex/hub.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/betboom/hub.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/navi/hub.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/team-spirit/hub.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/1win/hub.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/aurora/hub.json
-- C:/Users/felip/Desktop/dota-tier1/work/equipes/falcons/hub.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-tier1/work/equipes/yandex/hub.json
+- dota-tier1/work/equipes/betboom/hub.json
+- dota-tier1/work/equipes/navi/hub.json
+- dota-tier1/work/equipes/team-spirit/hub.json
+- dota-tier1/work/equipes/1win/hub.json
+- dota-tier1/work/equipes/aurora/hub.json
+- dota-tier1/work/equipes/falcons/hub.json
+- dota-roshan-solo/data/resumo_por_heroi.json
+- dota-roshan-solo/data/solos.json
 - https://api.opendota.com/api/heroes/96/itemPopularity
 - https://liquipedia.net/dota2/Centaur_Warrunner
 ---

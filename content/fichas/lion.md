@@ -5,18 +5,18 @@ heroi: Lion
 patch: 7.41
 posicoes: [4, 5]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/early_rosh_pro.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/late_rosh_pro.json
-- C:/Users/felip/Desktop/dota-tier1/data/draft.csv
-- C:/Users/felip/Desktop/dota-tier1/data/jogadores_partida.csv
-- C:/Users/felip/Desktop/dota-tier1/data/derivados/itens_chave.parquet
-- C:/Users/felip/Desktop/dota-tier1/data/heroes.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/heroStats.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-roshan-solo/data/resumo_por_heroi.json
+- dota-roshan-solo/data/early_rosh_pro.json
+- dota-roshan-solo/data/late_rosh_pro.json
+- dota-tier1/data/draft.csv
+- dota-tier1/data/jogadores_partida.csv
+- dota-tier1/data/derivados/itens_chave.parquet
+- dota-tier1/data/heroes.json
 - https://api.opendota.com/api/heroes/26/itemPopularity
 - https://dota2protracker.com/builds/lion-pos5-1
 ---

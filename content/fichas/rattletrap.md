@@ -5,16 +5,16 @@ heroi: Clockwerk
 patch: 7.41
 posicoes: [4, 5]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-tier1/data/draft.csv
-- C:/Users/felip/Desktop/dota-tier1/data/derivados/compras.parquet
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_com_suporte.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/heroStats.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-tier1/data/draft.csv
+- dota-tier1/data/derivados/compras.parquet
+- dota-roshan-solo/data/solos.json
+- dota-roshan-solo/data/resumo_por_heroi.json
+- dota-roshan-solo/data/resumo_com_suporte.json
 - https://api.opendota.com/api/heroes/51/itemPopularity
 - https://dotacoach.gg/en/heroes/clockwerk
 - https://dotacoach.gg/en/heroes/clockwerk/builds/support
@@ -209,4 +209,4 @@ Clockwerk é um iniciador e disabler de Força (papéis Initiator/Disabler/Durab
 
 Clockwerk não aparece como o herói que finaliza o Roshan sozinho nos replays locais: nenhum dos 2.720 eventos de morte de Roshan processados em solos.json tem ele como herói principal, e ele não entra nos resumos por herói que soloam (resumo_por_heroi.json, 22 heróis, nenhum deles Clockwerk; resumo_com_suporte.json, 29 heróis, idem). Ele aparece contribuindo dano ou presença no fosso em 276 dos 2.720 eventos (10,1%), quase todos classificados como abate em time (223 de 276) ou finalização (27 de 276); em 22 desses eventos ele contribui com dano de fato numa morte classificada como solo (puro ou com ajuda curta/suporte) de outro herói, e nesses casos a fração de dano dele é pequena (ex. 180 de dano num solo_puro do Gyrocopter aos 70:35, onde o Gyrocopter sozinho já tinha 98,8% do dano total). Isso casa com a descrição de matchup do dotacoach: a função dele no Roshan é travar quem está tentando roubar ou escapar do fosso com o Hookshot, já que o stun atravessa imunidade a debuff e a Power Cogs funciona como barreira: não farmar o bicho sozinho.
 
-Fonte: C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json; https://dotacoach.gg/en/heroes/clockwerk
+Fonte: dota-roshan-solo/data/solos.json; https://dotacoach.gg/en/heroes/clockwerk

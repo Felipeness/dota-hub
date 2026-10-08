@@ -3,12 +3,12 @@ id: roshan-solo-natures_prophet
 titulo: "Solo de Roshan: Nature's Prophet"
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_com_suporte.json
-- C:/Users/felip/Desktop/dota-roshan-solo/work/solo_roshan.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/natures_prophet.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- dota-roshan-solo/data/solos.json
+- dota-roshan-solo/data/resumo_por_heroi.json
+- dota-roshan-solo/data/resumo_com_suporte.json
+- dota-roshan-solo/work/solo_roshan.md
+- app/public/data/herois/natures_prophet.json
+- dota-imortal/data/opendota/items.json
 - replay 8944553935
 - replay 9010850705
 - replay 9027558607

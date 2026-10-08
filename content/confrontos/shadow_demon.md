@@ -3,10 +3,10 @@ id: confrontos-shadow_demon
 heroi: Shadow Demon
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/shadow_demon.json e pro_dados dos 14 oponentes (resumo, itens e confrontos de partidas de liga, patches 7.40 e 7.41)
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
+- dota-hub-conteudo-novo/pro_dados/shadow_demon.json e pro_dados dos 14 oponentes (resumo, itens e confrontos de partidas de liga, patches 7.40 e 7.41)
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/heroes.json
 - https://api.opendota.com/api/constants/aghs_desc
 - https://api.opendota.com/api/constants/heroes
 ---

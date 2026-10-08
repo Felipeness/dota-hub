@@ -5,14 +5,14 @@ heroi: Arc Warden
 patch: 7.41
 posicoes: [2]
 fontes:
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-tier1/data/draft.csv
-- C:/Users/felip/Desktop/dota-tier1/data/partidas.csv
-- C:/Users/felip/Desktop/dota-tier1/data/derivados/compras.parquet
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
+- dota-imortal/data/opendota/heroes.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/items.json
+- dota-tier1/data/draft.csv
+- dota-tier1/data/partidas.csv
+- dota-tier1/data/derivados/compras.parquet
+- dota-roshan-solo/data/solos.json
 - https://api.opendota.com/api/heroes/113/itemPopularity
 - https://dotacoach.gg/en/heroes/arc-warden
 - https://dotacoach.gg/en/items/butterfly
@@ -132,4 +132,4 @@ Arc Warden é um mid de item: Flux isola e desgasta um único alvo, Spark Wraith
 
 Sem solo confirmado nos replays locais. O dataset (dota-roshan-solo) tem só 2 aparições do Arc Warden no fosso: uma classificada "time" (partida pro, morte aos 13:16, Arc Warden com 54,7% do dano entre 4 aliados no fosso, nenhum solo) e uma "solo_com_suporte" em turbo (morte aos 26:22, nível 29, 85,1% do dano em 18,4s, inventário Bloodthorn + Mjollnir + Travel Boots 2 + Eye of Skadi + Hydra's Breath + Daedalus), mas com Dark Willow, Monkey King e Pudge por perto do fosso (Monkey King inclusive levou o acerto final), então não conta como solo isolado. Amostra pequena (2 jogos, nenhum deles solo puro) não dá pra tirar minuto ou nível medianos confiáveis.
 
-Fonte: C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
+Fonte: dota-roshan-solo/data/solos.json

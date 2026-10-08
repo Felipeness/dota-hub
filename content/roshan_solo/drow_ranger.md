@@ -3,13 +3,13 @@ id: roshan-solo-drow_ranger
 titulo: "Solo de Roshan: Drow Ranger"
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_por_heroi.json
-- C:/Users/felip/Desktop/dota-roshan-solo/data/resumo_com_suporte.json
-- C:/Users/felip/Desktop/dota-roshan-solo/work/solo_roshan.md
-- C:/Users/felip/Desktop/dota-roshan-solo/work/solos_linha_a_linha.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/drow_ranger.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
+- dota-roshan-solo/data/solos.json
+- dota-roshan-solo/data/resumo_por_heroi.json
+- dota-roshan-solo/data/resumo_com_suporte.json
+- dota-roshan-solo/work/solo_roshan.md
+- dota-roshan-solo/work/solos_linha_a_linha.md
+- app/public/data/herois/drow_ranger.json
+- dota-imortal/data/opendota/items.json
 heroi: Drow Ranger
 solos: 2
 origem: replay

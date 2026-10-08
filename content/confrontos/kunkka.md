@@ -3,24 +3,24 @@ id: confrontos-kunkka
 heroi: Kunkka
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/kunkka.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/rubick.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/beastmaster.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tiny.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/nevermore.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/disruptor.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/queenofpain.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/invoker.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/mars.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/marci.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/shadow_demon.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/enchantress.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/techies.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/bristleback.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/faceless_void.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
+- dota-hub-conteudo-novo/pro_dados/kunkka.json
+- dota-hub-conteudo-novo/pro_dados/rubick.json
+- dota-hub-conteudo-novo/pro_dados/beastmaster.json
+- dota-hub-conteudo-novo/pro_dados/tiny.json
+- dota-hub-conteudo-novo/pro_dados/nevermore.json
+- dota-hub-conteudo-novo/pro_dados/disruptor.json
+- dota-hub-conteudo-novo/pro_dados/queenofpain.json
+- dota-hub-conteudo-novo/pro_dados/invoker.json
+- dota-hub-conteudo-novo/pro_dados/mars.json
+- dota-hub-conteudo-novo/pro_dados/marci.json
+- dota-hub-conteudo-novo/pro_dados/shadow_demon.json
+- dota-hub-conteudo-novo/pro_dados/enchantress.json
+- dota-hub-conteudo-novo/pro_dados/techies.json
+- dota-hub-conteudo-novo/pro_dados/bristleback.json
+- dota-hub-conteudo-novo/pro_dados/faceless_void.json
+- dota-imortal/data/opendota/constants_abilities.json
+- dota-imortal/data/opendota/constants_hero_abilities.json
+- dota-imortal/data/opendota/heroes.json
 ---
 
 Kunkka joga um combo com delay: Torrent sobe depois de 1,6s de aviso (110 a 320 de dano, 1,4s de stun, raio 250) e Ghostship chega 3,1s depois de lançado (350 a 600 de dano, 1,2s de stun, alcance 2000). Nenhum dos dois atravessa Black King Bar (fonte: constants_abilities.json, campo bkbpierce). No dataset pro (893 partidas, patches 7.40 e 7.41, pro_dados/kunkka.json) ele sai de GPM 581, XPM 762, LH10 66, nível final 21, e o item que destrava o combo de verdade é o Black King Bar, mediana de 25,0min (p25 20,7min, 359 de 893 partidas). Antes disso ele vive de Phase Boots (mediana 7,0min, em 878 de 893 partidas) pra fechar distância e bater Tidebringer. Os 14 oponentes abaixo foram escolhidos assim: os 6 com mais partidas pro contra ele (Rubick, Beastmaster, Tiny, Shadow Fiend, Disruptor, Queen of Pain); os 2 que mais aparecem na mesma função que ele em pro sem já estar na lista (Invoker na mid, Mars na offlane); os 3 piores confrontos dele com 30+ partidas (Marci, Shadow Demon, Enchantress); e os 3 melhores confrontos dele com 30+ partidas (Techies, Bristleback, Faceless Void), esse último incluído mesmo sem lane em comum porque é o carry mais citado da lista.

@@ -7,7 +7,7 @@ fontes:
 - replay 8943038404
 - replay 9006604405
 - replay 9008436237
-- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
+- dota-roshan-solo/data/solos.json
 heroi: Kez
 solos: 4
 origem: replay
