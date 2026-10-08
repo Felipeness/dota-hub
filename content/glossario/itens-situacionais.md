@@ -2,7 +2,7 @@
 id: itens-situacionais
 titulo: Itens situacionais
 patch: 7.41
-categoria: item
+categoria: estrategia
 fontes:
 - app/src/heroes/FichaHeroi.tsx (Secao 'Situacionais')
 - content/porque_itens/*.md

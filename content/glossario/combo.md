@@ -2,7 +2,7 @@
 id: combo
 titulo: Combo
 patch: 7.41
-categoria: item
+categoria: estrategia
 fontes:
 - content/porque_itens/*.md (campo combo)
 - app/src/heroes/partes.tsx (DetalheDoPorque)

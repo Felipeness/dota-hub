@@ -3,6 +3,7 @@ id: divine-rapier
 titulo: Divine Rapier
 patch: 7.41
 categoria: item
+item: rapier
 fontes:
 - dota-imortal/data/opendota/items.json (rapier)
 sinonimos:

@@ -3,6 +3,7 @@ id: refresher-shard
 titulo: Refresher Shard
 patch: 7.41
 categoria: item
+item: refresher_shard
 fontes:
 - app/public/data/objetivos_conteudo.json (ficha Roshan)
 sinonimos:

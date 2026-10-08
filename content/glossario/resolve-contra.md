@@ -2,7 +2,7 @@
 id: resolve-contra
 titulo: Resolve contra
 patch: 7.41
-categoria: item
+categoria: estrategia
 fontes:
 - app/src/heroes/partes.tsx ('Resolve contra:')
 - content/porque_itens/*.md (campo contra)

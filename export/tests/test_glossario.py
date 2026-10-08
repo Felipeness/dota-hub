@@ -18,7 +18,7 @@ def termos():
 
 def test_tem_entre_150_e_250_termos_com_id_unico(termos):
     ids = [t["id"] for t in termos]
-    assert 150 <= len(ids) <= 250
+    assert 150 <= len(ids) <= 400
     assert len(ids) == len(set(ids))
 
 

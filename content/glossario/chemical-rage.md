@@ -2,7 +2,7 @@
 id: chemical-rage
 titulo: Chemical Rage
 patch: 7.41
-categoria: item
+categoria: mecanica
 fontes:
 - dota-imortal/data/opendota/constants_abilities.json (alchemist_chemical_rage)
 sinonimos:

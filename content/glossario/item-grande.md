@@ -2,7 +2,7 @@
 id: item-grande
 titulo: Item grande
 patch: 7.41
-categoria: item
+categoria: economia
 fontes:
 - app/src/live/partida/detalhe.ts (CUSTO_DE_ITEM_GRANDE)
 sinonimos:

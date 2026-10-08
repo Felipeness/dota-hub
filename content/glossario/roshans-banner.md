@@ -3,6 +3,7 @@ id: roshans-banner
 titulo: Roshan's Banner
 patch: 7.41
 categoria: item
+item: roshans_banner
 fontes:
 - dota-imortal/work/ref/mecanicas/gt/abilities_english.txt (roshans_banner)
 sinonimos:

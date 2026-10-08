@@ -3,6 +3,7 @@ id: cheese
 titulo: Cheese
 patch: 7.41
 categoria: item
+item: cheese
 fontes:
 - app/public/data/objetivos_conteudo.json (ficha Roshan, recompensas por morte)
 sinonimos:

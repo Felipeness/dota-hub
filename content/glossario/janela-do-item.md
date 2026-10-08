@@ -2,7 +2,7 @@
 id: janela-do-item
 titulo: janela
 patch: 7.41
-categoria: item
+categoria: economia
 fontes:
 - app/src/confronto/linhaDoTempo.ts (type Janela)
 sinonimos:

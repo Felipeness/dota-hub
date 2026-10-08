@@ -2,7 +2,7 @@
 id: acid-spray
 titulo: Acid Spray
 patch: 7.41
-categoria: item
+categoria: mecanica
 fontes:
 - dota-imortal/data/opendota/constants_abilities.json (acid_spray)
 sinonimos:

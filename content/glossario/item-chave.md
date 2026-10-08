@@ -2,7 +2,7 @@
 id: item-chave
 titulo: item-chave
 patch: 7.41
-categoria: item
+categoria: estrategia
 fontes:
 - export/dota_export/confrontos.py (CUSTO_DE_ITEM_CHAVE = 2000)
 - app/src/confronto/AnaliseDePro.tsx (classe cf-tl-chave)

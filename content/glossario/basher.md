@@ -3,6 +3,7 @@ id: basher
 titulo: Basher
 patch: 7.41
 categoria: item
+item: basher
 fontes:
 - dota-imortal/data/opendota/items.json (basher)
 sinonimos:
