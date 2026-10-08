@@ -11,5 +11,5 @@ aws s3 sync dist/assets $B/assets $P --only-show-errors --cache-control "public,
 aws s3 sync dist/data $B/data $P --only-show-errors --cache-control "public,max-age=3600" --delete
 aws s3 cp dist/favicon.svg $B/favicon.svg $P --only-show-errors --cache-control "public,max-age=86400"
 aws s3 cp dist/index.html $B/index.html $P --only-show-errors --cache-control "no-cache"
-aws cloudfront create-invalidation $P --distribution-id $DIST --paths "/index.html" "/data/*" --query Invalidation.Id --output text
+MSYS_NO_PATHCONV=1 aws cloudfront create-invalidation $P --distribution-id $DIST --paths "/index.html" "/data/*" --query Invalidation.Id --output text
 echo "https://d22phpj0gnvpfs.cloudfront.net"
