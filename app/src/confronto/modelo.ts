@@ -1,4 +1,4 @@
-import type { HabilidadeFonte, HabilidadesDosHeroisFonte, HabilidadesFonte, HeroisFonte, ItensFonte } from "./fonte";
+import type { AghanimFonte, HabilidadeFonte, HabilidadesDosHeroisFonte, HabilidadesFonte, HeroisFonte, ItensFonte } from "./fonte";
 
 export type Atributo = Readonly<{ chave: string; rotulo: string; valores: readonly string[] }>;
 export type Dispel = "basico" | "so-forte" | "nao" | "desconhecido";
@@ -16,6 +16,11 @@ export type Habilidade = Readonly<{
   recargaS: readonly number[];
 }>;
 
+/** Texto do Aghanim's Shard ou Scepter de um herói, como o jogo descreve. */
+export type Melhoria = Readonly<{ habilidade: string; descricao: string }>;
+export type Aghanim = Readonly<{ shard: Melhoria | null; scepter: Melhoria | null }>;
+const SEM_AGHANIM: Aghanim = { shard: null, scepter: null };
+
 export type Heroi = Readonly<{
   id: number;
   /** Nome curto do jogo, usado na URL e nos ícones: "slark", "antimage". */
@@ -26,9 +31,11 @@ export type Heroi = Readonly<{
   velocidade: number;
   armadura: number;
   habilidades: readonly Habilidade[];
+  aghanim: Aghanim;
 }>;
 
-export type Item = Readonly<{ id: number; chave: string; nome: string; texto: string }>;
+/** `valores` vem do attrib do item: "invuln_duration" -> "0.1". */
+export type Item = Readonly<{ id: number; chave: string; nome: string; texto: string; valores: Readonly<Record<string, string>> }>;
 
 const lista = (v: HabilidadeFonte["behavior"]): string[] => (v === null || v === undefined ? [] : [v].flat().map(String));
 const primeiro = (v: HabilidadeFonte["behavior"]): string | null => lista(v)[0] ?? null;
@@ -70,14 +77,36 @@ export function montarHerois(herois: HeroisFonte, doHeroi: HabilidadesDosHeroisF
         const fonte = habilidades[c];
         return fonte ? [habilidade(c, fonte)] : [];
       }).filter(visivel),
+      aghanim: SEM_AGHANIM,
     };
   }).sort((a, b) => a.nome.localeCompare(b.nome));
+}
+
+// Algumas descrições do aghs_desc vêm com <span> do tooltip do jogo.
+const semTags = (texto: string) => texto.replace(/<[^>]+>/g, "").trim();
+const melhoria = (tem: boolean, habilidade: string | null | undefined, descricao: string | null | undefined): Melhoria | null =>
+  tem && descricao ? { habilidade: habilidade ?? "", descricao: semTags(descricao) } : null;
+
+export function comAghanim(herois: readonly Heroi[], aghanim: AghanimFonte): Heroi[] {
+  const porNome = new Map(aghanim.map((a) => [a.hero_name.replace(/^npc_dota_hero_/, ""), a]));
+  return herois.map((h) => {
+    const a = porNome.get(h.chave);
+    if (!a) return h;
+    return {
+      ...h,
+      aghanim: {
+        shard: melhoria(a.has_shard, a.shard_skill_name, a.shard_desc),
+        scepter: melhoria(a.has_scepter, a.scepter_skill_name, a.scepter_desc),
+      },
+    };
+  });
 }
 
 export function montarItens(itens: ItensFonte): ReadonlyMap<string, Item> {
   return new Map(Object.entries(itens).map(([chave, i]) => [chave, {
     id: i.id, chave, nome: i.dname ?? chave,
     texto: (i.abilities ?? []).map((a) => a.description ?? "").join("\n"),
+    valores: Object.fromEntries((i.attrib ?? []).map((a) => [a.key, lista(a.value).join(" / ")])),
   }]));
 }
 

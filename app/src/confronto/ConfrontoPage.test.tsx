@@ -11,7 +11,7 @@ import { ConfrontoPage } from "./ConfrontoPage";
 
 const GRAVADAS: Readonly<Record<string, string>> = {
   "/constants/heroes": "herois", "/constants/hero_abilities": "habilidades-dos-herois",
-  "/constants/abilities": "habilidades", "/constants/items": "itens",
+  "/constants/abilities": "habilidades", "/constants/items": "itens", "/constants/aghs_desc": "aghanim",
   "/heroes/93/matchups": "matchups-93", "/heroes/93/itemPopularity": "popularidade-93",
 };
 

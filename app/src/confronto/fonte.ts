@@ -37,7 +37,16 @@ export const itensFonte = z.record(z.string(), z.object({
   // Campo exigido pelo schema da tela ao vivo, que divide este cache: precisa continuar aqui.
   components: z.union([z.boolean(), z.array(z.string()).nullable().optional()]),
   abilities: z.array(z.object({ title: textoOuNada, description: textoOuNada })).nullable().optional(),
-})).refine((r) => Object.values(r).some((i) => Array.isArray(i.abilities)), "itens sem descrição (versão podada do cache)");
+  attrib: z.array(z.object({ key: z.string(), value: escalarOuLista })).nullable().optional(),
+})).refine((r) => Object.values(r).some((i) => Array.isArray(i.abilities)), "itens sem descrição (versão podada do cache)")
+  // Cache gravado antes do attrib entrar no schema: recusa para buscar de novo, senão a janela do Manta some.
+  .refine((r) => Object.values(r).some((i) => Array.isArray(i.attrib)), "itens sem atributos (cache antigo)");
+
+export const aghanimFonte = z.array(z.object({
+  hero_name: z.string(),
+  has_shard: z.boolean(), shard_desc: textoOuNada, shard_skill_name: textoOuNada,
+  has_scepter: z.boolean(), scepter_desc: textoOuNada, scepter_skill_name: textoOuNada,
+}));
 
 export const matchupsFonte = z.array(z.object({ hero_id: z.number(), games_played: z.number(), wins: z.number() }));
 
@@ -51,5 +60,6 @@ export type HabilidadesFonte = z.infer<typeof habilidadesFonte>;
 export type HabilidadesDosHeroisFonte = z.infer<typeof habilidadesDosHeroisFonte>;
 export type HeroisFonte = z.infer<typeof heroisFonte>;
 export type ItensFonte = z.infer<typeof itensFonte>;
+export type AghanimFonte = z.infer<typeof aghanimFonte>;
 export type MatchupsFonte = z.infer<typeof matchupsFonte>;
 export type PopularidadeFonte = z.infer<typeof popularidadeFonte>;
