@@ -5,9 +5,9 @@ patch: 7.41
 categoria: estrategia
 fontes:
 - Liquipedia (verbete The International, torneio)
-- C:/Users/felip/Desktop/dota-tier1/work/PLANO.md (Etapa 1, corte de roster pela TI 2026)
-- C:/Users/felip/Desktop/dota-tier1/work/CONTRATO_CHAVES.md (campo historico)
-- C:/Users/felip/Desktop/dota-tier1/work/BRIEF_DRAFT.md (regra 4)
+- dota-tier1/work/PLANO.md (Etapa 1, corte de roster pela TI 2026)
+- dota-tier1/work/CONTRATO_CHAVES.md (campo historico)
+- dota-tier1/work/BRIEF_DRAFT.md (regra 4)
 sinonimos:
 - TI
 - The International

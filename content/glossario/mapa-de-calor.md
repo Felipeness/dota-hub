@@ -6,8 +6,8 @@ categoria: mapa
 fontes:
 - app/src/times/camadas.ts (LIMIAR_CALOR = 0.08, desenhosDoCalor, normalização pelo máximo da grade)
 - app/src/times/leitura.ts (LEITORES.calor, que lê zonasDaJanela, não a grade de calor)
-- C:/Users/felip/Desktop/dota-tier1/tools/mapa_equipes.py (comentário 'calor.valores[j][i] ... normalizado pelo máximo'; groupby de posições vivas por célula)
-- C:/Users/felip/Desktop/dota-tier1/work/CONTRATO_HUB.md (mapa.calor: grade, valores; mapa.zonas: tempo_pct)
+- dota-tier1/tools/mapa_equipes.py (comentário 'calor.valores[j][i] ... normalizado pelo máximo'; groupby de posições vivas por célula)
+- dota-tier1/work/CONTRATO_HUB.md (mapa.calor: grade, valores; mapa.zonas: tempo_pct)
 sinonimos:
 - calor
 - mapa de calor

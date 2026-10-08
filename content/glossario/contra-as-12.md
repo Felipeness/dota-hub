@@ -4,7 +4,7 @@ titulo: Contra as 12
 patch: 7.41
 categoria: estatistica
 fontes:
-- C:/Users/felip/Desktop/dota-tier1/work/sintese/definicoes.md (seção 0, convenções gerais: contra as 12)
+- dota-tier1/work/sintese/definicoes.md (seção 0, convenções gerais: contra as 12)
 sinonimos:
 - contra as 12
 ---

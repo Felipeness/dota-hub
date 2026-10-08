@@ -4,7 +4,7 @@ titulo: Recorte
 patch: 7.41
 categoria: estatistica
 fontes:
-- C:/Users/felip/Desktop/dota-tier1/work/CONTRATO_CHAVES.md (campo recorte)
+- dota-tier1/work/CONTRATO_CHAVES.md (campo recorte)
 - app/src/times/ComoVencer.tsx (linha 244: chaves.recorte && 'Recorte: ...')
 sinonimos:
 - recorte

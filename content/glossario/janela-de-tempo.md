@@ -5,7 +5,7 @@ patch: 7.41
 categoria: estatistica
 fontes:
 - app/src/times/camadas.ts (JANELAS, janelaDoTempo)
-- C:/Users/felip/Desktop/dota-tier1/work/sintese/definicoes.md (seção 0, convenções gerais: janelas)
+- dota-tier1/work/sintese/definicoes.md (seção 0, convenções gerais: janelas)
 sinonimos:
 - janela
 - min

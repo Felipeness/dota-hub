@@ -4,9 +4,9 @@ titulo: Win condition
 patch: 7.41
 categoria: estrategia
 fontes:
-- C:/Users/felip/Desktop/dota-tier1/work/CONTRATO_HUB.md (gameplan_contra.win_condition)
+- dota-tier1/work/CONTRATO_HUB.md (gameplan_contra.win_condition)
 - app/src/times/TimeAtlasPage.tsx (ROTULO_GAMEPLAN, win_condition: 'Win condition')
-- C:/Users/felip/Desktop/dota-tier1/work/BRIEF_EQUIPE.md (GAMEPLAN AGAINST)
+- dota-tier1/work/BRIEF_EQUIPE.md (GAMEPLAN AGAINST)
 sinonimos:
 - win condition
 - condição de vitória

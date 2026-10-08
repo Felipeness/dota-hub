@@ -4,8 +4,8 @@ titulo: Replay vs partida
 patch: 7.41
 categoria: estatistica
 fontes:
-- C:/Users/felip/Desktop/dota-tier1/work/CONTRATO_HUB.md (amostra: partidas, replays, vitorias, nivel)
-- C:/Users/felip/Desktop/dota-tier1/work/PLANO.md (Etapa 3, replays com status 'falhou' em data/replays.csv)
+- dota-tier1/work/CONTRATO_HUB.md (amostra: partidas, replays, vitorias, nivel)
+- dota-tier1/work/PLANO.md (Etapa 3, replays com status 'falhou' em data/replays.csv)
 sinonimos:
 - partidas
 - replays

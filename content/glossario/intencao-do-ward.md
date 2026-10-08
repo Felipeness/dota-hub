@@ -4,9 +4,9 @@ titulo: Intenção do ward
 patch: 7.41
 categoria: visao
 fontes:
-- C:/Users/felip/Desktop/dota-tier1/work/CONTRATO_HUB.md (campo mapa.wards[].intencao)
-- C:/Users/felip/Desktop/dota-tier1/work/PLANO.md (seção Limitações registradas)
-- C:/Users/felip/Desktop/dota-tier1/tools/mapa_equipes.py (função _intent, valores reais encontrados nos dados: roshan, tormentor, push, smoke, defesa, controle)
+- dota-tier1/work/CONTRATO_HUB.md (campo mapa.wards[].intencao)
+- dota-tier1/work/PLANO.md (seção Limitações registradas)
+- dota-tier1/tools/mapa_equipes.py (função _intent, valores reais encontrados nos dados: roshan, tormentor, push, smoke, defesa, controle)
 - app/src/times/leitura.ts (LEITORES.wards)
 sinonimos:
 - intenção

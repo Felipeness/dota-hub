@@ -8,9 +8,9 @@ fontes:
 - dota-imortal/work/farm_mechanics_corrigido.json (7.41f: notas da Valve, datamine e Liquipedia, conferidos em 03/10/2026)
 - dota-imortal/work/map_features_corrigido.json (posições e regras do mapa 7.41)
 - app/public/data/glossario.json (id tormentor, fonte declarada: datamine e Liquipedia conferidos em 03/10/2026)
-- C:/Users/felip/Desktop/dota-imortal/work/farm_mechanics_corrigido.json
-- C:/Users/felip/Desktop/dota-imortal/work/map_features_corrigido.json
-- C:/Users/felip/Desktop/dota-tier1/work/PLANO.md (Etapa 4, raio do fosso do Tormentor)
+- dota-imortal/work/farm_mechanics_corrigido.json
+- dota-imortal/work/map_features_corrigido.json
+- dota-tier1/work/PLANO.md (Etapa 4, raio do fosso do Tormentor)
 - app/src/times/camadas.ts (ROTULO_GRUPO)
 sinonimos:
 - fosso do Tormentor
