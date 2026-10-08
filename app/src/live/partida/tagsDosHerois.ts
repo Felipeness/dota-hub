@@ -55,3 +55,6 @@ export const TAGS_DOS_HEROIS: Readonly<Record<string, readonly Tag[]>> = {
 };
 
 export const tagsDoHeroi = (chave: string): readonly Tag[] => TAGS_DOS_HEROIS[chave] ?? [];
+
+/** false = herói ainda sem entrada no dicionário de tags (não conferido), não "sem motivo de counter". */
+export const heroiConferido = (chave: string): boolean => Object.hasOwn(TAGS_DOS_HEROIS, chave);

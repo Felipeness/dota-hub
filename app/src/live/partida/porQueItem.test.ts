@@ -22,8 +22,20 @@ it("BKB pede pelo menos 2 heróis de controle: um só não vira motivo", () => {
 });
 
 it("item sem regra que case mostra só a função", () => {
-  expect(explicarItem("monkey_king_bar", [heroi("axe"), heroi("lion")])).toEqual({ funcao: ITENS_CURADOS.monkey_king_bar?.funcao, motivo: null });
-  expect(explicarItem("blink", [heroi("riki")])).toMatchObject({ motivo: null });
+  expect(explicarItem("monkey_king_bar", [heroi("axe"), heroi("lion")]))
+    .toEqual({ funcao: ITENS_CURADOS.monkey_king_bar?.funcao, motivo: null, semDadoDe: [] });
+  expect(explicarItem("blink", [heroi("riki")])).toMatchObject({ motivo: null, semDadoDe: [] });
+});
+
+it("herói sem tag conferida entra em semDadoDe em vez de silenciar o motivo", () => {
+  const explicacao = explicarItem("monkey_king_bar", [heroi("heroi_nao_conferido", "Herói Novo")]);
+  expect(explicacao?.motivo).toBeNull();
+  expect(explicacao?.semDadoDe).toEqual(["Herói Novo"]);
+});
+
+it("herói conferido sem a tag não entra em semDadoDe", () => {
+  const explicacao = explicarItem("monkey_king_bar", [heroi("axe")]);
+  expect(explicacao?.semDadoDe).toEqual([]);
 });
 
 it("item fora do dicionário não tem explicação", () => {

@@ -1,4 +1,4 @@
-import { NOME_DA_TAG, tagsDoHeroi, type Tag } from "./tagsDosHerois";
+import { NOME_DA_TAG, heroiConferido, tagsDoHeroi, type Tag } from "./tagsDosHerois";
 
 /**
  * Para que serve cada item comum e contra o quê ele costuma ser comprado. Função do item resumida da descrição
@@ -103,7 +103,8 @@ export const ITENS_CURADOS: Readonly<Record<string, ItemCurado>> = {
 };
 
 export type InimigoParaRegra = Readonly<{ chave: string; nome: string }>;
-export type Explicacao = Readonly<{ funcao: string; motivo: string | null }>;
+/** `semDadoDe` só vem preenchido quando `motivo` é null por falta de dado (herói sem tag), não por não casar a regra. */
+export type Explicacao = Readonly<{ funcao: string; motivo: string | null; semDadoDe: readonly string[] }>;
 
 const itemCurado = (chave: string): ItemCurado | undefined =>
   (Object.hasOwn(ITENS_CURADOS, chave) ? ITENS_CURADOS[chave] : undefined);
@@ -121,7 +122,10 @@ function motivoContra(regra: Contra, inimigos: readonly InimigoParaRegra[]): str
 export function explicarItem(chave: string, inimigos: readonly InimigoParaRegra[]): Explicacao | null {
   const item = itemCurado(chave);
   if (!item) return null;
-  return { funcao: item.funcao, motivo: item.contra ? motivoContra(item.contra, inimigos) : null };
+  if (!item.contra) return { funcao: item.funcao, motivo: null, semDadoDe: [] };
+  const motivo = motivoContra(item.contra, inimigos);
+  const semDadoDe = motivo ? [] : inimigos.filter((i) => !heroiConferido(i.chave)).map((i) => i.nome);
+  return { funcao: item.funcao, motivo, semDadoDe };
 }
 
 export const temExplicacao = (chave: string) => itemCurado(chave) !== undefined;
