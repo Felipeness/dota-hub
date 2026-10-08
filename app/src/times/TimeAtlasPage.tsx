@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Link, useParams } from "react-router";
 import { Indisponivel, useData } from "../data/useData";
+import { TextoComTermos } from "../glossary/Termo";
 import { MapView } from "../map/MapView";
 import {
   CAMADAS, JANELAS, SETAS_POR_PADRAO, TODAS_AS_INTENCOES, desenhosDoMapa, intencoesDosWards, itensDoMapa, linhasDoPreparo, smokesDaJanela,
@@ -38,12 +39,17 @@ function dividirSecao(md: string): { resumo: string; resto: string } | null {
   return { resumo: md.slice(0, corte), resto: md.slice(corte) };
 }
 
+// Parágrafo/item sem formatação aninhada (só texto corrido) ganha os termos marcados; com links/negrito dentro, fica como está.
+const comTermosSeForTextoPuro = (children: ReactNode): ReactNode => (typeof children === "string" ? <TextoComTermos texto={children} /> : children);
+
 // Títulos do Markdown descem dois níveis (a seção já é h2) e tabela ganha rolagem própria em vez de alargar a página.
 const MARKDOWN: Components = {
   h1: ({ node: _node, ...props }) => <h3 {...props} />,
   h2: ({ node: _node, ...props }) => <h4 {...props} />,
   h3: ({ node: _node, ...props }) => <h5 {...props} />,
   table: ({ node: _node, ...props }) => <div className="atlas-tabela" role="region" aria-label="Tabela" tabIndex={0}><table {...props} /></div>,
+  p: ({ node: _node, children, ...props }) => <p {...props}>{comTermosSeForTextoPuro(children)}</p>,
+  li: ({ node: _node, children, ...props }) => <li {...props}>{comTermosSeForTextoPuro(children)}</li>,
 };
 
 type Vista = "2.5d" | "plano";
@@ -136,7 +142,7 @@ function AtlasDoTime({ time }: { time: TimeAtlas }) {
         <div className="atlas-texto">
           <ChavesDoTime id={time.id} nome={time.nome} />
           <LanesDoTime id={time.id} nome={time.nome} />
-          <p className="abertura">{time.resumo}</p>
+          <p className="abertura"><TextoComTermos texto={time.resumo} /></p>
           <ComoJogarContra gameplan={time.gameplan_contra} />
           {ordenarSecoes(time.secoes).map((bloco) => (bloco.tipo === "assinatura"
             ? <AssinaturaTemporal key="assinatura" assinatura={time.assinatura_temporal} />
@@ -164,10 +170,10 @@ function PainelDoItem({ item, onFechar }: { item: ItemDoMapa; onFechar: () => vo
         <button className="botao-icone" aria-label="Fechar" onClick={onFechar}>×</button>
       </div>
       <dl className="grade-numeros grade-3">
-        {item.numeros.map(([rotulo, valor]) => <div key={rotulo}><dt>{rotulo}</dt><dd>{valor}</dd></div>)}
+        {item.numeros.map(([rotulo, valor]) => <div key={rotulo}><dt><TextoComTermos texto={rotulo} /></dt><dd>{valor}</dd></div>)}
       </dl>
       {item.preparo && <LinhaDoPreparo preparo={item.preparo} />}
-      <p>{item.texto}</p>
+      <p><TextoComTermos texto={item.texto} /></p>
     </aside>
   );
 }
@@ -178,13 +184,13 @@ const posicaoNoPreparo = (t: number) => `${Math.min(100, Math.max(0, (1 - t / IN
 function LinhaDoPreparo({ preparo }: { preparo: readonly Preparo[] }) {
   return (
     <figure className="atlas-preparo">
-      <figcaption>Preparo, de T-180 s até o objetivo</figcaption>
+      <figcaption><TextoComTermos texto="Preparo, de T-180s até o objetivo" /></figcaption>
       <div className="atlas-preparo-barra" aria-hidden="true">
         {preparo.map((p, k) => <span key={k} className="atlas-preparo-ponto" style={{ left: posicaoNoPreparo(p.t_rel_s) }} />)}
         <span className="atlas-preparo-fim" />
       </div>
       <ol className="linha-do-tempo">
-        {linhasDoPreparo(preparo).map(({ t, texto }) => <li key={t}><span className="tempo">{t === 0 ? "T=0" : `T${t}s`}</span><strong>{texto}</strong></li>)}
+        {linhasDoPreparo(preparo).map(({ t, texto }) => <li key={t}><span className="tempo">{t === 0 ? "T=0" : `T${t}s`}</span><strong><TextoComTermos texto={texto} /></strong></li>)}
       </ol>
     </figure>
   );
@@ -198,7 +204,9 @@ function ComoJogarContra({ gameplan }: { gameplan: TimeAtlas["gameplan_contra"] 
     <section className="atlas-contra" aria-labelledby="titulo-contra">
       <h2 id="titulo-contra">Como jogar contra</h2>
       <dl>
-        {[...conhecidas, ...novas].map((k) => <div key={k}><dt>{ROTULO_GAMEPLAN[k] ?? k.replaceAll("_", " ")}</dt><dd>{gameplan[k]}</dd></div>)}
+        {[...conhecidas, ...novas].map((k) => (
+          <div key={k}><dt><TextoComTermos texto={ROTULO_GAMEPLAN[k] ?? k.replaceAll("_", " ")} /></dt><dd><TextoComTermos texto={gameplan[k]} /></dd></div>
+        ))}
       </dl>
     </section>
   );
@@ -245,7 +253,7 @@ function AssinaturaTemporal({ assinatura }: { assinatura: TimeAtlas["assinatura_
     <section className="atlas-secao" aria-labelledby="titulo-assinatura">
       <h2 id="titulo-assinatura">Assinatura temporal</h2>
       <ol className="linha-do-tempo">
-        {assinatura.map((a) => <li key={a.janela}><span className="tempo">{a.janela}</span><p>{a.texto}</p></li>)}
+        {assinatura.map((a) => <li key={a.janela}><span className="tempo">{a.janela}</span><p><TextoComTermos texto={a.texto} /></p></li>)}
       </ol>
     </section>
   );

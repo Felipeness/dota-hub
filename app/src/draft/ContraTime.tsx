@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import { Indisponivel, useData } from "../data/useData";
+import { TextoComTermos } from "../glossary/Termo";
 import { CAMINHO_INDICE, chavesSchema, indiceAtlasSchema, type Chaves } from "../times/schemas";
 import type { HeroId } from "./guia";
 import { formatarPp, type HeroiDraft } from "./pontuacao";
@@ -37,13 +38,13 @@ function Ban({ ban, acoes }: { ban: Chaves["banir"][number]; acoes: Acoes }) {
       </div>
       <p className="draft-linha">
         Vencem <span className="numero">{pct(ban.wr_com)}</span> com ele ({ban.n_com} jogos) e <span className="numero">{pct(ban.wr_sem)}</span> sem ({ban.n_sem}).
-        {ban.papel && <> Papel: {ban.papel}.</>}
+        {ban.papel && <> <TextoComTermos texto={`Papel: ${ban.papel}.`} /></>}
       </p>
       {placar && <p className="draft-linha">Placar do jogador: {placar}{ban.placar_60d && <>; últimos 60 dias: {ban.placar_60d}</>}.</p>}
       <details className="draft-porque">
         <summary>Por quê, em detalhe (confiança {ban.confianca})</summary>
-        <p>{ban.texto}</p>
-        {ban.leitura_contexto && <p>{ban.leitura_contexto}</p>}
+        <p><TextoComTermos texto={ban.texto} /></p>
+        {ban.leitura_contexto && <p><TextoComTermos texto={ban.leitura_contexto} /></p>}
       </details>
     </li>
   );
@@ -60,7 +61,7 @@ function HeroiContra({ heroi, acoes }: { heroi: Chaves["herois_contra"][number];
       <p className="draft-linha">Contra ele vencem <span className="numero">{pct(heroi.wr_equipe_contra)}</span> em {heroi.n} jogos.</p>
       <details className="draft-porque">
         <summary>Por quê, em detalhe (confiança {heroi.confianca})</summary>
-        <p>{heroi.texto}</p>
+        <p><TextoComTermos texto={heroi.texto} /></p>
       </details>
     </li>
   );
@@ -73,8 +74,8 @@ function RecomendacoesDoTime({ id, acoes }: { id: string; acoes: Acoes }) {
   const { banir, herois_contra: contra, resumo_para_vencer: resumo, historico } = chaves.dados;
   return (
     <>
-      {historico && <span className="selo">histórico: roster de antes da TI</span>}
-      <p className="draft-explicacao">{resumo}</p>
+      {historico && <span className="selo"><TextoComTermos texto="histórico: roster de antes da TI" /></span>}
+      <p className="draft-explicacao"><TextoComTermos texto={resumo} /></p>
       <div className="draft-colunas">
         <section className="draft-coluna" aria-label="Bans contra o time">
           <h2>Banir</h2>
@@ -84,7 +85,7 @@ function RecomendacoesDoTime({ id, acoes }: { id: string; acoes: Acoes }) {
         </section>
         <section className="draft-coluna" aria-label="Heróis contra o time">
           <h2>Pegar contra eles</h2>
-          <p className="draft-explicacao">Heróis do adversário contra os quais o time vence menos do que o esperado.</p>
+          <p className="draft-explicacao"><TextoComTermos texto="Heróis do adversário contra os quais o time vence menos do que o esperado." /></p>
           {contra.length === 0 ? <p className="draft-nota">O atlas não achou herói com dado contra este time.</p>
             : <ol className="draft-sugestoes">{contra.map((h) => <HeroiContra key={h.heroi} heroi={h} acoes={acoes} />)}</ol>}
         </section>

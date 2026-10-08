@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router";
 import { heroisCatalogoSchema, heroiSchema, type HeroiDoCatalogo } from "../../data/schemas";
 import { useData } from "../../data/useData";
+import { TextoComTermos } from "../../glossary/Termo";
 import { acharNoCatalogo } from "../../heroes/catalogo";
 import { urlDoRetrato } from "../../heroes/resumo";
 import { lerId } from "../contas";
@@ -43,7 +44,7 @@ function Partida({ detalhe, onAtualizar }: { detalhe: DetalheDaPartida; onAtuali
     <article className="partida">
       <Cabecalho detalhe={detalhe} herois={herois} onAtualizar={onAtualizar} />
       <ul className="partida-resumo" aria-label="Resumo da partida">
-        {resumoDaPartida(detalhe, pro).map((frase) => <li key={frase}>{frase}</li>)}
+        {resumoDaPartida(detalhe, pro).map((frase) => <li key={frase}><TextoComTermos texto={frase} /></li>)}
       </ul>
       {detalhe.draft.length > 0 && <DraftDaPartida draft={detalhe.draft} herois={herois} />}
       {detalhe.analisada ? (
@@ -87,7 +88,7 @@ function Cabecalho({ detalhe, herois, onAtualizar }: { detalhe: DetalheDaPartida
         )}
         {detalhe.eficienciaDeLanePct !== null && (
           <p className="partida-eficiencia">
-            Eficiência de lane: {Math.round(detalhe.eficienciaDeLanePct)}%.
+            <TextoComTermos texto="Eficiência de lane" />: {Math.round(detalhe.eficienciaDeLanePct)}%.
             <span className="partida-eficiencia-explicacao"> Ouro e experiência que você farmou contra o máximo possível na lane nesse período.</span>
           </p>
         )}
@@ -108,7 +109,7 @@ function DraftDaPartida({ draft, herois }: { draft: DetalheDaPartida["draft"]; h
             <li key={i} className={p.seuTime ? "seu-time" : "time-inimigo"}>
               <IconeOuIniciais src={p.heroi.retrato ? urlDoRetrato(p.heroi.retrato) : null} nome={p.heroi.nome} classe="partida-draft-retrato" />
               <span>{heroiDoCatalogo ? <Link to={`/herois/${heroiDoCatalogo.id}`}>{p.heroi.nome}</Link> : p.heroi.nome}</span>
-              <span className="partida-draft-tipo">{p.pick ? "pick" : "ban"}</span>
+              <span className="partida-draft-tipo"><TextoComTermos texto={p.pick ? "pick" : "ban"} /></span>
             </li>
           );
         })}
@@ -155,8 +156,7 @@ function Curvas({ detalhe, janela }: { detalhe: DetalheDaPartida; janela: IdJane
       </div>
       {referencia && (
         <p className="partida-aviso">
-          Mediana do herói = 50º percentil de ouro e last hits por minuto no /benchmarks do OpenDota (partidas públicas, não só pro),
-          esticado em linha reta; serve de régua, não de curva real.
+          <TextoComTermos texto="Mediana do herói = 50º percentil de ouro e last hits por minuto no /benchmarks do OpenDota (partidas públicas, não só pro), esticado em linha reta; serve de régua, não de curva real." />
         </p>
       )}
     </section>
@@ -170,7 +170,7 @@ function VantagemDoTime({ detalhe, janela }: { detalhe: DetalheDaPartida; janela
   return (
     <section className="partida-vantagem" aria-labelledby="titulo-vantagem">
       <h2 id="titulo-vantagem">Vantagem do time</h2>
-      <p className="partida-vazio">Positivo = seu time na frente; negativo = o time inimigo na frente.</p>
+      <p className="partida-vazio"><TextoComTermos texto="Positivo = seu time na frente; negativo = o time inimigo na frente." /></p>
       <div className="partida-curvas-grade">
         <CurvaDaPartida
           titulo="Vantagem de ouro" unidade="Diferença de ouro total entre os times (radiant_gold_adv do OpenDota)"

@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { TextoComTermos } from "../glossary/Termo";
 import { ListaDeFontes } from "../layout/Fontes";
 import { IconeOuIniciais } from "../live/partida/BuildDaPartida";
 import { dividirResumo, urlDoRetrato } from "./resumo";
@@ -30,9 +31,9 @@ type Porque = Readonly<{ detalhe: string | null; contra: string | null; combo: s
 export function DetalheDoPorque({ porque }: { porque: Porque }) {
   return (
     <>
-      {porque.detalhe && <p>{porque.detalhe}</p>}
-      {porque.contra && <p className="item-contra"><strong>Resolve contra:</strong> {porque.contra}</p>}
-      {porque.combo && <p><strong>Combo:</strong> {porque.combo}</p>}
+      {porque.detalhe && <p><TextoComTermos texto={porque.detalhe} /></p>}
+      {porque.contra && <p className="item-contra"><strong><TextoComTermos texto="Resolve contra:" /></strong> <TextoComTermos texto={porque.contra} /></p>}
+      {porque.combo && <p><strong><TextoComTermos texto="Combo:" /></strong> <TextoComTermos texto={porque.combo} /></p>}
       {porque.fontes.length > 0 && <p className="fonte">Fontes: <ListaDeFontes fontes={porque.fontes} /></p>}
     </>
   );
@@ -47,9 +48,9 @@ export function TopoDoHeroi({ id, nome, sobretitulo, resumo, children }: TopoPro
     <header className="ficha-topo">
       <img className="retrato" src={urlDoRetrato(id)} alt="" width={128} height={72} />
       <div><span className="sobretitulo">{sobretitulo}</span><h1>{nome}</h1></div>
-      <p className="abertura">{abertura}</p>
+      <p className="abertura"><TextoComTermos texto={abertura} /></p>
       {children}
-      {resto && <details className="recolhivel"><summary>Ler o resumo completo</summary><p>{resto}</p></details>}
+      {resto && <details className="recolhivel"><summary>Ler o resumo completo</summary><p><TextoComTermos texto={resto} /></p></details>}
     </header>
   );
 }

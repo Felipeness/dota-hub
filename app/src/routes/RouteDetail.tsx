@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import type { Objetivo, Passo, Rota } from "../data/schemas";
+import { TextoComTermos } from "../glossary/Termo";
 import { MapView } from "../map/MapView";
 import { ETIQUETA_DA_VIA } from "../map/selos";
 
@@ -25,10 +26,10 @@ export function RouteDetail({ rota, objetivos, titulos, onIrPara }: Props) {
       <div className="rota-principal">
         <div className="pilulas">
           <span className="selo selo-destaque">{rota.id}</span>
-          <span className="selo">{rota.origem === "real" ? `ROTA REAL · replay ${rota.replay}` : "ROTA RECOMENDADA"}</span>
+          <span className="selo"><TextoComTermos texto={rota.origem === "real" ? `ROTA REAL · replay ${rota.replay}` : "ROTA RECOMENDADA"} /></span>
           {rota.heroi ? <Link to={`/herois/${rota.heroi}`} className="selo">{rota.secao}</Link> : rota.secao && <span className="selo">{rota.secao}</span>}
         </div>
-        <h2>{rota.pergunta}</h2>
+        <h2><TextoComTermos texto={rota.pergunta} /></h2>
         <p className="rota-titulo">{rota.titulo}</p>
         <div className="rota-mapa">
           <MapView objetivos={objetivos} rota={rota} selecionado={selecionado} onSelecionar={setSelecionado} />
@@ -42,7 +43,7 @@ export function RouteDetail({ rota, objetivos, titulos, onIrPara }: Props) {
         {rota.porque && (
           <div className="porque">
             <h3 className="sobretitulo">Por quê</h3>
-            <p>{rota.porque}</p>
+            <p><TextoComTermos texto={rota.porque} /></p>
           </div>
         )}
       </aside>
@@ -88,7 +89,7 @@ export function ListaPassos({ passos, fuga = null }: { passos: readonly Passo[];
           <li key={p.n}>
             <span className={`passo passo-${p.risco}`} title={ROTULO_DO_RISCO[p.risco]} aria-label={ROTULO_DO_RISCO[p.risco]}>{p.n}</span>
             <span className="numero">{p.minuto}</span>
-            <span><strong>{p.via && `${ETIQUETA_DA_VIA[p.via]} `}{p.rotulo}</strong> · {p.acao}</span>
+            <span><strong>{p.via && <><TextoComTermos texto={ETIQUETA_DA_VIA[p.via]} /> </>}{p.rotulo}</strong> · <TextoComTermos texto={p.acao} /></span>
           </li>
         ))}
         {fuga && <li className="fuga"><span className="passo passo-fuga">↩</span><span /><span><strong>{fuga.rotulo}</strong> · a partir do passo {fuga.de_passo}</span></li>}
@@ -116,7 +117,7 @@ function SeOMapaMudar({ itens, titulos, onIrPara }: { itens: Desvio[]; titulos: 
       <ul>
         {itens.map(({ condicao, acao, rota: destino }) => (
           <li key={condicao}>
-            {condicao}{acao && ` → ${acao}`}
+            <TextoComTermos texto={acao ? `${condicao} → ${acao}` : condicao} />
             {destino && <> · <button className="link" title={destino} onClick={() => onIrPara(destino)}>{titulos.get(destino) ?? destino}</button></>}
           </li>
         ))}

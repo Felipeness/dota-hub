@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { TextoComTermos } from "../glossary/Termo";
 import { urlDoRetrato } from "../heroes/resumo";
 import type { Chaves, Confianca, FatorChave } from "./schemas";
 
@@ -62,7 +63,7 @@ function BansPorMes({ meses, ultimoPick }: { meses: NonNullable<Ban["bans_contra
       <span className="chave-meses-barras" role="img" aria-label={`Bans contra eles por mês: ${ordenados.map(([mes, m]) => `${nomeDoMes(mes)} ${pct(m.pct)}`).join(", ")}`}>
         {ordenados.map(([mes, m]) => <i key={mes} title={`${nomeDoMes(mes)}: ${m.n} de ${m.jogos} jogos`} style={{ height: `${Math.max(6, m.pct * 100)}%` }} />)}
       </span>
-      {nota && <span className="chave-papel">{nota}</span>}
+      {nota && <span className="chave-papel"><TextoComTermos texto={nota} /></span>}
     </span>
   );
 }
@@ -88,14 +89,16 @@ function CartaoBanir({ ban, destaque }: { ban: Ban; destaque: boolean }) {
         {ban.bans_contra_por_mes && <BansPorMes meses={ban.bans_contra_por_mes} ultimoPick={ban.ultimo_pick} />}
         {contexto.length > 0 && (
           <span className="chave-contexto" aria-label="Vitórias por situação">
-            {contexto.map(([chave, placar]) => <span key={chave} className="chave-chip">{ROTULO_CONTEXTO[chave] ?? chave.replaceAll("_", " ")} {placar}</span>)}
+            {contexto.map(([chave, placar]) => (
+              <span key={chave} className="chave-chip"><TextoComTermos texto={ROTULO_CONTEXTO[chave] ?? chave.replaceAll("_", " ")} /> {placar}</span>
+            ))}
           </span>
         )}
-        {ban.leitura_contexto && <span className="chave-leitura">{ban.leitura_contexto}</span>}
+        {ban.leitura_contexto && <span className="chave-leitura"><TextoComTermos texto={ban.leitura_contexto} /></span>}
         <span className="chave-selos">
           <span className={`chave-selo ${ban.ban_confirma === true ? "chave-selo-confirmado" : "chave-selo-indicio"}`}>{ban.ban_confirma === true ? "confirmado" : "indício"}</span>
-          {ban.ban_confirma !== true && <span className={`chave-selo ${selo.classe}`}>{selo.texto}</span>}
-          {ban.forca_contexto && <span className={`chave-selo ${SELO_DO_CONTEXTO[ban.forca_contexto].classe}`}>{SELO_DO_CONTEXTO[ban.forca_contexto].texto}</span>}
+          {ban.ban_confirma !== true && <span className={`chave-selo ${selo.classe}`}><TextoComTermos texto={selo.texto} /></span>}
+          {ban.forca_contexto && <span className={`chave-selo ${SELO_DO_CONTEXTO[ban.forca_contexto].classe}`}><TextoComTermos texto={SELO_DO_CONTEXTO[ban.forca_contexto].texto} /></span>}
         </span>
         <SeloConfianca confianca={ban.confianca} n={ban.n_com} />
       </div>
@@ -164,7 +167,7 @@ function FaixaDoWinRate({ fator }: { fator: FatorChave }) {
 function CartaoFator({ fator, maior, lado }: { fator: FatorChave; maior: number; lado: Lado }) {
   return (
     <li className="chave-fator-cartao" title={fator.texto}>
-      <span className="chave-fator">{fator.fator}{fator.padrao_da_liga ? <em> · padrão da liga</em> : null}</span>
+      <span className="chave-fator">{fator.fator}{fator.padrao_da_liga ? <em> · <TextoComTermos texto="padrão da liga" /></em> : null}</span>
       <span className="chave-barra" aria-hidden="true"><i style={{ width: `${(Math.abs(fator.efeito_pp) / maior) * 100}%` }} /></span>
       <span className="chave-efeito numero">{pp(fator.efeito_pp)}</span>
       <FaixaDoWinRate fator={fator} />
@@ -172,15 +175,15 @@ function CartaoFator({ fator, maior, lado }: { fator: FatorChave; maior: number;
         vence {pct(fator.wr_com)} com (n={fator.n_com}) · {pct(fator.wr_sem)} sem (n={fator.n_sem})
         {temValor(fator.ic_baixo) && temValor(fator.ic_alto) ? ` · IC ${pct(fator.ic_baixo)} a ${pct(fator.ic_alto)}` : ""}
       </span>
-      {temValor(fator.vs_liga_pp) && <span className="chave-liga">{comparacaoComLiga(fator.vs_liga_pp, lado)}</span>}
+      {temValor(fator.vs_liga_pp) && <span className="chave-liga"><TextoComTermos texto={comparacaoComLiga(fator.vs_liga_pp, lado)} /></span>}
       {fator.causalidade && (() => {
         const selo = CAUSALIDADE[fator.causalidade] ?? { texto: fator.causalidade, classe: "chave-selo-nao", titulo: "" };
         return (
           <span className="chave-selos">
-            <span className={`chave-selo ${selo.classe}`} title={selo.titulo}>{selo.texto}</span>
+            <span className={`chave-selo ${selo.classe}`} title={selo.titulo}><TextoComTermos texto={selo.texto} /></span>
             {temValor(fator.efeito_dentro_estado_pp) && (
               <span className="chave-papel">
-                mesmo em jogos no mesmo estado aos 15 min, o efeito continua em {pp(fator.efeito_dentro_estado_pp)}
+                <TextoComTermos texto={`mesmo em jogos no mesmo estado aos 15 min, o efeito continua em ${pp(fator.efeito_dentro_estado_pp)}`} />
               </span>
             )}
           </span>
@@ -211,8 +214,8 @@ export function ComoVencer({ chaves, nome }: { chaves: Chaves; nome: string }) {
   return (
     <section className="chave" aria-labelledby="titulo-vencer">
       <h2 id="titulo-vencer">Como vencer a {nome}</h2>
-      {chaves.historico && <span className="selo chave-historico">histórico: roster de antes da TI</span>}
-      <p className="chave-resumo">{chaves.resumo_para_vencer}</p>
+      {chaves.historico && <span className="selo chave-historico"><TextoComTermos texto="histórico: roster de antes da TI" /></span>}
+      <p className="chave-resumo"><TextoComTermos texto={chaves.resumo_para_vencer} /></p>
       {chaves.banir.length > 0 && (
         <section aria-label="Bans sugeridos">
           <h3>Bans sugeridos</h3>
@@ -235,13 +238,13 @@ export function ComoVencer({ chaves, nome }: { chaves: Chaves; nome: string }) {
           <h3>Estilo que funciona contra</h3>
           <ul className="chave-estilos">
             {estilos.map((e) => (
-              <li key={e.cluster}><strong>{e.cluster}</strong> {temValor(e.excesso_pp) && <span className="chave-efeito numero">{pp(e.excesso_pp)}</span>} {e.texto}</li>
+              <li key={e.cluster}><strong><TextoComTermos texto={e.cluster} /></strong> {temValor(e.excesso_pp) && <span className="chave-efeito numero">{pp(e.excesso_pp)}</span>} <TextoComTermos texto={e.texto} /></li>
             ))}
           </ul>
         </section>
       )}
-      {chaves.contexto_liga && <p className="chave-nota"><strong>Padrão da liga.</strong> {chaves.contexto_liga}</p>}
-      {chaves.recorte && <p className="chave-nota">Recorte: {chaves.recorte}.</p>}
+      {chaves.contexto_liga && <p className="chave-nota"><strong><TextoComTermos texto="Padrão da liga." /></strong> <TextoComTermos texto={chaves.contexto_liga} /></p>}
+      {chaves.recorte && <p className="chave-nota"><TextoComTermos texto={`Recorte: ${chaves.recorte}.`} /></p>}
     </section>
   );
 }
