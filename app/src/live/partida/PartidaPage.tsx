@@ -53,7 +53,7 @@ function Partida({ detalhe, onAtualizar }: { detalhe: DetalheDaPartida; onAtuali
           <SeletorDeJanela duracaoS={detalhe.duracaoS} janela={janela} onJanela={setJanela} />
           <Curvas detalhe={detalhe} janela={janela} />
           <RotaPorTempo detalhe={detalhe} janela={janela} />
-          <BuildDaPartida detalhe={detalhe} />
+          <BuildDaPartida detalhe={detalhe} pro={pro} />
         </>
       ) : (
         <p role="status" className="ao-vivo-vazio">
