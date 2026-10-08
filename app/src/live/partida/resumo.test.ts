@@ -1,5 +1,5 @@
 import type { DetalheDaPartida } from "./detalhe";
-import { ouroCurto, resumoDaPartida } from "./resumo";
+import { itemDoGuia, ouroCurto, resumoDaPartida } from "./resumo";
 
 const minutos = (porMinuto: number, n = 31) => Array.from({ length: n }, (_, i) => i * porMinuto);
 const base: DetalheDaPartida = {
@@ -27,10 +27,21 @@ it("resume resultado, lane, last hits, item principal e a janela com mais mortes
 });
 
 it("com o guia pro, compara o item com o alvo e os last hits com os pros", () => {
-  const pro = { itensCore: [{ nome: "Diffusal Blade (2500), alvo 13:00", minuto_alvo: 13 }], lh10: 61.5 };
+  const pro = { itensCore: [{ nome: "Diffusal Blade (2500), alvo 13:00", minuto_alvo: 13, base: "Mediana 13 min." }], lh10: 61.5 };
   const frases = resumoDaPartida(base, pro);
   expect(frases).toContain("60 last hits aos 10 min; os pros fazem 61,5 com o herói.");
   expect(frases).toContain("Diffusal Blade aos 17:40, 5 min mais tarde que o alvo do guia pro (13:00).");
+});
+
+it("casa compra do item final com guia registrado como upgrade (Basher -> Abyssal)", () => {
+  const pro = { itensCore: [{ nome: "Skull Basher -> Abyssal Blade", minuto_alvo: 37, base: "Mediana 37 min." }], lh10: null };
+  const compra = { t: 2_220, chave: "abyssal_blade", nome: "Abyssal Blade", custo: 6_250, grande: true };
+  expect(itemDoGuia(compra, pro)?.minuto_alvo).toBe(37);
+});
+
+it("sem guia pro, item do guia fica null", () => {
+  const compra = { t: 2_220, chave: "abyssal_blade", nome: "Abyssal Blade", custo: 6_250, grande: true };
+  expect(itemDoGuia(compra, null)).toBeNull();
 });
 
 it.each([
