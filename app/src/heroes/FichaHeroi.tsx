@@ -2,6 +2,7 @@ import { useState, type ReactNode } from "react";
 import { Link } from "react-router";
 import { indiceSchema, minutoComoTexto, rotaSchema, rotasResumoSchema, type ConteudoItem, type Fase, type Heroi, type Objetivo, type Spike } from "../data/schemas";
 import { Indisponivel, useData } from "../data/useData";
+import { ListaDeFontes } from "../layout/Fontes";
 import { IconeOuIniciais } from "../live/partida/BuildDaPartida";
 import { ListaPassos } from "../routes/RouteDetail";
 import type { Lado } from "../routes/filtros";
@@ -58,20 +59,44 @@ function Fontes({ heroi }: { heroi: Heroi }) {
   );
 }
 
-/** Um item da build: ícone, nome curto, minuto e o porquê num resumo escaneável; a estatística completa fica atrás de "ver detalhe". */
-function ItemDaBuild({ item }: { item: Heroi["guia"]["itens_core"][number] }) {
+type ItemCore = Heroi["guia"]["itens_core"][number];
+type ItemSituacional = Heroi["guia"]["itens_situacionais"][number];
+type Porque = NonNullable<ItemSituacional["porque"]>;
+
+/** Detalhe do porquê pesquisado: o "contra" vem destacado porque é o que decide a compra contra um herói específico. */
+function DetalheDoPorque({ porque }: { porque: Porque }) {
+  return (
+    <>
+      {porque.detalhe && <p>{porque.detalhe}</p>}
+      {porque.contra && <p className="item-contra"><strong>Resolve contra:</strong> {porque.contra}</p>}
+      {porque.combo && <p><strong>Combo:</strong> {porque.combo}</p>}
+      {porque.fontes.length > 0 && <p className="fonte">Fontes: <ListaDeFontes fontes={porque.fontes} /></p>}
+    </>
+  );
+}
+
+/** O power spike só complementa quando diz algo além do porquê pesquisado. */
+const spikeComplementar = ({ porque, spike }: ItemCore) => (porque && spike && spike.texto !== porque.texto ? spike : null);
+
+/** Um item da build: ícone, nome curto, minuto e o porquê num resumo escaneável; o resto fica atrás de "ver detalhe". */
+function ItemDaBuild({ item }: { item: ItemCore }) {
+  const principal = item.porque?.texto ?? item.spike?.texto;
+  const complemento = spikeComplementar(item);
   return (
     <li>
       <IconeOuIniciais src={urlDoIconeDeItem(item.item)} nome={item.nome_curto} classe="build-icone" />
       <div>
         <strong>{item.nome_curto}</strong>{" "}
         <span className="tempo">{item.minuto_alvo === null ? "sem minuto" : minutoComoTexto(item.minuto_alvo)}</span>
-        {item.porque && <p>{item.porque.texto}</p>}
+        {principal && <p className="item-porque">{principal}</p>}
         <details className="recolhivel">
-          <summary>Ver detalhe (tempo dos pros, D2PT e sua média)</summary>
+          <summary>Ver detalhe</summary>
+          {item.porque && <DetalheDoPorque porque={item.porque} />}
+          {complemento && <p><strong>No power spike:</strong> {complemento.texto}</p>}
           <p>{item.nome}</p>
           <p>{item.base}</p>
-          {item.porque && <p className="fonte">Fonte: {item.porque.fonte}</p>}
+          {item.spike && !item.porque && <p className="fonte">Fonte: {item.spike.fonte}</p>}
+          {complemento && <p className="fonte">Fonte do power spike: {complemento.fonte}</p>}
         </details>
       </div>
     </li>
@@ -91,11 +116,20 @@ function MarcoDoSpike({ spike }: { spike: Spike }) {
   );
 }
 
-function Situacional({ item }: { item: Heroi["guia"]["itens_situacionais"][number] }) {
+function Situacional({ item }: { item: ItemSituacional }) {
   return (
     <li>
       <IconeOuIniciais src={urlDoIconeDeItem(item.item)} nome={item.nome} classe="build-icone" />
-      <div><strong>{item.nome}</strong><p>{item.quando}</p></div>
+      <div>
+        <strong>{item.nome}</strong>
+        <p>{item.quando}</p>
+        {item.porque && (
+          <>
+            <p className="item-porque">{item.porque.texto}</p>
+            <details className="recolhivel"><summary>Ver detalhe</summary><DetalheDoPorque porque={item.porque} /></details>
+          </>
+        )}
+      </div>
     </li>
   );
 }

@@ -14,11 +14,11 @@ const guia: Heroi["guia"] = {
   skill_build: [], itens_situacionais: [], depois_dos_20: [], erros_comuns: [],
   condicao_para_farmar: { nivel: 6, minuto_tipico: 7.9, explicacao: "" },
   itens_core: [
-    { item: "power_treads", nome_curto: "Power Treads", nome: "Power Treads (1.400), alvo 6:54", minuto_alvo: 6.9, base: "", porque: null },
-    { item: "sem_minuto", nome_curto: "Sem minuto", nome: "Sem minuto", minuto_alvo: null, base: "", porque: null },
-    { item: "bfury", nome_curto: "Battle Fury", nome: "Battle Fury, alvo 13:48", minuto_alvo: 13.8, base: "", porque: null },
-    { item: "yasha", nome_curto: "Yasha", nome: "Yasha, alvo 17:12", minuto_alvo: 17.2, base: "", porque: null },
-    { item: "manta", nome_curto: "Manta Style", nome: "Manta Style, alvo 20:00", minuto_alvo: 20, base: "", porque: null },
+    { item: "power_treads", nome_curto: "Power Treads", nome: "Power Treads (1.400), alvo 6:54", minuto_alvo: 6.9, base: "", spike: null, porque: null },
+    { item: "sem_minuto", nome_curto: "Sem minuto", nome: "Sem minuto", minuto_alvo: null, base: "", spike: null, porque: null },
+    { item: "bfury", nome_curto: "Battle Fury", nome: "Battle Fury, alvo 13:48", minuto_alvo: 13.8, base: "", spike: null, porque: null },
+    { item: "yasha", nome_curto: "Yasha", nome: "Yasha, alvo 17:12", minuto_alvo: 17.2, base: "", spike: null, porque: null },
+    { item: "manta", nome_curto: "Manta Style", nome: "Manta Style, alvo 20:00", minuto_alvo: 20, base: "", spike: null, porque: null },
   ],
 };
 
@@ -37,8 +37,8 @@ it("quando nenhum item core tem minuto_alvo, mostra os itens sem horário em vez
   const semMinutoAlgum = {
     ...guia,
     itens_core: [
-      { item: "a", nome_curto: "Item A", nome: "Item A", minuto_alvo: null, base: "", porque: null },
-      { item: "b", nome_curto: "Item B", nome: "Item B", minuto_alvo: null, base: "", porque: null },
+      { item: "a", nome_curto: "Item A", nome: "Item A", minuto_alvo: null, base: "", spike: null, porque: null },
+      { item: "b", nome_curto: "Item B", nome: "Item B", minuto_alvo: null, base: "", spike: null, porque: null },
     ],
   };
   expect(destaquesDoHeroi({ guia: semMinutoAlgum })).toEqual([
@@ -48,9 +48,9 @@ it("quando nenhum item core tem minuto_alvo, mostra os itens sem horário em vez
 
 it("ordena os itens core por minuto_alvo, deixando os sem minuto por último", () => {
   const itens = [
-    { item: "manta", nome_curto: "Manta Style", nome: "", minuto_alvo: 18.6, base: "", porque: null },
-    { item: "diffusal", nome_curto: "Diffusal Blade", nome: "", minuto_alvo: null, base: "", porque: null },
-    { item: "power_treads", nome_curto: "Power Treads", nome: "", minuto_alvo: 6, base: "", porque: null },
+    { item: "manta", nome_curto: "Manta Style", nome: "", minuto_alvo: 18.6, base: "", spike: null, porque: null },
+    { item: "diffusal", nome_curto: "Diffusal Blade", nome: "", minuto_alvo: null, base: "", spike: null, porque: null },
+    { item: "power_treads", nome_curto: "Power Treads", nome: "", minuto_alvo: 6, base: "", spike: null, porque: null },
   ];
   expect(itensCoreNaLinhaDoTempo(itens).map((i) => i.item)).toEqual(["power_treads", "manta", "diffusal"]);
 });
@@ -58,8 +58,8 @@ it("ordena os itens core por minuto_alvo, deixando os sem minuto por último", (
 it("junta itens e power spikes numa linha do tempo só, por minuto, sem repetir o spike já citado como porquê de um item", () => {
   const itens = [
     { item: "power_treads", nome_curto: "Power Treads", nome: "Power Treads", minuto_alvo: 6, base: "",
-      porque: { texto: "Treads cedo.", fonte: "Power spike: Power Treads (6:00)" } },
-    { item: "manta", nome_curto: "Manta Style", nome: "Manta Style", minuto_alvo: 20, base: "", porque: null },
+      spike: { texto: "Treads cedo.", fonte: "Power spike: Power Treads (6:00)" }, porque: null },
+    { item: "manta", nome_curto: "Manta Style", nome: "Manta Style", minuto_alvo: 20, base: "", spike: null, porque: null },
   ];
   const spikes: Spike[] = [
     { minuto: 6, faixa: "6:00", marco: "Power Treads", o_que_fazer: "Treads cedo." },
@@ -71,7 +71,7 @@ it("junta itens e power spikes numa linha do tempo só, por minuto, sem repetir 
 });
 
 it("na linha do tempo, item e spike sem minuto vão para o fim", () => {
-  const itens = [{ item: "sem_minuto", nome_curto: "Sem minuto", nome: "", minuto_alvo: null, base: "", porque: null }];
+  const itens = [{ item: "sem_minuto", nome_curto: "Sem minuto", nome: "", minuto_alvo: null, base: "", spike: null, porque: null }];
   const spikes: Spike[] = [{ minuto: null, faixa: "fim do jogo", marco: "Late game", o_que_fazer: "x" }];
   const linha = linhaDoTempoDaBuild(itens, spikes);
   expect(linha.map((e) => e.minuto)).toEqual([null, null]);

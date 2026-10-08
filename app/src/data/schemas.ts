@@ -124,6 +124,11 @@ const porMinutoSchema = z.object({
 });
 const linhaProSchema = z.object({ jogador: z.string(), jogos: z.number(), vitorias: z.number().nullable(), lh10: z.number().nullable() });
 
+// Porquê tático pesquisado (content/porque_itens). null = item sem seção pesquisada; aí vale o power spike, se houver.
+const porqueDoItemSchema = z.object({
+  texto: z.string(), detalhe: z.string().nullable(), contra: z.string().nullable(), combo: z.string().nullable(), fontes: textos,
+}).nullable();
+
 export const heroiResumoSchema = z.object({
   id: z.string(), nome: z.string(), hero_id: z.number(), patch: z.string(), resumo: z.string(), tem_por_minuto: z.boolean(),
 });
@@ -137,10 +142,11 @@ export const heroiSchema = heroiResumoSchema.omit({ tem_por_minuto: true }).exte
     skill_build: z.array(z.object({ nivel: z.union([z.number(), z.string()]), skill: z.string() })),
     itens_core: z.array(z.object({
       item: z.string(), nome_curto: z.string(), nome: z.string(), minuto_alvo: z.number().nullable(), base: z.string(),
-      // Porquê do item: texto curto extraído do power spike do mesmo item, com a fonte. null = nenhuma fonte citou o item (não inventa).
-      porque: z.object({ texto: z.string(), fonte: z.string() }).nullable(),
+      // Power spike que cita o item, com a fonte. null = nenhum spike citou o item (não inventa).
+      spike: z.object({ texto: z.string(), fonte: z.string() }).nullable(),
+      porque: porqueDoItemSchema,
     })),
-    itens_situacionais: z.array(z.object({ item: z.string(), nome: z.string(), quando: z.string() })),
+    itens_situacionais: z.array(z.object({ item: z.string(), nome: z.string(), quando: z.string(), porque: porqueDoItemSchema })),
     condicao_para_farmar: z.object({ nivel: z.union([z.number(), z.string()]), minuto_tipico: z.number().nullable(), explicacao: z.string() }),
     depois_dos_20: textos, erros_comuns: textos,
   }),
