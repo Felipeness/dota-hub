@@ -91,12 +91,12 @@ export type EstadoDosHerois =
   | { estado: "ok"; herois: readonly HeroiDraft[] }
   | { estado: "erro"; erro: ErroAoVivo };
 
-export function useHeroStats(tentativa: number): EstadoDosHerois {
+export function useHeroStats(): [EstadoDosHerois, () => void] {
   const { consultar } = useServicosAoVivo();
   const [estado, setEstado] = useState<EstadoDosHerois>({ estado: "carregando" });
+  const [tentativa, setTentativa] = useState(0);
   useEffect(() => {
     let vivo = true;
-    setEstado({ estado: "carregando" });
     consultar({ caminho: "/heroStats", schema: heroStatsSchema, validadeS: VALIDADE_HEROSTATS_S })
       .then((r) => { if (vivo) setEstado(r.ok ? { estado: "ok", herois: paraHeroisDraft(r.dados.valor) } : { estado: "erro", erro: r.erro }); })
       .catch((causa: unknown) => {
@@ -105,7 +105,11 @@ export function useHeroStats(tentativa: number): EstadoDosHerois {
       });
     return () => { vivo = false; };
   }, [consultar, tentativa]);
-  return estado;
+  const tentarDeNovo = () => {
+    setEstado({ estado: "carregando" });
+    setTentativa((n) => n + 1);
+  };
+  return [estado, tentarDeNovo];
 }
 
 export type EstadoDosMatchups = Readonly<{ matchups: Matchups; carregando: boolean; erro: ErroAoVivo | null; tentarDeNovo: () => void }>;
@@ -121,7 +125,6 @@ export function useMatchups(ids: readonly HeroId[]): EstadoDosMatchups {
   useEffect(() => {
     if (faltando === "") return;
     let vivo = true;
-    setErro(null);
     // No máximo 10 heróis no draft; a fila do OpenDota já espaça as chamadas.
     const pedidos = faltando.split(",").map(Number).map(async (id) => {
       const r = await consultar({ caminho: `/heroes/${id}/matchups`, schema: matchupsSchema, validadeS: VALIDADE_MATCHUPS_S });
@@ -141,5 +144,8 @@ export function useMatchups(ids: readonly HeroId[]): EstadoDosMatchups {
     return () => { vivo = false; };
   }, [faltando, consultar, tentativa]);
 
-  return { matchups, carregando: faltando !== "" && erro === null, erro, tentarDeNovo: () => setTentativa((n) => n + 1) };
+  return { matchups, carregando: faltando !== "" && erro === null, erro, tentarDeNovo: () => {
+    setErro(null);
+    setTentativa((n) => n + 1);
+  } };
 }

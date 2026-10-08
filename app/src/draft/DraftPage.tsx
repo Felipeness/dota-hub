@@ -82,8 +82,7 @@ function Painel({ herois, guias }: { herois: readonly HeroiDraft[]; guias: Guias
 }
 
 export function DraftPage() {
-  const [tentativa, setTentativa] = useState(0);
-  const herois = useHeroStats(tentativa);
+  const [herois, tentarDeNovo] = useHeroStats();
   const guias = useGuias();
   return (
     <section className="draft">
@@ -91,7 +90,7 @@ export function DraftPage() {
       <p className="draft-explicacao">
         Monte os dois times e os bans. A lista mostra o que pegar e o que banir, sempre com o porquê e de onde veio o número.
       </p>
-      {herois.estado === "erro" && <ErroAoVivoView erro={herois.erro} onTentar={() => setTentativa((n) => n + 1)} />}
+      {herois.estado === "erro" && <ErroAoVivoView erro={herois.erro} onTentar={tentarDeNovo} />}
       {(herois.estado === "carregando" || guias === null) && herois.estado !== "erro" && <p>Carregando…</p>}
       {herois.estado === "ok" && guias !== null && <Painel herois={herois.herois} guias={guias} />}
     </section>
