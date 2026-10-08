@@ -1,14 +1,27 @@
 import type { Consultar } from "./consulta";
-import { buscar, consultaDeBusca, lerConta, lerId, montarResumo, nomeDaMedalha, resumoDaConta, venceu } from "./contas";
+import {
+  buscar, consultaDeBusca, heroisMaisFortes, lerConta, lerId, montarResumo, nomeDaMedalha, resumoDaConta, resumoDoQueMelhorar, venceu,
+} from "./contas";
 import { ok } from "./erros";
+import type { BenchmarksFonte } from "./fonte/schemas";
 import { YATORO, consultaGravada } from "./teste/gravados";
+import type { PartidaDaConta } from "./tipos";
 
 const frescor = { buscadoEm: 10, vencido: false };
 const partida = (slot: number, radiantWin: boolean | null, extra = {}) => ({
   match_id: 1, player_slot: slot, radiant_win: radiantWin, hero_id: 8, start_time: 100, duration: 1800,
-  kills: 5, deaths: 2, assists: 7, lane_role: 1, version: 21, ...extra,
+  kills: 5, deaths: 2, assists: 7, gold_per_min: 450, xp_per_min: 600, last_hits: 150, hero_damage: 8_000, hero_healing: 0,
+  lane_role: 1, version: 21, ...extra,
 });
 const nomes = { "8": { id: 8, name: "npc_dota_hero_juggernaut", localized_name: "Juggernaut" }, "1": { id: 1, name: "npc_dota_hero_antimage", localized_name: "Anti-Mage" } };
+const percentisDe = (p50: number) => [{ percentile: 0.5, value: p50 }];
+const benchmarksDoHeroi = (heroId: number, gpm: number, xpm: number, lh: number): BenchmarksFonte => ({
+  hero_id: heroId, result: { gold_per_min: percentisDe(gpm), xp_per_min: percentisDe(xpm), last_hits_per_min: percentisDe(lh) },
+});
+const partidaComComparacao = (nivel: "acima" | "abaixo" | null): PartidaDaConta => {
+  const metrica = { valor: 0, medianaDoHeroi: nivel === null ? null : 0, nivel };
+  return { id: "1", heroi: "Juggernaut", retrato: "juggernaut", venceu: true, abates: 0, mortes: 0, assistencias: 0, duracaoS: 0, inicio: 0, lane: null, analisada: true, comparacao: { ouro: metrica, xp: metrica, lh: metrica } };
+};
 
 it.each([
   { slot: 0, radiantWin: true, esperado: true },
@@ -59,6 +72,56 @@ it("monta o resumo com 10 heróis, nomes, medalha, lane e partidas sem análise"
   expect(resumo.partidas[0]).toMatchObject({ heroi: "Juggernaut", retrato: "juggernaut", venceu: true, lane: "safe", analisada: true });
   expect(resumo.partidas[1]).toMatchObject({ venceu: false, lane: null, analisada: false });
   expect(resumo.temDadosPublicos).toBe(true);
+  // Sem benchmarksPorHeroi/ranking, o comparativo e os heróis mais fortes ficam vazios, mas o resumo não falha.
+  expect(resumo.partidas[0]?.comparacao).toEqual({
+    ouro: { valor: 450, medianaDoHeroi: null, nivel: null }, xp: { valor: 600, medianaDoHeroi: null, nivel: null },
+    lh: { valor: 150 / 30, medianaDoHeroi: null, nivel: null },
+  });
+  expect(resumo.heroisMaisFortes).toEqual([]);
+  expect(resumo.oQueMelhorar).toEqual([]);
+});
+
+it("com benchmark do herói, compara GPM/XPM/LH e marca acima ou abaixo da mediana", () => {
+  const resumo = montarResumo({
+    id: 7, jogador: { profile: { account_id: 7, personaname: "Ness" }, rank_tier: null }, vitorias: { win: 0, lose: 0 },
+    herois: [],
+    // Acima em ouro e xp (mediana 400/550), abaixo em LH (last_hits 150 em 1800s = 5/min, mediana 8).
+    recentes: [partida(0, true)],
+    nomes, frescor,
+    benchmarksPorHeroi: new Map([[8, benchmarksDoHeroi(8, 400, 550, 8)]]),
+  });
+  expect(resumo.partidas[0]?.comparacao).toEqual({
+    ouro: { valor: 450, medianaDoHeroi: 400, nivel: "acima" }, xp: { valor: 600, medianaDoHeroi: 550, nivel: "acima" },
+    lh: { valor: 5, medianaDoHeroi: 8, nivel: "abaixo" },
+  });
+});
+
+it("heroisMaisFortes ordena pelo percentil (e pelo score no empate) e limita a 5", () => {
+  const ranking = [
+    { hero_id: 1, score: 100, percent_rank: 1 }, { hero_id: 2, score: 50, percent_rank: 0.9 },
+    { hero_id: 8, score: 200, percent_rank: 1 }, { hero_id: 3, score: 10, percent_rank: 0.2 },
+    { hero_id: 4, score: 1, percent_rank: 0.1 }, { hero_id: 5, score: 1, percent_rank: 0.05 },
+  ];
+  const fortes = heroisMaisFortes(ranking, nomes);
+  expect(fortes).toHaveLength(5);
+  expect(fortes[0]).toEqual({ heroi: "Juggernaut", retrato: "juggernaut", percentil: 1 });
+  expect(fortes[1]).toEqual({ heroi: "Anti-Mage", retrato: "anti_mage", percentil: 1 });
+});
+
+it("heroisMaisFortes sem ranking devolve lista vazia", () => {
+  expect(heroisMaisFortes(null, nomes)).toEqual([]);
+});
+
+it("resumoDoQueMelhorar só lista métricas abaixo da mediana na maioria das partidas comparáveis", () => {
+  const partidas = [partidaComComparacao("abaixo"), partidaComComparacao("abaixo"), partidaComComparacao("acima")];
+  expect(resumoDoQueMelhorar(partidas)).toEqual([
+    { metrica: "Ouro por minuto", abaixo: 2, total: 3 }, { metrica: "XP por minuto", abaixo: 2, total: 3 },
+    { metrica: "Last hits por minuto", abaixo: 2, total: 3 },
+  ]);
+});
+
+it("resumoDoQueMelhorar ignora partidas sem benchmark e não aponta nada quando a maioria está acima", () => {
+  expect(resumoDoQueMelhorar([partidaComComparacao("acima"), partidaComComparacao(null)])).toEqual([]);
 });
 
 it("conta privada (sem partidas públicas) fica sem dados públicos", () => {
@@ -89,6 +152,15 @@ it("resumo da conta real gravada tem 10 heróis e as partidas recentes", async (
   expect(r.ok && r.dados.herois).toHaveLength(10);
   expect(r.ok && r.dados.partidas.length).toBeGreaterThan(0);
   expect(r.ok && r.dados.temDadosPublicos).toBe(true);
+});
+
+it("resumo da conta real gravada compara a primeira partida com o benchmark do herói e lista os heróis mais fortes", async () => {
+  const r = await resumoDaConta(consultaGravada(), YATORO);
+  // Primeira partida (hero_id 93): gold_per_min 738 e xp_per_min 1155 acima da mediana (526/765); last_hits 491 em 2765s = 10,65/min, acima de 5,72.
+  expect(r.ok && r.dados.partidas[0]?.comparacao).toMatchObject({
+    ouro: { nivel: "acima" }, xp: { nivel: "acima" }, lh: { nivel: "acima" },
+  });
+  expect(r.ok && r.dados.heroisMaisFortes.length).toBeGreaterThan(0);
 });
 
 it.each([

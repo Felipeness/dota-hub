@@ -3,10 +3,12 @@ import { normalizar } from "../routes/filtros";
 import { juntarFrescor, type Consultar } from "./consulta";
 import { erroAoVivo, falha, ok, type RespostaAoVivo } from "./erros";
 import {
-  buscaFonte, heroisDaContaFonte, jogadorFonte, nomesDeHeroisFonte, partidasRecentesFonte, timesFonte, vitoriasFonte,
-  type PartidaRecenteFonte, type TimeFonte,
+  benchmarksFonte, buscaFonte, heroisDaContaFonte, jogadorFonte, nomesDeHeroisFonte, partidasRecentesFonte, rankingsFonte, timesFonte,
+  vitoriasFonte, type BenchmarksFonte, type PartidaRecenteFonte, type RankingFonte, type TimeFonte,
 } from "./fonte/schemas";
-import type { Busca, Frescor, Lane, PartidaDaConta, ResumoConta, TimeEncontrado } from "./tipos";
+import type {
+  Busca, ComparacaoDaPartida, ComparacaoMetrica, Frescor, HeroiForte, ItemDoResumo, Lane, PartidaDaConta, ResumoConta, TimeEncontrado,
+} from "./tipos";
 
 export const VALIDADE_S = {
   perfil: 3_600, busca: 3_600, time: 3_600, recentes: 600, partida: 7 * 24 * 3_600, constantes: 24 * 3_600,
@@ -15,13 +17,17 @@ export const LANE_POR_PAPEL: Readonly<Record<number, Lane>> = { 1: "safe", 2: "m
 const MEDALHAS = ["Herald", "Guardian", "Crusader", "Archon", "Legend", "Ancient", "Divine", "Immortal"] as const;
 const MAXIMO_DE_HEROIS = 10;
 const MAXIMO_DE_RESULTADOS = 10;
+const MAXIMO_DE_HEROIS_FORTES = 5;
+const MEDIANA = 0.5;
 const TEXTO_MINIMO = 2;
 const TEXTO_MAXIMO = 64;
+const NOME_DA_METRICA = { ouro: "Ouro por minuto", xp: "XP por minuto", lh: "Last hits por minuto" } as const;
 
 type Nomes = z.infer<typeof nomesDeHeroisFonte>;
 type Partes = Readonly<{
   id: number; jogador: z.infer<typeof jogadorFonte>; vitorias: z.infer<typeof vitoriasFonte>;
   herois: z.infer<typeof heroisDaContaFonte>; recentes: readonly PartidaRecenteFonte[]; nomes: Nomes; frescor: Frescor;
+  benchmarksPorHeroi?: ReadonlyMap<number, BenchmarksFonte>; ranking?: readonly RankingFonte[] | null;
 }>;
 
 export function lerId(texto: string, maximoDeDigitos = 12): number | null {
@@ -53,16 +59,60 @@ const nomeDoHeroi = (nomes: Nomes, id: number) => nomes[String(id)]?.localized_n
 // Duplicado de partida/detalhe.ts (não importamos de lá: esse módulo já importa de contas.ts, e um import de volta criaria ciclo).
 const slugDoHeroi = (nome: string) => nome.toLowerCase().replaceAll("'", "").replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, "");
 
-function partidaDaConta(p: PartidaRecenteFonte, nomes: Nomes): PartidaDaConta {
+function medianaDe(percentis: readonly Readonly<{ percentile: number; value: number }>[]): number | null {
+  return percentis.find((p) => p.percentile === MEDIANA)?.value ?? null;
+}
+
+function metricaComparada(valor: number, percentis: readonly Readonly<{ percentile: number; value: number }>[] | undefined): ComparacaoMetrica {
+  const medianaDoHeroi = percentis ? medianaDe(percentis) : null;
+  return { valor, medianaDoHeroi, nivel: medianaDoHeroi === null ? null : valor >= medianaDoHeroi ? "acima" : "abaixo" };
+}
+
+/** GPM e XPM da fonte já são por minuto; last_hits vem no total da partida, então divide pela duração. */
+function comparacaoDaPartida(p: PartidaRecenteFonte, benchmarks: BenchmarksFonte | null): ComparacaoDaPartida {
+  const lhPorMin = p.last_hits / (p.duration / 60);
+  return {
+    ouro: metricaComparada(p.gold_per_min, benchmarks?.result.gold_per_min),
+    xp: metricaComparada(p.xp_per_min, benchmarks?.result.xp_per_min),
+    lh: metricaComparada(lhPorMin, benchmarks?.result.last_hits_per_min),
+  };
+}
+
+function partidaDaConta(p: PartidaRecenteFonte, nomes: Nomes, benchmarksPorHeroi: ReadonlyMap<number, BenchmarksFonte>): PartidaDaConta {
   const heroi = nomeDoHeroi(nomes, p.hero_id);
   return {
     id: String(p.match_id), heroi, retrato: slugDoHeroi(heroi), venceu: venceu(p),
     abates: p.kills, mortes: p.deaths, assistencias: p.assists, duracaoS: p.duration, inicio: p.start_time,
     lane: laneDoPapel(p.lane_role), analisada: p.version != null,
+    comparacao: comparacaoDaPartida(p, benchmarksPorHeroi.get(p.hero_id) ?? null),
   };
 }
 
-export function montarResumo({ id, jogador, vitorias, herois, recentes, nomes, frescor }: Partes): ResumoConta {
+/** Top heróis do /players/{id}/rankings (percentil = posição entre todos os jogadores desse herói, 100 = melhores). */
+export function heroisMaisFortes(ranking: readonly RankingFonte[] | null, nomes: Nomes): readonly HeroiForte[] {
+  if (!ranking) return [];
+  return [...ranking]
+    .sort((a, b) => b.percent_rank - a.percent_rank || b.score - a.score)
+    .slice(0, MAXIMO_DE_HEROIS_FORTES)
+    .map((r) => {
+      const heroi = nomeDoHeroi(nomes, r.hero_id);
+      return { heroi, retrato: slugDoHeroi(heroi), percentil: r.percent_rank };
+    });
+}
+
+/** Métricas em que o jogador ficou abaixo da mediana do herói na maioria das partidas comparáveis. */
+export function resumoDoQueMelhorar(partidas: readonly PartidaDaConta[]): readonly ItemDoResumo[] {
+  return (Object.keys(NOME_DA_METRICA) as (keyof typeof NOME_DA_METRICA)[])
+    .map((chave) => {
+      const niveis = partidas.map((p) => p.comparacao[chave].nivel).filter((n) => n !== null);
+      const abaixo = niveis.filter((n) => n === "abaixo").length;
+      return { metrica: NOME_DA_METRICA[chave], abaixo, total: niveis.length };
+    })
+    .filter((item) => item.total > 0 && item.abaixo > item.total / 2);
+}
+
+export function montarResumo({ id, jogador, vitorias, herois, recentes, nomes, frescor, benchmarksPorHeroi = new Map(), ranking = null }: Partes): ResumoConta {
+  const partidas = recentes.map((p) => partidaDaConta(p, nomes, benchmarksPorHeroi));
   return {
     conta: { id, nome: jogador.profile?.personaname ?? `Conta ${id}`, medalha: nomeDaMedalha(jogador.rank_tier) },
     totais: { partidas: vitorias.win + vitorias.lose, vitorias: vitorias.win },
@@ -72,7 +122,9 @@ export function montarResumo({ id, jogador, vitorias, herois, recentes, nomes, f
         const heroi = nomeDoHeroi(nomes, h.hero_id);
         return { heroi, retrato: slugDoHeroi(heroi), partidas: h.games, vitorias: h.win };
       }),
-    partidas: recentes.map((p) => partidaDaConta(p, nomes)),
+    partidas,
+    heroisMaisFortes: heroisMaisFortes(ranking, nomes),
+    oQueMelhorar: resumoDoQueMelhorar(partidas),
     temDadosPublicos: recentes.length > 0,
     frescor,
   };
@@ -80,6 +132,20 @@ export function montarResumo({ id, jogador, vitorias, herois, recentes, nomes, f
 
 export const consultarNomesDeHerois = (consultar: Consultar) =>
   consultar({ caminho: "/constants/heroes", schema: nomesDeHeroisFonte, validadeS: VALIDADE_S.constantes });
+
+/** Um /benchmarks por herói único das partidas mostradas, pela fila (igual partida/detalhe.ts); falha por herói não derruba o resumo. */
+async function mapaDeBenchmarks(consultar: Consultar, idsDeHerois: readonly number[]): Promise<ReadonlyMap<number, BenchmarksFonte>> {
+  const unicos = [...new Set(idsDeHerois)];
+  const respostas = await Promise.all(
+    unicos.map((heroId) => consultar({ caminho: `/benchmarks?hero_id=${heroId}`, schema: benchmarksFonte, validadeS: VALIDADE_S.constantes })),
+  );
+  const mapa = new Map<number, BenchmarksFonte>();
+  unicos.forEach((heroId, i) => {
+    const resposta = respostas[i];
+    if (resposta?.ok) mapa.set(heroId, resposta.dados.valor);
+  });
+  return mapa;
+}
 
 export async function resumoDaConta(consultar: Consultar, id: number): Promise<RespostaAoVivo<ResumoConta>> {
   const jogador = await consultar({ caminho: `/players/${id}`, schema: jogadorFonte, validadeS: VALIDADE_S.perfil });
@@ -95,9 +161,15 @@ export async function resumoDaConta(consultar: Consultar, id: number): Promise<R
   if (!herois.ok) return herois;
   if (!recentes.ok) return recentes;
   if (!nomes.ok) return nomes;
+  const [benchmarksPorHeroi, ranking] = await Promise.all([
+    mapaDeBenchmarks(consultar, recentes.dados.valor.map((p) => p.hero_id)),
+    consultar({ caminho: `/players/${id}/rankings`, schema: rankingsFonte, validadeS: VALIDADE_S.perfil }),
+  ]);
   return ok(montarResumo({
     id, jogador: jogador.dados.valor, vitorias: vitorias.dados.valor, herois: herois.dados.valor,
-    recentes: recentes.dados.valor, nomes: nomes.dados.valor,
+    recentes: recentes.dados.valor, nomes: nomes.dados.valor, benchmarksPorHeroi,
+    // Ranking é extra (igual benchmarks): sem ele, o resumo só fica sem a lista de heróis mais fortes.
+    ranking: ranking.ok ? ranking.dados.valor : null,
     frescor: juntarFrescor(jogador.dados.frescor, vitorias.dados.frescor, herois.dados.frescor, recentes.dados.frescor),
   }));
 }
