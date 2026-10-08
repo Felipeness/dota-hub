@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["gerado_em", "fonte", "metodo", "herois"],
+  "properties": {
+    "gerado_em": {"type": "string"},
+    "fonte": {"type": "string", "minLength": 1},
+    "metodo": {"type": "string", "minLength": 1},
+    "herois": {
+      "type": "array", "minItems": 127,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["hero_id", "slug", "posicoes", "forca"],
+        "properties": {
+          "hero_id": {"type": "integer"},
+          "slug": {"type": "string", "pattern": "^[a-z0-9_]+$"},
+          "posicoes": {
+            "type": "object", "additionalProperties": false,
+            "required": ["n_total", "distribuicao"],
+            "properties": {
+              "n_total": {"type": "integer", "minimum": 0},
+              "distribuicao": {
+                "type": "object", "additionalProperties": false,
+                "required": ["pos1", "pos2", "pos3", "pos4", "pos5"],
+                "properties": {
+                  "pos1": {"$ref": "#/$defs/fracaoComN"}, "pos2": {"$ref": "#/$defs/fracaoComN"},
+                  "pos3": {"$ref": "#/$defs/fracaoComN"}, "pos4": {"$ref": "#/$defs/fracaoComN"},
+                  "pos5": {"$ref": "#/$defs/fracaoComN"}
+                }
+              }
+            }
+          },
+          "forca": {
+            "type": "object", "additionalProperties": false,
+            "required": ["n", "gpm_medio", "dano_torre_medio", "dano_heroi_medio", "cura_media", "stuns_medio_s",
+                         "duracao_media_vitorias_min", "vitoria_por_duracao"],
+            "properties": {
+              "n": {"type": "integer", "minimum": 0},
+              "gpm_medio": {"type": "number", "minimum": 0},
+              "dano_torre_medio": {"type": "number", "minimum": 0},
+              "dano_heroi_medio": {"type": "number", "minimum": 0},
+              "cura_media": {"type": "number", "minimum": 0},
+              "stuns_medio_s": {"type": "number", "minimum": 0},
+              "duracao_media_vitorias_min": {"type": "number", "minimum": 0},
+              "vitoria_por_duracao": {
+                "type": "object", "additionalProperties": false,
+                "required": ["menos_30min", "entre_30_40min", "mais_40min"],
+                "properties": {
+                  "menos_30min": {"$ref": "#/$defs/taxaComN"}, "entre_30_40min": {"$ref": "#/$defs/taxaComN"},
+                  "mais_40min": {"$ref": "#/$defs/taxaComN"}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "fracaoComN": {
+      "type": "object", "additionalProperties": false, "required": ["n", "fracao"],
+      "properties": {"n": {"type": "integer", "minimum": 0}, "fracao": {"type": "number", "minimum": 0, "maximum": 1}}
+    },
+    "taxaComN": {
+      "type": "object", "additionalProperties": false, "required": ["n", "taxa"],
+      "properties": {"n": {"type": "integer", "minimum": 0}, "taxa": {"type": "number", "minimum": 0, "maximum": 1}}
+    }
+  }
+}
