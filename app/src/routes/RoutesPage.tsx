@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import type { Indice, Objetivo, RotaResumo } from "../data/schemas";
 import { indiceSchema, objetivosSchema, rotaSchema, rotasResumoSchema } from "../data/schemas";
@@ -48,6 +48,7 @@ function Rotas({ rotas, indice, objetivos }: RotasProps) {
   const [texto, setTexto] = useState("");
   const [limite, setLimite] = useState(POR_PAGINA);
   const rolarQuandoAbrir = useRef(false);
+  const titulos = useMemo(() => new Map(rotas.map((r) => [r.id, r.titulo])), [rotas]);
   const irPara = (destino: string) => navigate(`/rotas/${destino}`);
   const temLadoEMinuto = selecao.lado !== undefined && selecao.minuto !== undefined;
   const celula = celulaDaSelecao(indice, selecao);
@@ -91,9 +92,12 @@ function Rotas({ rotas, indice, objetivos }: RotasProps) {
           onEscolher={(lado) => filtrar({ ...selecao, lado })} />
         <Seletor rotulo="2 · Minuto" estilo="minutos" opcoes={MINUTOS.map((m) => ({ valor: m, rotulo: String(m) }))} atual={selecao.minuto}
           onEscolher={(minuto) => filtrar({ ...selecao, minuto })} />
+        {/* A grade só cobre do minuto 4 em diante: a saída da base (antes disso) não tem célula no índice. */}
+        <p className="rotas-dica">Procurando a abertura, antes do minuto 4? Essas rotas não entram na grade acima, use a busca abaixo.</p>
         <Seletor rotulo={temLadoEMinuto ? "3 · Situação" : "3 · Situação (escolha lado e minuto antes)"} estilo="pilulas" desligado={!temLadoEMinuto}
           opcoes={indice.colunas.map((c) => ({ valor: c, rotulo: c }))} atual={selecao.situacao} onEscolher={alternarSituacao} />
         {celula?.nota && <p className="nota-celula">{celula.nota}</p>}
+        <Link to="/glossario" className="link">O que significa cada situação? Ver no glossário</Link>
       </div>
       <div className="rotas-lista">
         <label className="campo">
@@ -118,17 +122,19 @@ function Rotas({ rotas, indice, objetivos }: RotasProps) {
       </div>
       </div>
       <div className="rotas-mapa" id={ID_DO_MAPA}>
-        {id ? <RotaAberta id={id} objetivos={objetivos} onIrPara={irPara} /> : <MapaSemRota objetivos={objetivos} />}
+        {id ? <RotaAberta id={id} objetivos={objetivos} titulos={titulos} onIrPara={irPara} /> : <MapaSemRota objetivos={objetivos} />}
       </div>
     </section>
   );
 }
 
-function RotaAberta({ id, objetivos, onIrPara }: { id: string; objetivos: Objetivo[]; onIrPara: (id: string) => void }) {
+function RotaAberta(
+  { id, objetivos, titulos, onIrPara }: { id: string; objetivos: Objetivo[]; titulos: Map<string, string>; onIrPara: (id: string) => void },
+) {
   const rota = useData(`/data/rotas/${id}.json`, rotaSchema);
   if (rota.estado === "carregando") return <p className="rotas-dica">Carregando a rota…</p>;
   if (rota.estado === "indisponivel") return <p role="alert">Rota {id} não encontrada.</p>;
-  return <RouteDetail rota={rota.dados} objetivos={objetivos} onIrPara={onIrPara} />;
+  return <RouteDetail rota={rota.dados} objetivos={objetivos} titulos={titulos} onIrPara={onIrPara} />;
 }
 
 function MapaSemRota({ objetivos }: { objetivos: Objetivo[] }) {

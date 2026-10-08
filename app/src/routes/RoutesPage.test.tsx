@@ -5,7 +5,7 @@ import { RoutesPage } from "./RoutesPage";
 
 const rota: Rota = {
   id: "MA-R-01", pdf: "06", lado: "radiant", pergunta: "Onde farmo no minuto 6 se não posso pegar wave?", titulo: "Minuto 6", secao: "",
-  janela: { de: "6:00", ate: "7:00" }, estado: { minuto: 6, nivel: "5" }, origem: "real", replay: "8123",
+  janela: { de: "6:00", ate: "7:00" }, estado: { minuto: 6, nivel: "5", cenario: "lane impossível" }, origem: "real", replay: "8123",
   passos: [{ n: 1, alvo: "a", x: 0.39, y: 0.24, rotulo: "MEDIUM R6", minuto: "6:09", acao: "Saia da caixa.", risco: "seguro" }],
   caminhos: [], fuga: null, proxima: ["MA-R-02"], se: [], interrupcao: [], porque: "",
 };
@@ -13,8 +13,13 @@ const resumo: RotaResumo = { id: rota.id, pdf: rota.pdf, lado: rota.lado, pergun
 const indice: Indice = { colunas: ["lane impossível"], radiant: [{ minuto: 6, cenarios: { "lane impossível": { id: "MA-R-01", nota: "vindo do triângulo: MA-R-08" } } }], dire: [] };
 let arquivos: Record<string, unknown> = {};
 
+const proximaResumo: RotaResumo = { ...resumo, id: "MA-R-02", titulo: "Minuto 7" };
+
 beforeEach(() => {
-  arquivos = { "/data/rotas_resumo.json": [resumo], "/data/rotas/MA-R-01.json": rota, "/data/indice.json": indice, "/data/objetivos.json": [] };
+  arquivos = {
+    "/data/rotas_resumo.json": [resumo, proximaResumo], "/data/rotas/MA-R-01.json": rota,
+    "/data/indice.json": indice, "/data/objetivos.json": [],
+  };
   vi.stubGlobal("fetch", (path: string) =>
     Promise.resolve(path in arquivos ? new Response(JSON.stringify(arquivos[path])) : new Response("", { status: 404 })));
   Element.prototype.scrollIntoView = vi.fn();
@@ -37,6 +42,11 @@ it("abre a rota da célula em três toques e leva a tela até o mapa", async () 
   expect(screen.getByText("ROTA REAL · replay 8123")).toBeInTheDocument();
   expect(within(screen.getByRole("list", { name: "Passos da rota" })).getByText(/Saia da caixa./)).toBeInTheDocument();
   expect(Element.prototype.scrollIntoView).toHaveBeenCalled();
+  // O botão de próxima rota mostra o título legível da rota de destino, não o código interno.
+  expect(screen.getByRole("button", { name: /PRÓXIMA.*Minuto 7/ })).toHaveAttribute("title", "MA-R-02");
+  // estado.cenario confirma por que aquela rota foi escolhida; antes era descartado.
+  // (aparece 2x: na pílula de situação clicada e na faixa de estado da rota)
+  expect(screen.getAllByText("lane impossível")).toHaveLength(2);
 });
 
 it("rola até o mapa só depois que a rota da URL já está na tela", async () => {
@@ -50,6 +60,11 @@ it("rola até o mapa só depois que a rota da URL já está na tela", async () =
   fireEvent.click(screen.getByRole("button", { name: "lane impossível" }));
   await screen.findByRole("heading", { name: rota.pergunta });
   expect(dicaVisivelNaRolagem).toEqual([false]);
+});
+
+it("avisa que a abertura (antes do minuto 4) fica fora da grade e só sai pela busca", async () => {
+  renderizar();
+  expect(await screen.findByText(/antes do minuto 4/)).toBeInTheDocument();
 });
 
 it("mostra o mapa antes de escolher e deixa a situação desligada até ter lado e minuto", async () => {
