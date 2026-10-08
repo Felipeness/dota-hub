@@ -1,5 +1,8 @@
 import type { AghanimFonte, HabilidadeFonte, HabilidadesDosHeroisFonte, HabilidadesFonte, HeroisFonte, ItensFonte } from "./fonte";
 
+export const MECANICAS = ["invisibilidade", "silencio", "controle", "magico", "puro", "ilusoes", "cura", "evasao", "fuga", "passivas"] as const;
+export type MecanicaId = (typeof MECANICAS)[number];
+
 export type Atributo = Readonly<{ chave: string; rotulo: string; valores: readonly string[] }>;
 export type Dispel = "basico" | "so-forte" | "nao" | "desconhecido";
 
