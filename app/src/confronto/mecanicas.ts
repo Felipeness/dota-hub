@@ -1,6 +1,6 @@
 // Motor de regras do confronto: mecânica do inimigo -> por que importa -> itens e habilidades suas que respondem.
 // Tudo sai do texto e dos campos das habilidades e itens do OpenDota; nada de número digitado à mão.
-import { ehPassiva, type Atributo, type Habilidade, type Heroi, type Item } from "./modelo";
+import { ehPassiva, temDano, temValor, type Habilidade, type Heroi, type Item } from "./modelo";
 
 export type MecanicaId = "invisibilidade" | "silencio" | "controle" | "magico" | "puro" | "ilusoes" | "cura" | "evasao" | "fuga" | "passivas";
 
@@ -36,9 +36,6 @@ type Regra = Readonly<{
 }>;
 
 const ativa = (h: Habilidade) => !ehPassiva(h);
-/** O OpenDota gera atributos zerados ("generated"); esses não provam nada. */
-const temValor = (a: Atributo) => a.valores.some((v) => parseFloat(v) > 0);
-const temDano = (h: Habilidade) => h.atributos.some((a) => /damage/.test(a.chave) && temValor(a));
 const naoAtravessaBkb = (achadas: readonly Habilidade[]) => achadas.some((h) => h.atravessaBkb === false);
 const saiComDispelBasico = (achadas: readonly Habilidade[]) => achadas.some((h) => h.dispel === "basico");
 const temAlvoUnico = (achadas: readonly Habilidade[]) => achadas.some((h) => h.comportamento.includes("Unit Target"));

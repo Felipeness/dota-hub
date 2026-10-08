@@ -88,6 +88,9 @@ export function acharHeroi(herois: readonly Heroi[], parametro: string | undefin
 }
 
 export const ehPassiva = (h: Habilidade) => h.comportamento.includes("Passive");
+/** O OpenDota gera atributos zerados ("generated"); esses não provam nada. */
+export const temValor = (a: Atributo) => a.valores.some((v) => parseFloat(v) > 0);
+export const temDano = (h: Habilidade) => h.atributos.some((a) => /damage/.test(a.chave) && temValor(a));
 /** Ultimates têm 3 níveis; as outras, 4. É o que dá para afirmar só com a recarga do OpenDota. */
 export const ehUltimate = (h: Habilidade) => !ehPassiva(h) && h.recargaS.length === 3;
 
