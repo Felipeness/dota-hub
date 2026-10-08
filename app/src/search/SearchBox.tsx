@@ -31,6 +31,7 @@ export function SearchBox() {
         <input
           ref={campo} type="search" role="searchbox" value={consulta}
           aria-label="Buscar herói, rota, objetivo ou termo" placeholder="Buscar herói, rota, objetivo ou termo"
+          aria-expanded={ativa} aria-controls="busca-resultados"
           onFocus={() => setAtiva(true)}
           onChange={(e) => { setConsulta(e.target.value); setAtiva(true); }}
           onKeyDown={(e) => { if (e.key === "Escape") setAtiva(false); }}
@@ -72,14 +73,14 @@ function Resultados({ consulta, limpar }: { consulta: string; limpar: () => void
   const indisponivel = [rotas, objetivos, termos].find((e) => e.estado === "indisponivel");
   if (indisponivel) return <Indisponivel motivo={indisponivel.motivo} />;
   if (!consulta.trim()) return null;
-  if (!busca) return <p>Carregando a busca.</p>;
+  if (!busca) return <p id="busca-resultados">Carregando a busca.</p>;
 
   const achados = buscar(busca, consulta);
   if (achados.length === 0) {
     const parecidos = sugerir(busca, consulta);
     // Uma lista só: a mensagem e o atalho dividem a mesma caixa suspensa.
     return (
-      <ul onMouseDown={(e) => e.preventDefault()}>
+      <ul id="busca-resultados" aria-live="polite" onMouseDown={(e) => e.preventDefault()}>
         <li className="busca-nada">Nada encontrado.{parecidos.length > 0 && ` Você quis dizer: ${parecidos.join(", ")}?`}</li>
         <AtalhoAoVivo consulta={consulta} onIr={limpar} />
       </ul>
@@ -87,7 +88,7 @@ function Resultados({ consulta, limpar }: { consulta: string; limpar: () => void
   }
   // O Safari não dá foco ao link no clique: o preventDefault mantém o foco no campo e a lista não some antes do click.
   return (
-    <ul onMouseDown={(e) => e.preventDefault()}>
+    <ul id="busca-resultados" aria-live="polite" onMouseDown={(e) => e.preventDefault()}>
       {achados.map((a) => (
         <li key={`${a.tipo}:${a.id}`}>
           <span className="etiqueta">{ETIQUETA[a.tipo]}</span>{" "}

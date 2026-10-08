@@ -14,9 +14,11 @@ const guia: Heroi["guia"] = {
   skill_build: [], itens_situacionais: [], depois_dos_20: [], erros_comuns: [],
   condicao_para_farmar: { nivel: 6, minuto_tipico: 7.9, explicacao: "" },
   itens_core: [
-    { nome: "Power Treads", minuto_alvo: 6.9, base: "" }, { nome: "Sem minuto", minuto_alvo: null, base: "" },
-    { nome: "Battle Fury", minuto_alvo: 13.8, base: "" }, { nome: "Yasha", minuto_alvo: 17.2, base: "" },
-    { nome: "Manta Style", minuto_alvo: 20, base: "" },
+    { item: "power_treads", nome: "Power Treads", minuto_alvo: 6.9, base: "" },
+    { item: "sem_minuto", nome: "Sem minuto", minuto_alvo: null, base: "" },
+    { item: "battlefury", nome: "Battle Fury", minuto_alvo: 13.8, base: "" },
+    { item: "yasha", nome: "Yasha", minuto_alvo: 17.2, base: "" },
+    { item: "manta", nome: "Manta Style", minuto_alvo: 20, base: "" },
   ],
 };
 

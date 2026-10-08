@@ -59,3 +59,18 @@ def test_janela_em_texto_vira_minutos_e_fim_vira_nulo():
     bruta = {"de": "30:00", "ate": "fim", "objetivo": "x", "passos": [{"alvo": "lane_bot", "x": 0.8, "y": 0.2}]}
     fase = herois.fase("phantom_lancer", "dire", bruta)
     assert (fase["de"], fase["ate"], fase["janela"]) == (30, None, "30:00-fim")
+
+
+def test_itens_dos_guias_ignora_item_que_nao_e_slug_da_opendota():
+    # Alguns guias anotam "item" com rótulo livre (ex. "neutros", "Satanic (5.050)") em vez do slug real.
+    core = {"item": "power_treads", "nome": "", "minuto_alvo": None, "base": ""}
+    situacional_valido = {"item": "skadi", "nome": "", "quando": ""}
+    situacional_invalido = {"item": "Satanic (5.050)", "nome": "", "quando": ""}
+    fichas = [{"guia": {"itens_core": [core], "itens_situacionais": [situacional_valido, situacional_invalido]}}]
+    assert herois.itens_dos_guias(fichas) == {"power_treads", "skadi"}
+
+
+def test_itens_dos_guias_cobre_todos_os_herois_reais(fichas):
+    slugs = herois.itens_dos_guias(fichas)
+    assert "power_treads" in slugs
+    assert len(slugs) > 0

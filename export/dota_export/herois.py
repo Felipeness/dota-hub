@@ -90,9 +90,9 @@ def _guia(d: dict) -> dict:
         "bom_quando": q["bom_quando"], "evitar_quando": q["evitar_quando"], "momento_do_draft": q["momento_do_draft"],
         "lane": {"objetivo": lane["objetivo"], "itens_iniciais": lane["itens_iniciais"], "dicas": lane["dicas"]},
         "skill_build": [{"nivel": s["nivel"], "skill": s["skill"]} for s in d["skill_build"]],
-        "itens_core": [{"nome": i["nome"], "minuto_alvo": _numero(i["minuto_alvo"]), "base": i["base_do_numero"]}
+        "itens_core": [{"item": i["item"], "nome": i["nome"], "minuto_alvo": _numero(i["minuto_alvo"]), "base": i["base_do_numero"]}
                        for i in itens["core"]],
-        "itens_situacionais": [{"nome": i.get("nome") or _nome_item(i["item"]), "quando": i["quando"]}
+        "itens_situacionais": [{"item": i["item"], "nome": i.get("nome") or _nome_item(i["item"]), "quando": i["quando"]}
                                for i in itens["situacionais"]],
         "condicao_para_farmar": {"nivel": cf["nivel"], "minuto_tipico": _numero(cf["minuto_tipico"]),
                                  "explicacao": cf["explicacao"]},
@@ -157,3 +157,14 @@ def todos(rotas_validas: frozenset[str] = frozenset()) -> list[dict]:
 def indice(fichas: list[dict]) -> list[dict]:
     return [{"id": f["id"], "nome": f["nome"], "hero_id": f["hero_id"], "patch": f["patch"], "resumo": f["resumo"],
              "tem_por_minuto": f["por_minuto"] is not None} for f in fichas]
+
+
+def itens_dos_guias(fichas: list[dict]) -> set[str]:
+    """Slugs de item citados na build (core e situacionais) de cada ficha, pra exportar o ícone deles também.
+
+    Alguns guias anotam o campo "item" com um rótulo livre em vez do slug da OpenDota
+    (ex.: "neutros", "Satanic (5.050)", "disperser / diffusal_blade"): isso não tem imagem
+    no jogo sob esse nome, então fica de fora em vez de quebrar o export.
+    """
+    citados = {i["item"] for f in fichas for i in (*f["guia"]["itens_core"], *f["guia"]["itens_situacionais"])}
+    return citados & _itens().keys()
