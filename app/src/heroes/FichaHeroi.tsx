@@ -90,9 +90,9 @@ function AbaSpikes({ heroi }: { heroi: Heroi }) {
       {heroi.por_minuto && (
         <div className="tabela-rolavel">
           <table>
-            <thead><tr><th>Min</th><th>Nível</th><th>Habilidade</th><th>Item</th><th>Objetivo de farm</th></tr></thead>
+            <thead><tr><th>Min</th><th>Nível</th><th>Habilidade</th><th>Item</th><th>Próximo spike</th><th>Objetivo de farm</th></tr></thead>
             <tbody>{heroi.por_minuto.map((m) => (
-              <tr key={m.minuto}><td>{m.minuto}</td><td>{m.nivel}</td><td>{m.habilidade}</td><td>{m.item}</td><td>{m.objetivo_farm}</td></tr>
+              <tr key={m.minuto}><td>{m.minuto}</td><td>{m.nivel}</td><td>{m.habilidade}</td><td>{m.item}</td><td>{m.proximo_spike}</td><td>{m.objetivo_farm}</td></tr>
             ))}</tbody>
           </table>
         </div>
