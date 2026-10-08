@@ -6,8 +6,6 @@ categoria: item
 item: butterfly
 fontes:
 - dota-imortal/data/opendota/items.json (custo e atributos do item)
-links:
-- evasao
 ---
 ## Básico
-Custa 5450. Dá +35 de agilidade e 35% de evasão.
+Custa 5450. Dá +35 de agilidade, +35% de evasão, +20% de velocidade de ataque base e +25 de dano.
