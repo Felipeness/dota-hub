@@ -1,6 +1,7 @@
 import MiniSearch, { type SearchResult } from "minisearch";
-import type { ConteudoItem, HeroiResumo, JogadorResumo, Objetivo, RotaResumo, Time, UnidadeResumo } from "../data/schemas";
+import type { ConteudoItem, HeroiDoCatalogo, JogadorResumo, Objetivo, RotaResumo, Time, UnidadeResumo } from "../data/schemas";
 import { textoExtra } from "../glossary/filtros";
+import { ROTULO_DA_POSICAO } from "../heroes/catalogo";
 import { normalizar } from "../routes/filtros";
 import type { TimeNoIndice } from "../times/schemas";
 
@@ -11,7 +12,7 @@ export type Busca = MiniSearch<Doc>;
 
 type Fontes = {
   rotas: Pick<RotaResumo, "id" | "pergunta" | "titulo">[]; objetivos: Objetivo[]; termos: ConteudoItem[];
-  herois?: HeroiResumo[]; jogadores?: JogadorResumo[]; times?: Time[]; atlas?: readonly TimeNoIndice[];
+  herois?: readonly HeroiDoCatalogo[]; jogadores?: JogadorResumo[]; times?: Time[]; atlas?: readonly TimeNoIndice[];
   unidades?: readonly UnidadeResumo[];
 };
 
@@ -27,7 +28,7 @@ export function construirIndice({ rotas, objetivos, termos, herois = [], jogador
       chave: `termo:${t.id}`, tipo: "termo" as const, id: t.id, titulo: t.titulo, texto: t.secoes.basico, link: `/glossario/${t.id}`,
       icone: iconeDoItem(textoExtra(t, "item")),
     })),
-    ...herois.map((h) => ({ chave: `heroi:${h.id}`, tipo: "heroi" as const, id: h.id, titulo: h.nome, texto: h.resumo, link: `/herois/${h.id}`, icone: `/data/retratos/herois/${h.id}.webp` })),
+    ...herois.map((h) => ({ chave: `heroi:${h.id}`, tipo: "heroi" as const, id: h.id, titulo: h.nome, texto: textoDoHeroi(h), link: `/herois/${h.id}`, icone: `/data/retratos/herois/${h.id}.webp` })),
     ...jogadores.map((j) => ({ chave: `jogador:${j.id}`, tipo: "jogador" as const, id: j.id, titulo: j.nome, texto: `${j.time ?? ""} ${j.amostra}`, link: `/jogadores/${j.id}`, icone: null })),
     ...times.map((t) => ({ chave: `time:${t.id}`, tipo: "time" as const, id: t.id, titulo: t.nome, texto: t.jogadores.join(" "), link: `/jogadores/times/${t.id}`, icone: null })),
     ...atlas.map((t) => ({ chave: `atlas:${t.id}`, tipo: "atlas" as const, id: t.id, titulo: `${t.nome} (${t.tag})`, texto: `${t.tag} ${t.estilo}`, link: `/times/${t.id}`, icone: null })),
@@ -35,6 +36,10 @@ export function construirIndice({ rotas, objetivos, termos, herois = [], jogador
   ]);
   return busca;
 }
+
+// O nome interno do jogo ("zuus", "rattletrap") e as posições também acham o herói.
+const textoDoHeroi = (h: HeroiDoCatalogo) =>
+  [h.nome_interno, ...h.posicoes.map((p) => ROTULO_DA_POSICAO[p]), h.pagina === "guia" ? "guia completo" : "ficha"].join(" ");
 
 const iconeDoItem = (item: string | null): string | null => (item ? `/data/retratos/itens/${item}.webp` : null);
 const iconeDaHabilidade = (icone: string | null): string | null => (icone ? `/data/icones/${icone}.webp` : null);

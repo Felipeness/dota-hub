@@ -54,10 +54,14 @@ def _nome_local(caminho: str) -> str:
     return caminho.rsplit("/", 1)[-1]
 
 
+def sem_caminho_local(texto: str) -> str:
+    """Caminho da máquina de quem pesquisou vira o nome curto do dado, em qualquer texto que vai pro site."""
+    return CAMINHO_LOCAL.sub(lambda m: _nome_local(m[0]), texto)
+
+
 def fonte_legivel(fonte: str) -> str:
     """Caminho local vira nome curto legível; domínio sem esquema ganha https:// pra virar link no site."""
-    sem_caminho = CAMINHO_LOCAL.sub(lambda m: _nome_local(m[0]), fonte)
-    return URL_SEM_ESQUEMA.sub(lambda m: f"https://{m[0]}", sem_caminho)
+    return URL_SEM_ESQUEMA.sub(lambda m: f"https://{m[0]}", sem_caminho_local(fonte))
 
 
 def _secoes(corpo: str) -> dict:

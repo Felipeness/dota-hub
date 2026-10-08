@@ -1,7 +1,7 @@
 import { type RefObject, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router";
 import { dadosOuVazio, Indisponivel, useData } from "../data/useData";
-import { conteudoSchema, heroisSchema, jogadoresSchema, objetivosSchema, rotasResumoSchema, timesSchema, unidadesSchema } from "../data/schemas";
+import { conteudoSchema, heroisCatalogoSchema, jogadoresSchema, objetivosSchema, rotasResumoSchema, timesSchema, unidadesSchema } from "../data/schemas";
 import { CAMINHO_INDICE, indiceAtlasSchema } from "../times/schemas";
 import { AtalhoAoVivo } from "./AtalhoAoVivo";
 import { type Achado, buscar, construirIndice, sugerir } from "./index";
@@ -70,7 +70,7 @@ function Resultados({ consulta, ativo, listaRef, limpar }: {
   const objetivos = useData("/data/objetivos.json", objetivosSchema);
   const termos = useData("/data/glossario.json", conteudoSchema);
   // Os opcionais (1B e unidades): um arquivo que falta só tira aquele tipo da busca.
-  const herois = useData("/data/herois.json", heroisSchema);
+  const herois = useData("/data/herois_catalogo.json", heroisCatalogoSchema);
   const jogadores = useData("/data/jogadores.json", jogadoresSchema);
   const times = useData("/data/times.json", timesSchema);
   const unidades = useData("/data/unidades.json", unidadesSchema);

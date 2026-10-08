@@ -47,11 +47,15 @@ it("id exato de rota vem primeiro", () => {
 it("acha herói, jogador e time", () => {
   const b = construirIndice({
     rotas: [], objetivos: [], termos: [],
-    herois: [{ id: "medusa", nome: "Medusa", hero_id: 94, patch: "7.41f", resumo: "Carry de safelane.", tem_por_minuto: false }],
+    herois: [
+      { id: "medusa", nome: "Medusa", hero_id: 94, nome_interno: "medusa", atributo: "agi", posicoes: [1], pagina: "guia" },
+      { id: "zeus", nome: "Zeus", hero_id: 22, nome_interno: "zuus", atributo: "int", posicoes: [2], pagina: "ficha" },
+    ],
     jogadores: [{ id: "skiter", nome: "skiter", tipo: "pro", time: null, amostra: "1 replay" }],
     times: [{ id: "team-spirit", nome: "Team Spirit", jogadores: ["yatoro"], fonte: "" }],
   });
   expect(buscar(b, "medu")[0]).toMatchObject({ tipo: "heroi", link: "/herois/medusa" });
+  expect(buscar(b, "zuus")[0]).toMatchObject({ tipo: "heroi", link: "/herois/zeus", icone: "/data/retratos/herois/zeus.webp" });
   expect(buscar(b, "skit")[0]).toMatchObject({ tipo: "jogador", link: "/jogadores/skiter" });
   expect(buscar(b, "spirit")[0]).toMatchObject({ tipo: "time", link: "/jogadores/times/team-spirit" });
 });

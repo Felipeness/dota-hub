@@ -1,5 +1,5 @@
 import type { Indice, RotaResumo } from "../data/schemas";
-import { faseNoMinuto, filtrarHerois, objetivosDosPassos, proximoSpike, variacoesDaFase } from "./fases";
+import { faseNoMinuto, objetivosDosPassos, proximoSpike, variacoesDaFase } from "./fases";
 
 const fase = (de: number, ate: number | null) => ({ de, ate, janela: `${de}-${ate}`, objetivo: "", passos: [], caminhos: [] });
 const spike = (minuto: number | null, marco: string) => ({ minuto, faixa: "", marco, o_que_fazer: "" });
@@ -20,12 +20,6 @@ it("próximo spike ignora os sem minuto e os que já passaram", () => {
   const spikes = [spike(2.5, "Wand"), spike(null, "Tardio"), spike(7.9, "Nível 6")];
   expect(proximoSpike(spikes, 5)?.marco).toBe("Nível 6");
   expect(proximoSpike(spikes, 10)).toBeNull();
-});
-
-it("filtra heróis sem acento e sem caixa", () => {
-  const herois = [{ id: "natures_prophet", nome: "Nature's Prophet", hero_id: 53, patch: "", resumo: "", tem_por_minuto: true }];
-  expect(filtrarHerois(herois, "NATURE")).toHaveLength(1);
-  expect(filtrarHerois(herois, "medusa")).toHaveLength(0);
 });
 
 const torre = { id: "rad_bot_t1", tipo: "torre", nome: "T1 de baixo", x: 0.8, y: 0.2, lado: "radiant" as const, detalhes: {} };

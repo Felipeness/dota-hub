@@ -51,12 +51,12 @@ function Cartao({ sugestao, posicao, acao, onAcao, guia, pagina, inimigoPerigoso
           Como jogar {heroi.nome} contra {inimigoPerigoso.nome}
         </Link>
       )}
-      {(motivos.length > 0 || guia) && (
+      {(motivos.length > 0 || guia || pagina) && (
         <details className="draft-porque">
           <summary>Por quê, em detalhe</summary>
           <ul className="draft-motivos">{motivos.map((m) => <LinhaDeMotivo key={m.curto} motivo={m} comDetalhe />)}</ul>
           {guia && <p className="draft-momento"><strong>Momento do draft, pelo guia:</strong> {guia.momento}</p>}
-          {pagina && <Link to={`/herois/${pagina}`}>Guia completo do {heroi.nome}</Link>}
+          {pagina && <Link to={`/herois/${pagina}`}>{guia ? "Guia completo" : "Ficha"} do {heroi.nome}</Link>}
         </details>
       )}
     </li>

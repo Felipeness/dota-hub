@@ -48,11 +48,13 @@ it("mostra vantagem, mecânicas, itens, dicas e guia do Slark contra o Phantom L
   expect(within(itens).getByText("Battle Fury")).toBeInTheDocument();
   expect(screen.getByRole("region", { name: "Na prática" })).toBeInTheDocument();
   expect(await screen.findByRole("heading", { name: "No guia do Slark" })).toBeInTheDocument();
+  expect(screen.getByRole("link", { name: "Guia completo do Slark" })).toHaveAttribute("href", "/herois/slark");
 });
 
 it("o atalho ?contra= escolhe o inimigo e a troca de lado vai para a URL completa", async () => {
   abrir("/confronto?contra=26");
   expect(await screen.findByRole("combobox", { name: /Inimigo/ })).toHaveValue("Lion");
+  expect(await screen.findByRole("link", { name: "Ficha do Lion" })).toHaveAttribute("href", "/herois/lion");
   fireEvent.change(screen.getByRole("combobox", { name: /Seu herói/ }), { target: { value: "slark" } });
   expect(screen.getByLabelText("endereço")).toHaveTextContent("/confronto/slark/lion");
   fireEvent.click(screen.getByRole("button", { name: "Trocar os heróis de lado" }));

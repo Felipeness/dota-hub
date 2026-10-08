@@ -10,6 +10,7 @@ from pathlib import Path
 
 from . import (amigos, conteudo, fontes, herois, icones, jogadores, jogo, mapa, modelos, porque_itens, relevo, retratos,
                roshan, rotas, trajetorias, unidades, validar)
+from . import fichas as fichas_por_posicao
 
 RAIZ = Path(__file__).resolve().parents[2]
 DESTINO = RAIZ / "app" / "public" / "data"
@@ -65,6 +66,9 @@ def main() -> None:
     _gravar_colecao("herois", "heroi", fichas)
     pacotes["herois"] = herois.indice(fichas)
     pacotes["draft_guias"] = herois.draft_resumo(fichas)
+    por_posicao = fichas_por_posicao.carregar(RAIZ / "content" / "fichas")
+    _gravar_colecao("fichas", "ficha", por_posicao)
+    pacotes["herois_catalogo"] = fichas_por_posicao.catalogo(fichas, por_posicao)
     paineis = [jogadores.felipe(), *(jogadores.pro_compare(c) for c in ("satanic", "yatoro", "watson")),
                *jogadores.pros_de_replay(), amigos.leonardo(), amigos.hane(), amigos.yuma()]
     _gravar_colecao("jogadores", "painel", paineis)
@@ -78,7 +82,7 @@ def main() -> None:
     arquivo_vpk = jogo.vpk()
     retratos.atualizar_herois(arquivo_vpk, retratos.nomes_no_jogo(fichas) | retratos.todos_os_herois(), DESTINO / "retratos" / "herois")
     itens_do_glossario = {t["extras"]["item"] for t in pacotes["glossario"] if "item" in t["extras"]}
-    retratos.atualizar_itens(arquivo_vpk, itens_do_glossario | herois.itens_dos_guias(fichas), DESTINO / "retratos" / "itens")
+    retratos.atualizar_itens(arquivo_vpk, itens_do_glossario | herois.itens_dos_guias(fichas) | fichas_por_posicao.itens(por_posicao), DESTINO / "retratos" / "itens")
     base = unidades.Jogo.dos_arquivos(jogo.textos(arquivo_vpk), icones.disponiveis(arquivo_vpk))
     farm = fontes.farm()
     fichas_unidades = unidades.todas(base, farm, conteudo.carregar(RAIZ / "content" / "unidades"))
@@ -96,7 +100,8 @@ def main() -> None:
         _gravar(f"{nome}.json", dados)
     meta = {"exportado_em": datetime.now(timezone.utc).isoformat(timespec="seconds"), "patch": "7.41",
             "contagens": {"rotas": len(todas_rotas), "objetivos": len(pacotes["objetivos"]),
-                          "termos": len(pacotes["glossario"])}}
+                          "termos": len(pacotes["glossario"]),
+                          "fichas": len(por_posicao)}}
     validar.validar("meta", meta)
     _gravar("meta.json", meta)
     print(f"ok: {meta['contagens']}")
