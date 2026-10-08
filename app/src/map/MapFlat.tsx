@@ -8,6 +8,7 @@ import {
   type Ponto2, type VistaPlana,
 } from "./navegacao";
 import { BotaoDoPino } from "./BotaoDoPino";
+import { glifoDoTipo } from "./glifos";
 import { opacidadeDaMancha, type Pino } from "./trilhas";
 
 const pontosSvg = (pontos: readonly Ponto[]) => pontos.map(([x, y]) => `${x},${1 - y}`).join(" ");
@@ -32,7 +33,8 @@ export function MapFlat({ objetivos, rota, trilhas = [], marcas = [], manchas = 
         {objetivos.map((o) => (
           <button key={o.id} aria-label={o.nome} title={o.nome}
             className={`marcador marcador-${o.tipo} lado-${o.lado}${o.id === selecionado ? " ativo" : ""}`}
-            style={normToPercent([o.x, o.y])} onClick={() => onSelecionar(o.id)} />
+            style={{ ...normToPercent([o.x, o.y]), "--glifo": JSON.stringify(glifoDoTipo(o.tipo)) } as CSSProperties & Record<"--glifo", string>}
+            onClick={() => onSelecionar(o.id)} />
         ))}
         {rota && selosDaRota(rota.passos).map((selo) => (
           <span key={selo.chave} className="passo-no-mapa" style={normToPercent([selo.x, selo.y])}><SeloDaRota selo={selo} /></span>
