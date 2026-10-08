@@ -26,7 +26,7 @@
 .cf-placar-dele .cf-placar-veredito { color: var(--cor-dire); }
 .cf-placar-numero { font-size: clamp(40px, 12vw, 64px); line-height: 1; color: var(--cor-texto); }
 
-.cf-lista { display: grid; gap: var(--espaco-2); margin: 0; padding: 0; list-style: none; }
+.cf-lista { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-2); margin: 0; padding: 0; list-style: none; }
 .cf-cartao { border: 1px solid var(--cor-linha-forte); border-radius: var(--raio-pequeno); background: var(--cor-superficie-2); padding: 0 var(--espaco-3); }
 .cf-cartao > summary { display: flex; flex-wrap: wrap; align-items: center; gap: var(--espaco-2); min-height: var(--alvo-toque); padding: var(--espaco-2) 0; cursor: pointer; }
 .cf-cartao[open] > summary { border-bottom: 1px solid var(--cor-linha); margin-bottom: var(--espaco-2); }
@@ -38,7 +38,7 @@
 .cf-alerta { color: var(--cor-alerta-texto); }
 .cf-trunfo { color: var(--cor-radiant); }
 
-.cf-itens { display: grid; gap: var(--espaco-3); margin: 0; padding: 0; list-style: none; }
+.cf-itens { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: var(--espaco-3); margin: 0; padding: 0; list-style: none; }
 .cf-item { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: var(--espaco-3); align-items: start; }
 .cf-item img { border-radius: 4px; background: var(--cor-superficie-3); }
 .cf-item p + p { color: var(--cor-texto-2); }
