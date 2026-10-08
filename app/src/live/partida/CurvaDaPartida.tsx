@@ -28,12 +28,13 @@ function tetoDoEixo(maximo: number, marcas = MARCAS_NO_EIXO_Y): number {
   return passo * marcas;
 }
 
-function caminhoDaSerie(valores: readonly number[], fimMin: number, teto: number): string {
-  return valores.map((v, minuto) => `${minuto === 0 ? "M" : "L"}${x(minuto, fimMin).toFixed(1)},${y(v, teto).toFixed(1)}`).join(" ");
+function caminhoDaSerie(valores: readonly number[], fimMin: number, minimo: number, maximo: number): string {
+  return valores.map((v, minuto) => `${minuto === 0 ? "M" : "L"}${x(minuto, fimMin).toFixed(1)},${y(v, minimo, maximo).toFixed(1)}`).join(" ");
 }
 
 const x = (minuto: number, fimMin: number) => MARGEM.esquerda + (Math.min(minuto, fimMin) / fimMin) * larguraUtil;
-const y = (valor: number, teto: number) => MARGEM.topo + (1 - valor / teto) * alturaUtil;
+const y = (valor: number, minimo: number, maximo: number) => MARGEM.topo + (1 - (valor - minimo) / (maximo - minimo)) * alturaUtil;
+const rotuloDoEixoY = (v: number) => `${v < 0 ? "-" : ""}${Math.abs(v) >= 1_000 ? `${Math.abs(v) / 1_000}k` : Math.abs(v)}`;
 
 function MarcaDoEvento({ evento, fimMin }: { evento: EventoDaPartida; fimMin: number }) {
   const cx = x(evento.t / 60, fimMin);
@@ -62,8 +63,13 @@ function FaixaDaJanela({ janela, fimMin }: { janela: IdJanela; fimMin: number })
 
 export function CurvaDaPartida({ titulo, unidade, series, eventos, duracaoS, janela }: Props) {
   const fimMin = Math.max(1, duracaoS / 60);
-  const teto = tetoDoEixo(Math.max(...series.flatMap((s) => s.valores), 0));
-  const marcasY = Array.from({ length: MARCAS_NO_EIXO_Y + 1 }, (_, i) => (teto / MARCAS_NO_EIXO_Y) * i);
+  const valores = series.flatMap((s) => s.valores);
+  // Série com valor negativo (vantagem de time, por exemplo) centraliza o zero em vez de partir dele.
+  const diverge = valores.some((v) => v < 0);
+  const amplitude = tetoDoEixo(Math.max(...valores.map(Math.abs), 0));
+  const minimo = diverge ? -amplitude : 0;
+  const maximo = amplitude;
+  const marcasY = Array.from({ length: MARCAS_NO_EIXO_Y + 1 }, (_, i) => minimo + ((maximo - minimo) / MARCAS_NO_EIXO_Y) * i);
   const marcasX = Array.from({ length: Math.floor(fimMin / PASSO_DO_EIXO_X_MIN) + 1 }, (_, i) => i * PASSO_DO_EIXO_X_MIN);
   const noEixo = eventos.filter((e) => TIPOS_NO_EIXO.includes(e.tipo) && e.t >= 0);
   const descricao = `${titulo} por minuto: ${series.map((s) => `${s.nome} termina em ${s.valores.at(-1)?.toLocaleString("pt-BR") ?? "sem dado"}`).join("; ")}.`;
@@ -79,8 +85,8 @@ export function CurvaDaPartida({ titulo, unidade, series, eventos, duracaoS, jan
         <FaixaDaJanela janela={janela} fimMin={fimMin} />
         {marcasY.map((v) => (
           <g key={v} className="curva-grade">
-            <line x1={MARGEM.esquerda} x2={LARGURA - MARGEM.direita} y1={y(v, teto)} y2={y(v, teto)} />
-            <text x={MARGEM.esquerda - 6} y={y(v, teto) + 4} textAnchor="end">{v >= 1_000 ? `${v / 1_000}k` : v}</text>
+            <line x1={MARGEM.esquerda} x2={LARGURA - MARGEM.direita} y1={y(v, minimo, maximo)} y2={y(v, minimo, maximo)} />
+            <text x={MARGEM.esquerda - 6} y={y(v, minimo, maximo) + 4} textAnchor="end">{rotuloDoEixoY(v)}</text>
           </g>
         ))}
         {marcasX.map((m) => (
@@ -88,7 +94,7 @@ export function CurvaDaPartida({ titulo, unidade, series, eventos, duracaoS, jan
         ))}
         <text className="curva-eixo" x={LARGURA - MARGEM.direita} y={ALTURA - MARGEM.baixo + 16} textAnchor="end">min</text>
         {noEixo.map((e, i) => <MarcaDoEvento key={`${e.tipo}-${e.t}-${i}`} evento={e} fimMin={fimMin} />)}
-        {series.map((s) => <path key={s.nome} className={`curva-linha curva-${s.estilo}`} d={caminhoDaSerie(s.valores, fimMin, teto)} />)}
+        {series.map((s) => <path key={s.nome} className={`curva-linha curva-${s.estilo}`} d={caminhoDaSerie(s.valores, fimMin, minimo, maximo)} />)}
       </svg>
       <p className="curva-rodape">
         {unidade}. Marcas embaixo: {TIPOS_NO_EIXO.map((t) => <span key={t} className={`curva-marca-legenda curva-evento-${t}`}>{ROTULO_DO_TIPO[t]}</span>)}
