@@ -1,6 +1,6 @@
 import { partidaFonte } from "../fonte/schemas";
 import { PARTIDA, YATORO, amostra, consultaGravada } from "../teste/gravados";
-import { detalheDaPartida, slugDoHeroi, tempoDaPartida } from "./detalhe";
+import { detalheDaPartida, montarDetalhe, slugDoHeroi, tempoDaPartida } from "./detalhe";
 
 const carregar = async () => {
   const resposta = await detalheDaPartida(consultaGravada(), String(PARTIDA), YATORO);
@@ -13,6 +13,8 @@ it("partida real gravada vira o detalhe do jogador com herói, lado e adversári
   expect(d).toMatchObject({
     heroi: { nome: "Slark", chave: "slark", retrato: "slark" }, lado: "dire", lane: "safe", venceu: true,
     abates: 13, mortes: 5, assistencias: 12, analisada: true, adversario: { heroi: { nome: "Necrophos" } },
+    // A amostra gravada é de antes do OpenDota trazer vantagem do time, eficiência de lane e draft.
+    vantagemDoTime: { ouro: [], xp: [] }, eficienciaDeLanePct: null, draft: [],
   });
   expect(d.inimigos.map((i) => i.nome)).toContain("Nature's Prophet");
   expect(d.curvas.ouro.length).toBe(d.curvas.lh.length);
@@ -74,4 +76,28 @@ it.each([
 
 it.each([{ s: -89, texto: "-1:29" }, { s: 0, texto: "0:00" }, { s: 848, texto: "14:08" }])("$s s é $texto", ({ s, texto }) => {
   expect(tempoDaPartida(s)).toBe(texto);
+});
+
+it("vantagem do time inverte o sinal pro Dire; draft sai na ordem do campo order, não da posição no array", () => {
+  const partida = partidaFonte.parse({
+    match_id: 2, duration: 600, radiant_win: true,
+    radiant_gold_adv: [0, 500, -300], radiant_xp_adv: [0, 200, 100],
+    picks_bans: [
+      { is_pick: true, hero_id: 1, team: 1, order: 1 },
+      { is_pick: false, hero_id: 2, team: 0, order: 0 },
+    ],
+    players: [{ account_id: 7, player_slot: 128, hero_id: 1, kills: 0, deaths: 0, assists: 0 }],
+  });
+  const constantes = {
+    herois: {
+      "1": { id: 1, name: "npc_dota_hero_antimage", localized_name: "Anti-Mage" },
+      "2": { id: 2, name: "npc_dota_hero_axe", localized_name: "Axe" },
+    },
+    itens: {}, idsDeHabilidades: {}, habilidades: {},
+  };
+  const resposta = montarDetalhe({ partida, conta: 7, constantes, benchmarks: null, frescor: { buscadoEm: 1, vencido: false } });
+  if (!resposta.ok) throw new Error("esperava resposta ok");
+  expect(resposta.dados.vantagemDoTime).toEqual({ ouro: [-0, -500, 300], xp: [-0, -200, -100] });
+  expect(resposta.dados.draft.map((p) => p.heroi.nome)).toEqual(["Axe", "Anti-Mage"]);
+  expect(resposta.dados.draft.map((p) => p.seuTime)).toEqual([false, true]);
 });

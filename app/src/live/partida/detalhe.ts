@@ -21,6 +21,9 @@ export type NivelDeHabilidade = Readonly<{ nivel: number; chave: string; nome: s
 export type Curvas = Readonly<{ ouro: readonly number[]; lh: readonly number[]; patrimonio: readonly number[] }>;
 /** Mediana do herói no /benchmarks do OpenDota (partidas públicas analisadas, não só pro). */
 export type Referencia = Readonly<{ ouroPorMin: number; lhPorMin: number }>;
+/** Índice = minuto. Positivo = o time do jogador na frente; negativo = o time inimigo na frente. */
+export type VantagemDoTime = Readonly<{ ouro: readonly number[]; xp: readonly number[] }>;
+export type PickOuBan = Readonly<{ heroi: HeroiNaPartida; pick: boolean; seuTime: boolean }>;
 
 export type DetalheDaPartida = Readonly<{
   partida: string; conta: number; slot: number; duracaoS: number; venceu: boolean | null; analisada: boolean;
@@ -31,6 +34,11 @@ export type DetalheDaPartida = Readonly<{
   /** Lane deduzida das posições do laning; pode divergir da `lane` que a fonte registrou. */
   laneDoMapa: Lane | null;
   referencia: Referencia | null; frescor: Frescor;
+  vantagemDoTime: VantagemDoTime;
+  /** % de eficiência de farm na lane (ouro+xp vs. o máximo possível no período), direto do OpenDota; null sem dado. */
+  eficienciaDeLanePct: number | null;
+  /** Ordem real do draft (campo order do OpenDota); vazio em partidas sem picks_bans. */
+  draft: readonly PickOuBan[];
 }>;
 
 type Nomes = z.infer<typeof nomesDeHeroisFonte>;
@@ -79,6 +87,20 @@ function indiceDeHerois(nomes: Nomes) {
 }
 
 const curvas = (j: JogadorDaPartidaFonte): Curvas => ({ ouro: j.gold_t, lh: j.lh_t, patrimonio: j.networth_t });
+
+/** radiant_gold_adv/xp_adv são sempre do ponto de vista do Radiant; vira positivo = time do jogador. */
+function vantagemDoTime(partida: PartidaFonte, lado: Lado): VantagemDoTime {
+  const sinal = lado === "radiant" ? 1 : -1;
+  return { ouro: partida.radiant_gold_adv.map((v) => v * sinal), xp: partida.radiant_xp_adv.map((v) => v * sinal) };
+}
+
+function draftDaPartida(partida: PartidaFonte, herois: ReturnType<typeof indiceDeHerois>, lado: Lado): PickOuBan[] {
+  return [...partida.picks_bans].sort((a, b) => a.order - b.order)
+    .map((p) => ({ heroi: herois.porId(p.hero_id), pick: p.is_pick, seuTime: ladoDoTimeNumerico(p.team) === lado }));
+}
+
+/** picks_bans.team do OpenDota: 0 Radiant, 1 Dire. */
+const ladoDoTimeNumerico = (time: number): Lado => (time === 0 ? "radiant" : "dire");
 
 function adversarioDeLane(jogador: JogadorDaPartidaFonte, inimigos: readonly JogadorDaPartidaFonte[]) {
   const papel = jogador.lane_role == null ? undefined : PAPEL_ADVERSARIO[jogador.lane_role];
@@ -196,6 +218,9 @@ export function montarDetalhe({ partida, conta, constantes, benchmarks, frescor 
     compras, neutros: neutrosDoJogador(jogador, constantes.itens), habilidades: habilidadesDoJogador(jogador, constantes),
     manchasDaLane: manchas, laneDoMapa: laneDasManchas(manchas, lado),
     referencia: referenciaDoHeroi(benchmarks), frescor,
+    vantagemDoTime: vantagemDoTime(partida, lado),
+    eficienciaDeLanePct: jogador.lane_efficiency_pct,
+    draft: draftDaPartida(partida, herois, lado),
   });
 }
 
