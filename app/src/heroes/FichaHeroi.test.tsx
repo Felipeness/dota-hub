@@ -69,7 +69,7 @@ it("aba Power spikes mostra o próximo spike da tabela por minuto", () => {
   };
   render(<MemoryRouter><FichaHeroi heroi={comPorMinuto} objetivos={[]} solos={[]} /></MemoryRouter>);
   fireEvent.click(screen.getByRole("tab", { name: "Power spikes" }));
-  expect(screen.getByRole("columnheader", { name: "Próximo spike" })).toBeInTheDocument();
+  expect(screen.getByRole("columnheader", { name: "Próximo marco" })).toBeInTheDocument();
   expect(screen.getByText("Power Treads (em Agilidade) e nível 5 (~6:18 nos replays)")).toBeInTheDocument();
 });
 
