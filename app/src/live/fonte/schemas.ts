@@ -12,6 +12,7 @@ export const heroisDaContaFonte = z.array(z.object({ hero_id: z.coerce.number(),
 export const partidasRecentesFonte = z.array(z.object({
   match_id: z.number(), player_slot: z.number(), radiant_win: z.boolean().nullable(), hero_id: z.number(),
   start_time: z.number(), duration: z.number(), kills: z.number(), deaths: z.number(), assists: z.number(),
+  gold_per_min: z.number(), xp_per_min: z.number(), last_hits: z.number(), hero_damage: z.number(), hero_healing: z.number(),
   lane_role: z.number().nullable().optional(), version: z.number().nullable().optional(),
 }));
 export const buscaFonte = z.array(z.object({ account_id: z.number(), personaname: texto, last_match_time: texto }));
@@ -73,6 +74,7 @@ export const partidasDoTimeFonte = z.array(z.object({
   start_time: z.number(), league_name: texto, opposing_team_name: texto,
 }));
 export const nomesDeHeroisFonte = z.record(z.string(), z.object({ id: z.number(), name: z.string(), localized_name: z.string() }));
+export const rankingsFonte = z.array(z.object({ hero_id: z.number(), score: z.number(), percent_rank: z.number() }));
 
 export type PartidaRecenteFonte = z.infer<typeof partidasRecentesFonte>[number];
 export type PartidaFonte = z.infer<typeof partidaFonte>;
@@ -80,3 +82,4 @@ export type JogadorDaPartidaFonte = PartidaFonte["players"][number];
 export type ItensFonte = z.infer<typeof itensFonte>;
 export type BenchmarksFonte = z.infer<typeof benchmarksFonte>;
 export type TimeFonte = z.infer<typeof timeFonte>;
+export type RankingFonte = z.infer<typeof rankingsFonte>[number];
