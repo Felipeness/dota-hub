@@ -8,6 +8,7 @@ import type { MapViewProps, Tracado } from "./MapView";
 import { alturaEm, normToWorld, type Ponto } from "./coords";
 import { caixaDoFoco, distanciaParaEnquadrar, foiArraste, posicaoDaCamera, prenderAlvo, type Caixa } from "./navegacao";
 import { BotaoDoPino } from "./BotaoDoPino";
+import { glifoDoTipo } from "./glifos";
 import { SeloDaRota } from "./SeloDaRota";
 import { caminhoDaFuga, selosDaRota, trechosDaRota } from "./selos";
 import { texturaDoMapa } from "./textura";
@@ -77,6 +78,10 @@ function Gota({ objetivo, cor, ativo, noChao, onSelecionar }: GotaProps) {
         <sphereGeometry args={[0.85, 12, 10]} />
         <meshStandardMaterial color={cor} emissive={cor} emissiveIntensity={ativo ? 0.6 : 0.1} />
       </mesh>
+      {/* Mesmo glifo por tipo do mapa plano: sem ele, todo objetivo "neutro" é a mesma gota. */}
+      <Html position={[0, 2.2, 0]} center zIndexRange={[11, 0]} style={{ pointerEvents: "none" }}>
+        <span className="glifo-3d">{glifoDoTipo(objetivo.tipo)}</span>
+      </Html>
     </group>
   );
 }

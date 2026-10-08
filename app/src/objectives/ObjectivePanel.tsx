@@ -14,14 +14,15 @@ export function rotuloOrigem(marca: Marca): string | null {
   return `Visto em ${marca.replays.length} replays: ${marca.replays.join(", ")}.`;
 }
 
-const LIMITE_VALOR_CURTO = 20;
+// Alto o bastante pra notas tipo "sim: safe lane (bot), pull clássico; ..." não ficarem irreconhecíveis.
+export const LIMITE_VALOR_CURTO = 60;
 const ROTULO_LADO: Record<Objetivo["lado"], string> = { radiant: "Radiant", dire: "Dire", neutro: "Neutro" };
 // Rótulo das chaves de `detalhes` que o export grava hoje; chave nova aparece com o nome cru até ganhar rótulo aqui.
 const ROTULO_DETALHE: Readonly<Partial<Record<string, string>>> = {
   codigo: "Código", tipo: "Tipo", area: "Área", lane: "Lane", tier: "Tier", risco: "Risco",
   anfibio: "Anfíbio", empilhavel: "Dá stack", puxavel: "Dá pull", perto_de: "Perto de", liga_com: "Liga com",
   dist_torre_unidades: "Distância da torre", confianca_posicao: "Confiança da posição", lado_do_mapa: "Lado do mapa", regra: "Regra",
-  notas: "Notas", timing: "Tempo", evolui: "Evolui", entrada: "Entrada",
+  notas: "Notas", timing: "Tempo", evolui: "Evolui", entrada: "Entrada", predios: "Prédios",
 };
 
 // A grade mostra só o que cabe numa célula; frases longas já estão no texto do conteúdo.
@@ -33,10 +34,11 @@ export function numerosDoObjetivo(detalhes: Record<string, unknown>, nomes: Read
   });
 }
 
+// Texto longo é truncado (com "…"), nunca escondido: o jogador precisa saber que o campo existe.
 function valorCurto(valor: unknown): string | null {
   if (typeof valor === "number") return valor.toLocaleString("pt-BR");
   if (typeof valor === "boolean") return valor ? "sim" : "não";
-  if (typeof valor === "string" && valor.length <= LIMITE_VALOR_CURTO) return valor;
+  if (typeof valor === "string") return valor.length <= LIMITE_VALOR_CURTO ? valor : `${valor.slice(0, LIMITE_VALOR_CURTO)}…`;
   return null;
 }
 

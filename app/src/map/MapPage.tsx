@@ -85,6 +85,8 @@ export function MapPage() {
               <button aria-pressed={vista === "2.5d"} onClick={() => setVista("2.5d")}>2.5D</button>
               <button aria-pressed={vista === "plano"} onClick={() => setVista("plano")}>Plano</button>
             </div>
+            {/* O 3D (2.5D) não responde a teclado/leitor de tela: a vista Plano é a alternativa acessível. */}
+            {vista === "2.5d" && <p className="dica-vista">Usando teclado ou leitor de tela? A vista Plano abre os marcadores sem precisar do mouse.</p>}
           </div>
           <div className="grupo legenda">
             <h2 className="sobretitulo">Legenda</h2>

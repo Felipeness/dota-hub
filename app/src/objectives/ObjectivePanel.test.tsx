@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { numerosDoObjetivo, ObjectivePanel, rotuloOrigem } from "./ObjectivePanel";
+import { LIMITE_VALOR_CURTO, numerosDoObjetivo, ObjectivePanel, rotuloOrigem } from "./ObjectivePanel";
 
 const camp = { id: "rad_safe_small_1", tipo: "camp", nome: "Pequeno do pull", x: 0.7, y: 0.2, lado: "radiant" as const, detalhes: {} };
 const conteudo = [{ id: "camp", titulo: "Camp", patch: "7.41", fontes: ["Liquipedia"], secoes: { basico: "Camps nascem a cada minuto.", avancado: null }, origem: { basico: null, avancado: null }, links: [], extras: {} }];
@@ -37,11 +37,16 @@ it.each([
 it.each([
   { detalhes: { lane: "top", tier: 1 }, esperado: [["Lane", "top"], ["Tier", "1"]] },
   { detalhes: { empilhavel: true, anfibio: false }, esperado: [["Dá stack", "sim"], ["Anfíbio", "não"]] },
-  { detalhes: { dist_torre_unidades: 1420, regra: "texto longo demais para caber numa célula da grade" }, esperado: [["Distância da torre", "1.420"]] },
+  { detalhes: { dist_torre_unidades: 1420, regra: "texto longo demais para caber numa célula da grade" }, esperado: [["Distância da torre", "1.420"], ["Regra", "texto longo demais para caber numa célula da grade"]] },
   { detalhes: { chave_nova: "x" }, esperado: [["chave nova", "x"]] },
   { detalhes: { lista: [1, 2] }, esperado: [] },
 ])("numerosDoObjetivo($detalhes) devolve $esperado", ({ detalhes, esperado }) => {
   expect(numerosDoObjetivo(detalhes)).toEqual(esperado);
+});
+
+it("não esconde o pull só porque a explicação é longa", () => {
+  const texto = "sim: safe lane (bot), pull clássico; double pull junto com rad_safe_large_1";
+  expect(numerosDoObjetivo({ puxavel: texto })).toEqual([["Dá pull", `${texto.slice(0, LIMITE_VALOR_CURTO)}…`]]);
 });
 
 it("troca o id de outro objetivo pelo nome dele", () => {

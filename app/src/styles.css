@@ -161,6 +161,7 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 }
 .alternador button { border: 0; border-radius: 7px; background: transparent; font-weight: 600; font-size: 13px; }
 .alternador button[aria-pressed="true"] { background: var(--cor-linha-forte); }
+.dica-vista { font-size: 12px; color: var(--cor-texto-3); margin: 0; }
 .legenda { margin-top: auto; font-size: 13px; color: var(--cor-texto-2); }
 
 .mapa-centro {
@@ -234,9 +235,17 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .marcador::after { content: ""; position: absolute; inset: -12px; }
+/* Glifo por tipo (--glifo, definido inline por objetivo): contra-rotacionado para ficar de pé dentro da gota. */
+.marcador::before {
+  content: var(--glifo, "");
+  position: absolute; inset: 0; display: grid; place-items: center;
+  transform: rotate(45deg); font-size: 10px; line-height: 1; color: rgb(10 14 17 / 0.85); pointer-events: none;
+}
 .marcador:hover { transform: translate(-50%, -100%) rotate(-45deg) scale(1.15); }
 .marcador-roshan, .marcador-tormentor, .marcador-ancient { width: 30px; height: 30px; }
 .marcador-roshan::after, .marcador-tormentor::after, .marcador-ancient::after { inset: -7px; }
+.marcador-roshan::before, .marcador-tormentor::before, .marcador-ancient::before { font-size: 14px; }
+.glifo-3d { font-size: 12px; color: rgb(10 14 17 / 0.9); text-shadow: 0 0 2px rgb(255 255 255 / 0.5); }
 .marcador.ativo { z-index: 2; border-color: var(--cor-destaque); box-shadow: 0 0 0 6px rgb(242 181 68 / 0.25), 0 8px 18px rgb(0 0 0 / 0.6); }
 
 .passo {
