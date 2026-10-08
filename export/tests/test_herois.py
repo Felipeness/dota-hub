@@ -44,6 +44,29 @@ def test_por_minuto_so_existe_nos_herois_do_pool(fichas):
     assert por_id["medusa"]["por_minuto"] is None
 
 
+def test_medusa_null_talisman_ganha_o_porque_do_power_spike_que_cita_o_item(fichas):
+    medusa = next(f for f in fichas if f["id"] == "medusa")
+    null_talisman = next(i for i in medusa["guia"]["itens_core"] if i["item"] == "null_talisman")
+    assert null_talisman["porque"] == {
+        "texto": medusa["power_spikes"][0]["o_que_fazer"], "fonte": "Power spike: Null Talisman (505) e Magic Wand (2:30)",
+    }
+
+
+def test_item_sem_power_spike_que_cite_o_nome_nao_ganha_porque_inventado():
+    assert herois._porque_do_item("Item nunca citado (999)", 10, [
+        {"minuto": 5, "faixa": "5:00", "marco": "Outro marco qualquer", "o_que_fazer": "x"},
+    ]) is None
+
+
+def test_porque_do_item_escolhe_o_spike_mais_proximo_do_minuto_alvo_quando_ha_mais_de_um():
+    spikes = [
+        {"minuto": 10, "faixa": "10:00", "marco": "Blink Dagger (cedo)", "o_que_fazer": "cedo"},
+        {"minuto": 30, "faixa": "30:00", "marco": "Blink Dagger (tarde)", "o_que_fazer": "tarde"},
+    ]
+    escolhido = herois._porque_do_item("Blink Dagger (2250)", 29, spikes)
+    assert escolhido == {"texto": "tarde", "fonte": "Power spike: Blink Dagger (tarde) (30:00)"}
+
+
 def test_power_spike_com_minuto_em_texto_vira_faixa():
     spike = herois.spike({"minuto": "20-25", "marco": "BKB", "o_que_fazer": "Lute."})
     assert spike == {"minuto": None, "faixa": "20-25", "marco": "BKB", "o_que_fazer": "Lute."}
