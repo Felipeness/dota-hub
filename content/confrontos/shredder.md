@@ -23,22 +23,18 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
+- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 - https://api.opendota.com/api/constants/aghs_desc
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/shredder.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/alchemist.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/anti_mage.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/tiny.json
 ---
 
 ## Como os oponentes foram escolhidos
-Timbersaw joga quase só de offlane (pos 3) em pro (herois_catalogo.json). A lista mistura: os 6 adversários com mais partidas pro na base de confrontos dele (Snapfire, Jakiro, Mars, Tiny, Hoodwink, Shadow Fiend); 3 rivais da mesma posição principal, offlane, com alto volume (Centaur Warrunner, Pangolier, Axe); os 2 maiores favoritismos com 30+ jogos (Earthshaker, Anti-Mage) e os 3 maiores desfavoritismos com 30+ jogos (Legion Commander, Bane, Alchemist); e mais 2 carries de farm rápido que quase nunca dividem lane com ele mas cujo power spike compete pelo mesmo jogo (Gyrocopter, Ursa). Anti-Mage e Alchemist também cumprem esse último critério: nenhum dos dois é offlaner, mas o ritmo de farm de cada um decide boa parte do confronto, do jeito que Alchemist x Morphling decide mesmo sem lane em comum.
+Timbersaw joga quase só de offlane (pos 3) em pro. A lista mistura: os 6 adversários com mais partidas pro na base de confrontos dele (Snapfire, Jakiro, Mars, Tiny, Hoodwink, Shadow Fiend); 3 rivais da mesma posição principal, offlane, com alto volume (Centaur Warrunner, Pangolier, Axe); os 2 maiores favoritismos com 30+ jogos (Earthshaker, Anti-Mage) e os 3 maiores desfavoritismos com 30+ jogos (Legion Commander, Bane, Alchemist); e mais 2 carries de farm rápido que quase nunca dividem lane com ele mas cujo power spike compete pelo mesmo jogo (Gyrocopter, Ursa). Anti-Mage e Alchemist também cumprem esse último critério: nenhum dos dois é offlaner, mas o ritmo de farm de cada um decide boa parte do confronto, do jeito que Alchemist x Morphling decide mesmo sem lane em comum.
 
 ## Contra Snapfire (snapfire)
 - placar: Timbersaw venceu 133 de 256 partidas pro (52,0%). Maior volume de jogos de toda a base de confrontos dele.
 - por que importa: é o oponente mais visto em pro contra o Timbersaw (256 jogos), quase sempre a suporte do carry que ele enfrenta, sem lane direta mas presença em toda a partida.
 - janelas: até os 10 min ele limpa wave com Whirling Death e empurra enquanto ela ainda não tem Aghanim's Shard (mediana 16,9 min, pro_dados/snapfire.json) nem Mortimer Kisses maximizada; dos 10 aos 17 min ela só tem Scatterblast de poke, com Arcane Boots saindo aos 10,6 min, a janela mais segura pra ele iniciar lane ou gank perto. Depois dos 17 min, com Shard e Kisses prontos, ela passa a zonear área com dano mágico que não esbarra na Reactive Armor; o Blink dela sai aos 20,7 min e o dele aos 22,5 (pro_dados/shredder.json), quase juntos, e dali em diante quem inicia primeiro dita a troca.
-- o que ele faz com você: Mortimer Kisses lança 8 globs de até 360 de dano mágico cada e deixa poça que queima e reduz velocidade por 3,5 s (constants_abilities.json, snapfire_mortimer_kisses); como o dano é mágico, a Reactive Armor não ajuda em nada. Scatterblast empurra e atordoa antes do Timber Chain completar o cast.
+- o que ele faz com você: Mortimer Kisses lança 8 globs de até 360 de dano mágico cada e deixa poça que queima e reduz velocidade por 3,5 s (constants_abilities.json, snapfire_mortimer_kisses); como o dano é mágico, a Reactive Armor não ajuda em nada. Scatterblast desacelera 100% o movimento e o ataque por 1 s e ainda causa dano antes do Timber Chain completar o cast.
 - o que você faz com ele: Whirling Death é dano puro e ainda reduz o atributo primário dela por até 14 s, cortando a regeneração; Timber Chain fecha a distância antes dela carregar os 5,5 s de Mortimer Kisses; Chakram em cima da área nega o canal do combo dela.
 - itens que viram: Black King Bar (591 dos 1465 jogos pro do Timbersaw, mediana 26,6 min) segura o Scatterblast e libera o combo sem interrupção; Shiva's Guard soma armadura física contra o resto do time dela.
 - como jogar: force a troca antes dos 17 min, quando ela ainda não tem o combo completo; depois disso, gaste o Blink pra matar ela fora do alcance do Mortimer Kisses em vez de ficar parado recebendo o canal.
@@ -67,12 +63,12 @@ Timbersaw joga quase só de offlane (pos 3) em pro (herois_catalogo.json). A lis
 ## Contra Tiny (tiny)
 - placar: Timbersaw venceu 121 de 236 partidas pro (51,3%). Quarto maior volume e o carry (pos 1) que mais aparece na base dele.
 - por que importa: maior volume entre os carries puros da lista; farmer tão rápido quanto o Timbersaw, sem dividir lane com ele, no mesmo tipo de comparação de power spike pedida.
-- janelas: Tiny tem lh10 de 44 e gpm 514 (pro_dados/tiny.json), bem perto do próprio Timbersaw (lh10 53, gpm 587); os dois correm em paralelo até os 15 min, cada um puxando o próprio lado do mapa. Grow nível 6 sai perto dos 7-8 min pelo campo pro (app/public/data/herois/tiny.json, sem dados pessoais) e já libera o primeiro combo de pick; Echo Sabre dele sai mediano aos 12,1 min. Timber Chain e Kaya and Sange do Timbersaw saem perto dos 18 min, dando a ele uma iniciação concorrente quase no mesmo tempo que o Blink/Shadow Blade do Tiny.
+- janelas: Tiny tem lh10 de 44 e gpm 514 (pro_dados/tiny.json), bem perto do próprio Timbersaw (lh10 53, gpm 587); os dois correm em paralelo até os 15 min, cada um puxando o próprio lado do mapa. Grow nível 6 sai em mediana aos 7,9 min (partidas pro 7.40-7.41, OpenDota explorer) e já libera o primeiro combo de pick; Echo Sabre dele sai mediano aos 12,1 min. Timber Chain e Kaya and Sange do Timbersaw saem perto dos 18 min, dando a ele uma iniciação concorrente quase no mesmo tempo que o Blink/Shadow Blade do Tiny.
 - o que ele faz com você: Toss agarra qualquer unidade num raio de 300 (incluindo você) e joga em cima de outro alvo causando dano de impacto; combinado com Avalanche (5 tiques, até 360 de dano total em área), o combo atordoa e esmaga em rajada curta, antes da Reactive Armor conseguir empilhar o suficiente.
 - o que você faz com ele: Whirling Death reduz a força dele, cortando o dano bruto do combo Toss+Avalanche; Timber Chain sai do raio de 300 do agarrão antes que ele consiga te pegar.
 - itens que viram: Black King Bar seu nega o stun do combo inteiro; Heaven's Halberd desarma o autoataque dele depois que o combo mágico passa.
 - como jogar: não fique parado perto de árvore ou estrutura dentro do alcance de 300 do Toss; use Timber Chain pra abrir distância assim que ele aparecer sem o combo pronto (ambas as magias têm recarga, puna a janela vazia).
-- fonte: pro_dados/shredder.json; pro_dados/tiny.json; constants_abilities.json (tiny_toss, tiny_avalanche, tiny_grow); app/public/data/herois/tiny.json (power_spikes, sem trechos pessoais).
+- fonte: pro_dados/shredder.json; pro_dados/tiny.json; constants_abilities.json (tiny_toss, tiny_avalanche, tiny_grow); partidas pro 7.40-7.41 (OpenDota explorer).
 
 ## Contra Hoodwink (hoodwink)
 - placar: Timbersaw venceu 125 de 235 partidas pro (53,2%). Quinto maior volume de jogos da base.
@@ -115,14 +111,14 @@ Timbersaw joga quase só de offlane (pos 3) em pro (herois_catalogo.json). A lis
 - fonte: pro_dados/shredder.json; pro_dados/pangolier.json; constants_abilities.json (pangolier_swashbuckle, pangolier_gyroshell).
 
 ## Contra Axe (axe)
-- placar: Timbersaw venceu 81 de 176 partidas pro (46,0%). Levemente desfavorável, apesar de a própria ficha do Timbersaw listar o Axe como "bom contra".
-- por que importa: mesma posição, offlane, e confronto clássico citado na ficha dele (dotacoach: alcance de feitiço maior e Timber Chain escapando da iniciação); o banco de pro mostra um duelo mais parelho do que a reputação sugere, e vale deixar isso claro em vez de repetir só a regra geral.
+- placar: Timbersaw venceu 81 de 176 partidas pro (46,0%). Levemente desfavorável, duelo mais parelho do que a imagem de contra-pick costuma sugerir.
+- por que importa: mesma posição, offlane; o alcance de Timber Chain (750 a 1200, constants_abilities.json) passa longe do alcance corpo a corpo do Axe (150) e do raio do Berserker's Call (315), mas o banco de pro mostra um duelo mais parelho do que esse alcance maior sugere.
 - janelas: os dois sobem Soul Ring e Bracer cedo e entram parecidos até os 15 min; o Blink do Axe sai aos 15,7 min, um pouco antes do seu (22,5), dando a ele a primeira janela de Berserker's Call seguido de Culling Blade. Dos 15 aos 23 min ele costuma ter Blade Mail ativo (12,6 min de mediana geral da compra), então bater nele sem cuidado devolve dano; depois do seu Kaya and Sange (18,1) e do BKB dele (25,9), vira corrida de quem acerta o combo primeiro.
 - o que ele faz com você: Berserker's Call força você a atacar só ele, mas não bloqueia magia, então dá pra Timber Chain pra fora do raio de 315 assim que ele perder o alvo; Culling Blade é dano puro e atravessa Black King Bar (bkbpierce: yes), ficando mais perigoso com você abaixo de 475/375/275 de vida; Counter Helix também é dano puro em área a cada 4 a 7 ataques recebidos.
 - o que você faz com ele: Whirling Death e Chakram ignoram a armadura dele, e o Blade Mail não reflete o dano de área deles do jeito que reflete autoataque; Timber Chain sai do raio do Call assim que ele perde o alvo, porque Call não impede cast.
 - itens que viram: Black King Bar não resolve o Culling Blade nem o Counter Helix (os dois atravessam), a defesa real é manter a vida acima do threshold de execução e não autoatacar um Blade Mail ligado.
 - como jogar: não autoatque ele com Blade Mail ativo; gaste o combo de longe e cuide da vida abaixo de 475 (nível 6+), porque aí o Culling Blade vira execução garantida.
-- fonte: pro_dados/shredder.json; pro_dados/axe.json; constants_abilities.json (axe_berserkers_call, axe_culling_blade, axe_counter_helix); content/fichas/shredder.md (seção de resumo, matchup com Axe).
+- fonte: pro_dados/shredder.json; pro_dados/axe.json; constants_abilities.json (axe_berserkers_call, axe_culling_blade, axe_counter_helix).
 
 ## Contra Earthshaker (earthshaker)
 - placar: Timbersaw venceu 35 de 53 partidas pro (66,0%). Maior vantagem da lista.
@@ -137,12 +133,12 @@ Timbersaw joga quase só de offlane (pos 3) em pro (herois_catalogo.json). A lis
 ## Contra Anti-Mage (antimage)
 - placar: Timbersaw venceu 25 de 41 partidas pro (61,0%). Segunda maior vantagem da lista.
 - por que importa: é o tipo de comparação pedida direto, dois farmers que raramente trocam golpe (Anti-Mage é pos 1, Timbersaw pos 3) mas cujo ritmo de item decide boa parte do jogo.
-- janelas: Anti-Mage tem o salto de farm mais forte da lista: a Battle Fury sai mediano aos 13,8 min, mediana dos pros segundo o próprio guia do herói (app/public/data/herois/anti_mage.json; pro_dados/antimage.json não registra essa compra). O ritmo de last hit dele sobe de 10,1 pra 17,4 por minuto depois da Battle Fury, mesma fonte, sem dados pessoais. Até ali, Timbersaw já tem Soul Ring (7,6) e Kaya (13,0), puxando o próprio lado do mapa no mesmo ritmo. Dos 14 aos 20 min o Anti-Mage puxa à frente em patrimônio, mas só fecha Blink nível 4 perto dos 11 min e Manta aos 20,9 min, então antes disso ele não tem fuga pronta contra gank. Depois dos 20 min, o Blink do Timbersaw (22,5) e o BKB dele (26,6) chegam perto do Mana Void nível 3 do Anti-Mage, e quem fecha o combo primeiro decide a luta.
+- janelas: Anti-Mage tem o salto de farm mais forte da lista: a Battle Fury sai em mediana aos 14,1 min (pro_dados/antimage.json, item bfury). O ritmo de last hit dele sobe de cerca de 6 pra 14 por minuto depois da Battle Fury (partidas pro 7.40-7.41, OpenDota explorer). Até ali, Timbersaw já tem Soul Ring (7,6) e Kaya (13,0), puxando o próprio lado do mapa no mesmo ritmo. Dos 14 aos 20 min o Anti-Mage puxa à frente em patrimônio, mas só fecha Blink nível 4 perto dos 11 min e Manta aos 20,9 min, então antes disso ele não tem fuga pronta contra gank. Depois dos 20 min, o Blink do Timbersaw (22,5) e o BKB dele (26,6) chegam perto do Mana Void nível 3 do Anti-Mage, e quem fecha o combo primeiro decide a luta.
 - o que ele faz com você: Mana Void causa 1 de dano por ponto de mana que falta no alvo principal, em área; como Timbersaw gasta mana toda hora com os três feitiços, ele costuma estar com a reserva baixa e vira alvo perfeito; Mana Break queima mana a cada ataque e ainda causa dano proporcional ao que foi queimado.
 - o que você faz com ele: Whirling Death reduz a agilidade dele, cortando dano e velocidade de ataque; Timber Chain fecha nele antes do Blink dele resetar (recarga de 6 s no nível 4); seus três feitiços de dano puro não dependem de acerto físico, então a esquiva que o build dele não tem de qualquer forma não muda nada.
 - itens que viram: manter a mana cheia antes de entrar em luta reduz o dano do Mana Void contra você; Black King Bar segura o stun final do Mana Void dos dois lados, mas não impede a queima de mana em si.
 - como jogar: não entre em luta com mana baixa perto de um Anti-Mage de nível alto; gank ele antes do Battle Fury (14 min), quando ainda está fraco em luta de verdade.
-- fonte: pro_dados/shredder.json; pro_dados/antimage.json; constants_abilities.json (antimage_mana_void, antimage_mana_break); app/public/data/herois/anti_mage.json (power_spikes, sem trechos pessoais).
+- fonte: pro_dados/shredder.json; pro_dados/antimage.json; constants_abilities.json (antimage_mana_void, antimage_mana_break); partidas pro 7.40-7.41 (OpenDota explorer).
 
 ## Contra Legion Commander (legion_commander)
 - placar: Timbersaw venceu 12 de 38 partidas pro (31,6%). Maior desvantagem da lista.
@@ -167,12 +163,12 @@ Timbersaw joga quase só de offlane (pos 3) em pro (herois_catalogo.json). A lis
 ## Contra Alchemist (alchemist)
 - placar: Timbersaw venceu 23 de 61 partidas pro (37,7%). Terceira maior desvantagem da lista.
 - por que importa: é o exemplo mais direto do tipo de comparação pedida, como Alchemist contra Morphling: Alchemist é pos 1, Timbersaw pos 3, quase nunca na mesma lane, mas os dois são hiper-farmers e quem estoura o item primeiro dita o jogo.
-- janelas: Alchemist tem o farm mais rápido de toda a base de 127 heróis levantada (gpm 768, lh10 63, pro_dados/alchemist.json); Radiance sai mediano aos 13,9 min, perto dos 14,3 min que o próprio guia do herói também mede (app/public/data/herois/alchemist.json, sem trechos pessoais), bem antes do Blink e do Kaya and Sange do Timbersaw fecharem. Dos 14 aos 20 min o Alchemist já limpa 2 camps por vez com Radiance e Chemical Rage, puxando patrimônio muito à frente; nesse intervalo o Timbersaw só tem Soul Ring e Kaya, sem resposta de farm equivalente. A única janela real dele é antes dos 14 min, enquanto o Alchemist ainda só tem Soul Ring e Phase Boots.
+- janelas: Alchemist tem o farm mais rápido de toda a base de 127 heróis levantada (gpm 768, lh10 63, pro_dados/alchemist.json); Radiance sai mediano aos 13,9 min (pro_dados/alchemist.json), bem antes do Blink e do Kaya and Sange do Timbersaw fecharem. Dos 14 aos 20 min o Alchemist já limpa 2 camps por vez com Radiance e Chemical Rage, puxando patrimônio muito à frente; nesse intervalo o Timbersaw só tem Soul Ring e Kaya, sem resposta de farm equivalente. A única janela real dele é antes dos 14 min, enquanto o Alchemist ainda só tem Soul Ring e Phase Boots.
 - o que ele faz com você: Chemical Rage dá velocidade de ataque e 120 de regen por segundo por 30 s, sustain que sozinho já aguenta a Reactive Armor numa troca prolongada; Unstable Concoction carrega até 5 s e atordoa até 3,2 s a 775 de alcance, abrindo a troca à distância.
 - o que você faz com ele: Whirling Death reduz a força dele, que é a base de boa parte do dano e da vida do Alchemist; Timber Chain fecha a distância antes do Unstable Concoction terminar de carregar.
 - itens que viram: Black King Bar segura o stun do Unstable Concoction (nenhum pierce); mas o problema real não é a luta, é o farm, então Smoke ou gank antes dos 14 min vale mais do que qualquer item depois.
 - como jogar: pressione o Alchemist antes do Radiance (14 min); depois disso, evite luta de atrito prolongada, porque o Chemical Rage sustenta ele, e busque pick rápido com Timber Chain mais Chakram.
-- fonte: pro_dados/shredder.json; pro_dados/alchemist.json; constants_abilities.json (alchemist_chemical_rage, alchemist_unstable_concoction); app/public/data/herois/alchemist.json (power_spikes, sem trechos pessoais).
+- fonte: pro_dados/shredder.json; pro_dados/alchemist.json; constants_abilities.json (alchemist_chemical_rage, alchemist_unstable_concoction).
 
 ## Contra Gyrocopter (gyrocopter)
 - placar: Timbersaw venceu 108 de 216 partidas pro (50,0%). Oitavo maior volume geral.
@@ -185,11 +181,11 @@ Timbersaw joga quase só de offlane (pos 3) em pro (herois_catalogo.json). A lis
 - fonte: pro_dados/shredder.json; pro_dados/gyrocopter.json; constants_abilities.json (gyrocopter_call_down, gyrocopter_flak_cannon, shredder_reactive_armor).
 
 ## Contra Ursa (ursa)
-- placar: Timbersaw venceu 75 de 184 partidas pro (40,8%). Décimo segundo maior volume e contra clássico já citado na própria ficha do Timbersaw.
-- por que importa: maior volume entre os adversários desfavoráveis da lista e mecânica confirmada no conteúdo já verificado do site: Fury Swipes e o burst físico dele matam antes da Reactive Armor compensar.
+- placar: Timbersaw venceu 75 de 184 partidas pro (40,8%). Décimo segundo maior volume entre os adversários da lista.
+- por que importa: maior volume entre os adversários desfavoráveis da lista; o burst de Fury Swipes e Overpower (constants_abilities.json) mata antes da Reactive Armor compensar.
 - janelas: Ursa é o carry de burst mais rápido da lista pra uma troca isolada: Fury Swipes soma dano a cada ataque seguido no mesmo alvo (some se ele não bater em você por 8 a 20 s) e Overpower dá até 400% de velocidade de ataque por 3 a 6 ataques, então os primeiros 2-3 s de uma troca concentram quase todo o dano dele. Blink dele sai mediano aos 16,8 min (pro_dados/ursa.json), dando a ele iniciação à distância cedo.
 - o que ele faz com você: Overpower somado a Fury Swipes empilha dano físico rápido o bastante pra matar antes da Reactive Armor acumular stack suficiente, já que ela sobe com ataques repetidos e a primeira leva de hits chega quase de uma vez; Maul ainda soma 1,25% da vida atual dele como dano bônus por ataque; Enrage dá 80% de redução de dano, dispel forte e atravessa Black King Bar (bkbpierce: yes, constants_abilities.json), então nem o seu BKB impede ele de limpar o debuff de atributo que o Whirling Death aplicou.
 - o que você faz com ele: depois que a Reactive Armor empilha, os ataques seguintes dele rendem cada vez menos, e ela sobe rápido justamente porque cada ataque de herói conta 4x pra stack; Whirling Death ainda reduz a força dele direto.
-- itens que viram: Heaven's Halberd desarma o autoataque dele, resposta citada na própria ficha do Timbersaw pra esse matchup; Shiva's Guard soma armadura e ainda reduz a velocidade de ataque dele em aura.
+- itens que viram: Heaven's Halberd desarma o autoataque dele por 3,5 s (items.json); Shiva's Guard soma armadura e ainda reduz a velocidade de ataque dele em aura.
 - como jogar: não inicie a troca sozinho contra um Ursa com Overpower pronto, deixe ele gastar o burst numa stack baixa de Reactive Armor primeiro ou leve Heaven's Halberd antes de aceitar o 1x1.
-- fonte: pro_dados/shredder.json; pro_dados/ursa.json; constants_abilities.json (ursa_fury_swipes, ursa_overpower, ursa_enrage, shredder_reactive_armor); content/fichas/shredder.md (seção de itens situacionais, Heaven's Halberd contra Ursa).
+- fonte: pro_dados/shredder.json; pro_dados/ursa.json; constants_abilities.json (ursa_fury_swipes, ursa_overpower, ursa_enrage, shredder_reactive_armor); items.json (heavens_halberd).

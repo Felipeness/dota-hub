@@ -23,8 +23,7 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/phantom_assassin.md
+- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 - https://api.opendota.com/api/constants/aghs_desc
 - https://liquipedia.net/dota2/Evasion (via busca: evasão só se aplica a ataques, dano de habilidade sempre acerta)
 ---
@@ -38,7 +37,7 @@ Phantom Assassin é pos1 pura no dataset local (519 partidas pro 7.40+7.41, font
 - placar: 31 vitórias em 84 jogos de pro, 36,9% (fonte: pro_dados/phantom_assassin.json, campo confrontos)
 - por que importa: é o oponente mais comum contra ela em todo o dataset pro (84 jogos), o suporte de controle clássico que aparece em quase metade dos drafts dela
 - janelas: até 15 min: Rubick é só utilidade de wards e Fade Bolt, PA ainda está nos Treads (6:00, mediana 514 jogos); dos 15 aos 24 min: Rubick ganha Blink Dagger (21:36, mediana 2782 jogos) e passa a conseguir engajar de perto, janela perigosa pra PA que ainda não tem BKB; depois dos 23:30 (BKB dela, mediana 301 jogos): o jogo vira, porque o disable dele some
-- o que ele faz com você: Telekinesis é dano mágico e stun puro (0,9-1,5s), não passa pela evasão do Blur porque evasão só bloqueia ataque, não habilidade (fonte: constants_abilities.json; liquipedia.net/dota2/Evasion); Fade Bolt reduz o dano de ataque dela em até 24% por 10s (fonte: constants_abilities.json, campo damage_reduction), o que corta direto a força do crit de Coup de Grace
+- o que ele faz com você: Telekinesis é stun puro (0,9-1,5s), sem dano associado, e de qualquer forma não passaria pela evasão do Immaterial porque evasão só bloqueia ataque, não habilidade (fonte: constants_abilities.json; liquipedia.net/dota2/Evasion); Fade Bolt reduz o dano de ataque dela em até 24% por 10s (fonte: constants_abilities.json, campo damage_reduction), o que corta direto a força do crit de Coup de Grace
 - o que você faz com ele: Rubick tem pouca vida e zero disable depois que ela liga BKB (Telekinesis não trava mais); Phantom Strike (650-950 de alcance) ignora o blink dele e fecha a distância antes que ele reposicione
 - itens que viram: Black King Bar dela anula o Telekinesis; o Aghanim's Shard dele (upgrade de Telekinesis pra também alvejar aliados) não muda nada no 1x1 direto
 - como jogar: evite engajar perto de wards sem BKB nos primeiros 20 minutos; depois dos 23:30, ele se torna um alvo fácil pra Phantom Strike porque perdeu a única ferramenta que te travava
@@ -49,7 +48,7 @@ Phantom Assassin é pos1 pura no dataset local (519 partidas pro 7.40+7.41, font
 - placar: 43 vitórias em 77 jogos de pro, 55,8% (fonte: pro_dados/phantom_assassin.json)
 - por que importa: 2º oponente mais comum contra ela (77 jogos) e um dos três melhores matchups medidos dela
 - janelas: antes dos 19 min: Ogre ainda está em Arcane Boots (11:12, mediana 1926 jogos) e Hand of Midas (18:54, mediana 768 jogos), puro suporte sem grande ameaça; dos 20 aos 27: ele pega Aghanim's Shard (26:06, mediana 498 jogos) pro Fire Shield, mas isso protege aliado, não ele; PA com Battle Fury pronto (14:24) e BKB chegando (23:30) já está ultrapassando qualquer coisa que ele faça sozinho
-- o que ele faz com você: Fireblast stuna 1,2s e dá até 250 de dano, é mágico então ignora a evasão do Blur (fonte: constants_abilities.json); Multicast pode proc 2x, 3x ou até 4x o mesmo feitiço (75%/30%/15% de chance, fonte: constants_abilities.json), o que deixa o stun e o burst dele bem inconsistentes
+- o que ele faz com você: Fireblast stuna 1,2s e dá até 250 de dano, é mágico então ignora a evasão do Immaterial (fonte: constants_abilities.json); Multicast pode proc 2x, 3x ou até 4x o mesmo feitiço (75%/30%/15% de chance, fonte: constants_abilities.json), o que deixa o stun e o burst dele bem inconsistentes
 - o que você faz com ele: ele não tem fuga nenhuma e pouca vida pra um herói que passa boa parte do jogo de suporte; uma vez que ela sobrevive ao combo de Fireblast com BKB, um crit fecha a luta
 - itens que viram: Black King Bar dela anula o stun; sem ele, o Multicast de 3-4x pode empilhar stun suficiente pra matar ela cedo se pegar sem vida
 - como jogar: não entre sozinha no alcance de Fireblast (525) sem saber se o Multicast vai triplicar o stun; depois do BKB o confronto é unilateral a favor dela
@@ -71,7 +70,7 @@ Phantom Assassin é pos1 pura no dataset local (519 partidas pro 7.40+7.41, font
 - placar: 37 vitórias em 71 jogos de pro, 52,1% (fonte: pro_dados/phantom_assassin.json)
 - por que importa: 4º oponente mais comum contra ela em pro (71 jogos)
 - janelas: dos 17 aos 22 min, Skywrath pega Kaya (17:30, mediana 1020 jogos) e o Aghanim's Shard (22:18, mediana 818 jogos), que triplica o Arcane Bolt; isso é exatamente a janela em que PA ainda está terminando Battle Fury (14:24) e não tem BKB (23:30); depois disso ela ultrapassa ele rápido porque ele é extremamente frágil
-- o que ele faz com você: Ancient Seal silencia por 3 a 6s e aumenta o dano mágico recebido em até 35% (fonte: constants_abilities.json); Mystic Flare (ultimate) causa de 800 a 1600 de dano em 2s numa área de 170 de raio, dano mágico que ignora a evasão do Blur (fonte: constants_abilities.json) e pode te matar isolada se pegar cheio
+- o que ele faz com você: Ancient Seal silencia por 3 a 6s e aumenta o dano mágico recebido em até 35% (fonte: constants_abilities.json); Mystic Flare (ultimate) causa de 800 a 1600 de dano em 2s numa área de 170 de raio, dano mágico que ignora a evasão do Immaterial (fonte: constants_abilities.json) e pode te matar isolada se pegar cheio
 - o que você faz com ele: ele não tem fuga nenhuma além de botas; Phantom Strike (650-950 de alcance) chega nele antes que a Mystic Flare esteja de novo disponível, e um crit o mata de uma vez
 - itens que viram: Black King Bar bloqueia a silence da Ancient Seal (não bloqueia o dano da Mystic Flare, que é instantâneo e já vem antes do silence terminar, então vigilância de visão importa mais que item aqui)
 - como jogar: evite ficar isolada no alcance de 700-850 da Ancient Seal sem saber se a ultimate dele está pronta; depois que ela fecha com Phantom Strike, a luta acaba rápido pro lado dela
@@ -82,7 +81,7 @@ Phantom Assassin é pos1 pura no dataset local (519 partidas pro 7.40+7.41, font
 - placar: 34 vitórias em 65 jogos de pro, 52,3% (fonte: pro_dados/phantom_assassin.json)
 - por que importa: 5º oponente mais comum contra ela em pro (65 jogos) e também um dos melhores matchups medidos dela
 - janelas: até 15:12 (Blink Dagger dele, mediana 2136 jogos) ele ainda está montando o kit; dos 15 aos 21 (Aghanim's Shard, 21:30, mediana 1743 jogos, melhora o Spear) é quando ele consegue iniciar lutas de verdade; PA com Battle Fury (14:24) já está pronta pra essa janela, e o BKB dela (23:30) chega quase junto com o dele (26:30)
-- o que ele faz com você: Arena of Blood cria uma parede de 550 de raio por 5,5s que ninguém atravessa (fonte: constants_abilities.json), travando ela dentro da luta; God's Rebuke tem True Strike confirmado na própria descrição do jogo (fonte: constants_abilities.json), ou seja, ignora a evasão do Blur de propósito, além de dar crítico de 150 a 300% e empurrar
+- o que ele faz com você: Arena of Blood cria uma parede de 550 de raio por 5,5s que ninguém atravessa (fonte: constants_abilities.json), travando ela dentro da luta; God's Rebuke tem True Strike confirmado na própria descrição do jogo (fonte: constants_abilities.json), ou seja, ignora a evasão do Immaterial de propósito, além de dar crítico de 150 a 300% e empurrar
 - o que você faz com ele: Spear of Mars exige acerto preciso a longa distância (900-1200) e erra fácil contra alguém que se move; depois que ela tem Desolator (20:42) ou BKB, o dano sustentado de crit dela supera o dele numa troca prolongada, mesmo dentro da Arena
 - itens que viram: nenhum item especial dela anula a Arena (é imunidade de movimento, não debuff), então o jeito é vencer a troca de dano dentro dela, não escapar
 - como jogar: não deixe ele acertar a Spear de longe; se a Arena fechar com você dentro, foque matar ele rápido em vez de tentar sair, porque sair não é possível
@@ -91,20 +90,20 @@ Phantom Assassin é pos1 pura no dataset local (519 partidas pro 7.40+7.41, font
 ## Contra Shadow Fiend (nevermore)
 
 - placar: 29 vitórias em 63 jogos de pro, 46,0% (fonte: pro_dados/phantom_assassin.json)
-- por que importa: 6º oponente mais comum em pro (63 jogos) e o carry com mais partidas registradas contra ela, catálogo marca Shadow Fiend como pos1 neste patch (fonte: herois_catalogo.json)
+- por que importa: 6º oponente mais comum em pro (63 jogos) e o carry com mais partidas registradas contra ela, constante do jogo marca Shadow Fiend com o papel de Carry (fonte: heroes.json)
 - janelas: até 10 min, Shadow Fiend com Mask of Madness (10:12, mediana 2340 jogos) já farma e troca com Shadowraze de burst puro, enquanto PA ainda está nos Treads (6:00); dos 14 aos 23 (Dragon Lance 14:00 e Hurricane Pike 23:00, medianas 2571 e 1385 jogos) ele ganha alcance pra kitar; depois dos 23:30 (BKB dela) a vantagem muda de lado porque ele não tem nenhum disable
 - o que ele faz com você: Shadowraze causa de 85 a 280 de dano instantâneo em 3 direções diferentes, sem precisar de mira em unidade (fonte: constants_abilities.json), o que pune muito uma PA de nível baixo que ainda não tem vida; Requiem of Souls é um burst de execução em área que pode fechar a luta se ela estiver perto demais
 - o que você faz com ele: Shadow Fiend não tem nenhum stun ou root, só dano e kite com itens de alcance; depois que ela tem Battle Fury e níveis, ela sobrevive ao raze e fecha com Phantom Strike antes do Requiem estar pronto de novo
 - itens que viram: Black King Bar dela segura o burst de Requiem o suficiente pra ela fechar a troca; Hurricane Pike dele é a resposta pra ela chegar perto, então ela precisa fechar antes dele comprar (23:00)
 - como jogar: evite trocar com ele antes do nível 6-7 (raze chunka demais); depois de Battle Fury e BKB, force a luta de perto onde ele não tem resposta
-- fonte: pro_dados/phantom_assassin.json; pro_dados/nevermore.json; constants_abilities.json; herois_catalogo.json
+- fonte: pro_dados/phantom_assassin.json; pro_dados/nevermore.json; constants_abilities.json; heroes.json
 
 ## Contra Luna (luna)
 
 - placar: 26 vitórias em 60 jogos de pro, 43,3% (fonte: pro_dados/phantom_assassin.json)
 - por que importa: carry pos1 com 2º mais partidas contra ela entre os heróis da mesma função principal (60 jogos), mesmo raramente dividindo lane porque os dois puxam farm pra lanes opostas
 - janelas: Luna tem o maior gpm medido desta lista (695, fonte: pro_dados/luna.json, contra 601 dela); com Manta pronto (17:12, mediana 1862 jogos) ela já ameaça com Eclipse em qualquer luta de grupo; o Butterfly dela (26:06, mediana 1053 jogos) é o item de pico seguinte; no 1x1 isolado, quem chega primeiro no outro geralmente ganha
-- o que ela faz com você: Eclipse solta de 6 a 12 feixes numa área de 675 de raio, cada feixe é dano mágico (ignora o Blur) e com Aghanim's Scepter o intervalo cai pra 0,3s, virando um burst quase instantâneo em qualquer um parado perto (fonte: constants_abilities.json)
+- o que ela faz com você: Eclipse solta de 6 a 12 feixes numa área de 675 de raio, cada feixe é dano mágico (ignora o Immaterial) e com Aghanim's Scepter o intervalo cai pra 0,3s, virando um burst quase instantâneo em qualquer um parado perto (fonte: constants_abilities.json)
 - o que você faz com ela: Luna não tem fuga além de botas; Phantom Strike (650-950) chega nela antes que ela consiga reposicionar, e ela tem pouca vida base pra aguentar um crit de Coup de Grace sozinha fora de grupo
 - itens que viram: Black King Bar dela segura o burst da Eclipse o suficiente pra fechar o 1x1; pra ela, ficar fora do raio de 675 da Eclipse em teamfight é mais importante que qualquer item
 - como jogar: evite ficar parada perto de aliados quando Luna tem a ultimate pronta; busque o 1x1 isolado, onde ela não tem resposta pra Phantom Strike
@@ -115,7 +114,7 @@ Phantom Assassin é pos1 pura no dataset local (519 partidas pro 7.40+7.41, font
 - placar: 27 vitórias em 58 jogos de pro, 46,6% (fonte: pro_dados/phantom_assassin.json)
 - por que importa: 3º carry pos1 mais jogado contra ela em pro (58 jogos)
 - janelas: Sniper fecha Maelstrom aos 12:30 (mediana 944 jogos) ou já evolui pra Mjollnir aos 19:00 (763 jogos); o Hurricane Pike dele (23:24, mediana 577 jogos) é a resposta direta pro alcance curto dela; PA com Battle Fury (14:24) e BKB (23:30) está numa corrida de quem fecha o próprio spike primeiro
-- o que ele faz com você: Assassinate causa de 300 a 500 de dano a até 3000 de distância depois de uma mira de 2s; é dano de habilidade, não ataque, então a evasão do Blur não se aplica de qualquer forma (evasão só bloqueia ataque, fonte: liquipedia.net/dota2/Evasion); Shrapnel ilumina a área e desacelera, negando a abordagem furtiva do Blur
+- o que ele faz com você: Assassinate causa de 300 a 500 de dano a até 3000 de distância depois de uma mira de 2s; é dano de habilidade, não ataque, então a evasão do Immaterial não se aplica de qualquer forma (evasão só bloqueia ataque, fonte: liquipedia.net/dota2/Evasion); Shrapnel ilumina a área e desacelera, negando a abordagem furtiva do Blur
 - o que você faz com ele: Phantom Strike (650-950 de alcance) ignora o jogo de distância dele por completo; uma vez corpo a corpo, Sniper tem pouca vida e armadura baixa e morre rápido num crit
 - itens que viram: nenhum item anula a mira do Assassinate; o jeito é negar visão (sem wards dele vendo você chegar) e fechar antes que ele complete os 2s de mira
 - como jogar: não ande em linha reta no alcance dele sem saber se a Assassinate está pronta; feche com Phantom Strike de um ângulo sem visão e o resto é rápido
@@ -126,31 +125,31 @@ Phantom Assassin é pos1 pura no dataset local (519 partidas pro 7.40+7.41, font
 - placar: 25 vitórias em 55 jogos de pro, 45,5% (fonte: pro_dados/phantom_assassin.json)
 - por que importa: 4º carry pos1 mais jogado contra ela em pro (55 jogos) e o duelo mais parecido no estilo: os dois são carries corpo a corpo que fecham o jogo com burst no 1x1
 - janelas: os perfis de farm quase empatam (Ursa gpm 624 contra 601 dela); Battle Fury dos dois sai perto (dele 13:42, dela 14:24); o Blink Dagger dele (16:48, mediana 1565 jogos) chega antes do primeiro item de engajamento forte dela; o BKB de ambos sai quase junto (24:24 dele, 23:30 dela)
-- o que ele faz com você: Overpower dá +400% de velocidade de ataque por até 6 ataques (20s de duração), mas continuam sendo ataques normais, então a evasão do Blur pode sim esquivar deles (evasão só não funciona contra habilidade, fonte: constants_abilities.json; liquipedia.net/dota2/Evasion); Fury Swipes empilha até +36 de dano por acerto consecutivo no mesmo alvo; Enrage dá 80% de redução de dano e dispel forte, limpando o slow do Stifling Dagger
+- o que ele faz com você: Overpower dá +400% de velocidade de ataque por até 6 ataques (20s de duração), mas continuam sendo ataques normais, então a evasão do Immaterial pode sim esquivar deles (evasão só não funciona contra habilidade, fonte: constants_abilities.json; liquipedia.net/dota2/Evasion); Fury Swipes empilha até +36 de dano por acerto consecutivo no mesmo alvo; Enrage dá 80% de redução de dano e dispel forte, limpando o slow do Stifling Dagger
 - o que você faz com ele: Stifling Dagger desacelera -50% antes dele alcançar; se ele não tiver Enrage pronto, o slow mais o crit de Coup de Grace fecham a troca primeiro
-- itens que viram: Black King Bar de ambos neutraliza o controle do outro, então o confronto vira puro dano; pra ela, o Blur realmente ajuda aqui porque o Overpower dele é ataque, não feitiço
+- itens que viram: Black King Bar de ambos neutraliza o controle do outro, então o confronto vira puro dano; pra ela, o Immaterial realmente ajuda aqui porque o Overpower dele é ataque, não feitiço
 - como jogar: não entre no alcance dele sem saber se o Enrage está pronto; se os dois estiverem sem defensivo, quem acerta o primeiro combo geralmente fecha a luta
 - fonte: pro_dados/phantom_assassin.json; pro_dados/ursa.json; constants_abilities.json; liquipedia.net/dota2/Evasion (via busca)
 
 ## Contra Lifestealer (life_stealer)
 
 - placar: 17 vitórias em 50 jogos de pro, 34,0% (fonte: pro_dados/phantom_assassin.json)
-- por que importa: 5º carry pos1 mais jogado contra ela em pro (50 jogos) e o pior matchup medido dela entre os carries, já confirmado na ficha dela
-- janelas: Radiance dele sai aos 16:12 (mediana 1088 jogos), quase junto do Battle Fury dela (14:24); a partir desse ponto ele já está queimando e curando perto de qualquer um; o Armlet (18:06, mediana 773 jogos) acelera o dano dele; ela só equilibra com Satanic pronto (31:48, fonte: ficha de porquê de itens)
-- o que ele faz com você: Open Wounds desacelera em até -50%, dura 7s e cura todos os aliados que baterem no alvo em 20 a 50% do dano causado, sem poder ser removido por qualquer coisa, só dispel (fonte: constants_abilities.json, já citado na ficha dela); Feast cura ele em 1,45 a 3,25% da vida máxima do alvo por acerto, o que escala justamente com a vida alta dela
-- o que você faz com ele: Satanic dispela o Open Wounds antes da troca terminar (já confirmado na ficha dela com a fonte do matchup); sem Satanic, evite trocar corpo a corpo prolongado com ele
+- por que importa: 5º carry pos1 mais jogado contra ela em pro (50 jogos) e o pior matchup medido dela entre os carries
+- janelas: Radiance dele sai aos 16:12 (mediana 1088 jogos), quase junto do Battle Fury dela (14:24); a partir desse ponto ele já está queimando e curando perto de qualquer um; o Armlet (18:06, mediana 773 jogos) acelera o dano dele; ela só equilibra com Satanic pronto (31:48, mediana 120 jogos, fonte: pro_dados/phantom_assassin.json)
+- o que ele faz com você: Open Wounds desacelera em até -50%, dura 7s e cura todos os aliados que baterem no alvo em 20 a 50% do dano causado, sem poder ser removido por qualquer coisa, só dispel (fonte: constants_abilities.json); Feast cura ele em 1,45 a 3,25% da vida máxima do alvo por acerto, o que escala justamente com a vida alta dela
+- o que você faz com ele: Satanic dispela o Open Wounds antes da troca terminar, porque Open Wounds é dispelável e o ativo de Satanic é dispel básico (fonte: constants_abilities.json; items.json); sem Satanic, evite trocar corpo a corpo prolongado com ele
 - itens que viram: Satanic é o item que realmente vira esse confronto, porque o dispel do ativo limpa o Open Wounds; antes disso, Black King Bar não ajuda porque Open Wounds não é mágico nem é a fonte real do problema (é o lifesteal dele, não o controle)
 - como jogar: evite 1x1 prolongado com ele antes do Satanic pronto; depois disso, o dispel ativo vira a troca a seu favor
-- fonte: pro_dados/phantom_assassin.json; pro_dados/life_stealer.json; constants_abilities.json; content/fichas/phantom_assassin.md
+- fonte: pro_dados/phantom_assassin.json; pro_dados/life_stealer.json; constants_abilities.json; items.json
 
 ## Contra Dragon Knight (dragon_knight)
 
 - placar: 35 vitórias em 61 jogos de pro, 57,4% (fonte: pro_dados/phantom_assassin.json)
 - por que importa: melhor matchup medido dela com amostra grande (61 jogos, 57,4%)
 - janelas: até 16:12 (Blink Dagger dele, mediana 1304 jogos) ele não tem nenhum gap-closer; dos 16 aos 23 ele ganha mobilidade de blink mas ainda sem fuga nenhuma; PA com Battle Fury pronto (14:24) já farma mais rápido que ele nessa janela e com BKB (23:30) ignora o único disable relevante dele
-- o que ele faz com você: Breath Fire causa de 80 a 320 de dano ao longo do tempo e ainda reduz o dano que o alvo causa em 20 a 32% por 11s (fonte: constants_abilities.json), dano mágico que ignora o Blur; Dragon Tail stuna 1,8 a 2,4s mas só a 150 de distância, corpo a corpo
+- o que ele faz com você: Breathe Fire causa de 80 a 320 de dano ao longo do tempo e ainda reduz o dano que o alvo causa em 20 a 32% por 11s (fonte: constants_abilities.json), dano mágico que ignora o Immaterial; Dragon Tail stuna 1,8 a 2,4s mas só a 150 de distância, corpo a corpo
 - o que você faz com ele: ele não tem fuga nenhuma fora do Blink; Phantom Strike chega nele de 650-950 de distância antes que ele reposicione, e a resistência física dele não importa contra um crítico de 200 a 400%
-- itens que viram: o perigo real é o debuff de -32% de dano da Breath Fire, então o ideal é matar ele rápido com Stifling Dagger seguido de Phantom Strike antes que ele tenha chance de aplicar o debuff de novo
+- itens que viram: o perigo real é o debuff de -32% de dano da Breathe Fire, então o ideal é matar ele rápido com Stifling Dagger seguido de Phantom Strike antes que ele tenha chance de aplicar o debuff de novo
 - como jogar: force a troca cedo, antes dele conseguir Blink Dagger; depois do seu BKB, ele não tem nenhuma resposta
 - fonte: pro_dados/phantom_assassin.json; pro_dados/dragon_knight.json; constants_abilities.json
 
@@ -170,7 +169,7 @@ Phantom Assassin é pos1 pura no dataset local (519 partidas pro 7.40+7.41, font
 - placar: 13 vitórias em 41 jogos de pro, 31,7% (fonte: pro_dados/phantom_assassin.json)
 - por que importa: pior matchup medido dela com amostra grande (41 jogos, 31,7%)
 - janelas: Hoodwink é suporte de controle, pega Urn of Shadows cedo (11:00, mediana 943 jogos) e o Aghanim's Shard (23:48, mediana 1224 jogos) pro Hunter's Boomerang; o perigo dela não é por minuto, é sempre que há árvore perto e as habilidades estão prontas, incluindo contra uma PA já com Battle Fury e BKB
-- o que ela faz com você: Bushwhack stuna 1,5 a 2,1s e causa até 360 de dano se a PA estiver perto de uma árvore, além de zerar a visão do alvo (fonte: constants_abilities.json); Sharpshooter é canalizada até 3s, causa até 1350 de dano, aplica Break (desliga passivas, incluindo a evasão do Blur) e desacelera, disparando automaticamente no fim da carga (fonte: constants_abilities.json); Scurry dá movimento fasado e evasão dobrada por até 5s, deixando ela fugir por dentro de árvores que PA não atravessa
+- o que ela faz com você: Bushwhack stuna 1,5 a 2,1s e causa até 360 de dano se a PA estiver perto de uma árvore, além de zerar a visão do alvo (fonte: constants_abilities.json); Sharpshooter é canalizada até 3s, causa até 1350 de dano, aplica Break (desliga passivas, incluindo a evasão do Immaterial) e desacelera, disparando automaticamente no fim da carga (fonte: constants_abilities.json); Scurry dá movimento fasado e evasão dobrada por até 5s, deixando ela fugir por dentro de árvores que PA não atravessa
 - o que você faz com ela: Phantom Strike (0,25s de tempo de lançamento) é mais rápido que os 3s de canalização do Sharpshooter, então interromper a distância virando a luta antes da carga completa é a única saída real
 - itens que viram: nenhum item dela segura bem o Break da Sharpshooter porque ele desliga justamente a passiva que ela mais depende; o jeito é nunca deixar a carga completar
 - como jogar: evite lutar perto de árvores contra ela; feche a distância com Phantom Strike assim que ela começar a canalizar o Sharpshooter, antes dos 3s passarem
@@ -181,7 +180,7 @@ Phantom Assassin é pos1 pura no dataset local (519 partidas pro 7.40+7.41, font
 - placar: 11 vitórias em 34 jogos de pro, 32,4% (fonte: pro_dados/phantom_assassin.json)
 - por que importa: 2º pior matchup medido dela com 30+ jogos (34 jogos, 32,4%)
 - janelas: Warlock é suporte de controle puro, sem spike de item relevante pra esse confronto; o risco dele é todo por nível de ultimate (6, 11, 16) e por mana pra canalizar Upheaval; PA com Battle Fury e BKB ainda sofre, porque o problema dele não é dano, é posicionamento
-- o que ele faz com você: Upheaval é canalizado até 16s, desacelera progressivamente até 100% numa área de até 650 de raio (fonte: constants_abilities.json), prendendo um herói corpo a corpo como ela antes que chegue no alvo; Fatal Bonds liga até 6 inimigos de forma que 15 a 24% do dano causado num deles é sentido pelos outros, anulando o plano de focar um alvo só; Rain of Chaos com Aghanim's Scepter chama 2 Golems de até 3000 de vida cada, com dano reduzido de feitiço e punho flamejante, que trocam bem corpo a corpo com ela
+- o que ele faz com você: Upheaval é canalizado até 16s, desacelera progressivamente até 100% numa área de até 650 de raio (fonte: constants_abilities.json), prendendo um herói corpo a corpo como ela antes que chegue no alvo; Fatal Bonds liga até 6 inimigos de forma que 15 a 24% do dano causado num deles é sentido pelos outros, anulando o plano de focar um alvo só; Chaotic Offering com Aghanim's Scepter chama 2 Golems de até 3000 de vida cada, com dano reduzido de feitiço e punho flamejante, que trocam bem corpo a corpo com ela
 - o que você faz com ele: Warlock tem pouca vida própria; se ela chega nele isolado, sem Golem por perto, um crit resolve
 - itens que viram: nenhum item anula sozinho o Upheaval porque é desaceleração de área, não debuff único; o plano tem que ser matar os Golems primeiro ou evitar a área dele até Upheaval estar em cooldown
 - como jogar: nunca brigue com ele sozinha dentro do Upheaval; espere os Golems caírem ou o cooldown do Upheaval passar antes de engajar
@@ -204,7 +203,7 @@ Phantom Assassin é pos1 pura no dataset local (519 partidas pro 7.40+7.41, font
 - por que importa: um dos carries pos1 mais escolhidos em pro no patch (996 jogos no dataset local, fonte: pro_dados/weaver.json), incluído mesmo com poucas partidas medidas contra ela porque os dois quase nunca dividem lane, mas competem pelo mesmo papel de fechar jogo no late
 - janelas: os dois têm perfil de farm parecido (Weaver gpm 558 contra 601 dela) e chegam a comprar o mesmo item, Desolator (dele aos 15:36, mediana 379 jogos; dela aos 20:42); o Aghanim's Shard dele (18:30, mediana 597 jogos) marca inimigos atingidos pelo Shukuchi pra um ataque geminado extra; é uma corrida de power spike mais do que uma troca de lane
 - o que ele faz com você: Shukuchi dá invisibilidade e velocidade máxima por 4s, atravessando inimigos com até 190 de dano, deixando ele esquivar do Phantom Strike dela e reposicionar; Time Lapse volta a vida e mana dele pro estado de 5 segundos atrás com dispel forte, podendo desfazer um crítico inteiro de Coup de Grace
-- o que você faz com ele: se ela conseguir um combo que ele não consiga prever (Stifling Dagger seguido de Phantom Strike e crit num único momento), o Time Lapse só se usado a tempo salva ele; qualquer segunda troca sem o Time Lapse pronto de novo (ele não tem cooldown fixo documentado localmente) tende a favorecer quem bateu primeiro
+- o que você faz com ele: se ela conseguir um combo que ele não consiga prever (Stifling Dagger seguido de Phantom Strike e crit num único momento), o Time Lapse só se usado a tempo salva ele; qualquer segunda troca sem o Time Lapse pronto de novo (cooldown de 70 a 40s dependendo do nível, fonte: constants_abilities.json) tende a favorecer quem bateu primeiro
 - itens que viram: nenhum item dela anula o Time Lapse; o jeito é forçar duas trocas seguidas, uma pra gastar o Time Lapse e outra pra fechar
 - como jogar: não gaste o combo todo na primeira troca, ele provavelmente tem Time Lapse pronto; depois que ele usa, a segunda tentativa de crit costuma fechar
 - fonte: pro_dados/phantom_assassin.json; pro_dados/weaver.json; constants_abilities.json

@@ -23,16 +23,9 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/tiny.json
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/tiny.md
 - https://api.opendota.com/api/constants/aghs_desc
-- https://www.dotabuff.com/heroes/tiny/abilities
 - https://liquipedia.net/dota2/Spell_immunity
 - https://liquipedia.net/dota2/Debuff_Immunity
-- https://dotacoach.gg/en/heroes/bane
-- https://liquipedia.net/dota2/Kez
-- https://dotesports.com/dota-2/news/all-kez-abilities-in-dota-2
 ---
 
 ## Contra Shadow Fiend (nevermore)
@@ -57,13 +50,13 @@ fontes:
 
 ## Contra Ember Spirit (ember_spirit)
 - placar: 162 vitórias em 395 jogos de pro, 41,0% (amostra grande; é o pior resultado do Tiny entre os 6 oponentes mais comuns)
-- por que importa: 3º em jogos contra o Tiny no pro (395), e o próprio guia do Tiny já lista Ember Spirit entre os inimigos que tiram de 2 a 3,6 pontos percentuais de vitória em Divine+.
+- por que importa: 3º em jogos contra o Tiny no pro (395), um dos confrontos mais frequentes do personagem no campo profissional.
 - janelas: Ember é mid e costuma estar na frente cedo: bota aos 4,6 min e já farma rápido com Sleight of Fist entre camps a partir do nível 6-7. O Tiny só emparelha isso com Echo Sabre (12,1 min) e Blink (15,9 min). Depois dos 25-27 min, com BKB dos dois (Ember 27,1 min; Tiny 26,7 min) e Grow alto do Tiny, o combo de burst do Tiny volta a pesar mais numa troca direta.
 - o que ele faz com você: Flame Guard absorve uma parte do dano mágico recebido antes de estourar; como Avalanche e Toss são dano mágico, um Ember com o escudo de pé reduz boa parte do seu combo de abertura. Sleight of Fist ataca tudo ao redor com bônus contra herói e ele volta pra posição original antes de você revidar; Searing Chains prende você parado, cancelando seu Toss.
 - o que você faz com ele: Ember tem HP baixo. Se você aterrissa Avalanche + Toss com o Flame Guard já estourado (ou sem mana pra reativar), ele morre rápido; Tree Grab (alcance 300) também pega ele tentando reposicionar depois do Sleight of Fist.
 - itens que viram: Black King Bar (26,7 min) impede o combo de Searing Chains + Sleight; do lado dele, o Aghanim's Shard (25,3 min, carga extra de Fire Remnant) e o Scepter (31,6 min) alongam a fuga dele, então depois dos 25 min fica mais difícil fechar sem surpresa.
 - como jogar: espere o Flame Guard do Ember cair (ele estoura sozinho com o tempo ou com dano) antes de soltar o combo mágico; não force a luta se ele tiver Fire Remnant plantado por perto, porque ele escapa fácil.
-- fonte: pro_dados/tiny.json; pro_dados/ember_spirit.json; constants_abilities.json (ember_spirit_flame_guard, ember_spirit_sleight_of_fist, ember_spirit_searing_chains); app/public/data/herois/tiny.json guia.evitar_quando.
+- fonte: pro_dados/tiny.json; pro_dados/ember_spirit.json; constants_abilities.json (ember_spirit_flame_guard, ember_spirit_sleight_of_fist, ember_spirit_searing_chains).
 
 ## Contra Rubick (rubick)
 - placar: 176 vitórias em 362 jogos de pro, 48,6%
@@ -78,7 +71,7 @@ fontes:
 ## Contra Jakiro (jakiro)
 - placar: 180 vitórias em 356 jogos de pro, 50,6%
 - por que importa: 5º em jogos contra o Tiny no pro (356), suporte de zona que nega justamente o tipo de farm rápido que o Tiny precisa fazer entre os 10 e 20 min.
-- janelas: Jakiro não tem powerspike de 1x1, ele nega área. Macropyre (recarga 90/80/70s) cobre um camp inteiro com dano contínuo, atrasando o ciclo de Tree Grab do Tiny; Ice Path (stun em linha) já funciona desde o nível 1-2. O Tiny só passa a ignorar essa negação de área quando tem HP e armadura do Grow (nível 12+, por volta dos 17,5 min) pra atravessar o fogo sem perder a troca.
+- janelas: Jakiro não tem powerspike de 1x1, ele nega área. Macropyre (recarga 90/80/70s) cobre um camp inteiro com dano contínuo, atrasando o ciclo de Tree Grab do Tiny; Ice Path (stun em linha) já funciona desde o nível 1-2. O Tiny só passa a ignorar essa negação de área quando tem HP e armadura do Grow (nível 12+) pra atravessar o fogo sem perder a troca.
 - o que ele faz com você: Macropyre queima a área onde você tá farmando ou lutando, te forçando a sair do camp ou perder vida contínua; Ice Path atordoa em linha reta preparando o combo do time dele; Dual Breath desacelera seu ataque e sua movimentação juntos, cortando o DPS do Tree Grab.
 - o que você faz com ele: Jakiro é parado, sem fuga. Entrando com Avalanche + Toss em cima dele, ele morre antes de reagir, já que a força dele é de área, não de 1x1.
 - itens que viram: Black King Bar (26,7 min) ignora Ice Path e Macropyre; depois disso, farmar perto do Jakiro deixa de ser perigoso e vira oportunidade de abate.
@@ -97,8 +90,8 @@ fontes:
 
 ## Contra Windranger (windrunner)
 - placar: 166 vitórias em 343 jogos de pro, 48,4%
-- por que importa: herói flexível entre posição 1 e 4 que mais aparece contra o Tiny no pro (343 jogos) entre os de mesma posição principal, carry-contra-carry pelo catálogo do projeto.
-- janelas: Windranger poka de longe desde cedo com Powershot (canalizado, dano cresce até 1s de carga); Shackleshot é o stun de abertura dela, mais forte perto de árvore ou unidade. Focus Fire (acerto garantido contra um único alvo, recarga alta de 70/50/30s) é o que ela usa pra abater um alvo prioritário numa luta prolongada. O Tiny precisa do Blink (15,9 min) pra fechar antes do Shackleshot dela e do BKB (26,7 min; ela mesma upa o dela aos 24,4 min) pra sobreviver ao Focus Fire numa troca mais longa.
+- por que importa: herói flexível entre posição 1 e 4 que mais aparece contra o Tiny no pro (343 jogos); os dois aparecem como Carry em heroes.json (constantes do jogo).
+- janelas: Windranger poka de longe desde cedo com Powershot (canalizado, dano cresce até 1s de carga); Shackleshot é o stun de abertura dela, mais forte perto de árvore ou unidade. Focus Fire (dispara a velocidade de ataque dela contra um único alvo, até +500, recarga alta de 70/50/30s) é o que ela usa pra abater um alvo prioritário numa luta prolongada. O Tiny precisa do Blink (15,9 min) pra fechar antes do Shackleshot dela e do BKB (26,7 min; ela mesma upa o dela aos 24,4 min) pra sobreviver ao Focus Fire numa troca mais longa.
 - o que ele faz com você: Shackleshot te prende numa árvore ou unidade próxima, abrindo combo; Powershot acerta e desacelera à distância antes de você chegar perto; Windrun dá evasão total contra ataques físicos (não contra Avalanche/Toss, que são mágicos), dificultando seu DPS de Tree Grab numa troca longa.
 - o que você faz com ele: Windranger tem HP baixo pro meio-jogo. Avalanche + Toss mata ela como qualquer suporte-carry fraco em vida, principalmente antes do Shackleshot dela sair (ela precisa de alvo perto pro stun completo).
 - itens que viram: Black King Bar anula o Shackleshot e o Powershot; como Windrun só bloqueia físico, seu combo mágico continua funcionando com ela ativa.
@@ -117,7 +110,7 @@ fontes:
 
 ## Contra Luna (luna)
 - placar: 98 vitórias em 200 jogos de pro, 49,0%
-- por que importa: 3º carry de posição 1 mais comum contra o Tiny no pro (200 jogos), reforçando o grupo carry-contra-carry do catálogo do projeto.
+- por que importa: 3º carry de posição 1 mais comum contra o Tiny no pro (200 jogos); os dois aparecem como Carry em heroes.json (constantes do jogo).
 - janelas: Luna farma muito rápido com Moon Glaives (ricochete) desde o nível 1, puxando a economia dela na frente cedo. O pico real dela é Eclipse (recarga fixa de 105s), que só fica forte com Lucent Beam alto e à noite. Antes do Eclipse valer a pena (perto do nível 11-16, geralmente junto do Manta dela aos 17,2 min), ela é mais farmadora que lutadora, e o Tiny com Echo Sabre (12,1 min) já bate mais forte nessa fase. Depois dos 20-25 min, se Luna tiver Eclipse pronto à noite, ela estoura o time todo incluindo o Tiny sem BKB.
 - o que ele faz com você: Lucent Beam atordoa rápido e prepara combo; Eclipse chove feixes aleatórios em todo mundo perto dela, inclusive em você, sem precisar mirar; à noite o dano pesa mais porque o Lunar Blessing também fica global.
 - o que você faz com ele: Luna tem pouca vida e nenhuma fuga própria (sem blink, sem dash). Avalanche + Toss mata ela rápido fora de posição, principalmente longe do time dela, que é onde ela fica puxando camp sozinha pra aproveitar os Glaives.
@@ -133,7 +126,7 @@ fontes:
 - o que você faz com ele: AM não tem controle nem fuga de longa distância, só o blink curto. Avalanche (é área, não mira só nele, então não esbarra no Counterspell) + Toss pega ele rápido quando isolado puxando camp, e o HP baixo dele não aguenta o combo com Grow alto.
 - itens que viram: Blink Dagger é o item que fecha no AM isolado antes do Manta dele; BKB não é prioridade nesse confronto específico, porque o AM raramente inicia em você primeiro.
 - como jogar: cace ele enquanto farma sozinho, de preferência fora da visão do time dele; evite jogar o Toss mirado diretamente nele se o Counterspell estiver ligado, prefira abrir com Avalanche.
-- fonte: pro_dados/tiny.json; pro_dados/antimage.json; constants_abilities.json (antimage_counterspell, antimage_mana_void, antimage_blink); liquipedia.net/dota2/Spell_immunity; dotabuff.com/heroes/tiny/abilities.
+- fonte: pro_dados/tiny.json; pro_dados/antimage.json; constants_abilities.json (antimage_counterspell, antimage_mana_break, antimage_mana_void, antimage_blink); liquipedia.net/dota2/Spell_immunity.
 
 ## Contra Sven (sven)
 - placar: 50 vitórias em 78 jogos de pro, 64,1%
@@ -153,7 +146,7 @@ fontes:
 - o que você faz com ele: Avalanche pega ele de longe antes do Grappling Claw alcançar; se você conseguir o combo completo (Avalanche + Toss) fora da janela de invulnerabilidade do Raptor Dance, ele não tem outra fuga garantida.
 - itens que viram: seu BKB reduz o controle que ele consegue aplicar, mas o Raptor Dance (invulnerabilidade própria dele) ainda escapa do timing exato do combo; vigie a recarga do Raptor Dance (40/35/30s) antes de iniciar.
 - como jogar: ataque de longe com Avalanche antes dele fechar o Grappling Claw; evite iniciar logo depois dele ter acabado de usar o Raptor Dance, prefira pegar ele com a ulti de recarga.
-- fonte: pro_dados/tiny.json; pro_dados/kez.json; constants_abilities.json (kez_grappling_claw, kez_echo_slash, kez_raptor_dance); liquipedia.net/dota2/Kez; dotesports.com/dota-2/news/all-kez-abilities-in-dota-2.
+- fonte: pro_dados/tiny.json; pro_dados/kez.json; constants_abilities.json (kez_grappling_claw, kez_echo_slash, kez_raptor_dance).
 
 ## Contra Bane (bane)
 - placar: 48 vitórias em 131 jogos de pro, 36,6% (2ª maior desvantagem do Tiny no pro, amostra robusta)
@@ -173,7 +166,7 @@ fontes:
 - o que você faz com ele: ponto mecânico importante: uma unidade imune a debuff pode ser mirada pelo Toss, mas não pode ser agarrada e arremessada (o Toss simplesmente não funciona em quem tá debuff immune). Ou seja, se o Jugg já tiver o Blade Fury ativo quando você tenta o combo, o Toss nele falha. A saída é acertar o Avalanche antes dele girar, ou esperar o giro acabar (ele dura até o fim do Blade Fury) pra então Tossar.
 - itens que viram: seu BKB garante que você aguenta o Omnislash sem levar o combo mágico dele junto; Blink é o que te leva nele rápido o bastante pra pegar antes dele girar o Blade Fury.
 - como jogar: inicie o combo assim que ver o Blade Fury de recarga; se ele já girou, segure o Toss e espere o giro acabar antes de tentar agarrar.
-- fonte: pro_dados/tiny.json; pro_dados/juggernaut.json; constants_abilities.json (juggernaut_blade_fury, juggernaut_omni_slash); dotabuff.com/heroes/tiny/abilities (debuff immune não pode ser alvo do Toss).
+- fonte: pro_dados/tiny.json; pro_dados/juggernaut.json; constants_abilities.json (juggernaut_blade_fury, juggernaut_omni_slash); liquipedia.net/dota2/Debuff_Immunity (debuff immune não pode ser alvo do Toss).
 
 ## Contra Alchemist (alchemist)
 - placar: 50 vitórias em 97 jogos de pro, 51,5%

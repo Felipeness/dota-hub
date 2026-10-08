@@ -23,12 +23,8 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/puck.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
 - https://api.opendota.com/api/constants/aghs_desc
-- dotacoach.gg (heroes/void-spirit, heroes/tusk, heroes/tiny, heroes/jakiro, heroes/hoodwink, heroes/rubick, heroes/ember-spirit, heroes/queen-of-pain, heroes/dragon-knight, heroes/storm-spirit, heroes/silencer, heroes/weaver, heroes/crystal-maiden, heroes/bane, heroes/oracle, heroes/lone-druid, patch 7.41d/7.41e)
 - liquipedia.net/dota2 (Tusk, Dragon Knight, Storm Spirit, Weaver, Bane)
-- rdy.gg (dota2/heroes, vários heróis desta lista)
 ---
 
 ## Como foram escolhidos os 16 oponentes
@@ -43,7 +39,7 @@ Os 6 primeiros são os que mais jogaram contra o Puck em partida profissional no
 - o que você faz com ele: Waning Rift sala ele por até 3,5s, cortando o acesso a Astral Step e Dissimilate no momento exato em que ele tentaria iniciar; Dream Coil prende mesmo que ele use Dissimilate pra sumir, porque a coleira segue o alvo. Witch Blade com True Strike garante que seu ataque acerte mesmo se ele tentar usar invisibilidade de item pra escapar.
 - itens que viram: o Aghanim's Shard dele (17:00, mediana de 1270 partidas) dá visão verdadeira e um segundo caminho de puxão no Aether Remnant, perigoso se você tentar fugir reto; o Scepter (25:06) deixa a Resonant Pulse silenciar em vez de só dar escudo. Do seu lado, o seu próprio Shard (22:30) faz o Phase Shift acertar tudo ao redor quando ele tenta te cercar depois de reaparecer.
 - como jogar: gaste a Waning Rift assim que ele sair de Dissimilate perto de você, antes que ele decida entre atacar ou recuar. Guarde o Phase Shift pro primeiro Astral Step, não pro segundo cast de Dissimilate, porque o primeiro é o que carrega o dano de impacto maior.
-- fonte: pro_dados/void_spirit.json; pro_dados/puck.json; herois_catalogo.json (ficha Void Spirit); constants_abilities.json (void_spirit_astral_step, void_spirit_dissimilate, void_spirit_resonant_pulse, puck_waning_rift, puck_dream_coil); aghs_desc (Void Spirit, Puck); dotacoach.gg/en/heroes/void-spirit (cooldowns 7.41d)
+- fonte: pro_dados/void_spirit.json; pro_dados/puck.json; constants_abilities.json (void_spirit_astral_step, void_spirit_dissimilate, void_spirit_resonant_pulse, puck_waning_rift, puck_dream_coil); aghs_desc (Void Spirit, Puck)
 
 ## Contra Tusk (tusk)
 - placar: 154 vitórias em 291 jogos de pro, 52,9% (fonte: OpenDota matchups, pro_dados/puck.json)
@@ -53,7 +49,7 @@ Os 6 primeiros são os que mais jogaram contra o Puck em partida profissional no
 - o que você faz com ele: Phase Shift evita o impacto do Walrus PUNCH! e da aterrissagem do Snowball se você cronometrar antes do choque, porque o canal te deixa imune a dano por um instante; Waning Rift sala ele antes que ele consiga ativar o Snowball em cima de você.
 - itens que viram: o Scepter dele destrava o Walrus Kick, um chute à distância que estuna e machuca todo mundo a 250 de raio do pouso, perigoso mesmo se você não for o alvo direto; o Shard (Drinking Buddies) puxa um aliado pra perto dando velocidade e armadura, o que acelera o gank duplo em cima de você antes do nível 6.
 - como jogar: não fique parado em lane sem visão de rune nem de flanco antes do nível 6, o Tusk vive de Snowball de surpresa. Se ele rolar em cima de você, guarde o Phase Shift pro momento do impacto, não antes.
-- fonte: pro_dados/tusk.json; pro_dados/puck.json; herois_catalogo.json (ficha Tusk); constants_abilities.json (tusk_snowball, tusk_walrus_punch, tusk_walrus_kick, tusk_ice_shards, puck_waning_rift); aghs_desc (Tusk, Puck); liquipedia.net/dota2/Tusk
+- fonte: pro_dados/tusk.json; pro_dados/puck.json; constants_abilities.json (tusk_snowball, tusk_walrus_punch, tusk_walrus_kick, tusk_ice_shards, puck_waning_rift); aghs_desc (Tusk, Puck); liquipedia.net/dota2/Tusk
 
 ## Contra Tiny (tiny)
 - placar: 144 vitórias em 278 jogos de pro, 51,8% (fonte: OpenDota matchups, pro_dados/puck.json)
@@ -61,9 +57,9 @@ Os 6 primeiros são os que mais jogaram contra o Puck em partida profissional no
 - janelas: até os 6 min os dois ainda estão em farm, Tiny com Soul Ring aos 6:00 pouco antes do seu Power Treads (8:18). Dos 12 aos 16 min ele monta Echo Sabre (12:06) e sai com o combo pronto pra matar sozinho; seu Witch Blade (13:42) ainda não resolve isso porque Avalanche mais Toss acontece antes de você conseguir reagir. O Blink dele sai 15:54, praticamente junto do seu (17:36): quem inicia primeiro numa troca de meio de jogo geralmente ganha. Depois dos 22, com Black King Bar (26:42) e você já com Aghanim's Shard (22:30) e Blink prontos, a troca fica mais sobre controle de área do que sobre combo de abertura.
 - o que ele faz com você: Avalanche bombardeia uma área com pedras, dano e stun em sequência; Toss pega a unidade mais próxima, aliada ou inimiga, e arremessa nela, então ele pode te agarrar mesmo que você tente fugir pro lado errado. O combo clássico é Avalanche seguido de Toss em você mesmo, multiplicando o dano das pedras no seu corpo.
 - o que você faz com ele: Phase Shift cortado no momento certo tira você do meio da Avalanche antes do stun prender de vez, mas não evita ser agarrado pelo Toss se você estiver na unidade mais próxima dele quando ele cast. Waning Rift sala ele antes do combo começar, o que impede o cast do Toss.
-- itens que viram: o Shard de Tiny aumenta a área e o dano de quem é jogado por Toss ou pelas árvores, o que machuca mais quem estiver perto do seu pouso; o Scepter troca Tree Grab por um canal de volley de árvores à distância, menos relevante no 1x1 direto contra você. Do seu lado, o Aghanim's Shard (22:30) faz seu Phase Shift acertar tudo ao redor se ele tentar te cercar de perto depois do combo.
+- itens que viram: o Shard de Tiny aumenta a área e o dano de quem é jogado por Toss ou pelas árvores, o que machuca mais quem estiver perto do seu pouso; o Scepter adiciona Tree Volley, um canal que arremessa várias árvores à distância, menos relevante no 1x1 direto contra você. Do seu lado, o Aghanim's Shard (22:30) faz seu Phase Shift acertar tudo ao redor se ele tentar te cercar de perto depois do combo.
 - como jogar: evite ficar como a unidade mais próxima do Tiny perto do nível 6, é o gatilho do Toss em você. Se ele abrir com Avalanche, ande pra fora da área antes do segundo tick em vez de tentar sair só com Phase Shift.
-- fonte: pro_dados/tiny.json; pro_dados/puck.json; herois_catalogo.json (ficha Tiny); constants_abilities.json (tiny_avalanche, tiny_toss, puck_waning_rift, puck_phase_shift); aghs_desc (Tiny, Puck)
+- fonte: pro_dados/tiny.json; pro_dados/puck.json; constants_abilities.json (tiny_avalanche, tiny_toss, puck_waning_rift, puck_phase_shift); aghs_desc (Tiny, Puck)
 
 ## Contra Jakiro (jakiro)
 - placar: 134 vitórias em 270 jogos de pro, 49,6% (fonte: OpenDota matchups, pro_dados/puck.json)
@@ -73,17 +69,17 @@ Os 6 primeiros são os que mais jogaram contra o Puck em partida profissional no
 - o que você faz com ele: Phase Shift evita o stun do Ice Path se você sair antes do segundo tick de dano; Waning Rift sala ele antes do cast do Macropyre, que tem recarga de 90 a 70s e não pode ser recastado rápido se interrompido.
 - itens que viram: o Scepter dele aumenta a duração do Macropyre, muda o dano pra puro (ignora resistência mágica, inclusive a sua) e cria paredes de gelo que lentificam 60% quem tenta atravessar, o que te prende dentro do fogo; o Shard tira o custo de mana da Liquid Frost e libera ela da recarga compartilhada com Liquid Fire, dando mais slow sustentado em luta.
 - como jogar: não force a troca em cima do Ice Path sem saber se o Macropyre vem em seguida. Guarde o Dream Coil pra depois que ele gastar o combo de área, não antes, senão sua ultimate vira alvo fácil pro Macropyre.
-- fonte: pro_dados/jakiro.json; pro_dados/puck.json; herois_catalogo.json (ficha Jakiro); constants_abilities.json (jakiro_ice_path, jakiro_macropyre, jakiro_dual_breath, puck_waning_rift, puck_phase_shift, puck_dream_coil); aghs_desc (Jakiro, Puck); dotacoach.gg/en/heroes/jakiro
+- fonte: pro_dados/jakiro.json; pro_dados/puck.json; constants_abilities.json (jakiro_ice_path, jakiro_macropyre, jakiro_dual_breath, puck_waning_rift, puck_phase_shift, puck_dream_coil); aghs_desc (Jakiro, Puck)
 
 ## Contra Hoodwink (hoodwink)
 - placar: 121 vitórias em 252 jogos de pro, 48,0% (fonte: OpenDota matchups, pro_dados/puck.json)
 - por que importa: 5º em volume contra o Puck em pro, e um dos poucos suportes do patch com dano de longa distância suficiente pra ameaçar um mid que vive de ficar fora de alcance.
-- janelas: até os 12 min ela está em sustain básico de suporte, Arcane Boots aos 12:12; seu Witch Blade (13:42) sai logo depois, já dando troca de volta se ela se aproximar demais. Dos 21 aos 24 min ela soma Ward Dispenser (21:18) e o Aghanim's Shard (23:48), que dá um segundo boomerang de Hunter's Boomerang; é quando ela começa a poder punir de mais longe. Depois dos 26, com Force Staff (26:06) pra reposicionar, ela vira mais peça de setup de time do que ameaça solo, e você já tem Aghanim's Shard (22:30) e Blink (17:36) prontos pra fechar distância primeiro.
+- janelas: até os 12 min ela está em sustain básico de suporte, Arcane Boots aos 12:12; seu Witch Blade (13:42) sai logo depois, já dando troca de volta se ela se aproximar demais. Dos 21 aos 24 min ela soma Ward Dispenser (21:18) e o Aghanim's Shard (23:48), que dá o Hunter's Boomerang, um arremesso que acerta na ida e na volta; é quando ela começa a poder punir de mais longe. Depois dos 26, com Force Staff (26:06) pra reposicionar, ela vira mais peça de setup de time do que ameaça solo, e você já tem Aghanim's Shard (22:30) e Blink (17:36) prontos pra fechar distância primeiro.
 - o que ele faz com você: Sharpshooter carrega por 0,75s e acerta um tiro certeiro com break e slow, dano que sobe conforme carrega; Bushwhack prende perto de árvore com dano contínuo e reduz sua visão a zero na área.
 - o que você faz com ele: Phase Shift cortado durante o canal do Sharpshooter evita o impacto do tiro, porque o canal te deixa imune a dano enquanto ativo, negando o maior poder de fogo dela de graça; Waning Rift sala ela antes de completar o canal, cancelando o Sharpshooter.
 - itens que viram: o Shard dela joga um boomerang em arco que acerta na ida e na volta até ela e aplica um debuff de lentidão e vulnerabilidade a dano de feitiço, o que soma com o seu combo mágico se ela conseguir acertar primeiro; o Scepter aumenta a velocidade e o slow do Sharpshooter, reduzindo a janela que você tem pra reagir com Phase Shift. Nenhum item seu desliga isso direto além de spell immunity, então o timing do Phase Shift é a resposta real.
 - como jogar: fique de olho na barra de canal do Sharpshooter e corte com Phase Shift assim que ela começar a carregar em você. Evite lutar perto de árvore isolada, é onde o Bushwhack rende o combo completo.
-- fonte: pro_dados/hoodwink.json; pro_dados/puck.json; herois_catalogo.json (ficha Hoodwink); constants_abilities.json (hoodwink_sharpshooter, hoodwink_bushwhack, puck_waning_rift, puck_phase_shift); aghs_desc (Hoodwink, Puck)
+- fonte: pro_dados/hoodwink.json; pro_dados/puck.json; constants_abilities.json (hoodwink_sharpshooter, hoodwink_bushwhack, puck_waning_rift, puck_phase_shift); aghs_desc (Hoodwink, Puck)
 
 ## Contra Rubick (rubick)
 - placar: 127 vitórias em 248 jogos de pro, 51,2% (fonte: OpenDota matchups, pro_dados/puck.json)
@@ -93,7 +89,7 @@ Os 6 primeiros são os que mais jogaram contra o Puck em partida profissional no
 - o que você faz com ele: Phase Shift evita o pouso estuado da Telekinesis se você sair antes do impacto no chão; evitar gastar feitiço à toa perto dele reduz a chance de ele roubar justamente o Dream Coil no momento em que mais importaria.
 - itens que viram: o Scepter dele aumenta pra 2 o número de feitiços roubados, com cast range maior e versão melhorada do feitiço, o que é perigoso se o seu Dream Coil virar o roubo principal; o Shard deixa a Telekinesis mirar aliados também, dando um salvamento a mais pro time dele em cima de um gank seu.
 - como jogar: não gaste o Dream Coil à toa em farm ou em alvo isolado se o Rubick está por perto olhando, guarde pro momento de luta real. Se ele estiver com o seu feitiço roubado, trate como se o próprio Puck estivesse do lado dele.
-- fonte: pro_dados/rubick.json; pro_dados/puck.json; herois_catalogo.json (ficha Rubick); constants_abilities.json (rubick_telekinesis, rubick_spell_steal, puck_dream_coil, puck_phase_shift); aghs_desc (Rubick, Puck); dotacoach.gg/en/heroes/rubick (cooldowns 7.41d)
+- fonte: pro_dados/rubick.json; pro_dados/puck.json; constants_abilities.json (rubick_telekinesis, rubick_spell_steal, puck_dream_coil, puck_phase_shift); aghs_desc (Rubick, Puck)
 
 ## Contra Ember Spirit (ember_spirit)
 - placar: 113 vitórias em 227 jogos de pro, 49,8% (fonte: OpenDota matchups, pro_dados/puck.json)
@@ -103,7 +99,7 @@ Os 6 primeiros são os que mais jogaram contra o Puck em partida profissional no
 - o que você faz com ele: Waning Rift sala ele antes do cast de Sleight of Fist ou Searing Chains, cortando a iniciação; Dream Coil prende mesmo que ele tente usar Fire Remnant pra sumir, porque a coleira acompanha o alvo até ele quebrar.
 - itens que viram: o Aghanim's Shard dele (25:18) devolve uma carga de Fire Remnant sempre que um herói inimigo morre perto, o que o deixa com mobilidade extra em luta prolongada; o Scepter aumenta alcance, velocidade e número de Fire Remnants. Do seu lado, seu Aghanim's Shard (22:30) faz o Phase Shift acertar tudo ao redor se ele tentar fechar em cima de você com Sleight of Fist.
 - como jogar: gaste a Waning Rift assim que ele ativar Flame Guard, não antes, pra não desperdiçar dano na absorção. Mantenha distância da corrente do Searing Chains, uma vez preso o combo dele some quase todo.
-- fonte: pro_dados/ember_spirit.json; pro_dados/puck.json; herois_catalogo.json (ficha Ember Spirit); constants_abilities.json (ember_spirit_sleight_of_fist, ember_spirit_searing_chains, ember_spirit_flame_guard, ember_spirit_fire_remnant, puck_waning_rift, puck_dream_coil); aghs_desc (Ember Spirit, Puck)
+- fonte: pro_dados/ember_spirit.json; pro_dados/puck.json; constants_abilities.json (ember_spirit_sleight_of_fist, ember_spirit_searing_chains, ember_spirit_flame_guard, ember_spirit_fire_remnant, puck_waning_rift, puck_dream_coil); aghs_desc (Ember Spirit, Puck)
 
 ## Contra Queen of Pain (queenofpain)
 - placar: 111 vitórias em 219 jogos de pro, 50,7% (fonte: OpenDota matchups, pro_dados/puck.json)
@@ -113,7 +109,7 @@ Os 6 primeiros são os que mais jogaram contra o Puck em partida profissional no
 - o que você faz com ele: Waning Rift sala ela antes do cast de Sonic Wave ou Blink seguido de combo; Phase Shift evita o impacto do Sonic Wave se você sair da linha de visão antes do disparo, já que é uma onda com direção fixa.
 - itens que viram: o Scepter dela transforma Shadow Strike numa área de 375 que devolve Scream of Pain em quem está perto do alvo marcado, perigoso se o seu time ficar agrupado perseguindo ela; o Shard faz o Blink soltar uma explosão sônica nos dois pontos, dano e silence de 1,75s em quem estiver perto, o que pode te calar bem na hora que você for iniciar com Dream Coil.
 - como jogar: não entre no alcance do Blink dela sem o Waning Rift disponível pra cortar a fuga. Depois do nível 16 dela (Shard), espere o silence da explosão passar antes de tentar o seu próprio combo de iniciação.
-- fonte: pro_dados/queenofpain.json; pro_dados/puck.json; herois_catalogo.json (ficha Queen of Pain); constants_abilities.json (queenofpain_shadow_strike, queenofpain_sonic_wave, queenofpain_blink, puck_waning_rift, puck_phase_shift); aghs_desc (Queen of Pain, Puck)
+- fonte: pro_dados/queenofpain.json; pro_dados/puck.json; constants_abilities.json (queenofpain_shadow_strike, queenofpain_sonic_wave, queenofpain_blink, puck_waning_rift, puck_phase_shift); aghs_desc (Queen of Pain, Puck)
 
 ## Contra Dragon Knight (dragon_knight)
 - placar: 114 vitórias em 213 jogos de pro, 53,5% (fonte: OpenDota matchups, pro_dados/puck.json)
@@ -123,7 +119,7 @@ Os 6 primeiros são os que mais jogaram contra o Puck em partida profissional no
 - o que você faz com ele: Waning Rift sala ele antes do Dragon Tail, cortando a chance de ele travar seu combo primeiro; Dream Coil prende mesmo com Black King Bar ativo, porque a coleira em si não é um debuff removível, só o stun de quebra é mágico e cai contra BKB.
 - itens que viram: o Scepter dele sobe o nível da Elder Dragon Form, adicionando uma forma com pathing livre e mais resistência mágica, o que reduz o valor do seu dano de feitiço nele tarde; o Shard dá Fireball, dano contínuo em área extra pro combo físico dele. Seu Dream Coil continua sendo a resposta principal: mesmo sob BKB, a leash em si prende o movimento dele.
 - como jogar: na lane, evite gastar Illusory Orb só pra poke, a armadura dele absorve demais; guarde pro combo de kill com Waning Rift. Em luta de grupo, prenda ele com Dream Coil antes dele ativar BKB, porque depois disso só a coleira em si ainda funciona.
-- fonte: pro_dados/dragon_knight.json; pro_dados/puck.json; herois_catalogo.json (ficha Dragon Knight); constants_abilities.json (dragon_knight_dragon_tail, dragon_knight_breathe_fire, dragon_knight_elder_dragon_form, puck_waning_rift, puck_dream_coil); aghs_desc (Dragon Knight, Puck); liquipedia.net/dota2/Dragon_Knight (alcance Breathe Fire 7.41)
+- fonte: pro_dados/dragon_knight.json; pro_dados/puck.json; constants_abilities.json (dragon_knight_dragon_tail, dragon_knight_breathe_fire, dragon_knight_elder_dragon_form, puck_waning_rift, puck_dream_coil); aghs_desc (Dragon Knight, Puck); liquipedia.net/dota2/Dragon_Knight (alcance Breathe Fire 7.41)
 
 ## Contra Storm Spirit (storm_spirit)
 - placar: 80 vitórias em 149 jogos de pro, 53,7% (fonte: OpenDota matchups, pro_dados/puck.json)
@@ -133,7 +129,7 @@ Os 6 primeiros são os que mais jogaram contra o Puck em partida profissional no
 - o que você faz com ele: Dream Coil prende ele mesmo se ele tentar Ball Lightning pra fora, porque sair força a coleira a estourar, causando o stun de quebra nele mesmo; Waning Rift sala ele antes do Electric Vortex, cortando o puxão.
 - itens que viram: o Scepter dele faz Electric Vortex puxar todo mundo numa área ao redor dele, perigoso se seu time estiver agrupado perto; o Shard dá Overload em área pra aliados, aumentando a velocidade de ataque do time dele em luta. Do seu lado, o Dream Coil continua sendo a única forma confiável de impedir o Ball Lightning de fuga, já que ele não é dispellable fácil.
 - como jogar: force ele a gastar mana com Ball Lightning antes de entrar em troca, isso reduz a janela de fuga dele depois. Prenda com Dream Coil assim que ele colar em você, antes do Overload acumular carga.
-- fonte: pro_dados/storm_spirit.json; pro_dados/puck.json; herois_catalogo.json (ficha Storm Spirit); constants_abilities.json (storm_spirit_ball_lightning, storm_spirit_electric_vortex, storm_spirit_overload, puck_waning_rift, puck_dream_coil); aghs_desc (Storm Spirit, Puck)
+- fonte: pro_dados/storm_spirit.json; pro_dados/puck.json; constants_abilities.json (storm_spirit_ball_lightning, storm_spirit_electric_vortex, storm_spirit_overload, puck_waning_rift, puck_dream_coil); aghs_desc (Storm Spirit, Puck)
 
 ## Contra Silencer (silencer)
 - placar: 69 vitórias em 109 jogos de pro, 63,3% a favor do Puck (fonte: OpenDota matchups, pro_dados/puck.json)
@@ -143,7 +139,7 @@ Os 6 primeiros são os que mais jogaram contra o Puck em partida profissional no
 - o que você faz com ele: fora da janela rara de Global Silence (recarga de 120s), seu combo mágico inteiro funciona normal contra ele; e mesmo silenciado, o ataque do Witch Blade continua acertando, porque é dano de ataque, não feitiço.
 - itens que viram: o Scepter dele aplica Arcane Curse em todos durante a Global Silence, dano contínuo extra se você ficar perto; o Shard faz Glaives of Wisdom ricochetear pra um segundo alvo. Nenhum dos dois muda o padrão geral do confronto, que é sobre ele não ter poder de fogo suficiente pra acompanhar seu farm.
 - como jogar: jogue o seu jogo normal de farm e pressão de mid, o Silencer raramente tem recurso pra te punir sozinho. Guarde consciência só pra Global Silence em luta de grupo, onde ela pode atrasar sua iniciação por alguns segundos.
-- fonte: pro_dados/silencer.json; pro_dados/puck.json; herois_catalogo.json (ficha Silencer); constants_abilities.json (silencer_global_silence, silencer_last_word, puck_waning_rift); aghs_desc (Silencer, Puck)
+- fonte: pro_dados/silencer.json; pro_dados/puck.json; constants_abilities.json (silencer_global_silence, silencer_last_word, puck_waning_rift); aghs_desc (Silencer, Puck)
 
 ## Contra Weaver (weaver)
 - placar: 42 vitórias em 69 jogos de pro, 60,9% a favor do Puck (fonte: OpenDota matchups, pro_dados/puck.json)
@@ -153,7 +149,7 @@ Os 6 primeiros são os que mais jogaram contra o Puck em partida profissional no
 - o que você faz com ele: seu combo é inteiramente mágico (Illusory Orb, Waning Rift, Dream Coil, e o dano do Witch Blade/Parasma), então a armadura baixa dele não ajuda em nada; Dream Coil prende mesmo durante o Shukuchi, porque a coleira acompanha mesmo com ele invisível.
 - itens que viram: o Shard dele marca quem o Shukuchi acerta e soma um Geminate Attack atrasado, perigoso se você ficar perto depois de ele passar correndo; o Scepter deixa o Time Lapse salvar aliado também, não só ele mesmo, o que protege o time dele de um combo seu em grupo. Do seu lado, nenhum item muda o padrão: o combo mágico já é suficiente, o problema dele é timing de fuga, não resistência.
 - como jogar: combine o combo pra matar considerando que ele pode dar Time Lapse, ou seja, mire acima do HP atual dele, não só no que você vê na barra. Prenda com Dream Coil assim que ele ficar visível de novo depois do Shukuchi.
-- fonte: pro_dados/weaver.json; pro_dados/puck.json; herois_catalogo.json (ficha Weaver); constants_abilities.json (weaver_shukuchi, weaver_time_lapse, weaver_the_swarm, puck_dream_coil); aghs_desc (Weaver, Puck)
+- fonte: pro_dados/weaver.json; pro_dados/puck.json; constants_abilities.json (weaver_shukuchi, weaver_time_lapse, weaver_the_swarm, puck_dream_coil); aghs_desc (Weaver, Puck)
 
 ## Contra Crystal Maiden (crystal_maiden)
 - placar: 37 vitórias em 62 jogos de pro, 59,7% a favor do Puck (fonte: OpenDota matchups, pro_dados/puck.json)
@@ -163,7 +159,7 @@ Os 6 primeiros são os que mais jogaram contra o Puck em partida profissional no
 - o que você faz com ele: ela não tem dash, blink ou invisibilidade própria fora do Shard, então uma vez que o Dream Coil prende, dificilmente ela escapa; Waning Rift sala ela antes do cast de Frostbite ou do início do Freezing Field, cancelando o combo dela.
 - itens que viram: o Shard dela (Crystal Clone) desliza e cria um clone que disjunta projétil, inclusive seu Illusory Orb se o timing for perfeito, e estoura Frostbite em área ao redor se for destruído; o Scepter dela permite se mover e atacar durante o Freezing Field, o que a torna menos parada em troca prolongada, mas raramente é comprado contra o Puck porque o jogo costuma acabar antes.
 - como jogar: priorize ela em gank de grupo sempre que possível, raramente ela sai viva sem ajuda de aliado. Se ela tiver o Shard, cuidado com o clone absorvendo seu Illusory Orb antes de acertar ela de verdade.
-- fonte: pro_dados/crystal_maiden.json; pro_dados/puck.json; herois_catalogo.json (ficha Crystal Maiden); constants_abilities.json (crystal_maiden_frostbite, crystal_maiden_freezing_field, puck_waning_rift, puck_dream_coil, puck_illusory_orb); aghs_desc (Crystal Maiden, Puck)
+- fonte: pro_dados/crystal_maiden.json; pro_dados/puck.json; constants_abilities.json (crystal_maiden_frostbite, crystal_maiden_freezing_field, puck_waning_rift, puck_dream_coil, puck_illusory_orb); aghs_desc (Crystal Maiden, Puck)
 
 ## Contra Bane (bane)
 - placar: 29 vitórias em 83 jogos de pro, 34,9% a favor dele (fonte: OpenDota matchups, pro_dados/puck.json)
@@ -171,9 +167,9 @@ Os 6 primeiros são os que mais jogaram contra o Puck em partida profissional no
 - janelas: até os 12 min ele está em Arcane Boots (12:00), sustain de suporte puro; seu Power Treads e Witch Blade já estão prontos (8:18 e 13:42). Dos 22 aos 28 min ele soma Aether Lens (22:36) e Gem (28:42), ficando mais perigoso em visão e alcance de combo; é a janela em que Fiend's Grip vira ameaça real de kill se ele te pegar sem Dream Coil ou time pra proteger. Depois dos 33, com Blink (33:48) e Scepter (35:48), ele consegue iniciar de longe e, com o Scepter, soma duas ilusões canalizando Fiend's Grip ao mesmo tempo, dano dobrado se você ficar preso.
 - o que ele faz com você: Nightmare bota você pra dormir e te faz andar na direção que ele escolher, só acorda se tomar dano, e se alguém te atacar enquanto dorme o Nightmare passa pro atacante; Fiend's Grip é um canal que te disabilita, causa dano pesado por segundo e rouba mana, e uma vez que ele começa, você já está impedido de castar Phase Shift pra sair.
 - o que você faz com ele: a resposta real é não deixar o combo começar: Waning Rift sala ele antes do cast de Fiend's Grip, e se você estiver dormindo por Nightmare, qualquer dano recebido de aliado também aborta o sono sem passar o debuff pra você mesmo.
-- itens que viram: o Scepter dele reduz a recarga de Fiend's Grip em 45s e cria duas ilusões que também canalizam a grip no mesmo alvo, tomando 225% de dano incoming, o que multiplica o risco de kill se você for pego; o Shard deixa Brain Sap acertar em área de 550 e curar aliados próximos também. Do seu lado, nenhum item seu desliga Fiend's Grip depois que começa, então BKB (não comprado habitualmente no seu build) seria a única resposta depois do cast.
+- itens que viram: o Scepter dele reduz a recarga de Fiend's Grip em 45s e cria duas ilusões que também canalizam a grip no mesmo alvo, tomando 225% de dano incoming, o que multiplica o risco de kill se você for pego; o Shard deixa Brain Sap acertar em área de 550, curando o próprio Bane com cada alvo atingido. Do seu lado, nenhum item seu desliga Fiend's Grip depois que começa, então BKB (não comprado habitualmente no seu build) seria a única resposta depois do cast.
 - como jogar: trate o Bane como prioridade de silence antes de qualquer troca, gaste a Waning Rift nele assim que ele abrir linha de visão pra você. Nunca force combo sozinho contra um time com Bane sem saber onde ele está.
-- fonte: pro_dados/bane.json; pro_dados/puck.json; herois_catalogo.json (ficha Bane); constants_abilities.json (bane_fiends_grip, bane_nightmare, puck_waning_rift, puck_phase_shift); aghs_desc (Bane, Puck)
+- fonte: pro_dados/bane.json; pro_dados/puck.json; constants_abilities.json (bane_fiends_grip, bane_nightmare, puck_waning_rift, puck_phase_shift); aghs_desc (Bane, Puck)
 
 ## Contra Oracle (oracle)
 - placar: 10 vitórias em 35 jogos de pro, 28,6% a favor dele (fonte: OpenDota matchups, pro_dados/puck.json)
@@ -181,16 +177,16 @@ Os 6 primeiros são os que mais jogaram contra o Puck em partida profissional no
 - janelas: até os 12 min ele está em Arcane Boots (11:42), sustain de suporte; você já pressiona o mid com o seu próprio build. Dos 21 aos 25 min ele soma Ward Dispenser, Dust e Glimmer Cape (21 a 25 min), proteção em camada pro carry dele; o Blink dele sai 25:00, logo depois do seu Aghanim's Shard (22:30). A partir do nível 6 dele, Fate's Edict (recarga de 17 a 8s por nível) pode sair bem rápido em cima de qualquer aliado que você tente matar, anulando o seu combo inteiro naquele alvo.
 - o que ele faz com você: Fate's Edict desarma e dá 100% de resistência mágica ao alvo por até 5s, voltado pra proteger aliado, mas se usado em você mesmo (ou num inimigo que você precisa matar), zera o valor do seu dano mágico na janela; False Promise atrasa dano e cura recebidos por um aliado, segurando burst que mataria antes do tempo acabar.
 - o que você faz com ele: Waning Rift e Dream Coil ainda prendem e silenciam mesmo sob Fate's Edict, porque resistência mágica reduz dano, não cancela o controle; focar o próprio Oracle em vez do alvo protegido costuma valer mais, já que ele tem pouca vida e nenhuma fuga própria cedo.
-- itens que viram: o Shard dele dá Rain of Destiny, área que machuca inimigo e cura aliado ao mesmo tempo, útil pra segurar luta prolongada contra o seu time; ele não tem Scepter na build típica contra o Puck. Do seu lado, nenhum item reverte a resistência mágica de Fate's Edict, a resposta é mirar outro alvo ou esperar a janela passar.
+- itens que viram: o Shard dele dá Rain of Destiny, área que machuca inimigo e cura aliado ao mesmo tempo, útil pra segurar luta prolongada contra o seu time; ele não tem upgrade de Scepter nesse patch, só o Shard. Do seu lado, nenhum item reverte a resistência mágica de Fate's Edict, a resposta é mirar outro alvo ou esperar a janela passar.
 - como jogar: se o alvo que você quer matar ficar com o buff azul de Fate's Edict em cima, troque de alvo na hora, insistir só desperdiça o combo. Priorize o Oracle em vez do carry protegido sempre que a luta permitir.
-- fonte: pro_dados/oracle.json; pro_dados/puck.json; herois_catalogo.json (ficha Oracle); constants_abilities.json (oracle_fates_edict, oracle_false_promise, puck_waning_rift, puck_dream_coil); aghs_desc (Oracle, Puck)
+- fonte: pro_dados/oracle.json; pro_dados/puck.json; constants_abilities.json (oracle_fates_edict, oracle_false_promise, puck_waning_rift, puck_dream_coil); aghs_desc (Oracle, Puck)
 
 ## Contra Lone Druid (lone_druid)
 - placar: 9 vitórias em 36 jogos de pro, 25,0% a favor dele (fonte: OpenDota matchups, pro_dados/puck.json)
 - por que importa: a maior desvantagem do Puck com amostra de 30 jogos ou mais, de longe. Lone Druid é dois corpos jogando ao mesmo tempo (ele e o Spirit Bear), splitpusha lanes diferentes e farma rápido (GPM mediano de 685, o maior da lista), e o combo de alvo único do Puck não resolve duas unidades separadas em rotas diferentes.
-- janelas: até os 5 min ele já tem Power Treads (5:24), um dos itens mais rápidos da lista inteira. Dos 12 aos 17 min ele monta Maelstrom (12:06) e depois Mjollnir (16:30) no Spirit Bear, dano em área que limpa creep absurdamente rápido; nessa mesma janela o seu Witch Blade (13:42) ainda depende de pegar ele sozinho, o que é raro porque ele está spalitpushando. O Scepter dele sai 21:42, ampliando o Entangle; o Shard, 24:30, encurtando a janela de fuga do Savage Roar pra 4s mas ainda assim dando fear que quebra qualquer setup de combo seu em andamento.
+- janelas: até os 5 min ele já tem Power Treads (5:24), um dos itens mais rápidos da lista inteira. Dos 12 aos 17 min ele monta Maelstrom (12:06) e depois Mjollnir (16:30) no Spirit Bear, dano em área que limpa creep absurdamente rápido; nessa mesma janela o seu Witch Blade (13:42) ainda depende de pegar ele sozinho, o que é raro porque ele está spalitpushando. O Scepter dele sai 21:42, ampliando o Entangle; o Shard, 24:30, dá um dispel básico e bônus de velocidade pro time dele assim que ele ou o Urso ativar, o que pode salvar alguém do seu combo em andamento.
 - o que ele faz com você: Entangle empilha 5 marcas pra enraizar e causar dano contínuo, tanto do Lone Druid quanto do Spirit Bear com Entangling Claws; Savage Roar faz você e aliados fugirem pra base em pânico por um tempo, cancelando combo de iniciação em andamento; True Form no nível 6 transforma ele num urso com dano, vida e armadura bem maiores, perdendo o ataque à distância mas ganhando poder de luta direto.
 - o que você faz com ele: Dream Coil prende um dos dois corpos, mas o outro continua livre pra farmar ou splitpushar em outra lane, então sua ultimate nunca resolve o duo inteiro de uma vez; Waning Rift sala antes do Entangle ou do Savage Roar, cortando o combo de fuga dele numa troca pontual.
 - itens que viram: o Scepter dele aumenta o raio do Entangle e tira a proteção contra ganho de marca que o alvo teria, perigoso em luta de grupo; o Shard dá um dispel básico e bônus de velocidade de movimento e de ataque pros aliados perto de quem ativar, útil pro time dele escapar ou reagir depois de um gank seu. Nenhum item seu resolve o problema de fundo, que é ter duas unidades pra escolher onde aplicar pressão.
 - como jogar: não tente resolver o confronto sozinho no 1x1, ele sempre tem a opção de fugir com o outro corpo enquanto farma; priorize objetivo e visão de mapa em vez de caçar ele, e junte o time pra forçar luta em 5 em vez de 1.
-- fonte: pro_dados/lone_druid.json; pro_dados/puck.json; herois_catalogo.json (ficha Lone Druid); constants_abilities.json (lone_druid_spirit_bear_entangle, lone_druid_savage_roar, lone_druid_true_form, puck_waning_rift, puck_dream_coil); aghs_desc (Lone Druid, Puck)
+- fonte: pro_dados/lone_druid.json; pro_dados/puck.json; constants_abilities.json (lone_druid_spirit_bear_entangle, lone_druid_savage_roar, lone_druid_true_form, puck_waning_rift, puck_dream_coil); aghs_desc (Lone Druid, Puck)

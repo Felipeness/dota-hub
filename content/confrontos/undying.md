@@ -21,11 +21,6 @@ fontes:
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/alchemist.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/confrontos/night_stalker.md
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/confrontos/rubick.md
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/confrontos/shadow_shaman.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/undying.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 
@@ -50,24 +45,24 @@ fontes:
 - fonte: pro_dados/undying.json; pro_dados/hoodwink.json; constants_abilities.json (undying_tombstone, undying_decay, hoodwink_bushwhack, hoodwink_acorn_shot); aghs_desc.
 
 ## Contra Rubick (rubick)
-- placar: Undying venceu 63 de 158 partidas de pro (39,9%). Rubick venceu as outras 95 (60,1%, confirmado em confrontos/rubick.md). Fonte: pro_dados/undying.json.
+- placar: Undying venceu 63 de 158 partidas de pro (39,9%). Rubick venceu as outras 95 (60,1%, partidas pro 7.40-7.41, OpenDota). Fonte: pro_dados/undying.json.
 - por que importa: 3º oponente com mais jogos (158) e a pior desvantagem percentual do Undying entre os 6 mais jogados; Rubick rouba o kit dele mesmo sem compartilhar lane de carry, forçando cuidado extra com o que Undying lança perto dele.
 - janelas: os dois sobem Arcane Boots quase junto (Undying 11,0min, Rubick 10,3min); Rubick chega no Blink (21,6min) quase 7min antes de Undying (28,3min), dando a ele a janela de iniciação primeiro por boa parte do jogo; o Aghanim's dele sai em timing parecido com o Shard de Undying (24,4min).
-- o que ele faz com você: Telekinesis interrompe o avanço antes do Flesh Golem virar relevante; Fade Bolt reduz o dano de saída por stack, cortando o bônus de ataque do Flesh Golem ativo; Spell Steal pode copiar a Decay ou o Soul Rip se usados perto dele, mas o alvo clássico de roubo é o próprio Flesh Golem como pânico defensivo (confirmado em confrontos/rubick.md).
+- o que ele faz com você: Telekinesis interrompe o avanço antes do Flesh Golem virar relevante; Fade Bolt reduz o dano de saída por stack, cortando o bônus de ataque do Flesh Golem ativo; Spell Steal pode copiar a Decay, o Soul Rip ou o próprio Flesh Golem se usados perto dele.
 - o que você faz com ele: Decay rouba a força dele e reduz a vida já baixa de Rubick; a Tombstone trava ele na zona de zumbis, atrasando o cast de Spell Steal.
 - itens que viram: o Shard de Undying esconde o aliado-alvo do Telekinesis dentro da Tombstone, anulando o combo de iniciação; o blink de Rubick chegando bem antes do seu significa que ele abre a luta primeiro na maior parte do jogo.
 - como jogar: evite plantar a Tombstone sem checar se Rubick já gastou o blink; depois que ele usar Telekinesis ou Spell Steal, é a hora de avançar com o Flesh Golem.
-- fonte: pro_dados/undying.json; pro_dados/rubick.json; confrontos/rubick.md (bloco Contra Undying); constants_abilities.json (undying_decay, undying_tombstone, undying_flesh_golem, rubick_telekinesis, rubick_fade_bolt, rubick_spell_steal); aghs_desc.
+- fonte: pro_dados/undying.json; pro_dados/rubick.json; constants_abilities.json (undying_decay, undying_tombstone, undying_flesh_golem, rubick_telekinesis, rubick_fade_bolt, rubick_spell_steal); aghs_desc.
 
 ## Contra Shadow Fiend (nevermore)
 - placar: Undying venceu 69 de 157 partidas de pro (43,9%). Fonte: pro_dados/undying.json.
-- por que importa: 4º oponente com mais jogos (157); é um dos matchups já citados como favoráveis a Undying na ficha do herói (dotacoach.gg).
+- por que importa: 4º oponente com mais jogos (157).
 - janelas: Shadow Fiend sobe Boots of the Elves aos 6,9min e Blade of Alacrity aos 12,7min, item rápido de farm, e prefere empurrar e farmar sozinho a disputar uma zona fixa, então o controle de área do Tombstone pesa menos nele do que num suporte; até os 20min (tpscroll dele 20,9) Undying já tem Arcane Boots (11,0) e Chainmail (12,3) prontos pra segurar engajamento; o Shard de Undying (24,4) chega perto do Claymore dele (24,2), fase em que SF já tem dano de sobra pra punir erro de posicionamento.
 - o que ele faz com você: Shadowraze acerta em uma das três distâncias com dano crescente por Necromastery (até 280 de dano base mais bônus por alma); se pega Undying sozinho perto da Tombstone recém plantada, o dano de linha já basta pra matar um suporte sem Shard.
 - o que você faz com ele: Decay reduz a força dele, que tem vida curta por ser um carry físico; a Tombstone e os zumbis atrapalham ele de farmar perto da zona e de alinhar o Shadowraze com segurança.
 - itens que viram: o kit padrão de Undying não tem dano em área pra punir o farm dele à distância; a resposta prática é zona, plantar a Tombstone na rota de farm dele corta o income antes de tentar vencer a troca.
 - como jogar: use a Tombstone pra negar a rota de farm dele, não só pra defender; evite segurar o grupo parado dentro do alcance de Requiem of Souls quando ele já tiver muitas almas guardadas.
-- fonte: pro_dados/undying.json; pro_dados/nevermore.json; constants_abilities.json (nevermore_shadowraze1, nevermore_requiem, nevermore_necromastery, undying_decay, undying_tombstone); dota-hub/content/fichas/undying.md (matchups favoráveis, dotacoach.gg).
+- fonte: pro_dados/undying.json; pro_dados/nevermore.json; constants_abilities.json (nevermore_shadowraze1, nevermore_requiem, nevermore_necromastery, undying_decay, undying_tombstone).
 
 ## Contra Tusk (tusk)
 - placar: Undying venceu 59 de 135 partidas de pro (43,7%). Fonte: pro_dados/undying.json.
@@ -91,43 +86,43 @@ fontes:
 
 ## Contra Axe (axe)
 - placar: Undying venceu 63 de 119 partidas de pro (52,9%). Fonte: pro_dados/undying.json.
-- por que importa: rival direto de posição, os dois aparecem como pos 3 no catálogo (`herois_catalogo.json`); 119 jogos de pro, Undying levemente favorito.
+- por que importa: rival direto de rota; 119 jogos de pro, Undying levemente favorito.
 - janelas: Axe monta rápido pro corpo a corpo (Phase Boots 7,2min, Blade Mail 12,6min, Blink 15,7min), chegando na mobilidade bem antes de Undying (28,3min), dos 15 aos 24min ele pode iniciar o Call em cima de Undying fora de posição; mas o Chainmail de Undying (12,3) e a Decay (disponível desde o nível 1) seguram a troca de HP cedo. O Shard de Axe (22,9min) e o de Undying (24,4min) chegam quase juntos, equilibrando o late.
 - o que ele faz com você: Berserker's Call (raio 315, 12 a 15 de armadura) trava Undying pra bater nele; Counter Helix devolve 100 a 160 de dano puro a cada 4 a 7 ataques recebidos, o que pune bater nele sem plano.
 - o que você faz com ele: Decay rouba a força dele bem na troca corpo a corpo que ele busca; com Shard, dá pra esconder o aliado que o Axe focou com o Call dentro da Tombstone.
 - itens que viram: o Shard de Axe (Battle Hunger empilhável) aumenta o dano contínuo sofrido por quem ele enrola; o Shard de Undying protege contra o Call isolando o alvo.
 - como jogar: não force troca de ataque corpo a corpo direto nele por causa do Counter Helix; use a Tombstone pra dar um ponto de fuga pro aliado que ele chamar com o Call.
-- fonte: pro_dados/undying.json; pro_dados/axe.json; constants_abilities.json (axe_berserkers_call, axe_counter_helix, axe_battle_hunger, undying_decay, undying_tombstone); aghs_desc; herois_catalogo.json.
+- fonte: pro_dados/undying.json; pro_dados/axe.json; constants_abilities.json (axe_berserkers_call, axe_counter_helix, axe_battle_hunger, undying_decay, undying_tombstone); aghs_desc.
 
 ## Contra Mars (mars)
 - placar: Undying venceu 60 de 117 partidas de pro (51,3%). Fonte: pro_dados/undying.json.
-- por que importa: outro rival direto de posição (pos 3 no catálogo), 117 jogos de pro, Undying levemente favorito.
+- por que importa: outro rival direto de rota, 117 jogos de pro, Undying levemente favorito.
 - janelas: Mars também monta rápido pro corpo a corpo (Blink 15,2min, bem antes do de Undying); Spear of Mars (900 a 1200 de alcance crescente por nível) ameaça empalar Undying de longe mesmo antes do blink dele. O Shard dele, que faz a lança empalar 2 heróis e deixar rastro de fogo, sai aos 21,5min, pouco antes do de Undying (24,4min).
 - o que ele faz com você: Spear of Mars empala e empurra, prendendo Undying se bater em árvore, prédio ou penhasco (stun de 1,3 a 2,2s); God's Rebuke dá crítico de 150 a 300% e empurra em cone de 140°, ótimo pra tirar Undying de perto da própria Tombstone.
 - o que você faz com ele: Decay reduz a força dele, cortando o dano físico do kit inteiro (Spear e God's Rebuke escalam com o corpo a corpo dele); a Tombstone e os zumbis atrapalham o posicionamento da Arena of Blood.
 - itens que viram: Bulwark dele reduz até 70% do dano frontal, então ataque básico de zumbi ou aliado de frente rende pouco; o Shard de Undying protege o aliado que ele tentar empalar contra parede.
 - como jogar: não fique alinhado perto de parede ou árvore quando ele tiver a Spear pronta; aproveite a Decay pra reduzir o dano dele antes de uma troca corpo a corpo.
-- fonte: pro_dados/undying.json; pro_dados/mars.json; constants_abilities.json (mars_spear, mars_gods_rebuke, mars_bulwark, undying_decay, undying_tombstone); aghs_desc; herois_catalogo.json.
+- fonte: pro_dados/undying.json; pro_dados/mars.json; constants_abilities.json (mars_spear, mars_gods_rebuke, mars_bulwark, undying_decay, undying_tombstone); aghs_desc.
 
 ## Contra Centaur Warrunner (centaur)
 - placar: Undying venceu 57 de 114 partidas de pro (50,0%). Fonte: pro_dados/undying.json (arquivo pro_dados/centaur.json).
-- por que importa: terceiro rival direto de posição (pos 3 no catálogo), 114 jogos de pro, o confronto mais parelho da lista.
+- por que importa: terceiro rival direto de rota, 114 jogos de pro, o confronto mais parelho da lista.
 - janelas: Centaur monta tankiness cedo (Vanguard 8,5min, Ring of Tarrasque 17,5min) pra aguentar iniciação; o blink dele (19,6min) chega bem antes do de Undying, então ele ameaça Stampede + Hoof Stomp num grupo antes de Undying conseguir reposicionar. O Chainmail de Undying (12,3min) ajuda a segurar o corpo a corpo cedo contra a regeneração dele.
 - o que ele faz com você: Hoof Stomp atordoa (1,6 a 2,2s) e abre com Double Edge (dano por percentual da força dele, sem risco de morte própria); Stampede atropela o time todo, inclusive Undying, tirando a posição da Tombstone.
 - o que você faz com ele: Decay reduz a força dele, que é a base de quase todo o dano do kit (Double Edge e Retaliate escalam com ela); a Tombstone trava o ponto de iniciação, forçando a Stampede a vir de outro ângulo.
 - itens que viram: Retaliate dele devolve dano de ataque básico, então bater nele com zumbi ou ataque normal custa caro; a Decay compensa reduzindo a força antes da troca.
 - como jogar: não disponha o time em linha reta pro Stampede dele; gaste a Decay assim que ele avançar, antes do combo físico começar.
-- fonte: pro_dados/undying.json; pro_dados/centaur.json; constants_abilities.json (centaur_hoof_stomp, centaur_double_edge, centaur_return, centaur_stampede, undying_decay, undying_tombstone); herois_catalogo.json.
+- fonte: pro_dados/undying.json; pro_dados/centaur.json; constants_abilities.json (centaur_hoof_stomp, centaur_double_edge, centaur_return, centaur_stampede, undying_decay, undying_tombstone).
 
 ## Contra Night Stalker (night_stalker)
-- placar: Undying venceu 25 de 37 partidas de pro (67,6%). Night Stalker venceu as outras 12 (32,4%, confirmado em confrontos/night_stalker.md). Fonte: pro_dados/undying.json. Maior vantagem da lista com amostra válida (37 jogos, acima do corte de 30).
+- placar: Undying venceu 25 de 37 partidas de pro (67,6%). Night Stalker venceu as outras 12 (32,4%, partidas pro 7.40-7.41, OpenDota). Fonte: pro_dados/undying.json. Maior vantagem da lista com amostra válida (37 jogos, acima do corte de 30).
 - por que importa: Undying anula justamente a arma principal de Night Stalker fora da noite, espaço livre pra caçar e iniciar.
 - janelas: Undying não tem spike de dano (gpm 379, lh10 de 21), a força é controle de área desde o nível 6 com a Tombstone; o Shard dele (24,4min) chega perto do blink de Night Stalker já estar "velho" (17,1min), então do meio do jogo em diante Tombstone + Shard passam a travar ganks e lutas em grupo inteiras.
 - o que ele faz com você: Crippling Fear silencia (corta o recast de Tombstone/Soul Rip) enquanto está perto; de noite o Void dá mini-stun e atordoa, facilitando destruir a Tombstone mais rápido (HP dela escala de 20 a 32 por nível).
 - o que você faz com ele: a Tombstone cria zumbis num raio de 1200 por 30s, lotando a área de alvos que distraem a Crippling Fear dele e atrasam a chegada nele mesmo; a Decay rouba a força de Night Stalker e cura Undying, reduzindo o dano físico do combo de burst dele.
 - itens que viram: Black King Bar de Night Stalker não resolve o problema de espaço da Tombstone, só o dano dos zumbis; a resposta real dele seria dano em área (que não é o forte do herói) ou ignorar a zona e focar outro alvo, o que raramente acontece em pro.
 - como jogar: plante a Tombstone nos pontos de rotação e gank que ele mais usa, não só defensivamente; force a troca de dia, quando o Void dele não atordoa.
-- fonte: pro_dados/undying.json; pro_dados/night_stalker.json; confrontos/night_stalker.md (bloco Contra Undying); constants_abilities.json (undying_tombstone, undying_decay, night_stalker_crippling_fear, night_stalker_void).
+- fonte: pro_dados/undying.json; pro_dados/night_stalker.json; constants_abilities.json (undying_tombstone, undying_decay, night_stalker_crippling_fear, night_stalker_void).
 
 ## Contra Medusa (medusa)
 - placar: Undying venceu 23 de 35 partidas de pro (65,7%). Fonte: pro_dados/undying.json. 2ª maior vantagem com amostra válida (35 jogos).
@@ -140,14 +135,14 @@ fontes:
 - fonte: pro_dados/undying.json; pro_dados/medusa.json; constants_abilities.json (undying_tombstone, undying_decay, undying_soul_rip, medusa_split_shot, medusa_stone_gaze, medusa_mana_shield).
 
 ## Contra Shadow Shaman (shadow_shaman)
-- placar: Undying venceu 30 de 47 partidas de pro (63,8%). Shadow Shaman venceu as outras 17 (36,2%, confirmado em confrontos/shadow_shaman.md). Fonte: pro_dados/undying.json. 3ª maior vantagem com amostra válida (47 jogos).
+- placar: Undying venceu 30 de 47 partidas de pro (63,8%). Shadow Shaman venceu as outras 17 (36,2%, partidas pro 7.40-7.41, OpenDota). Fonte: pro_dados/undying.json. 3ª maior vantagem com amostra válida (47 jogos).
 - por que importa: espelho de suporte duro, os dois disputam zona de lane no bracket pos 4/5, e Undying ganha essa disputa com folga.
 - janelas: Undying monta devagar (Chainmail 12,3min, Arcane Boots 11,0min); o Shard (24,4min) deixa a Tombstone virar bunker pra um aliado, poder de zona que cresce bastante no meio do jogo, bem na curva em que Shadow Shaman tenta consolidar presença no mapa com a Mass Serpent Ward.
 - o que ele faz com você: Shackles (canalização de até 4,2s) imobiliza e drena vida se ele conseguir chegar perto; Hex transforma e desarma por até 2,9s, risco real se pegar Undying fora da Tombstone.
 - o que você faz com ele: a Tombstone cria zumbis que perseguem e desaceleram todo mundo perto, inclusive o Shaman tentando plantar ward ou se posicionar pro combo; a Decay rouba força (e dá o dobro de dano em creep, o que também limpa ward e Serpent Ward mais rápido).
 - itens que viram: nenhum item do Shaman neutraliza a zona da Tombstone diretamente; a saída prática pra ele é evitar lutar em cima dela, não tentar atravessar.
 - como jogar: plante a Tombstone em cima das wards e da Serpent Ward dele quando possível, a Decay limpa rápido; não deixe ele canalizar Shackles perto da zona sem punir com zumbi e Decay.
-- fonte: pro_dados/undying.json; pro_dados/shadow_shaman.json; confrontos/shadow_shaman.md (bloco Contra Undying); constants_abilities.json (undying_tombstone, undying_decay, shadow_shaman_shackles, shadow_shaman_voodoo).
+- fonte: pro_dados/undying.json; pro_dados/shadow_shaman.json; constants_abilities.json (undying_tombstone, undying_decay, shadow_shaman_shackles, shadow_shaman_voodoo).
 
 ## Contra Lone Druid (lone_druid)
 - placar: Undying venceu 10 de 32 partidas de pro (31,3%). Fonte: pro_dados/undying.json. Maior desvantagem da lista com amostra válida (32 jogos, no limite do corte de 30).

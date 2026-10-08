@@ -10,13 +10,12 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 - https://api.opendota.com/api/constants/aghs_desc
-- C:/Users/felip/Desktop/dota-hub/content/fichas/silencer.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
+- https://api.opendota.com/api/explorer (consulta lane_role de partidas de liga 7.40+7.41, hero_id 75)
 ---
 
 ## Como foi montada essa lista
 
-Silencer é suporte puro em pro play (pos 4 de roaming ou pos 5 duro, nunca carry nem mid, fonte: herois_catalogo.json e fichas/silencer.md). Os 16 oponentes abaixo vêm de quatro critérios cruzados com o OpenDota (pro_dados/silencer.json, 1170 jogos de liga): os 6 com mais jogos registrados contra ele (Rubick, Shadow Fiend, Snapfire, Lion, Ogre Magi, Disruptor), mais 4 suportes pos 4/5 muito jogados contra ele que não entraram no top 6 (Hoodwink, Tusk, Phoenix, Skywrath Mage), mais os 3 com maior vantagem e os 3 com maior desvantagem pra Silencer com 30+ partidas (Clinkz, Lina, Primal Beast do lado bom; Treant Protector, Night Stalker, Keeper of the Light do lado ruim). Shadow Fiend entra mesmo sendo mid porque é o 2º herói mais jogado contra ele no banco de dados inteiro, e a lógica desse confronto é exatamente a do Alchemist contra Morphling do pedido original: dois heróis que raramente trocam na lane, mas cujo timing de poder um contra o outro define o jogo quando se cruzam.
+Silencer joga quase só de suporte em pro play: das 1.172 partidas de liga 7.40-7.41 com lane_role registrado, 742 (63,3%) foram na safe lane, papel típico do pos 5 que acompanha o carry, e 386 (32,9%) na off lane, papel típico do pos 4 de roaming; só 42 (3,6%) apareceram como mid (fonte: partidas pro 7.40-7.41, OpenDota explorer, lane_role). Os 16 oponentes abaixo vêm de quatro critérios cruzados com o OpenDota (pro_dados/silencer.json, 1170 jogos de liga): os 6 com mais jogos registrados contra ele (Rubick, Shadow Fiend, Snapfire, Lion, Ogre Magi, Disruptor), mais 4 suportes pos 4/5 muito jogados contra ele que não entraram no top 6 (Hoodwink, Tusk, Phoenix, Skywrath Mage), mais os 3 com maior vantagem e os 3 com maior desvantagem pra Silencer com 30+ partidas (Clinkz, Lina, Primal Beast do lado bom; Treant Protector, Night Stalker, Keeper of the Light do lado ruim). Shadow Fiend entra mesmo sendo mid porque é o 2º herói mais jogado contra ele no banco de dados inteiro, e a lógica desse confronto é exatamente a do Alchemist contra Morphling do pedido original: dois heróis que raramente trocam na lane, mas cujo timing de poder um contra o outro define o jogo quando se cruzam.
 
 ## Contra Rubick (rubick)
 
@@ -190,6 +189,6 @@ Silencer é suporte puro em pro play (pos 4 de roaming ou pos 5 duro, nunca carr
 - janelas: Keeper of the Light farma bem mais rápido que um suporte comum (lh10 34, gpm 444, fonte: resumo), puxado pelo próprio Illuminate pegando creep de lane; ele costuma estar à frente do seu Arcane Boots (11,9 min) já com Holy Locket (15,3 min, n=629) ou caminho pra Boots of Travel (14,8 min); o alcance de 1550-1800 do Illuminate e o bônus de alcance de cast do Spirit Form (até +300) superam o seu alcance de 850-900 no Last Word e Fade... ou seja, ele ameaça de mais longe do que você consegue responder na maior parte da partida.
 - o que ele faz com você: Illuminate é canalizado até 3s e causa até 500 de dano numa linha de 400 de largura e 1550 de alcance (fonte: constants_abilities.json); Chakra Magic devolve mana e reduz recarga de habilidades do time dele, o que combate exatamente a pressão de recurso que você tenta aplicar.
 - o que você faz com ele: Illuminate é canal, então Global Silence interrompe o dano se você acertar durante o cast; mas o alcance dele dificulta chegar perto o suficiente pra confirmar o silence antes do dano sair.
-- itens que viram: o Aghanim's Scepter dele invoca o Ignis Fatuus, uma versão autônoma que ataca de longe sem precisar da presença física dele, o que reduz ainda mais a exposição dele ao seu alcance de silence.
+- itens que viram: o Aghanim's Scepter dele invoca o Ignis Fatuus, um ponto que pisca e puxa inimigos pra si causando dano em área, lançado a distância e sem precisar da presença física dele junto do efeito, o que reduz ainda mais a exposição dele ao seu alcance de silence.
 - como jogar: use visão de ward pra prever onde o Illuminate vai vir e saia da linha antes do canal completar; não tente vencer o duelo de alcance, jogue pelo flanco ou espere ele gastar mana em creep antes de se expor.
 - fonte: pro_dados/silencer.json; pro_dados/keeper_of_the_light.json; constants_abilities.json (keeper_of_the_light_illuminate, keeper_of_the_light_chakra_magic); aghs_desc (keeper of the light scepter).

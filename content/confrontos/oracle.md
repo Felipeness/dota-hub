@@ -21,20 +21,6 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/oracle.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/disruptor.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/jakiro.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/mars.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/rubick.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/pudge.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/batrider.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/snapfire.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/puck.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/silencer.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/hoodwink.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/windrunner.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/dragon_knight.md
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/confrontos/batrider.md
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/confrontos/hoodwink.md
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/confrontos/dragon_knight.md
@@ -67,11 +53,11 @@ Os placares abaixo são sempre da perspectiva do Oracle (vitórias dele no confr
 - o que você faz com ele: Fortune's End (raio 350, dispel básico) purga buffs do Disruptor e o enraíza por até 2,75s antes dele formar a gaiola; Fate's Edict dá 100% de resistência mágica a um aliado preso na Static Storm, zerando o dano dos 20 pulsos mesmo sem remover o silêncio em si.
 - itens que viram: nenhum dos dois pierce BKB nessas duas magias, então Black King Bar de qualquer lado anula a interação principal; Aghanim's Scepter do Disruptor (34,9 min, item muito tardio) faz Static Storm silenciar também uso de item, cortando Glimmer Cape ou Force Staff como saída de quem estiver preso.
 - como jogar: não ande perto do raio de 350 da Kinetic Field sem saber se o Disruptor já tem mana pra Static Storm. Se ele formar a gaiola em cima de você, gaste Fortune's End nele antes do silêncio fechar; depois dos 25 min, quem bate o Blink primeiro ganha a troca de posicionamento.
-- fonte: pro_dados/oracle.json; pro_dados/disruptor.json; constants_abilities.json (disruptor_kinetic_field, disruptor_static_storm, oracle_fortunes_end, oracle_fates_edict); ficha disruptor.md.
+- fonte: pro_dados/oracle.json; pro_dados/disruptor.json; constants_abilities.json (disruptor_kinetic_field, disruptor_static_storm, oracle_fortunes_end, oracle_fates_edict).
 
 ## Contra Shadow Fiend (nevermore)
 
-- placar: 23 vitórias em 57 partidas de pro, 40,4% (conferido contra confrontos/nevermore.json: 34V/57, 59,6% pro Shadow Fiend).
+- placar: 23 vitórias em 57 partidas de pro, 40,4% (conferido contra confrontos/nevermore.md: 34V/57, 59,6% pro Shadow Fiend).
 - por que importa: 2º maior volume de jogos pro da lista (57) e o pior resultado entre os confrontos de alto volume; dotacoach.gg lista Oracle na seção "Good against" do Shadow Fiend, citando que "Requiem can burst Oracle before he can use Fate's Edict or False Promise in time, especially during a smoke or blink initiation".
 - janelas: Shadow Fiend fecha Power Treads aos 5,9 min, Yasha aos 13,3 e Dragon Lance aos 14,0, puxando dano e alcance rápido; Black King Bar dele só fecha aos 25,2. Oracle só tem Arcane Boots pronto aos 11,7 e nenhum item de dano, sua curva é toda em nível de habilidade. Dos 12 aos 25 min o Shadow Fiend cresce em dano muito mais rápido do que Oracle em utilidade; depois dos 25, ele já tem BKB furando disable físico.
 - o que ele faz com você: Shadowraze (85 a 280 de dano, raio 250, sem precisar mirar unidade, recarga de 3s por raze individual) acerta a 200 de distância antes de reagir; Requiem of Souls (raio 1000, até 20 linhas de energia conforme almas capturadas) amedronta e reduz resistência mágica e velocidade por até 2,15s, podendo acertar você se aproximando pra curar um aliado.
@@ -89,7 +75,7 @@ Os placares abaixo são sempre da perspectiva do Oracle (vitórias dele no confr
 - o que você faz com ele: Fortune's End (raio 350) purga buffs de Jakiro e o enraíza antes dele reposicionar Ice Path; Fate's Edict dá resistência mágica total contra o próprio Macropyre (dano mágico) num aliado pego na faixa de fogo.
 - itens que viram: Aghanim's Shard de Jakiro troca Liquid Frost pra custo zero de mana e sem cooldown compartilhado com Liquid Fire, deixando ele spammar controle sem gastar mana, o que aumenta a pressão constante contra Oracle gastando mana pra curar.
 - como jogar: não fique parada perto do trilho de Ice Path esperando pra curar, o stun de até 2s te prende se a Macropyre vier logo depois. Gaste Fortune's End em Jakiro assim que ele começar a canalizar Macropyre perto do seu time.
-- fonte: pro_dados/oracle.json; pro_dados/jakiro.json; constants_abilities.json (jakiro_macropyre, jakiro_ice_path, jakiro_dual_breath, oracle_fortunes_end, oracle_fates_edict); aghs_desc (jakiro shard); ficha jakiro.md.
+- fonte: pro_dados/oracle.json; pro_dados/jakiro.json; constants_abilities.json (jakiro_macropyre, jakiro_ice_path, jakiro_dual_breath, oracle_fortunes_end, oracle_fates_edict); aghs_desc (jakiro shard).
 
 ## Contra Tiny (tiny)
 
@@ -108,7 +94,7 @@ Os placares abaixo são sempre da perspectiva do Oracle (vitórias dele no confr
 - por que importa: maior vantagem da lista com volume alto (53 jogos) e confirmado por fonte externa: dotacoach.gg lista Oracle na seção "Bad against" do próprio Mars, com o texto "Oracle can save allies from lethal damage inside Arena of Blood using False Promise, negating Mars' burst potential. Additionally, Fate's Edict can disarm Mars, lowering his threat in fights, or grant magic immunity to teammates against Spear of Mars and Arena of Blood."
 - janelas: Mars sobe Blink aos 15,2 min, Aghanim's Shard aos 21,5 (Spear passa a empalar 2 heróis) e Black King Bar aos 26,5. Até os 15 min ele não tem Spear fácil de acertar de longe; depois disso, toda luta que ele fechar com Arena of Blood (raio 550, 5,5s) é quando False Promise decide quem sobrevive lá dentro.
 - o que ele faz com você: Spear of Mars (dano 100 a 325, empala e estuna 1,3 a 2,2s) te prende contra parede, árvore ou prédio se acertar; Arena of Blood cria uma arena que bloqueia movimento e ataque de quem está preso dentro, com guerreiros batendo em quem fica na borda.
-- o que você faz com ele: False Promise no alvo preso na Arena anula o burst inteiro de Mars enquanto durar, atrasando o dano e curando depois; Fate's Edict desarma Mars (zera o auto-attack e o God's Rebuke físico) e dá imunidade mágica total contra o dano do Spear e dos guerreiros da Arena.
+- o que você faz com ele: False Promise no alvo preso na Arena anula o burst inteiro de Mars enquanto durar, atrasando o dano e curando depois; Fate's Edict desarma Mars (zera o auto-attack dele) e dá imunidade mágica total contra o dano do Spear e dos guerreiros da Arena.
 - itens que viram: Aghanim's Shard de Mars (21,5 min) deixa Spear empalar 2 heróis ao mesmo tempo, dobrando o risco de uma iniciação em grupo; Fate's Edict num dos dois alvos ainda bloqueia o dano mágico residual, mas não desfaz o stun físico do empalamento (Spear exige dispel forte, Fate's Edict é resistência, não remoção).
 - como jogar: não force troca dentro da Arena of Blood sem já ter Fate's Edict ou False Promise de prontidão em alguém. Trate o Blink de Mars (15,2 min) como o gatilho real da ameaça dele, antes disso ele só ameaça com Spear de alcance fixo.
 - fonte: pro_dados/oracle.json; pro_dados/mars.json; constants_abilities.json (mars_spear, mars_arena_of_blood, oracle_false_promise, oracle_fates_edict); aghs_desc (mars shard); https://dotacoach.gg/en/heroes/counters/mars.
@@ -122,7 +108,7 @@ Os placares abaixo são sempre da perspectiva do Oracle (vitórias dele no confr
 - o que você faz com ele: Fortune's End em Rubick (raio 350) purga qualquer buff que ele tenha ativo e o enraíza por até 2,75s, interrompendo o avanço antes dele fechar Telekinesis (levanta e estuna área ao cair); se ele acabou de roubar uma magia sua, Fate's Edict continua funcionando normal nele, o roubo não dá proteção contra as outras.
 - itens que viram: Aghanim's Scepter de Rubick (27,4 min) aumenta o alcance de Spell Steal e deixa roubar 2 magias ao mesmo tempo, dobrando o risco de perder justo a magia que você mais precisa numa luta.
 - como jogar: lance suas magias de longe quando ele estiver visível, pra evitar o roubo. Se perceber que ele já guardou uma magia sua, mude o plano de luta pra não depender dela.
-- fonte: pro_dados/oracle.json; pro_dados/rubick.json; constants_abilities.json (rubick_spell_steal, rubick_telekinesis, rubick_fade_bolt, oracle_fortunes_end, oracle_fates_edict); aghs_desc (rubick scepter); ficha rubick.md.
+- fonte: pro_dados/oracle.json; pro_dados/rubick.json; constants_abilities.json (rubick_spell_steal, rubick_telekinesis, rubick_fade_bolt, oracle_fortunes_end, oracle_fates_edict); aghs_desc (rubick scepter).
 
 ## Contra Pudge (pudge)
 
@@ -149,11 +135,11 @@ Os placares abaixo são sempre da perspectiva do Oracle (vitórias dele no confr
 ## Contra Snapfire (snapfire)
 
 - placar: 23 vitórias em 45 partidas de pro, 51,1%, praticamente 50/50.
-- por que importa: função parecida (suporte ou iniciadora de pickoff, aparece em várias posições no catálogo) e volume relevante (45 jogos).
+- por que importa: função parecida (suporte ou iniciadora de pickoff) e volume relevante (45 jogos).
 - janelas: Snapfire sobe Aghanim's Shard muito cedo pra um shard, mediana 16,9 min (Firesnap Cookie passa a curar o alvo e lançar um Mortimer Kiss extra), antes até do próprio Blink dela (20,7). Oracle só fecha Arcane Boots aos 11,7 e não tem spike de dano; dos 15 aos 20 min, Snapfire já ameaça pickoff enquanto Oracle ainda está em rotação de suporte puro.
 - o que ele faz com você: Scatterblast (dano em cone, desacelera movimento e ataque) seguido de Firesnap Cookie (stun na área de aterrissagem) é o combo de abertura; Mortimer Kisses (barragem de 5,5s, 180 a 360 de dano por impacto, ela fica com giro reduzido e exposta o tempo todo) pode acertar você tentando curar de longe.
 - o que você faz com ele: False Promise, dispel forte no cast inicial, cleana o stun de Firesnap Cookie se lançada a tempo no aliado atingido (a própria Firesnap exige dispel forte pra sair, Fortune's End sozinha não remove); Fate's Edict dá resistência mágica total contra Scatterblast e Mortimer Kisses, os dois mágicos.
-- itens que viram: Aghanim's Shard dela (16,9 min) acelera o ciclo de cura mais stun do Firesnap Cookie, então quanto mais cedo você interromper o combo com Fortune's End nela (rota e some os buffs dela), menos vezes ela repete isso na mesma luta.
+- itens que viram: Aghanim's Shard dela (16,9 min) faz Firesnap Cookie curar o alvo e lançar um Mortimer Kiss extra na queda; interromper o combo com Fortune's End nela antes do cast tira esse bônus de cura e dano da jogada.
 - como jogar: ataque Snapfire durante os 5,5s de Mortimer Kisses, ela fica praticamente parada e exposta. Guarde Fate's Edict pro aliado que ela já acertou com Scatterblast, o dano residual é mágico.
 - fonte: pro_dados/oracle.json; pro_dados/snapfire.json; constants_abilities.json (snapfire_scatterblast, snapfire_firesnap_cookie, snapfire_mortimer_kisses, oracle_false_promise, oracle_fortunes_end, oracle_fates_edict); aghs_desc (snapfire shard).
 
@@ -174,7 +160,7 @@ Os placares abaixo são sempre da perspectiva do Oracle (vitórias dele no confr
 - por que importa: mesma função exata (suporte 4/5) e a interação mais perigosa da lista pro Oracle, Global Silence desliga o kit inteiro dela de uma vez.
 - janelas: Silencer fecha Arcane Boots aos 11,9 min (quase igual a Oracle, 11,7). Nenhum dos dois tem spike de dano; o confronto é todo sobre nível de ultimate e timing de silêncio. A partir do nível 6, cada vez que Silencer acerta Global Silence no grupo é uma janela de 4,5 a 6s em que Oracle não existe como suporte ativo.
 - o que ele faz com você: Global Silence não tem alvo, é mapa inteiro, "preventing enemy heroes and units on the map from casting spells" pelo próprio desc da habilidade, e desliga False Promise, Fortune's End, Fate's Edict e Purifying Flames ao mesmo tempo, em qualquer lugar do mapa; Last Word te cala e te marca se você castar qualquer coisa enquanto o efeito estiver ativo.
-- o que você faz com ele: fora da janela da ultimate dele, Fortune's End purga buffs de Silencer e o enraíza; Fate's Edict desarma ele (tira o auto-attack amplificado por Last Word) e dá resistência mágica total contra o próprio Last Word.
+- o que você faz com ele: fora da janela da ultimate dele, Fortune's End purga buffs de Silencer e o enraíza; Fate's Edict desarma ele (tira o auto-attack) e dá resistência mágica total contra o próprio Last Word.
 - itens que viram: Global Silence atravessa Black King Bar (bkbpierce: sim), então BKB não te salva do silêncio; e enquanto ela dura, você mesma não consegue se limpar sozinha, porque está impedida de castar qualquer coisa, só um dispel vindo de um aliado ajuda.
 - como jogar: trate o cooldown da ultimate dele como o relógio real da luta, depois que ele gasta Global Silence sem te travar você tem uma janela livre pra jogar agressivo. Nunca guarde False Promise ou Fortune's End pra "depois" se ele está prestes a ultar, gaste antes.
 - fonte: pro_dados/oracle.json; pro_dados/silencer.json; constants_abilities.json (silencer_global_silence, silencer_last_word, oracle_false_promise, oracle_fortunes_end, oracle_fates_edict).
@@ -193,13 +179,13 @@ Os placares abaixo são sempre da perspectiva do Oracle (vitórias dele no confr
 ## Contra Windranger (windrunner)
 
 - placar: 14 vitórias em 41 partidas de pro, 34,1%, 2ª maior desvantagem da lista.
-- por que importa: embora o catálogo marque ela como suporte, no 7.41 ela é jogada majoritariamente como pos 1 carry em pro (53,6% dos picks no recorte local de tier 1, fonte ficha windrunner.md), então o confronto real é suporte contra right-clicker puro, não suporte contra suporte.
+- por que importa: no 7.41, em pro ela tem perfil de carry, 492 gpm e 36 last hits aos 10 minutos na mediana (partidas pro 7.40-7.41, OpenDota), bem acima do padrão de suporte, então o confronto real é suporte contra right-clicker puro, não suporte contra suporte.
 - janelas: Windranger sobe itens de ataque cedo pra right-click, Hyperstone aos 17,4 min, Mjollnir aos 18,3, Black King Bar aos 24,4. Oracle não tem item de dano pra competir, a curva dela de carry supera a de utilidade do Oracle a partir dos 18 min.
 - o que ele faz com você: Windrun dá 100% de evasão a ataques físicos por 3 a 6s (não bloqueia dano mágico, pelo próprio desc "adds evasion from all physical attacks"), te deixa sem como puni-la com auto-attack, mas não protege contra Fortune's End nem Purifying Flames, os dois mágicos; Shackleshot prende um aliado numa árvore ou unidade próxima, abrindo o combo de Focus Fire.
 - o que você faz com ele: Fortune's End dispela Windrun (dispellable: Sim, pelas constantes do patch) e enraíza Windranger, cortando o escape dela; Fate's Edict dá resistência mágica total contra Powershot, mas o próprio Focus Fire é dano físico de ataque, então a resistência mágica sozinha não segura o right-click dela.
 - itens que viram: Black King Bar de Windranger (24,4 min) bloqueia o root de Fortune's End a partir desse ponto; antes disso, qualquer dispel seu em cima dela ainda funciona normal.
 - como jogar: pressione Windranger antes dos 24 min, antes do BKB fechar. Depois disso, trate-a como right-clicker puro e jogue em volta de Focus Fire, não tente disable direto nela.
-- fonte: pro_dados/oracle.json; pro_dados/windrunner.json; constants_abilities.json (windrunner_windrun, windrunner_shackleshot, windrunner_focusfire, oracle_fortunes_end, oracle_fates_edict); ficha windrunner.md.
+- fonte: pro_dados/oracle.json; pro_dados/windrunner.json; constants_abilities.json (windrunner_windrun, windrunner_shackleshot, windrunner_focusfire, oracle_fortunes_end, oracle_fates_edict).
 
 ## Contra Dragon Knight (dragon_knight)
 

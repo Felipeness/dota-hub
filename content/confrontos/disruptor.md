@@ -21,27 +21,13 @@ fontes:
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/enigma.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/disruptor.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/jakiro.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/tusk.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/ogre_magi.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/lion.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/mars.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/rubick.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/hoodwink.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/shadow_demon.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/phantom_assassin.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/muerta.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/broodmother.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/enigma.md
-- https://strategywiki.org/wiki/Dota_2/Disruptor_the_Stormcrafter
-- https://dotacoach.gg/heroes/phantom-lancer
+- https://api.opendota.com/api/constants/aghs_desc
+- https://api.opendota.com/api/explorer (partidas de liga 7.40-7.41, lane_role)
 ---
 
 ## Como essa lista foi montada
 
-16 oponentes, escolhidos em 4 grupos (critério do pedido):
+15 oponentes, escolhidos em 4 grupos (critério do pedido):
 
 1. **Mais jogos de pro contra o Disruptor** (top 6 do `pro_dados/disruptor.json`, campo `confrontos`): Jakiro, Shadow Fiend, Tusk, Ogre Magi, Lion, Mars.
 2. **Mesma posição principal (4/5), alto volume em pro**, além dos 6 acima: Rubick, Hoodwink, Shadow Demon (esse último também é a maior desvantagem com amostra grande).
@@ -59,7 +45,7 @@ Os placares abaixo são sempre da perspectiva do Disruptor (vitórias dele no co
 - o que você faz com ele: Kinetic Field (raio 350, formação de 1s) prende o Jakiro antes dele posicionar a Macropyre direito; Static Storm (raio 550, 6s, não dispelável) silencia Dual Breath, Ice Path e Macropyre ao mesmo tempo enquanto ele estiver dentro. Glimpse devolve o Jakiro 4s no tempo, cancelando qualquer avanço que ele tenha feito até ali.
 - itens que viram: o Blink do Disruptor (24,0 min) entra dentro dos 800-900 de alcance das duas magias de área antes do Jakiro reagir; Aghanim's Scepter do Disruptor (34,9) faz Static Storm silenciar também uso de item, tirando o Glimmer Cape do Jakiro como saída durante a tempestade.
 - como jogar: não force entrada dentro dos 1100 de alcance do Ice Path sem vantagem de visão; espere o Jakiro errar a área ou gastar Static Storm fora de alcance antes de avançar o Dual Breath. Depois do nível 6, quem prender o outro primeiro numa área de 350-550 de raio fecha a troca.
-- fonte: pro_dados/disruptor.json; pro_dados/jakiro.json; ficha disruptor.md; ficha jakiro.md; constants_abilities.json (disruptor_thunder_strike, disruptor_kinetic_field, disruptor_static_storm, disruptor_glimpse, jakiro_dual_breath, jakiro_ice_path, jakiro_macropyre)
+- fonte: pro_dados/disruptor.json; pro_dados/jakiro.json; constants_abilities.json (disruptor_thunder_strike, disruptor_kinetic_field, disruptor_static_storm, disruptor_glimpse, jakiro_dual_breath, jakiro_ice_path, jakiro_macropyre)
 
 ## Contra Shadow Fiend (nevermore)
 
@@ -81,7 +67,7 @@ Os placares abaixo são sempre da perspectiva do Disruptor (vitórias dele no co
 - o que você faz com ele: Kinetic Field (raio 350, formação de 1s) e Static Storm (raio 550, silencia 6s) travam o Tusk e qualquer aliado puxado pela Snowball antes dele conseguir usar o combo curto; como o kit do Tusk depende de alcance de 150-250, ficar preso atrás da parede do Kinetic Field cancela a iniciação dele por completo.
 - itens que viram: o Blink do Tusk chega 5 minutos antes do Blink do Disruptor (19,0 contra 24,0), então nessa janela intermediária é o Tusk quem ataca primeiro; depois dos 24 min os dois têm blink prontos e vira corrida de quem reage mais rápido ao ver o outro se aproximar.
 - como jogar: antes dos 19 min, evite ficar agrupado perto do Tusk pra Snowball não valer a pena; depois que ele tiver Blink, jogue perto de visão própria pra formar Kinetic Field assim que ele aparecer, antes dele fechar o Walrus Kick.
-- fonte: pro_dados/disruptor.json; pro_dados/tusk.json; ficha tusk.md; constants_abilities.json (disruptor_kinetic_field, disruptor_static_storm)
+- fonte: pro_dados/disruptor.json; pro_dados/tusk.json; constants_abilities.json (disruptor_kinetic_field, disruptor_static_storm)
 
 ## Contra Ogre Magi (ogre_magi)
 
@@ -92,7 +78,7 @@ Os placares abaixo são sempre da perspectiva do Disruptor (vitórias dele no co
 - o que você faz com ele: Kinetic Field prende o Ogre antes dele chegar nos 525 de alcance do Fireblast; Static Storm silencia os 6s inteiros, desligando Fireblast, Ignite e Bloodlust ao mesmo tempo, o que neutraliza o Multicast também, já que sem feitiço não tem o que recastar.
 - itens que viram: o Shard do Ogre (Fire Shield, absorve 85% de 3 ataques físicos) protege ele de troca corpo a corpo, mas não ajuda contra o silêncio de Static Storm; o Blink do Disruptor chega na mesma janela do Shard do Ogre, então quem formar a própria área primeiro desarma o combo do outro.
 - como jogar: evite ficar parado a até 525 de distância do Ogre sem vantagem numérica antes dos 26 min; depois que ele tiver o Shard, puxe a luta pra fora do alcance do Fireblast antes de iniciar, porque o Multicast pode reaplicar o stun em cadeia se a entrada for mal calculada.
-- fonte: pro_dados/disruptor.json; pro_dados/ogre_magi.json; ficha ogre_magi.md; constants_abilities.json (disruptor_kinetic_field, disruptor_static_storm)
+- fonte: pro_dados/disruptor.json; pro_dados/ogre_magi.json; constants_abilities.json (disruptor_kinetic_field, disruptor_static_storm)
 
 ## Contra Lion (lion)
 
@@ -103,7 +89,7 @@ Os placares abaixo são sempre da perspectiva do Disruptor (vitórias dele no co
 - o que você faz com ele: Static Storm silencia o Lion, impedindo Hex, Earth Spike e Finger of Death enquanto ele estiver na área; nenhuma magia do Lion fura Black King Bar, então a troca é simétrica no quesito imunidade. Kinetic Field prende o Lion fora do alcance de 650 de Earth Spike antes dele puxar o combo.
 - itens que viram: o Blink do Lion chega quase 6 min antes do Blink do Disruptor, então até os 24 min é ele quem ameaça iniciar primeiro; depois disso vira disputa de reação, já que os dois dependem do mesmo gap-closer pra acertar o próprio disable.
 - como jogar: antes dos 18 min não há blink de nenhum lado, então a troca é de alcance direto (800-900 do Disruptor contra 575-650 do Lion), vantagem dele; depois que o Lion tiver Blink, ande em grupo e não se isole, porque Hex + Earth Spike não precisam de muito pra matar um suporte sozinho.
-- fonte: pro_dados/disruptor.json; pro_dados/lion.json; ficha lion.md
+- fonte: pro_dados/disruptor.json; pro_dados/lion.json
 
 ## Contra Mars (mars)
 
@@ -114,7 +100,7 @@ Os placares abaixo são sempre da perspectiva do Disruptor (vitórias dele no co
 - o que você faz com ele: Kinetic Field prende o Mars (e os aliados dele) antes da Arena of Blood formar no lugar certo; Static Storm silencia qualquer magia que o Mars precise lançar depois de entrar, embora o Spear já disparado antes não seja cancelado por isso.
 - itens que viram: o Blink do Mars chega quase 9 min antes do Blink do Disruptor, então até os 24 min é o Mars quem ameaça iniciar de surpresa; o Black King Bar do Mars (26,5) sai pouco depois do Blink do Disruptor e remove o silêncio de Static Storm, encerrando a vantagem do Disruptor nessa troca.
 - como jogar: antes dos 15 min o Mars não tem blink, então mantenha distância segura de 1200 (alcance máximo do Spear) sem ficar parado; depois que ele tiver Blink e principalmente depois do BKB (26,5), trate a Arena of Blood como ameaça de grupo e não tente segurar sozinho dentro dela.
-- fonte: pro_dados/disruptor.json; pro_dados/mars.json; ficha mars.md; constants_abilities.json (mars_spear, mars_arena_of_blood)
+- fonte: pro_dados/disruptor.json; pro_dados/mars.json; constants_abilities.json (mars_spear, mars_arena_of_blood)
 
 ## Contra Rubick (rubick)
 
@@ -125,7 +111,7 @@ Os placares abaixo são sempre da perspectiva do Disruptor (vitórias dele no co
 - o que você faz com ele: Kinetic Field e Static Storm travam o Rubick antes dele chegar no alcance curto de Telekinesis; como Fade Bolt e Telekinesis não furam BKB (igual ao Static Storm do Disruptor, que também não fura), a troca de controle entre os dois é simétrica, decide quem acerta a área primeiro.
 - itens que viram: o Blink do Rubick sai antes do Blink do Disruptor (21,6 contra 24,0), dando a ele a primeira janela de iniciação; o Aghanim's Scepter do Disruptor (34,9) faz Static Storm silenciar uso de item também, o que bloqueia o próprio Spell Steal do Rubick se ele tentar usar durante a tempestade.
 - como jogar: não gaste Static Storm ou Kinetic Field perto do Rubick sem necessidade, porque ele pode devolver a mesma magia com Spell Steal; priorize acertar a área nele antes dele ter Blink (antes dos 21-22 min) pra não enfrentar o combo de Telekinesis primeiro.
-- fonte: pro_dados/disruptor.json; pro_dados/rubick.json; ficha rubick.md
+- fonte: pro_dados/disruptor.json; pro_dados/rubick.json
 
 ## Contra Hoodwink (hoodwink)
 
@@ -136,7 +122,7 @@ Os placares abaixo são sempre da perspectiva do Disruptor (vitórias dele no co
 - o que você faz com ela: Static Storm silencia Acorn Shot e Bushwhack por 6s; Kinetic Field prende a Hoodwink fora do alcance de qualquer árvore próxima, tirando a ferramenta de pick-off dela enquanto durar a parede.
 - itens que viram: o Shard da Hoodwink (23,8) chega pouco antes do Blink do Disruptor (24,0), dando a ela ameaça extra de longe nessa janela; depois que o Disruptor tiver Blink, ele consegue fechar a distância antes dela se posicionar perto de árvore.
 - como jogar: ande longe de árvores isoladas contra ela antes dos 24 min; depois que o Disruptor tiver Blink, use a mobilidade pra acertar a área nela antes que consiga plantar o próprio combo perto de vegetação.
-- fonte: pro_dados/disruptor.json; pro_dados/hoodwink.json; ficha hoodwink.md; constants_abilities.json (hoodwink_hunters_boomerang)
+- fonte: pro_dados/disruptor.json; pro_dados/hoodwink.json; constants_abilities.json (hoodwink_hunters_boomerang)
 
 ## Contra Shadow Demon (shadow_demon)
 
@@ -147,7 +133,7 @@ Os placares abaixo são sempre da perspectiva do Disruptor (vitórias dele no co
 - o que você faz com ele: Kinetic Field e Static Storm prendem e silenciam o Shadow Demon normalmente, já que nenhuma magia dele atravessa a área; mas como ele não depende de BKB inimigo pra funcionar, a janela de segurança do Disruptor contra ele é menor que contra outros suportes da lista.
 - itens que viram: o Demonic Cleanse do Shard do Shadow Demon (só em aliado, fura BKB, cura 450 ao fim) protege o time dele de qualquer debuff que o Disruptor aplicar, mesmo antes do Scepter do Disruptor (34,9) silenciar item; é por isso que o confronto pesa contra o Disruptor mesmo com os dois tendo timings de item quase idênticos até os 24 min.
 - como jogar: trate o Demonic Purge como ameaça mesmo atrás de Black King Bar; priorize isolar ou afastar o Shadow Demon antes dele comprar o Shard (25,4), porque depois disso ele limpa qualquer controle que o time aplicar nos aliados dele.
-- fonte: pro_dados/disruptor.json; pro_dados/shadow_demon.json; ficha shadow_demon.md; constants_abilities.json (shadow_demon_demonic_cleanse via ficha)
+- fonte: pro_dados/disruptor.json; pro_dados/shadow_demon.json; constants_abilities.json (shadow_demon_demonic_cleanse)
 
 ## Contra Phantom Assassin (phantom_assassin)
 
@@ -158,7 +144,7 @@ Os placares abaixo são sempre da perspectiva do Disruptor (vitórias dele no co
 - o que você faz com ela: Static Storm silencia Phantom Strike, cortando o teleporte de ataque que ela usa pra reposicionar durante a tempestade; Kinetic Field prende ela antes de chegar perto o bastante pra bater. Nenhuma das duas magias do Disruptor revela invisibilidade, então contra Shadow Blade ou Silver Edge dela o time ainda precisa de Sentry ou Gem à parte.
 - itens que viram: o Black King Bar da PA (23,5) sai pouco antes do Blink do Disruptor (24,0), então entre os 20 e 24 min ela já pode entrar imune a magia numa luta em que o Disruptor ainda não tem Blink pra reagir; depois dos 24 min o Disruptor ganha mobilidade pra formar a área antes dela se aproximar.
 - como jogar: não dê visão fácil de perto dela antes do Disruptor ter Blink; depois que tiver, prenda ela de longe com Kinetic Field antes que o Coup de Grace acerte alguém squishy, porque uma vez que ela conecta um crítico, BKB no alvo não ajuda.
-- fonte: pro_dados/disruptor.json; pro_dados/phantom_assassin.json; ficha phantom_assassin.md; constants_abilities.json (phantom_assassin_coup_de_grace, phantom_assassin_phantom_strike, via ficha)
+- fonte: pro_dados/disruptor.json; pro_dados/phantom_assassin.json; constants_abilities.json (phantom_assassin_coup_de_grace, phantom_assassin_phantom_strike)
 
 ## Contra Phantom Lancer (phantom_lancer)
 
@@ -169,18 +155,18 @@ Os placares abaixo são sempre da perspectiva do Disruptor (vitórias dele no co
 - o que você faz com ele: Glimpse mata ilusão instantaneamente (efeito confirmado no texto da própria habilidade), então usar Glimpse no PL real cancela a diferença de farm ou posição que ele monta com Spirit Lance; Static Storm silencia Spirit Lance e Doppelwalk, cortando a criação de ilusão nova e a fuga por invisibilidade.
 - itens que viram: o Scepter do PL (21,9) sai bem antes do Blink do Disruptor, então na janela de 22 a 24 min ele já cria ilusão extra em fuga sem o Disruptor ter mobilidade pra perseguir; depois que o Disruptor tem Blink, ele consegue alcançar o PL real antes de Doppelwalk ativar.
 - como jogar: gaste Sentry perto da luta pra separar o PL real do grupo de ilusões antes de mirar qualquer disable nele; use Glimpse assim que identificar o real, porque ela mata a ilusão mais próxima de graça e ainda devolve o PL de verdade pra trás.
-- fonte: pro_dados/disruptor.json; pro_dados/phantom_lancer.json; constants_abilities.json (phantom_lancer_juxtapose, phantom_lancer_phantom_edge, phantom_lancer_doppelwalk, disruptor_glimpse); https://dotacoach.gg/heroes/phantom-lancer (efeito do Scepter)
+- fonte: pro_dados/disruptor.json; pro_dados/phantom_lancer.json; constants_abilities.json (phantom_lancer_juxtapose, phantom_lancer_phantom_edge, phantom_lancer_doppelwalk, disruptor_glimpse); OpenDota constants/aghs_desc (efeito do Scepter)
 
 ## Contra Muerta (muerta)
 
 - placar: 84V/148 (56,8%) para o Disruptor; conferido contra pro_dados/muerta.json (64V da Muerta). Vantagem robusta, maior amostra entre os carries da lista (148 jogos).
-- por que importa: carry mais escolhido em pro depois dos dois primeiros (85,7% das partidas dela no recorte Tier 1 local são pos 1, fonte ficha muerta.md), e a vantagem aqui tem volume suficiente pra confiar mais que Phantom Assassin e Phantom Lancer; Static Storm segura The Calling e Dead Shot, as duas magias de controle dela.
+- por que importa: ela joga a safelane (lane_role 1) em 954 de 1.377 partidas pro 7.40-7.41 (OpenDota, 69,3%), e a vantagem aqui tem volume suficiente pra confiar mais que Phantom Assassin e Phantom Lancer; Static Storm segura The Calling e Dead Shot, as duas magias de controle dela.
 - janelas: Muerta sobe Power Treads aos 7,5 e Maelstrom aos 13,8, puxando farm cedo; o pico dela chega com Mjollnir (19,7) e Black King Bar (27,5), já depois do Blink do Disruptor (24,0) mas ainda antes do Scepter dele (34,9).
 - o que ela faz com você: Dead Shot desacelera o alvo inicial e o ricochete amedronta quem for atingido em seguida; Pierce the Veil transforma o dano dela em mágico por alguns segundos, útil contra armadura alta, mas sem efeito contra quem já tem imunidade mágica.
 - o que você faz com ela: Pierce the Veil causa dano mágico puro, então o Black King Bar do time anula o burst dela por completo durante o efeito; Static Storm silencia The Calling e Dead Shot, cortando o combo de controle que ela usa pra abrir antes de atirar.
 - itens que viram: o Black King Bar da Muerta (27,5) sai depois do Blink do Disruptor (24,0), então entre os 24 e 27 min o Disruptor tem janela de mobilidade antes dela comprar a resposta de imunidade; depois do BKB dela, o Static Storm ainda segura Dead Shot e The Calling porque nenhum dos dois fura imunidade mágica.
 - como jogar: antes dos 24 min, prenda ela de longe com Kinetic Field pra atrapalhar o farm rápido de Maelstrom/Mjollnir; depois que ela tiver BKB, concentre o controle em Dead Shot e The Calling em vez de tentar prender ela parada, porque esses dois não furam imunidade.
-- fonte: pro_dados/disruptor.json; pro_dados/muerta.json; ficha muerta.md
+- fonte: pro_dados/disruptor.json; pro_dados/muerta.json; OpenDota explorer (lane_role, partidas de liga 7.40-7.41)
 
 ## Contra Broodmother (broodmother)
 
@@ -191,7 +177,7 @@ Os placares abaixo são sempre da perspectiva do Disruptor (vitórias dele no co
 - o que você faz com ela: Kinetic Field prende a Broodmother (e qualquer Spiderling perto) antes dela alcançar a própria rede; Static Storm silencia Spin Web e Insatiable Hunger enquanto ela estiver na área, cortando fuga e cura ao mesmo tempo.
 - itens que viram: o Manta da Broodmother (17,6) sai bem antes do Blink do Disruptor, então ela já farma rápido com imagens muito antes dele ter mobilidade; o Black King Bar dela (24,1) chega quase junto do Blink do Disruptor, o que significa que ela costuma ter a resposta de imunidade pronta assim que o Disruptor ganha capacidade de iniciar.
 - como jogar: não entre no raio de ação de uma web sem conseguir fechar a distância antes; priorize prender ela longe da própria rede com Kinetic Field, porque uma vez que ela alcança a teia a perseguição praticamente acaba.
-- fonte: pro_dados/disruptor.json; pro_dados/broodmother.json; ficha broodmother.md
+- fonte: pro_dados/disruptor.json; pro_dados/broodmother.json
 
 ## Contra Io (wisp)
 
@@ -213,4 +199,4 @@ Os placares abaixo são sempre da perspectiva do Disruptor (vitórias dele no co
 - o que você faz com ele: Static Storm silencia o Enigma, mas o Black Hole, uma vez já em canalização, só é interrompido por stun ou silence que acerte ele durante os 4s; Kinetic Field pode travar o Enigma antes dele entrar no alcance de 275 de lançamento do Black Hole, já que ele precisa estar perto pra canalizar.
 - itens que viram: o Blink do Enigma (15,8) chega quase 9 min antes do Blink do Disruptor, então até os 24 min é o Enigma quem ameaça abrir a luta primeiro com Black Hole; o Black King Bar dele (25,7) sai pouco depois do Blink do Disruptor, fechando a resposta dele ao silêncio do Static Storm logo na sequência.
 - como jogar: trate qualquer aproximação do Enigma como ameaça de Black Hole, mesmo sem ver o Blink Dagger dele, porque o alcance de lançamento é só 275 e ele precisa estar perto; se ele começar a canalizar, jogue todo stun ou silence disponível nele antes dos 4s passarem, porque depois disso o dano já caiu.
-- fonte: pro_dados/disruptor.json; pro_dados/enigma.json; ficha enigma.md
+- fonte: pro_dados/disruptor.json; pro_dados/enigma.json

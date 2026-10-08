@@ -24,9 +24,8 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/enigma.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
 - https://api.opendota.com/api/constants/aghs_desc
+- https://api.opendota.com/api/explorer (lane_role, partidas de liga 7.40-7.41)
 ---
 
 ## Contra Hoodwink (hoodwink)
@@ -57,7 +56,7 @@ fontes:
 - o que você faz com ele: Tusk tem pouca vida de suporte; o Black Hole (100 a 200/s de dano puro) mais Malefice com Shard mata ele rápido se pego isolado antes do combo dele sair; Midnight Pulse ajuda a limpar o Snowball se ele tentar bolar aliados.
 - itens que viram: quem chega primeiro no próprio Blink Dagger decide quem inicia a troca; Enigma, em mediana, chega 3 minutos antes (15:48 contra 19:00).
 - como jogar: use a vantagem de blink mais cedo pra forçar luta antes dos 19min; depois disso, cuidado com Ice Shards cortando sua rota de aproximação antes do Black Hole.
-- fonte: pro_dados/enigma.json; pro_dados/tusk.json; constants_abilities.json (tusk_snowball, tusk_ice_shards, tusk_walrus_punch).
+- fonte: pro_dados/enigma.json; pro_dados/tusk.json; constants_abilities.json (tusk_snowball, tusk_ice_shards, tusk_walrus_kick).
 
 ## Contra Windranger (windrunner)
 - placar: Enigma venceu 40 de 61 partidas de pro (65,6%). Fonte: pro_dados/enigma.json.
@@ -71,13 +70,13 @@ fontes:
 
 ## Contra Centaur Warrunner (centaur)
 - placar: Enigma venceu 28 de 53 partidas de pro (52,8%). Fonte: pro_dados/enigma.json.
-- por que importa: 5º mais jogos contra Enigma (53) e mesma posição principal (ambos pos 3 no catálogo de herois, offlane/jungle); é o rival direto de rota do patch e o único deste grupo com um stun de curto alcance que interrompe o channel na cara.
+- por que importa: 5º mais jogos contra Enigma (53) e mesma rota principal (offlane em 87,7% das partidas de Enigma e 97,6% das de Centaur, partidas pro 7.40-7.41, OpenDota explorer); é o rival direto de rota do patch e o único deste grupo com um stun de curto alcance que interrompe o channel na cara.
 - janelas: os dois correm blink quase no mesmo tempo (Centaur 19:36 contra Enigma 15:48, Enigma chega antes); antes disso Centaur farma com Helm of Iron Will (4:48) e Ring of Health rumo a Vanguard (8:30), tankando a lane; dos 15:48 aos 19:36 Enigma tem a janela de blinkar sozinho sem resposta; depois dos 19:36 os dois podem iniciar um no outro, e o combate vira quem consegue cravar o combo primeiro.
 - o que ele faz com você: Hoof Stomp (stun de 1,6 a 2,2s após meio segundo de preparação, constants_abilities.json) interrompe o Black Hole se acertar Enigma durante o channel; Stampede dá velocidade de atropelamento pro time dele contra-iniciar em cima de Enigma antes dele conseguir blinkar; Double Edge soma dano extra por força, pode acabar o combate sozinho contra HP baixo.
 - o que você faz com ele: Centaur é tanque de muita vida, então o Black Hole sozinho raramente mata; a força real é prender ele e o time junto pro resto do grupo surrar; se ele gastou o Stomp antes, o channel fica seguro.
 - itens que viram: Black King Bar de Enigma (25:42) bloqueia o stun do Hoof Stomp dele, então depois desse ponto o combo fica seguro contra a interrupção dele; antes disso, o risco de ser interrompido é real.
 - como jogar: cheque se o Hoof Stomp dele está disponível antes de canalizar perto; depois do seu BKB, pode iniciar sem medo da interrupção dele.
-- fonte: pro_dados/enigma.json; pro_dados/centaur.json; constants_abilities.json (centaur_hoof_stomp, centaur_stampede, centaur_double_edge); herois_catalogo.json (posições).
+- fonte: pro_dados/enigma.json; pro_dados/centaur.json; constants_abilities.json (centaur_hoof_stomp, centaur_stampede, centaur_double_edge); partidas pro 7.40-7.41 (OpenDota explorer, lane_role).
 
 ## Contra Snapfire (snapfire)
 - placar: Enigma venceu 23 de 51 partidas de pro (45,1%). Fonte: pro_dados/enigma.json.
@@ -91,43 +90,43 @@ fontes:
 
 ## Contra Mars (mars)
 - placar: Enigma venceu 29 de 51 partidas de pro (56,9%). Fonte: pro_dados/enigma.json.
-- por que importa: maior número de jogos entre os heróis de posição 3 fora do top 6 geral (51); rival direto de rota do offlane/jungle no 7.41, junto com Centaur e Axe.
+- por que importa: maior número de jogos entre os heróis de offlane fora do top 6 geral (51); Mars joga off em 96,3% das partidas de pro, mesma rota de Centaur (97,6%) e Axe (97,7%), partidas pro 7.40-7.41, OpenDota explorer.
 - janelas: Mars chega no próprio Blink aos 15:12, pouco antes de Enigma (15:48), então na primeira janela de roam ele tem leve vantagem de iniciação; Enigma pega Shard aos 17:06 e passa a ameaçar Malefice prolongado; Black King Bar dos dois é parecido (Mars 26:30, Enigma 25:42), então Enigma costuma chegar primeiro; Aghanim's Shard de Mars (21:30) dá a Spear de Mars a chance de empalar 2 heróis, o que pode acertar Enigma no meio do combo dele.
 - o que ele faz com você: Arena of Blood (raio 550, duração 5,5s, constants_abilities.json) cria uma parede que bloqueia movimento, pode te prender dentro ou fora de uma luta antes do Black Hole; Spear of Mars empala o primeiro herói atingido e empurra, interrompendo o channel se acertar Enigma.
 - o que você faz com ele: Mars tem bastante vida e Bulwark reduz dano físico recebido, mas não reduz o dano puro do Black Hole; se ele for pego sem Enrage (não tem, isso é do Ursa) ou sem escapar da arena própria, o Black Hole mais Midnight Pulse machuca bastante.
 - itens que viram: o Blink de Mars chega cerca de 30s antes do de Enigma, então ele costuma iniciar primeiro em disputas de rota; Black King Bar de Enigma neutraliza o risco da Spear interromper o channel.
 - como jogar: cuidado ao entrar na Arena of Blood dele sem BKB, ela pode te prender junto com os aliados dele; prefira iniciar você quando ele já gastou a Spear ou a Arena.
-- fonte: pro_dados/enigma.json; pro_dados/mars.json; constants_abilities.json (mars_arena_of_blood, mars_spear, mars_bulwark); herois_catalogo.json (posições).
+- fonte: pro_dados/enigma.json; pro_dados/mars.json; constants_abilities.json (mars_arena_of_blood, mars_spear, mars_bulwark); partidas pro 7.40-7.41 (OpenDota explorer, lane_role).
 
 ## Contra Axe (axe)
 - placar: Enigma venceu 25 de 43 partidas de pro (58,1%). Fonte: pro_dados/enigma.json.
-- por que importa: 2º herói de posição 3 mais comum contra Enigma (43 jogos), outro rival direto de offlane/jungle com iniciação própria.
+- por que importa: 2º herói de offlane mais comum contra Enigma (43 jogos; Axe joga off em 97,7% das partidas de pro, 7.40-7.41, OpenDota explorer), outro rival direto de rota com iniciação própria.
 - janelas: Axe tem Phase Boots cedo (7:12, pro_dados/axe.json) e Blade Mail aos 12:36, bom pra segurar lane; Enigma chega no Blink aos 15:48, perto do de Axe (15:42, praticamente empatado); dos 15 aos 22min é a janela de troca de iniciação; depois dos 22:54 (Shard de Axe) Battle Hunger pode empilhar em um só alvo, e o Black King Bar de Axe (25:54) fica quase junto do de Enigma (25:42).
 - o que ele faz com você: Berserker's Call (raio 315, constants_abilities.json) obriga Enigma a atacar Axe, mas não é stun nem silence, então não interrompe o channel do Black Hole; Counter Helix dispara a cada 4 a 7 ataques recebidos e devolve 100 a 160 de dano puro, pouco relevante já que Enigma raramente ataca; Culling Blade (275 a 475 de dano puro) mata Enigma de HP baixo e reseta a recarga se conseguir o abate.
 - o que você faz com ele: como a Call não interrompe o channel, Enigma pode blinkar e canalizar Black Hole mesmo sendo chamado; o Black Hole (100 a 200/s puro) soma com Midnight Pulse pra queimar a vida de Axe, que costuma ser de força bruta mas sem fuga própria além do blink.
 - itens que viram: Black King Bar de Enigma (25:42) chega antes do de Axe (25:54), então Enigma tende a iniciar seguro primeiro nessa janela; Blade Mail de Axe (12:36) devolve dano físico, mas não afeta o Black Hole, que é puro.
 - como jogar: não tenha medo de canalizar Black Hole mesmo sendo "chamado" pelo Call, ele não quebra o channel; cuidado só com Culling Blade se estiver com pouca vida.
-- fonte: pro_dados/enigma.json; pro_dados/axe.json; constants_abilities.json (axe_berserkers_call, axe_counter_helix, axe_culling_blade, enigma_black_hole).
+- fonte: pro_dados/enigma.json; pro_dados/axe.json; constants_abilities.json (axe_berserkers_call, axe_counter_helix, axe_culling_blade, enigma_black_hole); partidas pro 7.40-7.41 (OpenDota explorer, lane_role).
 
 ## Contra Ember Spirit (ember_spirit)
 - placar: Enigma venceu 18 de 43 partidas de pro (41,9%). Fonte: pro_dados/enigma.json.
-- por que importa: herói de posição 2 (mid) mais comum contra Enigma (43 jogos, empatado em volume com Axe) e o pior resultado entre todos os matchups com 30+ jogos; Ember reposiciona e sai do raio do Black Hole com facilidade.
+- por que importa: herói de mid mais comum contra Enigma (43 jogos, empatado em volume com Axe; Ember joga mid em 96,2% das partidas de pro, 7.40-7.41, OpenDota explorer) e o pior resultado entre todos os matchups com 30+ jogos; Ember reposiciona e sai do raio do Black Hole com facilidade.
 - janelas: Ember farma rápido com bottle (1:30) e sobe pra Urn of Shadows (7:18) e Spirit Vessel (12:48), ficando relevante cedo; ele carrega Fire Remnant com recarga curta (meio segundo pra lançar, 0,5s) desde o nível 1 da skill, então tem reposicionamento disponível praticamente o jogo inteiro; Enigma só chega no Blink aos 15:48, bem depois do pico de mobilidade de Ember; dos 19:12 (Kaya) em diante Ember também cura mana rápido pra manter Sleight of Fist, que farma e poka sem se aproximar.
 - o que ele faz com você: Fire Remnant (recarga de carga de 35s, dano de 100 a 300, constants_abilities.json) deixa Ember plantar um ponto de fuga fora do raio de 420 do Black Hole antes da luta, e escapar instantaneamente quando o channel começa; Sleight of Fist ataca tudo numa área sem ficar parado no alcance de Malefice.
 - o que você faz com ele: se Enigma conseguir isolar Ember sem Fire Remnant plantado (carga gasta ou em recarga), o Black Hole mais Malefice prolongado pelo Shard mata ele rápido, já que tem pouca vida própria; Midnight Pulse ajuda a queimar ele se ele ficar perto demais batendo com Sleight of Fist.
 - itens que viram: a carga de Fire Remnant de Ember é o item/skill real que decide o duelo, não um item comprado; Black King Bar de Enigma (25:42) contra o de Ember (27:06) chega primeiro, mas isso só importa se Ember já gastou o remnant.
 - como jogar: cheque se o Fire Remnant dele está disponível antes de iniciar; se ele já usou o remnant recentemente (recarga de 35s), é a janela certa pra blinkar em cima dele.
-- fonte: pro_dados/enigma.json; pro_dados/ember_spirit.json; constants_abilities.json (ember_spirit_fire_remnant, ember_spirit_sleight_of_fist); herois_catalogo.json (posições).
+- fonte: pro_dados/enigma.json; pro_dados/ember_spirit.json; constants_abilities.json (ember_spirit_fire_remnant, ember_spirit_sleight_of_fist); partidas pro 7.40-7.41 (OpenDota explorer, lane_role).
 
 ## Contra Ursa (ursa)
 - placar: Enigma venceu 27 de 40 partidas de pro (67,5%). Fonte: pro_dados/enigma.json.
-- por que importa: maior vantagem de Enigma entre os carries com amostra boa (40 jogos); os dois raramente dividem lane (Ursa é pos 1, Enigma pos 2/3 no catálogo), mas é o tipo de confronto que o dono pediu: dois cores que não se cruzam na lane mas decidem o jogo um contra o outro mais tarde.
+- por que importa: maior vantagem de Enigma entre os carries com amostra boa (40 jogos); os dois raramente dividem lane (Ursa joga safe lane em 98,7% das partidas de pro, Enigma offlane em 87,7%, partidas pro 7.40-7.41, OpenDota explorer), mas é o tipo de confronto que o dono pediu: dois cores que não se cruzam na lane mas decidem o jogo um contra o outro mais tarde.
 - janelas: Ursa farma rápido, Battle Fury pronto aos 13:42 (pro_dados/ursa.json) já clareia jungle e ganha gold; até os 16:48 (Blink de Ursa) ele é puramente um duelista cronometrado de 1x1, sem fuga; Enigma com Blink aos 15:48 chega primeiro nessa corrida; dos 21:30 aos 24:24 Ursa ganha Mithril Hammer rumo a Basher (22:30) e cresce em dano de duelo, mas só tem Black King Bar aos 24:24, perto do de Enigma (25:42); depois dos 26:06 (Aghanim's Shard de Ursa) Earthshock aplica Fury Swipes em área.
 - o que ele faz com você: Overpower dá 400% de velocidade de ataque por 3 a 6 ataques, ótimo pra explodir Enigma de perto se ele ficar exposto depois de canalizar; Enrage dá 80% de redução de dano e 50% de resistência a status com dispel forte por 4 a 5s, o que reduz bastante (mas não zera) o dano do Black Hole se ele estiver preso dentro.
 - o que você faz com ele: Black Hole prende Ursa por 4s sem poder atacar nem usar Enrage antes do efeito começar a valer (ele só ajuda se já estiver ativo quando o channel pega); 100 a 200 de dano puro por segundo soma até 800 no total, dano que ameaça matar Ursa sozinho se ele não tiver BKB nem Enrage prontos; como Ursa depende de alcance curto pra lutar, prendê-lo tira o jogo dele por completo.
 - itens que viram: Enrage de Ursa (recarga de 30 a 60s) é o único jeito dele reduzir o estrago do Black Hole; se ele já gastou Enrage antes da luta, a janela de 4s do channel é quase garantia de abate.
 - como jogar: espere Ursa gastar Enrage recentemente antes de iniciar; se ele tiver o Enrage pronto, prefira focar outro alvo primeiro ou garantir que o time ajude a queimar ele durante o channel.
-- fonte: pro_dados/enigma.json; pro_dados/ursa.json; constants_abilities.json (ursa_overpower, ursa_enrage, enigma_black_hole); herois_catalogo.json (posições).
+- fonte: pro_dados/enigma.json; pro_dados/ursa.json; constants_abilities.json (ursa_overpower, ursa_enrage, enigma_black_hole); partidas pro 7.40-7.41 (OpenDota explorer, lane_role).
 
 ## Contra Batrider (batrider)
 - placar: Enigma venceu 23 de 34 partidas de pro (67,6%). Fonte: pro_dados/enigma.json.
@@ -171,13 +170,13 @@ fontes:
 
 ## Contra Morphling (morphling)
 - placar: Enigma venceu 9 de 15 partidas de pro (60,0%); amostra pequena. Fonte: pro_dados/enigma.json.
-- por que importa: o carry mais jogado em pro no patch 7.40/7.41 entre os considerados aqui (871 partidas no dataset, pro_dados/morphling.json), mesmo não cruzando lane com Enigma (Morphling é pos 1, Enigma pos 2/3); é exatamente o tipo de confronto carry-contra-carry sem lane em comum que decide jogos de late, só que com amostra direta pequena.
+- por que importa: o carry mais jogado em pro no patch 7.40/7.41 entre os considerados aqui (871 partidas no dataset, pro_dados/morphling.json), mesmo não cruzando lane com Enigma (Morphling joga safe lane em 88,1% das partidas de pro, Enigma offlane em 87,7%, partidas pro 7.40-7.41, OpenDota explorer); é exatamente o tipo de confronto carry-contra-carry sem lane em comum que decide jogos de late, só que com amostra direta pequena.
 - janelas: Morphling escala puramente por farm, Power Treads aos 6:00 e Manta Style aos 18:24 (pro_dados/morphling.json); até Manta ele não tem jeito confiável de dodgear o Black Hole fora do Waveform, que fica invulnerável durante o cast mas tem recarga de 12 a 21s; Enigma com Blink aos 15:48 geralmente chega antes do Manta dele; dos 25:48 (Butterfly) em diante ele ganha evasão alta contra fisico, irrelevante contra o dano puro do Black Hole; Black King Bar dele só sai aos 30:54, bem depois do de Enigma (25:42).
 - o que ele faz com você: Waveform (invulnerável durante o uso, constants_abilities.json) pode atravessar o raio de 420 do Black Hole sem tomar o dano, mas só se já estiver em recarga disponível quando o channel começa; Adaptive Strike estuna e empurra, pode interromper Enigma se vier antes do cast.
 - o que você faz com ele: Morphling tem HP alto mas pouca resistência mágica própria cedo; os 100 a 200 de dano puro por segundo do Black Hole (bkbpierce: Yes) ignoram qualquer forma dele estiver (força ou agilidade) e qualquer resistência física que ele tenha empilhado; se pego sem Waveform disponível, o combo soma rápido.
 - itens que viram: Waveform disponível é o fator real, não um item comprado; Black King Bar de Enigma (25:42) chega 5min antes do de Morphling (30:54), então a janela de iniciar com segurança é longa.
 - como jogar: cheque a recarga do Waveform dele antes de iniciar, 12 a 21s dependendo do nível; se ele acabou de usar pra farmar ou escapar, é a hora de blinkar em cima.
-- fonte: pro_dados/enigma.json; pro_dados/morphling.json; constants_abilities.json (morphling_waveform, morphling_adaptive_strike_agi, enigma_black_hole); herois_catalogo.json (posições).
+- fonte: pro_dados/enigma.json; pro_dados/morphling.json; constants_abilities.json (morphling_waveform, morphling_adaptive_strike_agi, enigma_black_hole); partidas pro 7.40-7.41 (OpenDota explorer, lane_role).
 
 ## Contra Terrorblade (terrorblade)
 - placar: Enigma venceu 5 de 20 partidas de pro (25,0%); amostra pequena, mas a maior queda de taxa de vitória entre os 16 confrontos deste arquivo. Fonte: pro_dados/enigma.json.

@@ -22,8 +22,6 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/muerta.md
 - https://api.opendota.com/api/constants/aghs_desc
 - https://liquipedia.net/dota2/7.41e
 - https://hawk.live/posts/valve-released-patch-741f-dota-2-full-list-changes
@@ -70,7 +68,7 @@ A lista mistura 4 critérios, sempre citados no "por que importa" de cada bloco:
 - janelas: ele trava esperando mana pra Macropyre (300-500 de custo) até o nível 6; 0-11 min some de impacto de farm (lh10 8); depois dos 25 tenta o combo Force Staff + Macropyre de perto. Muerta domina 15-25 min com Maelstrom rodando contra o burst fraco dele nessa fase.
 - o que ele faz com você: Dual Breath (burn 20-80 + slow de ataque e movimento) empurra da wave e reduz seu DPS; Ice Path (stun até 2s em área) e Macropyre (100-200 de dano por segundo por 10s numa linha) punem parado. Nenhum dos dois atravessa Black King Bar dela (`bkbpierce: No`).
 - o que você faz com ele: Dead Shot interrompe o setup antes do Macropyre carregar; Spectral Slug corta 20% do dano mágico dele de volta, relevante se ela ficar presa no fogo.
-- itens que viram: BKB nela segura o pacote Ice Path + Macropyre inteiro; o Scepter dele (Macropyre com dano puro e paredes de gelo que escorregam 60% a mais) ignora a armadura dela, então mesmo com BKB o dano do fogo ainda conta se ela entrar na área por engano depois do stun (fonte: `aghs_desc`).
+- itens que viram: BKB nela segura o pacote Ice Path + Macropyre inteiro; o Scepter dele (Macropyre com dano puro e paredes de gelo que reduzem 60% a velocidade de quem cruzar) ignora a armadura dela, então mesmo com BKB o dano do fogo ainda conta se ela entrar na área por engano depois do stun (fonte: `aghs_desc`).
 - como jogar: farmar fora do raio de Dual Breath (300), nunca ficar parada numa área quando ele já tiver mana pra Macropyre (300+).
 - fonte: `pro_dados/muerta.json`; `pro_dados/jakiro.json`; `constants_abilities.json`; `aghs_desc`.
 
@@ -108,7 +106,7 @@ A lista mistura 4 critérios, sempre citados no "por que importa" de cada bloco:
 - placar: 64V/134 (47,8%), leve desvantagem.
 - por que importa: terceiro carry mais jogado contra ela em pro (134 jogos), flex entre mid e pos 1. Compartilha literalmente a mesma rota de item (Maelstrom → Mjollnir), então quando aparece como rival de posição é uma corrida de farm direta.
 - janelas: os dois correm o mesmo caminho de item; ela fecha Maelstrom um pouco antes (13,4 x 13,8 da Muerta) e Mjollnir também (18,3 x 19,7), dando a Windranger uma janela de farm mais rápido entre 13 e 19 min. Depois dos 20 ficam parecidos, mas ela tem Windrun (evasão total) pra sobreviver ao burst, o que ajuda a explicar a desvantagem de 47,8% da Muerta.
-- o que ela faz com você: Windrun dá evasão total e cura passiva por alguns segundos, então ataque básico simples não resolve; Shackleshot prende contra árvore ou unidade por até 3,25s; Powershot (170-470 de dano em linha) e Focus Fire (+350-500% de velocidade de ataque por 20s) são o burst real. Shackleshot não atravessa Black King Bar (`bkbpierce: No`).
+- o que ela faz com você: Windrun dá evasão total por alguns segundos, então ataque básico simples não resolve; Shackleshot prende contra árvore ou unidade por até 3,25s; Powershot (170-470 de dano em linha) e Focus Fire (+350-500% de velocidade de ataque por 20s) são o burst real. Shackleshot não atravessa Black King Bar (`bkbpierce: No`).
 - o que você faz com ele: Dead Shot e The Calling são feitiço, não ataque básico, então ignoram a evasão de Windrun por completo; The Calling silencia antes do Focus Fire ligar.
 - itens que viram: Monkey King Bar é a resposta direta ao Windrun, porque perfura evasão; Black King Bar segura o combo Shackleshot + Focus Fire se ela vier com Blink (fonte: `constants_abilities.json`).
 - como jogar: guardar silêncio/stun pro momento antes do Focus Fire, nunca durante o Windrun; upar MKB assim que a build dela já tiver Mjollnir rodando.
@@ -147,7 +145,7 @@ A lista mistura 4 critérios, sempre citados no "por que importa" de cada bloco:
 ## Contra Slark (slark)
 - placar: 14V/44 (31,8%), a maior desvantagem entre os confrontos com 30+ jogos.
 - por que importa: pior percentual de vitória da Muerta com amostra relevante (44 jogos). Carry de jungle/offlane flex que farma rápido e vira caçador assim que tem Essence Shift acumulado, sem precisar de lane direta contra ela.
-- janelas: Slark fecha Diffusal Blade aos 12,8 (rouba mana e desacelera a cada ataque) e Scepter aos 22,3; Essence Shift (rouba atributo por ataque, permanente até morrer) é cumulativo, então quanto mais a luta se arrasta mais forte ele fica em cima de quem ele já bateu antes. Isso inverte a lógica normal: contra Slark, lutas curtas favorecem Muerta, lutas longas favorecem ele.
+- janelas: Slark fecha Diffusal Blade aos 12,8 (rouba mana e desacelera a cada ataque) e Scepter aos 22,3; Essence Shift (rouba atributo por ataque, dura cerca de 12,5s por stack e renova a cada novo acerto) é cumulativo enquanto ele mantém o ataque, então quanto mais a luta se arrasta mais forte ele fica em cima de quem ele já bateu antes. Isso inverte a lógica normal: contra Slark, lutas curtas favorecem Muerta, lutas longas favorecem ele.
 - o que ele faz com você: Pounce (prende em leash por até 3,25s) fecha a distância; Dark Pact (75-300 de dano em pulso, também se autoaplica) limpa debuff e ainda causa dano; Essence Shift rouba atributo a cada acerto de ataque, incluindo o Gunslinger duplo dela, o que paradoxalmente acelera o roubo quando ela ataca mais rápido. Pounce e Dark Pact não atravessam Black King Bar (`bkbpierce: No` em ambos).
 - o que você faz com ele: Dead Shot (slow total de impacto por 1s) atrasa o gap-close antes do Pounce; The Calling silencia a janela de Dark Pact/Pounce.
 - itens que viram: Black King Bar nela segura o combo de iniciação, mas não impede Essence Shift continuar roubando enquanto ele ataca; o Shard dele (Depth Shroud vira nuvem que esconde aliados com efeito de Shadow Dance) e o Scepter (mais cargas e alcance de Pounce) tornam ele ainda mais difícil de isolar depois dos 25 min (fonte: `aghs_desc`).
@@ -167,7 +165,7 @@ A lista mistura 4 critérios, sempre citados no "por que importa" de cada bloco:
 ## Contra Alchemist (alchemist)
 - placar: 22V/49 (44,9%), leve desvantagem, amostra média (49 jogos vs. os 796 jogos totais do herói em pro, sinal de que raramente dividem lane).
 - por que importa: um dos dois carries mais jogados em pro sem lane em comum com ela (796 jogos totais, quase 16x mais do que os 49 registrados direto contra Muerta). O confronto real não é de lane, é de farm e de quem vence o 1x1 quando os dois cruzam no mapa ou disputam Roshan.
-- janelas: Alchemist é o farmer mais rápido do grupo inteiro (gpm 768, o maior de todos os 16 heróis desta ficha) e fecha Radiance aos 13,9, bem antes do Maelstrom dela (13,8, praticamente empatado, mas o aura de Radiance já clear sozinha); ele fecha Scepter aos 22,4 e BKB aos 25,1. Até os 20 min ele farma mais rápido que qualquer coisa que ela faça; depois dos 25, se os dois já tiverem BKB, a troca vira sobre quem tem mais dano sustentado, e aí o DPS dela (Mjollnir + Gunslinger) costuma superar o burst dele.
+- janelas: Alchemist é o farmer mais rápido do grupo inteiro (gpm 768, o maior de todos os 16 heróis desta ficha) e fecha Radiance aos 13,9, quase no mesmo minuto do Maelstrom dela (13,8, praticamente empatado, mas o aura de Radiance já clear sozinha); ele fecha Scepter aos 22,4 e BKB aos 25,1. Até os 20 min ele farma mais rápido que qualquer coisa que ela faça; depois dos 25, se os dois já tiverem BKB, a troca vira sobre quem tem mais dano sustentado, e aí o DPS dela (Mjollnir + Gunslinger) costuma superar o burst dele.
 - o que ele faz com você: Unstable Concoction (150-360 de dano em explosão) é o burst de pick isolado; Acid Spray (25-40 de dano por segundo + reduz 3-6 de armadura em área) acelera farm e dano sustentado em luta de grupo. Unstable Concoction não atravessa Black King Bar (`bkbpierce: No`).
 - o que você faz com ele: Dead Shot interrompe o cast do Unstable Concoction antes dele detonar; Pierce the Veil (dano mágico) ignora a armadura reduzida pelo Acid Spray de qualquer jeito, já que é bônus mágico, não físico.
 - itens que viram: Black King Bar nela nega o burst do Unstable Concoction por completo; o Scepter dele (distribui upgrades de Scepter pros aliados) não afeta o 1x1 direto, mas muda a luta de grupo em volta, então o confronto real de item é corrida de Radiance x Maelstrom/Mjollnir, não um combo específico (fonte: `constants_abilities.json`; `aghs_desc`).

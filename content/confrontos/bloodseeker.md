@@ -18,8 +18,6 @@ fontes:
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/terrorblade.json
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/morphling.json
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/alchemist.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/bloodseeker.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
@@ -31,7 +29,7 @@ fontes:
 
 ## Por que esses 14 oponentes
 
-Bloodseeker só aparece como pos 1 em pro no 7.41 (ficha confirma: 5/5 picks locais e 62,9% de seleção pública como carry). A lista mistura quatro critérios: os 6 heróis que mais jogaram contra ele em pro (Pangolier, Slark, Snapfire, Rubick, Disruptor, Ogre Magi), os carries de pos 1 que mais cruzam com ele nos dados (Shadow Fiend, Templar Assassin), e os carries mais jogados em pro no patch mesmo sem histórico de lane junto com ele (Windranger, Luna, Tiny, Terrorblade, Morphling, Alchemist), porque dois HCs decidem muita coisa fora da lane: quem farma mais rápido, quem caça quem depois dos 20 min. Dos confrontos registrados, só Pangolier (45 jogos) e Slark (32) passam de 30 jogos pro; todo o resto está marcado como amostra pequena, incluindo os de maior vantagem/desvantagem (Alchemist, Morphling, Terrorblade), que entram pela regra do carry mais jogado, não pelo placar.
+Bloodseeker tem 166 partidas pro no 7.40-7.41, todas com build de carry (botas aos 3,0 min, Javelin aos 9,1, Maelstrom aos 12,4, partidas pro 7.40-7.41 via OpenDota), por isso a lista de oponentes é toda de pos 1. A lista mistura quatro critérios: os 6 heróis que mais jogaram contra ele em pro (Pangolier, Slark, Snapfire, Rubick, Disruptor, Ogre Magi), os carries de pos 1 que mais cruzam com ele nos dados (Shadow Fiend, Templar Assassin), e os carries mais jogados em pro no patch mesmo sem histórico de lane junto com ele (Windranger, Luna, Tiny, Terrorblade, Morphling, Alchemist), porque dois HCs decidem muita coisa fora da lane: quem farma mais rápido, quem caça quem depois dos 20 min. Dos confrontos registrados, só Pangolier (45 jogos) e Slark (32) passam de 30 jogos pro; todo o resto está marcado como amostra pequena, incluindo os de maior vantagem/desvantagem (Alchemist, Morphling, Terrorblade), que entram pela regra do carry mais jogado, não pelo placar.
 
 ## Contra Pangolier (pangolier)
 - placar: 21V-24D em 45 partidas pro (46,7% de vitória do Bloodseeker). Maior amostra de todo o dataset dele.
@@ -96,7 +94,7 @@ Bloodseeker só aparece como pos 1 em pro no 7.41 (ficha confirma: 5/5 picks loc
 ## Contra Shadow Fiend (nevermore)
 - placar: 9V-11D em 20 partidas pro (45,0% de vitória do Bloodseeker). Amostra pequena.
 - por que importa: é o carry pos 1 com mais jogos pro contra você, e também o herói mais jogado como pos 1 em todo o patch (3990 jogos de pro no dataset local), então a comparação de power spike entre dois HCs vale mais do que o histórico direto de lane.
-- janelas: 0-10 min é a pior janela do confronto pra você: Shadow Fiend tem o melhor lh10 de todo o pool de oponentes (78, contra seu 58), já sai de bota aos 3,1 min (3990 jogos) e fecha os itens base de carry entre 5,9 e 12,7 min; seu Maelstrom (12,4) só fecha quando ele já está com Blade of Alacrity pronta; a partir de Requiem of Souls, que escala com as almas de Necromastery, ele vira ameaça de teamfight mesmo sem te caçar direto.
+- janelas: 0-10 min é a pior janela do confronto pra você: Shadow Fiend tem o melhor lh10 de todo o pool de oponentes (78, contra seu 58), já sai de bota aos 3,1 min (3990 jogos) e fecha os itens base de carry entre 5,9 e 12,7 min; seu Maelstrom (12,4) fecha quase no mesmo minuto da Blade of Alacrity dele (12,7, 3859 jogos), sem folga real de nenhum dos dois lados; a partir de Requiem of Souls, que escala com as almas de Necromastery, ele vira ameaça de teamfight mesmo sem te caçar direto.
 - o que ele faz com você: Shadowraze (até 280 de dano em 3 direções, mais dano empilhado por alma) te ameaça à distância sem precisar de corpo a corpo; Requiem of Souls lança linhas de dano em área ao redor dele, proporcional às almas coletadas (até 20), e pode te pegar fora de alcance de Rupture.
 - o que você faz com ele: Rupture trava a fuga dele, que não tem nenhum escape de verdade; Blood Bath silencia Shadow Fiend bem no meio do cast de Requiem (0,3s de cast point do seu lado contra um canal que ele precisa terminar), cancelando o combo inteiro; Sanguivore te deixa sustentar dano corpo a corpo que ele não tem resposta nenhuma pra sustentar de volta.
 - itens que viram: seu Black King Bar (22,9 min) anula Shadowraze e Requiem por inteiro, já que os dois são mágicos; priorize fechar ele antes do nível em que ele costuma ter 15+ almas.
@@ -117,7 +115,7 @@ Bloodseeker só aparece como pos 1 em pro no 7.41 (ficha confirma: 5/5 picks loc
 - placar: 12V-13D em 25 partidas pro (48,0% de vitória do Bloodseeker). Amostra pequena, mas é o confronto mais equilibrado do pool.
 - por que importa: pos 1/4 flex e 3º herói mais jogado em pro no patch (2596 jogos); o item-espelho com Maelstrom faz dela a comparação de farm mais direta da lista.
 - janelas: os dois correm pro mesmo item: seu Maelstrom sai aos 12,4 min contra o dela aos 13,4 (1452 jogos), praticamente empatado; o Mjollnir dela sai aos 18,3 min (979 jogos) contra o seu aos 17,2, levinha vantagem sua; Shackleshot dela ameaça desde o nível 1 de lane.
-- o que ela faz com você: Shackleshot prende você a uma árvore ou unidade atrás dele por até 3,25s, trava total pra quem não tem escape, que é o seu caso; Windrun dá 100% de evasão a ataques físicos por até 6s, fazendo seus auto-ataques errarem sem parar durante a janela; Powershot executa à distância quem já está com vida baixa.
+- o que ela faz com você: Shackleshot prende você a uma árvore ou unidade atrás dele por até 3,25s, trava total pra quem não tem escape, que é o seu caso; Windrun dá 100% de evasão a ataques físicos por até 6s, fazendo seus auto-ataques errarem sem parar durante a janela; Powershot ameaça à distância com dano alto e slow, mesmo fora de combo.
 - o que você faz com ele: Blood Bath silencia Windranger e desliga Shackleshot, Windrun e Powershot de uma vez, já que as três dependem de conjurar; Rupture pune a fuga dela mesmo com Windrun ativo, porque velocidade e evasão não cortam o dano de movimento, só esquivam de ataque físico.
 - itens que viram: Monkey King Bar (seu, situacional) garante acerto contra o Windrun; o Mjollnir de cada um decide quem chega primeiro na janela de clear mais rápido.
 - como jogar: trave o silêncio antes dela abrir Shackleshot; não gaste muitos auto-ataques durante a Windrun dela, espere passar; corra a build de Maelstrom igual, quem fecha Mjollnir primeiro ganha o meio de jogo.
@@ -125,7 +123,7 @@ Bloodseeker só aparece como pos 1 em pro no 7.41 (ficha confirma: 5/5 picks loc
 
 ## Contra Luna (luna)
 - placar: 4V-8D em 12 partidas pro (33,3% de vitória do Bloodseeker). Amostra pequena.
-- por que importa: 4º carry pos 1 mais jogado em pro no patch (1970 jogos) e o maior gpm de farmer "comum" da lista (695); mesmo sem lane junto, ela é um dos carries que mais aparecem no draft pra comparar com você.
+- por que importa: 4º carry pos 1 mais jogado em pro no patch (1970 jogos) e um dos maiores gpm da lista (695, atrás só de Alchemist e Terrorblade); mesmo sem lane junto, ela é um dos carries que mais aparecem no draft pra comparar com você.
 - janelas: ela tem o farm de wave/camp mais rápido do pool via Moon Glaive (ricochete) e Lunar Blessing (dano passivo em área, dobrado pra ela); seu Maelstrom (12,4) ainda assim limpa onda/camp rápido o bastante pra não ficar pra trás nos primeiros 15 min; o spike de duelo dela só chega com Manta aos 17,2 min (1862 jogos), perto do seu Mjollnir (17,2); Eclipse (ultimate) vira uma ameaça de teamfight a partir do nível 6, mas só com itens ela sustenta a luta.
 - o que ela faz com você: Lucent Beam (até 300 de dano + 0,6s de stun) interrompe sua perseguição ou seu combo; Moon Glaive faz ela farmar onda mais rápido que você em alguns momentos; Eclipse chove feixes aleatórios em quem estiver perto, dano alto se ela estiver bem de itens.
 - o que você faz com ele: Rupture é a resposta clássica pra Luna porque ela não tem nenhuma ferramenta de escape ou blink, então uma vez tagueada ela corre e sangra; Blood Bath silencia o Eclipse e o Lucent Beam.
@@ -136,7 +134,7 @@ Bloodseeker só aparece como pos 1 em pro no 7.41 (ficha confirma: 5/5 picks loc
 ## Contra Tiny (tiny)
 - placar: 7V-5D em 12 partidas pro (58,3% de vitória do Bloodseeker). Amostra pequena, vantagem sua.
 - por que importa: 2º carry pos 1 mais jogado em pro no patch (3127 jogos); entra pela regra do carry mais comum, não por cruzar lane com você.
-- janelas: o Tiny é fraco sem Blink Dagger; ele sai aos 15,9 min (2546 jogos), exatamente quando o seu Maelstrom (12,4) e seu Mjollnir (17,2) já estão de pé; antes disso ele só tem Avalanche + Toss pra combo, sem blink pra aplicar de surpresa; Grow (passivo) soma dano fixo grande nos níveis 6/12/18, então o corpo a corpo dele fica pesado mesmo sem muito item.
+- janelas: o Tiny é fraco sem Blink Dagger; ele sai aos 15,9 min (2546 jogos), bem depois do seu Maelstrom (12,4) e pouco antes do seu Mjollnir (17,2); antes disso ele só tem Avalanche + Toss pra combo, sem blink pra aplicar de surpresa; Grow (passivo) soma dano fixo grande nos níveis 6/12/18, então o corpo a corpo dele fica pesado mesmo sem muito item.
 - o que ele faz com você: Avalanche (até 360 de dano + stun) seguido de Toss (até 360 de dano) é um combo de burst alto, mas o seu HP e o Sanguivore aguentam melhor que a maioria dos suportes; Toss pode te arremessar pra cima do time dele ou numa rune, perdendo sua posição.
 - o que você faz com ele: Rupture pune exatamente o ponto fraco dele, que é depender do Blink pra iniciar: se ele blinka em cima de você já rupturado, o próprio engajamento dele é que gera o dano de movimento; Thirst te dá velocidade pra alcançá-lo depois, já que o Blink tem cooldown longo e ele não tem outro escape.
 - itens que viram: seu Black King Bar (22,9) anula Avalanche/Toss; o Blink dele (15,9) é a única coisa que você precisa jogar em volta.
@@ -147,7 +145,7 @@ Bloodseeker só aparece como pos 1 em pro no 7.41 (ficha confirma: 5/5 picks loc
 - placar: 10V-2D em 12 partidas pro (83,3% de vitória do Bloodseeker). Amostra pequena, grande vantagem sua.
 - por que importa: hypercarry pos 1 clássico, 887 jogos de pro no patch; entra pela regra do carry mais jogado mesmo sem cruzar lane, e o placar (ainda que em poucos jogos) mostra por que esse tipo de confronto importa.
 - janelas: Terrorblade é fraquíssimo antes do nível 6 e antes do Manta (17,1 min, 850 jogos): sem Metamorphosis ele ataca corpo a corpo fraco e sem alcance, e sem Manta não tem ilusão de qualidade pra puxar farm; isso bate direto com a janela em que você já tem Maelstrom (12,4) pronto pra pressionar; só depois dos 25-30 min, com Manta + Skadi (28,2 min, 455 jogos) ele vira ameaça real.
-- o que ele faz com você: Sunder troca uma porcentagem da vida atual dele com a sua, de qualquer HP, o único resgate de verdade que ele tem contra uma ameaça de kill; Reflection (ultimate com Aghanim's Scepter) cria ilusões invulneráveis que atacam e atrasam quem estiver perto.
+- o que ele faz com você: Sunder troca uma porcentagem da vida atual dele com a sua, de qualquer HP, o único resgate de verdade que ele tem contra uma ameaça de kill; Reflection (habilidade básica, sem precisar de Aghanim's) troca Terrorblade por uma ilusão quando ele tomaria dano alto, e essa ilusão ainda desacelera quem bateu nele.
 - o que você faz com ele: a janela de 0 a 20 min é sua, ele não tem mobilidade nenhuma pra fugir de uma Rupture antes do Manta; Thirst acha ele mesmo se tentar se esconder pra farmar sozinho; Sunder salva a vida dele uma vez, mas não limpa o dano de movimento já em andamento se ele continuar se mexendo depois da troca.
 - itens que viram: pressione antes do Manta dele (17,1 min); depois disso ele ganha opções de kite que mudam o duelo.
 - como jogar: ataque a janela de 10-17 min sem dó; se ele usar Sunder, recue em vez de insistir, porque ele volta com HP alto; não deixe o jogo passar dos 30 min sem converter essa vantagem.

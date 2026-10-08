@@ -23,8 +23,7 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/beastmaster.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
+- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 - https://api.opendota.com/api/constants/aghs_desc
 - https://liquipedia.net/dota2/Outworld_Destroyer
 ---
@@ -57,7 +56,7 @@ fontes:
 - o que você faz com ele: seu Primal Roar tem 600 de alcance contra o blink dele de distância menor; se você reagir rápido ao blink dele, consegue stunar ele no ar antes do combo começar. Seus hawks (Summon Raptor) prendem (root) ele junto, o que atrapalha o posicionamento do Ice Shards dele.
 - itens que viram: BKB seu neutraliza o Ice Shards (stun mágico comum, bkbpierce=No em constants_abilities.json), mas não o Walrus Kick: ele tem bkbpierce=Yes, então o combo Snowball + Kick atravessa seu Black King Bar. Do lado dele, Shard de Tusk puxa aliado pra perto, o que pode tirar o alvo do seu Roar antes de você soltar.
 - como jogar: não force trade sem BKB contra ele depois dos 15 min, é exatamente a fase que ele fecha item pra iniciar. Prefira puxar ele pra perto do seu time com o hawk antes de engajar sozinho.
-- fonte: pro_dados/tusk.json; pro_dados/beastmaster.json; constants_abilities.json (tusk_ice_shards, tusk_walrus_kick, beastmaster_primal_roar)
+- fonte: pro_dados/tusk.json; pro_dados/beastmaster.json; constants_abilities.json (tusk_ice_shards, tusk_walrus_kick, beastmaster_primal_roar); api.opendota.com/api/constants/aghs_desc (shard de Tusk)
 
 ## Contra Shadow Fiend (nevermore)
 - placar: Beastmaster venceu 136 de 255 (53,3%), leve vantagem. Fonte pro_dados/beastmaster.json.
@@ -67,7 +66,7 @@ fontes:
 - o que você faz com ele: ele não tem disable nem escape de verdade (Requiem of Souls é a única ameaça real, dano em linhas retas ao redor dele). Seu Primal Roar atravessa o BKB dele e te deixa 600 de distância pra pegar ele antes do Requiem carregar.
 - itens que viram: Black King Bar seu primeiro: sem isso você não sobrevive pra chegar nos 600 de alcance do Roar contra o Raze dele. Do lado dele, Shard de Shadow Fiend reduz cooldown por herói acertado, então ele empilha Raze mais rápido se o seu time ficar agrupado.
 - como jogar: na lane, jogue de fora do alcance do Raze médio e deixe o boar segurar a wave. Depois dos 20 min, gankeie ele com visão prévia: sem TP ele fica isolado e o Roar fecha a kill sozinho.
-- fonte: pro_dados/nevermore.json; pro_dados/beastmaster.json; constants_abilities.json (nevermore_shadowraze1, nevermore_requiem, beastmaster_primal_roar)
+- fonte: pro_dados/nevermore.json; pro_dados/beastmaster.json; constants_abilities.json (nevermore_shadowraze1, nevermore_requiem, beastmaster_primal_roar); api.opendota.com/api/constants/aghs_desc (shard de Shadow Fiend)
 
 ## Contra Jakiro (jakiro)
 - placar: Beastmaster venceu 118 de 239 (49,4%), praticamente parelho. Fonte pro_dados/beastmaster.json.
@@ -77,31 +76,31 @@ fontes:
 - o que você faz com ele: ele é lento e sem disable de curto alcance pra te impedir de chegar nos 600 do Roar. Pegue ele isolado antes do nível 6, antes do Macropyre virar ameaça de área.
 - itens que viram: BKB seu segura o Ice Path (stun mágico comum) até você soltar o Roar. Do lado dele, Scepter de Jakiro deixa o Macropyre com dano puro e mais longo, o que ignora qualquer resistência mágica sua ou do seu bicho dominado.
 - como jogar: não agrupe seu time em cima de árvore ou vegetação perto dele depois do nível 6, é onde o Macropyre compensa. Gankeie ele antes disso, de preferência antes dos 6 min.
-- fonte: pro_dados/jakiro.json; constants_abilities.json (jakiro_macropyre, jakiro_ice_path)
+- fonte: pro_dados/jakiro.json; constants_abilities.json (jakiro_macropyre, jakiro_ice_path); api.opendota.com/api/constants/aghs_desc (scepter de Jakiro)
 
 ## Contra Snapfire (snapfire)
 - placar: Beastmaster venceu 125 de 239 (52,3%), leve vantagem. Fonte pro_dados/beastmaster.json.
-- por que importa: empatado como quinto/sexto mais jogado (239). Suporte flex que também pode ir pos 2 ou 3 (mesma posição principal do Beastmaster, catálogo marca [2,3,4,5] pra ela), então às vezes é rival direto de rota.
+- por que importa: empatado como quinto/sexto mais jogado (239). Suporte com papéis de Nuker e Disabler em comum com o Beastmaster (fonte heroes.json), então às vezes é rival direto de rota.
 - janelas: o item que mais importa nela é o Aghanim's Shard (mediana 16,9 min, n=1919 de 2456 partidas, fonte pro_dados/snapfire.json), bem antes do seu BKB (23,6 min). Entre os 15 e 20 min ela já tem Firesnap Cookie turbinado, enquanto você ainda tá fechando Blink.
 - o que ele faz com você: Scatterblast e Lil' Shredder reduzem a sua armadura e a do seu bicho dominado, então ele morre mais rápido pra creep wave do que o normal. Firesnap Cookie com Shard ainda cura o alvo e manda um Mortimer Kiss extra, o que sustenta ela numa troca longa.
 - o que você faz com ele: ela não tem blink nem disjoint de projétil, então Wild Axes acerta fácil e o Roar fecha o combo sem ela conseguir sair.
-- itens que viram: seu Assault Cuirass reduz a armadura dela ainda mais em área (raio 1200, fonte constants_abilities.json via ficha) e acelera o contador de Drums of Slom, compensando o Break que ela não tem mas o Shredder reduz sua defesa igual.
+- itens que viram: seu Assault Cuirass reduz a armadura dela ainda mais em área (raio 1200, fonte items.json) e acelera o contador de Drums of Slom, compensando o Break que ela não tem mas o Shredder reduz sua defesa igual.
 - como jogar: respeite o alcance do Scatterblast em ponto cego (point-blank dá +30% de dano e +50% de duração do slow, fonte constants_abilities.json), não entre de frente nela. Flanqueie com o hawk antes do boar.
-- fonte: pro_dados/snapfire.json; constants_abilities.json (snapfire_scatterblast, snapfire_firesnap_cookie)
+- fonte: pro_dados/snapfire.json; constants_abilities.json (snapfire_scatterblast, snapfire_firesnap_cookie); items.json (assault)
 
 ## Contra Pangolier (pangolier)
 - placar: Beastmaster venceu 84 de 205 (41,0%), desvantagem com amostra grande. Fonte pro_dados/beastmaster.json.
-- por que importa: é o rival de mesma posição principal mais jogado contra ele em pro (pos 2/3 os dois, catálogo herois_catalogo.json). Os dois competem pela mesma rota e pelo mesmo papel de iniciador saltitante.
+- por que importa: é o rival mais jogado contra ele em pro que compartilha todos os papéis do Beastmaster (Initiator, Disabler, Durable, Nuker, fonte heroes.json). Os dois competem pela mesma rota e pelo mesmo papel de iniciador saltitante.
 - janelas: Pangolier depende de item pra fazer qualquer coisa de longe: Blink mediana 19,2 min (fonte pro_dados/pangolier.json), bem depois do seu (18,6 min). Até lá ele só tem Swashbuckle de curto alcance. Depois dos 20 min, quando ele já rola com Rolling Thunder, a diferença é que o Roll Up dele (imunidade a debuff e 80% de resistência mágica) bloqueia seu stun enquanto ativo, mas não dura pra sempre.
 - o que ele faz com você: Rolling Thunder acerta e atordoa todo mundo no caminho, inclusive seu bicho dominado, e ele pode cancelar o rolê com Roll Up se perceber que vai tomar o Roar, ficando imune por alguns segundos.
 - o que você faz com ele: fora do Roll Up ele não tem imunidade a debuff nenhuma, e como ele depende de blink pra iniciar, qualquer disable seu antes do Blink dele (nível baixo, antes dos 6) trava o jogo dele inteiro.
 - itens que viram: espere ele sair do Roll Up/Gyroshell pra soltar o Roar, caçar o momento certo rende mais que tentar atravessar a imunidade. Seu BKB segura o Shield Crash dele até você devolver o combo.
 - como jogar: pressione ele antes dos 19 min, é a janela em que ele não tem blink nem bola pra fugir. Depois disso, jogue reativo: deixe ele gastar o Rolling Thunder primeiro.
-- fonte: pro_dados/pangolier.json; constants_abilities.json (pangolier_gyroshell, pangolier_rollup, beastmaster_primal_roar)
+- fonte: pro_dados/pangolier.json; constants_abilities.json (pangolier_gyroshell, pangolier_rollup, pangolier_shield_crash, beastmaster_primal_roar)
 
 ## Contra Queen of Pain (queenofpain)
 - placar: Beastmaster venceu 111 de 199 (55,8%), vantagem. Fonte pro_dados/beastmaster.json.
-- por que importa: mesma posição principal (pos 2, catálogo), e é o melhor saldo do Beastmaster entre os rivais de mid de verdade com amostra grande (199 jogos).
+- por que importa: é o melhor saldo do Beastmaster entre os rivais de mid de verdade com amostra grande (199 jogos).
 - janelas: Queen of Pain já nasce com Blink (habilidade própria, não item) e usa Scream of Pain pra farmar onda e te poquear ao mesmo tempo desde o nível 1. Ela fecha Kaya mediana 13,9 min (fonte pro_dados/queenofpain.json) pra virar o próprio spell amp, bem antes do seu Scepter (14,6 min) fazer diferença de verdade em luta.
 - o que ele faz com você: ela te poqueia de longe com Scream sem precisar chegar nos seus 600 de Roar, e usa o Blink dela pra sair assim que você fecha distância. Sonic Wave (ult) te empurra pra longe, exatamente o oposto do que o Roar faz com ela.
 - o que você faz com ele: ela não tem disable de verdade, só o slow do Shadow Strike. Se você fechar os 600 de distância com o próprio blink antes dela reagir, o Roar nela é quase garantido porque ela não tem ferramenta pra sair de um unit-target.
@@ -111,17 +110,17 @@ fontes:
 
 ## Contra Mars (mars)
 - placar: Beastmaster venceu 101 de 199 (50,8%), praticamente parelho. Fonte pro_dados/beastmaster.json.
-- por que importa: mesma posição principal (pos 3, catálogo), e é o confronto de offlane iniciador contra offlane iniciador mais jogado da lista.
+- por que importa: compartilha os papéis de Initiator, Disabler e Durable com o Beastmaster (fonte heroes.json), e é o confronto de offlane iniciador contra offlane iniciador mais jogado da lista.
 - janelas: Mars fecha Blink mais cedo que você (mediana 15,2 min contra 18,6 min seu, fonte pro_dados/mars.json e pro_dados/beastmaster.json), então nos primeiros 15 a 18 min ele ameaça iniciar primeiro. Depois que seu Blink e BKB saem (18,6 e 23,6 min), a troca fica mais equilibrada: os dois têm engajamento forte e tanque.
 - o que ele faz com você: Spear of Mars te empala e te arrasta pra trás se bater em parede ou árvore, te tirando da luta antes dela começar. Arena of Blood prende seu time (e os hawks, se estiverem dentro) numa arena que nega fuga e cura.
 - o que você faz com ele: God's Rebuke tem acerto garantido mas não disable longo; seu Roar, que atravessa BKB dele, ainda funciona mesmo se ele ativar Bulwark (o escudo é contra ataque físico frontal, não contra feitiço).
-- itens que viram: BKB seu segura o Spear dele até o Roar sair. Do lado dele, Scepter de Mars cura e dá dano em área dentro da própria Arena se matar alguém lá dentro, o que vira bola de neve se a luta demorar.
+- itens que viram: BKB seu segura o Spear dele até o Roar sair. Do lado dele, Scepter de Mars cura ele e os aliados dentro da própria Arena e dá bônus de dano de ataque (empilhável) se matar alguém lá dentro, o que vira bola de neve se a luta demorar.
 - como jogar: não entre em linha reta com ele à vista, a Lança é de longo alcance. Prefira iniciar você primeiro: quem engaja primeiro geralmente ganha esse confronto.
-- fonte: pro_dados/mars.json; pro_dados/beastmaster.json; constants_abilities.json (mars_spear, mars_arena_of_blood, beastmaster_primal_roar)
+- fonte: pro_dados/mars.json; pro_dados/beastmaster.json; constants_abilities.json (mars_spear, mars_arena_of_blood, mars_gods_rebuke, mars_bulwark, beastmaster_primal_roar); api.opendota.com/api/constants/aghs_desc (scepter de Mars)
 
 ## Contra Juggernaut (juggernaut)
 - placar: Beastmaster venceu 24 de 63 (38,1%), desvantagem grande. Fonte pro_dados/beastmaster.json.
-- por que importa: carry mais jogado contra ele em pro (63 jogos) mesmo sem dividir lane: Juggernaut é farmador solo de safelane, Beastmaster normalmente nem está na rota dele. Entra na lista porque, como pede o pedido original, dois core fortes se cruzam no mapa e no poder de luta mesmo sem trocar hit na lane.
+- por que importa: um dos carries mais jogados contra ele em pro (63 jogos) mesmo sem dividir lane: Juggernaut é farmador solo de safelane, Beastmaster normalmente nem está na rota dele. Entra na lista porque dois core fortes se cruzam no mapa e no poder de luta mesmo sem trocar hit na lane.
 - janelas: até os 13-14 min os dois só farmam (Juggernaut fecha Battle Fury mediana 13,6 min, fonte pro_dados/juggernaut.json; você fecha o Scepter aos 14,6). Dos 15 aos 20 min ele já ameaça pickoff com Blade Fury, mas sem disable pra te travar primeiro. Depois dos 23 min, com seu BKB pronto, você consegue aguentar o Omnislash (cooldown 120s, fonte constants_abilities.json) até seu time focar ele.
 - o que ele faz com você: Blade Fury te acerta à distância enquanto ele fica com 80% de resistência mágica e imune a debuff por 5s (fonte constants_abilities.json), ou seja, enquanto o spin tá ativo, nem seu Primal Roar (que atravessa BKB) consegue te travar ele. Omnislash (120s de cooldown) te pula em cima com invulnerabilidade durante o salto.
 - o que você faz com ele: ele não tem fuga nenhuma fora do Blade Fury. Se você soltar o Roar antes do spin começar ou depois dele acabar, ele fica preso: sem blink, sem invisibilidade.
@@ -154,7 +153,7 @@ fontes:
 - por que importa: é o maior desequilíbrio a favor do Beastmaster entre confrontos com 30 ou mais jogos de pro, o que surpreende: Outworld Destroyer é feito pra punir herói de mana baixa, e Beastmaster, apesar de atributo universal, não empilha mana como os magos que o OD costuma enfrentar. Mesmo assim, nessa amostra pequena, é o confronto mais favorável da lista pra ele, provavelmente porque OD é frágil fisicamente e cai rápido pro Roar antes do mana gap virar problema.
 - janelas: Essence Flux dele cresce com nível, não com item de luta, então o perigo dele já existe desde a lane. Beastmaster só começa a competir depois do Scepter (14,6 min) dar sustentação via Drums of Slom, mas isso não resolve o problema de mana baixa contra o Sanity's Eclipse dele.
 - o que ele faz com você: Arcane Orb soma dano puro a cada ataque baseado na mana atual dele (10% a 13% do pool, cooldown que cai pra 0 no nível 4, fonte constants_abilities.json), o que faz o right-click dele doer cada vez mais sem gastar nada. Sanity's Eclipse soma dano base (200/300/400) mais 40% da diferença entre a mana dele e a sua: como Beastmaster não empilha mana, essa diferença cresce sozinha com o nível do OD e pode te explodir numa magia só. Astral Imprisonment ainda te tira da luta por até 4s enquanto rouba uma fatia do seu mana pool.
-- o que você faz com ele: ele é frágil fisicamente e sem fuga além da Imprisonment nele mesmo via Scepter. Seu Primal Roar, que atravessa BKB, ainda garante o stun nele, mas o problema é sobreviver até os 600 de alcance sem levar um Eclipse antes.
+- o que você faz com ele: ele é frágil fisicamente e sem fuga além de se esconder lançando a própria Astral Imprisonment nele mesmo (a magia pode mirar aliados). Seu Primal Roar, que atravessa BKB, ainda garante o stun nele, mas o problema é sobreviver até os 600 de alcance sem levar um Eclipse antes.
 - itens que viram: Pipe of Insight seu (barreira de 425 de dano mágico por aliado) amortece o Eclipse em luta de grupo. Items de mana (Null Talisman, Bracer) ajudam a fechar a diferença que o Sanity's Eclipse usa como gatilho de dano.
 - como jogar: não entre no alcance de 700 do Eclipse sem BKB ativo ou sem barreira. Gankeie ele cedo, antes do nível 6, antes da ultimate virar ameaça de uma magia só.
 - fonte: pro_dados/obsidian_destroyer.json; pro_dados/beastmaster.json; constants_abilities.json (obsidian_destroyer_sanity_eclipse, obsidian_destroyer_arcane_orb, obsidian_destroyer_astral_imprisonment); liquipedia.net/dota2/Outworld_Destroyer

@@ -20,26 +20,19 @@ fontes:
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/wisp.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/ember_spirit.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/shadow_fiend.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/sven.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/tiny.json
 - https://api.opendota.com/api/constants/aghs_desc
-- https://dotacoach.gg/en/heroes/counters/storm-spirit
 - https://dota2.fandom.com/wiki/Ember_Spirit
-- https://www.dota2protips.com/heroes/ember_spirit
 ---
 
 ## Contra Storm Spirit (storm_spirit)
 - placar: Ember Spirit venceu 222 de 420 partidas pro (52,9%). É o oponente que mais aparece na base de confrontos do Ember.
 - por que importa: maior volume de jogos pro contra ele (420) e o espelho mais direto de mid: os dois são mágicos ricos em mobilidade, saem de bottle e vivem de flash farm pra chegar rápido no meio jogo.
-- janelas: os dois compram bottle quase junto (Ember 1,5 min, Storm 1,4 min, pro_dados/storm_spirit.json). Até os 10 min Storm tenta zonear com Static Remnant e Overload à distância, mas Flame Guard absorve 70% desse dano mágico até estourar a barreira (60 a 300 de dano conforme o nível, dota2protips.com), então o poke dele rende menos do que parece. Dos 13 aos 20 min Storm sobe Kaya (13,7 min) e começa a rotear o mapa sozinho com Ball Lightning; Ember só rota depois de plantar um Fire Remnant, então até ter Aghanim's Shard (25,3 min, que recarrega carga de remnant a cada herói inimigo morto perto) ele fica um pouco mais preso ao mapa do que o Storm. Black King Bar sai quase junto pros dois (Ember 27,1 min, Storm 26,1 min): depois disso vira corrida de quem acerta o combo primeiro.
+- janelas: os dois compram bottle quase junto (Ember 1,5 min, Storm 1,4 min, pro_dados/storm_spirit.json). Até os 10 min Storm tenta zonear com Static Remnant e Overload à distância, mas Flame Guard absorve 70% desse dano mágico até estourar a barreira (60 a 300 de dano conforme o nível, constants_abilities.json), então o poke dele rende menos do que parece. Dos 13 aos 20 min Storm sobe Kaya (13,7 min) e começa a rotear o mapa sozinho com Ball Lightning; Ember só rota depois de plantar um Fire Remnant, então até ter Aghanim's Shard (25,3 min, que recarrega carga de remnant a cada herói inimigo morto perto) ele fica um pouco mais preso ao mapa do que o Storm. Black King Bar sai quase junto pros dois (Ember 27,1 min, Storm 26,1 min): depois disso vira corrida de quem acerta o combo primeiro.
 - o que ele faz com você: Ball Lightning ignora dano físico no trajeto mas gasta mana proporcional à distância, então Storm fica vulnerável logo depois de uma viagem longa; Electric Vortex puxa você pra cima dele (tether de 1200) antes do combo. Como o dano dele é quase todo mágico (Static Remnant, Overload), Flame Guard reduz bastante o que ele consegue aplicar numa troca curta.
-- o que você faz com ele: Searing Chains é classificado como raiz, não stun (dotacoach.gg), e raiz bloqueia a maior parte das magias de mobilidade, incluindo o Ball Lightning: se você acertar a chain primeiro, ele fica preso no lugar sem conseguir fugir voando. Sleight of Fist atravessa Black King Bar (bkbpierce: yes, constants_abilities.json) e ainda retorna sozinho pro ponto de partida, então mesmo sem Fire Remnant pronto você tem uma saída curta depois do dash.
+- o que você faz com ele: Searing Chains prende no lugar, é raiz e não stun (constants_abilities.json descreve o efeito como anchoring them in place), e raiz bloqueia a maior parte das magias de mobilidade, incluindo o Ball Lightning: se você acertar a chain primeiro, ele fica preso no lugar sem conseguir fugir voando. Sleight of Fist atravessa Black King Bar (bkbpierce: yes, constants_abilities.json) e ainda retorna sozinho pro ponto de partida, então mesmo sem Fire Remnant pronto você tem uma saída curta depois do dash.
 - itens que viram: seu Black King Bar não impede a raiz da Searing Chains nele (ela é sua, não dele), mas tira o Electric Vortex e o burst mágico do combo dele; o Aghanim's Scepter dele faz a Electric Vortex puxar todo mundo num raio ao redor dele, não só você, então cuidado ao ficar perto de aliados sem BKB (o Shard dele não tem nada a ver com a Vortex, ele dá cargas de Overload pro time, aghs_desc).
 - como jogar: force a troca logo depois de acertar a Searing Chains nele, antes dele conseguir carregar mana pra fugir voando; evite ficar parado tomando Static Remnant sem Flame Guard ativa, ela some rápido contra o combo mágico dele.
-- fonte: pro_dados/ember_spirit.json; pro_dados/storm_spirit.json; constants_abilities.json (ember_spirit_searing_chains, ember_spirit_sleight_of_fist, ember_spirit_flame_guard, storm_spirit_ball_lightning, storm_spirit_electric_vortex); dotacoach.gg/en/heroes/counters/storm-spirit; dota2protips.com/heroes/ember_spirit.
+- fonte: pro_dados/ember_spirit.json; pro_dados/storm_spirit.json; constants_abilities.json (ember_spirit_searing_chains, ember_spirit_sleight_of_fist, ember_spirit_flame_guard, storm_spirit_ball_lightning, storm_spirit_electric_vortex).
 
 ## Contra Tiny (tiny)
 - placar: Ember Spirit venceu 233 de 395 partidas pro (59,0%). Segundo oponente mais comum da base, o carry que mais aparece contra ele.
@@ -49,7 +42,7 @@ fontes:
 - o que você faz com ele: Tiny não tem blink próprio antes de comprar Dagger (quase 16 min na mediana), então antes disso ele é parado e fácil de fechar com Sleight of Fist (atravessa BKB, retorna sozinho); Searing Chains o prende no lugar e corta a rota dele até o próximo camp.
 - itens que viram: seu Black King Bar anula o combo Avalanche mais Toss (os dois são mágicos, constants_abilities.json); seu Aghanim's Shard garante carga extra de remnant toda vez que ele ou um aliado dele morre perto, ajuda a manter a mobilidade na janela de blink dele.
 - como jogar: antes dos 16 min ataque, Tiny não tem como fugir do seu gap close; depois do Dagger dele, não leve o combo parado, ative Flame Guard antes de entrar em alcance de Avalanche.
-- fonte: pro_dados/ember_spirit.json; pro_dados/tiny.json; constants_abilities.json (ember_spirit_flame_guard, ember_spirit_sleight_of_fist, tiny_avalanche, tiny_toss, tiny_grow); app/public/data/herois/tiny.json (power_spikes, Grow e Blink Dagger).
+- fonte: pro_dados/ember_spirit.json; pro_dados/tiny.json; constants_abilities.json (ember_spirit_flame_guard, ember_spirit_sleight_of_fist, tiny_avalanche, tiny_toss, tiny_grow).
 
 ## Contra Rubick (rubick)
 - placar: Ember Spirit venceu 188 de 371 partidas pro (50,7%, equilibrado). Terceiro oponente mais comum da base.
@@ -85,11 +78,11 @@ fontes:
 - placar: Ember Spirit venceu 183 de 343 partidas pro (53,4%). Sexto oponente mais comum da base, fecha o grupo de maior volume.
 - por que importa: sexto maior volume de jogos pro (343), suporte 5 que controla área parada; Macropyre é a única coisa que realmente estoura sua Flame Guard.
 - janelas: Jakiro sobe Force Staff aos 26,2 min (pro_dados/jakiro.json), timing próximo do seu Aghanim's Shard (25,3 min) e BKB (27,1 min); Jakiro quase nunca compra Aghanim's Shard nessa amostra, não tem timing de shard pra ele na base. Até lá ele zonea com Dual Breath (cooldown fixo de 10s) e segura engajamento parado; sua mobilidade de remnant evita a zona dele com facilidade.
-- o que ele faz com você: Macropyre causa até 200 de dano por segundo durante 10 segundos numa faixa de 500 de largura, dano mágico que passa fácil do teto da sua barreira de Flame Guard (até 300 de dano absorvido no nível 4, dota2protips.com); ficar parado dentro da chama anula sua barreira em menos de 2 segundos. Dual Breath soma lentidão e dano contínuo antes disso.
+- o que ele faz com você: Macropyre causa até 200 de dano por segundo durante 10 segundos numa faixa de 500 de largura, dano mágico que passa fácil do teto da sua barreira de Flame Guard (até 300 de dano absorvido no nível 4, constants_abilities.json); ficar parado dentro da chama anula sua barreira em menos de 2 segundos. Dual Breath soma lentidão e dano contínuo antes disso.
 - o que você faz com ele: Jakiro não tem mobilidade nenhuma; Searing Chains prende ele no lugar e Sleight of Fist atravessa BKB se ele comprar um, então uma vez que você chega perto ele não tem como fugir da luta.
 - itens que viram: seu Black King Bar bloqueia o Dual Breath e reduz o Macropyre, mas não zera o dano dele (é área contínua, não um disable único); prefira entrar com Sleight em vez de ficar parado recebendo o DPS da chama.
 - como jogar: não force luta dentro da área de Macropyre mesmo com Flame Guard ativa, ela estoura rápido contra DPS constante; fora disso, feche a distância cedo, Jakiro sozinho não tem resposta pra mobilidade.
-- fonte: pro_dados/ember_spirit.json; pro_dados/jakiro.json; constants_abilities.json (jakiro_macropyre, jakiro_dual_breath, ember_spirit_flame_guard, ember_spirit_searing_chains); dota2protips.com/heroes/ember_spirit.
+- fonte: pro_dados/ember_spirit.json; pro_dados/jakiro.json; constants_abilities.json (jakiro_macropyre, jakiro_dual_breath, ember_spirit_flame_guard, ember_spirit_searing_chains).
 
 ## Contra Queen of Pain (queenofpain)
 - placar: Ember Spirit venceu 168 de 306 partidas pro (54,9%). Mid espelhado mais comum depois do Storm Spirit.
@@ -124,12 +117,12 @@ fontes:
 ## Contra Shadow Fiend (nevermore)
 - placar: Ember Spirit venceu 150 de 298 partidas pro (50,3%, equilibrado). O carry/mid de maior volume contra ele na base.
 - por que importa: maior volume de jogos pro entre os cores que raramente dividem lane com o Ember (Shadow Fiend costuma ir offlane ou mid rival), porque os dois competem pelo mesmo papel de core físico mágico que decide jogo sozinho no meio game, o mesmo tipo de confronto do Alchemist contra Morphling: dois cores fortes que se cruzam fora da lane.
-- janelas: Shadow Fiend farma muito mais rápido que você (LH aos 10 min: 78 contra 53 seus, GPM 658 contra 558). Ele sobe nível 6 (Requiem) por volta dos 7,2 min e Mask of Madness perto dos 10,6 min (app/public/data/herois/shadow_fiend.json, power_spikes); três Shadowraze seguidos num alvo com alma suficiente já passam de 1.200 de dano mágico antes de resistência. Seu Aghanim's Shard (25,3 min) e BKB (27,1 min) chegam antes do Black King Bar dele (26,4 min), janela boa pra forçar luta antes dele se proteger.
+- janelas: Shadow Fiend farma muito mais rápido que você (LH aos 10 min: 78 contra 53 seus, GPM 658 contra 558). Ele sobe Mask of Madness aos 10,2 min (pro_dados/nevermore.json); três Shadowraze seguidos num alvo com alma suficiente já passam de 1.200 de dano mágico antes de resistência. O Black King Bar dele sai aos 25,2 min (pro_dados/nevermore.json), antes do seu Aghanim's Shard (25,3 min) e bem antes do seu próprio BKB (27,1 min); force a luta antes dos 25 min, enquanto nenhum dos dois tem imunidade mágica.
 - o que ele faz com você: Shadowraze é dano mágico de curto alcance (200) na frente dele, então Flame Guard absorve parte se já estiver ativa; Requiem of Souls tem raio de 1000 e amedronta, reduzindo sua velocidade de movimento e resistência mágica por até 2,15 segundos, perigoso se ele já tiver almas suficientes acumuladas.
 - o que você faz com ele: Shadow Fiend precisa ficar parado perto de você pra acertar Shadowraze (alcance de só 200); Searing Chains prende ele antes dele conseguir distância, e Sleight of Fist atravessa BKB se ele comprar, fechando o combo mesmo contra a imunidade dele.
-- itens que viram: seu Black King Bar bloqueia o Requiem of Souls (dano mágico) e reduz o Shadowraze; antecipe o BKB dele, sai perto dos 26 min, force a luta um pouco antes se puder.
+- itens que viram: seu Black King Bar bloqueia o Requiem of Souls (dano mágico) e reduz o Shadowraze; antecipe o BKB dele, sai perto dos 25 min, force a luta um pouco antes se puder.
 - como jogar: não dê flanco de perto sem susto antes do seu BKB, as três direções de Shadowraze zoneiam fácil; depois do seu combo pronto, feche nele antes dele completar 20 almas pro Requiem valer a pena.
-- fonte: pro_dados/ember_spirit.json; pro_dados/nevermore.json; constants_abilities.json (nevermore_shadowraze1, nevermore_requiem, ember_spirit_searing_chains, ember_spirit_sleight_of_fist, ember_spirit_flame_guard); app/public/data/herois/shadow_fiend.json (power_spikes).
+- fonte: pro_dados/ember_spirit.json; pro_dados/nevermore.json; constants_abilities.json (nevermore_shadowraze1, nevermore_requiem, ember_spirit_searing_chains, ember_spirit_sleight_of_fist, ember_spirit_flame_guard).
 
 ## Contra Sniper (sniper)
 - placar: Ember Spirit venceu 34 de 50 partidas pro (68,0%). Maior vantagem do Ember entre os oponentes com 30 ou mais jogos.
@@ -154,12 +147,12 @@ fontes:
 ## Contra Sven (sven)
 - placar: Ember Spirit venceu 27 de 66 partidas pro (40,9%). Segunda maior desvantagem do Ember com 30 ou mais jogos.
 - por que importa: segundo pior confronto da base, carry físico que farma quase tão rápido quanto você (GPM 656 contra 558 seu) e vira a luta numa corrida de dano físico puro que sua Flame Guard não ajuda a segurar.
-- janelas: Sven sobe Blink Dagger aos 17,1 min e God's Strength 3/3 (+190% de dano) por volta dos 23 min (app/public/data/herois/sven.json, power_spikes), timing muito perto do seu Aghanim's Shard (25,3 min) e BKB (27,1 min). Antes dos 17 min ele farma rápido com Great Cleave, limpando camp e wave junto; depois do Blink mais Black King Bar dele (22,7 min, antes do seu), ele inicia primeiro com Storm Hammer e já com God's Strength ativo, dano físico bruto que você não tem como absorver com magia.
+- janelas: Sven sobe Blink Dagger aos 17,1 min (pro_dados/sven.json); o God's Strength no nível máximo soma até 190% de dano bônus (constants_abilities.json). Antes dos 17 min ele farma rápido com Great Cleave, limpando camp e wave junto; depois do Blink mais Black King Bar dele (22,7 min, antes do seu), ele inicia primeiro com Storm Hammer e já com God's Strength ativo, dano físico bruto que você não tem como absorver com magia.
 - o que ele faz com você: Storm Hammer atordoa até 1,6 segundo em área antes do combo; Great Cleave atravessa Black King Bar (bkbpierce: yes, constants_abilities.json) e acerta tudo que está perto em linha, então mesmo com seu BKB ativo você ainda recebe o cleave físico dele; God's Strength no nível 18 dá até 190% de dano base por 30 segundos, suficiente pra matar rápido em troca direta.
 - o que você faz com ele: Searing Chains prende ele (raiz, não atravessa BKB dele) e Sleight of Fist atravessa o BKB dele, então o ataque físico ainda funciona mesmo contra a imunidade; Flame Guard não ajuda muito aqui, o dano dele é quase todo físico.
 - itens que viram: seu Black King Bar bloqueia o Storm Hammer, mas não o Great Cleave; prefira armadura e vida (Shiva's Guard, Assault Cuirass situacionais) em vez de confiar só na Flame Guard contra ele.
 - como jogar: não aceite troca prolongada parada perto dele depois do Blink mais BKB dele (perto dos 22 min), o cleave dele soma rápido; prefira pegar ele isolado antes do God's Strength carregar, ou leve a luta pra longe de onde o cleave acerta aliados junto.
-- fonte: pro_dados/ember_spirit.json; pro_dados/sven.json; constants_abilities.json (sven_storm_bolt, sven_great_cleave, sven_gods_strength, ember_spirit_searing_chains, ember_spirit_sleight_of_fist, ember_spirit_flame_guard); app/public/data/herois/sven.json (power_spikes).
+- fonte: pro_dados/ember_spirit.json; pro_dados/sven.json; constants_abilities.json (sven_storm_bolt, sven_great_cleave, sven_gods_strength, ember_spirit_searing_chains, ember_spirit_sleight_of_fist, ember_spirit_flame_guard).
 
 ## Contra Io (wisp)
 - placar: Ember Spirit venceu 19 de 51 partidas pro (37,3%). Pior confronto do Ember na base inteira com 30 ou mais jogos.

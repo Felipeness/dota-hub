@@ -18,8 +18,6 @@ fontes:
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/shadow_demon.json
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/ember_spirit.json
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/furion.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/broodmother.md
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
@@ -30,7 +28,7 @@ fontes:
 
 Os placares vêm do OpenDota `/heroes/61/matchups` filtrado pra partidas de liga (pro), patches 7.40 e 7.41. O "ele" ganha quando o % de vitória da Broodmother é menor que 50, o "você" ganha quando é maior. Os timings de item são medianos de partidas de pro (não suas), vindos de `pro_dados/<slug>.json`.
 
-A Broodmother tem 328 partidas de pro na amostra, GPM 642 e XPM 782 (`broodmother.json`, resumo). O caminho de item dela, conferido com a ficha do site (5 partidas de pro tier1 detalhadas): Wraith Band pronto aos 2:18, Power Treads aos 7:24, Soul Ring aos 9:30, depois Yasha aos 15:30 e Diadem aos 15:54 formam a Manta Style aos 18:30 (esses dois viraram os componentes oficiais da Manta no 7.41). Orchid Malevolence varia muito (12:30 a 33:30, mediana 18:30, comprado em 4 das 5 partidas), BKB sai aos 25:06 e Butterfly aos 29:30 (ficha-broodmother.md).
+A Broodmother tem 328 partidas de pro na amostra, GPM 642 e XPM 782 (`broodmother.json`, resumo). O caminho de item dela, pela mediana das 328 partidas: Wraith Band pronto aos 1:54, Power Treads aos 6:36, Soul Ring aos 7:36, depois Yasha aos 13:54 e Diadem aos 15:06 formam a Manta Style aos 17:36 (Yasha e Diadem são os componentes oficiais da Manta, `items.json`). Orchid Malevolence sai aos 15:00 (mediana, p25 13:00) e o Black King Bar aos 24:06 (`broodmother.json`, itens).
 
 ---
 
@@ -52,7 +50,7 @@ A Broodmother tem 328 partidas de pro na amostra, GPM 642 e XPM 782 (`broodmothe
 - placar: 30 vitórias em 53 jogos de pro, 56,6% pra Broodmother (`broodmother.json`, hero_id 86).
 - por que importa: 2º lugar em volume de jogos de pro (53). Suporte global, não compartilha lane com você, mas é pick comum em qualquer draft que precisa resposta pra pick-off e pra ultimates fortes.
 - janelas: ele farma devagar (arcane boots aos 10:18) até o Blink Dagger aos 21:36, que é quando ele passa a conseguir se posicionar perto o bastante pra um Telekinesis em você. Aghanim's Shard (27:00) e Ultimate Scepter (27:24) são itens de jogo tardio, bem depois da sua BKB (24:06).
-- o que ele faz com você: Telekinesis te joga longe da teia ou pro meio do time dele; se você usar Insatiable Hunger ou Spawn Spiderlings perto dele, Spell Steal pode copiar a habilidade (embora o valor real do roubo dependa do resto da composição dele). Fade Bolt aplica um debuff que te deixa levando mais dano mágico por alguns segundos, ótimo setup pra combo do time.
+- o que ele faz com você: Telekinesis te joga longe da teia ou pro meio do time dele; se você usar Insatiable Hunger ou Spawn Spiderlings perto dele, Spell Steal pode copiar a habilidade (embora o valor real do roubo dependa do resto da composição dele). Fade Bolt aplica um debuff que reduz seu dano de ataque e de feitiço por alguns segundos, enfraquecendo sua resposta logo na troca seguinte.
 - o que você faz com ele: ele não tem vida nem mobilidade própria sem Blink; se você pegar ele fora de posição antes dos 21min, ele morre rápido pro seu combo de ataque.
 - itens que viram: Black King Bar (24:06) evita o fling do Telekinesis virar punição de time inteiro; evitar lançar Spawn Spiderlings perto dele quando ele ainda não gastou Spell Steal.
 - como jogar: nas primeiras fases do jogo, antes do Blink dele (21:36), ele não ameaça seu split push. Depois disso, cheque fog perto das suas rotas antes de ficar parada.
@@ -62,11 +60,11 @@ A Broodmother tem 328 partidas de pro na amostra, GPM 642 e XPM 782 (`broodmothe
 
 ## Contra Jakiro (jakiro)
 
-- placar: 20 vitórias em 49 jogos de pro, 40,8% pra Broodmother, a pior marca dela entre os confrontos de alto volume (`broodmother.json`, hero_id 64).
+- placar: 20 vitórias em 49 jogos de pro, 40,8% pra Broodmother, uma das piores marcas dela entre os confrontos de alto volume (`broodmother.json`, hero_id 64).
 - por que importa: 3º lugar em jogos de pro (49) e dentro dos piores números dela com amostra grande. Suporte de área que te tira do camp mesmo sem lane em comum.
 - janelas: arcane boots dele aos 11:42, depois ele escala devagar até Force Staff (26:12) e Glimmer Cape (22:48). O nível 6 dele (Macropyre) é o verdadeiro spike, não um item: assim que ele tem ultimate, qualquer camp ou onda que você está limpando vira zona proibida por ~8s.
 - o que ele faz com você: Macropyre queima a área onde você está farmando e te obriga a sair ou morrer queimada; Ice Path trava você fora da teia pro resto do combo do time; Dual Breath já reduz sua velocidade de movimento e aplica dano contínuo na troca inicial.
-- o que você faz com ele: ele não tem mobilidade nenhuma. Se você pegar Orchid Malevolence nele (silence de 5s, `ficha-broodmother.md`), ele não consegue nem fugir nem castar; fora de combo, Spawn Spiderlings sozinhas limpam onda contra ele sem risco.
+- o que você faz com ele: ele não tem mobilidade nenhuma. Se você pegar Orchid Malevolence nele (Soul Burn, silence de 5s, `items.json`), ele não consegue nem fugir nem castar; fora de combo, Spawn Spiderlings sozinhas limpam onda contra ele sem risco.
 - itens que viram: Orchid Malevolence é o pick-off claro contra ele (sem fuga própria); Black King Bar (24:06) ignora Macropyre e Ice Path quando ele finalmente alcança sua rota.
 - como jogar: depois que o time dele tiver nível 6, reforce exploração de visão antes de plantar numa área nova; se conseguir isolar o Jakiro fora de posição, é kill garantido com Orchid.
 - fonte: broodmother.json (confrontos); jakiro.json (itens).
@@ -90,7 +88,7 @@ A Broodmother tem 328 partidas de pro na amostra, GPM 642 e XPM 782 (`broodmothe
 
 - placar: 28 vitórias em 42 jogos de pro, 66,7% pra Broodmother (`broodmother.json`, hero_id 87).
 - por que importa: empatado em 5º/6º lugar em volume (42 jogos) e uma das suas melhores taxas entre os confrontos com 30+ jogos. Suporte que deveria te revelar na web, mas na prática não trava sua fuga.
-- janelas: o blink dele (24:00) é o mais tardio entre os suportes deste lote (19:00 do Tusk, 21:36 do Rubick), bem depois do seu BKB aos 24:06; as arcane boots (11:24) não são as mais lentas, isso fica com o Hoodwink (12:12). Ele não tem spike de farm, depende do nível do seu ultimate real, Static Storm (Kinetic Field é a habilidade normal que cria a redoma, não o ultimate).
+- janelas: o blink dele (24:00) é o mais tardio entre os suportes deste lote (19:00 do Tusk, 21:36 do Rubick), saindo quase junto do seu BKB aos 24:06; as arcane boots (11:24) não são as mais lentas, isso fica com o Hoodwink (12:12). Ele não tem spike de farm, depende do nível do seu ultimate real, Static Storm (Kinetic Field é a habilidade normal que cria a redoma, não o ultimate).
 - o que ele faz com você: Thunder Strike marca você com dano periódico e te revela mesmo invisível na teia, tirando seu esconderijo; Glimpse te teleporta de volta pra posição de alguns segundos atrás, anulando um walk de fuga; Kinetic Field cria uma redoma que impede qualquer saída, te prendendo com o time dele lá dentro.
 - o que você faz com ele: ele não tem blink antes dos 24min e não tem dano de verdade sozinho. Se ele gastar Glimpse ou Kinetic Field fora de hora, ele fica sem resposta pro resto da luta.
 - itens que viram: Black King Bar (24:06) ignora o Thunder Strike e reduz o impacto do Kinetic Field (você ainda fica presa na redoma, mas o time dele precisa converter sem outro controle); Orchid cala ele antes do Kinetic Field.
@@ -102,13 +100,13 @@ A Broodmother tem 328 partidas de pro na amostra, GPM 642 e XPM 782 (`broodmothe
 ## Contra Shadow Fiend (nevermore)
 
 - placar: 20 vitórias em 42 jogos de pro, 47,6% pra Broodmother (`broodmother.json`, hero_id 11).
-- por que importa: mesma posição principal (carry, confirmado em `herois_catalogo.json`), um dos carries mais jogados contra ela em pro mesmo sem dividir lane sempre, e GPM altíssimo (658, `nevermore.json` resumo) que rivaliza o seu (642).
+- por que importa: mesma posição principal (carry, `heroes.json`), um dos carries mais jogados contra ela em pro mesmo sem dividir lane sempre, e GPM altíssimo (658, `nevermore.json` resumo) que rivaliza o seu (642).
 - janelas: até os 10min ele já tem Mask of Madness (10:12) pra farmar e trocar rápido; Yasha sai aos 13:18, bem perto do seu Yasha (13:54, `broodmother.json`), então até aí o farm dos dois é parecido. Dos 18 aos 25min ele escala com Força Staff (22:30) e Hurricane Pike (23:00), mas sua Manta (17:36) já virou vantagem de clone bem antes disso; o Black King Bar dele (25:12) sai depois do seu (24:06).
 - o que ele faz com você: Shadowraze não tem cast point, três opções de alcance, e te deleta se você estiver parada perto dele em qualquer uma das três distâncias; Necromastery acumula alma a cada kill (inclusive suas spiderlings) e aumenta o dano do Requiem of Souls; o Requiem em si (ult) bate em anéis ao redor dele e ignora teia.
 - o que você faz com ele: ele tem pouca vida e nenhuma mobilidade real fora do Hurricane Pike tardio (23:00). Se você pegar ele isolado antes do nível 6, ele não tem resposta.
 - itens que viram: Black King Bar dos dois lados decide quem inicia a troca primeiro; Orchid silencia antes de ele conseguir alinhar um Shadowraze.
 - como jogar: nunca fique parada nas três distâncias de Shadowraze perto de nível 6+ dele. Se conseguir isolar ele cedo (antes dos 10-13min), é a sua janela de maior vantagem.
-- fonte: broodmother.json (confrontos); nevermore.json (itens, resumo); herois_catalogo.json.
+- fonte: broodmother.json (confrontos); nevermore.json (itens, resumo); heroes.json (papéis).
 
 ---
 
@@ -121,7 +119,7 @@ A Broodmother tem 328 partidas de pro na amostra, GPM 642 e XPM 782 (`broodmothe
 - o que você faz com ele: ele não tem fuga própria sem Blink (16:48); se você tirar ele de alcance de farm antes disso ou pegar ele fora de posição, ele não acompanha. Orchid antes do Enrage ainda consegue silenciar ele, já que Enrage não dá imunidade mágica, só corta a duração do seu controle à metade.
 - itens que viram: Orchid Malevolence lançado antes do Enrage ainda prende ele; Black King Bar decide o 1x1 corpo a corpo direto se os dois chegarem com ele pronto.
 - como jogar: não dispute farm bruto com ele antes dos 13min, ele ganha essa corrida com Battle Fury. Depois da sua Manta, espalhe rotas pra ele não conseguir cobrir tudo sozinho.
-- fonte: broodmother.json (confrontos, resumo); ursa.json (itens, resumo); herois_catalogo.json.
+- fonte: broodmother.json (confrontos, resumo); ursa.json (itens, resumo); heroes.json (papéis).
 
 ---
 
@@ -134,20 +132,20 @@ A Broodmother tem 328 partidas de pro na amostra, GPM 642 e XPM 782 (`broodmothe
 - o que você faz com ele: ele é lento sem Blink e, mesmo com ele, não tem burst de longa distância; se você pegar ele isolado fora de Dragon Blood estacado (poucos stacks), ele não aguenta troca.
 - itens que viram: Black King Bar seu (24:06) ignora Dragon Tail; Orchid cala ele antes de qualquer engage.
 - como jogar: evite trocar corpo a corpo direto quando ele já tiver Armlet e stacks de Dragon Blood altos. Prefira hit-and-run com Insatiable Hunger antes do Blink dele (16:12).
-- fonte: broodmother.json (confrontos, resumo); dragon_knight.json (itens, resumo); herois_catalogo.json.
+- fonte: broodmother.json (confrontos, resumo); dragon_knight.json (itens, resumo); heroes.json (papéis).
 
 ---
 
 ## Contra Tiny (tiny)
 
 - placar: 13 vitórias em 32 jogos de pro, 40,6% pra Broodmother, uma das piores marcas dela com amostra grande (`broodmother.json`, hero_id 19).
-- por que importa: mesma posição principal listada no catálogo (carry) e desvantagem clara com 30+ jogos. Mesmo flexível pra suporte em parte da amostra (LH10 baixo, 44, `tiny.json` resumo), o combo dele é letal pra sua vida baixa.
+- por que importa: mesma posição principal (carry, `heroes.json`) e desvantagem clara com 30+ jogos. Mesmo flexível pra suporte em parte da amostra (LH10 baixo, 44, `tiny.json` resumo), o combo dele é letal pra sua vida baixa.
 - janelas: Blink Dagger dele sai aos 15:54, quase junto com a sua Manta (17:36), então a janela mais perigosa é entre o nível 6 dele e os seus primeiros 17min, antes de você ter clone pra dividir o risco. Depois do seu BKB (24:06) o combo físico dele perde a trava de stun, mas o dano de Toss continua.
 - o que ele faz com você: Avalanche prende numa área e Toss arremessa um aliado (ou a própria árvore) causando dano em cima de você, o combo clássico "avalanche + toss" te deixa sem vida antes mesmo de reagir, já que você tem pouca vida base; Tree Grab aumenta o dano físico dele contra você.
 - o que você faz com ele: ele depende do combo pra fazer dano de verdade; fora dele, Tiny sozinho não te ameaça tanto. Se você pegar ele sem ambas habilidades disponíveis, ele não tem resposta.
 - itens que viram: Black King Bar (24:06) ignora o stun de Avalanche e reduz o dano mágico do combo; evitar ficar parada perto de árvores quando ele tem nível 6.
 - como jogar: trate o combo dele como execução de curto alcance, mantenha distância ou web por perto pra sumir assim que ele aparecer. Depois da sua BKB, a troca fica mais segura.
-- fonte: broodmother.json (confrontos, resumo); tiny.json (itens, resumo); herois_catalogo.json.
+- fonte: broodmother.json (confrontos, resumo); tiny.json (itens, resumo); heroes.json (papéis).
 
 ---
 
@@ -158,7 +156,7 @@ A Broodmother tem 328 partidas de pro na amostra, GPM 642 e XPM 782 (`broodmothe
 - janelas: ela sobe rápido (Kaya aos 13:54, no mesmo minuto do seu Yasha, 13:54) e rusha Ultimate Scepter cedo pra pro, mediana de 23:30 (`queenofpain.json`), bem antes do normal pra esse item. Isso é logo antes da sua BKB (24:06), que é exatamente o item que neutraliza o combo dela.
 - o que ela faz com você: Scream of Pain bate em área ao redor dela e pega suas Spiderlings junto; Shadow Strike com Scepter vira uma AoE de 375 de raio, então ela não precisa acertar você direto pra começar o dano; Sonic Wave (ult) é uma onda de dano pesado que, somada ao resto, costuma deletar alvos de pouca vida.
 - o que você faz com ela: ela tem vida baixíssima e nenhum escape além do Blink inato de curto alcance; se você pegar ela fora de posição antes do combo completo, ela morre rápido pro seu ataque corpo a corpo.
-- itens que viram: Black King Bar (24:06) é o item que decide esse confronto, ele anula magia dela inteira, inclusive Sonic Wave; sem BKB, o combo dela deleta você em segundos.
+- itens que viram: Black King Bar (24:06) anula Scream of Pain e Shadow Strike, mas não o Sonic Wave, que ignora imunidade mágica; mesmo com BKB pronto, respeite o alcance da ult dela.
 - como jogar: não entre em visão dela sem BKB pronto ou quase pronto. Se ela errar o combo ou gastar o Blink cedo, é a sua chance de trocar.
 - fonte: broodmother.json (confrontos); queenofpain.json (itens).
 

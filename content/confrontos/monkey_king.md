@@ -22,8 +22,6 @@ fontes:
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/treant.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/monkey_king.md
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 
@@ -35,7 +33,7 @@ fontes:
 - o que você faz com ele: Rubick tem pouca vida a vida inteira. Jingu Mastery fecha o stack de 4 hits nele rápido, e Boundless Strike (True Strike, nunca erra) o pega mesmo se ele tentar usar Telekinesis pra fugir.
 - itens que viram: Aghanim's Shard seu (mediana 25,9 min) não aumenta o alcance do Boundless Strike (continua 1100), mas faz o golpe aplicar Primal Spring extra no alvo acertado, dano e slow a mais sem precisar de um segundo cast.
 - como jogar: evite lançar Boundless Strike à toa perto dele sem necessidade, cada cast visível é uma chance de ele roubar. Priorize matá-lo rápido antes que ele pegue o Scepter aos 27 min.
-- fonte: monkey_king.json (confrontos, itens power_spikes); rubick.json (itens blink, ultimate_scepter); constants_abilities.json (rubick_spell_steal, monkey_king_boundless_strike)
+- fonte: monkey_king.json (confrontos, itens boots_of_elves); rubick.json (itens blink, ultimate_scepter); constants_abilities.json (rubick_spell_steal, monkey_king_boundless_strike)
 
 ## Contra Hoodwink (hoodwink)
 - placar: MK vence 89 de 172 jogos de pro, 51,7% (fonte: monkey_king.json, confrontos hero_id 123)
@@ -45,11 +43,11 @@ fontes:
 - o que você faz com ela: Mischief disfarça sua forma (0,1 s de imunidade a dano ao transformar) pra ela não conseguir mirar o Bushwhack certo. Boundless Strike (alcance 1100, True Strike) alcança ela mesmo se ela tentar Scurry pra fugir, já que a habilidade dela só dá velocidade e fase pra atravessar árvore, não invisibilidade de verdade.
 - itens que viram: Black King Bar seu (mediana 24,9 min) ignora o stun do Bushwhack, deixando você entrar livre depois dessa janela.
 - como jogar: ataque longe de árvores isoladas quando possível, e force a luta antes dos 19 min, quando ela ainda não tem Force Staff nem Shard pra escapar.
-- fonte: monkey_king.json (confrontos, power_spikes 5:42, black_king_bar 24:54); hoodwink.json (itens force_staff, aghanims_shard); constants_abilities.json (hoodwink_bushwhack, hoodwink_scurry)
+- fonte: monkey_king.json (confrontos, itens boots_of_elves 5:42, black_king_bar 24:54); hoodwink.json (itens force_staff, aghanims_shard); constants_abilities.json (hoodwink_bushwhack, hoodwink_scurry)
 
 ## Contra Pangolier (pangolier)
 - placar: MK vence 69 de 166 jogos de pro, 41,6% (fonte: monkey_king.json, confrontos hero_id 120)
-- por que importa: 3º em volume de jogos e o pior resultado do MK entre os 6 oponentes mais frequentes. Os dois são farmers rápidos de early game (561 GPM do Pangolier contra 572 do MK) que competem pelo mesmo espaço de mapa.
+- por que importa: 3º em volume de jogos, com um dos piores resultados do MK entre os 6 oponentes mais frequentes. Os dois são farmers rápidos de early game (561 GPM do Pangolier contra 572 do MK) que competem pelo mesmo espaço de mapa.
 - janelas: Pangolier bate em cima na lane com Swashbuckle (ida e volta, crítico incluso) antes mesmo do seu 1º item. Seu spike de 5:42 ainda compete de perto. Dos 16 aos 19 min ele fecha Blade of Alacrity e Blink Dagger (mediana 19,2 min), e a partir daí ele entra em luta já com Rolling Thunder disponível.
 - o que ele faz com você: Rolling Thunder deixa Pangolier com debuff immunity e 80% de resistência mágica enquanto rola. Como é debuff immune, o stun do seu Boundless Strike simplesmente não pega nele nesse estado, mesmo o ataque acertando (True Strike garante o dano, não o efeito de stun contra imunidade).
 - o que você faz com ele: ataque antes dele rolar ou espere a Rolling Thunder acabar (o giro tem duração curta); Jingu Mastery mata rápido porque ele tem pouca vida fora da bola.
@@ -64,18 +62,18 @@ fontes:
 - o que ele faz com você: Searing Chains prende quem chega perto, atrasando seu Jingu Mastery. Sleight of Fist acerta tudo num raio, incluindo cada soldado separado do seu Wukong's Command, então ele pode limpar sua formação inteira de uma vez.
 - o que você faz com ele: Ember Spirit tem pouca vida no early e médio game. Jingu Mastery (4 hits, 20% a 80% de roubo de vida) fecha rápido nele antes dele reposicionar com remnant.
 - itens que viram: seu BKB (mediana 24,9 min) sai antes do dele (27,1 min). Essa janela de 2 minutos é sua melhor chance de forçar a luta sem resposta de Avatar do lado dele.
-- como jogar: pressione a lane antes dos 9 min, quando ele ainda não tem Chainmail nem Urn. Evite agrupar os soldados do Wukong's Command perto dele depois que ele tiver Sleight of Fist a nível alto.
-- fonte: monkey_king.json (confrontos, power_spikes, black_king_bar); ember_spirit.json (itens chainmail, black_king_bar); constants_abilities.json (ember_spirit_sleight_of_fist, ember_spirit_searing_chains)
+- como jogar: pressione a lane antes dos 9 min, quando ele ainda não tem Chainmail. Evite agrupar os soldados do Wukong's Command perto dele depois que ele tiver Sleight of Fist a nível alto.
+- fonte: monkey_king.json (confrontos, itens boots_of_elves, black_king_bar); ember_spirit.json (itens chainmail, black_king_bar); constants_abilities.json (ember_spirit_sleight_of_fist, ember_spirit_searing_chains)
 
 ## Contra Queen of Pain (queenofpain)
 - placar: MK vence 60 de 136 jogos de pro, 44,1% (fonte: monkey_king.json, confrontos hero_id 39)
-- por que importa: um dos nukers mágicos à distância citados como pior matchup do MK no conteúdo já verificado do site (porque_itens, seção Black King Bar), confirmado também na amostra de pro.
+- por que importa: um dos nukers mágicos à distância mais fortes contra o MK. A amostra de pro confirma a desvantagem, só 44,1% de vitórias.
 - janelas: QoP farma rota com Shadow Strike (poison) à distância, sem precisar chegar perto. Seu 1º spike de 5:42 ainda não resolve o problema dela ser ranged. A partir dos 20 a 23 min ela tem Kaya and Sange e o ultimate Sonic Wave pronto (até 625 de dano em linha reta), e aos 23,5 min o Aghanim's Scepter dela.
 - o que ela faz com você: Sonic Wave empurra e causa dano alto em linha; combinado com Scream of Pain em área, ela pode te queimar boa parte da vida antes de você chegar no corpo a corpo.
 - o que você faz com ela: ela tem pouca vida e nenhuma forma de travar seu avanço além de Shadow Strike (slow). Uma vez perto, Jingu Mastery mata rápido.
-- itens que viram: Black King Bar (mediana 24,9 min seu) é o item decisivo aqui, conforme já identificado no guia de itens do herói. Force a luta só depois de ter o Avatar pronto.
+- itens que viram: Black King Bar (mediana 24,9 min seu) é o item decisivo aqui. Force a luta só depois de ter o Avatar pronto.
 - como jogar: use Tree Dance pra fechar distância sem ficar exposto ao poke dela, e não entre em luta sem BKB contra ela com ultimate disponível.
-- fonte: monkey_king.json (confrontos, black_king_bar); queenofpain.json (itens kaya_and_sange, ultimate_scepter); porque_itens/monkey_king.md (seção Black King Bar); constants_abilities.json (queenofpain_sonic_wave)
+- fonte: monkey_king.json (confrontos, black_king_bar); queenofpain.json (itens kaya_and_sange, ultimate_scepter); constants_abilities.json (queenofpain_sonic_wave)
 
 ## Contra Shadow Fiend (nevermore)
 - placar: MK vence 53 de 132 jogos de pro, 40,2% (fonte: monkey_king.json, confrontos hero_id 11)
@@ -85,17 +83,17 @@ fontes:
 - o que você faz com ele: Shadow Fiend é extremamente frágil fisicamente. Mischief te deixa passar pelas zonas de raze sem ser notado, e uma vez perto, Jingu Mastery resolve rápido.
 - itens que viram: os dois correm pro BKB quase no mesmo minuto. Quem fechar primeiro dita quando a luta acontece.
 - como jogar: evite ficar na linha de visão das razes antes do nível 6. Depois disso, use o disfarce do Mischief pra se aproximar sem avisar.
-- fonte: monkey_king.json (confrontos, power_spikes, black_king_bar); nevermore.json (resumo gpm/lh10, itens boots_of_elves, black_king_bar); constants_abilities.json (nevermore_shadowraze1, nevermore_requiem)
+- fonte: monkey_king.json (confrontos, itens boots_of_elves, black_king_bar); nevermore.json (resumo gpm/lh10, itens boots_of_elves, black_king_bar); constants_abilities.json (nevermore_shadowraze1, nevermore_requiem)
 
 ## Contra Tiny (tiny)
 - placar: MK vence 52 de 121 jogos de pro, 43,0% (fonte: monkey_king.json, confrontos hero_id 19)
 - por que importa: o carry pos1 com mais jogos de pro contra o MK, mesmo os dois raramente dividindo a mesma lane (Tiny costuma ir offlane, MK vai mid ou safelane), porque ambos competem pelo mesmo papel de combo burst no time.
-- janelas: Tiny é fraco sem Treants no early. Seu spike de 5:42 domina essa fase. A partir dos 15 a 16 min ele pega Blink Dagger (mediana 15,9 min) e Void Stone, montando o combo Toss mais Avalanche.
+- janelas: Tiny é fraco sem árvore no early, antes de ativar Tree Grab. Seu spike de 5:42 domina essa fase. A partir dos 15 a 16 min ele pega Blink Dagger (mediana 15,9 min) e Void Stone, montando o combo Toss mais Avalanche.
 - o que ele faz com você: o combo Avalanche (stun em área) seguido de Toss te prende por tempo suficiente pra matar antes de você reagir, especialmente se ele te joga em cima do próprio time dele.
 - o que você faz com ele: Tiny tem armadura baixa cedo. Jingu Mastery acumula rápido se você chegar no corpo a corpo antes do combo dele ficar pronto.
 - itens que viram: Black King Bar (seu, 24,9 min mediano, mais cedo que o dele, 26,7 min) ignora o stun de Avalanche e a arremessada de Toss, abrindo a janela de all-in a seu favor.
 - como jogar: force a troca antes do Blink dele (15,9 min) sair. Depois disso, não entre em luta sem seu BKB ativo.
-- fonte: monkey_king.json (confrontos, power_spikes, black_king_bar); tiny.json (itens blink, black_king_bar); constants_abilities.json (tiny_avalanche, tiny_toss)
+- fonte: monkey_king.json (confrontos, itens boots_of_elves, black_king_bar); tiny.json (itens blink, black_king_bar); constants_abilities.json (tiny_avalanche, tiny_toss)
 
 ## Contra Ursa (ursa)
 - placar: MK vence 49 de 96 jogos de pro, 51,0% (fonte: monkey_king.json, confrontos hero_id 70)
@@ -105,7 +103,7 @@ fontes:
 - o que você faz com ele: ataque antes do Battle Fury dele (13,7 min) ou force o Enrage cedo e recue, já que a duração é curta.
 - itens que viram: os dois compram BKB quase no mesmo minuto (24,4 Ursa, 24,9 seu). Depois disso a luta vira pura troca de Overpower contra Jingu Mastery.
 - como jogar: evite trocar golpe por golpe com ele depois que ele tiver Fury Swipes acumulado; prefira abrir com Boundless Strike de longe (alcance 1100) em vez de brigar no corpo a corpo prolongado.
-- fonte: monkey_king.json (confrontos, power_spikes, black_king_bar); ursa.json (itens bfury, blink, black_king_bar); constants_abilities.json (ursa_fury_swipes, ursa_enrage)
+- fonte: monkey_king.json (confrontos, itens boots_of_elves, black_king_bar); ursa.json (itens bfury, blink, black_king_bar); constants_abilities.json (ursa_fury_swipes, ursa_enrage)
 
 ## Contra Templar Assassin (templar_assassin)
 - placar: MK vence 27 de 71 jogos de pro, 38,0%, pior resultado entre os carries pos1 comparados (fonte: monkey_king.json, confrontos hero_id 46)
@@ -115,7 +113,7 @@ fontes:
 - o que você faz com ela: Boundless Strike tem True Strike, então nunca erra, mas isso não ignora o barrier do Refraction dela (são mecânicas diferentes: True Strike é sobre acerto, o barrier é sobre absorção de dano). Gaste os charges do Refraction antes do hit decisivo, ou simplesmente mate ela rápido com Jingu Mastery já que a vida dela é baixa sem itens defensivos.
 - itens que viram: o Desolator dela (14,3 min) chega muito antes do seu (18,3 min). Se você deixar o jogo chegar nessa fase sem pressionar antes, ela já está furando sua armadura primeiro.
 - como jogar: pressione a lane bem cedo, antes dos 14 min. Depois disso evite ficar sozinho perto de árvore ou grama alta onde ela possa dar Meld.
-- fonte: monkey_king.json (confrontos, power_spikes); templar_assassin.json (resumo gpm/lh10, itens desolator); constants_abilities.json (templar_assassin_refraction, templar_assassin_meld)
+- fonte: monkey_king.json (confrontos, itens boots_of_elves); templar_assassin.json (resumo gpm/lh10, itens desolator); constants_abilities.json (templar_assassin_refraction, templar_assassin_meld)
 
 ## Contra Lifestealer (life_stealer)
 - placar: MK vence 23 de 59 jogos de pro, 39,0% (fonte: monkey_king.json, confrontos hero_id 54)
@@ -125,7 +123,7 @@ fontes:
 - o que você faz com ele: force o combo antes dele ativar Rage, ou espere a janela de 3 a 6 s acabar antes de engajar de verdade.
 - itens que viram: o Radiance dele (16,2 min) é o divisor de águas. Antes disso ele ainda não tem sustentação suficiente pra ganhar uma troca prolongada contra seu burst.
 - como jogar: pressione antes dos 16 min. Depois disso, prefira poke à distância com Primal Spring em vez de trocar corpo a corpo direto.
-- fonte: monkey_king.json (confrontos, power_spikes); life_stealer.json (itens phase_boots, radiance); constants_abilities.json (life_stealer_rage, life_stealer_open_wounds)
+- fonte: monkey_king.json (confrontos, itens boots_of_elves); life_stealer.json (itens phase_boots, radiance); constants_abilities.json (life_stealer_rage, life_stealer_open_wounds)
 
 ## Contra Alchemist (alchemist)
 - placar: MK vence 23 de 53 jogos de pro, 43,4%, amostra menor que os outros pos1 mas ainda acima de 30 jogos (fonte: monkey_king.json, confrontos hero_id 73)
@@ -135,7 +133,7 @@ fontes:
 - o que você faz com ele: Alchemist não tem fuga além de itens. Jingu Mastery (4 hits, 20% a 80% de roubo de vida) mata rápido se você conseguir chegar nele antes do Radiance.
 - itens que viram: seu Desolator (18,3 min) ajuda a furar a armadura que o Radiance dele dá de resistência indireta via farm rápido de itens defensivos; o BKB dele só sai aos 25,1 min, mais tarde que o seu.
 - como jogar: pressione a lane ou a jungle dele antes dos 14 min. Depois do Radiance, ele farma rápido demais pra você alcançar só com pressão de lane, prefira ganks com o time.
-- fonte: monkey_king.json (confrontos, power_spikes); alchemist.json (resumo gpm, itens radiance, black_king_bar); constants_abilities.json (alchemist_chemical_rage, alchemist_acid_spray)
+- fonte: monkey_king.json (confrontos, itens boots_of_elves); alchemist.json (resumo gpm, itens radiance, black_king_bar); constants_abilities.json (alchemist_chemical_rage, alchemist_acid_spray)
 
 ## Contra Terrorblade (terrorblade)
 - placar: MK vence 27 de 55 jogos de pro, 49,1% (fonte: monkey_king.json, confrontos hero_id 109)
@@ -145,17 +143,17 @@ fontes:
 - o que você faz com ele: Boundless Strike (alcance 1100, stun em linha) ainda acerta ele mesmo transformado, porque é um skillshot de área, não depende de alcance de ataque. Ataque antes dele trocar pra forma demônio, quando ele ainda está fraco no corpo a corpo.
 - itens que viram: seu Desolator ajuda contra as illusions dele (vida baixa, mas dano real quando furadas); o Skadi dele (28,2 min) é o item que trava sua mobilidade depois da metade do jogo.
 - como jogar: pressione antes dele ter Manta pronto (17,1 min). Depois disso, use Boundless Strike de longe em vez de se aproximar e arriscar o Sunder.
-- fonte: monkey_king.json (confrontos, power_spikes); terrorblade.json (itens manta, skadi); constants_abilities.json (terrorblade_sunder, terrorblade_metamorphosis)
+- fonte: monkey_king.json (confrontos, itens boots_of_elves); terrorblade.json (itens manta, skadi); constants_abilities.json (terrorblade_sunder, terrorblade_metamorphosis)
 
 ## Contra Skywrath Mage (skywrath_mage)
 - placar: MK vence só 20 de 68 jogos de pro, 29,4%, a pior taxa de vitória do MK entre todos os oponentes com 30+ jogos (fonte: monkey_king.json, confrontos hero_id 101)
-- por que importa: é o oponente mais citado no conteúdo já verificado do site como contador do MK (seção Black King Bar do porque_itens), e a amostra de pro confirma: é a pior desvantagem do herói.
+- por que importa: nenhum outro herói machuca tanto o winrate do MK quanto Skywrath Mage. A diferença pro segundo pior matchup é grande.
 - janelas: Skywrath é fraco fisicamente a vida inteira (apenas 7 de lh10). Seu spike de 5:42 vence qualquer troca física isolada. Mas dos 16 aos 18 min ele fecha Staff of Wizardry (mediana 18,1 min) e destrava Mystic Flare, o maior burst mágico do jogo (até 1600 de dano somado em 2 s), bem antes do seu BKB (24,9 min).
 - o que ele faz com você: Ancient Seal silencia (te impede de lançar Boundless Strike ou Primal Spring) e aumenta o dano mágico recebido em até 35%; Mystic Flare sozinho te mata mesmo com vida alta, nesse combo.
 - o que você faz com ele: Mischief disfarça sua forma e evita que ele consiga confirmar o alvo pra iniciar o combo; depois do BKB, Avatar (9 s de imunidade mágica) ignora o Mystic Flare inteiro.
 - itens que viram: Black King Bar é praticamente obrigatório nesse confronto, e antes dele estar pronto (24,9 min) você deveria evitar ficar sozinho no alcance de 1200 do Mystic Flare dele.
 - como jogar: não entre em visão dele sem BKB disponível depois dos 16 min. Use o disfarce do Mischief pra se aproximar sem ser alvo confirmado.
-- fonte: monkey_king.json (confrontos, black_king_bar); skywrath_mage.json (itens staff_of_wizardry); porque_itens/monkey_king.md (seção Black King Bar); constants_abilities.json (skywrath_mage_mystic_flare, skywrath_mage_ancient_seal)
+- fonte: monkey_king.json (confrontos, black_king_bar); skywrath_mage.json (itens staff_of_wizardry); constants_abilities.json (skywrath_mage_mystic_flare, skywrath_mage_ancient_seal)
 
 ## Contra Weaver (weaver)
 - placar: MK vence só 15 de 48 jogos de pro, 31,2%, a 2ª pior taxa do MK entre 30+ jogos (fonte: monkey_king.json, confrontos hero_id 63)

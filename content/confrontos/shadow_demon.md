@@ -7,13 +7,11 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/shadow_demon.md
 - https://api.opendota.com/api/constants/aghs_desc
-- https://dotacoach.gg/en/heroes/counters/shadow-demon
+- https://api.opendota.com/api/constants/heroes
 ---
 
-Shadow Demon é suporte de disable: Disruption bane o alvo por 2,75s (não fura BKB, não é dispelável), Shadow Poison empilha dano à distância (1500 de alcance), e a ultimate Demonic Purge remove buff positivo e desacelera até 100%, furando Black King Bar (constants_abilities.json, `bkbpierce: Yes` em `shadow_demon_demonic_purge`, `No` em `shadow_demon_disruption`). HP base de 120, o mais frágil do kit de suporte (content/fichas/shadow_demon.md). Mediana de pro (2.022 jogos, 7.40+7.41): boots 5,4min, Ring of Basilius 8,8min, Arcane Boots 11,3min, Blink Dagger 23,9min, Aghanim's Shard 25,4min (pro_dados/shadow_demon.json).
+Shadow Demon é suporte de disable: Disruption bane o alvo por 2,75s (não fura BKB, não é dispelável), Shadow Poison empilha dano à distância (1500 de alcance), e a ultimate Demonic Purge remove buff positivo e desacelera até 100%, furando Black King Bar (constants_abilities.json, `bkbpierce: Yes` em `shadow_demon_demonic_purge`, `No` em `shadow_demon_disruption`). HP base de 120, igual a todo herói, com ganho de força de só 2,6 por nível (constants/heroes, OpenDota), o que deixa o HP efetivo baixo mesmo tarde no jogo. Mediana de pro (2.022 jogos, 7.40+7.41): boots 5,4min, Ring of Basilius 8,8min, Arcane Boots 11,3min, Blink Dagger 23,9min, Aghanim's Shard 25,4min (pro_dados/shadow_demon.json).
 
 ## Contra Jakiro (jakiro)
 - placar: 202 vitórias em 382 jogos de pro (52,9%), fonte OpenDota /heroes/79/matchups.
@@ -57,13 +55,13 @@ Shadow Demon é suporte de disable: Disruption bane o alvo por 2,75s (não fura 
 
 ## Contra Tiny (tiny)
 - placar: 168 vitórias em 305 jogos de pro (55,1%), fonte OpenDota /heroes/79/matchups.
-- por que importa: quinto em jogos de pro (305) e sem lane fixa em comum com Shadow Demon (Tiny é carry pos 1 no catálogo atual), mas aparece demais em pro pra ignorar; é também o matchup que a dotacoach.gg lista como favorável pra você (+3,9% de vantagem na contagem deles, fonte secundária).
+- por que importa: quinto em jogos de pro (305) e sem lane fixa em comum com Shadow Demon (Tiny é carry, heroes.json), mas aparece demais em pro pra ignorar.
 - janelas: 0-7 min cada um na sua lane, Tiny já com lh10 de 44 contra o seu 7 (pro_dados), bem mais forte em farm; nível 6 (7-8 min) ele liga Grow e o combo Toss + Avalanche vira ameaça de kill instantâneo; Tiny pega Blink aos 15,9min, antes do seu; dos 16 aos 23 min ele tem mais mobilidade que você pra iniciar o combo.
 - o que ele faz com você: Toss (cd 20-11s) te pega num raio de 300 e te joga em cima de Avalanche (cd 23-14s, 1,5s de pancadas), e com Grow o dano de ambos escala muito.
-- o que você faz com ele: se ele te pegar no Toss, Disruption em você mesmo ou no aliado agarrado não é possível (Disruption não se auto-alveja), mas Disruption nele antes do cast cancela o combo inteiro; Demonic Purge desacelera 100% e fura BKB, ótimo pra impedir ele de reposicionar depois de errar o combo.
+- o que você faz com ele: Disruption aceita alvo aliado (target_team Enemy/Friendly em constants_abilities.json), então banir você mesmo ou o aliado agarrado no meio do Toss remove a unidade do mapa e cancela o combo com a Avalanche; Disruption nele antes do cast também cancela o combo inteiro; Demonic Purge desacelera 100% e fura BKB, ótimo pra impedir ele de reposicionar depois de errar o combo.
 - itens que viram: o Aghanim's Shard de Tiny faz a unidade jogada pelo Toss (você, nesse combo) bater mais forte e desacelerar uma área maior no ponto de aterrissagem, piorando ainda mais o combo com Avalanche contra você; seu Blink (23,9min) te dá a mesma mobilidade que ele já tem desde os 16 min, equalizando o 1x1 na metade do jogo.
 - como jogar: fique fora dos 300 de raio do Toss sempre que ele estiver perto do nível 6. Depois do seu Blink, você pode banir ele de longe antes do combo começar.
-- fonte: pro_dados/tiny.json; pro_dados/shadow_demon.json; constants_abilities.json (tiny_toss, tiny_avalanche, tiny_grow); https://dotacoach.gg/en/heroes/counters/shadow-demon
+- fonte: pro_dados/tiny.json; pro_dados/shadow_demon.json; constants_abilities.json (tiny_toss, tiny_avalanche, tiny_grow); heroes.json
 
 ## Contra Snapfire (snapfire)
 - placar: 154 vitórias em 294 jogos de pro (52,4%), fonte OpenDota /heroes/79/matchups.
@@ -82,7 +80,7 @@ Shadow Demon é suporte de disable: Disruption bane o alvo por 2,75s (não fura 
 - o que ele faz com você: Telekinesis (cd 22-13s) te joga no ar e te estoura no chão perto de aliados dele; Spell Steal pode roubar seu último cast, e se for seu Demonic Purge, ele devolve furando BKB do seu próprio time.
 - o que você faz com ele: Shadow Poison de 1500 de alcance acerta antes dele chegar perto o bastante pra roubar algo útil; gaste primeiro um spell barato (Disseminate) perto dele pra não deixar Purge ou Disruption disponíveis pro roubo.
 - itens que viram: o Aghanim's Scepter de Rubick guarda 2 spells roubados com a versão Scepter deles, então contra você o risco é ele roubar sua Demonic Purge já com o bônus de Scepter dela: 2 cargas da habilidade em vez de 1 (constants_abilities.json: scepter de `shadow_demon_demonic_purge`).
-- como jogar: nunca gaste Demonic Purge perto de um Rubick sem abafar (Disruption nele primeiro, ou distância). Prefira vencer a troca de poke à distância antes de entrar em alcance de Telekinesis (375).
+- como jogar: nunca gaste Demonic Purge perto de um Rubick sem abafar (Disruption nele primeiro, ou distância). Prefira vencer a troca de poke à distância antes de entrar no alcance de Telekinesis (550 a 625 conforme o nível, constants_abilities.json).
 - fonte: pro_dados/rubick.json; pro_dados/shadow_demon.json; constants_abilities.json (rubick_telekinesis, rubick_spell_steal); https://api.opendota.com/api/constants/aghs_desc
 
 ## Contra Lion (lion)
@@ -117,39 +115,39 @@ Shadow Demon é suporte de disable: Disruption bane o alvo por 2,75s (não fura 
 
 ## Contra Weaver (weaver)
 - placar: 107 vitórias em 168 jogos de pro (63,7%), fonte OpenDota /heroes/79/matchups.
-- por que importa: a maior vantagem do herói com amostra grande (168 jogos, 63,7%), mesmo sem dividir lane (Weaver é carry pos 1 no catálogo atual), exatamente o tipo de confronto entre dois heróis sem rota em comum que o pro play decide por mecânica, não por lane.
+- por que importa: a maior vantagem do herói com amostra grande (168 jogos, 63,7%), mesmo sem dividir lane (Weaver é carry, heroes.json), exatamente o tipo de confronto entre dois heróis sem rota em comum que o pro play decide por mecânica, não por lane.
 - janelas: Weaver farma muito rápido (gpm 558, lh10 44, o terceiro maior gpm dos 14 oponentes, atrás de Alchemist e Gyrocopter) e escala sozinho com Geminate Attack; ele não compra Blink nem Aghanim's Scepter no top14 de itens (pro_dados/weaver.json), prioriza Power Treads e itens de ataque, então sua rota de combate com ele costuma ser ele vindo até você depois de já ter vantagem de farm.
 - o que ele faz com você: Shukuchi (cd 15-6s) te atravessa, causa dano e some, difícil de acompanhar com seu kit de alcance fixo.
 - o que você faz com ele: Demonic Purge te garante o slow de 100% e o dano furando BKB bem na hora que ele tenta sair de Shukuchi, mas o próprio Shukuchi não é dispelável (`dispellable: No`, constants_abilities.json), então a visibilidade não volta com o Purge; conte com Shadow Poison de longo alcance pra acertar antes dele reiniciar o ataque.
 - itens que viram: o Aghanim's Shard de Weaver marca quem ele atravessa no Shukuchi e aplica um Geminate Attack adicional depois, então um Weaver com shard faz mais dano no primeiro contato do que parece.
 - como jogar: priorize Sentry perto de onde ele costuma rondar com Shukuchi. Gaste Demonic Purge assim que ele aparecer visível, não espere ele sumir de novo.
-- fonte: pro_dados/weaver.json; pro_dados/shadow_demon.json; constants_abilities.json (weaver_shukuchi, weaver_geminate_attack, shadow_demon_demonic_purge); https://api.opendota.com/api/constants/aghs_desc
+- fonte: pro_dados/weaver.json; pro_dados/shadow_demon.json; constants_abilities.json (weaver_shukuchi, weaver_geminate_attack, shadow_demon_demonic_purge); heroes.json
 
 ## Contra Gyrocopter (gyrocopter)
-- placar: 115 vitórias em 190 jogos de pro (60,5%), fonte OpenDota /heroes/79/matchups; a dotacoach.gg também lista Gyrocopter como matchup bom pra você (+4,9% na contagem deles, fonte secundária).
-- por que importa: terceira maior vantagem do herói com amostra grande (190 jogos, 60,5%, atrás de Weaver e Dazzle), outro carry sem lane fixa em comum (pos 1 no catálogo) que aparece demais em pro pra ficar de fora, o par certo pro exemplo que o dono citou (dois heróis sem lane, mas que se cruzam o jogo todo).
+- placar: 115 vitórias em 190 jogos de pro (60,5%), fonte OpenDota /heroes/79/matchups.
+- por que importa: terceira maior vantagem do herói com amostra grande (190 jogos, 60,5%, atrás de Weaver e Dazzle), outro carry sem lane fixa em comum (heroes.json) que aparece demais em pro pra ficar de fora, o par certo pro exemplo que o dono citou (dois heróis sem lane, mas que se cruzam o jogo todo).
 - janelas: Gyrocopter tem o segundo maior gpm dos 14 oponentes (643, atrás só do Alchemist com 768) e lh10 de 62, puro farm; a ameaça dele liga no nível 6 com Call Down (cd 90-60s, 3 mísseis aéreos sequenciais, até 500 de dano cada, que desaceleram, constants_abilities.json) e Flak Cannon (cd 26-20s) pra limpar onda e acertar área; ele não compra Blink no top14 de itens (pro_dados/gyrocopter.json), então até ele ter Boots of Travel ou algo parecido, sua mobilidade de Blink (23,9min) é maior que a dele.
 - o que ele faz com você: Call Down cobre uma área grande e te pega mesmo fora de combate corpo a corpo, Flak Cannon acerta qualquer um perto dele em teamfight.
 - o que você faz com ele: Demonic Purge fura BKB e desacelera 100%, ótimo pra travar ele no lugar antes do segundo míssil do Call Down cair; Shadow Poison empilhado estoura rápido nele porque Gyrocopter não tem fonte de regen alta pra sustentar o veneno.
 - itens que viram: o Aghanim's Shard dele faz Homing Missile disparar junto com Rocket Barrage, dobrando o dano do combo à distância, mas isso não muda o 1x1 corpo a corpo onde seu Purge decide.
 - como jogar: não fique parado dentro do raio do Call Down depois do nível 6. Aproveite a falta de mobilidade dele pra te posicionar e abrir com Shadow Poison antes dele reagir.
-- fonte: pro_dados/gyrocopter.json; pro_dados/shadow_demon.json; constants_abilities.json (gyrocopter_call_down, gyrocopter_flak_cannon); https://dotacoach.gg/en/heroes/counters/shadow-demon
+- fonte: pro_dados/gyrocopter.json; pro_dados/shadow_demon.json; constants_abilities.json (gyrocopter_call_down, gyrocopter_flak_cannon); heroes.json
 
 ## Contra Alchemist (alchemist)
 - placar: 20 vitórias em 52 jogos de pro (38,5%), fonte OpenDota /heroes/79/matchups; a maior desvantagem do herói com amostra acima de 30 jogos.
-- por que importa: é exatamente o tipo de confronto que o dono pediu pra não ficar de fora: dois heróis sem lane fixa em comum (Alchemist é carry pos 1), mas com o pior número do Shadow Demon contra qualquer oponente da lista, o que só se enxerga olhando os dois pro_dados juntos, não o draft de lane.
+- por que importa: é exatamente o tipo de confronto que o dono pediu pra não ficar de fora: dois heróis sem lane fixa em comum (Alchemist é carry, heroes.json), mas com o pior número do Shadow Demon contra qualquer oponente da lista, o que só se enxerga olhando os dois pro_dados juntos, não o draft de lane.
 - janelas: Alchemist tem o maior gpm e xpm dos 14 oponentes (768 gpm, 792 xpm, lh10 63, nível final 22), a diferença de farm já é brutal sozinha; ele liga Chemical Rage no nível 6 (cd 60s) e nunca mais para de farmar, com Radiance saindo em mediana de 13,9min (p25 12,9min, pro_dados/alchemist.json), bem cedo pra um item de 5350 de ouro.
 - o que ele faz com você: a diferença de farm vira diferença de item tão rápido que seus disables não compensam o gold lead; Unstable Concoction (cd 17s, até 3,2s de stun) te atordoa à queima-roupa se você chegar perto pra tentar o combo.
 - o que você faz com ele: Demonic Purge dissipa Chemical Rage (é Basic Dispel, constants_abilities.json: "DISPEL TYPE: Basic Dispel" em `alchemist_chemical_rage`), tirando o attack speed e o regen dele bem na troca, e ainda fura BKB se ele tiver.
 - itens que viram: o Aghanim's Shard de Alchemist (Berserk Potion) dá a um aliado attack speed, movimento, regen e um basic dispel de brinde, ou seja, ele consegue limpar seu próprio Demonic Purge de um aliado puxando esse item, fique de olho se ele estiver comprando.
 - como jogar: não tente vencer pelo farm, vença pela janela de nível 6 a 15 min antes do Radiance dele estabilizar o jogo. Gaste Demonic Purge assim que ele ligar Chemical Rage, não espere o pico do buff.
-- fonte: pro_dados/alchemist.json; pro_dados/shadow_demon.json; constants_abilities.json (alchemist_chemical_rage, alchemist_unstable_concoction, shadow_demon_demonic_purge); https://api.opendota.com/api/constants/aghs_desc
+- fonte: pro_dados/alchemist.json; pro_dados/shadow_demon.json; constants_abilities.json (alchemist_chemical_rage, alchemist_unstable_concoction, shadow_demon_demonic_purge); heroes.json; https://api.opendota.com/api/constants/aghs_desc
 
 ## Contra Zeus (zuus)
 - placar: 23 vitórias em 55 jogos de pro (41,8%), fonte OpenDota /heroes/79/matchups; segunda maior desvantagem do herói com amostra acima de 30 jogos.
 - por que importa: mid clássico sem lane em comum com um suporte 4/5, mas segunda pior desvantagem do Shadow Demon na lista inteira, outro caso de confronto que só aparece olhando os dois pro_dados juntos.
 - janelas: Zeus farma rápido pra mid (gpm 429, xpm 586, lh10 27) e escala puro dano mágico; Lightning Bolt (cd 6s fixo, 140-380 de dano) é barato e constante, machuca seu 120 de HP em poucas trocas; a partir do nível 6 Thundergod's Wrath (cd 130s, 300-650 de dano global) ameaça mesmo quando você está fora de visão.
-- o que ele faz com você: Static Field (passivo) soma 3,45% do seu HP atual a cada ataque ou spell que ele acerta em você, então qualquer troca prolongada já sangra uma fatia extra; Lightning Bolt dá true sight, cancelando seu Shukuchi-like de fuga via fog.
+- o que ele faz com você: Static Field (passivo) soma 3,45% do seu HP atual a cada ataque ou spell que ele acerta em você, então qualquer troca prolongada já sangra uma fatia extra; Lightning Bolt dá true sight por 5s num raio de 600 (constants_abilities.json), o que cancela qualquer tentativa sua de fugir pro fog nesse raio.
 - o que você faz com ele: seu Shadow Poison empilha e estoura rápido, Zeus não tem forma de reduzir dano mágico no kit base; Demonic Purge fura BKB e ainda desacelera, importante porque ele não tem gap closer, se você sobreviver ao poke inicial, ele não te alcança de volta.
 - itens que viram: o Aghanim's Shard de Zeus (Lightning Hands) dá bônus de attack speed com raios em cada ataque, aumentando o dano sustentado dele em lane; o Scepter cria uma nuvem que conjura Lightning Bolt sozinha, perigoso se você ficar parado perto da área marcada.
 - como jogar: evite ficar no alcance de visão dele, Lightning Bolt dá true sight e cancela qualquer jogada no fog. Jogue pra matar ele rápido se conseguir fechar a distância, ele não tem fuga própria.

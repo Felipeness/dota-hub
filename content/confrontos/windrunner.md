@@ -23,38 +23,17 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
 - https://api.opendota.com/api/constants/aghs_desc
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/windrunner.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/rubick.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/snapfire.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/jakiro.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/tusk.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/dragon_knight.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/weaver.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/treant.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/ember_spirit.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/necrolyte.md
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/alchemist.md
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/luna.md
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/morphling.md
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/templar_assassin.md
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/tiny.md
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/shadow_fiend.md
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/confrontos/alchemist.md
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/confrontos/luna.md
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/confrontos/nevermore.md
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/confrontos/tiny.md
 ---
 
 ## Contra Shadow Fiend (nevermore)
 - placar: Windranger venceu 211 de 423 partidas pro (49,9%, praticamente equilibrado). Maior volume de jogos pro de toda a base de confrontos dela.
 - por que importa: maior volume da lista (423 jogos), e os dois saem como pos 1 no catálogo do projeto, carry físico contra carry físico, mesmo raramente dividindo a mesma lane.
-- janelas: até os 9 min as duas correm atrás de item de farm cedo, Windranger fecha Power Treads aos 7,2 e o caminho pro Maelstrom (Javelin) aos 9,3 (pro_dados/windrunner.json). Dos 9 aos 18 min ela monta Maelstrom (13,4) e Mjollnir (18,3) pra bater mais vezes por segundo, enquanto o Shadow Fiend fecha Yasha e Dragon Lance (13,3 a 14,0) e depois Manta por volta de 16 min (pro_dados/nevermore.json). Nessa janela quem acerta o combo primeiro costuma ganhar, porque Windranger depende de controle (Shackleshot) pra abrir, não de burst mágico puro. Depois dos 20 min as duas fecham Black King Bar quase junto (ela 24,4, ele 25,2), dali em diante vira corrida de quem inicia primeiro.
+- janelas: até os 9 min as duas correm atrás de item de farm cedo, Windranger fecha Power Treads aos 7,2 e o caminho pro Maelstrom (Javelin) aos 9,3 (pro_dados/windrunner.json). Dos 9 aos 18 min ela monta Maelstrom (13,4) e Mjollnir (18,3) pra bater mais vezes por segundo, enquanto o Shadow Fiend fecha Yasha e Dragon Lance (13,3 a 14,0, pro_dados/nevermore.json). Nessa janela quem acerta o combo primeiro costuma ganhar, porque Windranger depende de controle (Shackleshot) pra abrir, não de burst mágico puro. Depois dos 20 min as duas fecham Black King Bar quase junto (ela 24,4, ele 25,2), dali em diante vira corrida de quem inicia primeiro.
 - o que ele faz com você: Shadowraze (cooldown de só 9 s no nível 7) zonea seu farm de longe, sem precisar te ver; Requiem of Souls te executa à distância se sua vida já estiver baixa, com linhas de dano mágico que escalam com as almas que ele já capturou (até 20, constants_abilities.json).
 - o que você faz com ele: Shackleshot estuna até 3,25 s se acertar ele junto de uma árvore ou unidade atrás; Focus Fire dá até 500 de velocidade de ataque com acerto garantido num alvo só e atravessa Black King Bar (bkbpierce: yes, constants_abilities.json), o suficiente pra abater o Shadow Fiend rápido se ele não tiver BKB pronto a tempo.
 - itens que viram: seu Black King Bar (24,4) bloqueia o Requiem (dano mágico) e chega pouco antes do dele; o Black King Bar dele bloqueia o seu Shackleshot, mas não bloqueia o Focus Fire, que ignora BKB de qualquer lado.
 - como jogar: não force a luta antes do seu BKB se ele já tiver Dragon Lance e Manta prontos, o combo de Raze dele recarrega rápido. Depois que os dois tiverem BKB, o jeito de ganhar é acertar o Shackleshot primeiro, não trocar Focus Fire contra o combo dele.
-- fonte: pro_dados/windrunner.json; pro_dados/nevermore.json; constants_abilities.json (windrunner_shackleshot, windrunner_focusfire, nevermore_requiem); confrontos/nevermore.md (placar e janelas do lado do Shadow Fiend).
+- fonte: pro_dados/windrunner.json; pro_dados/nevermore.json; constants_abilities.json (windrunner_shackleshot, windrunner_focusfire, nevermore_requiem).
 
 ## Contra Rubick (rubick)
 - placar: Windranger venceu 177 de 377 partidas pro (46,9%, leve desvantagem). Segundo maior volume de jogos pro da base.
@@ -69,9 +48,9 @@ fontes:
 ## Contra Snapfire (snapfire)
 - placar: Windranger venceu 189 de 357 partidas pro (52,9%, leve vantagem). Terceiro maior volume de jogos pro da base.
 - por que importa: terceiro maior volume (357), e hoje Snapfire é jogada mais como mid/iniciadora do que como suporte de ward no pro atual do patch, então mesmo sem dividir lane sempre, ela aparece no mesmo trecho do mapa que uma Windranger pos 1 ou pos 4.
-- janelas: até os 10 min Snapfire sobe Ring of Basilius (7,7) e Arcane Boots (10,6), zoneando de perto com Scatterblast (alcance de cast 800, slow de 100% por 1 s); Windranger prefere manter distância e poka com Powershot (alcance 3000), que acerta antes dela entrar no raio do Scatterblast. Dos 15 aos 20 min Snapfire fecha Aghanim's Shard (16,9) e blink (20,7); com o shard, o Firesnap Cookie vira um combo de stun mais forte. Windranger fecha Maelstrom (13,4) nessa mesma janela e já bate mais vezes por segundo com Focus Fire.
-- o que ela faz com você: Scatterblast te acerta em cone e te empurra, útil pra abrir o combo do time dela se você ficar perto; Mortimer Kisses é uma barragem canalizada de 5,5 s com globos de até 360 de dano cada, mas cada glob pode ser destruído por right-click antes de acertar.
-- o que você faz com ele: Powershot atravessa tudo em linha reta com até 470 de dano e desacelera, acerta antes dela chegar no alcance curto do Scatterblast (800); Shackleshot prende ela numa árvore ou unidade atrás, abrindo o combo do seu time.
+- janelas: até os 10 min Snapfire sobe Ring of Basilius (7,7) e Arcane Boots (10,6), zoneando de perto com Scatterblast (alcance de cast 800, slow de 100% por 1 s); Windranger prefere manter distância e poka com Powershot (alcance 3000), que acerta antes dela entrar no raio do Scatterblast. Dos 15 aos 20 min Snapfire fecha Aghanim's Shard (16,9) e blink (20,7); com o shard, o Firesnap Cookie passa a lançar um Mortimer Kiss extra no impacto, somando dano e cura ao combo. Windranger fecha Maelstrom (13,4) nessa mesma janela e já bate mais vezes por segundo com Focus Fire.
+- o que ela faz com você: Scatterblast te acerta em cone e te desacelera (100% por 1 s), útil pra abrir o combo do time dela se você ficar perto; Mortimer Kisses é uma barragem canalizada de 5,5 s com globos de até 360 de dano cada, mas cada glob pode ser destruído por right-click antes de acertar.
+- o que você faz com ela: Powershot atravessa tudo em linha reta com até 470 de dano e desacelera, acerta antes dela chegar no alcance curto do Scatterblast (800); Shackleshot prende ela numa árvore ou unidade atrás, abrindo o combo do seu time.
 - itens que viram: seu Black King Bar bloqueia o Scatterblast e o stun do Firesnap Cookie (ambos mágicos); contra a Mortimer Kisses, a defesa de item nenhum substitui destruir os globos a tempo com right-click.
 - como jogar: mantenha distância de 800 ou mais dela antes dos 15 min, o Scatterblast não alcança; depois que ela fechar o shard, respeite o Firesnap Cookie em cima de árvore, o combo de stun fica mais longo.
 - fonte: pro_dados/windrunner.json; pro_dados/snapfire.json; constants_abilities.json (snapfire_scatterblast, snapfire_mortimer_kisses, windrunner_powershot); aghs_desc (Snapfire).
@@ -88,23 +67,23 @@ fontes:
 
 ## Contra Tusk (tusk)
 - placar: Windranger venceu 192 de 343 partidas pro (56,0%, vantagem clara). Quinto maior volume de jogos pro da base.
-- por que importa: quinto maior volume (343, empatado com Tiny), ganker 4/5 clássico que gira o mapa, mas é o hero de menor farm da lista (ficha local registra mediana de 300 de ouro/min pra ele, bem abaixo do que ela farma como pos 1).
-- janelas: até os 19 min Tusk ganka a pé com Ice Shards (raio 200, dano até 300) e Walrus Kick (550 de dano fixo, cooldown de só 12 s); Windranger já monta Maelstrom (13,4) nessa janela e, se o gank errar, a troca fica livre pra ela. Blink dele sai só aos 19,0 (pro_dados/tusk.json), tarde pro padrão de suporte. Depois disso os dois têm blink (o dela sai perto dos 21 min via Hurricane Pike/Dragon Lance), mas o dano dele continua baixo mesmo com item, Snowball e Walrus Kick não escalam tanto quanto o Focus Fire dela.
+- por que importa: quinto maior volume (343, empatado com Tiny), ganker 4/5 clássico que gira o mapa, mas é o hero de menor farm da lista (partidas pro 7.40-7.41, OpenDota, registram mediana de 300 de ouro/min pra ele, bem abaixo do que ela farma como pos 1).
+- janelas: até os 19 min Tusk ganka a pé com Ice Shards (raio 200, dano até 300) e Walrus Kick (550 de dano fixo, cooldown de só 12 s); Windranger já monta Maelstrom (13,4) nessa janela e, se o gank errar, a troca fica livre pra ela. Blink dele sai só aos 19,0 (pro_dados/tusk.json), tarde pro padrão de suporte. Depois disso os dois ganham mobilidade, ela com Dragon Lance (21,9, pro_dados/windrunner.json), mas o dano dele continua baixo mesmo com item, Snowball e Walrus Kick não escalam tanto quanto o Focus Fire dela.
 - o que ele faz com você: Walrus Kick atravessa Black King Bar (bkbpierce: yes, constants_abilities.json) e te acerta em linha com 550 de dano fixo e slow; Ice Shards cria uma parede que te prende se você estiver do lado errado quando ele lança.
 - o que você faz com ele: Tusk tem o menor dano sustentado da lista, Focus Fire nele é quase kill garantido se ele não tiver Snowball pra fugir rolando com o time; Powershot acerta antes dele chegar no alcance de gank.
 - itens que viram: Black King Bar não bloqueia o Walrus Kick (ele atravessa BKB por design), a resposta é distância, não imunidade. Seu Windrun (evasão total a ataque físico) não ajuda aqui porque Walrus Kick é dano fixo de habilidade, não ataque básico.
 - como jogar: não ande sozinho perto de parede de visão baixa nos primeiros 19 min, o gank dele não avisa. Depois que ele gastar Snowball e Kick sem fechar a kill, a troca é sua, ele não tem segundo combo rápido.
-- fonte: pro_dados/windrunner.json; pro_dados/tusk.json; constants_abilities.json (tusk_walrus_kick, tusk_ice_shards, tusk_snowball); content/fichas/tusk.md (GPM/LH do Tusk).
+- fonte: pro_dados/windrunner.json; pro_dados/tusk.json; constants_abilities.json (tusk_walrus_kick, tusk_ice_shards, tusk_snowball).
 
 ## Contra Tiny (tiny)
 - placar: Windranger venceu 177 de 343 partidas pro (51,6%, levemente favorável). Sexto maior volume de jogos pro da base, maior entre os de mesma posição principal (carry pos 1 contra carry pos 1, pelo catálogo).
 - por que importa: mesma posição principal no catálogo do projeto (os dois saem pos 1 em pro), e é o carry físico mais comum contra ela na base, mesmo raramente dividindo a mesma lane.
 - janelas: Tiny fecha Power Treads aos 6,1 min (1.404 de 3.127 jogos pro) e Echo Sabre por volta de 12,1; Windranger fecha Maelstrom aos 13,4, quase junto. Até o Echo Sabre dele o combo de burst (Avalanche + Toss) é fraco, ela out-poka com Powershot de 3000 de alcance. Dos 12 aos 18 min, com Echo Sabre e depois Shadow Blade (mediana pro de 17,6, pro_dados/tiny.json), o combo dele pode estourar a vida baixa dela antes do Mjollnir (18,3) estar pronto, porque Avalanche e Toss são mágicos e passam direto pela evasão do Windrun. Depois dos 20 min, com Mjollnir e BKB prontos (ela 24,4, ele por volta de 26,7), ela ganha a troca prolongada: Focus Fire atravessa o BKB dele e o combo de burst dele já gastou o blink.
 - o que ele faz com você: Avalanche (stun curto, raio até 370) seguido de Toss te joga pra cima do time dele, e os dois são dano mágico, então o Windrun não ajuda; Grow aumenta o alcance de ataque e o dano das árvores jogadas, estica o poke dele.
-- o que você faz com ele: Shackleshot prende ele numa árvore ou unidade perto, abrindo o combo do seu time antes do blink dele estar pronto (19,0 a 15,9 min conforme a fonte); Focus Fire ignora o Black King Bar dele numa troca prolongada depois dos 20 min.
+- o que você faz com ele: Shackleshot prende ele numa árvore ou unidade perto, abrindo o combo do seu time antes do blink dele estar pronto (mediana pro de 15,9 min, pro_dados/tiny.json); Focus Fire ignora o Black King Bar dele numa troca prolongada depois dos 20 min.
 - itens que viram: Black King Bar dele bloqueia seu Shackleshot, mas não o seu Focus Fire; seu Black King Bar não ajuda contra Avalanche + Toss (resolve com distância e timing, não com imunidade, já que o combo é rápido e não depende de canal longo).
 - como jogar: evite ficar visível e parado antes do blink dele estar pronto (perto dos 16 a 19 min), é quando o combo dele rende mais. Depois dos 20 min, force a troca prolongada, Focus Fire ganha de dano sustentado contra o burst dele já gasto.
-- fonte: pro_dados/windrunner.json; pro_dados/tiny.json; constants_abilities.json (tiny_avalanche, tiny_toss, windrunner_focusfire, windrunner_windrun); confrontos/tiny.md; content/porque_itens/tiny.md.
+- fonte: pro_dados/windrunner.json; pro_dados/tiny.json; constants_abilities.json (tiny_avalanche, tiny_toss, windrunner_focusfire, windrunner_windrun).
 
 ## Contra Ember Spirit (ember_spirit)
 - placar: Windranger venceu 114 de 283 partidas pro (40,3%, desvantagem grande). Sétimo maior volume de jogos pro da base, e o pior resultado dela entre os oponentes de alto volume.
@@ -114,7 +93,7 @@ fontes:
 - o que você faz com ele: Shackleshot prende ele numa árvore antes do Fire Remnant estar pronto pra reposicionar; na janela dos 24 aos 27 min, com BKB só do seu lado, force a luta, Searing Chains é bloqueado pelo seu BKB (bkbpierce: no).
 - itens que viram: seu Black King Bar (24,4) bloqueia o Searing Chains dele e chega antes do BKB dele (27,1); contra o Flame Guard, prefira abrir com Shackleshot + Powershot de longe em vez de ficar batendo nele perto o tempo inteiro com Focus Fire, porque o escudo devolve dano enquanto você ataca.
 - como jogar: evite trocar Focus Fire corpo a corpo com o Flame Guard dele ativo, puxe pra Powershot de longe. Force a troca entre 24 e 27 min, é a única janela de BKB a seu favor.
-- fonte: pro_dados/windrunner.json; pro_dados/ember_spirit.json; constants_abilities.json (ember_spirit_searing_chains, ember_spirit_flame_guard, windrunner_focusfire); content/fichas/ember_spirit.md.
+- fonte: pro_dados/windrunner.json; pro_dados/ember_spirit.json; constants_abilities.json (ember_spirit_searing_chains, ember_spirit_flame_guard, windrunner_focusfire).
 
 ## Contra Dragon Knight (dragon_knight)
 - placar: Windranger venceu 116 de 219 partidas pro (53,0%, leve vantagem). Oitavo maior volume de jogos pro da base, carry/mid rival por função.
@@ -124,27 +103,27 @@ fontes:
 - o que você faz com ele: o Windrun anula a parte física do ataque de Dragon Form, incluindo o splash, deixando só a fração mágica (Wyrm's Wrath) acertando você durante a evasão; Shackleshot prende ele numa árvore antes do Blink Dagger estar pronto.
 - itens que viram: seu Black King Bar (24,4) chega antes do dele (23,3) por pouca margem, então a corrida de quem fecha BKB primeiro decide boa parte da troca tardia; Crystalys (lesser_crit, 29,9 min no seu build) acelera o dano puro depois que o controle já está resolvido.
 - como jogar: evite trocar ataque básico sustentado contra a forma de dragão sem o Windrun ativo, ele ainda te acerta de volta com splash físico; force a luta pouco depois do seu BKB (24,4), antes do dele se tornar irrelevante pela imunidade dela.
-- fonte: pro_dados/windrunner.json; pro_dados/dragon_knight.json; constants_abilities.json (dragon_knight_breathe_fire, dragon_knight_wyrms_wrath, windrunner_windrun); content/fichas/dragon_knight.md.
+- fonte: pro_dados/windrunner.json; pro_dados/dragon_knight.json; constants_abilities.json (dragon_knight_breathe_fire, dragon_knight_wyrms_wrath, windrunner_windrun).
 
 ## Contra Luna (luna)
 - placar: Windranger venceu 113 de 207 partidas pro (54,6%, vantagem clara). Nono maior volume de jogos pro da base, mesma posição principal (carry pos 1 contra carry pos 1).
 - por que importa: as duas saem pos 1 no catálogo do projeto, ambas agi ranged que escalam rápido com item, e o Windrun é um contador mecânico direto do win condition dela (autoataque e Moon Glaives).
 - janelas: Luna sobe Mask of Madness entre 9,1 e 10,0 e Manta entre 16,1 e 17,2; Windranger fecha Maelstrom aos 13,4 nessa mesma faixa. A janela de maior risco pra ela é dos 18 aos 24 min, quando Luna tem Eclipse maxado (perto do nível 18, cooldown de 105 s) e pode te queimar de longe numa noite, sem precisar vencer o 1x1 de perto. Depois do seu Black King Bar (24,4) e do seu Mjollnir (18,3), o Focus Fire sustentado ganha de qualquer troca de auto-ataque porque o Windrun anula o retorno físico dos Moon Glaives dela.
 - o que ela faz com você: Lucent Beam estuna 0,6 s e inicia a troca a 9 a 6 s de cooldown; Eclipse chove raios em área (até 300 de dano por raio) e acerta mesmo com seu Windrun ativo, porque é dano de feitiço, não de ataque.
-- o que você faz com ele: Windrun dá evasão total contra o ataque básico dela, incluindo os saltos do Moon Glaive (bkbpierce: yes, mas isso não muda a evasão, que é separada de BKB), ela erra o ataque físico inteiro enquanto a janela estiver ativa; Shackleshot abre o combo antes dela ter Manta pra escapar.
+- o que você faz com ela: Windrun dá evasão total contra o ataque básico dela, incluindo os saltos do Moon Glaive (bkbpierce: yes, mas isso não muda a evasão, que é separada de BKB), ela erra o ataque físico inteiro enquanto a janela estiver ativa; Shackleshot abre o combo antes dela ter Manta pra escapar.
 - itens que viram: nenhum item dela remove a evasão do Windrun diretamente, por isso Lucent Beam e Eclipse (dano de feitiço) são a ferramenta real de dano garantido nela, não o autoataque. Seu Black King Bar bloqueia os dois.
 - como jogar: force ela a gastar o Windrun antes de comprometer o dano de auto-ataque; evite ficar parado numa noite depois do nível 18 dela, é quando o Eclipse sozinho ameaça te matar.
-- fonte: pro_dados/windrunner.json; pro_dados/luna.json; constants_abilities.json (luna_eclipse, luna_lucent_beam, luna_moon_glaive, windrunner_windrun); content/porque_itens/luna.md; confrontos/luna.md.
+- fonte: pro_dados/windrunner.json; pro_dados/luna.json; constants_abilities.json (luna_eclipse, luna_lucent_beam, luna_moon_glaive, windrunner_windrun).
 
 ## Contra Templar Assassin (templar_assassin)
 - placar: Windranger venceu 107 de 186 partidas pro (57,5%, vantagem grande). Décimo maior volume de jogos pro da base, mesma posição principal (carry pos 1 contra carry pos 1).
 - por que importa: as duas saem pos 1 no catálogo, e é um dos melhores resultados da Windranger entre carries de farm rápido, o motivo mecânico é direto: o win condition dela é 100% autoataque (Psi Blades, Meld, Refraction), exatamente o que o Windrun anula.
-- janelas: Templar Assassin fecha Power Treads entre 4,0 e 5,5 min (gatilho de nível 4) e Dragon Lance por volta de 14,2 a 14,3, dobrando o alcance de ataque; Windranger fecha Maelstrom aos 13,4, quase na mesma janela. Dos 14 aos 17 min ela soma Desolator (14,3) pra reduzir armadura e abrir tower dive; depois disso vem o Blink Dagger dela (17,4). Windranger tem Mjollnir pronto (18,3) e BKB (24,4) antes do blink dela render troca de verdade, então a janela de maior risco pra Windranger é justamente antes do Mjollnir, quando a TA já tem Desolator e consegue queimar vida rápido de longe com o Meld ativo.
+- janelas: Templar Assassin fecha Power Treads entre 5,2 e 6,0 min (mediana pro, pro_dados/templar_assassin.json) e Dragon Lance por volta de 14,2, dobrando o alcance de ataque; Windranger fecha Maelstrom aos 13,4, quase na mesma janela. Dos 14 aos 17 min ela soma Desolator (14,3) pra reduzir armadura e abrir tower dive; depois disso vem o Blink Dagger dela (17,4). Windranger tem Mjollnir pronto (18,3) e BKB (24,4) antes do blink dela render troca de verdade, então a janela de maior risco pra Windranger é justamente antes do Mjollnir, quando a TA já tem Desolator e consegue queimar vida rápido de longe com o Meld ativo.
 - o que ela faz com você: Psi Blades tem spill a 400 a 700 de alcance e atravessa Black King Bar (bkbpierce: yes); Desolator reduz sua armadura em 6 pontos por 7 s, somando com o Meld (mais até 8 pontos no nível máximo, constants_abilities.json), o que acelera qualquer troca física contra você.
-- o que você faz com ele: Windrun dá evasão total contra Psi Blades, Meld e os pulsos de Refraction, que são instâncias de ataque físico (bkbpierce: yes nos três, mas isso não protege contra a evasão, que é separada de BKB), ela erra praticamente todo o DPS dela enquanto a janela estiver ativa; Shackleshot prende ela antes do Blink Dagger estar pronto (17,4).
+- o que você faz com ela: Windrun dá evasão total contra Psi Blades, Meld e os pulsos de Refraction, que são instâncias de ataque físico (bkbpierce: yes nos três, mas isso não protege contra a evasão, que é separada de BKB), ela erra praticamente todo o DPS dela enquanto a janela estiver ativa; Shackleshot prende ela antes do Blink Dagger estar pronto (17,4).
 - itens que viram: nenhum item físico dela compensa o Windrun, só dano mágico (ela não tem) resolveria; o Aghanim's Shard dela (Refraction castável enquanto atordoada) reduz o valor do seu Shackleshot, porque ela ainda ativa a defesa mesmo presa, mas é item raro nessa posição. Seu Black King Bar bloqueia a Trap dela (bkbpierce: no), o que importa principalmente se ela tiver Scepter, que adiciona silêncio ao acerto.
 - como jogar: force a troca justamente durante o Windrun, ela não tem resposta de dano mágico pra furar a evasão; evite ficar visível perto de árvore antes do Blink dela (17,4), onde o Shackleshot garante o combo.
-- fonte: pro_dados/windrunner.json; pro_dados/templar_assassin.json; constants_abilities.json (templar_assassin_psi_blades, templar_assassin_meld, templar_assassin_refraction, windrunner_windrun); aghs_desc (Templar Assassin); content/porque_itens/templar_assassin.md.
+- fonte: pro_dados/windrunner.json; pro_dados/templar_assassin.json; constants_abilities.json (templar_assassin_psi_blades, templar_assassin_meld, templar_assassin_refraction, windrunner_windrun); aghs_desc (Templar Assassin).
 
 ## Contra Necrophos (necrolyte)
 - placar: Windranger venceu 72 de 120 partidas pro (60,0%, vantagem grande). Um dos dois melhores resultados da base com amostra de 30 jogos ou mais, junto com Morphling.
@@ -164,17 +143,17 @@ fontes:
 - o que você faz com ele: Powershot acerta a 3000 de distância, bem além do alcance de melee dele; se ele ficar isolado sem o time perto, Shackleshot mais o seu dano físico fecha ele rápido, porque ele tem pouco HP e nenhuma fuga própria além do Blink Dagger tardio.
 - itens que viram: Black King Bar não resolve o Overgrowth (ele atravessa por design), a única resposta é posição, ficar fora do raio de 800 antes dele lançar; Linken's Sphere bloqueia o próximo feitiço "unit target" dele, mas o Overgrowth é em área, não unit target, então não resolve.
 - como jogar: evite agrupar sua equipe perto de árvore alta quando o Overgrowth dele estiver disponível; fora de teamfight, ele não ameaça seu 1x1 em nada, farme longe dele e deixe o impacto dele só pra quando o time já estiver junto.
-- fonte: pro_dados/windrunner.json; pro_dados/treant.json; constants_abilities.json (treant_overgrowth, treant_leech_seed, windrunner_powershot); content/fichas/treant.md.
+- fonte: pro_dados/windrunner.json; pro_dados/treant.json; constants_abilities.json (treant_overgrowth, treant_leech_seed, windrunner_powershot).
 
 ## Contra Morphling (morphling)
 - placar: Windranger venceu 54 de 90 partidas pro (60,0%, vantagem grande). O exemplo clássico de dois carries pos 1 que quase nunca dividem lane mas cujo confronto direto importa de verdade.
 - por que importa: os dois saem pos 1 no catálogo do projeto, raramente se enfrentam em lane, mas competem pelo mesmo papel de hard-carry físico de fim de jogo; é também o melhor resultado dela entre os oponentes de alto winrate com amostra de 30 jogos ou mais, empatado com Necrophos.
-- janelas: Morphling fecha Power Treads aos 6,0 (mediana de 63 de 63 jogos, content/porque_itens/morphling.md), Morbid Mask por volta de 8,1 a 8,2, Vladmir's Offering perto de 10,7 e Manta Style por volta de 18,4; Windranger fecha Maelstrom aos 13,4 e Mjollnir aos 18,3, quase junto do Manta dele. Até os 18 min Morphling é frágil fora de item, sem nenhum disable ou burst, só Waveform (dash reto com dano) e Adaptive Strike (empurrão à distância). A partir dos 18 min, com Manta pronto, ele ganha mobilidade, mas o dano dele continua sendo quase 100% autoataque escalado pela Attribute Shift.
-- o que ele faz com você: Waveform atravessa em linha reta com dano e slow, serve tanto pra engajar quanto pra fugir; Adaptive Strike empurra e causa dano mágico à distância, ignora o Windrun porque não é ataque básico.
+- janelas: Morphling fecha Power Treads aos 6,0 (mediana pro de 869 jogos, pro_dados/morphling.json), Morbid Mask por volta de 7,9, Vladmir's Offering perto de 10,7 e Manta Style por volta de 18,4; Windranger fecha Maelstrom aos 13,4 e Mjollnir aos 18,3, quase junto do Manta dele. Até os 18 min Morphling é frágil fora de item, sem nenhum disable ou burst, só Waveform (dash reto com dano) e Adaptive Strike (empurrão à distância). A partir dos 18 min, com Manta pronto, ele ganha mobilidade, mas o dano dele continua sendo quase 100% autoataque escalado pela Attribute Shift.
+- o que ele faz com você: Waveform atravessa em linha reta com dano, serve tanto pra engajar quanto pra fugir (ele fica invulnerável durante o dash); Adaptive Strike empurra e causa dano mágico à distância, ignora o Windrun porque não é ataque básico.
 - o que você faz com ele: Windrun dá evasão total contra o autoataque dele, que é praticamente todo o dano que ele tem fora dos dois feitiços de utilidade; Shackleshot prende ele antes do Manta estar pronto (18,4), quando ele ainda não tem fuga própria de verdade.
 - itens que viram: nenhum item físico dele resolve o Windrun, a janela dela de evasão simplesmente nega o win condition dele por 3 a 6 s; seu Black King Bar (24,4) bloqueia o Adaptive Strike, a única fonte de dano mágico garantido dele.
 - como jogar: force a troca antes dos 18 min, quando ele ainda não tem Manta nem mobilidade real; se ele já tiver Manta, ative Windrun antes de engajar, o autoataque dele simplesmente erra durante a janela.
-- fonte: pro_dados/windrunner.json; pro_dados/morphling.json; constants_abilities.json (morphling_waveform, morphling_adaptive_strike_agi, windrunner_windrun); content/porque_itens/morphling.md.
+- fonte: pro_dados/windrunner.json; pro_dados/morphling.json; constants_abilities.json (morphling_waveform, morphling_adaptive_strike_agi, windrunner_windrun).
 
 ## Contra Weaver (weaver)
 - placar: Windranger venceu 51 de 86 partidas pro (59,3%, vantagem grande). Amostra de 30 jogos ou mais, um dos melhores resultados da base.
@@ -184,7 +163,7 @@ fontes:
 - o que você faz com ele: Powershot ameaça metade da vida dele de longe desde o nível 4, muito antes de qualquer item de sobrevivência dele estar pronto; Shackleshot precisa acertar antes do Time Lapse, senão ele desfaz o próprio stun.
 - itens que viram: não existe item seu que impeça o Time Lapse (é passivo do kit dele, recarrega em 70 a 40 s por nível), a resposta é atacar quando o cooldown já foi gasto; seu Mjollnir (Chain Lightning atravessa evasão) ajuda a acertar mesmo se ele tentar se esconder com Shukuchi em área.
 - como jogar: force o combo logo que avistar o Shukuchi dele ativo, cada segundo de invisibilidade gasto sem ele fugir de verdade é cooldown que não volta; depois que ele gastar o Time Lapse uma vez, a janela seguinte de 40 a 70 s é livre de dispel forte.
-- fonte: pro_dados/windrunner.json; pro_dados/weaver.json; constants_abilities.json (weaver_shukuchi, weaver_time_lapse, windrunner_powershot, windrunner_shackleshot); content/fichas/weaver.md.
+- fonte: pro_dados/windrunner.json; pro_dados/weaver.json; constants_abilities.json (weaver_shukuchi, weaver_time_lapse, windrunner_powershot, windrunner_shackleshot).
 
 ## Contra Alchemist (alchemist)
 - placar: Windranger venceu 31 de 71 partidas pro (43,7%, desvantagem clara). Amostra de 30 jogos ou mais, um dos piores resultados da base.
@@ -194,4 +173,4 @@ fontes:
 - o que você faz com ele: Shackleshot prende ele antes do Blink Dagger estar pronto (21,4); Powershot acerta de longe sem entrar na área do Radiance dele.
 - itens que viram: seu Black King Bar (24,4) não bloqueia o burn do Radiance (é dano de aura, não feitiço direto, mas o Chemical Rage em si não é mágico nem físico, é um buff, então BKB nenhum lado resolve o sustain dele); a resposta de verdade é burst rápido, matar ele antes da regeneração compensar o dano, não troca prolongada.
 - como jogar: evite ficar dentro da área do Radiance dele parada; force o combo de burst (Shackleshot + Powershot carregado + Focus Fire) de uma vez, troca longa favorece o sustain da Chemical Rage dele.
-- fonte: pro_dados/windrunner.json; pro_dados/alchemist.json; constants_abilities.json (alchemist_chemical_rage, windrunner_shackleshot, windrunner_powershot); confrontos/alchemist.md (seção Windranger, placar espelho); content/porque_itens/alchemist.md.
+- fonte: pro_dados/windrunner.json; pro_dados/alchemist.json; constants_abilities.json (alchemist_chemical_rage, windrunner_shackleshot, windrunner_powershot).

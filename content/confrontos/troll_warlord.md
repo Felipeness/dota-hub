@@ -23,8 +23,6 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/troll_warlord.md
 - https://api.opendota.com/api/constants/aghs_desc
 - https://dotacoach.gg/en/heroes/counters/troll-warlord
 - https://vcgamers.com/news/en/hero-counter-troll-warlord-dota-2
@@ -32,14 +30,14 @@ fontes:
 
 ## Como os oponentes foram escolhidos
 
-Troll Warlord é pos 1 (carry) e pos 2 (mid) no patch 7.41, confirmado pelo catálogo do site e pela ficha já verificada (3 picks pos 1, 2 picks pos 2 no recorte de Tier 1). A lista de 16 junta quatro critérios: os 6 heróis com mais jogos de pro contra ele, não importa a posição (Slardar, Snapfire, Shadow Fiend, Rubick, Ursa, Disruptor); os heróis de pos 1/pos 2 com mais jogos de pro contra ele, carry contra carry e mid contra mid (Dragon Knight, Windranger, Storm Spirit, Luna, Gyrocopter, Tiny, que também entram no critério 1 quando se repetem); os maiores desvios de winrate com amostra de 30+ jogos, pra cima (Dark Willow, Bristleback) e pra baixo (Templar Assassin, Abaddon); e os carries mais picados em pro no geral mesmo sem lane garantida com o Troll, que no caso dele já caem dentro dos critérios anteriores (Shadow Fiend, Tiny, Windranger e Luna estão todos entre os 5 carries com mais jogos de pro no patch). Cada bloco abaixo explica de novo, de forma específica, por que aquele herói está na lista.
+Troll Warlord é pos 1 (carry) e pos 2 (mid) no patch 7.41, papel que bate com a curva de item de `pro_dados/troll_warlord.json`: Battle Fury mediano aos 13,4 min (perfil de farm de carry) com Boots of the Elves e Blade of Alacrity cedo (perfil de mid com Yasha). A lista de 16 junta quatro critérios: os 6 heróis com mais jogos de pro contra ele, não importa a posição (Slardar, Snapfire, Shadow Fiend, Rubick, Ursa, Disruptor); os heróis de pos 1/pos 2 com mais jogos de pro contra ele, carry contra carry e mid contra mid (Dragon Knight, Windranger, Storm Spirit, Luna, Gyrocopter, Tiny, que também entram no critério 1 quando se repetem); os maiores desvios de winrate com amostra de 30+ jogos, pra cima (Dark Willow, Bristleback) e pra baixo (Templar Assassin, Abaddon); e os carries mais picados em pro no geral mesmo sem lane garantida com o Troll, que no caso dele já caem dentro dos critérios anteriores (Shadow Fiend, Tiny, Windranger e Luna estão todos entre os 5 carries com mais jogos de pro no patch). Cada bloco abaixo explica de novo, de forma específica, por que aquele herói está na lista.
 
 Os winrates abaixo são sempre do ponto de vista do Troll Warlord (% de vitórias do time dele nos jogos em que enfrentou aquele herói), tirados de `pro_dados/troll_warlord.json` (campo `confrontos`, fonte original OpenDota `/heroes/95/matchups`, partidas de liga).
 
 ## Contra Shadow Fiend (nevermore)
 
 - placar: 73 vitórias em 128 jogos de pro, 57,0% a favor do Troll.
-- por que importa: maior amostra entre os 16 confrontos e os dois são carries clássicos de ataque básico que disputam o mesmo papel de hiper carry, mesmo raramente dividindo lane.
+- por que importa: terceira maior amostra entre os 16 confrontos e os dois são carries clássicos de ataque básico que disputam o mesmo papel de hiper carry, mesmo raramente dividindo lane.
 - janelas: até os 10 min Shadow Fiend ganha a troca à distância com Shadowraze (CD 9s, sem contato) sem depender de last hit perfeito, e fecha Blade of Alacrity aos 12,7 min (mediana de 3859 jogos de pro). O Troll só fecha o primeiro item grande, Battle Fury, aos 13,4 min (mediana de 430 jogos). Dos 13 aos 20 min o cleave do Bfury acelera seu farm, mas só com Yasha (17,2 min) você vira perseguidor de verdade. Depois dos 24,7 min, quando o BKB do Troll fecha, o duelo vira: nenhuma das 3 Shadowraze nem o Requiem of Souls atravessam imunidade a magia.
 - o que ele faz com você: 3 Shadowraze (85 a 280 de dano base, mais bônus por alma acumulada em Necromastery) te acerta de longe sem precisar de contato, e o Requiem solta linhas de energia em área com até 20 almas se ele te pegar perto dele.
 - o que você faz com ele: Berserker's Rage (ensnare no corpo a corpo) atravessa o BKB dele, então mesmo imune a magia ele fica preso; sem dash, Shadow Fiend não escapa do seu Fervor empilhado depois que o root prende.
@@ -183,7 +181,7 @@ Os winrates abaixo são sempre do ponto de vista do Troll Warlord (% de vitória
 
 - placar: 20 vitórias em 30 jogos de pro, 66,7% a favor do Troll. Amostra no limite mínimo (30 jogos), maior vantagem percentual da lista.
 - por que importa: maior vantagem percentual do Troll com amostra válida, mesmo sendo um suporte fora da lane direta dele.
-- janelas: Dark Willow sobe Shadow Realm (fica untargetable até o próximo ataque, que vem com bônus de dano mágico) e Bramble Maze (raízes que prendem e causam dano ao longo do tempo) desde cedo, mas sem alcance pra acertar um Troll já farmado com Whirling Axes de longe (950 de alcance contra o raio de 500 da Bramble Maze). Depois do Bfury do Troll (13,4 min), o farm dele supera qualquer harass, e o Cursed Crown (stun em área com delay) é fácil de evitar fora de teamfight.
+- janelas: Dark Willow sobe Shadow Realm (fica untargetable até o próximo ataque, que vem com bônus de dano mágico) e Bramble Maze (raízes que prendem e causam dano ao longo do tempo) desde cedo, mas sem alcance pra acertar um Troll já farmado com Whirling Axes de longe (950 de alcance contra os 500 de alcance de colocação da Bramble Maze). Depois do Bfury do Troll (13,4 min), o farm dele supera qualquer harass, e o Cursed Crown (stun em área com delay) é fácil de evitar fora de teamfight.
 - o que ele faz com você: Bramble Maze prende e causa dano contínuo se você pisar numa raiz; Cursed Crown atordoa em área depois de um delay; Shadow Realm deixa ela untargetable até o próximo ataque, que vem com dano mágico bônus.
 - o que você faz com ele: Whirling Axes ranged acerta ela antes dela chegar perto o bastante pro combo; Berserker's Rage prende ela sem Shadow Realm ativo pra escapar.
 - itens que viram: seu BKB nega o Cursed Crown e o dano contínuo da Bramble Maze; Whirling Axes melee (AoE curto) limpa as raízes se você estiver preso nelas.

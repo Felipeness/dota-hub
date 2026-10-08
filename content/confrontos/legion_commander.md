@@ -21,11 +21,7 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/legion_commander.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
 - https://api.opendota.com/api/constants/aghs_desc
-- https://teamsmurf.com/how-to-counter-legion-commander-duel-discipline/
-- https://vpesports.com/?p=191032
 ---
 
 ## Contra Rubick (rubick)
@@ -33,7 +29,7 @@ fontes:
 - por que importa: é o oponente com mais jogos contra ela no banco de pro (133), suporte quase onipresente em qualquer composição que ela enfrenta.
 - janelas: até os 15:18 ela já tem Blink (pro_dados/legion_commander.json) e Rubick ainda nem começou as Arcane Boots (10:18) nem o próprio Blink (21:36), então essa é a janela clássica pra isolar ele antes do time dele reagir. Dos 15:18 aos 21:36 ela tem reposicionamento e ele não, vantagem dela. Depois dos 21:36 Rubick também blinka e começa a kitar ou se reposicionar antes do Duel fechar.
 - o que ele faz com você: Spell Steal copia o último feitiço lançado por qualquer herói inimigo visível; se ele vê você usar Duel, Overwhelming Odds ou Press the Attack e ativa o roubo logo depois, fica com essa habilidade por 180 a 300s dependendo do nível (constants_abilities.json: rubick_spell_steal).
-- o que você faz com ele: Rubick tem o menor LH aos 10min (17) e o menor GPM (374) do grupo de suporte nesse recorte (pro_dados/rubick.json), então qualquer Duel que conecte nele mata rápido: Overwhelming Odds (100% de slow por 0,3s + bônus de velocidade de ataque, constants_abilities.json) e o lifesteal de 55 a 85% do Moment of Courage fecham a troca antes dele escapar.
+- o que você faz com ele: Rubick farma pouco (17 de LH aos 10min, 374 de GPM, pro_dados/rubick.json), então qualquer Duel que conecte nele mata rápido: Overwhelming Odds (100% de slow por 0,3s + bônus de velocidade de ataque, constants_abilities.json) e o lifesteal de 55 a 85% do Moment of Courage fecham a troca antes dele escapar.
 - itens que viram: seu Blink (15:18) chega mais de 6min antes do dele (21:36), é a folga real da matchup; se você tiver o Aghanim's Scepter dela, vencer o Duel dispara Press the Attack automaticamente ao redor dela (campo trigger_pta_on_victory em constants_abilities.json, confirmado também pelo texto do scepter em aghs_desc), o que ajuda a sair vivo se o time dele reagir rápido depois da morte do Rubick.
 - como jogar: gaste o blink pra isolar o Rubick antes dos 21min. Depois que ele tiver Aether Lens (22:54) e o próprio shard/scepter (27:00 / 27:24), ele passa a ter alcance e opções de kit emprestado, então prefira fechar antes disso.
 - fonte: pro_dados/legion_commander.json; pro_dados/rubick.json; constants_abilities.json (legion_commander_duel, legion_commander_overwhelming_odds, legion_commander_moment_of_courage, rubick_spell_steal); https://api.opendota.com/api/constants/aghs_desc.
@@ -41,9 +37,9 @@ fontes:
 ## Contra Ogre Magi (ogre_magi)
 - placar: Legion Commander venceu 59 de 102 (57,8%). Fonte: pro_dados/legion_commander.json.
 - por que importa: 2º oponente com mais jogos contra ela (102), suporte de stun e sustain que aparece em quase todo draft que a enfrenta.
-- janelas: Ogre Magi não tem item de poder próprio: o maior item dele é Glimmer Cape aos 22:30 (pro_dados/ogre_magi.json), nada que mude uma troca de dano. Ela, com Chainmail (6:30), Phase Boots (6:42) e Blade Mail (12:42) já formada antes disso, domina a fase inteira do jogo contra ele.
+- janelas: Ogre Magi não tem item ofensivo de poder: Glimmer Cape (22:30) é defensivo e o Aghanim's Shard (26:06, pro_dados/ogre_magi.json) sai tarde demais pra mudar a fase de linha. Ela, com Chainmail (6:30), Phase Boots (6:42) e Blade Mail (12:42) já formada antes disso, domina a fase inteira do jogo contra ele.
 - o que ele faz com você: Fireblast atordoa por 1,2s e causa 70 a 250 de dano (constants_abilities.json: ogre_magi_fireblast), pode zoná-la fora da wave antes dos 6min. Multicast dá chance de repetir o cast (1% a cada 16 de Força, sem teto documentado na fonte local), então em late game ele às vezes estende o stun em cadeia sem aviso.
-- o que você faz com ele: 315 de GPM e 8 de LH aos 10min (pro_dados/ogre_magi.json) é o perfil mais fraco de farm do grupo; ela mata ele fácil com Moment of Courage e Overwhelming Odds se ele ficar isolado, e o Duel trava ele de lançar Fireblast em qualquer aliado durante a duração.
+- o que você faz com ele: 315 de GPM e 8 de LH aos 10min (pro_dados/ogre_magi.json) é farm fraco de suporte; ela mata ele fácil com Moment of Courage e Overwhelming Odds se ele ficar isolado, e o Duel trava ele de lançar Fireblast em qualquer aliado durante a duração.
 - itens que viram: Blade Mail dela (12:42) reflete o Fireblast se ele bater nela com o ativo ligado; depois disso ele não tem resposta de item nenhuma, Glimmer Cape é defensivo, não ofensivo.
 - como jogar: se ele já gastou Fireblast, pode iniciar sem medo do segundo stun; se não gastou, pop a Blade Mail antes de chegar perto pra devolver o dano caso ele acerte.
 - fonte: pro_dados/legion_commander.json; pro_dados/ogre_magi.json; constants_abilities.json (ogre_magi_fireblast, ogre_magi_multicast); items.json (blade_mail).
@@ -90,28 +86,28 @@ fontes:
 
 ## Contra Axe (axe)
 - placar: Legion Commander venceu 29 de 60 (48,3%). Fonte: pro_dados/legion_commander.json.
-- por que importa: o rival de posição 3 com mais jogos contra ela (60, catálogo de posições em herois_catalogo.json), outro iniciador de Força que também trava alvo único, e o único confronto dessa lista com um bug documentado de interação entre as duas ultimates.
+- por que importa: o oponente com mais jogos contra ela nesse recorte (60), outro iniciador de Força (heroes.json: primary_attr str, role Initiator, igual a dela) que também trava alvo único, o espelho mais próximo dela em estilo de jogo depois do Pudge.
 - janelas: o build dos dois é quase espelhado: Chainmail dela 6:30 contra 6:54 dele, Phase Boots 6:42 contra 7:12, Blink 15:18 contra 15:42, BKB 26:24 contra 25:54 (pro_dados/legion_commander.json vs pro_dados/axe.json). Com itens tão parecidos, a corrida de gold quase não decide a troca, quem trava primeiro decide.
-- o que ele faz com você: Berserker's Call força unidades próximas a atacar o Axe por 2,1 a 3s num raio de 315, com 12 a 15 de armadura bônus pra ele (constants_abilities.json: axe_berserkers_call). Um relato sobre bugs do patch 7.41 (vpesports.com, análise do time Spirit) lista o Call entre as habilidades de taunt que, se acertarem a Legion Commander já dentro de um Duel em andamento, fazem ela "trocar de aggro" pra outro alvo e perder o foco no alvo real do Duel, bug sem correção anunciada pela Valve até a publicação do relato. Counter Helix ainda devolve 100 a 160 de dano puro a cada 4 a 7 ataques recebidos, cortando o dano físico dela em qualquer troca.
+- o que ele faz com você: Berserker's Call força unidades próximas a atacar o Axe por 2,1 a 3s num raio de 315, com 12 a 15 de armadura bônus pra ele (constants_abilities.json: axe_berserkers_call). Se ele acertar o Call antes do Duel, ela perde esses 2,1 a 3s presa batendo nele em vez de iniciar. Counter Helix ainda devolve 100 a 160 de dano puro a cada 4 a 7 ataques recebidos, cortando o dano físico dela em qualquer troca.
 - o que você faz com ele: Duel atravessa o Black King Bar do Axe (bkbpierce: Yes, mesma regra vale pro dela), então o BKB dele não impede ser puxado pro Duel; sem o Call ativo, Overwhelming Odds e o lifesteal de Moment of Courage decidem a favor dela na maioria das trocas.
-- itens que viram: nenhum item resolve a interação do Call, é timing puro de habilidade; Blade Mail de ambos os lados serve só pra sobreviver à troca, não pra evitar o bug.
-- como jogar: nunca inicie o Duel com o Call do Axe disponível, segundo o relato é a jogada que mais risco de dar errado tem; deixe ele gastar o Call num creep ou aliado primeiro (recarga de 12 a 18s dependendo do nível) e só então feche o Duel.
-- fonte: pro_dados/legion_commander.json; pro_dados/axe.json; constants_abilities.json (legion_commander_duel, axe_berserkers_call, axe_counter_helix); https://vpesports.com/?p=191032; https://teamsmurf.com/how-to-counter-legion-commander-duel-discipline/.
+- itens que viram: nenhum item neutraliza o Call diretamente, é timing puro de habilidade; Blade Mail de ambos os lados serve só pra sobreviver à troca.
+- como jogar: nunca inicie o Duel com o Call do Axe disponível; deixe ele gastar o Call num creep ou aliado primeiro (recarga de 12 a 18s dependendo do nível) e só então feche o Duel.
+- fonte: pro_dados/legion_commander.json; pro_dados/axe.json; constants_abilities.json (legion_commander_duel, axe_berserkers_call, axe_counter_helix); heroes.json (axe, legion_commander: primary_attr, roles).
 
 ## Contra Mars (mars)
 - placar: Legion Commander venceu 28 de 58 (48,3%). Fonte: pro_dados/legion_commander.json.
-- por que importa: 2º rival de posição 3 com mais jogos (58, herois_catalogo.json), outro iniciador de Força que também disputa o mesmo espaço de farm e engajamento na offlane.
+- por que importa: 2º oponente com mais jogos nesse grupo (58), outro iniciador de Força (heroes.json: primary_attr str, role Initiator) que também disputa o mesmo espaço de farm e engajamento.
 - janelas: build quase igual de novo: Blink dela 15:18 contra 15:12 dele, BKB 26:24 contra 26:30 (pro_dados/legion_commander.json vs pro_dados/mars.json), praticamente empatado. A diferença real é o Aghanim's Shard do Mars, que sai aos 21:30 (pro_dados/mars.json), bem antes do scepter/shard situacional dela (25:48), dando a ele uma ferramenta a mais nessa janela de 21 a 26min.
 - o que ele faz com você: Spear of Mars (100 a 325 de dano, alcance de 900 a 1200, atordoa de 1,3 a 2,2s se encostar em terreno, constants_abilities.json: mars_spear) pode interromper o cast dela antes do Duel fechar. Arena of Blood bloqueia movimento e ataque num raio de 550 por 5,5s, forçando a luta a acontecer dentro da zona dele.
 - o que você faz com ele: Duel atravessa a resistência mágica e não é bloqueado pela parede da Arena contra quem já está dentro dela; sem regeneração própria, o God's Rebuke dele (cleave corpo a corpo) não troca dano melhor que o lifesteal de 55 a 85% do Moment of Courage dela num combate direto.
 - itens que viram: Blade Mail baita a Lança antes dele conseguir te prender na Arena; a corrida de Blink (15:18 contra 15:12) é tão próxima que decide pouco, o resto da luta é quem usa a habilidade certa primeiro.
 - como jogar: não entre andando na Arena of Blood pra iniciar, espere o cooldown dela e da Lança (14 a 11s / 100 a 90s) cair antes de se aproximar.
-- fonte: pro_dados/legion_commander.json; pro_dados/mars.json; constants_abilities.json (legion_commander_duel, mars_spear, mars_arena_of_blood, mars_gods_rebuke).
+- fonte: pro_dados/legion_commander.json; pro_dados/mars.json; constants_abilities.json (legion_commander_duel, mars_spear, mars_arena_of_blood, mars_gods_rebuke); heroes.json (mars, legion_commander: primary_attr, roles).
 
 ## Contra Timbersaw (shredder)
 - placar: Legion Commander venceu 26 de 38 (68,4%, amostra moderada, mas é o maior % de vitória dela com 30+ jogos nesse recorte). Fonte: pro_dados/legion_commander.json.
-- por que importa: outro rival de posição 3 (herois_catalogo.json) e a maior vantagem registrada dela contra qualquer oponente com amostra de 30 jogos ou mais.
-- janelas: Timbersaw tem o spike mais atrasado do grupo todo: Blink só aos 22:30 e BKB aos 26:36 (pro_dados/shredder.json), contra 15:18 e 26:24 dela. Isso deixa uma janela de 7min (15 a 22min) em que ela tem mobilidade e ele não tem nenhuma.
+- por que importa: a maior vantagem registrada dela contra qualquer oponente com amostra de 30 jogos ou mais.
+- janelas: Timbersaw atrasa os itens de poder bem depois dela: Blink só aos 22:30 e BKB aos 26:36, o BKB mais tardio do grupo (pro_dados/shredder.json), contra 15:18 e 26:24 dela. Isso deixa uma janela de 7min (15 a 22min) em que ela tem mobilidade e ele não tem nenhuma.
 - o que ele faz com você: Reactive Armor empilha armadura e regeneração a cada vez que ele é atacado, contando ataque de herói como 4x (0,4 a 0,7 de armadura e regen por stack, até 40 stacks, constants_abilities.json: shredder_reactive_armor). Em teoria, cada golpe dela dentro de um Duel longo deveria deixar ele mais tanque com o tempo.
 - o que você faz com ele: na prática o placar de pro não mostra ela ganhando no desgaste contra a armadura empilhada; o padrão é ela iniciar antes dos 22min, quando ele ainda não tem Blink nem BKB, resolvendo o Duel rápido com Overwhelming Odds e Moment of Courage antes da armadura empilhar, ou simplesmente não duelar ele depois disso e focar o resto do time enquanto ele fica preso como tanque lento de teamfight.
 - itens que viram: nenhum item dela neutraliza a Reactive Armor diretamente, a resposta é timing: duelar cedo ou não duelar.
@@ -120,8 +116,8 @@ fontes:
 
 ## Contra Luna (luna)
 - placar: Legion Commander venceu 38 de 60 (63,3%). Fonte: pro_dados/legion_commander.json.
-- por que importa: não é rival de lane (Luna é pos 1 de safelane, ela é pos 3 de offlane, herois_catalogo.json), mas é a carregadora de dano mais jogada contra ela nesse recorte (60 partidas) e uma das maiores vantagens com amostra boa: exatamente o tipo de matchup "sem lane em comum mas importa" que todo bom hard carry representa pra uma travadora de alvo único.
-- janelas: até os 17:12 Luna não tem Manta Style (pro_dados/luna.json), praticamente sem defesa contra ser isolada; o Blink dela sai aos 15:18, quase 2min antes disso, janela curta mas real pra iniciar antes da Manta. Depois dos 17:12 ela ganha ilusão e dispel pra se safar; depois dos 26:06 Luna soma Butterfly (35 de evasão, 30 de ataque e velocidade de ataque, catálogo padrão do item), dificultando qualquer troca de ataque físico puro contra ela.
+- por que importa: não é rival direta de lane, mas é a carregadora de dano mais jogada contra ela nesse recorte (60 partidas) e uma das maiores vantagens com amostra boa: exatamente o tipo de matchup "sem lane em comum mas importa" que todo bom hard carry representa pra uma travadora de alvo único.
+- janelas: até os 17:12 Luna não tem Manta Style (pro_dados/luna.json), praticamente sem defesa contra ser isolada; o Blink dela sai aos 15:18, quase 2min antes disso, janela curta mas real pra iniciar antes da Manta. Depois dos 17:12 ela ganha ilusão e dispel pra se safar; depois dos 26:06 Luna soma Butterfly (35% de evasão, 25 de dano e 20% de velocidade de ataque, catálogo padrão do item), dificultando qualquer troca de ataque físico puro contra ela.
 - o que ele faz com você: Eclipse chove de 6 a 12 feixes de Lucent Beam (75 a 300 de dano por feixe, intervalo de 0,6s entre feixes, constants_abilities.json: luna_eclipse), mas só funciona de noite e não ajuda nada dentro de um Duel, já que o alvo não pode lançar habilidade. Moon Glaive (cleave do ataque básico) também não serve pra nada contra um alvo único forçado pelo Duel.
 - o que você faz com ele: o Duel anula a única vantagem de Luna contra um alvo isolado (o cleave) e trava ela pra só trocar ataque básico; antes da Manta, o lifesteal de Moment of Courage e o slow total de 0,3s do Overwhelming Odds decidem a troca.
 - itens que viram: feche o Duel antes dos 17:12 (Manta dela); depois dos 26:06 (Butterfly), a evasão dela passa a fazer o ataque básico da Legion Commander falhar com mais frequência, dificultando fechar a troca golpe a golpe.
@@ -130,7 +126,7 @@ fontes:
 
 ## Contra Pangolier (pangolier)
 - placar: Legion Commander venceu 21 de 34 (61,8%). Fonte: pro_dados/legion_commander.json.
-- por que importa: outro core sem lane fixa em comum com ela (Pangolier joga 2 ou 3, herois_catalogo.json) mas com volume de jogos relevante (34) e uma das maiores vantagens da lista, interessante por ser o único oponente aqui com uma ferramenta de barreira pensada pra encurtar burst.
+- por que importa: outro core sem lane fixa em comum com ela, mas com volume de jogos relevante (34) e uma das maiores vantagens da lista, interessante por ser o único oponente aqui com uma ferramenta de barreira pensada pra encurtar burst.
 - janelas: Pangolier só tem Blink aos 19:12 (pro_dados/pangolier.json), 4min depois do dela (15:18); Diffusal Blade cedo (12:24) ajuda na lane mas não serve de defesa contra ser isolado num Duel.
 - o que ele faz com você: Shield Crash dá uma barreira que absorve dano por um tempo curto depois de acertar um herói (constants_abilities.json: pangolier_shield_crash, barreira escalando com o nível), então se ele ativar bem antes do Duel começar, os primeiros golpes dela batem na barreira em vez da vida dele.
 - o que você faz com ele: a barreira não dura o Duel inteiro e a recarga de Shield Crash (15 a 6s) não é rápida o bastante pra reaplicar sempre; depois que ela cai, o lifesteal de Moment of Courage e o dano de Overwhelming Odds fecham a troca como em qualquer outro core sem fuga própria antes do Blink dele.
@@ -160,10 +156,10 @@ fontes:
 
 ## Contra Abaddon (abaddon)
 - placar: Legion Commander venceu 13 de 38 (34,2%, 30+ jogos). Fonte: pro_dados/legion_commander.json.
-- por que importa: outro rival de posição 3 (Abaddon também joga 4 e 5, herois_catalogo.json) e o confronto mais explicável mecanicamente da lista: um contador quase literal pro Duel.
+- por que importa: outro herói com papel de suporte no kit (heroes.json: role Support) e o confronto mais explicável mecanicamente da lista: um contador quase literal pro Duel.
 - janelas: o Blink de Abaddon só sai aos 24:54 (pro_dados/abaddon.json), quase 10min depois do dela (15:18), então no papel ela deveria dominar a janela inicial inteira. O placar mostra o contrário, porque o problema não é mobilidade, é o que acontece no instante em que o Duel começa.
 - o que ele faz com você: Borrowed Time ativa sozinho sempre que a vida dele cai abaixo de 400, mesmo com a habilidade bloqueada pelo "alvo não pode usar habilidades" do Duel, porque é um gatilho automático, não um cast manual (constants_abilities.json: abaddon_borrowed_time, limiar de 400, duração de 4 a 6s dependendo do nível). Uma vez ativo, todo golpe dela cura ele em vez de machucar, virando o Duel de cabeça pra baixo. Aphotic Shield lançada por um aliado nele antes da troca (barreira de 120 a 210 de dano, 12s de duração) amortece a abertura do Duel da mesma forma.
 - o que você faz com ele: o Duel ainda tira dele a habilidade de lançar Aphotic Shield em outro aliado enquanto está travado; se ela pegar ele cedo, antes do Chainmail e Phase Boots dele fecharem (5:36 / 6:30, pro_dados/abaddon.json), ele morre como qualquer outro alvo sem a vida alta que o Borrowed Time precisa pra compensar.
 - itens que viram: não existe resposta de item direta pro autocast do Borrowed Time; a jogada prática é gastar o Duel só depois que a recarga dele estiver visivelmente gasta (85 a 65s dependendo do nível) ou simplesmente não duelar Abaddon e usar Overwhelming Odds e pressão de time em vez disso.
 - como jogar: baite o Borrowed Time com poke antes de comprometer o Duel de verdade, ou pule o duelo nesse alvo específico, principalmente depois que ele já tiver vida alta o bastante pra deixar o gatilho de 400 valer a pena.
-- fonte: pro_dados/legion_commander.json; pro_dados/abaddon.json; constants_abilities.json (legion_commander_duel, abaddon_borrowed_time, abaddon_aphotic_shield); https://teamsmurf.com/how-to-counter-legion-commander-duel-discipline/.
+- fonte: pro_dados/legion_commander.json; pro_dados/abaddon.json; constants_abilities.json (legion_commander_duel, abaddon_borrowed_time, abaddon_aphotic_shield); heroes.json (abaddon: roles).

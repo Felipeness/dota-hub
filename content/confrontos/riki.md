@@ -21,13 +21,12 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
 - https://api.opendota.com/api/constants/aghs_desc
 - https://dota2.fandom.com/wiki/Riki
 ---
 
 ## Como essa lista foi montada
-8 oponentes são os que mais enfrentaram Riki em partidas de pro (Rubick, Puck, Shadow Demon, Warlock, Shadow Fiend, Mars, Lion e Lich, OpenDota `/heroes/32/matchups` via `pro_dados/riki.json`). Desses, só Rubick passa dos 30 jogos (32), então é o único matchup sem a ressalva de amostra pequena; nenhum outro confronto do Riki no banco de dados chega a esse volume, então o critério de "maior vantagem/desvantagem com 30+ jogos" não rendeu nomes além do próprio Rubick. Os outros 5 são carries pos 1 (critério de mesma posição principal, `herois_catalogo.json`) ordenados pelo volume de partidas de pro no patch 7.40+7.41 (`resumo.n` de cada `pro_dados/<slug>.json`): Tiny (3127), Luna (1970), Templar Assassin (1681), Ursa (1641) e Juggernaut (963), incluídos mesmo quando a amostra direta contra Riki é pequena, porque são os carries que mais aparecem no cenário competitivo e comparar o power spike dos dois sempre vale, mesmo sem lane em comum.
+8 oponentes são os que mais enfrentaram Riki em partidas de pro (Rubick, Puck, Shadow Demon, Warlock, Shadow Fiend, Mars, Lion e Lich, OpenDota `/heroes/32/matchups` via `pro_dados/riki.json`). Desses, só Rubick passa dos 30 jogos (32), então é o único matchup sem a ressalva de amostra pequena; nenhum outro confronto do Riki no banco de dados chega a esse volume, então o critério de "maior vantagem/desvantagem com 30+ jogos" não rendeu nomes além do próprio Rubick. Os outros 5 são carries pos 1 (critério de mesma posição principal, `roles` do heroes.json e volume de pro de cada `pro_dados/<slug>.json`) ordenados pelo volume de partidas de pro no patch 7.40+7.41 (`resumo.n` de cada `pro_dados/<slug>.json`): Tiny (3127), Luna (1970), Templar Assassin (1681), Ursa (1641) e Juggernaut (963), incluídos mesmo quando a amostra direta contra Riki é pequena, porque são os carries que mais aparecem no cenário competitivo e comparar o power spike dos dois sempre vale, mesmo sem lane em comum.
 
 ## Contra Rubick (rubick)
 - placar: 12 vitórias em 32 partidas de pro, 37,5% (OpenDota /heroes/32/matchups, pro_dados/riki.json)

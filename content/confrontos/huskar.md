@@ -20,12 +20,10 @@ fontes:
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/ancient_apparition.json
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/morphling.json
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/terrorblade.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/huskar.md
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
 - https://api.opendota.com/api/constants/aghs_desc
-- https://dotacoach.gg/en/heroes/counters/huskar
 - https://liquipedia.net/dota2/Terrorblade
 ---
 
@@ -43,13 +41,13 @@ fontes:
 ## Contra Windranger (windrunner)
 
 - placar: Huskar vence 59 de 121, 48,8% (pro_dados/huskar.json). Segundo em volume de jogos pro contra ele, e um dos poucos nomes de muito jogo onde o Huskar fica abaixo de 50%.
-- por que importa: é o contrapique mais citado pra Huskar (dotacoach.gg/en/heroes/counters/huskar, "Windranger kites Huskar effortlessly using Windrun to evade his attacks"). Mesmo sem dividir lane direto com ele quase sempre, aparece como resposta de draft.
+- por que importa: segundo maior volume de jogos pro contra o Huskar, e um dos poucos nomes de muito jogo em que ele fica abaixo de 50% de vitórias (pro_dados/huskar.json, confrontos).
 - janelas: a curva dela é rápida: Power Treads aos 7,2 min, Maelstrom aos 13,4 (via Javelin 9,3), o que já dá poke e farm em área cedo. O Huskar ainda está no meio do Armlet (9,1) e do Sange (14,8) nesse momento, então até os 15 min o duelo é parelho, mas depois dos 20 (Blade of Alacrity 21,8 dela contra BKB 23,2 e Sange and Yasha 20,0 dele) o Huskar passa a aguentar mais a troca de dano.
 - o que ele faz com você: nada, essa linha é dela. Windrun dá evasão contra ataque físico, que bloqueia parte do dano de autoataque do Huskar, mas não bloqueia o Burning Spear, que é mágico (constants_abilities.json, huskar_burning_spear, dmg_type Magical). Shackleshot pode prender o Huskar numa árvore ou unidade antes do Life Break sair.
 - o que você faz com ele: Life Break ignora a distância que ela abre com Windrun, porque é um salto garantido no alvo, não um projétil que ela possa desviar. Uma vez colado, o Burning Spear continua acertando mesmo com a evasão ativa.
 - itens que viram: o Aghanim's Scepter do Huskar, que força o alvo a atacar ele, anula de vez a estratégia dela de ficar hitando à distância.
 - como jogar: evite trocar à distância antes do Armlet, ela ganha esse poke. Depois dos 9-10 min, force o combo corpo a corpo onde a evasão física dela não resolve contra o Burning Spear. Shackleshot é o maior risco: jogue perto de árvore ou unidade neutra com cuidado redobrado antes de iniciar.
-- fonte: pro_dados/huskar.json; pro_dados/windrunner.json; constants_abilities.json (windrunner_windrun, windrunner_shackleshot, huskar_burning_spear); dotacoach.gg/en/heroes/counters/huskar; aghs_desc
+- fonte: pro_dados/huskar.json; pro_dados/windrunner.json; constants_abilities.json (windrunner_windrun, windrunner_shackleshot, huskar_burning_spear); aghs_desc
 
 ## Contra Rubick (rubick)
 
@@ -65,24 +63,24 @@ fontes:
 ## Contra Ember Spirit (ember_spirit)
 
 - placar: Huskar vence 58 de 109, 53,2% (pro_dados/huskar.json).
-- por que importa: os dois disputam mid em 7.41 (pro_dados/ember_spirit.json e ficha huskar.md, pos 2 em 26 dos 35 picks do Atlas), e o dotacoach lista Ember Spirit entre os heróis que o Huskar domina na lane ("Huskar DESTROYS Ember in lane and completely shuts down his early game as he deals too much damage").
+- por que importa: é um dos rivais com mais jogos pro contra o Huskar no dataset (109 partidas, pro_dados/huskar.json e ember_spirit.json, confrontos).
 - janelas: no 7.41, o build pro do Ember não passa por Battle Fury (não aparece entre os 30 itens mais comprados, pro_dados/ember_spirit.json), ele foca Aghanim's Shard (25,3 min) e depois Ultimate Scepter (31,6 min). Isso deixa o Ember fraco justo na janela em que o Huskar já fechou Armlet (9,1) e está subindo pro Sange and Yasha (20,0) e BKB (23,2). Até os 25 min, o power spike é todo do Huskar.
 - o que ele faz com você: Sleight of Fist acerta e some antes do Burning Spear estourar de verdade; Flame Guard absorve uma % do dano mágico recebido, incluindo parte do Burning Spear, enquanto ativo. Fire Remnant dá escape garantido mesmo sem mana.
 - o que você faz com ele: Life Break tira uma fatia grande da vida atual dele de cara, mesmo que o Flame Guard absorva uma parte desse dano mágico como absorve qualquer outro; com o Burning Spear sustentado, o Flame Guard quebra rápido e para de absorver.
 - itens que viram: Black King Bar (23,2 min) segura o burst de Searing Chains; se o Ember já tem Flame Guard ligado, prefira abrir com Life Break em vez de autoataque pra não gastar o escudo dele à toa.
 - como jogar: na lane, pressione cedo, antes dos 25 min o Ember não tem ferramenta de verdade pra responder ao seu dano. Depois do Aghanim's Scepter dele (31,6 min), ele ganha mais remanescentes e alcance, então force o jogo antes disso se puder.
-- fonte: pro_dados/huskar.json; pro_dados/ember_spirit.json; dota-hub/content/fichas/huskar.md; constants_abilities.json (ember_spirit_sleight_of_fist, ember_spirit_flame_guard, ember_spirit_fire_remnant, huskar_life_break); dotacoach.gg/en/heroes/counters/huskar
+- fonte: pro_dados/huskar.json; pro_dados/ember_spirit.json; constants_abilities.json (ember_spirit_sleight_of_fist, ember_spirit_flame_guard, ember_spirit_fire_remnant, huskar_life_break)
 
 ## Contra Queen of Pain (queenofpain)
 
 - placar: Huskar vence 63 de 109, 57,8% (pro_dados/huskar.json), um dos melhores retornos dele entre os nomes de muito volume.
-- por que importa: rival direto de mid em 7.41 e, pelo dotacoach, um dos heróis que mais ganharam winrate recente contra o Huskar virar pick favorável pra ele (trending de vitória do Huskar contra QoP).
-- janelas: QoP sobe rápido no início (Robe 9,6, Kaya 13,9) mas o burst dela é quase todo mágico (Scream of Pain, Sonic Wave), e o Berserker's Blood do Huskar escala resistência mágica até 30% conforme a vida cai (ficha huskar.md). Isso significa que o combo dela fica mais fraco exatamente quando o Huskar já está baixo de vida, o momento em que ela mais quer acertar o burst. Scepter dela sai aos 23,5 e Shard aos 27,5, já depois do BKB do Huskar (23,2).
+- por que importa: rival direto de mid em 7.41, com um dos melhores retornos de vitória do Huskar entre os nomes de muito volume (57,8%, pro_dados/huskar.json, confrontos).
+- janelas: QoP sobe rápido no início (Robe 9,6, Kaya 13,9) mas o burst dela é quase todo mágico (Scream of Pain, Sonic Wave), e o Berserker's Blood do Huskar escala resistência mágica até 30% conforme a vida cai (constants_abilities.json, huskar_berserkers_blood, maximum_magic_resist). Isso significa que o combo dela fica mais fraco exatamente quando o Huskar já está baixo de vida, o momento em que ela mais quer acertar o burst. Scepter dela sai aos 23,5 e Shard aos 27,5, já depois do BKB do Huskar (23,2).
 - o que ele faz com você: Shadow Strike aplica dano inicial alto e depois dano ao longo do tempo, e o Blink dela permite entrar e sair rápido pra evitar o Burning Spear sustentado.
 - o que você faz com ele: Life Break ignora o Blink curto dela, porque é um salto garantido, e a resistência mágica do Berserker's Blood reduz justo a parte mágica do combo dela, que é praticamente todo o dano que ela tem.
 - itens que viram: Black King Bar (23,2 min) bloqueia Scream of Pain e Sonic Wave inteiros enquanto ativo; Sange and Yasha (20,0 min) já está no corpo antes do Scepter dela sair, então o Huskar chega na luta com mais vida de sobra pra tankar o combo.
 - como jogar: evite ficar parado tomando o combo dela sem BKB nos primeiros 20 min, é a única janela em que ela realmente ameaça. Depois disso, ignore o burst dela e feche com Life Break, o dano mágico já não rende o suficiente.
-- fonte: pro_dados/huskar.json; pro_dados/queenofpain.json; dota-hub/content/fichas/huskar.md; constants_abilities.json (queenofpain_shadow_strike, queenofpain_blink, queenofpain_scream_of_pain, huskar_berserkers_blood); dotacoach.gg/en/heroes/counters/huskar
+- fonte: pro_dados/huskar.json; pro_dados/queenofpain.json; constants_abilities.json (queenofpain_shadow_strike, queenofpain_blink, queenofpain_scream_of_pain, huskar_berserkers_blood)
 
 ## Contra Tusk (tusk)
 
@@ -98,19 +96,19 @@ fontes:
 ## Contra Shadow Fiend (nevermore)
 
 - placar: Huskar vence 50 de 95, 52,6% (pro_dados/huskar.json), com sample grande pra um rival clássico de mid.
-- por que importa: é o duelo de mid mais tradicional do jogo. Os dois disputam a mesma lane e os dois escalam rápido, e o dotacoach cita Shadow Fiend entre os nomes com maior ganho recente de winrate do Huskar.
+- por que importa: é o duelo de mid mais tradicional do jogo. Os dois disputam a mesma lane e os dois escalam rápido.
 - janelas: Shadow Fiend poka de longe com Shadowraze antes dos 6 (nível de ult), fase em que o Huskar ainda não tem Armlet e perde a troca à distância. A partir dos 9-10 min (Armlet do Huskar, 9,1; Mask of Madness do SF, 10,2), o jogo vira: o MoM reduz a própria armadura em 7 enquanto ativo (items.json, mask_of_madness, berserk_armor_reduction), o que entrega mais dano físico pro Huskar justo quando ele está puxando o Burning Spear.
 - o que ele faz com você: Shadowraze acerta de longe sem precisar de linha de visão direta, e cada Raze acumula um amplificador de dano no alvo; Necromastery soma dano fixo pra cada alma presa, deixando o late game dele mais forte conforme mata.
 - o que você faz com ele: uma vez que o SF troca pra MoM pra brigar de perto, a redução de armadura dele conta a favor do Burning Spear; Life Break fecha a distância da Raze antes de ele conseguir recarregar e poka de novo.
 - itens que viram: Black King Bar (23,2 min) do Huskar sai perto do BKB dele (25,2), então quem fecha primeiro ganha a janela de iniciar sem medo de disable; o próprio SF costuma comprar Hurricane Pike (23,0 min, pro_dados/nevermore.json) pra abrir distância, mas o Life Break é um salto garantido no alvo, não um projétil, então o alcance extra do Pike não ajuda o SF a escapar dele.
 - como jogar: evite trocar Raze à distância antes do Armlet, feche a lane assim que puder. Depois dos 10 min, puxe pra luta corpo a corpo sempre que ele tiver MoM ativo.
-- fonte: pro_dados/huskar.json; pro_dados/nevermore.json; items.json (mask_of_madness); constants_abilities.json (nevermore_shadowraze1, nevermore_necromastery); dotacoach.gg/en/heroes/counters/huskar
+- fonte: pro_dados/huskar.json; pro_dados/nevermore.json; items.json (mask_of_madness); constants_abilities.json (nevermore_shadowraze1, nevermore_necromastery)
 
 ## Contra Storm Spirit (storm_spirit)
 
 - placar: Huskar vence 45 de 71, 63,4% (pro_dados/huskar.json), a maior vantagem do Huskar entre os rivais de mid com volume relevante.
 - por que importa: rival de mid e também um dos dois ou três com maior vantagem (30+ jogos) do Huskar em todo o dataset.
-- janelas: Storm sobe Kaya and Sange por volta dos 20 min (19,9 a 20,1) e só chega no Aghanim's Scepter dele (via mystic_staff 32,4 e devastator 31,8) depois dos 30 min, bem depois do Huskar já ter fechado Armlet (9,1), Sange and Yasha (20,0) e BKB (23,2).
+- janelas: Storm sobe Kaya and Sange por volta dos 20 min (19,9 a 20,1) e só parte pro Parasma (mystic_staff 32,4 e devastator 31,8) depois dos 30 min, bem depois do Huskar já ter fechado Armlet (9,1), Sange and Yasha (20,0) e BKB (23,2).
 - o que ele faz com você: Ball Lightning dá mobilidade pra fugir ou entrar, Static Remnant detona se alguém chegar perto, Electric Vortex puxa o alvo pra cima dele, o que pode ser usado contra o próprio Huskar se ele tentar fugir.
 - o que você faz com ele: Life Break é um salto garantido no alvo, não um skillshot, então o Ball Lightning não ajuda o Storm a desviar dele; uma vez colado, o Burning Spear continua acertando independente da mana que sobrou pro Storm fugir de novo.
 - itens que viram: Black King Bar (23,2 min do Huskar contra 26,1 min do Storm) chega primeiro no Huskar na maioria dos jogos, travando o combo de burst do Storm antes dele conseguir reagir.
@@ -119,14 +117,14 @@ fontes:
 
 ## Contra Puck (puck)
 
-- placar: Huskar vence 39 de 66, 59,1% (pro_dados/huskar.json). Confirma o que o dotacoach já lista: "Huskar is strong against Puck because his Burning Spears apply constant damage over time, forcing Puck to play defensively".
-- por que importa: rival de mid e um matchup de vantagem clara e documentada pelo dotacoach, não só pelos números.
-- janelas: o Puck só chega no Aghanim's Shard dele aos 22,5 min e no caminho de Scepter (mystic_staff 27,1, devastator 27,3) depois dos 27. Até lá, o Huskar já passou pelo Armlet (9,1), Sange and Yasha (20,0) e está perto do BKB (23,2).
+- placar: Huskar vence 39 de 66, 59,1% (pro_dados/huskar.json).
+- por que importa: rival de mid e um matchup de vantagem clara pelos números (59,1%, pro_dados/huskar.json, confrontos).
+- janelas: o Puck só chega no Aghanim's Shard dele aos 22,5 min e no Parasma (mystic_staff 27,1, devastator 27,3) depois dos 27. Até lá, o Huskar já passou pelo Armlet (9,1), Sange and Yasha (20,0) e está perto do BKB (23,2).
 - o que ele faz com você: Phase Shift dá invulnerabilidade curta pra escapar de combo, Dream Coil prende e estoura se o alvo tentar fugir, Illusory Orb dá reposicionamento rápido.
 - o que você faz com ele: Phase Shift é curto e, assim que acaba, o Life Break já pode cair em cima; o Burning Spear continua acumulando dano mesmo que o Puck use Illusory Orb pra fugir, porque o salto do Life Break fecha de novo.
 - itens que viram: Black King Bar (23,2 min) segura o Dream Coil; o Aghanim's Scepter do Huskar, que força o alvo a atacar ele, impede o Puck de ficar kitando com Illusory Orb em vez de brigar.
 - como jogar: force o combo assim que o Phase Shift dele estiver de recarga. Não gaste o Life Break achando que vai acertar durante o Phase Shift, ele é invulnerável nesse momento, espere a janela fechar.
-- fonte: pro_dados/huskar.json; pro_dados/puck.json; constants_abilities.json (puck_phase_shift, puck_dream_coil, puck_illusory_orb); dotacoach.gg/en/heroes/counters/huskar; aghs_desc
+- fonte: pro_dados/huskar.json; pro_dados/puck.json; constants_abilities.json (puck_phase_shift, puck_dream_coil, puck_illusory_orb); aghs_desc
 
 ## Contra Silencer (silencer)
 
@@ -157,9 +155,9 @@ fontes:
 - janelas: Hoodwink não compra item de escala cedo (Wizard Hat 12,4, Aghanim's Shard 23,8), o problema dela pro Huskar não é power spike de item, é a ultimate em si, disponível desde o nível 6.
 - o que ele faz com você: Sharpshooter "causa dano pesado, Break e lentidão" (constants_abilities.json, hoodwink_sharpshooter) num alvo único. O Break desativa habilidades passivas por um tempo, e isso inclui o Berserker's Blood inteiro, o bônus de velocidade de ataque, regen e resistência mágica some justo na hora que o Huskar mais precisa dele. Bushwhack estuna perto de árvore, e Scurry deixa ela correr de árvore em árvore fugindo do combo.
 - o que você faz com ele: pouca coisa enquanto o Break está ativo, o Life Break continua funcionando (é dano, não depende do passivo), mas sem o Berserker's Blood o Huskar perde a sustentação que normalmente ganha nessa troca.
-- itens que viram: Heaven's Halberd (citado na ficha huskar.md como situacional) não resolve o Break; o melhor é evitar ficar no alcance do Sharpshooter carregando, já que ele é de alvo único e dá pra fugir da mira antes do disparo.
+- itens que viram: Heaven's Halberd (Disarm impede atacar por 3,5s, items.json, heavens_halberd) não resolve o Break; o melhor é evitar ficar no alcance do Sharpshooter carregando, já que ele é de alvo único e dá pra fugir da mira antes do disparo.
 - como jogar: jogue de fora do alcance dela quando o Sharpshooter estiver disponível, a carga é visível e dá tempo de reagir. Não force o combo contra ela sozinho sem suporte, o Break tira justo a parte do seu kit que ganha a troca.
-- fonte: pro_dados/huskar.json; pro_dados/hoodwink.json; constants_abilities.json (hoodwink_sharpshooter, hoodwink_bushwhack, hoodwink_scurry, huskar_berserkers_blood); dota-hub/content/fichas/huskar.md
+- fonte: pro_dados/huskar.json; pro_dados/hoodwink.json; constants_abilities.json (hoodwink_sharpshooter, hoodwink_bushwhack, hoodwink_scurry, huskar_berserkers_blood); items.json (heavens_halberd)
 
 ## Contra Monkey King (monkey_king)
 
@@ -168,20 +166,20 @@ fontes:
 - janelas: Monkey King sobe Aghanim's Shard (25,9) e Desolator (18,3), uma curva parecida em timing com a do Huskar, mas o kit dele é desenhado pra evitar justamente o tipo de troca sustentada que o Huskar quer.
 - o que ele faz com você: Boundless Strike tem True Strike, não erra mesmo contra evasão, e estuna em linha; Jingu Mastery dá quatro ataques carregados com dano bônus e lifesteal no quarto acerto no mesmo alvo, sustentando ele na troca; Tree Dance e Primal Spring dão posição alta e reengajamento, fugindo do corpo a corpo prolongado que o Huskar precisa pra render o Burning Spear.
 - o que você faz com ele: Life Break ainda ignora a distância e tira uma fatia da vida atual dele de cara, mas sem conseguir prender o combate por tempo suficiente, o Burning Spear não acumula o bastante antes do Monkey King reposicionar de novo.
-- itens que viram: Black King Bar (23,2 min) segura o stun do Boundless Strike, mas não resolve o reposicionamento por árvore; Heaven's Halberd (situacional, ficha huskar.md) trava quem depende de autoataque, o que reduz o valor do Jingu Mastery dele.
+- itens que viram: Black King Bar (23,2 min) segura o stun do Boundless Strike, mas não resolve o reposicionamento por árvore; Heaven's Halberd (Disarm impede atacar por 3,5s, items.json, heavens_halberd) trava quem depende de autoataque, o que reduz o valor do Jingu Mastery dele.
 - como jogar: evite trocas longas, force o combo rápido com Life Break antes dele conseguir subir numa árvore. Jogue perto de visão de torre ou aliado, perder o Monkey King de vista é dar o reposicionamento de graça.
-- fonte: pro_dados/huskar.json; pro_dados/monkey_king.json; constants_abilities.json (monkey_king_boundless_strike, monkey_king_jingu_mastery, monkey_king_tree_dance, monkey_king_primal_spring); dota-hub/content/fichas/huskar.md
+- fonte: pro_dados/huskar.json; pro_dados/monkey_king.json; constants_abilities.json (monkey_king_boundless_strike, monkey_king_jingu_mastery, monkey_king_tree_dance, monkey_king_primal_spring); items.json (heavens_halberd)
 
 ## Contra Ancient Apparition (ancient_apparition)
 
 - placar: Huskar vence 17 de 41, 41,5% (pro_dados/huskar.json).
-- por que importa: o dotacoach lista Ancient Apparition direto entre os piores matchups do Huskar ("Ice Blast is one of, if not the best spell against Huskar as he is the only hero in DOTA that does not have a Mana pool"), e o dado de pro bate com isso.
+- por que importa: é um dos piores matchups do Huskar no dataset pro (41,5% de vitórias em 41 jogos, pro_dados/huskar.json, confrontos). O motivo é mecânico, Huskar é o único herói sem reserva de mana (constants_abilities.json, huskar_blood_magic), o que deixa o Ice Blast da AA, que bloqueia cura e regeneração, especialmente forte contra ele.
 - janelas: AA é suporte puro, GPM 312 (pro_dados/ancient_apparition.json), e não escala item nenhum relevante além do Aghanim's Shard (24,4 min). A ameaça dele não é de item, é de nível 6 em diante, quando a ultimate fica disponível.
 - o que ele faz com você: Ice Blast marca uma área e deixa quem é atingido "Frostbitten", tomando dano ao longo do tempo e impedido de regenerar ou curar vida enquanto durar (constants_abilities.json, ancient_apparition_ice_blast). Isso anula na prática o regen do Berserker's Blood, que é a peça central do sustain do Huskar. E se a vida cair abaixo de certa porcentagem sob efeito do Frostbite, o alvo "estilhaça" na hora, o que é especialmente perigoso pra um herói que já joga de propósito com pouca vida.
 - o que você faz com ele: Life Break ainda fecha a distância rápido o bastante pra matar o AA antes dele conseguir acertar o combo de longe, já que ele não tem fuga nenhuma de verdade.
 - itens que viram: Black King Bar (23,2 min) bloqueia o Cold Feet e o Ice Blast enquanto ativo; evitar ficar muito tempo com a vida baixa perto de um AA vivo é o cuidado que nenhum item resolve sozinho.
 - como jogar: respeite a ultimate dele a partir do nível 6, não jogue de vida baixa dentro do alcance de Ice Blast sem BKB. Depois que o BKB sobe, a lógica inverte, cace o AA primeiro em qualquer luta.
-- fonte: pro_dados/huskar.json; pro_dados/ancient_apparition.json; constants_abilities.json (ancient_apparition_ice_blast, ancient_apparition_cold_feet); dotacoach.gg/en/heroes/counters/huskar
+- fonte: pro_dados/huskar.json; pro_dados/ancient_apparition.json; constants_abilities.json (ancient_apparition_ice_blast, ancient_apparition_cold_feet, huskar_blood_magic)
 
 ## Contra Morphling (morphling)
 
@@ -189,10 +187,10 @@ fontes:
 - por que importa: os dois não disputam lane (Huskar é pos 2/3, Morphling é pos 1 puro), mas é o confronto clássico de "quem fica forte primeiro" entre dois core que escalam rápido, o tipo de pergunta que todo jogador de Huskar já se fez.
 - janelas: até os 15 min: o Huskar sai na frente com Armlet (9,1) contra o Morphling ainda comprando Diadem (15,7) e Yasha (14,6). Dos 15 aos 25: o Morphling sobe Manta (18,4) e segue pra Talisman of Evasion (25,1) rumo a Butterfly (25,8), enquanto o Huskar fecha Sange and Yasha (20,0) e BKB (23,2). Depois dos 25: o Butterfly dele só fica pronto quando o Huskar já está pronto pra engajar há um bom tempo, com o power spike inteiro do Huskar já consumido antes do pico de evasão do Morphling existir.
 - o que ele faz com você: Adaptive Strike estuna e empurra, interrompendo a sequência de ataques do Burning Spear; Waveform dá invulnerabilidade curta pra fugir do corpo a corpo.
-- o que você faz com ele: Adaptive Strike escala stun e empurrão com a força do Morphling, então se ele deslocar atributo pra agilidade (pra atirar mais rápido e evadir mais), o stun fica mais curto, abrindo brecha pro Life Break seguinte; Life Break ignora o Waveform, que só protege durante o cast, não depois.
+- o que você faz com ele: Adaptive Strike escala dano, stun e empurrão com a agilidade do Morphling (constants_abilities.json, morphling_adaptive_strike_agi), fica mais forte quanto mais ele desloca atributo pra agilidade; Life Break ignora o Waveform, que só protege durante o cast, não depois.
 - itens que viram: Black King Bar (23,2 min) bloqueia o Adaptive Strike; o Aghanim's Scepter do Huskar ("força o alvo a atacar o Huskar"), bom contra quem depende de distância, trava o Morphling corpo a corpo onde a evasão da Butterfly ainda não compensa o Burning Spear sustentado.
-- como jogar: force a troca antes dos 25 min, antes do Butterfly dele ficar pronto. Se ele deslocar pra agilidade visando evasão, redobre a pressão, a troca de atributo encurta o controle dele contra você.
-- fonte: pro_dados/huskar.json; pro_dados/morphling.json; constants_abilities.json (morphling_adaptive_strike_agi, morphling_waveform, huskar_life_break); items.json (butterfly não listado localmente, referência de evasão por conhecimento de item padrão); aghs_desc
+- como jogar: force a troca antes dos 25 min, antes do Butterfly dele ficar pronto. Se ele deslocar pra agilidade visando evasão, respeite mais o Adaptive Strike, o combo dele fica mais forte, não mais fraco.
+- fonte: pro_dados/huskar.json; pro_dados/morphling.json; constants_abilities.json (morphling_adaptive_strike_agi, morphling_waveform, huskar_life_break); items.json (butterfly, 35% evasão); aghs_desc
 
 ## Contra Terrorblade (terrorblade)
 

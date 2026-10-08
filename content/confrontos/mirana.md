@@ -22,15 +22,11 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
 - https://api.opendota.com/api/constants/aghs_desc
-- C:/Users/felip/Desktop/dota-hub/content/fichas/mirana.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- https://www.dotabuff.com/heroes/mirana/abilities
-- https://dotacoach.gg/en/heroes/counters/mirana
-- https://dotacoach.gg/en/heroes/mirana
+- https://api.opendota.com/api/explorer
 - https://liquipedia.net/dota2/Storm_Spirit
 ---
 
-Mirana é pos4 ou pos5 de pick-off em pro (D2PT: pos4 em 9.393 partidas do patch, pos5 em 7.288; fonte: `content/fichas/mirana.md`). Ela não compartilha lane fixa com quase ninguém dessa lista: o trabalho dela é correr o mapa com Sacred Arrow, achar quem está exposto e decidir a luta antes dela começar. Por isso boa parte dos confrontos abaixo são contra heróis que ela nunca encontra "na lane", mas que ela ou caça (carries e meias-lanes móveis como Ursa e Storm Spirit) ou disputa a mesma função de roaming (Hoodwink, Rubick, Dark Willow, Winter Wyvern, Clockwerk).
+Mirana é suporte móvel de pick-off em pro. Nos patches 7.40 e 7.41, ela jogou em safelane em 424 partidas, na offlane em 293, no meio em só 80 e na jungle em 3 (partidas pro 7.40-7.41, OpenDota explorer). Ela não compartilha lane fixa com quase ninguém dessa lista: o trabalho dela é correr o mapa com Sacred Arrow, achar quem está exposto e decidir a luta antes dela começar. Por isso boa parte dos confrontos abaixo são contra heróis que ela nunca encontra "na lane", mas que ela ou caça (carries e meias-lanes móveis como Ursa e Storm Spirit) ou disputa a mesma função de roaming (Hoodwink, Rubick, Dark Willow, Winter Wyvern, Clockwerk).
 
 ## Contra Hoodwink (hoodwink)
 
@@ -94,27 +90,27 @@ Mirana é pos4 ou pos5 de pick-off em pro (D2PT: pos4 em 9.393 partidas do patch
 - janelas: até os 12 min Centaur só tem Helm of Iron Will (4,8 min) e está fraco em HP, a melhor janela de Mirana pra punir; o Blink Dagger dele (19,6 min) é o divisor de águas, porque a partir daí Hoof Stomp vira iniciação global de luta; desde o early ele já tem Vanguard (8,5 min) e dos 18 aos 21 min completa Pipe (18,1 min) e Crimson Guard (21,5 min), ficando tanque demais pro dano de auto-ataque e Arrow sozinha resolverem
 - o que ele faz com você: Hoof Stomp (CD 18-12s) stuna e dana em área depois de um breve wind-up, suficiente pra pegar Mirana se ela blinkar pra perto sem ver; Stampede dá velocidade de atropelamento pro time dele inteiro, incluindo atravessar o terreno que Mirana usa pra fugir
 - o que você faz com ele: antes do Blink (19,6 min), a Arrow pune qualquer tentativa de Double Edge de perto, porque ele não tem como fechar distância rápido; depois do Blink, o alcance de 3000 da Arrow ainda permite abrir a luta antes dele iniciar
-- itens que viram: Blink Dagger é o item mais decisivo do confronto, já que sem ele Centaur não ameaça ninguém à distância; o Aghanim's Shard dele (29,1 min) dá slow e buff de força em quem o Double Edge acerta, tornando a perseguição depois do stun mais perigosa pra Mirana fugir
+- itens que viram: Blink Dagger é o item mais decisivo do confronto, já que sem ele Centaur não ameaça ninguém à distância; o Aghanim's Shard dele (29,1 min) faz o Double Edge desacelerar quem é atingido e ainda dá força extra pro próprio Centaur por herói acertado, tornando a perseguição depois do stun mais perigosa pra Mirana fugir
 - como jogar: antes dos 20 min, puna todo momento sem Blink disponível; depois do Blink, não ande sozinha perto do fog dele; priorize detectar o Pipe/Crimson Guard antes de contar com dano puro pra fechar o kill
 - fonte: pro_dados/mirana.json; pro_dados/centaur.json; constants_abilities.json (centaur_hoof_stomp, centaur_stampede); api.opendota.com/api/constants/aghs_desc (Centaur shard)
 
 ## Contra Winter Wyvern (winter_wyvern)
 
 - placar: 42 vitórias em 86 partidas de Mirana contra Winter Wyvern, 48,8% (fonte: `pro_dados/mirana.json`)
-- por que importa: rival direto de posição (pos5 nos dados D2PT e no Atlas tier1), sétimo mais comum em pro (86 jogos); as duas são suportes frágeis que dependem de pegar o disável primeiro
+- por que importa: rival direto de posição, suporte de safelane na maior parte das partidas pro (790 de 951 em safelane nos patches 7.40-7.41, OpenDota explorer), sétimo mais comum em pro (86 jogos); as duas são suportes frágeis que dependem de pegar o disável primeiro
 - janelas: os dois lados ficam de Boots cru por bastante tempo (Mirana 5,8 min, Winter Wyvern 6,3 min); o Blink Dagger de Winter Wyvern (23,0 min) chega perto do Eul's de Mirana (22,3 min), ou seja as duas melhoram mobilidade quase junto; o verdadeiro divisor é o nível 6 de cada uma, porque Winter's Curse (CD 100-80s) é devastador em grupo mas tem cooldown enorme comparado à Arrow (19-16s)
 - o que ele faz com você: Winter's Curse prende um alvo no lugar e faz quem está perto atacar ele, virando o próprio time de Mirana contra ela se for pega sozinha; Cold Embrace (CD 24-15s) cura e bloqueia dano físico num aliado, podendo salvar quem Mirana tentou isolar com Arrow
 - o que você faz com ele: Sacred Arrow acerta de mais longe que qualquer coisa do kit dela, então Mirana pode abrir ou fugir da troca primeiro; depois de usar o Curse, Winter Wyvern fica sem disable por mais de 80s, janela boa pra caçar ela de volta
 - itens que viram: Blink Dagger de Winter Wyvern é o item que permite o Curse pegar alguém isolado; o Aghanim's Scepter dela (não presente na amostra de 30 itens mais comprados, item situacional) vira Arctic Burn em toggle que dá mais velocidade, deixando-a mais difícil de alcançar quando sai
 - como jogar: antes do nível 6, jogue vendo ward e pull como qualquer duelo pos5 espelhado; depois que ela usar o Curse, puna a janela de 80-100s sem disable; guarde o Eul's ou Leap pra não ser o alvo isolado quando ela tiver mana pro combo
-- fonte: pro_dados/mirana.json; pro_dados/winter_wyvern.json; constants_abilities.json (winter_wyvern_winters_curse, winter_wyvern_cold_embrace); api.opendota.com/api/constants/aghs_desc (Winter Wyvern scepter)
+- fonte: pro_dados/mirana.json; pro_dados/winter_wyvern.json; constants_abilities.json (winter_wyvern_winters_curse, winter_wyvern_cold_embrace); api.opendota.com/api/constants/aghs_desc (Winter Wyvern scepter); OpenDota explorer (lane_role, partidas de liga 7.40-7.41)
 
 ## Contra Clockwerk (rattletrap)
 
 - placar: 42 vitórias em 79 partidas de Mirana contra Clockwerk, 53,2% (fonte: `pro_dados/mirana.json`)
-- por que importa: rival de posição (pos4/5), nono mais comum em pro (79 jogos); os dois competem por quem rota mais rápido e pega o primeiro pick-off do jogo
+- por que importa: rival de posição (pos4/5), um dos mais comuns em pro (79 jogos); os dois competem por quem rota mais rápido e pega o primeiro pick-off do jogo
 - janelas: Clockwerk sai de Tranquil Boots aos 8,5 min, mais cedo que o Arcane Boots de Mirana (12,6 min), então ele costuma chegar primeiro nas rotações iniciais; o Hookshot dele melhora de nível com o tempo (CD caindo de 60 pra 30s), ficando uma ameaça constante de pegar Mirana no meio de um Leap de fuga; depois dos 24-30 min, o Aghanim's Shard dele (30,0 min) dá jetpack pra voar por cima de rio e trocar de lane rápido, competindo direto com a mobilidade dela
-- o que ele faz com você: Hookshot (CD caindo até 30s) agarra Mirana à distância e a puxa pra perto, cancelando o Leap antes dela se afastar; Power Cogs (CD 21-15s) forma um anel que prende quem estiver perto, útil pra travar ela no meio de uma troca
+- o que ele faz com você: Hookshot (CD caindo até 30s) lança Clockwerk até Mirana à distância e estuna todo mundo num raio ao redor dela no impacto, cancelando o Leap antes dela se afastar; Power Cogs (CD 21-15s) forma um anel que prende quem estiver perto, útil pra travar ela no meio de uma troca
 - o que você faz com ele: Sacred Arrow (alcance 3000) acerta antes do Hookshot conseguir ser lançado na maior parte das distâncias; Starstorm castigada em área pune Clockwerk se ele ficar parado usando Power Cogs perto demais
 - itens que viram: o Aghanim's Scepter de Clockwerk aumenta raio e duração de quase todas as magias dele, inclusive o stun do Hookshot, tornando a captura de Mirana mais confiável depois que ele fecha; o Shard dá jetpack, deixando-o mais rápido pra fugir do contra-ataque dela
 - como jogar: evite andar em linha reta e previsível no early, porque é exatamente isso que o Hookshot pune; ao ver ele sem Hookshot disponível, é a hora de engajar com Arrow; depois do Scepter dele, jogue mais em grupo pra não ser pega isolada
@@ -157,7 +153,7 @@ Mirana é pos4 ou pos5 de pick-off em pro (D2PT: pos4 em 9.393 partidas do patch
 
 - placar: 14 vitórias em 35 partidas de Mirana contra Sniper, 40,0%, a maior desvantagem da lista com amostra de 30+ (fonte: `pro_dados/mirana.json`)
 - por que importa: pior matchup de Mirana com amostra confiável; sem lane em comum (Sniper é carry/mid de longo alcance), mas é o oponente clássico de "quem vê primeiro, mata primeiro" contra uma suporte frágil que também joga à distância
-- janelas: Sniper sai de Power Treads aos 5,9 min e já farma rápido; Maelstrom (12,5 min) e depois Hurricane Pike (23,4 min) ou Mjollnir (19,0 min) dão o alcance e o DPS que fazem dele perigoso de longe antes mesmo da Mirana chegar perto; o Aghanim's Shard dele (24,8 min) acelera e dá knockback no Concussive Grenade, cortando a fuga dela ainda mais
+- janelas: Sniper sai de Power Treads aos 5,9 min e já farma rápido; Maelstrom (12,5 min) e depois Hurricane Pike (23,4 min) ou Mjollnir (19,0 min) dão o alcance e o DPS que fazem dele perigoso de longe antes mesmo da Mirana chegar perto; o Aghanim's Shard dele (24,8 min) dá a ele a habilidade nova Concussive Grenade, que machuca em área, desarma e aplica knockback, cortando a fuga dela ainda mais
 - o que ele faz com você: Assassinate (ultimate, CD 20-10s) mira de qualquer distância do mapa e mini-stuna no impacto, matando uma Mirana sem HP alto se ela for vista; Shrapnel (sem CD, com cargas) revela e zoneia área, tirando o esconderijo que ela precisa pra se aproximar
 - o que você faz com ele: a Sacred Arrow ainda tem mais alcance bruto (3000) que o ataque básico dele, então a única jogada é abrir vendo ele primeiro, com ward ou Moonlight Shadow, antes dele te ver; depois do stun, Leap fecha rápido pra matar antes do alcance dele resolver de novo
 - itens que viram: Aghanim's Scepter de Sniper faz o Assassinate disparar mais rápido e stunar, o que torna reagir a ele quase impossível se ele já tiver visão; o Aghanim's Shard de Mirana dá 3 cargas extra de Arrow enquanto o Leap está ativo, então empilhar Leap + Shard é a única forma de sobreviver chegando perto rápido o bastante

@@ -22,25 +22,19 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/earth_spirit.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/shadow_fiend.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/tiny.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/drow_ranger.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/morphling.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/templar_assassin.json
 - https://api.opendota.com/api/constants/aghs_desc
+- https://api.opendota.com/api/explorer (partidas de liga, patches 7.40-7.41)
 ---
 
 ## Contra Shadow Fiend (nevermore)
 - placar: Earth Spirit venceu 88 de 157 partidas de pro (56,1%). É o oponente com mais jogos contra ES em toda a base de confrontos.
 - por que importa: maior volume de jogos pro contra ES (157), rival clássico de mid. Os dois disputam a mesma rota e a mesma prioridade de rotação desde o nível 2, mesmo raramente ficando parados um na frente do outro depois dos 10 min.
-- janelas: até os 7:12, SF já tem nível 6 e Power Treads (herois/shadow_fiend.json), com Requiem nível 1 pronto (80 de dano por linha, medo de até 2,15 s) pra assustar quem fica alinhado com ele; seu combo só fecha de verdade com Urn (6:24) e Power Treads (9:18), então 7 a 9 min é sua pior janela, evite ficar em linha reta. Dos 10 aos 16 min o Mask of Madness dele (10:36) acelera o farm mas corta a defesa, boa hora pra rotacionar com Urn+Vessel (12:42) prontos. Depois dos 20, seu Black King Bar (22:36) chega bem antes do dele (26:24): a janela de 23 a 26 min é sua pra iniciar sem medo de Requiem.
-- o que ele faz com você: Shadowraze acerta até 280 de dano instantâneo numa de três distâncias fixas (constants_abilities.json: nevermore_shadowraze1), e 3 razes seguidos num só alvo já somam 1.200 de dano mágico antes de redução; Requiem of Souls (raio 1.000) assusta (fear) e reduz velocidade e resistência mágica de quem pega a linha, não é um empurrão.
-- o que você faz com ele: Rolling Boulder em cima de um Stone Remnant rola mais rápido e mais longe e aumenta o stun (earth_spirit_rolling_boulder, constants_abilities.json), o suficiente pra fechar em cima do SF antes dele conseguir distância pra acertar o raze de longe; Magnetize atravessa Black King Bar (bkbpierce: yes), então mesmo depois do BKB dele (26:24) seu ult segue ticando.
-- itens que viram: seu BKB sai 3,8 min antes do dele, use essa janela (23 a 26 min) pra iniciar sem medo de Requiem/Shadowraze; Spirit Vessel corta 70% da cura que o Mask of Madness dá pra ele.
+- janelas: até os 7:00, SF já tem nível 6 (mediana, partidas pro 7.40-7.41) e Power Treads (mediana 5:54, pro_dados/nevermore.json), com Requiem nível 1 pronto (80 de dano por linha, medo de até 2,15 s) pra assustar quem fica alinhado com ele; seu combo só fecha de verdade com Urn (6:24) e Power Treads (9:18), então 7 a 9 min é sua pior janela, evite ficar em linha reta. Dos 10 aos 16 min o Mask of Madness dele (10:12) acelera o farm mas corta a defesa, boa hora pra rotacionar com Urn+Vessel (12:42) prontos. Depois dos 20, seu Black King Bar (22:36) chega antes do dele (25:12): a janela de 23 a 25 min é sua pra iniciar sem medo de Requiem.
+- o que ele faz com você: Shadowraze acerta até 280 de dano instantâneo numa de três distâncias fixas (constants_abilities.json: nevermore_shadowraze1), e cada raze que acerta o mesmo alvo empilha um amplificador de até 80 de dano extra nas próximas razes, então ficar alinhado com ele várias vezes seguidas pune cada vez mais; Requiem of Souls (raio 1.000) assusta (fear) e reduz velocidade e resistência mágica de quem pega a linha, não é um empurrão.
+- o que você faz com ele: Rolling Boulder em cima de um Stone Remnant rola mais rápido e mais longe e aumenta o stun (earth_spirit_rolling_boulder, constants_abilities.json), o suficiente pra fechar em cima do SF antes dele conseguir distância pra acertar o raze de longe; Magnetize atravessa Black King Bar (bkbpierce: yes), então mesmo depois do BKB dele (25:12) seu ult segue ticando.
+- itens que viram: seu BKB sai 2,6 min antes do dele, use essa janela (23 a 25 min) pra iniciar sem medo de Requiem/Shadowraze; Spirit Vessel corta 70% da cura que o Mask of Madness dá pra ele.
 - como jogar: não force engajamento em linha reta nos primeiros 8 min, raze pune de graça quem fica alinhado. Depois do seu BKB (perto dos 22 min), force a luta antes do dele ficar pronto.
-- fonte: pro_dados/earth_spirit.json; app/public/data/herois/shadow_fiend.json (power_spikes); constants_abilities.json (nevermore_shadowraze1, nevermore_requiem, earth_spirit_rolling_boulder, earth_spirit_magnetize); content/fichas/earth_spirit.md.
+- fonte: pro_dados/earth_spirit.json; pro_dados/nevermore.json; constants_abilities.json (nevermore_shadowraze1, nevermore_requiem, earth_spirit_rolling_boulder, earth_spirit_magnetize); partidas pro 7.40-7.41 (OpenDota explorer, nível 6).
 
 ## Contra Hoodwink (hoodwink)
 - placar: Earth Spirit venceu 82 de 138 partidas de pro (59,4%). Empatada em 2º lugar em volume de jogos contra ES.
@@ -50,7 +44,7 @@ fontes:
 - o que você faz com ele: ela tem vida baixa e nenhuma forma de se livrar de silence; Geomagnetic Grip puxa um Stone Remnant em cima dela e ainda silencia quem for atingido no caminho, cortando a fuga da Scurry antes dela ativar.
 - itens que viram: seu Black King Bar (22:36) bloqueia o Bushwhack (stun mágico); Magnetize ignora BKB e Scurry não tira você do alcance se você já estiver grudado nela com Boulder Smash.
 - como jogar: não force troca sem visão de onde ela está escondida (Decoy cria confusão de alvo); depois do seu BKB, ignore o combo dela e vá direto na vida baixa, Scurry não segura sua rota de dano por muito tempo.
-- fonte: pro_dados/earth_spirit.json; pro_dados/hoodwink.json; constants_abilities.json (hoodwink_bushwhack, hoodwink_scurry, earth_spirit_geomagnetic_grip); content/fichas/earth_spirit.md.
+- fonte: pro_dados/earth_spirit.json; pro_dados/hoodwink.json; constants_abilities.json (hoodwink_bushwhack, hoodwink_scurry, earth_spirit_geomagnetic_grip).
 
 ## Contra Rubick (rubick)
 - placar: Earth Spirit venceu 82 de 138 partidas de pro (59,4%). Empatado em 2º lugar em volume de jogos contra ES.
@@ -85,12 +79,12 @@ fontes:
 ## Contra Tiny (tiny)
 - placar: Earth Spirit venceu 58 de 106 partidas de pro (54,7%). 6º maior volume de jogos contra ES.
 - por que importa: alto volume de confrontos (106) e disputa direta de papel: os dois são iniciadores físicos de stun em área que competem pela mesma janela de pickoff no meio-jogo.
-- janelas: Tiny sobe nível 6/Grow aos 7:42 e Echo Sabre aos 11:48 (herois/tiny.json); seu combo completo (Urn 6:24 + Treads 9:18) fica pronto nessa mesma janela, fase parelha de farm. Dos 17 aos 19 min ele ganha Shadow Blade (17:36) e Blink (19:06), reposicionamento que você ainda não tem (seu Blink não é item core de pro); seu BKB (22:36) chega antes do dele (25:30), janela de 23 a 25 min pra iniciar sem medo do combo Avalanche+Toss.
+- janelas: Tiny sobe nível 6/Grow por volta dos 8:00 (mediana, partidas pro 7.40-7.41) e Echo Sabre perto dos 12:06 (mediana, pro_dados/tiny.json); seu combo completo (Urn 6:24 + Treads 9:18) fica pronto nessa mesma janela, fase parelha de farm. Dos 16 aos 18 min ele ganha Blink (15:54) e Shadow Blade (17:36), reposicionamento que você ainda não tem (seu Blink não é item core de pro); seu BKB (22:36) chega antes do dele (26:42), janela de 23 a 26 min pra iniciar sem medo do combo Avalanche+Toss.
 - o que ele faz com você: Avalanche (stun de 0,3 s por tick, 5 ticks, raio crescente até 370) seguido de Toss (até 360 de dano, joga você longe) é o combo clássico de iniciação dele, e com Grow 3 (nível 18) o Toss sozinho já passa de 700 de dano mágico.
-- o que você faz com ele: Rolling Boulder sobre remnant chega mais rápido que o alcance de cast do Toss dele (800 a 1.100) se você antecipar; Geomagnetic Grip silencia, cortando o combo Avalanche+Toss no meio se ele não tiver Blink ainda (antes dos 19:06).
-- itens que viram: seu Black King Bar sai quase 3 min antes do dele (22:36 contra 25:30), use essa janela; Magnetize ignora BKB e continua ticando mesmo depois do dele pronto.
+- o que você faz com ele: Rolling Boulder sobre remnant chega mais rápido que o alcance de cast do Toss dele (800 a 1.100) se você antecipar; Geomagnetic Grip silencia, cortando o combo Avalanche+Toss no meio se ele não tiver Blink ainda (antes dos 15:54).
+- itens que viram: seu Black King Bar sai 4 min antes do dele (22:36 contra 26:42), use essa janela; Magnetize ignora BKB e continua ticando mesmo depois do dele pronto.
 - como jogar: evite ficar isolado perto de árvore antes do seu BKB, o combo Avalanche+Toss dele pode sair de longe; depois do seu BKB, iniciar primeiro é quase sempre a jogada certa.
-- fonte: pro_dados/earth_spirit.json; app/public/data/herois/tiny.json (power_spikes); constants_abilities.json (tiny_avalanche, tiny_toss, earth_spirit_rolling_boulder, earth_spirit_geomagnetic_grip, earth_spirit_magnetize).
+- fonte: pro_dados/earth_spirit.json; pro_dados/tiny.json; constants_abilities.json (tiny_avalanche, tiny_toss, earth_spirit_rolling_boulder, earth_spirit_geomagnetic_grip, earth_spirit_magnetize); partidas pro 7.40-7.41 (OpenDota explorer, nível 6).
 
 ## Contra Storm Spirit (storm_spirit)
 - placar: Earth Spirit venceu 49 de 104 partidas de pro (47,1%, levemente desfavorável). 2º mid mais comum contra ES depois do Ember Spirit.
@@ -103,7 +97,7 @@ fontes:
 - fonte: pro_dados/earth_spirit.json; pro_dados/storm_spirit.json; constants_abilities.json (storm_spirit_ball_lightning, storm_spirit_electric_vortex, earth_spirit_geomagnetic_grip, earth_spirit_magnetize).
 
 ## Contra Centaur Warrunner (centaur)
-- placar: Earth Spirit venceu 57 de 106 partidas de pro (53,8%). Rival direto de offlane quando ES joga pos 3/4 (10,1% a 9,4% dos picks dele, pro_dados/herois_catalogo.json).
+- placar: Earth Spirit venceu 57 de 106 partidas de pro (53,8%). Rival direto de offlane quando ES joga fora do meio: 28,8% das partidas pro dele são offlane, partidas pro 7.40-7.41 (OpenDota explorer).
 - por que importa: volume alto (106 jogos) e choque direto de papel: os dois são iniciadores de Força que vivem pra travar o inimigo primeiro, a luta vira quem atordoa primeiro.
 - janelas: Centaur sobe Vanguard (8:30) e Ring of Tarrasque (17:30) antes do Blink (19:36); seu Urn+Treads (6:24/9:18) chegam na mesma janela de farm inicial. Dos 18 aos 22 min ele junta Pipe (18:06) e Crimson Guard (21:30), itens de time que não ajudam no 1x1; seu BKB (22:36) sai perto do Blink dele (19:36), fase de decisão de quem fecha o combo primeiro.
 - o que ele faz com você: Hoof Stomp (325 de raio, stun de 1,6 a 2,2 s, só 0,5 s de preparo) atordoa mais rápido que o delay de 0,6 s do seu Rolling Boulder, então se ele blinka em cima de você primeiro, o stun dele sai antes; Double Edge causa dano em ambos, ruim pra você se já estiver com vida baixa pelo combo.
@@ -115,12 +109,12 @@ fontes:
 ## Contra Drow Ranger (drow_ranger)
 - placar: Earth Spirit venceu 33 de 46 partidas de pro (71,7%). Maior vantagem de ES na base inteira (amostra válida, 46 jogos).
 - por que importa: carry pos1 que quase nunca divide lane com ES, mas é o oponente mais fácil do kit dele: squishy, sem blink, alvo clássico de pick-off, por isso entra mesmo sem lane em comum (mesma lógica do confronto Alchemist x Morphling).
-- janelas: até os 7:18, Drow só tem Multishot e Frost Arrows, sem mobilidade nenhuma (herois/drow_ranger.json); seu Urn (6:24) já está pronto e seu Power Treads (9:18) chega pouco depois, janela perfeita pra caçar ela isolada puxando camp. Dos 12 aos 20 min ela farma com Dragon Lance (12:00), ainda sem escape; sua janela de vantagem fecha quando o Manta dela (19:48) vira defesa real, seu Black King Bar (22:36) chega tarde pra essa decisão, mas segue bem antes do BKB dela (26:48).
+- janelas: Drow só tem Multishot e Frost Arrows no kit dela, sem nenhuma magia de mobilidade (constants_hero_abilities.json: drow_ranger); seu Urn (6:24) já está pronto e seu Power Treads (9:18) chega pouco depois, janela perfeita pra caçar ela isolada puxando camp. Dos 14 aos 20 min ela farma com Dragon Lance (14:12), ainda sem escape; sua janela de vantagem fecha quando o Manta dela (20:12) vira defesa real, seu Black King Bar (22:36) chega tarde pra essa decisão, mas segue bem antes do BKB dela (30:48).
 - o que ela faz com você: Gust (nome atual de Wave of Silence, 900 de alcance, silence de 3 a 6 s e empurrão) pode cortar seu combo antes de você fechar, se ela acertar primeiro; Frost Arrows reduz sua velocidade em até 45%, dificultando perseguição sem gap closer.
 - o que você faz com ela: Rolling Boulder sobre remnant fecha a distância rápido o bastante pra pegá-la antes dela conseguir se afastar com Multishot kitando; Drow tem vida baixa fixa, Geomagnetic Grip silencia e já deixa ela sem resposta pro resto do combo.
-- itens que viram: antes do Manta dela (19:48) ela não tem forma nenhuma de sair do seu Grip; seu BKB bloqueia o Gust (stun/silence mágico) caso ela acerte primeiro, mas só fica pronto depois do Manta dela, então a defesa real nessa janela é a vida baixa fixa dela, não o seu BKB.
-- como jogar: ataque antes dos 20 min, é a janela de maior vantagem; depois do Manta e do Hurricane Pike dela (20:30) ela ganha distância e kite, prefira focar ela só em grupo com seu time.
-- fonte: pro_dados/earth_spirit.json; app/public/data/herois/drow_ranger.json (power_spikes); constants_abilities.json (drow_ranger_wave_of_silence, drow_ranger_frost_arrows, earth_spirit_rolling_boulder, earth_spirit_geomagnetic_grip).
+- itens que viram: antes do Manta dela (20:12) ela não tem forma nenhuma de sair do seu Grip; seu BKB bloqueia o Gust (stun/silence mágico) caso ela acerte primeiro, mas só fica pronto depois do Manta dela, então a defesa real nessa janela é a vida baixa fixa dela, não o seu BKB.
+- como jogar: ataque antes dos 20 min, é a janela de maior vantagem; depois do Manta (20:12) e do Hurricane Pike dela (22:48) ela ganha distância e kite, prefira focar ela só em grupo com seu time.
+- fonte: pro_dados/earth_spirit.json; pro_dados/drow_ranger.json; constants_abilities.json (drow_ranger_wave_of_silence, drow_ranger_frost_arrows, earth_spirit_rolling_boulder, earth_spirit_geomagnetic_grip); constants_hero_abilities.json (drow_ranger).
 
 ## Contra Timbersaw (shredder)
 - placar: Earth Spirit venceu 38 de 60 partidas de pro (63,3%). 2ª maior vantagem de ES (amostra válida, 60 jogos).
@@ -144,40 +138,40 @@ fontes:
 
 ## Contra Marci (marci)
 - placar: Earth Spirit venceu 13 de 36 partidas de pro (36,1%). Pior confronto de ES na base com amostra válida (36 jogos).
-- por que importa: pior winrate de ES com amostra confiável, e o motivo é mecânico: Marci é outra iniciadora de Força mobile que compete pelo mesmo papel, com dispel embutido que limpa o combo de ES. A ficha do site (dota2protips.com) já lista Marci entre os piores confrontos dele no Legend+.
+- por que importa: pior winrate de ES com amostra confiável, e o motivo é mecânico: Marci é outra iniciadora de Força mobile que compete pelo mesmo papel, com dispel embutido que limpa o combo de ES.
 - janelas: Marci sobe Phase Boots (10:54) e Black King Bar (24:18); seu Urn+Treads (6:24/9:18) chegam antes, fase parelha de farm. O BKB dela (24:18) sai quase 2 min depois do seu (22:36), mas Unleash dela já tem dispel básico embutido, então o timing de item importa menos do que a ordem do combo.
 - o que ela faz com você: Unleash dá pulsos que reduzem sua velocidade de movimento e de ataque num raio de 800 enquanto ativa, não é silence, então não corta o cast do seu Rolling Boulder/Geomagnetic Grip, só dificulta fugir ou reagir depois; Sidekick/Bodyguard dá dispel básico pro aliado que ela protege, limpando parte do seu combo de controle.
 - o que você faz com ele: Geomagnetic Grip silencia antes dela conseguir ativar Unleash, mas o cast dela é rápido (0,2 s), então a ordem de quem abre primeiro decide a troca; Rolling Boulder em remnant chega rápido o bastante pra interromper o Dispose (nome atual do Grapple) dela se você antecipar.
 - itens que viram: seu BKB sai antes do dela (22:36 contra 24:18), use essa janela; depois que ela tiver BKB, seu Boulder Smash (dano mágico, não é stun) não a afasta nela, prefira Magnetize, que atravessa.
 - como jogar: não abra o combo perto dela sem saber se o Unleash está pronto, o slow em área dificulta sua fuga; depois do seu BKB, priorize ela primeiro, antes que o dela saia.
-- fonte: pro_dados/earth_spirit.json; pro_dados/marci.json; constants_abilities.json (marci_unleash, marci_grapple, earth_spirit_geomagnetic_grip, earth_spirit_magnetize); content/fichas/earth_spirit.md (confrontos citados por dota2protips.com).
+- fonte: pro_dados/earth_spirit.json; pro_dados/marci.json; constants_abilities.json (marci_unleash, marci_grapple, earth_spirit_geomagnetic_grip, earth_spirit_magnetize).
 
 ## Contra Razor (razor)
 - placar: Earth Spirit venceu 15 de 38 partidas de pro (39,5%). 2º pior confronto de ES com amostra válida (38 jogos).
-- por que importa: outro dos piores confrontos de ES citados na ficha do site (dota2protips.com), carry/mid que drena e kita o combo dele à distância.
+- por que importa: outro dos piores confrontos de ES na base com amostra válida, carry/mid que drena e kita o combo dele à distância.
 - janelas: Razor sobe Power Treads (6:54) e Guardian Greaves (14:12) antes do BKB (24:42); seu Urn+Treads (6:24/9:18) chegam na mesma fase. Dos 17 aos 21 min ele ganha Yasha (17:48) e Manta (21:18), mobilidade pra kitar o combo físico seu; seu BKB (22:36) chega quase junto do Manta dele, fase de decisão.
 - o que ele faz com você: Static Link drena seu dano de ataque pra ele por até 18 s de link no nível 4 (até 24 de dano por segundo) e o link não quebra correndo, só reduz o quanto ele puxa com a distância; Plasma Field (raio 700) desacelera e dilui seu time antes do seu combo, sem empurrão, é slow e dano em onda.
 - o que você faz com ele: Razor tem pouco controle de perto; Rolling Boulder fecha a distância antes dele conseguir linkar e kitar, e Geomagnetic Grip silencia, cortando o Static Link no meio do cast.
 - itens que viram: Magnetize atravessa BKB dele, então mesmo depois do 24:42 seu ult continua ticando enquanto ele tenta kitar; Black King Bar seu bloqueia o Plasma Field (slow mágico) mas não a drenagem do Static Link, que não é considerada debuff mágico puro.
 - como jogar: feche a distância antes dele conseguir te linkar e se afastar; depois do Manta dele (21:18), priorize silenciar com Geomagnetic Grip antes de qualquer outra coisa, senão ele kita o resto da luta.
-- fonte: pro_dados/earth_spirit.json; pro_dados/razor.json; constants_abilities.json (razor_static_link, razor_plasma_field, earth_spirit_rolling_boulder, earth_spirit_geomagnetic_grip, earth_spirit_magnetize); content/fichas/earth_spirit.md (confrontos citados por dota2protips.com).
+- fonte: pro_dados/earth_spirit.json; pro_dados/razor.json; constants_abilities.json (razor_static_link, razor_plasma_field, earth_spirit_rolling_boulder, earth_spirit_geomagnetic_grip, earth_spirit_magnetize).
 
 ## Contra Templar Assassin (templar_assassin)
 - placar: Earth Spirit venceu 20 de 47 partidas de pro (42,6%). 4º pior confronto de ES com amostra válida (47 jogos).
-- por que importa: carry pos1 raramente na mesma lane, mas quarto pior confronto citado na ficha do site (dota2protips.com), e a razão é clara: Refraction anula boa parte do dano do combo de ES.
-- janelas: TA sobe Power Treads (5:00) e Meld nível 3 (6:00-8:00); seu Urn+Treads (6:24/9:18) chegam na mesma fase, mas ela já tem Refraction (nível 10, 11:00-13:00) antes do seu BKB ficar pronto. Dos 15 aos 20 min ela ganha Blink (15:30-19:30) e Hurricane Pike (17:00-22:00), reposicionamento que complica a perseguição; o Black King Bar dela sai na mesma janela do seu (20:00-26:00, mediana 21:24, contra 22:36 do seu), sem vantagem clara de timing pra nenhum dos dois.
+- por que importa: carry pos1 raramente na mesma lane, mas um dos confrontos mais desfavoráveis de ES na base com amostra válida, e a razão é clara: Refraction anula boa parte do dano do combo de ES.
+- janelas: TA sobe Power Treads (6:00); seu Urn+Treads (6:24/9:18) chegam pouco depois, fase parelha de farm cedo. Dos 16 aos 24 min ela ganha Blink (15:54-17:24) e Hurricane Pike (22:00-24:30), reposicionamento que complica a perseguição; o Black King Bar dela (mediana 28:06) sai bem depois do seu (22:36), quase 5,5 min de vantagem sua.
 - o que ela faz com você: Refraction dá 3 a 6 instâncias que absorvem dano e devolvem dano bônus (até 60 por instância) por 17 s, então boa parte do seu dano de autoataque e Boulder Smash é desperdiçada nas instâncias antes de chegar na vida dela; Meld (até 200 de dano e -8 de armadura) é burst alto se ela pegar você parado.
 - o que você faz com ela: Rolling Boulder e Magnetize são dano mágico; a descrição oficial de Refraction não restringe o bloqueio a dano físico, mas gastar seu combo mágico evita depender de autoataque contra o burst dela de qualquer forma; TA tem vida relativamente baixa, silenciar com Geomagnetic Grip corta o Meld/Psi Blades no meio.
-- itens que viram: prefira o combo mágico completo (Rolling Boulder + Magnetize) em vez de ficar trocando autoataque contra o Refraction dela; o BKB dela sai perto do seu, não dá pra contar com essa janela pra iniciar sem medo do Psionic Trap silenciando.
+- itens que viram: prefira o combo mágico completo (Rolling Boulder + Magnetize) em vez de ficar trocando autoataque contra o Refraction dela; seu BKB sai bem antes do dela (22:36 contra 28:06), use essa janela de quase 5,5 min pra iniciar sem medo do Psionic Trap silenciando.
 - como jogar: não troque autoataque contra ela com Refraction ativa, é desperdício; feche com o combo mágico e silencie antes dela conseguir se meldar em cima de alguém do seu time.
-- fonte: pro_dados/earth_spirit.json; app/public/data/herois/templar_assassin.json (power_spikes); constants_abilities.json (templar_assassin_refraction, templar_assassin_meld, earth_spirit_rolling_boulder, earth_spirit_magnetize, earth_spirit_geomagnetic_grip); content/fichas/earth_spirit.md (confrontos citados por dota2protips.com).
+- fonte: pro_dados/earth_spirit.json; pro_dados/templar_assassin.json; constants_abilities.json (templar_assassin_refraction, templar_assassin_meld, earth_spirit_rolling_boulder, earth_spirit_magnetize, earth_spirit_geomagnetic_grip).
 
 ## Contra Morphling (morphling)
 - placar: Earth Spirit venceu 25 de 41 partidas de pro (61,0%). Boa vantagem (amostra válida, 41 jogos), mesmo sem lane em comum.
 - por que importa: carry pos1 que quase nunca divide lane com ES, mas é alvo clássico de pick-off antes do farm dele decolar, igual à lógica do confronto Alchemist x Morphling citado como referência: dois heróis que raramente se cruzam na lane, mas o que um pode fazer com o outro define a partida.
-- janelas: até os 6:00, Morphling só tem Waveform nível 1 (115 de mana, recarga 21 s) e nenhuma defesa real (herois/morphling.json); seu Urn+Treads (6:24/9:18) chegam logo depois, janela perfeita pra pegá-lo isolado puxando camp antes dos 15 min. O Manta dele só sai aos 18:35 e o BKB dele vem muito tarde (31:55, quase 10 min depois do seu); a janela de 9 a 18 min é toda sua.
+- janelas: Morphling não tem nenhuma defesa real cedo, só Waveform (115 de mana, recarga 21 s) como fuga (constants_abilities.json: morphling_waveform); seu Urn+Treads (6:24/9:18) chegam logo depois, janela perfeita pra pegá-lo isolado puxando camp antes dos 15 min. O Manta dele só sai aos 18:24 e o BKB dele vem muito tarde (30:54, mais de 8 min depois do seu); a janela de 9 a 18 min é toda sua.
 - o que ele faz com você: Adaptive Strike (até 110 + 2,5x Agilidade de dano, stun de até 2,6 s) é o único disable dele, e ele precisa estar perto pra acertar; Waveform é escape, não dano, então em troca direta ele depende de attack damage puro depois do nível 7.
 - o que você faz com ele: Morphling tem vida baixa nos primeiros 15 min e nenhum blink; Rolling Boulder sobre remnant fecha a distância rápido o bastante pra pegá-lo antes do Waveform dele recarregar (21 s), e Geomagnetic Grip silencia, cortando o Adaptive Strike no meio.
-- itens que viram: antes do Manta (18:35) ele não tem forma nenhuma de sair do seu Grip além do Waveform, que tem recarga alta no começo; Magnetize atravessa BKB dele (31:55), então mesmo tarde no jogo seu ult continua ticando.
-- como jogar: cace ele isolado antes dos 15 min, é a sua melhor janela do confronto inteiro; depois do Manta e do Butterfly dele (25:45), evite o 1x1 sozinho e foque ele só com o time.
-- fonte: pro_dados/earth_spirit.json; app/public/data/herois/morphling.json (power_spikes); constants_abilities.json (morphling_waveform, morphling_adaptive_strike_agi, earth_spirit_rolling_boulder, earth_spirit_geomagnetic_grip, earth_spirit_magnetize).
+- itens que viram: antes do Manta (18:24) ele não tem forma nenhuma de sair do seu Grip além do Waveform, que tem recarga alta no começo; Magnetize atravessa BKB dele (30:54), então mesmo tarde no jogo seu ult continua ticando.
+- como jogar: cace ele isolado antes dos 15 min, é a sua melhor janela do confronto inteiro; depois do Manta e do Butterfly dele (25:48), evite o 1x1 sozinho e foque ele só com o time.
+- fonte: pro_dados/earth_spirit.json; pro_dados/morphling.json; constants_abilities.json (morphling_waveform, morphling_adaptive_strike_agi, earth_spirit_rolling_boulder, earth_spirit_geomagnetic_grip, earth_spirit_magnetize).

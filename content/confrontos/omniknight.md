@@ -20,8 +20,7 @@ fontes:
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/skywrath_mage.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/omniknight.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
+- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 
@@ -41,19 +40,19 @@ fontes:
 - janelas: até os 10:12 ele já está muito à frente em farm (LH10 78 x 43, GPM 658 x 465), mas ainda sem Mask of Madness; dos 10:12 aos 13:18 o MoM (10:12) e o Yasha (13:18) destravam o right-click físico dele, perigoso se pegar você sem Repel de pé; dos 17:24 aos 21:24 seu combo fecha (Echo Sabre 17:24, Diadem 20:06, Harpoon 21:24) e o Guardian Angel passa a apagar o dano físico amplificado do MoM; depois dos 25min o BKB dele (25:12) decide se ele consegue fechar Requiem of Souls em cima de você sem ser interrompido.
 - o que ele faz com você: Shadowraze (Mágico, 85 a 280 de dano base + 35 a 80 de dano extra por stack de um debuff que o próprio Shadowraze acumula no alvo a cada acerto, separado da Necromastery, constants_abilities.json) pune qualquer aproximação em linha reta; Requiem of Souls solta ondas em raio 1.000 ao redor dele, quanto mais almas acumuladas (kills/stacks) mais dano, e ainda reduz resistência mágica de quem é atingido.
 - o que você faz com ele: Guardian Angel zera o right-click dele (inclusive amplificado por Mask of Madness, que é dano Físico); Hammer of Purity (Pure, 30 a 90% do dano base + 20 a 80 fixo) e Degen Aura cortam a vida fina dele sem precisar de muito farm seu; Repel (50% de resistência a status, +8 a 38 de Força, +8 a 20 de regen de vida) ajuda a sobreviver a um Requiem mal posicionado.
-- itens que viram: o BKB dele garante o Requiem sem interrupção; seu BKB (ficha: ~4.050 de ouro) garante que você fecha o combo físico sem travar nas Shadowraze antes.
+- itens que viram: o BKB dele garante o Requiem sem interrupção; seu BKB (4.050 de ouro, items.json) garante que você fecha o combo físico sem travar nas Shadowraze antes.
 - como jogar: evite ficar parado em linha reta na frente dele antes dos 25min (Shadowraze cedo); depois que ele compra MoM, só dê trade corpo a corpo com Guardian Angel de pé.
-- fonte: pro_dados/omniknight.json; pro_dados/nevermore.json; constants_abilities.json (nevermore_shadowraze1, nevermore_requiem_of_souls, omniknight_guardian_angel, omniknight_hammer_of_purity, omniknight_repel).
+- fonte: pro_dados/omniknight.json; pro_dados/nevermore.json; constants_abilities.json (nevermore_shadowraze1, nevermore_requiem, omniknight_guardian_angel, omniknight_hammer_of_purity, omniknight_repel); items.json (black_king_bar).
 
 ## Contra Pudge (pudge)
 - placar: Omniknight venceu 26 de 54 partidas de pro (48,1%). Fonte: pro_dados/omniknight.json (confrontos).
 - por que importa: mesma posição principal (offlane/suporte), 3º oponente com mais jogos contra o Omniknight (54), clássico duelo de iniciação por gancho contra sustain tanque.
 - janelas: cedo os dois dependem mais de acerto de habilidade que de item (LH10 dele é só 32 contra 43 do Omniknight, pro_dados); aos 17:12 ele já tem Aghanim's Scepter, bem cedo pra um herói que não é carry, deixando o Rot em área maior e mais forte; dos 17:24 aos 21:24 seu combo fecha quase junto com o Blink dele (19:30), vira corrida de quem inicia primeiro; depois disso o Dismember dele segue sendo a maior ameaça isolada do confronto.
 - o que ele faz com você: Meat Hook (Pure, 150 a 360 de dano) te puxa pra perto dele antes de qualquer coisa; Dismember (Mágico, canalizado, 80 a 120 de dano/s por 6 ticks, cura ele pelo total causado) prende e dreno você ao mesmo tempo; com Scepter, Rot (área 200 maior, +90 de dano, -20% de regen de vida no alvo) te pune mesmo sem ele estar perto de você especificamente.
-- o que você faz com ele: Repel dá 50% de resistência a status, que encurta (não cancela) o tempo de hold do Dismember se você já estiver com o buff de pé antes do gancho conectar; Hammer of Purity e Purification também perdem uma mordida fixa pra Flesh Heap dele (8 a 26, de qualquer tipo de dano, não só Físico, constants_abilities.json), mas como esse bloqueio é pequeno perto do dano total dos dois, seu poke ainda pesa; Degen Aura atrapalha ele de se aproximar o suficiente pra acertar o gancho de perto.
-- itens que viram: Harpoon seu cancela qualquer reposicionamento dele antes da troca começar (igual descrito na ficha de itens do Omniknight); o Blink dele garante um Dismember de surpresa em alguém isolado.
+- o que você faz com ele: Repel dá 50% de resistência a status, que encurta (não cancela) o tempo de hold do Dismember se você já estiver com o buff de pé antes do gancho conectar; Hammer of Purity e Purification também perdem uma mordida fixa pra Meat Shield dele (8 a 26, de qualquer tipo de dano, não só Físico, constants_abilities.json), mas como esse bloqueio é pequeno perto do dano total dos dois, seu poke ainda pesa; Degen Aura atrapalha ele de se aproximar o suficiente pra acertar o gancho de perto.
+- itens que viram: Harpoon seu puxa o alvo (35% da distância, 100% de lentidão por 1s, items.json), cancelando qualquer reposicionamento dele antes da troca começar; o Blink dele garante um Dismember de surpresa em alguém isolado.
 - como jogar: não ande sozinho fora de alcance de socorro antes do nível 6 dele (sem Dismember, o Hook sozinho não mata); depois que ele tem Scepter, respeite a área maior do Rot perto de torres e Roshan.
-- fonte: pro_dados/omniknight.json; pro_dados/pudge.json; constants_abilities.json (pudge_meat_hook, pudge_dismember, pudge_flesh_heap, omniknight_repel, omniknight_hammer_of_purity, omniknight_degen_aura).
+- fonte: pro_dados/omniknight.json; pro_dados/pudge.json; constants_abilities.json (pudge_rot, pudge_meat_hook, pudge_dismember, pudge_flesh_heap, omniknight_repel, omniknight_hammer_of_purity, omniknight_degen_aura); items.json (harpoon); https://api.opendota.com/api/constants/aghs_desc (pudge scepter).
 
 ## Contra Mars (mars)
 - placar: Omniknight venceu 26 de 50 partidas de pro (52,0%). Fonte: pro_dados/omniknight.json (confrontos).
@@ -63,7 +62,7 @@ fontes:
 - o que você faz com ele: Guardian Angel bloqueia o crítico Físico do God's Rebuke por completo; Hammer of Purity (Pure) passa direto pelo Bulwark dele, que reduz 40 a 70% do dano Físico vindo de frente e só 20 a 35% vindo de lado (constants_abilities.json), então ataque Mars pelas costas pra fugir do bloqueio por completo, de lado ele ainda bloqueia uma parte menor do resto do seu dano de ataque.
 - itens que viram: dentro da Arena ninguém escapa, então o Blink seu só serve se usado antes da formação completar (0,1s de formação, quase instantâneo); fora disso, BKB dos dois decide quem fecha o combo primeiro.
 - como jogar: não force a troca perto de paredes ou do limite do mapa, onde o Spear te prende fácil; se ele já gastou a Arena sem te pegar dentro, é a sua melhor janela de troca.
-- fonte: pro_dados/omniknight.json; pro_dados/mars.json; constants_abilities.json (mars_spear, mars_gods_rebuke, mars_arena_of_blood, mars_bulwark, omniknight_guardian_angel, omniknight_hammer_of_purity).
+- fonte: pro_dados/omniknight.json; pro_dados/mars.json; constants_abilities.json (mars_spear, mars_gods_rebuke, mars_arena_of_blood, mars_bulwark, omniknight_guardian_angel, omniknight_hammer_of_purity); https://api.opendota.com/api/constants/aghs_desc (mars shard).
 
 ## Contra Ogre Magi (ogre_magi)
 - placar: Omniknight venceu 24 de 48 partidas de pro (50,0%). Fonte: pro_dados/omniknight.json (confrontos).
@@ -81,9 +80,9 @@ fontes:
 - janelas: ele não farma praticamente nada (LH10 de 4, GPM de 279, o mais baixo de toda a lista, pro_dados), então o risco dele nunca vem de item; aos 11:24 ele resolve mana com Arcane Boots; dos 17:24 aos 21:24, enquanto você fecha seu combo, ele ainda está comprando sentry e observer; o Blink dele só sai aos 24:00 e o Aghanim's Scepter (muta itens do alvo) é raríssimo na amostra, 34:54 de mediana. O perigo dele é 100% de nível de habilidade, não de item.
 - o que ele faz com você: Glimpse (Mágico, até 280 de dano) te teleporta de volta pra onde você estava 4s atrás, cancelando qualquer avanço ou fuga no meio da troca; Static Storm (Mágico, até 200 a 350 de dano/s crescente por 6s, silencia tudo na área) desliga Purification, Repel, Hammer of Purity e Guardian Angel ao mesmo tempo se você for pego dentro.
 - o que você faz com ele: como ele tem pouquíssima vida e quase nenhum farm, um Purification (90 a 300 de dano em área) ou um Hammer of Purity já ameaça matar ele sozinho na lane; Degen Aura dificulta a fuga dele, que não tem nenhuma mobilidade própria.
-- itens que viram: Lotus Orb (situacional da ficha de itens do Omniknight) reflete o Glimpse, que é de alvo único, de volta pro próprio Disruptor; vale a pena especificamente contra ele.
+- itens que viram: Lotus Orb (5s de duração do ativo, items.json) reflete o Glimpse, que é de alvo único, de volta pro próprio Disruptor; vale a pena especificamente contra ele.
 - como jogar: pressione a lane sem dó, ele não aguenta a troca de dano cedo; lance Purification, Repel ou Guardian Angel antes de entrar na área de cast da Static Storm, porque depois de silenciado não dá pra reagir.
-- fonte: pro_dados/omniknight.json; pro_dados/disruptor.json; constants_abilities.json (disruptor_glimpse, disruptor_static_storm, omniknight_degen_aura).
+- fonte: pro_dados/omniknight.json; pro_dados/disruptor.json; constants_abilities.json (disruptor_glimpse, disruptor_static_storm, omniknight_degen_aura); items.json (lotus_orb); https://api.opendota.com/api/constants/aghs_desc (disruptor scepter).
 
 ## Contra Tidehunter (tidehunter)
 - placar: Omniknight venceu 17 de 40 partidas de pro (42,5%). Fonte: pro_dados/omniknight.json (confrontos).
@@ -127,7 +126,7 @@ fontes:
 
 ## Contra Dragon Knight (dragon_knight)
 - placar: Omniknight venceu 20 de 34 partidas de pro (58,8%). Fonte: pro_dados/omniknight.json (confrontos).
-- por que importa: não compartilha lane (Dragon Knight é carry/mid), mas é o 2º melhor winrate do Omniknight com amostra grande da lista, útil porque os dois são heróis tanques de sustain em Força, então o confronto mede bem quem ganha a guerra de atrito.
+- por que importa: não compartilha lane (Dragon Knight é carry/mid), mas é o 3º melhor winrate do Omniknight com amostra grande da lista, útil porque os dois são heróis tanques de sustain em Força, então o confronto mede bem quem ganha a guerra de atrito.
 - janelas: ele farma rápido (LH10 de 63, GPM 583, dos maiores da lista) e sai de Power Treads aos 6:00; aos 11:12 o Mask of Madness liga o farm/agressão dele; no nível 6 ele troca o combate corpo a corpo por Elder Dragon Form, um ataque à distância que foge do alcance de 150 do seu Hammer of Purity; o BKB dele sai aos 23:18, quase 2min depois do seu combo completo de Harpoon (21:24) já ter fechado, então a corrida pra iniciar primeiro é apertada.
 - o que ele faz com você: Dragon Tail (Mágico, 1,8 a 2,4s de stun + até 150 de dano) abre o combo; em Elder Dragon Form ele ganha dano corrosivo em área (nível 1+), respingo (nível 2+) e um slow de gelo que ignora resistência a debuff (nível 3+), tudo de longe.
 - o que você faz com ele: o autoataque físico dele continua sendo bloqueado pelo Guardian Angel mesmo em Elder Dragon Form, já que a forma só muda alcance e adiciona efeitos mágicos por cima, não troca o tipo do dano base de ataque; Hammer of Purity (Pure, com cura de parte do dano causado pra você) ganha qualquer corrida de sustain contra o Dragon Blood dele (regen fixo de Força).

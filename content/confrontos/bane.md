@@ -21,17 +21,13 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/bane.md
-- https://howdoiplay.com/tips/bane.html
-- https://rdy.gg/es/dota2/heroes/pangolier
-- https://gamersdecide.com/articles/dota-2-pangolier-counters-best-heroes-against-pangolier-1
+- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 ---
 
 ## Contra Hoodwink (hoodwink)
 - placar: 107 vitórias em 194 jogos de pro, 55,2% (OpenDota explorer, matchups de Bane)
 - por que importa: é o herói que mais enfrenta Bane em pro, de longe. Os dois disputam o mesmo papel, suporte roamer que vive de pegar um alvo isolado longe da lane dele
-- janelas: até uns 20 min, Hoodwink ganha a troca à distância, Sharpshooter já existe desde o nível 6 e carrega dano crescente por 0,75s antes de disparar, sem precisar de item. Bane só fica confortável pra entrar na briga depois do Aether Lens, mediana de 22:36 em 486 de 855 jogos pro (pro_dados/bane.json). O Aghanim's Shard de Hoodwink, mediana 23:48 em 1.224 de 2.917 jogos (pro_dados/hoodwink.json), chega quase junto e dá o Hunter's Boomerang, um poke em arco que volta pra ela e aplica slow com vulnerabilidade a dano mágico, então a janela dos 22 aos 25 min é de poke longo dos dois lados, não de all in
+- janelas: até uns 20 min, Hoodwink ganha a troca à distância, Sharpshooter já existe desde o nível 6 e carrega dano crescente por até 3s antes de disparar automaticamente, sem precisar de item. Bane só fica confortável pra entrar na briga depois do Aether Lens, mediana de 22:36 em 486 de 855 jogos pro (pro_dados/bane.json). O Aghanim's Shard de Hoodwink, mediana 23:48 em 1.224 de 2.917 jogos (pro_dados/hoodwink.json), chega quase junto e dá o Hunter's Boomerang, um poke em arco que volta pra ela e aplica slow com vulnerabilidade a dano mágico, então a janela dos 22 aos 25 min é de poke longo dos dois lados, não de all in
 - o que ele faz com você: Bushwhack prende Bane perto de árvore antes que ele consiga se aproximar pra iniciar, e tira a visão do alvo durante o stun. Sharpshooter pune qualquer aproximação sem Blink ainda pronto
 - o que você faz com ele: Nightmare tirado em cima do canal do Sharpshooter cancela o tiro na hora, já que ela fica parada carregando. Fiend's Grip ignora Scurry (que só dá velocidade e tree walking, não escape de unit target) e drena a mana que ela precisa pro combo Shard mais Sharpshooter
 - itens que viram: Aether Lens dos dois lados decide quem casta primeiro fora do alcance de resposta do outro. Blink Dagger do Bane (mediana 33:48 em 325 jogos) é o que fecha a distância depois que o poke de longe empata
@@ -46,14 +42,14 @@ fontes:
 - o que você faz com ele: Brain Sap e Fiend's Grip furam BKB, então se Pangolier tentar sobreviver só com Black King Bar (ele não compra BKB com frequência nesta amostra) o combo de Bane ainda passa. Fiend's Grip lançado antes dele entrar em Gyroshell tranca ele parado achando a abertura da ultimate
 - itens que viram: Diffusal Blade e Blink de Pangolier (12:24 e 19:12) definem se ele chega isolando Bane antes dos 20 min. Aether Lens do Bane (22:36) é o que inverte isso, dando alcance pra travar Pangolier antes dele rolar
 - como jogar: fique fora do alcance de Swashbuckle antes do seu Aether Lens sair, é a fase em que ele caça mais rápido. Depois dos 22-23 min, mire Fiend's Grip assim que ele aparecer fora do Gyroshell, porque uma vez que ele rola o combo não entra
-- fonte: pro_dados/bane.json; pro_dados/pangolier.json; constants_abilities.json (pangolier_gyroshell, pangolier_swashbuckle, bane_brain_sap, bane_fiends_grip); [rdy.gg, ficha de Pangolier](https://rdy.gg/es/dota2/heroes/pangolier) (Gyroshell dá 80% de resistência mágica e imunidade a debuff enquanto rola, dispel básico no cast)
+- fonte: pro_dados/bane.json; pro_dados/pangolier.json; constants_abilities.json (pangolier_gyroshell: 80% de resistência mágica e imunidade a debuff enquanto rola, dispel básico; pangolier_swashbuckle, bane_brain_sap, bane_fiends_grip)
 
 ## Contra Tiny (tiny)
 - placar: 83 vitórias em 131 jogos de pro, 63,4% (OpenDota explorer, matchups de Bane)
 - por que importa: empatado com Pangolier como terceiro herói mais jogado contra Bane em pro, de novo sem lane em comum (Tiny é carry 1). É o confronto clássico de combo contra combo, quem trava o outro primeiro ganha a troca
 - janelas: Tiny é item dependente pra matar rápido, Echo Sabre (12:06) e depois Blink (15:54, em 2.546 de 3.127 jogos, pro_dados/tiny.json) formam o combo Toss mais Avalanche cedo. Bane só tem Aether Lens aos 22:36, então entre os 15 e os 22 min Tiny ataca primeiro se achar a abertura. Depois disso, Bane consegue iniciar o combo dele de fora do alcance de resposta do Tiny, que segue frágil sem BKB até os 26:42 (1.148 de 3.127 jogos)
 - o que ele faz com você: Avalanche mais Toss é um combo de burst que não depende de alvo ter saída, se pegar Bane sem Nightmare disponível é dano pesado de uma vez. Grow aumenta o dano bônus do próprio Toss, então Tiny crescido ameaça com burst maior no mesmo combo
-- o que você faz com ele: Brain Sap e Fiend's Grip furam BKB (se ele comprar), e como Tiny é historicamente de vida baixa pra um carry (mais strength em dano do que em HP), o grip sozinho já tira uma fatia grande antes dele conseguir jogar a combo. Nightmare em cima do Tiny cancela a tentativa de combo se usado assim que ele se aproxima
+- o que você faz com ele: Brain Sap e Fiend's Grip furam BKB (se ele comprar), então mesmo com o item de proteção o grip sozinho já tira uma fatia grande antes dele conseguir jogar a combo. Nightmare em cima do Tiny cancela a tentativa de combo se usado assim que ele se aproxima
 - itens que viram: Blink do Tiny (15:54) é o item que decide se ele chega primeiro. BKB dele (26:42) tira Enfeeble e Nightmare do jogo mas não tira Brain Sap nem Fiend's Grip
 - como jogar: antes dos 20 min evite ficar sozinho no alcance de Toss, principalmente perto de árvore (ele pode jogar você em cima de aliado dele também). Depois que ele gasta o combo numa troca ruim, é a sua janela: Fiend's Grip fecha o que sobrou da vida dele, já que o grip ignora o BKB que ele comprou
 - fonte: pro_dados/bane.json; pro_dados/tiny.json; constants_abilities.json (tiny_toss, tiny_avalanche, tiny_grow, bane_brain_sap, bane_fiends_grip, bane_nightmare)
@@ -62,7 +58,7 @@ fontes:
 - placar: 74 vitórias em 126 jogos de pro, 58,7% (OpenDota explorer, matchups de Bane)
 - por que importa: quarto mais jogado contra Bane em pro e mesma função de suporte roamer, briga direta por quem inicia a rotação primeiro
 - janelas: Snapfire liga o burst dela muito cedo. Mortimer's Kisses existe desde o nível 6, e o Aghanim's Shard, mediana de 16:54 em 1.919 de 2.456 jogos (pro_dados/snapfire.json), upa o Firesnap Cookie pra curar o aliado e lançar um Mortimer's Kiss extra no destino. É o power spike mais adiantado dos dois confrontos de suporte desta lista, bem antes do Aether Lens de Bane (22:36). Depois dos 20-21 min, quando o Blink dela sai (20:42), ela consegue iniciar de perto também, mas a essa altura Bane já alcança de longe com Aether Lens
-- o que ele faz com você: Mortimer's Kisses é um nuke pesado em área que não fura BKB mas também não precisa, porque o combo normal dela é matar antes do Bane reagir. Scatterblast empurra e atordoa de perto, útil pra impedir o Bane de fechar o Fiend's Grip corpo a corpo
+- o que ele faz com você: Mortimer's Kisses é um nuke pesado em área que não fura BKB mas também não precisa, porque o combo normal dela é matar antes do Bane reagir. Scatterblast reduz muito a velocidade de movimento e de ataque dele numa área em cone, efeito ainda mais forte à queima-roupa, útil pra atrasar o Bane antes de fechar o Fiend's Grip corpo a corpo
 - o que você faz com ele: Enfeeble reduz o dano físico dela caso ela dependa do atirador (Mortimer), mas o x corte real é Fiend's Grip travando ela antes do Mortimer's Kisses carregar, já que o nuke dela tem alcance mínimo de lançamento de 600 e ela fica com giro reduzido durante a canalização, mais fácil de acertar
 - itens que viram: Aghanim's Shard dela (16:54) dá sustain e burst extra via Firesnap Cookie bem cedo, é o item que faz ela bater o pico antes do suporte padrão. Aether Lens do Bane (22:36) é a resposta, dá alcance pra pegar ela antes dela carregar o Mortimer's Kisses
 - como jogar: na fase de lane e rotação cedo, ela bate mais forte primeiro, jogue defensivo até os 20 min. Depois do seu Aether Lens, mire o Fiend's Grip assim que ela começar a mirar o Mortimer's Kisses, cancela o canal e inverte quem morre
@@ -94,9 +90,9 @@ fontes:
 - janelas: os dois sobem quase junto, Blink de Rubick aos 21:36 e Aether Lens de Bane aos 22:36 (pro_dados/rubick.json e pro_dados/bane.json), Scepter e Shard de Rubick saem por volta dos 27 min. Não existe uma janela clara de domínio, o confronto gira em torno de quem lança o disable primeiro em vez de quem tem item antes
 - o que ele faz com você: Spell Steal fura BKB e pode copiar o último feitiço que Bane lançou, inclusive Fiend's Grip. Se Bane abrir o grip primeiro numa troca, Rubick pode responder com o grip roubado na sequência, já que o próprio Fiend's Grip tem cast point curto (0,2s)
 - o que você faz com ele: Nightmare End permite ao próprio Bane dispelar um Nightmare que Rubick tenha roubado e usado nele, então o combo roubado de Rubick não prende Bane de volta pra sempre. Fiend's Grip lançado antes de Rubick conseguir copiar alguma coisa evita dar munição pro roubo
-- itens que viram: Lotus Orb, mesmo sendo item neutro de qualquer suporte e não exclusivo de Rubick, cancela o cast de Fiend's Grip instantaneamente e reflete Nightmare de volta pro Bane, segundo guias de contrajogo do herói. É o item que mais muda esse 1x1 quando qualquer um dos dois lados compra
+- itens que viram: Lotus Orb, mesmo sendo item neutro de qualquer suporte e não exclusivo de Rubick, cancela o cast de Fiend's Grip instantaneamente e reflete Nightmare de volta pro Bane. É o item que mais muda esse 1x1 quando qualquer um dos dois lados compra
 - como jogar: não gaste seu combo primeiro se Rubick está com o feitiço do time ainda disponível pra copiar, ele pode usar contra você quase igual. Se ele te prender com Nightmare roubado, lembre que dá pra cancelar sozinho com Nightmare End
-- fonte: pro_dados/bane.json; pro_dados/rubick.json; constants_abilities.json (rubick_spell_steal, bane_nightmare, bane_fiends_grip); [howdoiplay.com, dicas de Bane](https://howdoiplay.com/tips/bane.html) (Lotus Orb cancela o cast de Fiend's Grip instantaneamente; Lotus Orb também reflete feitiços de alvo único como Nightmare pelo mecanismo padrão do item)
+- fonte: pro_dados/bane.json; pro_dados/rubick.json; constants_abilities.json (rubick_spell_steal, bane_nightmare, bane_fiends_grip); items.json (lotus_orb: Echo Shell re-lança feitiços de alvo único de volta pro conjurador)
 
 ## Contra Jakiro (jakiro)
 - placar: 63 vitórias em 113 jogos de pro, 55,8% (OpenDota explorer, matchups de Bane)

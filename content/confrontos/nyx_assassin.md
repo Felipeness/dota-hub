@@ -22,7 +22,8 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
+- https://api.opendota.com/api/explorer (player_matches.lane_role, partidas de liga 7.40+7.41)
+- https://api.opendota.com/api/heroStats (base_health, base_armor)
 - https://api.opendota.com/api/constants/aghs_desc
 - https://dotacoach.gg/en/heroes/counters/nyx-assassin
 - https://liquipedia.net/dota2/Nyx_Assassin
@@ -33,11 +34,11 @@ fontes:
 
 ## Como essa lista foi montada
 
-14 oponentes, em 3 grupos (critério do pedido; o item "carry sempre entra mesmo sem lane" não se aplica, Nyx Assassin é suporte pos 4/5 em praticamente 100% dos jogos pro do patch, conforme `herois_catalogo.json`):
+14 oponentes, em 3 grupos (critério do pedido; o item "carry sempre entra mesmo sem lane" não se aplica, Nyx Assassin joga como suporte na rota de off em 79,2% das partidas pro do patch, 733 de 925 jogos, OpenDota explorer):
 
 1. **Mais jogos de pro contra o Nyx** (top 6 de `pro_dados/nyx_assassin.json`, campo `confrontos`): Rubick (166), Snapfire (141), Tusk (131), Tiny (123), Jakiro (106), Warlock (103). Cinco deles já são suporte pos 4/5 (Rubick, Snapfire, Tusk, Jakiro, Warlock); Tiny é carry pos 1 e não divide lane de verdade, mas aparece tanto nos dados porque farma rápido e o jogo entre os dois se decide por quem caça quem no meio, não na rota.
 2. **Mesma posição principal (suporte 4/5), mais jogado em pro**, além dos 6 acima: Disruptor (94 jogos) e Hoodwink (88 jogos). Entre os dois grupos existem heróis com mais jogos (Shadow Fiend com 102, Ember Spirit com 97), mas nenhum dos dois é suporte 4/5, então ficam fora do critério de posição.
-3. **Maior vantagem e maior desvantagem do Nyx (30+ jogos)**: por taxa de vitória, as duas maiores vantagens são Crystal Maiden (72,5% em 40 jogos) e Lich (71,7% em 46); a 3ª maior na verdade é Gyrocopter (71,1% em 38), que não entra nesta lista. Void Spirit (68,2% em 85) é a 4ª por taxa de vitória, mas tem a maior amostra entre as vantagens grandes do Nyx, e o próprio catálogo do site já cita o Nyx como contador direto dele. Desvantagem: Venomancer (36,8% em 38), Terrorblade (37,5% em 48) e Kunkka (38,2% em 34), essas sim são as três piores por taxa de vitória. Void Spirit, Terrorblade e Kunkka não dividem lane com o Nyx (mid e offlane/carry), mas entram porque a diferença de poder entre os dois decide o jogo de qualquer forma, o mesmo raciocínio do exemplo Alchemist contra Morphling.
+3. **Maior vantagem e maior desvantagem do Nyx (30+ jogos)**: por taxa de vitória, as duas maiores vantagens são Crystal Maiden (72,5% em 40 jogos) e Lich (71,7% em 46); a 3ª maior na verdade é Gyrocopter (71,1% em 38), que não entra nesta lista. Void Spirit (68,2% em 85) é a 4ª por taxa de vitória, mas tem a maior amostra entre as vantagens grandes do Nyx. Desvantagem: Venomancer (36,8% em 38), Terrorblade (37,5% em 48) e Kunkka (38,2% em 34), essas sim são as três piores por taxa de vitória. Void Spirit, Terrorblade e Kunkka não dividem lane com o Nyx (mid e offlane/carry), mas entram porque a diferença de poder entre os dois decide o jogo de qualquer forma, o mesmo raciocínio do exemplo Alchemist contra Morphling.
 
 Os placares abaixo são sempre da perspectiva do Nyx Assassin (vitórias dele no confronto), fonte `pro_dados/nyx_assassin.json`, cruzados com o arquivo do oponente pra conferência. Vendetta: segundo `constants_abilities.json` e `aghs_desc`, a duração base foi reduzida de 60s (7.41) para 45/50/55s por nível no patch 7.41b, e o acerto que quebra a invisibilidade passou a desligar passivas do alvo por 4s; uso essa versão vigente em todo o arquivo.
 
@@ -77,13 +78,13 @@ Os placares abaixo são sempre da perspectiva do Nyx Assassin (vitórias dele no
 ## Contra Tiny (tiny)
 
 - placar: 68V/123 (55,3%) para o Nyx; conferido contra pro_dados/tiny.json (55V do Tiny).
-- por que importa: 4º maior volume de jogos pro (123); não divide lane (Tiny é carry de safelane em 79% dos jogos pro do patch, Nyx é suporte 4/5, fonte herois_catalogo.json), mas é o caso do grupo 1 que mais se parece com Alchemist contra Morphling: os dois raramente se cruzam na rota e ainda assim decidem o jogo um pelo outro, Tiny puxa a janela de farm e o Nyx é quem tenta isolar ele fora da lane.
+- por que importa: 4º maior volume de jogos pro (123); não divide lane fixa (Tiny não tem posição única em pro no patch, 36,7% das partidas na safelane, 33,4% mid e 29,5% offlane por lane_role, OpenDota explorer; Nyx joga de suporte na rota de off), mas é o caso do grupo 1 que mais se parece com Alchemist contra Morphling: os dois raramente se cruzam na rota e ainda assim decidem o jogo um pelo outro, Tiny puxa a janela de farm e o Nyx é quem tenta isolar ele fora da lane.
 - janelas: Tiny sobe Power Treads aos 6,1 e Echo Sabre aos 12,1, bem antes de qualquer item de nível do Nyx. Até os 15-16 min é a janela dele, já com o bônus de dano do Grow (nível 6) e sem precisar de Blink pra ameaçar. O Blink dele sai aos 15,9, bem antes do Nyx (23,4): dos 16 aos 23 min é a janela de risco pra quem jogar sozinho perto de ward.
 - o que ele faz com você: Toss (alcance até 1100 no nível 4, dano até 360 mais o bônus do Grow) arremessa qualquer unidade perto, inclusive o próprio Nyx se pego sem Carapace de pé; Avalanche (raio até 370, dano total até 360 em 5 ticks) atordoa em área e é o setup clássico do combo Avalanche-Toss, que ignora a Vendetta porque é efeito de área, não de alvo único.
 - o que você faz com ele: Impale trava o Tiny antes dele soltar o Toss, que é instantâneo mas exige estar perto; Vendetta desliga passivas do alvo por 4s no hit que quebra a invisibilidade, e isso inclui o bônus de dano do Grow, interação já documentada na comunidade com itens de break como Silver Edge. Jolt queima 25-40% da mana máxima, incômodo pra um Tiny que depende de mana pra Toss e Avalanche com recargas baixas.
 - itens que viram: o Blink do Tiny (15,9) chega bem antes de o Nyx ter qualquer resposta de nível, então evitar lane sozinha contra um Tiny com Blink é prioridade; depois dos 23-25 min, com Blink e Shard, o Nyx consegue abrir o combo Impale-Vendetta antes do Tiny reagir com Toss.
 - como jogar: não ande sozinho perto de visão do Tiny entre os 16 e os 23 min; depois disso, Spiked Carapace de pé antes de se aproximar anula o primeiro Toss ou ataque dele e abre a troca pro Nyx.
-- fonte: pro_dados/nyx_assassin.json; pro_dados/tiny.json; constants_abilities.json (nyx_assassin_impale, nyx_assassin_vendetta, nyx_assassin_jolt, nyx_assassin_spiked_carapace, tiny_toss, tiny_avalanche, tiny_grow); herois_catalogo.json (posição do Tiny)
+- fonte: pro_dados/nyx_assassin.json; pro_dados/tiny.json; constants_abilities.json (nyx_assassin_impale, nyx_assassin_vendetta, nyx_assassin_jolt, nyx_assassin_spiked_carapace, tiny_toss, tiny_avalanche, tiny_grow); OpenDota explorer (lane_role do Tiny)
 
 ## Contra Jakiro (jakiro)
 
@@ -132,13 +133,13 @@ Os placares abaixo são sempre da perspectiva do Nyx Assassin (vitórias dele no
 ## Contra Crystal Maiden (crystal_maiden)
 
 - placar: 29V/40 (72,5%) para o Nyx; conferido contra pro_dados/crystal_maiden.json (11V da Crystal Maiden).
-- por que importa: maior vantagem do Nyx entre os suportes com 30+ jogos; ela é a hard support mais frágil do jogo (120 de vida base, 0 de armadura, fonte herois_catalogo.json) e sem mobilidade própria, o perfil que a Vendetta mais pune.
+- por que importa: maior vantagem do Nyx entre os suportes com 30+ jogos; ela é a hard support mais frágil do jogo (120 de vida base, 0 de armadura, OpenDota heroStats) e sem mobilidade própria, o perfil que a Vendetta mais pune.
 - janelas: CM sobe Tranquil Boots aos 8,4, antes do Arcane do Nyx (10,3), mas isso só ajuda ela a andar, não a lutar. Ela não tem item de nível antes dos 17-18 min (Aghanim's Shard 17,7, Shadow Amulet 18,4); o Nyx também está sem item forte nessa fase, então é janela de poke com Impale contra Frostbite. Dos 21 aos 23 min ela finaliza Glimmer Cape (21,1) e Blink (23,1), ferramentas de sobrevivência, mas sem conseguir caçar de volta.
 - o que ele faz com você: Frostbite (alcance 600, até 3s travando o alvo, dano por segundo) impede o Nyx de fechar o Impale se ela acertar primeiro; Freezing Field (canal de 10s, raio 810) ameaça em área, mas exige ficar parada o tempo todo, janela perfeita pro Impale cancelar o canal.
 - o que você faz com ele: Impale (750 de alcance) chega mais longe que o Frostbite (600) e cancela o canal da Freezing Field assim que acerta; Vendetta entra invisível direto nos 120 de vida dela, e o bônus de até 500 de dano sozinho já mata ou deixa perto da morte uma CM sem Glimmer Cape ativo.
 - itens que viram: o Aghanim's Shard da CM (17,7, gera um clone que desvia projétil e aplica Frostbite ao morrer) pode salvar ela de um primeiro Impale, mas não do bônus de dano da Vendetta se o Nyx já estiver colado; o Shard do Nyx (25,2) multiplica as janelas de pick-off contra uma CM que farma pouco e não tem mobilidade própria.
 - como jogar: priorize fechar o alcance de 750 do Impale antes dela usar o Frostbite de 600; depois do nível 6, a Vendetta sozinha já ameaça matar a CM se ela estiver fora de visão dos aliados.
-- fonte: pro_dados/nyx_assassin.json; pro_dados/crystal_maiden.json; constants_abilities.json (nyx_assassin_impale, nyx_assassin_vendetta, crystal_maiden_frostbite, crystal_maiden_freezing_field); aghs_desc (nyx_assassin, crystal_maiden); herois_catalogo.json
+- fonte: pro_dados/nyx_assassin.json; pro_dados/crystal_maiden.json; constants_abilities.json (nyx_assassin_impale, nyx_assassin_vendetta, crystal_maiden_frostbite, crystal_maiden_freezing_field); aghs_desc (nyx_assassin, crystal_maiden); heroStats (base_health, base_armor)
 
 ## Contra Lich (lich)
 
@@ -149,18 +150,18 @@ Os placares abaixo são sempre da perspectiva do Nyx Assassin (vitórias dele no
 - o que você faz com ele: Impale (750 de alcance) chega antes do Lich reagir com Frost Blast (alcance 575-650); Vendetta entra na invisibilidade e o bônus de até 500 de dano é suficiente pra abater um suporte com vida baixa e sem fuga própria; Spiked Carapace reflete o Frost Blast se ele tentar zonear o Nyx de longe.
 - itens que viram: o Aghanim's Shard do Lich (22,9, gera um Ice Spire que desacelera perto) ajuda a segurar território, mas não protege ele de um pick-off; o Shard do Nyx (25,2) encurta a recarga da Vendetta, e como o Lich não tem blink nem dispel de movimento, cada janela de invisibilidade vira ameaça real de kill.
 - como jogar: evite ficar parado tentando zonear com Frost Blast quando o Nyx já tem Vendetta disponível; use o alcance do Impale pra abrir antes do Lich decidir entre Frost Nova e fugir, porque ele não tem como fugir de verdade.
-- fonte: pro_dados/nyx_assassin.json; pro_dados/lich.json; constants_abilities.json (nyx_assassin_impale, nyx_assassin_vendetta, nyx_assassin_spiked_carapace, lich_sinister_gaze, lich_chain_frost, lich_frost_nova); aghs_desc (nyx_assassin, lich); herois_catalogo.json
+- fonte: pro_dados/nyx_assassin.json; pro_dados/lich.json; constants_abilities.json (nyx_assassin_impale, nyx_assassin_vendetta, nyx_assassin_spiked_carapace, lich_sinister_gaze, lich_chain_frost, lich_frost_nova); aghs_desc (nyx_assassin, lich)
 
 ## Contra Void Spirit (void_spirit)
 
 - placar: 58V/85 (68,2%) para o Nyx; conferido contra pro_dados/void_spirit.json (27V do Void Spirit).
-- por que importa: não é a 3ª maior vantagem do Nyx por taxa de vitória (Gyrocopter tem 71,1% em 38 jogos, fora desta lista), mas é a vantagem grande com a maior amostra do patch (85 jogos); não divide lane (Void Spirit é mid em 93,75% dos jogos pro do patch, Nyx é suporte), mas o próprio catálogo do site já cita o Nyx como um dos contadores diretos dele, "fraco contra quem interrompe blink e invisibilidade de perto" (herois_catalogo.json).
+- por que importa: não é a 3ª maior vantagem do Nyx por taxa de vitória (Gyrocopter tem 71,1% em 38 jogos, fora desta lista), mas é a vantagem grande com a maior amostra do patch (85 jogos); não divide lane (Void Spirit é mid em 91,2% dos jogos pro do patch, 1475 de 1618 jogos por lane_role, OpenDota explorer; Nyx é suporte), mas o kit do Nyx interrompe justamente o que o Void Spirit mais depende: Impale e o reflexo do Spiked Carapace cancelam o Astral Step em cast, e a Vendetta desliga a Intrinsic Edge por 4s.
 - janelas: Void Spirit é o herói mais rápido da lista: Power Treads aos 9,7, Diadem aos 11,0, com 50 last hits aos 10 min (fonte pro_dados/void_spirit.json). Até os 17 min ele farma livre; o Aghanim's Shard dele (17,0) só adiciona um segundo caminho de visão que gira ao redor do Aether Remnant, não é a ferramenta de duelo. Quem silencia é o Aghanim's Scepter (25,1, dá silêncio e 2 cargas ao Resonant Pulse), que chega quase junto do Shard do Nyx (25,2). Mesmo assim o Nyx não precisa de item pra punir o Astral Step, o combo funciona desde o nível 6.
 - o que ele faz com você: Aether Remnant (alcance 850, puxa quem tocar o retorno do orbe) e Resonant Pulse (raio 500, com Scepter silencia e dá 2 cargas) ameaçam se ele vier com iniciativa; Dissimilate (ultimate) ataca em anel ao redor de onde ele reaparece, dano alto se o Nyx estiver perto do teleporte.
 - o que você faz com ele: Astral Step (blink com 2 cargas) não pode ser lançado se o Void Spirit estiver atordoado no momento do cast, e tanto o Impale quanto o reflexo do Spiked Carapace estunam; Vendetta desliga passivas do alvo por 4s no hit que tira a invisibilidade, o que inclui a Intrinsic Edge (a passiva que converte atributo em dano de ataque), cortando justamente o que mais dá dano pro Void Spirit.
 - itens que viram: o Aghanim's Scepter dele (25,1, silêncio no Resonant Pulse) é perigoso, mas o Spiked Carapace não é mágico, é reflexo físico de ativação instantânea, e continua estunando quem acertar o Nyx mesmo em silêncio; o Aghanim's Shard do Nyx (25,2) chega quase junto e dá a mobilidade extra que fecha o que falta pra alcançar um herói rápido como ele.
 - como jogar: puna qualquer Astral Step feito perto do Nyx com Impale ou Carapace de pé, cortando o blink antes dele completar; evite ficar parado perto de onde o Void Spirit pode reaparecer com Dissimilate.
-- fonte: pro_dados/nyx_assassin.json; pro_dados/void_spirit.json; constants_abilities.json (nyx_assassin_impale, nyx_assassin_vendetta, nyx_assassin_spiked_carapace, void_spirit_aether_remnant, void_spirit_resonant_pulse, void_spirit_dissimilate); aghs_desc (void_spirit); herois_catalogo.json
+- fonte: pro_dados/nyx_assassin.json; pro_dados/void_spirit.json; constants_abilities.json (nyx_assassin_impale, nyx_assassin_vendetta, nyx_assassin_spiked_carapace, void_spirit_aether_remnant, void_spirit_resonant_pulse, void_spirit_dissimilate); aghs_desc (void_spirit); OpenDota explorer (lane_role)
 
 ## Contra Venomancer (venomancer)
 
@@ -171,7 +172,7 @@ Os placares abaixo são sempre da perspectiva do Nyx Assassin (vitórias dele no
 - o que você faz com ele: Impale trava o Venomancer antes dele aplicar o Snakebite; Vendetta com o bônus de até 500 de dano pode abater ele rápido se o burst inicial acontecer antes do slow da Venomous Gale acumular, mas a janela é curta porque ele aplica o debuff de 800 de alcance antes do Nyx alcançar os 750 do Impale.
 - itens que viram: se o Venomancer tiver Spirit Vessel (17,2, reduz cura e causa dano ao longo do tempo) ativo no Nyx, o burst da Vendetta perde força porque ele já está sangrando sem cura própria pra compensar; o Nyx precisa fechar o Impale antes da Venomous Gale aplicar, ou a troca vira disputa de dano contínuo que o Venomancer ganha.
 - como jogar: não entre nos 800 de alcance da Venomous Gale achando que a Vendetta resolve sozinha, o debuff continua acumulando; priorize abrir com Impale a 750 de distância antes dele aplicar o slow.
-- fonte: pro_dados/nyx_assassin.json; pro_dados/venomancer.json; constants_abilities.json (nyx_assassin_impale, nyx_assassin_vendetta, venomancer_venomous_gale, venomancer_poison_sting); herois_catalogo.json
+- fonte: pro_dados/nyx_assassin.json; pro_dados/venomancer.json; constants_abilities.json (nyx_assassin_impale, nyx_assassin_vendetta, venomancer_venomous_gale, venomancer_poison_sting)
 
 ## Contra Terrorblade (terrorblade)
 
@@ -182,7 +183,7 @@ Os placares abaixo são sempre da perspectiva do Nyx Assassin (vitórias dele no
 - o que você faz com ele: Impale e Vendetta funcionam bem antes do Manta Style e do Metamorphosis, porque ilusões não confundem o foco do Impale (área, não alvo único) e o bônus de dano da Vendetta mira a unidade real que o Nyx marcar; Spiked Carapace reflete e estuna se o TB tentar trocar de perto antes de virar ranged.
 - itens que viram: o Manta Style do TB (17,1) separa ele do foco de magia single-target, mas não protege de Impale em área; o Aghanim's Shard do Nyx (25,2) dá mais chances de pegar o TB sozinho antes dele farmar o item que fecha o 1x1 dele, geralmente Hurricane Pike (27,8), pra manter distância.
 - como jogar: ataque o TB antes dos 17 min, quando ainda não tem Manta nem Metamorphosis de qualidade; depois disso, prefira Impale em área a perseguir uma ilusão específica, e feche o combo antes dele comprar o Hurricane Pike.
-- fonte: pro_dados/nyx_assassin.json; pro_dados/terrorblade.json; constants_abilities.json (nyx_assassin_impale, nyx_assassin_vendetta, nyx_assassin_spiked_carapace, terrorblade_sunder, terrorblade_metamorphosis); herois_catalogo.json
+- fonte: pro_dados/nyx_assassin.json; pro_dados/terrorblade.json; constants_abilities.json (nyx_assassin_impale, nyx_assassin_vendetta, nyx_assassin_spiked_carapace, terrorblade_sunder, terrorblade_metamorphosis)
 
 ## Contra Kunkka (kunkka)
 

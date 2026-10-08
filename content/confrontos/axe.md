@@ -22,10 +22,7 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/axe.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
 - https://api.opendota.com/api/constants/aghs_desc
-- https://www.dotabuff.com/heroes/morphling/counters
 ---
 
 ## Contra Shadow Fiend (nevermore)
@@ -50,13 +47,13 @@ fontes:
 
 ## Contra Snapfire (snapfire)
 - placar: Axe venceu 155 de 306 (50,7%). Fonte: pro_dados/axe.json.
-- por que importa: 3º oponente com mais jogos contra Axe (306) e suporte flex (pos 2 a 5 no catálogo), aparece em boa parte dos trios contra o offlane.
+- por que importa: 3º oponente com mais jogos contra Axe (306) e suporte que roda por mais de uma rota nas partidas pro 7.40-7.41 (54,8% na rota de off, 23,9% na rota segura, 21,1% no mid; OpenDota explorer), aparece em boa parte dos trios contra o offlane.
 - janelas: fase de lane é troca de poke; aos 16:54 Snapfire já tem o Aghanim's Shard dela (pro_dados/snapfire.json), bem mais cedo que o seu (22:54), então ela ganha alcance extra em Scatterblast/Lil Shredder antes de você ter resposta mágica própria; sua Blade Mail (12:36) já ajuda a segurar esse poke antes disso. Depois dos 20:42 ela tem Blink e Glimmer Cape (21:54) pra salvar aliado do seu Call.
 - o que ele faz com você: Mortimer Kisses lança 8 globos de até 360 de dano cada em até 5,5s, com queimadura de 60 a 100 por segundo e redução de giro em Snapfire durante o cast; se você travou o time dela com Call, o ult dela acerta todo mundo parado, inclusive você.
 - o que você faz com ele: ela tem pouca vida pra suporte; Culling Blade quase sempre mata, e Call+Counter Helix corta a vida antes dela conseguir se afastar.
 - itens que viram: Blade Mail segura o poke de Scatterblast; Glimmer Cape dela (invisibilidade + resistência mágica) pode tirar o alvo do seu Call se ativado a tempo.
 - como jogar: feche a call antes dela ter mana pra Mortimer Kisses em você; se ela já tem Shard, respeite o alcance extra na lane.
-- fonte: pro_dados/axe.json; pro_dados/snapfire.json; constants_abilities.json (snapfire_mortimer_kisses).
+- fonte: pro_dados/axe.json; pro_dados/snapfire.json; constants_abilities.json (snapfire_mortimer_kisses); partidas pro 7.40-7.41 (OpenDota explorer).
 
 ## Contra Jakiro (jakiro)
 - placar: Axe venceu 148 de 302 (49,0%). Fonte: pro_dados/axe.json.
@@ -90,19 +87,19 @@ fontes:
 
 ## Contra Mars (mars)
 - placar: Axe venceu 134 de 260 (51,5%). Fonte: pro_dados/axe.json.
-- por que importa: mesma posição principal (offlane, pos 3 no catálogo), o oponente de offlane x offlane mais jogado contra Axe em pro (260 jogos).
+- por que importa: mesma posição principal, os dois jogam na rota de off em mais de 95% das partidas pro 7.40-7.41 (OpenDota explorer), o oponente de offlane x offlane mais jogado contra Axe em pro (260 jogos).
 - janelas: os dois correm pro Blink quase no mesmo ritmo (Axe 15:42 contra Mars 15:12, pro_dados/mars.json), então quem tem o item primeiro dita quem inicia a troca. Dos 18 aos 21min Mars pode usar Arena of Blood pra cercar e travar Axe do lado de fora antes dele conseguir usar o Call; depois dos 21:30 o Aghanim's Shard de Mars reforça ainda mais essa parede.
 - o que ele faz com você: Arena of Blood cria uma arena de 550 de raio por 5,5s com lanceiros que batem em quem fica perto da borda, 80 a 240 de dano por lançada (uma a cada segundo, constants_abilities.json: mars_arena_of_blood); se Axe fica preso dentro sem alcançar o alvo, perde o timing do Call.
 - o que você faz com ele: Counter Helix pune Mars se ele tentar trocar auto-ataque contra você dentro da arena; Call tira Mars do próprio controle da arena por 2,1 a 3s.
 - itens que viram: quem completa o Blink primeiro tende a vencer a abertura da luta; Black King Bar (25:54 Axe x 26:30 Mars) decide quem segura o combo do outro até o fim.
 - como jogar: não entre dentro da Arena of Blood sem conseguir alcançar o Mars imediatamente; se ele abrir a arena em cima de você, recue até ela sumir (5,5s) em vez de lutar preso.
-- fonte: pro_dados/axe.json; pro_dados/mars.json; constants_abilities.json (mars_arena_of_blood).
+- fonte: pro_dados/axe.json; pro_dados/mars.json; constants_abilities.json (mars_arena_of_blood); partidas pro 7.40-7.41 (OpenDota explorer).
 
 ## Contra Centaur Warrunner (centaur)
 - placar: Axe venceu 100 de 229 (43,7%), amostra boa (229 jogos) e desvantagem clara. Fonte: pro_dados/axe.json.
 - por que importa: 2º offlane mais jogado contra Axe (229 jogos) e uma das piores taxas dele com amostra relevante, ambos tanques de Força que disputam o mesmo espaço de iniciação.
 - janelas: Centaur farma rápido com Vanguard (8:30, pro_dados/centaur.json) e assim que tem nível 6 pode vir de Stampede do outro lado do mapa, pegando Axe de surpresa antes dele conseguir iniciar primeiro. Dos 18 aos 21min ele ainda não tem Pipe (18:06) nem Crimson Guard (21:30), a janela em que o combo Call + Blade Mail de Axe rende mais, sem mitigação de time.
-- o que ele faz com você: Stampede atropela e atordoa por área com dano baseado em Força (multiplicador de 2 a 3x a Força dele), um ataque de iniciação que ignora a necessidade de Blink; Hoof Stomp (70 a 280 de dano, 1,6 a 2,2s de stun) interrompe seu Call antes dele sair.
+- o que ele faz com você: Stampede atropela e desacelera totalmente por área (100% de slow, não é stun) com dano baseado em Força (multiplicador de 2 a 3x a Força dele), um ataque de iniciação que ignora a necessidade de Blink; Hoof Stomp (70 a 280 de dano, 1,6 a 2,2s de stun) interrompe seu Call antes dele sair.
 - o que você faz com ele: Counter Helix pune Centaur quando ele bate em você tentando estourar Double Edge/auto-ataque; Culling Blade tira uma boa fatia da vida dele mesmo ele sendo tanque.
 - itens que viram: Pipe e Crimson Guard dele neutralizam boa parte do seu Blade Mail e Call em luta de grupo depois dos 18 a 21min; corra pra fechar antes disso.
 - como jogar: force a troca antes dos 18min, enquanto ele ainda não tem itens de time; depois disso, prefira lutas isoladas, não de grupo contra o kit dele.
@@ -140,13 +137,13 @@ fontes:
 
 ## Contra Abaddon (abaddon)
 - placar: Axe venceu 63 de 163 (38,7%), 5ª pior taxa com amostra boa (163 jogos). Fonte: pro_dados/axe.json.
-- por que importa: também offlane no catálogo e o counter mecânico mais direto do kit de Axe: Abaddon neutraliza exatamente o combo Call + Counter Helix + Culling Blade.
+- por que importa: nas partidas pro 7.40-7.41 Abaddon joga mais na rota segura (65,4%) do que na de off (34,1%, OpenDota explorer), mas o motivo de importar é mecânico: o counter mais direto do kit de Axe, Abaddon neutraliza exatamente o combo Call + Counter Helix + Culling Blade.
 - janelas: Radiance dele sai aos 16:18 (pro_dados/abaddon.json) e já pulsa dano enquanto ele tanka a lane; mas o perigo real começa antes disso, assim que ele tem mana pra Aphotic Shield. Axe precisa decidir o confronto rápido ou já chegar com Basher/Aghanim's pronto, porque depois dos 23 a 25min Abaddon tem Manta (23:36) e Blink (24:54) pra reposicionar.
 - o que ele faz com você: Aphotic Shield cria uma barreira que absorve 120 a 210 de dano antes de estourar (constants_abilities.json), segurando sozinha boa parte do seu Counter Helix (100 a 160) ou parte do Culling Blade; Borrowed Time ativa sozinho quando a vida dele cai abaixo de 400, convertendo TODO dano recebido em cura por 4 a 6s, inclusive o dano puro do seu Culling Blade.
 - o que você faz com ele: Call ainda trava ele e o time dele pra bater em você; se você conseguir matar antes dele acumular mana pro Shield ou enquanto o Borrowed Time está de recarga, o combo funciona normal.
 - itens que viram: Black King Bar seu não ajuda aqui, o problema não é disable, é o Shield/Borrowed Time absorvendo seu dano; Basher/Abyssal (via os componentes Ogre Axe e Mithril Hammer, medianas 22:48 e 23:36 em pro_dados/axe.json) ajuda a prender ele fora do alcance do próprio Shield recém-lançado.
 - como jogar: cheque se o Aphotic Shield dele está de recarga antes de abrir o combo; Culling Blade gasta melhor em cima de outro alvo quando Abaddon está com o Borrowed Time disponível.
-- fonte: pro_dados/axe.json; pro_dados/abaddon.json; constants_abilities.json (abaddon_aphotic_shield, abaddon_borrowed_time, axe_culling_blade).
+- fonte: pro_dados/axe.json; pro_dados/abaddon.json; constants_abilities.json (abaddon_aphotic_shield, abaddon_borrowed_time, axe_culling_blade); partidas pro 7.40-7.41 (OpenDota explorer).
 
 ## Contra Faceless Void (faceless_void)
 - placar: Axe venceu 36 de 58 (62,1%), uma das melhores taxas dele com amostra ok (58 jogos). Fonte: pro_dados/axe.json.
@@ -166,7 +163,7 @@ fontes:
 - o que você faz com ele: Call trava ele mesmo durante boa parte da fase squishy; Counter Helix pune o right-click de Morphling tentando atacar de volta; Culling Blade (275 a 475 de dano puro) mata ele fácil antes do Manta.
 - itens que viram: seu Blink (15:42) chega antes do Manta dele (18:24) na maioria dos jogos, é a janela certa pra pegar ele isolado; depois do Butterfly ele ganha evasão alta e a troca vira contra você.
 - como jogar: gankeie Morphling antes dos 18min; se ele já tem Manta e Butterfly, evite o 1x1 sem ajuda, prefira focar ele em grupo onde ele não escolhe o alvo do dano.
-- fonte: pro_dados/axe.json; pro_dados/morphling.json; https://www.dotabuff.com/heroes/morphling/counters.
+- fonte: pro_dados/axe.json; pro_dados/morphling.json.
 
 ## Contra Death Prophet (death_prophet)
 - placar: Axe venceu 32 de 49 (65,3%), a melhor taxa de vitória dele entre todos os oponentes com 30 ou mais jogos. Fonte: pro_dados/axe.json.

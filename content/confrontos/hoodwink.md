@@ -23,8 +23,6 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/hoodwink.md
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 
@@ -42,7 +40,7 @@ fontes:
 - placar: 217 vitórias em 440 jogos de pro, 49,3% (OpenDota explorer, matchups de Hoodwink)
 - por que importa: 2º mais jogado contra ela em pro (440 jogos). Os dois nunca dividem lane de verdade, são os dois roamers por excelência do jogo e se cruzam o mapa inteiro atrás do mesmo pick-off
 - janelas: boots saem quase juntas (Hoodwink 5:48, Tusk 5:06), nenhum vence o início sozinho. O Blink de Tusk sai aos 19:00 (2.655 de 2.953 jogos, 89,9% de presença, é praticamente padrão), bem antes de qualquer item de mobilidade dela (o Force Staff dela só sai aos 26:06, 1.061 jogos). Entre 19 e 26 min ele costuma iniciar a rotação primeiro, porque fecha a distância antes dela. Depois disso os dois têm ferramenta de reposicionamento e a troca fica mais parelha
-- o que ele faz com você: Ice Shards cria uma parede de 200 de raio que corta sua rota de fuga ou te isola de aliados. Snowball pode carregar um aliado dele junto, chegando com dano somado (base 80-260 mais 40-115 por aliado) e stun de até 1,2s, suficiente pra abrir espaço pro combo. Walrus Punch tem bkbpierce: Sim, então mesmo com Black King Bar ligado ele te critica e te arremessa no ar
+- o que ele faz com você: Ice Shards cria uma parede de 200 de largura que corta sua rota de fuga ou te isola de aliados. Snowball pode carregar um aliado dele junto, chegando com dano somado (base 80-260 mais 40-115 por aliado) e stun de até 1,2s, suficiente pra abrir espaço pro combo. Walrus Punch tem bkbpierce: Sim, então mesmo com Black King Bar ligado ele te critica e te arremessa no ar
 - o que você faz com ele: Bushwhack perto de árvore prende ele e ainda zera a visão dele durante o stun, cancelando qualquer tentativa de Snowball em cima do seu time. Sharpshooter alcança 3.000 de distância e pune Tusk se aproximando sem Blink pronto, já que ele não tem nenhuma forma de dash instantâneo fora do Blink genérico
 - itens que viram: o Blink de Tusk (19:00) decide quem inicia primeiro antes dos 26 min, é o item mais comum de toda a amostra dele. Depois do seu Force Staff (26:06) e do Aghanim's Shard dela (23:48), a rotação fica mais equilibrada porque você também ganha reposicionamento
 - como jogar: antes dos 19-26 min, evite rotas isoladas sem visão de Tusk, é a janela em que ele chega primeiro com Snowball mais Walrus Punch. Depois que pegar Shard ou Force Staff, você pode caçar junto, Bushwhack perto de árvore cancela o Snowball dele antes que ele carregue o time junto
@@ -52,11 +50,11 @@ fontes:
 - placar: 208 vitórias em 425 jogos de pro, 48,9% (OpenDota explorer, matchups de Hoodwink)
 - por que importa: 3º mais jogado contra ela em pro (425 jogos). Mesma função, Snapfire também é suporte de roaming e pick-off, flex pra 4 ou 5 igual Hoodwink
 - janelas: até os 10 min, boots saem quase juntas (Hoodwink 5:48, Snapfire 5:00). O Aghanim's Shard de Snapfire chega aos 16:54 (1.919 de 2.456 jogos, 78,1% de presença, quase item padrão), bem antes do de Hoodwink (23:48). Dos 17 aos 24 min, a vantagem é de Snapfire: o shard transforma Firesnap Cookie num Mortimer Kiss à distância, que cura e lança impacto, dando uma forma extra de punir aproximação antes dela. Depois dos 24 min, com o shard dela no lugar e o Blink de Snapfire saindo só aos 20:42 (1.171 jogos), a troca fica mais equilibrada
-- o que ele faz com você: Scatterblast desacelera 100% seu movimento e ataque num cone, te prendendo pra Lil Shredder acertar e reduzir sua armadura a cada tiro. Firesnap Cookie com shard chega de longe, cura o alvo e ainda estoura impacto na chegada, então ela pode punir você antes que o Bushwhack esteja no alcance. Gobble Up engole e pode carregar um aliado dela até você, mas também engole você mesma se acertar, te deixando imóvel por 2,5s dentro do bicho
+- o que ele faz com você: Scatterblast desacelera 100% seu movimento e ataque num cone, te prendendo pra Lil Shredder acertar e reduzir sua armadura a cada tiro. Firesnap Cookie com shard chega de longe, cura o alvo e ainda estoura impacto na chegada, então ela pode punir você antes que o Bushwhack esteja no alcance. Gobble Up engole um aliado ou creep dela, que ela pode cuspir em você depois com Spit Out: o impacto tem 400 de raio e atordoa por 1,2s, então cuidado se ela andar com algo na boca perto do seu time
 - o que você faz com ele: Bushwhack perto de árvore prende Snapfire e zera a visão dela durante o stun, útil porque ela não tem blink inato nem dash de escape fora do item. Sharpshooter alcança 3.000 de distância, então pune de longe antes do shard dela estar pronto outra vez (cooldown de Firesnap Cookie é 15-18s, recarrega rápido)
 - itens que viram: o Aghanim's Shard de Snapfire (16:54) chega bem antes do de Hoodwink (23:48), é a janela de maior risco pra você. Depois dos 24 min, com seu próprio Shard pronto, a troca equilibra
 - como jogar: antes dos 17-24 min, cuidado ao se aproximar sem visão, o Firesnap Cookie com shard já alcança de longe e cura o alvo dela de quebra. Depois do seu Shard, a troca fica mais justa, seu Bushwhack ainda é o disable mais confiável das duas porque ela não tem nenhum hard CC fora do Gobble Up
-- fonte: pro_dados/hoodwink.json; pro_dados/snapfire.json; constants_abilities.json (hoodwink_bushwhack, hoodwink_sharpshooter, snapfire_firesnap_cookie, snapfire_scatterblast, snapfire_lil_shredder); aghs_desc (snapfire shard: Mortimer Kiss no Firesnap Cookie)
+- fonte: pro_dados/hoodwink.json; pro_dados/snapfire.json; constants_abilities.json (hoodwink_bushwhack, hoodwink_sharpshooter, snapfire_firesnap_cookie, snapfire_scatterblast, snapfire_lil_shredder, snapfire_spit_creep); aghs_desc (snapfire shard: Mortimer Kiss no Firesnap Cookie)
 
 ## Contra Pangolier (pangolier)
 - placar: 225 vitórias em 415 jogos de pro, 54,2% (OpenDota explorer, matchups de Hoodwink)
@@ -70,7 +68,7 @@ fontes:
 
 ## Contra Jakiro (jakiro)
 - placar: 188 vitórias em 367 jogos de pro, 51,2% (OpenDota explorer, matchups de Hoodwink)
-- por que importa: 5º mais jogado contra ela em pro (367 jogos). Mesma função, Jakiro é o suporte pos5 puro mais comum do jogo (posicoes: [5] no catálogo), disputa o mesmo slot de hard support que Hoodwink
+- por que importa: 5º mais jogado contra ela em pro (367 jogos). Mesma função, Jakiro é o suporte pos5 puro mais comum do jogo, disputa o mesmo slot de hard support que Hoodwink
 - janelas: boots saem quase juntas (Hoodwink 5:48, Jakiro 5:36), e Arcane Boots também (12:12 contra 11:42). Como os dois são suportes sem farm relevante (gpm de Jakiro é 315, bem abaixo da média da lista), o jogo é decidido mais por nível e posicionamento que por item: Jakiro, sendo um herói grande e com duas cabeças de hitbox larga, é alvo fácil pra Bushwhack a qualquer momento, enquanto Hoodwink é tão frágil quanto ele e morre pra um combo Ice Path mais Dual Breath mais Macropyre se for pega perto da área
 - o que ele faz com você: Ice Path cria um caminho de gelo que atordoa por até 2s qualquer um que pisar nele, incluindo você tentando fugir. Macropyre (ult, 90-70s de cooldown) cobre uma faixa larga de 500 e causa até 200 de dano por segundo por 10s, área que você não quer estar depois de cair num Ice Path
 - o que você faz com ele: Bushwhack prende Jakiro perto de árvore e zera a visão dele durante o stun, cancelando a chance dele setar Ice Path ou Macropyre a tempo. Sharpshooter alcança 3.000 de distância, então pune ele parado spammando Dual Breath de longe sem conseguir revidar
@@ -90,7 +88,7 @@ fontes:
 
 ## Contra Disruptor (disruptor)
 - placar: 184 vitórias em 341 jogos de pro, 54,0% (OpenDota explorer, matchups de Hoodwink)
-- por que importa: mesma função, Disruptor é o outro clássico suporte-trap da lista (posicoes [5,4] no catálogo), 341 jogos de pro contra ela, disputa o mesmo slot de hard support com controle de área
+- por que importa: mesma função, Disruptor é o outro clássico suporte-trap da lista, 341 jogos de pro contra ela, disputa o mesmo slot de hard support com controle de área
 - janelas: boots e Arcane Boots saem quase juntos (Hoodwink 12:12, Disruptor 11:24). Nenhum dos dois farma de verdade (gpm de Disruptor é 279, o mais baixo de toda a lista), então o jogo é decidido por quem trava o outro primeiro. O Blink de Disruptor só sai aos 24:00 (1.128 de 2.521 jogos, 44,7%, nem é item padrão pra ele) e o Glimmer Cape aos 22:42 (713 jogos). O Aghanim's Shard dela (23:48) chega bem na mesma janela, então dos 22 aos 24 min nenhum tem vantagem clara de item
 - o que ele faz com você: Kinetic Field cria uma barreira de 350 de raio que te prende dentro ou fora, cortando sua rota de fuga depois de um combo ruim. Static Storm silencia tudo num raio de 550 por 6s, impedindo você de castar Bushwhack, Sharpshooter ou Boomerang enquanto ativo, mas o cooldown é de 100-70s, não recarrega rápido
 - o que você faz com ele: Disruptor não tem nenhum self-peel fora de Glimpse, que reseta posição e causa um pouco de dano, mas não atordoa. Bushwhack perto de árvore prende ele sem resposta nenhuma, e Sharpshooter de 3.000 de distância pune qualquer Static Storm setado de longe antes dele conseguir fugir
@@ -100,7 +98,7 @@ fontes:
 
 ## Contra Lion (lion)
 - placar: 162 vitórias em 330 jogos de pro, 49,1% (OpenDota explorer, matchups de Hoodwink)
-- por que importa: mesma função, Lion é o outro suporte 4/5 de combo-e-mata da lista (posicoes [4,5]), 330 jogos de pro, e os dois dependem do mesmo princípio: quem acerta o stun primeiro, mata
+- por que importa: mesma função, Lion é o outro suporte 4/5 de combo-e-mata da lista, 330 jogos de pro, e os dois dependem do mesmo princípio: quem acerta o stun primeiro, mata
 - janelas: Lion sai de Tranquil Boots (7:24, 2.539 de 2.775 jogos) em vez de Arcane, prioriza sustento de vida em vez de mana, diferente dela. O Blink dele chega aos 18:12 (2.412 jogos, 86,9%, quase padrão), bem antes do Aghanim's Shard dela (23:48) ou de qualquer item de mobilidade dela. Do nível 6 em diante (Finger of Death liberado), um Voodoo mais Finger of Death bem acertado tira a vida inteira dela num golpe só; o combo dela (Bushwhack mais Acorn Shot) não mata Lion sozinho no mesmo nível, então a execução favorece ele quando ambos estão a par em item
 - o que ele faz com você: Voodoo transforma você numa criatura inofensiva por até 3,2s, desabilitando tudo, inclusive Scurry. Finger of Death causa até 850 de dano mágico fixo num alvo só, o suficiente pra matar a maioria das builds dela sem nem precisar de outro feitiço
 - o que você faz com ele: Bushwhack prende Lion perto de árvore e zera a visão dele durante o stun, cancelando a chance dele setar Voodoo primeiro. Sharpshooter de 3.000 de distância pune ele parado tentando Mana Drain ou trocando magia de longe sem fuga própria além do Blink
@@ -110,7 +108,7 @@ fontes:
 
 ## Contra Dark Willow (dark_willow)
 - placar: 147 vitórias em 286 jogos de pro, 51,4% (OpenDota explorer, matchups de Hoodwink)
-- por que importa: mesma função, Dark Willow é pos4 pura no catálogo (posicoes [4]), 286 jogos de pro contra ela, e as duas compartilham o mesmo arquétipo: invisibilidade pra se aproximar e uma área de controle pra prender o alvo
+- por que importa: mesma função, Dark Willow é pos4 pura, 286 jogos de pro contra ela, e as duas compartilham o mesmo arquétipo: invisibilidade pra se aproximar e uma área de controle pra prender o alvo
 - janelas: até os 17-20 min os dois crescem parecido (boots: Hoodwink 5:48, Dark Willow 5:24). O Aghanim's Shard dela (Dark Willow) só sai aos 29:12 (554 de 1.610 jogos, 34,4%, nem é item padrão), bem mais tarde que o de Hoodwink (23:48). Dos 24 aos 29 min, Hoodwink tende a estar na frente em utilidade, já com Shard pronto enquanto Dark Willow ainda depende só do kit base
 - o que ele faz com você: Bramble Maze cobre uma área de 500 de raio com 8 brambles que enraízam quem encostar, prendendo você antes de conseguir fechar o Bushwhack. Cursed Crown tem um delay de 4s antes de estourar, então ela pode pré-plantar o stun antes de você perceber a ameaça
 - o que você faz com ele: Bushwhack prende Dark Willow perto de árvore e zera a visão dela durante o stun, cancelando qualquer Cursed Crown pré-castada se você acertar primeiro. Sharpshooter de 3.000 de distância pune ela tentando ficar invisível em Shadow Realm fora do alcance de visão, já que o tiro não depende de visão direta no alvo depois de marcado
@@ -120,7 +118,7 @@ fontes:
 
 ## Contra Phoenix (phoenix)
 - placar: 153 vitórias em 275 jogos de pro, 55,6% (OpenDota explorer, matchups de Hoodwink)
-- por que importa: mesma função, Phoenix é pos5 pura no catálogo (posicoes [5]), 275 jogos de pro contra ela, e é uma das maiores vantagens com amostra grande da lista (55,6%)
+- por que importa: mesma função, Phoenix é pos5 pura, 275 jogos de pro contra ela, e é uma das maiores vantagens com amostra grande da lista (55,6%)
 - janelas: até o nível 6, Phoenix não tem nenhum disable duro, só o slow de Icarus Dive, então qualquer Bushwhack dela já é favorável nessa fase. Tranquil Boots (8:48, 1.896 de 2.242 jogos) dá sustento de vida cedo, mas isso não resolve contra um stun de 265 de raio. Supernova (ult) só libera stun aos 1,6-2,4s depois de 6s de canalização que pode ser interrompida por ataque de herói, então mesmo depois do nível 6 a resposta dela é lenta
 - o que ele faz com você: Icarus Dive avança em arco fixo de até 1.400 e causa dano ao longo do caminho, útil pra perseguir ou escapar, mas não atordoa. Supernova, se completar os 6s de canalização, atordoa todo mundo perto por até 2,4s e ainda cura Phoenix pra vida cheia, resetando a troca inteira
 - o que você faz com ele: Bushwhack prende Phoenix perto de árvore e zera a visão dela durante o stun, e como Phoenix não tem disable instantâneo, você geralmente acerta primeiro. Sharpshooter de 3.000 de distância pune Phoenix tentando setar Supernova de perto antes da canalização terminar, já que atacar ela durante os 6s de Supernova destrói a estrela antes do estouro
@@ -130,7 +128,7 @@ fontes:
 
 ## Contra Shadow Shaman (shadow_shaman)
 - placar: 100 vitórias em 159 jogos de pro, 62,9% (OpenDota explorer, matchups de Hoodwink)
-- por que importa: mesma função, Shadow Shaman é pos4 puro no catálogo (posicoes [4]), e é uma das maiores vantagens de toda a amostra com volume relevante (62,9% em 159 jogos), os dois disputam o mesmo slot de roaming disabler frágil
+- por que importa: mesma função, Shadow Shaman é pos4 puro, e é uma das maiores vantagens de toda a amostra com volume relevante (62,9% em 159 jogos), os dois disputam o mesmo slot de roaming disabler frágil
 - janelas: até o Blink dele (19:18, 1.583 de 1.862 jogos, 85%), Shadow Shaman é um suporte parado sem fuga própria, só com Voodoo (Hex) pra se defender em cima da hora. Shackles exige canalização em alcance de 450, o que o deixa parado e vulnerável durante o cast inteiro. Essa janela toda (0-19 min) favorece Hoodwink, que consegue interromper o canal com Bushwhack a qualquer momento
 - o que ele faz com você: Ether Shock bate em todo mundo próximo ao alvo principal, dano em área que pode acertar você se estiver perto dele. Voodoo transforma você numa criatura inofensiva por até 2,9s, mas ele precisa estar vivo e com linha de visão pra lançar
 - o que você faz com ele: Bushwhack cancela o canal de Shackles no meio, já que o stun interrompe a canalização dele, e ainda zera a visão dele durante o stun. Sharpshooter de 3.000 de distância pune ele tentando spammar Mass Serpent Ward de longe sem conseguir fugir antes do Blink
@@ -140,7 +138,7 @@ fontes:
 
 ## Contra Keeper of the Light (keeper_of_the_light)
 - placar: 66 vitórias em 178 jogos de pro, 37,1% (OpenDota explorer, matchups de Hoodwink)
-- por que importa: maior desvantagem com amostra grande da lista (37,1% em 178 jogos). Raramente compartilha lane de verdade com ela (posicoes [4,2] no catálogo, mas em pro ele costuma jogar offlane/mid poke), entra porque o alcance dele anula justamente o plano de roam dela
+- por que importa: maior desvantagem com amostra grande da lista (37,1% em 178 jogos). Raramente compartilha lane de verdade com ela, mas em pro ele costuma jogar offlane/mid poke, entra porque o alcance dele anula justamente o plano de roam dela
 - janelas: KOTL começa com Boots já aos 3:36 (928 de 1.245 jogos), o mais cedo de toda a lista, e já fica pokando de longe cedo com Illuminate. O Ward Observer dele sai aos 15:18 (963 jogos), mantendo visão de longo alcance no mapa, o oposto do jogo de visão limitada dela em early game. Illuminate alcança 1.550 de distância e, com canal completo de 3s, causa até 500 de dano, mais que a vida inteira dela em quase qualquer fase do jogo, tudo isso fora do alcance de 1.100 de cast do Bushwhack
 - o que ele faz com você: Illuminate, canalizado até o máximo, acerta de 1.550 de distância antes dela sequer estar perto o bastante pra plantar o trap. Blinding Light cega e empurra num raio de área, atrapalhando o acerto do Bushwhack mesmo quando ela já está perto
 - o que você faz com ele: Bushwhack, quando ela consegue fechar a distância, prende ele perto de árvore e zera a visão dele durante o stun, cancelando qualquer Illuminate seguinte. Sharpshooter de 3.000 de distância é a única ferramenta dela que alcança mais longe que o próprio Illuminate dele (1.550), então é a forma mais segura de punir ele de fora do alcance de resposta
@@ -150,7 +148,7 @@ fontes:
 
 ## Contra Phantom Assassin (phantom_assassin)
 - placar: 28 vitórias em 41 jogos de pro, 68,3% (OpenDota explorer, matchups de Hoodwink)
-- por que importa: maior vantagem de toda a amostra com 30 ou mais jogos (68,3%). Carry puro (posicoes [1] no catálogo), nunca compartilha lane com ela, é o exemplo clássico pedido: duas peças que não se cruzam na lane mas decidem o jogo uma contra a outra
+- por que importa: maior vantagem de toda a amostra com 30 ou mais jogos (68,3%). Carry puro, nunca compartilha lane com ela, é o exemplo clássico pedido: duas peças que não se cruzam na lane mas decidem o jogo uma contra a outra
 - janelas: antes do Battle Fury (14:24, 485 de 519 jogos, 93,4%, praticamente padrão), PA é uma right-clicker frágil, sem disable e sem fuga própria fora de Blur. Essa janela toda favorece Hoodwink, que pode gankar e matar PA isolada antes dela farmar. Depois do Battle Fury, PA passa a limpar jungle rápido e farmar sozinha, mas continua sem nenhuma resposta a um trap bem posicionado
 - o que ele faz com você: Blur deixa PA invisível à distância, e Immaterial dá evasão de até 55% no nível máximo, mas isso não ajuda contra Bushwhack, que é um trap de área, não um ataque, então a evasão simplesmente não entra na conta. Coup de Grace (bkbpierce: Sim) crítica mesmo contra alvo com BKB, mas só funciona em combate direto, que ela evita se você sempre a pegar de surpresa
 - o que você faz com ele: Bushwhack prende PA perto de árvore e zera a visão dela durante o stun, e como o trap não é um ataque, Blur não dá nenhuma defesa contra ele. Sharpshooter de 3.000 de distância ameaça ela mesmo farmando longe da sua rota normal, então o alcance global do tiro é o que faz a diferença contra uma carry que nunca compartilha lane
@@ -160,7 +158,7 @@ fontes:
 
 ## Contra Oracle (oracle)
 - placar: 30 vitórias em 44 jogos de pro, 68,2% (OpenDota explorer, matchups de Hoodwink)
-- por que importa: 2ª maior vantagem de toda a amostra com 30 ou mais jogos (68,2%). Mesma função, Oracle é suporte 4/5 puro no catálogo (posicoes [5,4]), disputam o mesmo slot de pick, e é o oponente com curva de item quase idêntica à dela
+- por que importa: 2ª maior vantagem de toda a amostra com 30 ou mais jogos (68,2%). Mesma função, Oracle é suporte 4/5 puro, disputam o mesmo slot de pick, e é o oponente com curva de item quase idêntica à dela
 - janelas: as curvas são quase iguais (boots: Hoodwink 5:48, Oracle 5:48; Arcane Boots: Hoodwink 12:12, Oracle 11:42). Como Oracle não tem nenhum disable (False Promise e Fate's Edict só protegem, não travam ninguém), o confronto é decidido inteiramente por quem lança o controle primeiro, e isso é sempre ela
 - o que ele faz com você: False Promise (bkbpierce: Sim) atrasa cura e dano num aliado, podendo salvar alguém que você ia matar, mas não faz nada contra você diretamente. Fate's Edict desarma e dá 100% de resistência mágica ao alvo por até 5s, incluindo o próprio Oracle se ele se proteger antes de você lançar Bushwhack
 - o que você faz com ele: Bushwhack prende Oracle perto de árvore sem nenhuma resposta de disable da parte dele, e Sharpshooter de 3.000 de distância pune ele tentando proteger um aliado de longe sem ter como fugir sozinho
@@ -170,7 +168,7 @@ fontes:
 
 ## Contra Naga Siren (naga_siren)
 - placar: 19 vitórias em 53 jogos de pro, 35,8% (OpenDota explorer, matchups de Hoodwink)
-- por que importa: maior desvantagem de toda a amostra com 30 ou mais jogos (35,8%). Carry puro (posicoes [1] no catálogo), sem lane em comum, é o caso mais claro pedido de duas peças que quase nunca se cruzam, mas uma anula a outra quando se encontram
+- por que importa: maior desvantagem de toda a amostra com 30 ou mais jogos (35,8%). Carry puro, sem lane em comum, é o caso mais claro pedido de duas peças que quase nunca se cruzam, mas uma anula a outra quando se encontram
 - janelas: Naga farma puro, sem nenhuma intenção de disable cedo (Yasha 10:48, Diadem 12:06, Manta 14:36 de 250-256 jogos cada). Antes do Manta (14:36), ela tem pouquíssima defesa contra um gank isolado. Depois disso, Song of the Siren (ult, cooldown de 160-100s) deixa a lane inteira em estase por 7s sempre que ela precisa fugir ou resetar uma luta ruim, então depois dos 15-20 min ela praticamente escolhe quando lutar
 - o que ele faz com você: Ensnare interrompe e prende no lugar, bloqueando até blink, por até 5s no nível máximo, suficiente pra matar você se ela tiver farm pra isso. Song of the Siren bota toda luta em pausa, ela pode simplesmente esperar seu Bushwhack passar e voltar com a luta resetada
 - o que você faz com ele: antes do Manta (14:36), Bushwhack prende Naga perto de árvore sem resposta nenhuma, é a janela mais fácil de executar ela antes da defesa chegar. Sharpshooter de 3.000 de distância ameaça o farm isolado dela em qualquer parte do mapa, já que ela quase nunca anda em grupo
@@ -180,10 +178,10 @@ fontes:
 
 ## Contra Magnus (magnataur)
 - placar: 25 vitórias em 66 jogos de pro, 37,9% (OpenDota explorer, matchups de Hoodwink)
-- por que importa: 3ª maior desvantagem com amostra relevante da lista (37,9% em 66 jogos). Core de offlane/mid (posicoes [2,3] no catálogo), raramente compartilha lane com ela, mas é um dos poucos herois capazes de fechar o combo nela antes que ela reaja
+- por que importa: 3ª maior desvantagem com amostra relevante da lista (37,9% em 66 jogos). Core de offlane/mid, raramente compartilha lane com ela, mas é um dos poucos herois capazes de fechar o combo nela antes que ela reaja
 - janelas: o Blink de Magnus sai aos 13:36 (561 de 587 jogos, 95,6%, item quase universal pra ele), muito antes de qualquer mobilidade dela (Aghanim's Shard só aos 23:48, Force Staff aos 26:06). Essa diferença de mais de 10 minutos é o que decide o confronto: a partir dos 13-14 min, Magnus consegue se teleportar pra cima dela e fechar o combo antes que ela tenha qualquer ferramenta própria de escape além do Scurry, que não é um dash de verdade
 - o que ele faz com você: Reverse Polarity (bkbpierce: Sim) te puxa e atordoa por até 3,5s mesmo com Black King Bar ligado, um dos poucos stuns do jogo que fura imunidade a feitiço de verdade. Skewer te arrasta até 1.100 de distância e dá 50% de slow depois, útil pra garantir que você fique perto do time dele
 - o que você faz com ele: Bushwhack prende Magnus perto de árvore e zera a visão dele durante o stun, mas como o Reverse Polarity dele fura BKB, não dá pra contar só com imunidade a feitiço pra se defender, é melhor nunca ficar no alcance de 430 do combo dele sem visão. Sharpshooter de 3.000 de distância ameaça ele de longe, fora do alcance do Blink, antes dele conseguir fechar a distância
 - itens que viram: o Blink dele (13:36) chega mais de 10 minutos antes de qualquer resposta de mobilidade sua, é a maior diferença de spike de toda a lista. Black King Bar nela não resolve contra o combo completo, porque Reverse Polarity fura; a defesa real é distância e visão, não item
-- como jogar: depois dos 13-14 min, nunca ande sozinha sem visão de Magnus, o Blink dele alcança qualquer posição isolada no mapa. Mantenha distância de pelo menos 1.100-1.200 (alcance do Skewer) quando ele estiver por perto, e prefira caçar ele antes dele conseguir o Blink, na janela inicial onde ele ainda não tem gap-close
+- como jogar: depois dos 13-14 min, nunca ande sozinha sem visão de Magnus, o Blink dele alcança qualquer posição isolada no mapa. Mantenha distância de pelo menos 1.100 (alcance do Skewer) quando ele estiver por perto, e prefira caçar ele antes dele conseguir o Blink, na janela inicial onde ele ainda não tem gap-close
 - fonte: pro_dados/hoodwink.json; pro_dados/magnataur.json; constants_abilities.json (hoodwink_bushwhack, hoodwink_sharpshooter, hoodwink_scurry, magnataur_reverse_polarity, magnataur_skewer)

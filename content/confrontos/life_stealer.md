@@ -21,18 +21,9 @@ fontes:
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/templar_assassin.json
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/slardar.json
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/confrontos/_heroid_map.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - https://api.opendota.com/api/constants/aghs_desc
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/lifestealer.md
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/alchemist.md
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/shadow_fiend.md
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/tiny.md
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/morphling.md
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/terrorblade.md
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/luna.md
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/templar_assassin.md
 ---
 
 ## Como os 16 oponentes foram escolhidos
@@ -54,10 +45,10 @@ Life Stealer é carry de safelane (posição 1). A lista mistura 4 critérios, s
 - por que importa: segundo em jogos de pro contra você (192). Raramente compartilha lane (ele vai de mid, você de safelane), mas os dois são carries de early-mid cuja curva de item decide o jogo primeiro, então o confronto é indireto: quem fica forte antes pressiona o mapa antes.
 - janelas: ele tem o pico mais cedo dos dois. Falcon Blade sai aos 6,2 min (mediana, p25 4,8) e libera o combo de Shadowraze em quase toda troca de lane. Dos 16 aos 20 min, antes da sua Radiance (16:12) e do BKB dele (mediana 25,2), é a fase mais perigosa pra você: 3 Shadowraze custam só 225 de mana e tiram metade da vida de um herói de nível baixo. O Mask of Madness dele (mediana 10,2) silencia o próprio Shadow Fiend por 6s enquanto ativo, então ele não consegue emendar Raze nessa janela. Depois da sua Radiance (16,2) e do Dragon Lance dele (mediana 14,0), o jogo vira farm paralelo.
 - o que ele faz com você: Shadowraze bate à queima-roupa (raio 250, sem precisar mirar em você de verdade) e ganha dano extra por alma roubada via Necromastery; Requiem of Souls (ult) causa medo em área, te afastando dele por até 2,15s.
-- o que você faz com ele: ele tem só 538 de vida no nível 1 e nenhuma fuga própria antes do Hurricane Pike (mediana 21,5 min); fechando distância com Phase Boots, Rage mais Open Wounds encerram a troca antes dele emendar 3 Razes.
+- o que você faz com ele: ele tem pouca vida no nível 1 e nenhuma fuga própria antes do Hurricane Pike (mediana 23,0 min); fechando distância com Phase Boots, Rage mais Open Wounds encerram a troca antes dele emendar 3 Razes.
 - itens que viram: Mask of Madness dele te dá 6s livres se você já estiver em cima na hora que ele ativa; BKB dele (25,2 min) bloqueia seu Open Wounds por completo a partir desse ponto, porque a habilidade não atravessa BKB.
 - como jogar: ataque antes dos 20 min, de preferência logo depois dele gastar o combo de Raze numa wave (fica sem mana pros 3 hits de novo). Depois do BKB dele, jogue pelo dano bruto do Feast, não pelo Open Wounds.
-- fonte: pro_dados/life_stealer.json; pro_dados/nevermore.json; porque_itens/shadow_fiend.md; constants_abilities.json (nevermore_shadowraze1, nevermore_requiem, life_stealer_open_wounds).
+- fonte: pro_dados/life_stealer.json; pro_dados/nevermore.json; constants_abilities.json (nevermore_shadowraze1, nevermore_requiem, life_stealer_open_wounds).
 
 ## Contra Tiny (tiny)
 - placar: 97 vitórias em 189 jogos de pro (51,3%). Amostra grande.
@@ -67,7 +58,7 @@ Life Stealer é carry de safelane (posição 1). A lista mistura 4 critérios, s
 - o que você faz com ele: Rage não bloqueia o dano do combo, mas segura boa parte do controle atrelado a debuff; Open Wounds reduz a cura dele em até 50%, o que pesa porque Tiny não tem sustain própria no kit.
 - itens que viram: BKB dele (26,7 min) bloqueia seu Open Wounds a partir desse ponto; Basher seu (30,9 min) trava o Toss dele a distância, porque ele não consegue se afastar depois de bashado.
 - como jogar: evite lutar sozinho entre 15 e 20 min sem visão do Blink dele. Depois da sua Radiance, force a troca em área aberta, sem árvore pro Toss dele.
-- fonte: pro_dados/life_stealer.json; pro_dados/tiny.json; porque_itens/tiny.md; constants_abilities.json (tiny_avalanche, tiny_toss, tiny_grow).
+- fonte: pro_dados/life_stealer.json; pro_dados/tiny.json; constants_abilities.json (tiny_avalanche, tiny_toss, tiny_grow).
 
 ## Contra Centaur Warrunner (centaur)
 - placar: 89 vitórias em 186 jogos de pro (47,8%). Amostra grande.
@@ -77,7 +68,7 @@ Life Stealer é carry de safelane (posição 1). A lista mistura 4 critérios, s
 - o que você faz com ele: Open Wounds corta a cura do Ring of Tarrasque e do Helm of the Dominator em até 50%, que é a base do sustain dele; Feast te cura enquanto ele tenta te segurar.
 - itens que viram: Aghanim's Shard dele (29,1 min, reforma: Double Edge agora lentifica heróis e dá Força por stack acumulado) estica a troca a favor dele depois desse ponto.
 - como jogar: não troque golpe a golpe sem Open Wounds já aplicado. Use Rage pra ignorar o Hoof Stomp se precisar terminar a troca ou recuar.
-- fonte: pro_dados/life_stealer.json; pro_dados/centaur.json; constants_abilities.json (centaur_hoof_stomp, centaur_double_edge, centaur_return, life_stealer_open_wounds).
+- fonte: pro_dados/life_stealer.json; pro_dados/centaur.json; constants_abilities.json (centaur_hoof_stomp, centaur_double_edge, centaur_return, life_stealer_open_wounds); aghs_desc (centaur, shard).
 
 ## Contra Jakiro (jakiro)
 - placar: 84 vitórias em 170 jogos de pro (49,4%). Amostra grande.
@@ -85,9 +76,9 @@ Life Stealer é carry de safelane (posição 1). A lista mistura 4 critérios, s
 - janelas: Jakiro não tem farm de carry (315 de gpm e 8 last hits aos 10 min, bem abaixo do seu); o relevante é o nível de magia dele. Macropyre (ult, liberada no nível 6) cria uma faixa de 10s de dano contínuo (100 a 200 por segundo) que nega território de farm perto da sua Radiance. Ice Path e Dual Breath aparecem desde a lane, então o choque mais perigoso pra você é antes do nível 6, antes de Phase Boots e Feast prontos.
 - o que ele faz com você: Macropyre não atravessa resistência mágica, então sua Rage (80% de resistência) reduz bastante o dano, mas ainda queima; Dual Breath reduz sua velocidade de ataque, o que corta o ritmo do seu Feast e Open Wounds.
 - o que você faz com ele: ele tem pouquíssima vida e farm; pegando ele isolado, 2-3 autoataques com Feast resolvem antes dele reagir.
-- itens que viram: Aghanim's Shard dele libera a Dual Breath sem gastar mana nem dividir recarga com a Liquid Fire, sustentando o controle de área por mais tempo; sua Rage reduz bastante o dano do Macropyre pela resistência mágica.
+- itens que viram: Aghanim's Shard dele libera a Liquid Frost sem gastar mana nem dividir recarga com a Liquid Fire, sustentando o controle de área por mais tempo; sua Rage reduz bastante o dano do Macropyre pela resistência mágica.
 - como jogar: evite ficar parado dentro do Macropyre tentando terminar uma wave, o dano por segundo soma rápido mesmo com Rage ativa. Ataque Jakiro fora do alcance das wards dele, ele não aguenta troca direta.
-- fonte: pro_dados/life_stealer.json; pro_dados/jakiro.json; constants_abilities.json (jakiro_macropyre, jakiro_dual_breath, life_stealer_rage).
+- fonte: pro_dados/life_stealer.json; pro_dados/jakiro.json; constants_abilities.json (jakiro_macropyre, jakiro_dual_breath, jakiro_liquid_ice, jakiro_liquid_fire, life_stealer_rage); aghs_desc (jakiro, shard).
 
 ## Contra Mars (mars)
 - placar: 80 vitórias em 163 jogos de pro (49,1%). Amostra grande.
@@ -117,7 +108,7 @@ Life Stealer é carry de safelane (posição 1). A lista mistura 4 critérios, s
 - o que você faz com ele: Open Wounds lentifica e corta a cura dele, mas o Enrage dele limpa isso instantaneamente ao ativar; Feast cura você conforme ele bate, então troca longa sem o Enrage dele tende a favorecer você.
 - itens que viram: o Enrage dele (recarga de 60 a 30s conforme o nível) é o que mais muda o duelo, por remover seu debuff de graça; atacar em rajada curta, sem deixar ele acumular Fury Swipes por mais de 8s, evita o pico de dano dele.
 - como jogar: puxe a luta pro início, antes do Battle Fury dele fechar, ou espere o Enrage dele estar em recarga antes de aplicar Open Wounds. Evite trocar ataque por ataque continuamente além de 8s sem pausa.
-- fonte: pro_dados/life_stealer.json; pro_dados/ursa.json; constants_abilities.json (ursa_fury_swipes, ursa_enrage, ursa_overpower, life_stealer_open_wounds).
+- fonte: pro_dados/life_stealer.json; pro_dados/ursa.json; constants_abilities.json (ursa_fury_swipes, ursa_enrage, ursa_overpower, life_stealer_open_wounds); aghs_desc (ursa, shard).
 
 ## Contra Phantom Assassin (phantom_assassin)
 - placar: 33 vitórias em 50 jogos de pro (66,0%). Amostra média, mas maior vantagem percentual da lista.
@@ -131,33 +122,33 @@ Life Stealer é carry de safelane (posição 1). A lista mistura 4 critérios, s
 
 ## Contra Doom (doom_bringer)
 - placar: 18 vitórias em 61 jogos de pro (29,5%). Amostra grande, pior desvantagem da lista.
-- por que importa: pior desvantagem sua com amostra grande (29,5% em 61 jogos de pro), e é consenso do material já verificado do site: o próprio guia do Life Stealer já aponta Doom como ponto fraco estrutural do herói, porque a Rage não atravessa.
+- por que importa: pior desvantagem sua com amostra grande (29,5% em 61 jogos de pro), o pior resultado de toda a lista. A causa é mecânica: o Doom dele aplica dispel e bloqueia toda cura com um efeito que atravessa imunidade mágica, inclusive a resistência da sua Rage.
 - janelas: Doom tem ult desde o nível 6, então o risco começa cedo, bem antes da sua Radiance. O pico dele é o Blink (19,7 min) combinado com Doom pronto; o Aghanim's Shard dele (mediana 18,7 min) chega quase junto do Blink, então a partir desse ponto ele já tem as duas peças pra abrir a troca de uma vez.
 - o que ele faz com você: Doom aplica um dispel básico ao acertar (remove sua Rage se já estiver ativa), te silencia por completo (sem Rage, Open Wounds nem Infest) e bloqueia toda cura, inclusive a do Feast, por 12 a 16s enquanto causa de 25 a 66 de dano por segundo. A habilidade atravessa imunidade mágica, então nem Black King Bar segura, e sua Rage, que não é imunidade de verdade, segura ainda menos.
 - o que você faz com ele: ele não tem fuga própria cedo; pegando ele isolado antes do Blink (19,7), Feast e Open Wounds derrubam rápido, porque ele tem pouca mobilidade pra sair da troca.
 - itens que viram: Linken's Sphere bloqueia o Doom antes dele completar o cast, mas não aparece entre os itens mais comprados por pros na amostra do Life Stealer, então não é algo pra contar no plano. A defesa real é posicional: não ficar isolado no mapa sem visão de Doom depois do nível 6 dele.
 - como jogar: jogue perto de aliados ou com visão a partir do nível 6 dele. Se ele acertar o Doom em você, aceite que a Rage não resolve e gaste o tempo recuando ou dando TP, em vez de tentar lutar sem feitiço.
-- fonte: pro_dados/life_stealer.json; pro_dados/doom_bringer.json; herois_catalogo.json (resumo lifestealer, ponto fraco contra Doom); constants_abilities.json (doom_bringer_doom, life_stealer_rage).
+- fonte: pro_dados/life_stealer.json; pro_dados/doom_bringer.json; constants_abilities.json (doom_bringer_doom, life_stealer_rage).
 
 ## Contra Alchemist (alchemist)
 - placar: 21 vitórias em 59 jogos de pro (35,6%). Amostra grande.
-- por que importa: é o exemplo clássico de confronto que não aparece numa ficha de lane porque os dois raramente se enfrentam direto (Alchemist costuma ir pra offlane ou mid-farm, você pra safelane), mas são os carries com o motor de farm mais parecido do jogo: os dois fecham Radiance. 35,6% é desvantagem clara em 59 jogos de pro.
+- por que importa: é o exemplo clássico de confronto que não vem de disputa de lane direta, já que os dois raramente se enfrentam de perto (Alchemist costuma ir pra offlane ou mid-farm, você pra safelane), mas são os carries com o motor de farm mais parecido do jogo: os dois fecham Radiance. 35,6% é desvantagem clara em 59 jogos de pro.
 - janelas: Alchemist tem o maior gpm da lista inteira (768 de mediana, acima até do seu) e fecha a Radiance dele aos 13,9 min, cerca de 2,3 min antes da sua (16,2). Na corrida de quem fica livre pra farmar sozinho primeiro, ele costuma vencer. Depois dos 22 (Scepter dele aos 22,4, fundido num aliado, e Blink aos 21,4), ele vira ameaça de gank com o Unstable Concoction carregado.
 - o que ele faz com você: Unstable Concoction, carregado e combinado com Blink, aplica até 3,2s de stun e 360 de dano de surpresa; Chemical Rage (ult) aplica dispel básico ao ativar, removendo seu Open Wounds na hora, além de dar até 120 de regeneração de vida por segundo no nível máximo.
 - o que você faz com ele: Open Wounds reduz a cura dele até a Chemical Rage estar pronta de novo (recarga de 60s); pegando ele sem o combo de stun pronto, Feast resolve rápido porque ele não tem fuga própria cedo.
 - itens que viram: a Chemical Rage dele anula seu Open Wounds na hora que ativa, pelo dispel básico; do seu lado, não adianta aplicar o debuff muito antes da luta, melhor esperar o cooldown da Chemical Rage girado ou fechar a troca rápido o bastante pra matar antes dele ativar.
 - como jogar: na corrida de farm, priorize fechar sua Radiance rápido e cace ele enquanto ainda não tem Blink (antes dos 21 min). Depois disso, prefira luta de grupo a 1x1, onde o Unstable Concoction dele rende menos.
-- fonte: pro_dados/life_stealer.json; pro_dados/alchemist.json; porque_itens/alchemist.md; constants_abilities.json (alchemist_chemical_rage, alchemist_unstable_concoction, life_stealer_open_wounds).
+- fonte: pro_dados/life_stealer.json; pro_dados/alchemist.json; constants_abilities.json (alchemist_chemical_rage, alchemist_unstable_concoction, life_stealer_open_wounds); aghs_desc (alchemist, scepter).
 
 ## Contra Morphling (morphling)
 - placar: 19 vitórias em 52 jogos de pro (36,5%). Amostra grande.
 - por que importa: o outro exemplo citado de carry que raramente divide lane com você, mas que todo jogador de Life Stealer sente no late porque ele estica a vida e vira o duelo de 1x1 mais puro do jogo.
-- janelas: Morphling fecha o motor de farm dele cedo, Morbid Mask por volta de 7,9-8,1 min e Vladmir's Offering aos 10,7, bem antes da sua Radiance. O Manta dele (18,4) chega logo depois da sua (16,2), e o Attribute Shift (troca Força/Agilidade) deixa ele decidir, no meio da troca, se quer ficar tanque ou bater mais forte, justo quando você solta Feast e Open Wounds.
+- janelas: Morphling fecha o motor de farm dele cedo, Morbid Mask por volta dos 7,9 min e Vladmir's Offering aos 10,7, bem antes da sua Radiance. O Manta dele (18,4) chega logo depois da sua (16,2), e o Attribute Shift (troca Força/Agilidade) deixa ele decidir, no meio da troca, se quer ficar tanque ou bater mais forte, justo quando você solta Feast e Open Wounds.
 - o que ele faz com você: Waveform avança com dano e Adaptive Strike pode atordoar e empurrar; o Attribute Shift pra Força no meio da sua troca aumenta a vida dele na hora, esticando o tempo que ele aguenta seu Feast.
 - o que você faz com ele: Open Wounds não é bloqueado por nada do kit base dele (só por BKB, mediana 30,9 min, ou pelo dispel do próprio Manta ao ativar), então antes disso a lentidão e o corte de cura pesam bastante nele, que depende de atributo alto pra tankar.
 - itens que viram: o Manta dele (18,4) aplica dispel básico ao ativar e remove seu Open Wounds; antes desse item, ou fora da recarga dele (34s), o debuff gruda. O BKB dele (30,9) é o ponto em que ele passa a ignorar o debuff por completo.
 - como jogar: force a troca antes dos 18 min, quando ele ainda não tem Manta pra se livrar do seu Open Wounds. Depois disso, jogue pelo Feast, que atravessa imunidade mágica, em vez de depender do debuff.
-- fonte: pro_dados/life_stealer.json; pro_dados/morphling.json; porque_itens/morphling.md; constants_abilities.json (morphling_morph_agi, life_stealer_feast, life_stealer_open_wounds).
+- fonte: pro_dados/life_stealer.json; pro_dados/morphling.json; constants_abilities.json (morphling_morph_agi, life_stealer_feast, life_stealer_open_wounds).
 
 ## Contra Terrorblade (terrorblade)
 - placar: 40 vitórias em 79 jogos de pro (50,6%). Amostra grande.
@@ -167,7 +158,7 @@ Life Stealer é carry de safelane (posição 1). A lista mistura 4 critérios, s
 - o que você faz com ele: mantendo sua vida alta (Feast ajuda, curando a cada ataque), o Sunder dele rende menos porque a troca de vida vale menos quanto menor a diferença; Open Wounds reduz a cura dele caso ele tente sustentar com item.
 - itens que viram: nenhum item seu bloqueia o Sunder direto, porque não é um feitiço de alvo único convencional; a defesa real é controlar sua própria vida máxima e não entrar em troca prolongada com a vida baixa perto dele.
 - como jogar: não force a troca final com a vida abaixo de 50% se ele estiver por perto, é a faixa onde o Sunder dele rende mais. Prefira terminar a luta rápido, antes dele acumular Metamorphosis (nível 6, até 50s de forma à distância) pra te kitar.
-- fonte: pro_dados/life_stealer.json; pro_dados/terrorblade.json; porque_itens/terrorblade.md; constants_abilities.json (terrorblade_sunder, terrorblade_reflection, terrorblade_metamorphosis).
+- fonte: pro_dados/life_stealer.json; pro_dados/terrorblade.json; constants_abilities.json (terrorblade_sunder, terrorblade_reflection, terrorblade_metamorphosis).
 
 ## Contra Luna (luna)
 - placar: 70 vitórias em 125 jogos de pro (56,0%). Amostra grande.
@@ -177,17 +168,17 @@ Life Stealer é carry de safelane (posição 1). A lista mistura 4 critérios, s
 - o que você faz com ela: ela não tem debuff nem controle pra travar você em troca corpo a corpo; Feast e Open Wounds resolvem rápido se você chegar nela antes da Eclipse estar pronta (recarga de 105s).
 - itens que viram: Eye of Skadi dela corta sua cura quando aparece; sua Rage reduz bastante o dano da Eclipse pelos 80% de resistência mágica, o que muda muito o resultado de ficar pego numa Eclipse.
 - como jogar: evite ficar parado perto dela à noite sem saber se a ult está disponível; a recarga é alta, então depois de usada ela fica exposta por bastante tempo. Busque o 1x1 direto, ela não tem ferramenta pra fugir nem pra travar você.
-- fonte: pro_dados/life_stealer.json; pro_dados/luna.json; porque_itens/luna.md; constants_abilities.json (luna_eclipse, luna_lucent_beam, life_stealer_rage).
+- fonte: pro_dados/life_stealer.json; pro_dados/luna.json; constants_abilities.json (luna_eclipse, luna_lucent_beam, life_stealer_rage).
 
 ## Contra Templar Assassin (templar_assassin)
 - placar: 55 vitórias em 114 jogos de pro (48,2%). Amostra grande, o confronto mais equilibrado da lista.
-- por que importa: carry pos1 mais equilibrado da lista (48,2% em 114 jogos, quase 50/50) e o maior lh10 (73) e xpm (871) de todo o grupo, prova de que farma mais rápido que qualquer outro nome aqui, inclusive você.
+- por que importa: carry pos1 mais equilibrado da lista (48,2% em 114 jogos, quase 50/50) e o maior xpm (871) de todo o grupo, prova de que farma rápido, inclusive mais que você.
 - janelas: TA fecha Desolator aos 14,3 min e Dragon Lance aos 14,2, antes da sua Radiance (16,2): até os 16-17 min ela farma e ataca de mais longe do que você consegue responder, com o alcance extra do Psi Blades maxado. Depois da sua Radiance e do seu Armlet (18,1), a corrida de dano sustentado passa a ser mais sua, mas ela segue perigosa em emboscada por causa do Meld.
 - o que ela faz com você: Meld (invisível, bônus de dano de até 200 e redução de até 8 de armadura) emboscada antes de você ver ela chegando; Refraction cria até 6 instâncias que bloqueiam ataques e aumentam o dano do próximo golpe dela, neutralizando vários dos seus autoataques de Feast sem você perceber; Psi Blades é dano físico de respingo que atravessa qualquer imunidade mágica.
 - o que você faz com ela: ela tem vida relativamente baixa pro que farma; fechando a troca rápido, antes dela completar o Refraction de novo (recarga 14s) ou sair do Meld, Feast e Open Wounds resolvem.
 - itens que viram: o Desolator dela (-6 de armadura) somado ao Meld (-2 a -8) te deixa muito mais vulnerável a dano físico do time dela inteiro, não só dela; do seu lado não há resposta direta de item, a defesa é posicional.
 - como jogar: ande com visão (wards ou Observer perto da sua rota de farm) depois que ela tiver Meld. Se ela abrir Meld em cima de você, gaste Rage pra reduzir o burst e tente emendar Open Wounds antes dela recarregar o Refraction.
-- fonte: pro_dados/life_stealer.json; pro_dados/templar_assassin.json; porque_itens/templar_assassin.md; constants_abilities.json (templar_assassin_meld, templar_assassin_refraction, templar_assassin_psi_blades).
+- fonte: pro_dados/life_stealer.json; pro_dados/templar_assassin.json; constants_abilities.json (templar_assassin_meld, templar_assassin_refraction, templar_assassin_psi_blades).
 
 ## Contra Slardar (slardar)
 - placar: 37 vitórias em 97 jogos de pro (38,1%). Amostra grande, segunda pior desvantagem da lista.

@@ -8,9 +8,8 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/weaver.md, tusk.md, shadow_demon.md, jakiro.md, queenofpain.md, batrider.md, razor.md, ursa.md, crystal_maiden.md, leshrac.md, gyrocopter.md, doom_bringer.md
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/shadow_fiend.md, tiny.md, morphling.md, monkey_king.md
+- C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
+- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 - https://api.opendota.com/api/constants/aghs_desc
 - https://liquipedia.net/dota2/Toss (mecânica de debuff immunity pós 7.33: Toss não agarra alvo com Black King Bar ativo)
 ---
@@ -23,7 +22,7 @@ fontes:
 - o que você faz com ele: Threads of Fate rende dano bônus se você ficar a até 700 dele por 1,5s depois de acertar, e o Geminate Attack (autocast, também atravessa BKB) soma dano rápido se ele tentar bater em você de volta; Time Lapse desfaz os últimos 5s de vida se o combo dele já tiver conectado.
 - itens que viram: seu BKB (27,6 min) bloqueia Ice Shards e Snowball, nenhum dos dois atravessa imunidade mágica (constants_abilities.json); não bloqueia o Walrus Punch, mas esse exige alcance de 150, corpo a corpo.
 - como jogar: não fique parado pra last hit sem visão do Tusk antes do seu Power Treads; depois do seu Desolator e Shard, você já pode trocar de volta se ele errar o Snowball sozinho.
-- fonte: pro_dados/weaver.json; pro_dados/tusk.json; content/fichas/weaver.md; content/fichas/tusk.md; constants_abilities.json (tusk_ice_shards, tusk_snowball, tusk_walrus_punch, weaver_threads_of_fate, weaver_geminate_attack); api.opendota.com/api/constants/aghs_desc
+- fonte: pro_dados/weaver.json; pro_dados/tusk.json; constants_abilities.json (tusk_ice_shards, tusk_snowball, tusk_walrus_punch, weaver_threads_of_fate, weaver_geminate_attack); api.opendota.com/api/constants/aghs_desc
 
 ## Contra Shadow Demon (shadow_demon)
 - placar: 61V-168J, 36,3% de vitória do Weaver, a pior taxa dele entre os 6 oponentes com mais jogos de pro (pro_dados/weaver.json)
@@ -33,7 +32,7 @@ fontes:
 - o que você faz com ele: ele é suporte puro, sem sustain própria; Geminate Attack e The Swarm acabam com ele rápido se você fechar a distância antes da Disruption.
 - itens que viram: BKB não resolve a Demonic Purge; sua melhor resposta é Linken's Sphere, já que Disruption e Demonic Purge são de alvo único e o Linken's bloqueia o primeiro cast de alvo único a cada ciclo.
 - como jogar: trate o nível 6 dele como o ponto de virada, antes disso ele só tem Disruption e Shadow Poison; abra distância antes de engajar, não depois.
-- fonte: pro_dados/weaver.json; pro_dados/shadow_demon.json; content/fichas/shadow_demon.md; content/fichas/weaver.md; constants_abilities.json (shadow_demon_disruption, shadow_demon_demonic_purge, weaver_shukuchi)
+- fonte: pro_dados/weaver.json; pro_dados/shadow_demon.json; constants_abilities.json (shadow_demon_disruption, shadow_demon_demonic_purge, weaver_shukuchi)
 
 ## Contra Jakiro (jakiro)
 - placar: 63V-151J, 41,7% de vitória do Weaver (pro_dados/weaver.json)
@@ -41,9 +40,9 @@ fontes:
 - janelas: Jakiro fecha Arcane Boots aos 11,7 min e tem Macropyre disponível desde o nível 6 (pro_dados/jakiro.json); ele é squishy e de farm baixo o jogo inteiro (GPM 315), então não cresce como ameaça 1x1. O Weaver fecha o primeiro item de poder (Desolator, 15,6) ainda dentro da janela em que o Jakiro só tem Dual Breath e Ice Path.
 - o que ele faz com você: Ice Path estuna até 2s em área se você atravessar o caminho de gelo; Macropyre aplica dano contínuo numa faixa longa (10s) e não é dispelável, mas nenhuma das duas atravessa Black King Bar.
 - o que você faz com ele: ele não tem fuga própria nem vida alta; Shukuchi fecha a distância rápido e Geminate Attack mais Desolator matam ele antes que o time consiga proteger.
-- itens que viram: seu BKB (27,6) anula o kit inteiro do Jakiro, nenhuma habilidade dele atravessa imunidade mágica (constants_abilities.json); o Aghanim's Shard dele só libera Liquid Fire sem custo de mana, não muda o duelo direto.
+- itens que viram: seu BKB (27,6) anula o kit inteiro do Jakiro, nenhuma habilidade dele atravessa imunidade mágica (constants_abilities.json); o Aghanim's Shard dele não muda o duelo direto.
 - como jogar: evite ficar no alcance de 850 do Dual Breath antes do seu BKB; depois dele, force a troca se ele estiver sozinho, porque ele não tem como fugir.
-- fonte: pro_dados/weaver.json; pro_dados/jakiro.json; content/fichas/jakiro.md; content/fichas/weaver.md; constants_abilities.json (jakiro_ice_path, jakiro_macropyre, jakiro_dual_breath)
+- fonte: pro_dados/weaver.json; pro_dados/jakiro.json; constants_abilities.json (jakiro_ice_path, jakiro_macropyre, jakiro_dual_breath)
 
 ## Contra Shadow Fiend (nevermore)
 - placar: 74V-140J, 52,9% de vitória do Weaver (pro_dados/weaver.json)
@@ -53,7 +52,7 @@ fontes:
 - o que você faz com ele: Threads of Fate aplicado rende dano bônus persistente se você ficar perto, e o Geminate Attack atravessa o BKB dele (bkbpierce sim) quando o combate já estiver travado; Time Lapse desfaz o burst do Shadowraze se você acertar o timing.
 - itens que viram: seu BKB (27,6) bloqueia Shadowraze e Requiem, nenhum atravessa imunidade mágica (constants_abilities.json); o Dragon Lance dele (14,0) aumenta o alcance pra bater de mais longe e evitar ficar perto do seu Geminate.
 - como jogar: não troque ataque básico parado na frente dele antes do seu Desolator; com Desolator e Shard prontos, use Shukuchi pra fechar distância rápido e sair da zona das três Razes.
-- fonte: pro_dados/weaver.json; pro_dados/nevermore.json; content/porque_itens/shadow_fiend.md; content/fichas/weaver.md; constants_abilities.json (nevermore_shadowraze1, nevermore_requiem, nevermore_necromastery, weaver_threads_of_fate, weaver_geminate_attack)
+- fonte: pro_dados/weaver.json; pro_dados/nevermore.json; constants_abilities.json (nevermore_shadowraze1, nevermore_requiem, nevermore_necromastery, weaver_threads_of_fate, weaver_geminate_attack)
 
 ## Contra Queen of Pain (queenofpain)
 - placar: 69V-125J, 55,2% de vitória do Weaver, a melhor taxa dele entre os 6 oponentes com mais jogos de pro (pro_dados/weaver.json)
@@ -63,7 +62,7 @@ fontes:
 - o que você faz com ele: ela tem vida baixa pra uma mid; Shukuchi fecha a distância do Blink dela, e Geminate Attack mais Desolator fazem dano rápido o bastante pra matar antes do combo dela reaplicar.
 - itens que viram: seu BKB (27,6) bloqueia Shadow Strike e Scream of Pain, mas não a Sonic Wave (as duas primeiras não atravessam imunidade mágica, a Sonic Wave sim); o Linken's Sphere dela, se vier, bloquearia só o seu próximo cast de alvo único.
 - como jogar: evite ficar no alcance do Scream of Pain em grupo antes do seu BKB; depois dele, force a troca isolada, já que o único dano real que sobra é a Sonic Wave, de recarga alta.
-- fonte: pro_dados/weaver.json; pro_dados/queenofpain.json; content/fichas/queenofpain.md; content/fichas/weaver.md; constants_abilities.json (queenofpain_shadow_strike, queenofpain_scream_of_pain, queenofpain_sonic_wave, queenofpain_blink)
+- fonte: pro_dados/weaver.json; pro_dados/queenofpain.json; constants_abilities.json (queenofpain_shadow_strike, queenofpain_scream_of_pain, queenofpain_sonic_wave, queenofpain_blink)
 
 ## Contra Batrider (batrider)
 - placar: 48V-124J, 38,7% de vitória do Weaver (pro_dados/weaver.json)
@@ -73,7 +72,7 @@ fontes:
 - o que você faz com ele: ele não tem fuga própria depois de usar o Lasso, precisa ficar parado segurando você; se um aliado o mata durante o Lasso, o efeito quebra e você escapa. Geminate Attack atravessa o BKB dele se a troca já estiver travada.
 - itens que viram: nem BKB nem Time Lapse resolvem o Flaming Lasso sozinho, porque a habilidade ignora imunidade mágica e impede qualquer cast; a resposta real é matar o Batrider rápido enquanto ele segura você, ou contar com um aliado pra isso.
 - como jogar: mantenha mais de 200 de distância (alcance de cast do Lasso) sempre que ele estiver perto sem visão clara do time dele; se for pego, chame o time pra focar nele, esperar o Lasso acabar sozinho não é opção.
-- fonte: pro_dados/weaver.json; pro_dados/batrider.json; content/fichas/batrider.md; content/fichas/weaver.md; constants_abilities.json (batrider_flaming_lasso, batrider_sticky_napalm)
+- fonte: pro_dados/weaver.json; pro_dados/batrider.json; constants_abilities.json (batrider_flaming_lasso, batrider_sticky_napalm)
 
 ## Contra Tiny (tiny)
 - placar: 40V-111J, 36,0% de vitória do Weaver (pro_dados/weaver.json)
@@ -83,7 +82,7 @@ fontes:
 - o que você faz com ele: Threads of Fate rende dano bônus persistente, e o Shukuchi te tira do raio do Avalanche antes que ele feche o combo; Time Lapse desfaz o dano do combo se você acertar o timing.
 - itens que viram: seu BKB (27,6) bloqueia o stun do Avalanche; pela debuff immunity atual do jogo, você também não pode ser agarrado pelo Toss enquanto o BKB estiver ativo, então sem BKB o combo Avalanche-Toss conecta inteiro, com BKB o Tiny não consegue nem te pegar pra jogar.
 - como jogar: fique fora do alcance de 600 do Avalanche quando ele tiver Blink pronto e sumir de visão; depois do seu BKB, ele perde o combo de abertura inteiro contra você.
-- fonte: pro_dados/weaver.json; pro_dados/tiny.json; content/porque_itens/tiny.md; content/fichas/weaver.md; constants_abilities.json (tiny_avalanche, tiny_toss, tiny_grow, weaver_threads_of_fate); liquipedia.net/dota2/Toss (debuff immunity bloqueia o agarrão do Toss)
+- fonte: pro_dados/weaver.json; pro_dados/tiny.json; constants_abilities.json (tiny_avalanche, tiny_toss, tiny_grow, weaver_threads_of_fate); liquipedia.net/dota2/Toss (debuff immunity bloqueia o agarrão do Toss)
 
 ## Contra Razor (razor)
 - placar: 53V-103J, 51,5% de vitória do Weaver (pro_dados/weaver.json)
@@ -93,27 +92,27 @@ fontes:
 - o que você faz com ele: Threads of Fate e Geminate Attack dão dano de longe; o Shukuchi quebra a distância do link mais rápido do que ele consegue recastar, já que o Static Link tem alcance de 550 e um buffer de 250 antes de romper.
 - itens que viram: seu BKB (27,6) não bloqueia Static Link nem Eye of the Storm (os dois têm bkbpierce sim); a resposta real é distância, não imunidade mágica. O Desolator (15,6) ajuda a vencer a troca de ataque básico mesmo com o link ativo, já que reduz a armadura dele.
 - como jogar: evite ficar parado dentro de 550 de alcance dele sem necessidade; se ele conectar o link, recue em vez de trocar ataque básico, o roubo de dano é fixo por segundo, não algo pra tankar.
-- fonte: pro_dados/weaver.json; pro_dados/razor.json; content/fichas/razor.md; content/fichas/weaver.md; constants_abilities.json (razor_static_link, razor_eye_of_the_storm)
+- fonte: pro_dados/weaver.json; pro_dados/razor.json; constants_abilities.json (razor_static_link, razor_eye_of_the_storm)
 
 ## Contra Ursa (ursa)
 - placar: 44V-92J, 47,8% de vitória do Weaver (pro_dados/weaver.json)
-- por que importa: 3º carry de posição 1 mais jogado contra o Weaver em pro (92 jogos), outro farmer agressivo de ataque básico; a própria ficha do Ursa descreve ele como pick tardio de counter no draft.
+- por que importa: 3º carry de posição 1 mais jogado contra o Weaver em pro (92 jogos), outro farmer agressivo de ataque básico.
 - janelas: Ursa fecha Battle Fury aos 13,7, antes do Desolator do Weaver (15,6), e Blink aos 16,8, com iniciação cedo contra alvo isolado. O Aghanim's Shard dele (26,1) sai pouco antes do BKB do Weaver (27,6): se pegar o Weaver sozinho nessa janela, Earthshock com o Shard aplica 3 stacks de Fury Swipes de uma vez.
 - o que ele faz com você: Overpower dá +400% de velocidade de ataque por 3 a 6 ataques, um buff nele mesmo que nenhum item seu bloqueia; Fury Swipes empilha dano extra a cada acerto consecutivo no mesmo alvo (reseta se parar de bater por 8s) e atravessa Black King Bar (bkbpierce sim). Contra a vida baixa do Weaver, isso mata rápido mesmo com BKB ativo.
 - o que você faz com ele: Shukuchi te tira do alcance dele antes que o Overpower complete os ataques; Threads of Fate rende dano bônus se você conseguir ficar perto o suficiente pra bater primeiro.
-- itens que viram: seu BKB não impede o Overpower (buff nele mesmo) nem o dano extra do Fury Swipes (bkbpierce sim); contra ele, Linken's Sphere bloqueia o cast do Earthshock (salto de alvo único), cortando o início do combo antes do Overpower.
+- itens que viram: seu BKB não impede o Overpower (buff nele mesmo) nem o dano extra do Fury Swipes (bkbpierce sim); Earthshock é sem alvo (ele pula e bate em área ao redor dele mesmo), então Linken's Sphere não ajuda contra esse combo, a resposta real é distância antes dele pular em cima de você.
 - como jogar: não troque ataque básico parado com ele sem vantagem clara de vida, mesmo com BKB; prefira bater e sair com Shukuchi em vez de ficar na frente dele.
-- fonte: pro_dados/weaver.json; pro_dados/ursa.json; content/fichas/ursa.md; content/fichas/weaver.md; constants_abilities.json (ursa_overpower, ursa_fury_swipes, ursa_earthshock)
+- fonte: pro_dados/weaver.json; pro_dados/ursa.json; constants_abilities.json (ursa_overpower, ursa_fury_swipes, ursa_earthshock)
 
 ## Contra Crystal Maiden (crystal_maiden)
 - placar: 22V-34J, 64,7% de vitória do Weaver, a melhor taxa dele entre todos os oponentes com 30+ jogos de pro (pro_dados/weaver.json)
 - por que importa: maior vantagem medida do Weaver com amostra relevante (34 jogos); suporte duro, sem mobilidade própria e com a menor vida base do jogo.
 - janelas: Crystal Maiden é puro suporte, fecha Tranquil Boots aos 8,4 e nunca chega perto de um item de dano real. O Weaver, mesmo antes do Desolator, já farma mais rápido que ela em qualquer ponto do jogo.
 - o que ela faz com você: Frostbite prende e impede movimento e ataque por até 3s; Crystal Nova desacelera em área; a ultimate Freezing Field é canalizada (10s parada no lugar) e fácil de interromper ou fugir com Shukuchi.
-- o que você faz com ele: ela tem 120 de vida base e 0 de armadura, a menor do jogo (ficha dela); Geminate Attack mais Desolator matam ela em 1-2 trocas se você chegar perto.
+- o que você faz com ele: ela tem 120 de vida base e 0 de armadura, estatísticas baixas mesmo pros padrões de suporte (heroStats.json); Geminate Attack mais Desolator matam ela em 1-2 trocas se você chegar perto.
 - itens que viram: seu BKB (27,6) bloqueia Frostbite e Crystal Nova; qualquer Freezing Field vira risco pra ela se você estiver com imunidade mágica por perto, e mesmo sem BKB o Shukuchi já tira você do alcance do kit dela antes do combo completar.
 - como jogar: ignore a presença dela na lane adversária e farme normal; se ela tentar Frostbite sozinha, puna com Geminate Attack, ela não tem como revidar.
-- fonte: pro_dados/weaver.json; pro_dados/crystal_maiden.json; content/fichas/crystal_maiden.md; content/fichas/weaver.md; constants_abilities.json (crystal_maiden_frostbite, crystal_maiden_crystal_nova, crystal_maiden_freezing_field)
+- fonte: pro_dados/weaver.json; pro_dados/crystal_maiden.json; heroStats.json (base_health, base_armor); constants_abilities.json (crystal_maiden_frostbite, crystal_maiden_crystal_nova, crystal_maiden_freezing_field)
 
 ## Contra Leshrac (leshrac)
 - placar: 25V-42J, 59,5% de vitória do Weaver, a 2ª melhor taxa dele entre oponentes com 30+ jogos de pro (pro_dados/weaver.json)
@@ -123,7 +122,7 @@ fontes:
 - o que você faz com ele: ele não tem fuga própria além de distância e itens; Shukuchi fecha rápido e Geminate Attack mata antes que ele consiga reaplicar o combo mágico.
 - itens que viram: seu BKB (27,6) bloqueia Split Earth e Lightning Storm, nenhum atravessa imunidade mágica; o Diabolic Edict ainda machuca através do BKB, mas o dano sozinho não é suficiente pra matar.
 - como jogar: force a troca direta assim que tiver Desolator; ele depende de acertar o stun em área pra começar o combo, fique fora de grupo quando ele estiver com mana cheia.
-- fonte: pro_dados/weaver.json; pro_dados/leshrac.json; content/fichas/leshrac.md; content/fichas/weaver.md; constants_abilities.json (leshrac_split_earth, leshrac_diabolic_edict, leshrac_lightning_storm)
+- fonte: pro_dados/weaver.json; pro_dados/leshrac.json; constants_abilities.json (leshrac_split_earth, leshrac_diabolic_edict, leshrac_lightning_storm)
 
 ## Contra Gyrocopter (gyrocopter)
 - placar: 41V-69J, 59,4% de vitória do Weaver, a 3ª melhor taxa dele entre oponentes com 30+ jogos de pro (pro_dados/weaver.json)
@@ -133,7 +132,7 @@ fontes:
 - o que você faz com ele: ele não tem fuga própria nem alta mobilidade; Shukuchi fecha a distância antes do Homing Missile completar o voo (2,5s de pré-voo), e Geminate Attack mais Desolator vencem a troca de ataque básico.
 - itens que viram: seu BKB (27,6) bloqueia Homing Missile e Call Down, nenhum atravessa imunidade mágica; o Flak Cannon dele ainda te acerta mesmo com BKB, mas é dano dividido entre todos no raio, não focado em você.
 - como jogar: desvie do Homing Missile andando em zigue-zague ou perto de um aliado; depois do seu Desolator e Shard, force o 1x1 antes dele ter o Scepter pronto.
-- fonte: pro_dados/weaver.json; pro_dados/gyrocopter.json; content/fichas/gyrocopter.md; content/fichas/weaver.md; constants_abilities.json (gyrocopter_homing_missile, gyrocopter_flak_cannon, gyrocopter_call_down)
+- fonte: pro_dados/weaver.json; pro_dados/gyrocopter.json; constants_abilities.json (gyrocopter_homing_missile, gyrocopter_flak_cannon, gyrocopter_call_down)
 
 ## Contra Morphling (morphling)
 - placar: 14V-62J, 22,6% de vitória do Weaver, a pior taxa dele entre todos os oponentes com 30+ jogos de pro (pro_dados/weaver.json)
@@ -143,7 +142,7 @@ fontes:
 - o que você faz com ele: ele troca pra Força quando é iniciado, então pegar ele distraído farmando, sem a troca de atributo pronta, é o melhor momento; Threads of Fate rende dano persistente se você ficar perto por 1,5s, e Geminate Attack soma dano rápido contra a vida baixa dele no início do jogo.
 - itens que viram: o Butterfly dele (25,8, 35% de evasão) chega antes do seu BKB e faz parte dos seus ataques básicos errarem; Monkey King Bar resolve isso (80% de acerto certeiro), mas raramente compensa o slot no Weaver. O BKB dele (30,9, tarde) sai bem depois do seu: dos 27 aos 31 min você tem imunidade mágica e ele não.
 - como jogar: não brigue no farm dele cedo, ele sempre sai na frente até os 15 min; espere seu Desolator e Shard pra forçar a troca, e use Shukuchi pra reposicionar em vez de perseguir uma Waveform que você não alcança.
-- fonte: pro_dados/weaver.json; pro_dados/morphling.json; content/porque_itens/morphling.md; content/fichas/weaver.md; constants_abilities.json (morphling_waveform, morphling_adaptive_strike_agi, weaver_threads_of_fate, weaver_geminate_attack); api.opendota.com/api/constants/aghs_desc
+- fonte: pro_dados/weaver.json; pro_dados/morphling.json; items.json (butterfly, monkey_king_bar); constants_abilities.json (morphling_waveform, morphling_adaptive_strike_agi, weaver_threads_of_fate, weaver_geminate_attack); api.opendota.com/api/constants/aghs_desc
 
 ## Contra Doom (doom_bringer)
 - placar: 12V-40J, 30,0% de vitória do Weaver, a 2ª pior taxa dele entre oponentes com 30+ jogos de pro (pro_dados/weaver.json)
@@ -153,14 +152,14 @@ fontes:
 - o que você faz com ele: antes do nível 6 dele, ou se ele gastar o Doom em outro alvo, ele não tem mais disable real; Geminate Attack atravessa o próprio BKB dele depois, e Threads of Fate rende dano se você ficar perto.
 - itens que viram: seu BKB (27,6) não resolve o Doom, a habilidade ignora imunidade mágica por desenho (bkbpierce sim, constants_abilities.json); a resposta real é não deixar ele chegar perto o bastante pra castar antes do nível 6-10, depois de aplicado não existe item que reverta o efeito em você.
 - como jogar: não farme sozinho e visível perto de onde o Doom costuma rotacionar antes do seu nível 6 estar seguro; se ele gastar o Doom em outro herói do seu time, é a janela pra você forçar a luta sem medo do silence.
-- fonte: pro_dados/weaver.json; pro_dados/doom_bringer.json; content/fichas/doom_bringer.md; content/fichas/weaver.md; constants_abilities.json (doom_bringer_doom, weaver_shukuchi, weaver_time_lapse)
+- fonte: pro_dados/weaver.json; pro_dados/doom_bringer.json; constants_abilities.json (doom_bringer_doom, weaver_shukuchi, weaver_time_lapse)
 
 ## Contra Monkey King (monkey_king)
 - placar: 15V-48J, 31,3% de vitória do Weaver, a 3ª pior taxa dele entre oponentes com 30+ jogos de pro (pro_dados/weaver.json)
-- por que importa: 3º pior confronto do Weaver no pro play; também carry historicamente de posição 1 (539 partidas de liga como safelane no patch 7.41, das quais 332 antes do 7.41c), outro duelo de carry sem lane fixa em comum, com os ataques dele atravessando Black King Bar.
+- por que importa: 3º pior confronto do Weaver no pro play; também carry de posição 1 de alto farm (GPM 572 em pro, 7.40-7.41), outro duelo de carry sem lane fixa em comum, com os ataques dele atravessando Black King Bar.
 - janelas: Monkey King fecha Power Treads aos 6,0 e Echo Sabre aos 13,5 (pro_dados/monkey_king.json), um power spike de ataque básico que chega antes do Desolator do Weaver (15,6). Dos 18 aos 26 min ele fecha BKB (24,9) e Aghanim's Shard (25,9), pronto pra uma troca prolongada; o Weaver só fecha o próprio BKB aos 27,6, cerca de 3 min depois.
 - o que ele faz com você: Boundless Strike estuna em linha com True Strike (ignora evasão) e dano crítico; Jingu Mastery dá 4 ataques bônus com dano e lifesteal depois do 4º acerto no mesmo alvo, e esse efeito atravessa Black King Bar (bkbpierce sim), então mesmo com imunidade mágica ele continua roubando vida de você numa troca prolongada.
 - o que você faz com ele: Threads of Fate e Geminate Attack dão dano à distância, fora do alcance corpo a corpo dele; se você mantém distância, ele nunca completa os 4 acertos do Jingu Mastery.
 - itens que viram: seu BKB (27,6) bloqueia Boundless Strike (Strong Dispels Only, então BKB impede o cast nele), mas não o Jingu Mastery, que continua funcionando mesmo contra você com imunidade mágica; a resposta real contra ele é distância, não item defensivo único.
 - como jogar: evite trocar ataque básico corpo a corpo com ele sem necessidade, cada acerto dele soma pro combo do Jingu Mastery; use Shukuchi e o alcance do Geminate Attack pra vencer de longe em vez de bater de perto.
-- fonte: pro_dados/weaver.json; pro_dados/monkey_king.json; content/porque_itens/monkey_king.md; app/public/data/herois/monkey_king.json (539 partidas de liga safelane); content/fichas/weaver.md; constants_abilities.json (monkey_king_boundless_strike, monkey_king_jingu_mastery, weaver_threads_of_fate, weaver_geminate_attack)
+- fonte: pro_dados/weaver.json; pro_dados/monkey_king.json; constants_abilities.json (monkey_king_boundless_strike, monkey_king_jingu_mastery, weaver_threads_of_fate, weaver_geminate_attack)

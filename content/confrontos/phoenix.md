@@ -23,9 +23,7 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
 - https://api.opendota.com/api/constants/aghs_desc
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/shadow_fiend.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/lone_druid.json
+- https://api.opendota.com/api/explorer (partidas de liga, patches 7.40-7.41)
 ---
 
 ## Contra Rubick (rubick)
@@ -41,12 +39,12 @@ fontes:
 ## Contra Shadow Fiend (nevermore)
 - placar: Phoenix venceu 175 de 296 partidas pro (59,1%). Segundo oponente mais comum da base.
 - por que importa: segundo maior volume de jogos pro (296), mid clássico que quase nunca divide lane com o pos5 Phoenix, mas os dois têm o combo mais perigoso do kit à distância: o Requiem dele executa de longe, a Supernova sua estuna em área, nenhum precisa se encontrar na lane pra decidir a luta.
-- janelas: Shadow Fiend sobe Power Treads (5,9 min), nível 6 aos 7,2 min, Mask of Madness entre 10 e 11 min, Manta Style aos 16,0 min, Hurricane Pike 21,5, Black King Bar 25,2 e Daedalus 28,3 (app/public/data/herois/shadow_fiend.json, power_spikes). Seu Tranquil Boots (8,8 min) e Aghanim's Shard (23,3) chegam bem antes do BKB dele; mesmo depois disso, sua Supernova atravessa o BKB dele de qualquer forma (bkbpierce: yes).
+- janelas: Shadow Fiend sobe Power Treads (5,9 min), Mask of Madness (10,2 min), Hurricane Pike (23,0 min), Black King Bar (25,2 min) e Daedalus (28,3 min, pro_dados/nevermore.json; partidas pro 7.40-7.41, OpenDota). Seu Tranquil Boots (8,8 min) e Aghanim's Shard (23,3) chegam bem antes do BKB dele; mesmo depois disso, sua Supernova atravessa o BKB dele de qualquer forma (bkbpierce: yes).
 - o que ele faz com você: Shadowraze (até 280 de dano base mais bônus por alma acumulada, cd de só 9s) te raspa de longe sem precisar de visão direta; Requiem of Souls (até 20 linhas, reduz até 30% de velocidade e 15% de resistência mágica por linha acertada) executa à distância se sua vida estiver baixa, e reativa automaticamente mesmo se ele morrer.
-- o que você faz com ele: sua Supernova atravessa o BKB dele e estuna em área mesmo com ele imune a magia; Fire Spirits corta até 140 de velocidade de ataque dele bem na hora em que ele depende de autoataque com Manta e Dragon Lance.
+- o que você faz com ele: sua Supernova atravessa o BKB dele e estuna em área mesmo com ele imune a magia; Fire Spirits corta até 140 de velocidade de ataque dele bem na hora em que ele depende de autoataque com Dragon Lance.
 - itens que viram: seu Aghanim's Shard libera o Sun Ray mesmo durante a Supernova, então você se cura e ainda ameaça enquanto ele tenta destruir o sol; o BKB dele não impede seu stun final, a resposta real dele é destruir a Supernova antes da explosão (6 a 10 ataques de herói, conforme seu nível).
 - como jogar: não force Supernova sozinho contra o Requiem já carregado, ele reativa automático mesmo morto; use Icarus Dive pra fechar ou fugir do alcance curto do Shadowraze (raio de 250, só 200 de distância na frente dele).
-- fonte: pro_dados/phoenix.json; pro_dados/nevermore.json; app/public/data/herois/shadow_fiend.json (power_spikes); constants_abilities.json (nevermore_shadowraze1, nevermore_requiem, phoenix_supernova).
+- fonte: pro_dados/phoenix.json; pro_dados/nevermore.json; partidas pro 7.40-7.41 (OpenDota); constants_abilities.json (nevermore_shadowraze1, nevermore_requiem, phoenix_supernova).
 
 ## Contra Tusk (tusk)
 - placar: Phoenix venceu 171 de 290 partidas pro (59,0%). Terceiro oponente mais comum da base.
@@ -55,7 +53,7 @@ fontes:
 - o que ele faz com você: Ice Shards cria uma parede que te prende se você estiver do lado errado (cd de 23 a 14s); Walrus Kick acerta em linha com 550 de dano fixo e atravessa Black King Bar (bkbpierce: yes), cd de só 12s; Snowball em grupo pode te prender junto com aliados dele.
 - o que você faz com ele: Fire Spirits reduz a velocidade de ataque dele bem na hora em que ele tenta puxar o combo de Walrus Punch; sua Supernova estuna em área mesmo que ele tenha BKB, e o cooldown de 120s dela recicla antes da próxima investida dele depois que ele já gastou o blink.
 - itens que viram: como o Walrus Kick atravessa BKB, não dá pra confiar só em imunidade, o certo é não ficar isolado sem visão; seu Aghanim's Shard mantém o Sun Ray ativo mesmo dentro da Supernova, então você ainda cura o time se ele tentar focar o sol.
-- como jogar: não ande sozinho sem visão nos primeiros 19 min, o gank dele não avisa; depois que ele gastar o Blink numa iniciação ruim, é sua janela livre por quase 20s de recarga.
+- como jogar: não ande sozinho sem visão nos primeiros 19 min, o gank dele não avisa; depois que ele gastar o Blink numa iniciação ruim, é sua janela livre pelos 15s de recarga do item.
 - fonte: pro_dados/phoenix.json; pro_dados/tusk.json; constants_abilities.json (tusk_walrus_kick, tusk_ice_shards, tusk_snowball, phoenix_fire_spirits, phoenix_supernova).
 
 ## Contra Jakiro (jakiro)
@@ -72,7 +70,7 @@ fontes:
 - placar: Phoenix perdeu a maioria, 122 de 275 partidas pro vencidas (44,4%). Quinto oponente mais comum da base e o pior resultado entre os seis com mais volume.
 - por que importa: quinto maior volume de jogos pro (275) e o único dos seis mais comuns em que o Phoenix perde mais do que ganha. Suporte 4/5 que zoneia à distância com Acorn Shot e pune erro de posicionamento com Bushwhack mais Sharpshooter.
 - janelas: Hoodwink sobe Arcane Boots (12,2 min), Aghanim's Shard (23,8) e Force Staff (26,1, pro_dados/hoodwink.json). Seu próprio Aghanim's Shard (23,3) sai pouco antes do dela. Antes disso a ameaça real é o Sharpshooter, que carrega até 3s e acerta de muito longe (alcance 3000, dano de até 1350 no nível 3) se você ficar parado perto de arbustos.
-- o que ela faz com você: Bushwhack (raiz perto de árvore, dano total de até 360, cd de 15 a 12s) te prende parado pro combo do time dela; Sharpshooter acerta à distância com break (anula suas passivas) e slow, é o nuke mais perigoso contra seu HP baixo cedo; Scurry dá fuga rápida se você tentar puni-la.
+- o que ela faz com você: Bushwhack (estuna perto de árvore, dano total de até 360, cd de 15 a 12s) te prende parado pro combo do time dela; Sharpshooter acerta à distância com break (anula suas passivas) e slow, é o nuke mais perigoso contra seu HP baixo cedo; Scurry dá fuga rápida se você tentar puni-la.
 - o que você faz com ele: Fire Spirits corta a velocidade de ataque dela, que depende de autoataque pra valer item; Icarus Dive foge do alcance curto de ataque dela numa troca ruim; sua Supernova atravessa qualquer BKB que ela não tem.
 - itens que viram: seu Aghanim's Shard (23,3) chega antes do dela (23,8), então o Sun Ray da sua Supernova já está liberado quando o combo dela estiver pronto; evite ficar parado perto de arbusto sem visão, é onde o Bushwhack rende.
 - como jogar: varie a rota perto de arbustos nos primeiros 20 min; depois que ela gastar o Sharpshooter (recarga de 45s) numa magia fraca, force a luta, ela fica sem o maior nuke dela por quase um minuto.
@@ -125,7 +123,7 @@ fontes:
 - o que ele faz com você: Vacuum te puxa pra dentro de uma área fechada, abre pro combo do time dele; Ion Shell soma dano se você ficar perto da unidade afetada por tempo longo.
 - o que você faz com ele: Fire Spirits reduz a velocidade de ataque dele; sua Supernova atravessa qualquer BKB que ele compre (ele raramente tem disable duro pra evitar), e o stun em área de até 1200 de raio é maior que o Vacuum dele.
 - itens que viram: os dois fecham Shiva's Guard quase no mesmo minuto (23,6 contra 23,7), a corrida de redução de armadura e slow em área empata; seu Aghanim's Shard (23,3) chega pouco antes do shard dele (24,3), pequena vantagem de timing.
-- como jogar: não entre em grupo dentro do raio do Vacuum sem HP de sobra; force a luta com sua Supernova assim que ele gastar a iniciação, o dano dele sozinho não compete com sua cura em área.
+- como jogar: não entre em grupo dentro do raio do Vacuum sem HP de sobra; force a luta com sua Supernova assim que ele gastar a iniciação, o dano dele sozinho não compete com seu stun em área.
 - fonte: pro_dados/phoenix.json; pro_dados/dark_seer.json; constants_abilities.json (dark_seer_vacuum, dark_seer_ion_shell, phoenix_supernova, phoenix_fire_spirits).
 
 ## Contra Marci (marci)
@@ -141,11 +139,11 @@ fontes:
 ## Contra Death Prophet (death_prophet)
 - placar: Phoenix venceu 30 de 46 partidas pro (65,2%). Terceiro melhor confronto da base com 30 ou mais jogos.
 - por que importa: terceiro melhor resultado com amostra relevante (65,2% em 46 jogos). Mid ou carry que farma rápido com Witchcraft e tem no Exorcism um dano físico que atravessa BKB, mas sem nenhum disable duro contra a Supernova.
-- janelas: Death Prophet fecha Aghanim's Scepter cedo, mediana de 18,3 min (pro_dados/death_prophet.json), antes do Eul's Scepter (14,9) virar prioridade e bem antes do próprio BKB (26,4). Seu Aghanim's Shard (23,3) chega antes do BKB dela. Exorcism (cd de 150s) solta espíritos que voltam pra ela em 40s, dano físico que atravessa BKB (bkbpierce: yes) mas precisa ficar perto do alvo.
+- janelas: Death Prophet fecha Aghanim's Scepter cedo, mediana de 18,3 min (pro_dados/death_prophet.json), depois do Eul's Scepter (14,9), que fecha primeiro, e bem antes do próprio BKB (26,4). Seu Aghanim's Shard (23,3) chega antes do BKB dela. Exorcism (cd de 150s) solta espíritos que voltam pra ela em 40s, dano físico que atravessa BKB (bkbpierce: yes) mas precisa ficar perto do alvo.
 - o que ela faz com você: Silence impede qualquer magia sua por até 5s em área de 450, cancela sua Supernova se usado antes do cast; Carrion Swarm (mágico) e Exorcism (físico, atravessa BKB) somam dano contínuo de longe.
-- o que você faz com ele: Fire Spirits reduz a velocidade de ataque dela; sua Supernova atravessa o BKB dela, e como o Silence dela tem cd de 12 a 15s, ela não consegue te silenciar toda a luta.
+- o que você faz com ele: Fire Spirits reduz a velocidade de ataque dela; sua Supernova atravessa o BKB dela, e como o Silence dela tem cd de 15 a 12s, ela não consegue te silenciar toda a luta.
 - itens que viram: lance a Supernova antes dela conseguir o Silence, uma vez no ar ela continua funcionando mesmo que você seja silenciado depois; seu Aghanim's Shard garante Sun Ray mesmo durante a Supernova, sustenta contra o dano contínuo do Exorcism.
-- como jogar: observe o cooldown do Silence dela (12 a 15s) antes de abrir com Supernova; depois que ela gastar, é sua janela livre de conjurar.
+- como jogar: observe o cooldown do Silence dela (15 a 12s) antes de abrir com Supernova; depois que ela gastar, é sua janela livre de conjurar.
 - fonte: pro_dados/phoenix.json; pro_dados/death_prophet.json; constants_abilities.json (death_prophet_silence, death_prophet_exorcism, phoenix_supernova, phoenix_fire_spirits).
 
 ## Contra Keeper of the Light (keeper_of_the_light)
@@ -173,7 +171,7 @@ fontes:
 - por que importa: terceiro pior resultado com amostra relevante (37,5% em 32 jogos, no limite mínimo). Suporte pos5/4 de cura garantida que anula justo o que sua Supernova faz, remove debuff e atrasa dano com False Promise.
 - janelas: Oracle sobe Arcane Boots (11,7 min) e Aether Lens (25,4, pro_dados/oracle.json), suporte de utilidade pura sem item de dano cedo. False Promise (cd de 110 a 60s) atrasa qualquer dano ou cura por até 10s e remove a maioria dos debuffs no cast, chega quase a salvar um aliado prestes a morrer pro stun da sua Supernova.
 - o que ele faz com você: False Promise em um aliado dele anula o timing do seu combo de dano, o dano fica represado e só conta depois; Fortune's End dispela buffs, raiz e ainda causa dano, cancela qualquer vantagem de Sun Ray ativo; Purifying Flames cura rápido um aliado dele, compete direto com a cura que você dá.
-- o que você faz com ele: Fire Spirits reduz a velocidade de ataque dele; sua Supernova estuna em área e cura o time no final, mas se ele usar False Promise num alvo antes da explosão, o efeito é adiado.
+- o que você faz com ele: Fire Spirits reduz a velocidade de ataque dele; sua Supernova estuna em área e a explosão te restaura por completo, mas se ele usar False Promise num alvo antes dela, o efeito é adiado.
 - itens que viram: False Promise dele é dispel forte (Strong Dispel) e atravessa BKB (bkbpierce: yes), nenhum item seu cancela isso; a resposta é focar matar antes dele conseguir reagir ou esperar o cooldown de 110 a 60s dele cair.
 - como jogar: observe quando ele já gastou o False Promise, é sua janela de executar; não dependa só da Supernova pra fechar o kill se um alvo dele estiver protegido, ela atrasa o dano em vez de negar.
 - fonte: pro_dados/phoenix.json; pro_dados/oracle.json; constants_abilities.json (oracle_false_promise, oracle_fortunes_end, oracle_purifying_flames, phoenix_supernova, phoenix_fire_spirits).

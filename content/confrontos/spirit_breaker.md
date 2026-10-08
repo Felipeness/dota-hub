@@ -21,24 +21,22 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/spirit_breaker.md
+- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 - https://api.opendota.com/api/constants/aghs_desc
-- https://www.esportstales.com/dota-2/how-to-counter-spirit-breaker-items-heroes-and-tips
-- https://dotacoach.gg/de/heroes/counters/disruptor
+- https://api.opendota.com/api/explorer
 ---
 
 ## Spirit Breaker no 7.41: o que define as janelas abaixo
 
-No pro play atual Spirit Breaker é jogado quase só como pos 4 roamer, não como carry (a tag "Carry" do OpenDota é histórica). Mediana de 355 de ouro por minuto em 1.708 jogos de liga nos patches 7.40 e 7.41 (fonte: pro_dados/spirit_breaker.json, resumo). No 7.41 ele tem Bulldoze (velocidade e resistência a status enquanto carrega, pode ser usada durante o Charge) como habilidade base, e Planar Pocket (redireciona pra ele qualquer feitiço com alvo único que um inimigo lance no herói escolhido) só fica disponível com o Aghanim's Shard (fonte: https://api.opendota.com/api/constants/aghs_desc, shard_new_skill). Greater Bash segue passiva (17% de chance, 25 a 40% da velocidade de movimento como dano mágico, atravessa imunidade a magia) e com Aghanim's Scepter ganha mais empurrão e repassa 25% do dano pro alvo original e pro segundo inimigo que ele colidir no caminho (fonte: constants_abilities.json, spirit_breaker_greater_bash e spirit_breaker_bulldoze e spirit_breaker_planar_pocket; https://api.opendota.com/api/constants/aghs_desc).
+No pro play atual Spirit Breaker é jogado quase só como pos 4 roamer, não como carry (a tag "Carry" do OpenDota é histórica). Mediana de 355 de ouro por minuto em 1.708 jogos de liga nos patches 7.40 e 7.41 (fonte: pro_dados/spirit_breaker.json, resumo). No 7.41 ele tem Bulldoze (velocidade e resistência a status enquanto carrega, pode ser usada durante o Charge) como habilidade base, e Planar Pocket (redireciona pra ele qualquer feitiço com alvo único que um inimigo lance no herói escolhido) só fica disponível com o Aghanim's Shard (fonte: https://api.opendota.com/api/constants/aghs_desc, shard_new_skill). Greater Bash segue passiva (17% de chance, 25 a 40% da velocidade de movimento como dano mágico, atravessa imunidade a magia) e com Aghanim's Scepter ganha mais empurrão: se o inimigo empurrado colidir com um segundo inimigo, esse segundo também é bashado (contra creep, só 25% do dano) e o alvo original leva mais 25% do dano do Bash de novo (fonte: constants_abilities.json, spirit_breaker_greater_bash e spirit_breaker_bulldoze e spirit_breaker_planar_pocket; https://api.opendota.com/api/constants/aghs_desc).
 
-A linha do tempo de item dele nos jogos de pro: Magic Stick aos 5:18, Chainmail aos 7:36, Phase Boots aos 9:24, pacote de wards fechado por volta de 17-19 min, Blitz Knuckles aos 18:06, e o Shadow Blade fecha por volta dos 23 min (Shadow Amulet 21:18, Claymore 21:06, Invis Sword 22:54). Black King Bar e Glimmer Cape são situacionais e tardios (amostra pequena, ficha cita 27-30+ min); Spirit Vessel é situacional mas chega bem mais cedo, por volta dos 22 min, também em amostra pequena (fontes: pro_dados/spirit_breaker.json, itens; content/fichas/spirit_breaker.md).
+A linha do tempo de item dele nos jogos de pro: Magic Stick aos 5:18, Chainmail aos 7:36, Phase Boots aos 9:24, pacote de wards fechado por volta de 17-19 min, Blitz Knuckles aos 18:06, e o Shadow Blade fecha por volta dos 23 min (Shadow Amulet 21:18, Claymore 21:06, Invis Sword 22:54). Black King Bar é situacional e tardio (34:31 na mediana, n=200); Glimmer Cape é raro e ainda mais tardio (24:51 na mediana, amostra pequena, n=16); Spirit Vessel é situacional mas chega bem mais cedo, por volta dos 20:16 (n=104) (fonte: partidas pro 7.40-7.41, OpenDota explorer).
 
-Importante sobre o Charge of Darkness: qualquer stun, root ou disable cancela a carga, e Linken's Sphere bloqueia o cast inteiro porque é um feitiço de alvo único (fonte: esportstales.com/dota-2/how-to-counter-spirit-breaker-items-heroes-and-tips). Isso volta em quase todo confronto abaixo.
+Importante sobre o Charge of Darkness: qualquer stun, root ou disable cancela a carga, e Linken's Sphere bloqueia o cast inteiro porque é um feitiço de alvo único (fonte: constants_abilities.json, spirit_breaker_charge_of_darkness, behavior Unit Target; items.json, sphere). Isso volta em quase todo confronto abaixo.
 
 ## Como os 14 oponentes foram escolhidos
 - **Os 6 mais enfrentados em pro** (confrontos de spirit_breaker.json, 7.40+7.41): Shadow Fiend, Rubick, Snapfire, Tusk, Mars, Ogre Magi.
-- **Mesma posição principal (pos 4) com mais volume em pro**, fora os 6 acima: Lion e Disruptor (catálogo marca os dois como posicoes [4,5] e eles aparecem quase tanto quanto o top 6 nos confrontos).
+- **Suporte de gpm baixo, perfil parecido com o seu (355)**, fora os 6 acima: Lion (gpm 286) e Disruptor (gpm 279), que aparecem quase tanto quanto o top 6 nos confrontos (fonte: pro_dados/spirit_breaker.json; pro_dados/lion.json; pro_dados/disruptor.json, resumo).
 - **Maior vantagem com 30+ jogos**: Death Prophet, Anti-Mage, Clinkz.
 - **Maior desvantagem com 30+ jogos**: Io, Treant Protector, Mirana.
 
@@ -56,13 +54,13 @@ Importante sobre o Charge of Darkness: qualquer stun, root ou disable cancela a 
 
 ## Contra Rubick (rubick)
 - placar: 128 vitórias em 267 jogos de pro (47,9%) (fonte: pro_dados/spirit_breaker.json, confrontos).
-- por que importa: segundo oponente mais comum em pro e também pos 4/5, então divide lane e rotação com você na maioria dos jogos (catálogo marca Rubick como [4,5]).
+- por que importa: segundo oponente mais comum em pro e também suporte de gpm baixo (374 contra os seus 355), então divide lane e rotação com você na maioria dos jogos.
 - janelas: nos primeiros 10 min os dois estão comprando sobi_mask/magic_wand e disputando a lane; não há vantagem clara de item ainda. Entre 15 e 21 min é a janela perigosa pra você: Rubick ainda sem Blink Dagger (ele fecha aos 21:36 na mediana) é lento, mas Spell Steal já está ativo desde o nível 6 dele. Depois dos 21 min, com blink pronto, ele passa a conseguir se desgrudar de uma carga sua ou reposicionar pra roubar seu Nether Strike com segurança.
 - o que ele faz com você: Telekinesis é um pickup à distância que te deixa no ar e te stuna ao cair, cancelando qualquer Charge of Darkness em andamento (disable cancela a carga). Spell Steal copia o último feitiço lançado por um herói inimigo perto: se você usar Nether Strike perto dele antes de engajar, ele pode roubar o blink com bash e virar o jogo contra você.
 - o que você faz com ele: Rubick tem pouquíssima vida (374 de gpm, perfil 100% suporte) e nenhuma fuga própria antes do Blink Dagger. Pegá-lo com Charge antes dos 21 min, antes do blink dele ficar pronto, costuma ser kill garantida se ele não tiver Force Staff ou Glimmer de aliado.
-- itens que viram: Linken's Sphere nele bloqueia seu Charge of Darkness inteiro, já que é um feitiço de alvo único (fonte: esportstales.com); evite iniciar nele se ele tiver Linken's, mire outro alvo. Do seu lado, não solte Nether Strike a menos de 1000 de distância dele sem necessidade (alcance do Spell Steal), pra não dar o roubo de graça.
+- itens que viram: Linken's Sphere nele bloqueia seu Charge of Darkness inteiro, já que é um feitiço de alvo único (fonte: constants_abilities.json, spirit_breaker_charge_of_darkness; items.json, sphere); evite iniciar nele se ele tiver Linken's, mire outro alvo. Do seu lado, não solte Nether Strike a menos de 1000 de distância dele sem necessidade (alcance do Spell Steal), pra não dar o roubo de graça.
 - como jogar: na lane, jogue pela troca, não pela Telekinesis dele (ela tem alcance curto). Depois dos 6 dele, cuidado extra com qualquer engajada sua perto dele: guarde o Nether Strike pra fora do raio de steal. Antes do blink dele (21 min), é sua melhor janela de kill isolado.
-- fonte: pro_dados/spirit_breaker.json; pro_dados/rubick.json; constants_abilities.json (rubick_spell_steal, rubick_telekinesis); herois_catalogo.json.
+- fonte: pro_dados/spirit_breaker.json; pro_dados/rubick.json; constants_abilities.json (rubick_spell_steal, rubick_telekinesis).
 
 ## Contra Snapfire (snapfire)
 - placar: 124 vitórias em 231 jogos de pro (53,7%) (fonte: pro_dados/spirit_breaker.json, confrontos).
@@ -106,23 +104,23 @@ Importante sobre o Charge of Darkness: qualquer stun, root ou disable cancela a 
 
 ## Contra Lion (lion)
 - placar: 97 vitórias em 194 jogos de pro (50,0%) (fonte: pro_dados/spirit_breaker.json, confrontos).
-- por que importa: mesma posição principal que você (catálogo marca Lion como [4,5]), um dos suportes de maior volume em pro contra o Spirit Breaker mesmo não entrando no top 6 por uma diferença mínima de jogos.
+- por que importa: suporte de gpm baixo como o seu (286 contra 355), um dos suportes de maior volume em pro contra o Spirit Breaker mesmo não entrando no top 6 por uma diferença mínima de jogos.
 - janelas: na lane, Earth Spike (Impale) tem alcance de linha longo e te acerta antes de você chegar perto, então os primeiros 10 min são dele. Depois dos 18 min, com Blink Dagger pronto (18:12), ele reposiciona e combina Hex com Finger of Death pra queimar um alvo isolado, geralmente você se pegar sozinho.
-- o que ele faz com você: Hex (Voodoo) te transforma por 2 a 3,2 s conforme o nível, cancelando Charge e qualquer ativo; Finger of Death bate de 600 a 850 de dano mágico (não é pure, seu Black King Bar bloqueia), o suficiente pra matar um Spirit Breaker sem BKB e sem muito item sozinho. Mana Drain seca seu mana cedo, dificultando pagar o custo do Charge (80 a 110 conforme o nível).
+- o que ele faz com você: Hex (Voodoo) te transforma por 2 a 3,2 s conforme o nível, cancelando Charge e qualquer ativo; Finger of Death bate de 600 a 850 de dano mágico (não é pure, seu Black King Bar bloqueia), o suficiente pra matar um Spirit Breaker sem BKB e sem muito item sozinho. Mana Drain seca seu mana cedo, dificultando pagar o custo do Charge (90 a 120 conforme o nível).
 - o que você faz com ele: Lion tem pouca vida e nenhuma fuga própria antes do Blink (18 min); gankeado antes disso, ele não sobrevive a um Charge limpo.
 - itens que viram: Black King Bar seu neutraliza o Hex dele perto do fim de jogo (hex forte exige dispel forte, BKB básico não resolve sozinho, mas reduz a dependência de reagir a tudo); do lado dele, Aether Lens/Blink aumentam o alcance efetivo do combo Impale+Hex+Finger.
 - como jogar: na lane, jogue de ângulo, fora da linha reta do Impale. Depois do nível 6 dele, não entre sozinho no alcance de Finger of Death sem vida de sobra.
-- fonte: pro_dados/spirit_breaker.json; pro_dados/lion.json; constants_abilities.json (lion_impale, lion_voodoo, lion_finger_of_death, lion_mana_drain); herois_catalogo.json.
+- fonte: pro_dados/spirit_breaker.json; pro_dados/lion.json; constants_abilities.json (lion_impale, lion_voodoo, lion_finger_of_death, lion_mana_drain, spirit_breaker_charge_of_darkness).
 
 ## Contra Disruptor (disruptor)
 - placar: 103 vitórias em 190 jogos de pro (54,2%) (fonte: pro_dados/spirit_breaker.json, confrontos).
-- por que importa: mesma posição principal (catálogo marca Disruptor como [5,4]) e dono do contador mecânico mais direto do seu kit: Glimpse.
+- por que importa: suporte de gpm baixo como o seu (279 contra 355) e dono do contador mecânico mais direto do seu kit: Glimpse.
 - janelas: até os 11 min a troca é de poke, Thunder Strike reduz sua velocidade de ataque e movimento em 100% por 1,75 s a cada golpe. Depois dos 11-19 min ele tem Arcane Boots (11:24) pra sustentar o combo Glimpse e Kinetic Field. Blink dele é tardio e raro nesta amostra (24:00, poucos jogos), então antes disso ele depende de alcance pra te travar.
-- o que ele faz com você: Glimpse teleporta o alvo de volta pra posição de 4 segundos atrás, o que, usado no meio de um Charge, zera todo o progresso e te joga de volta pro ponto de partida, cancelando a carga por completo (fonte: constants_abilities.json, disruptor_glimpse; dotacoach.gg/de/heroes/counters/disruptor). Kinetic Field prende você e aliados num círculo que nenhum dos dois atravessa; Static Storm silencia, travando Nether Strike e Bulldoze.
+- o que ele faz com você: Glimpse teleporta o alvo de volta pra posição de 4 segundos atrás, o que, usado no meio de um Charge, zera todo o progresso e te joga de volta pro ponto de partida, cancelando a carga por completo (fonte: constants_abilities.json, disruptor_glimpse). Kinetic Field prende você e aliados num círculo que nenhum dos dois atravessa; Static Storm silencia, travando Nether Strike e Bulldoze.
 - o que você faz com ele: Disruptor não tem fuga própria além de andar; é um dos suportes mais lentos do jogo (gpm 279, a pé a maior parte da partida). Pegar ele antes de gastar o Glimpse nele mesmo (ele pode usar em si pra reposicionar) costuma ser kill fácil.
 - itens que viram: Bulldoze ativa antes de iniciar reduz o impacto do Glimpse (o Glimpse ainda te reposiciona, mas a resistência a status ajuda a sobreviver ao que vier depois); do lado dele, Force Staff permite escapar da Kinetic Field que ele mesmo criou.
 - como jogar: não inicie o Charge sem saber se o Glimpse dele está disponível (recarga 18-24 s); se ele acabou de usar em outra luta, essa é sua janela. Evite lutar dentro do raio onde ele pode formar Kinetic Field em cima de você.
-- fonte: pro_dados/spirit_breaker.json; pro_dados/disruptor.json; constants_abilities.json (disruptor_glimpse, disruptor_kinetic_field, disruptor_static_storm, disruptor_thunder_strike); dotacoach.gg/de/heroes/counters/disruptor; herois_catalogo.json.
+- fonte: pro_dados/spirit_breaker.json; pro_dados/disruptor.json; constants_abilities.json (disruptor_glimpse, disruptor_kinetic_field, disruptor_static_storm, disruptor_thunder_strike).
 
 ## Contra Death Prophet (death_prophet)
 - placar: 33 vitórias em 48 jogos de pro (68,8%, melhor confronto do Spirit Breaker com amostra de 30+) (fonte: pro_dados/spirit_breaker.json, confrontos).
@@ -156,7 +154,7 @@ Importante sobre o Charge of Darkness: qualquer stun, root ou disable cancela a 
 
 ## Contra Io (wisp)
 - placar: 7 vitórias em 32 jogos de pro (21,9%, pior confronto do Spirit Breaker com amostra de 30+) (fonte: pro_dados/spirit_breaker.json, confrontos).
-- por que importa: a pior desvantagem do Spirit Breaker entre os confrontos com 30 ou mais jogos, de longe. Io é suporte flexível (catálogo marca [1,4,5]) e o kit dele anula justamente a ideia central do seu herói, que é prender um alvo específico.
+- por que importa: a pior desvantagem do Spirit Breaker entre os confrontos com 30 ou mais jogos, de longe. Io é suporte com gpm moderado (364, contra os seus 355) e o kit dele anula justamente a ideia central do seu herói, que é prender um alvo específico.
 - janelas: o jogo inteiro é dela, não existe janela sua clara. Até os 15 min ela já tem Magic Wand (6:48) e está tetherando o carry, compartilhando cura e velocidade. Relocate (teleporte global com o aliado tetherado) está disponível desde o nível 6 e vira a resposta padrão pra qualquer gank seu.
 - o que ele faz com você: Relocate teleporta Io e o aliado tetherado pra qualquer lugar do mapa, inclusive de volta depois, então mesmo um Charge perfeito pode terminar com o alvo simplesmente sumindo antes do Bash acertar. Tether dá velocidade de movimento extra pro aliado puxado, dificultando a perseguição mesmo sem usar a ultimate.
 - o que você faz com ele: pouco. Greater Bash ainda funciona se você conseguir acertar antes do Relocate, e, se você tiver o Aghanim's Shard, Planar Pocket pode redirecionar um Tether pra você em vez do alvo original (Spirits não entra nessa conta, é um feitiço sem alvo único). O timing é apertado de qualquer forma porque Relocate não é um feitiço de alvo único redirecionável (ele afeta Io e o tetherado junto).
@@ -176,10 +174,10 @@ Importante sobre o Charge of Darkness: qualquer stun, root ou disable cancela a 
 
 ## Contra Mirana (mirana)
 - placar: 14 vitórias em 40 jogos de pro (35,0%) (fonte: pro_dados/spirit_breaker.json, confrontos).
-- por que importa: terceira pior desvantagem com 30+ jogos e também mesma posição principal (catálogo marca Mirana como [4,5]), então o confronto junta "oponente direto de lane" com "matchup ruim pra você".
+- por que importa: terceira pior desvantagem com 30+ jogos e também perfil parecido de suporte com farm baixo (gpm 375 e 16 last hits aos 10 min, contra seus 355 e 14), então o confronto junta "oponente direto de lane" com "matchup ruim pra você".
 - janelas: na lane, Sacred Arrow tem alcance de mapa inteiro e stuna de longe antes de você chegar perto; é sempre a janela dela. Do nível 6 em diante, Moonlight Shadow (invisibilidade pro time inteiro) é a resposta padrão dela a qualquer rotação sua.
 - o que ele faz com você: Sacred Arrow pode te acertar de qualquer lugar do mapa, cancelando sua aproximação antes mesmo de você começar a carregar, com stun de até 2,6 s dependendo da distância percorrida. Leap dá ela velocidade de ataque e movimento bônus por 5 s, o suficiente pra correr de uma carga sem precisar de item. Moonlight Shadow deixa o time dela invisível bem na hora que você inicia, tirando a visão que seu Charge precisa pra manter o alvo.
 - o que você faz com ele: Mirana tem pouca vida (375 de gpm) e, fora o Leap, nenhuma fuga garantida contra um gank bem posicionado; se você aparecer fora do alcance de visão dela antes da flecha, ela não tem tempo de reagir.
 - itens que viram: Sentry do seu lado anula o Moonlight Shadow dela bem na hora da luta; do lado dela, Blink Dagger de aliado combinado com a arrow aumenta o alcance efetivo de punir sua entrada.
 - como jogar: aproxime-se fora da linha de visão dela, pela floresta, pra evitar a flecha. Se ela usar Moonlight Shadow, tenha sentry pronta ou espere o efeito acabar antes de comprometer o Charge.
-- fonte: pro_dados/spirit_breaker.json; pro_dados/mirana.json; constants_abilities.json (mirana_arrow, mirana_leap, mirana_invis); herois_catalogo.json.
+- fonte: pro_dados/spirit_breaker.json; pro_dados/mirana.json; constants_abilities.json (mirana_arrow, mirana_leap, mirana_invis).

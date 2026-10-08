@@ -23,8 +23,7 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/clinkz.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
+- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 
@@ -120,13 +119,13 @@ fontes:
 
 ## Contra Morphling
 - placar: Clinkz venceu 17 de 28 partidas de pro, 60,7%, amostra pequena (fonte: pro_dados/clinkz.json, confrontos).
-- por que importa: o par clássico de dois carries que raramente cruzam lane mas moldam o jogo um pelo outro, os dois agilidade ranged que vivem de autoataque e mobilidade. É o exemplo que o dono pediu pra não deixar de fora mesmo com amostra pequena, igual alchemist contra morphling.
+- por que importa: o par clássico de dois carries que raramente cruzam lane mas moldam o jogo um pelo outro, os dois agilidade ranged que vivem de autoataque e mobilidade.
 - janelas: Morphling sai de Yasha aos 14:36 e Manta aos 18:24 (mediana, 761 e 716 de 871 partidas, pro_dados/morphling.json), pouco atrás do Desolator do Clinkz (14:18). Dos 14 aos 18 min Clinkz tem a vantagem de dano puro; depois do Manta, Morphling ganha ilusões pra dividir farm e esquiva de boa parte do burst, porque Waveform é invulnerável durante o dash. Late game ele troca atributo pra Força via Attribute Shift e fica quase impossível de burstar, enquanto Clinkz segue 100% dependente de um pico de crítico.
 - o que ele faz com você: Waveform é um dash invulnerável que escapa de qualquer combo, inclusive do Burning Barrage (constants_abilities.json, morphling_waveform). Se ele der Replicate no próprio Clinkz, ganha Strafe e Searing Arrows por 24s, raro mas possível.
 - o que você faz com ele: antes do Manta (18:24), Morphling não tem como esquivar fisicamente do Strafe mais Desolator. Burning Barrage ainda acerta mesmo que ele tente recuar, porque cobre uma linha inteira.
-- itens que viram: Desolator é decisivo antes do Manta dele. Depois, Eye of Skadi corta 50% da cura e da regeneração do alvo (dota-hub/content/fichas/clinkz.md), a resposta certa ao Attribute Shift pra Força porque reduz o quanto ele sustenta a troca.
+- itens que viram: Desolator é decisivo antes do Manta dele. Depois, Eye of Skadi corta 50% da cura e da regeneração do alvo (items.json, skadi), a resposta certa ao Attribute Shift pra Força porque reduz o quanto ele sustenta a troca.
 - como jogar: pressione antes dos 18 min, quando ele ainda não tem Manta nem Waveform de recarga curta. Depois disso, jogue pelo pick isolado em vez de 1x1 direto, porque ele escapa fácil.
-- fonte: pro_dados/clinkz.json; pro_dados/morphling.json; constants_abilities.json (morphling_waveform, morphling_replicate, morphling_morph_str); dota-hub/content/fichas/clinkz.md (skadi).
+- fonte: pro_dados/clinkz.json; pro_dados/morphling.json; constants_abilities.json (morphling_waveform, morphling_replicate, morphling_morph_str); items.json (skadi).
 
 ## Contra Clockwerk (rattletrap)
 - placar: Clinkz venceu 41 de 62 partidas de pro, 66,1%, maior % de vitória entre os oponentes com 30 ou mais jogos (fonte: pro_dados/clinkz.json, confrontos).
@@ -163,10 +162,10 @@ fontes:
 - por que importa: Living Armor é a resposta direta ao plano de jogo do Clinkz, que é quase 100% autoataque, por isso é a maior desvantagem da lista.
 - janelas: Treant é suporte (gpm 301, lh10 7, pro_dados/treant.json), sem power spike de item, mas o impacto dele independe de farm, porque Living Armor e Overgrowth escalam só com nível de habilidade. A partir do momento em que ele tem Living Armor em qualquer aliado ou em si mesmo, parte do autoataque de Searing Arrows simplesmente não conta, do early ao late.
 - o que ele faz com você: Living Armor bloqueia até 120 de dano físico por aplicação no nível máximo, decrescendo 20 por hit bloqueado, e ainda cura 13 de vida por segundo (constants_abilities.json, treant_living_armor). Como Searing Arrows soma dano fixo por ataque, esse é o contador exato do kit do Clinkz: cada autoataque esvazia o escudo em vez de tirar vida de verdade. Overgrowth impede invisibilidade, movimento e ataque por até 5s num raio de 800, cancelando Skeleton Walk e Strafe ao mesmo tempo.
-- o que você faz com ele: Desolator reduz armadura mas não ajuda contra o bloqueio fixo da Living Armor. A resposta real é ignorar quem está com o escudo ativo e focar outro alvo, ou acumular Infernal Shred, que penetra até 20% da armadura por stack, pra pelo menos manter algum dano passando.
+- o que você faz com ele: Desolator reduz armadura mas não ajuda contra o bloqueio fixo da Living Armor. A resposta real é ignorar quem está com o escudo ativo e focar outro alvo, ou acumular Infernal Shred, que soma 3% de penetração de armadura por ataque de Clinkz (1% por esqueleto) até um teto de 20% no total, pra pelo menos manter algum dano passando.
 - itens que viram: Orchid ou Bloodthorn silenciam Treant antes dele reaplicar Living Armor ou soltar Overgrowth, o item que mais muda essa troca a favor do Clinkz. Black King Bar não ajuda contra o Overgrowth, porque ele atravessa Black King Bar (constants_abilities.json), e também não resolve o bloqueio de dano fixo da Living Armor, que é passivo.
 - como jogar: não troque autoataque contra um alvo com Living Armor ativa, mude de alvo. Guarde Orchid ou Bloodthorn pra abrir em cima do Treant antes dele reaplicar o escudo ou soltar Overgrowth numa teamfight.
-- fonte: pro_dados/clinkz.json; pro_dados/treant.json; constants_abilities.json (treant_living_armor, treant_overgrowth, clinkz_infernal_shred); dota-hub/content/fichas/clinkz.md (orchid).
+- fonte: pro_dados/clinkz.json; pro_dados/treant.json; constants_abilities.json (treant_living_armor, treant_overgrowth, clinkz_infernal_shred); items.json (orchid, bloodthorn).
 
 ## Contra Spirit Breaker
 - placar: Clinkz venceu 18 de 55 partidas de pro, 32,7%, 2ª pior % de vitória entre os oponentes com 30 ou mais jogos (fonte: pro_dados/clinkz.json, confrontos).
@@ -186,4 +185,4 @@ fontes:
 - o que você faz com ele: Dazzle não tem fuga própria nem muito HP. Se Clinkz conseguir isolar ele sem o alvo do Shallow Grave por perto, mata rápido.
 - itens que viram: Orchid ou Bloodthorn silenciam Dazzle antes dele reagir com Shallow Grave no aliado alvo, o item que resolve a troca. Sem silence, o burst esbarra direto no Shallow Grave e a luta vira atrito, que favorece o time com suporte vivo.
 - como jogar: identifique quem é o alvo prioritário do Dazzle antes de abrir o combo e, se possível, mate ele primeiro ou silencie no cast do Shallow Grave. Nunca gaste o burst inteiro achando que vai executar um alvo com Shallow Grave ativo.
-- fonte: pro_dados/clinkz.json; pro_dados/dazzle.json; constants_abilities.json (dazzle_shallow_grave, dazzle_poison_touch); dota-hub/content/fichas/clinkz.md (orchid).
+- fonte: pro_dados/clinkz.json; pro_dados/dazzle.json; constants_abilities.json (dazzle_shallow_grave, dazzle_poison_touch); items.json (orchid, bloodthorn).

@@ -23,11 +23,11 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
+- https://api.opendota.com/api/explorer (player_matches.lane_role, partidas de liga 7.40+7.41)
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 
-Invoker joga de pos 2 em praticamente 100% das partidas de pro (nos 8 times tier 1 mapeados ele nunca aparece fora do mid, fonte: herois_catalogo.json). Isso explica dois padrões nos confrontos abaixo: os heróis com mais jogos contra ele nem sempre dividem lane, muitos são suportes que rotacionam cedo porque Invoker é um dos mids mais fracos do jogo antes do nível 7 (sem Invoke maduro, sem burst, vida baixa); e quando o jogo estica, ele também decide duelos contra carries que nunca o enfrentaram na lane, só depois, em teamfight ou pick tardio.
+Invoker joga de pos 2 em 94,4% das partidas de pro do patch 7.40+7.41 (1919 de 2033 jogos com lane_role mid, OpenDota explorer). Isso explica dois padrões nos confrontos abaixo: os heróis com mais jogos contra ele nem sempre dividem lane, muitos são suportes que rotacionam cedo porque Invoker é um dos mids mais fracos do jogo antes do nível 7 (sem Invoke maduro, sem burst, vida baixa); e quando o jogo estica, ele também decide duelos contra carries que nunca o enfrentaram na lane, só depois, em teamfight ou pick tardio.
 
 ## Contra Shadow Fiend (nevermore)
 - placar: 220 vitórias do Invoker em 431 jogos de pro, 51,0% (pro_dados/invoker.json, patches 7.40+7.41)
@@ -41,7 +41,7 @@ Invoker joga de pos 2 em praticamente 100% das partidas de pro (nos 8 times tier
 
 ## Contra Rubick (rubick)
 - placar: 163 vitórias do Invoker em 319 jogos, 51,1% (pro_dados/invoker.json)
-- por que importa: segundo maior volume de jogos em pro contra o Invoker. Rubick joga de suporte (pos 4/5, herois_catalogo.json) e não divide lane fixa com ele, mas rotaciona cedo pra matar o mid mais frágil do jogo, e Spell Steal rouba o último feitiço do combo dele em qualquer fase.
+- por que importa: segundo maior volume de jogos em pro contra o Invoker. Rubick joga majoritariamente na rota de off como suporte (lane_role 3 em 69,7% das partidas pro, OpenDota explorer) e não divide lane fixa com ele, mas rotaciona cedo pra matar o mid mais frágil do jogo, e Spell Steal rouba o último feitiço do combo dele em qualquer fase.
 - janelas: até 15 min Rubick é reativo, só ameaça se roubar um Sun Strike ou EMP bem usado. A partir dos 17-21 min, com Blink Dagger (21,6 min, pro_dados/rubick.json) e Aether Lens (22,9 min), ele consegue iniciar de longe. Depois dos 27 min, com Aghanim's Scepter (27,4 min) ele guarda 2 feitiços roubados em vez de 1, o que multiplica o risco de qualquer combo seu virar arma dele.
 - o que ele faz com você: Spell Steal copia seu último feitiço lançado (Sun Strike ou Tornado viram dele por até 5 minutos, duração escala com nível de Spell Steal), Telekinesis te levanta e estunta no pouso, Fade Bolt reduz seu dano mágico por 10s.
 - o que você faz com ele: não solte seu feitiço mais forte perto dele sem necessidade, isso é Spell Steal de graça. Cold Snap e EMP têm menos valor como "feitiço roubável" pra ele do que Sun Strike, prefira abrir combo com eles quando ele estiver por perto.

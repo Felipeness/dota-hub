@@ -22,8 +22,6 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/dark_willow.md
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 
@@ -79,9 +77,9 @@ fontes:
 
 ## Contra Snapfire (snapfire)
 - placar: 89 vitórias em 208 jogos de pro, 42,8% (OpenDota explorer, matchups de Dark Willow)
-- por que importa: quinto mais jogado contra ela em pro, mesma função de suporte de pick-off cedo, duelo direto de quem estoura o combo primeiro
+- por que importa: sexto mais jogado contra ela em pro, mesma função de suporte de pick-off cedo, duelo direto de quem estoura o combo primeiro
 - janelas: Snapfire liga o burst muito cedo. O Aghanim's Shard dela sai aos 16:54 (1.919 de 2.456 jogos, pro_dados/snapfire.json), bem antes do seu Blink (25:54) e também antes do seu Aghanim's Shard (29:12). É o power spike mais adiantado desta lista inteira. O Blink dela só sai aos 20:42, então entre 17 e 26 min ela ameaça de longe com Mortimer Kisses acelerado antes de você conseguir fechar com o combo completo
-- o que ele faz com você: Mortimer Kisses é um nuke pesado em área que não fura BKB mas também não precisa, o combo dela é matar antes de você reagir. Scatterblast desacelera forte de perto (100% de lentidão de movimento e de ataque no alcance mínimo, constants_abilities.json), sem atordoar, útil pra impedir você de fechar o Blink em cima dela
+- o que ele faz com você: Mortimer Kisses é um nuke pesado em área que não fura BKB mas também não precisa, o combo dela é matar antes de você reagir. Scatterblast já desacelera 100% o movimento e o ataque em qualquer alcance, e perto da Snapfire (alcance mínimo) essa lentidão dura 50% mais (constants_abilities.json), sem atordoar, útil pra impedir você de fechar o Blink em cima dela
 - o que você faz com ele: Cursed Crown pré-castada antes dela começar o canal do Mortimer Kisses cancela a tentativa, já que ela fica com giro reduzido durante a canalização. Bramble Maze prende ela perto o bastante pra travar o Scatterblast de resposta
 - itens que viram: o Aghanim's Shard dela (16:54) é o que faz ela bater o pico muito antes do suporte padrão, inclusive antes do seu; na prática ele upa o Firesnap Cookie pra curar e lançar um Mortimer Kiss extra, não o Mortimer Kisses em si (aghs_desc). O seu Blink (25:54) é a resposta, dá alcance pra fechar antes dela carregar o nuke de novo
 - como jogar: antes dos 17 min, não ande sozinha no alcance dela, o Shard já mudou o jogo cedo. Depois do seu Blink, mire Cursed Crown assim que ela começar a mirar o Mortimer Kisses, cancela o canal e inverte quem morre
@@ -89,7 +87,7 @@ fontes:
 
 ## Contra Disruptor (disruptor)
 - placar: 96 vitórias em 191 jogos de pro, 50,3% (OpenDota explorer, matchups de Dark Willow)
-- por que importa: sexto mais jogado contra ela e mesma posição 4/5, duelo direto de dois suportes sem mobilidade própria no kit base, que dependem do Blink pra engajar
+- por que importa: sétimo mais jogado contra ela e mesma posição 4/5, duelo direto de dois suportes sem mobilidade própria no kit base, que dependem do Blink pra engajar
 - janelas: nenhum dos dois tem item core cedo, os dois sobem devagar. O Blink de Disruptor sai aos 24:00 (1.128 de 2.521 jogos, pro_dados/disruptor.json), um pouco antes do seu (25:54). Entre 24 e 26 min ele tem uma pequena janela de iniciativa, depois disso os dois têm a mesma ferramenta de fechar distância
 - o que ele faz com você: Glimpse te teleporta pra onde você estava 4 segundos atrás, pode cancelar um reposicionamento ou um Blink que você acabou de dar. Static Storm silencia em área, o que impede você de castar Cursed Crown ou Bramble Maze enquanto estiver dentro
 - o que você faz com ele: Cursed Crown pré-castada antes dele formar o Kinetic Field evita que ele prenda seu time dentro da barreira. Bramble Maze prende ele perto o bastante pra impedir o combo de Thunder Strike mais Static Storm
@@ -99,7 +97,7 @@ fontes:
 
 ## Contra Lion (lion)
 - placar: 81 vitórias em 182 jogos de pro, 44,5% (OpenDota explorer, matchups de Dark Willow)
-- por que importa: sétimo mais jogado contra ela e mesma posição 4/5. É o confronto mais clássico de pick-off contra pick-off da lista, os dois vivem de isolar e estourar um alvo só, quem acerta primeiro ganha a troca
+- por que importa: décimo mais jogado contra ela e mesma posição 4/5. É o confronto mais clássico de pick-off contra pick-off da lista, os dois vivem de isolar e estourar um alvo só, quem acerta primeiro ganha a troca
 - janelas: o Blink de Lion sai aos 18:12 (2.412 de 2.775 jogos, pro_dados/lion.json), bem antes do seu (25:54). Até os 25 min ele tem iniciativa pra fechar Hex mais Finger of Death primeiro. O Aghanim's Shard dele só sai aos 25:48, quase junto do seu Blink, e é quando a troca de iniciativa equilibra
 - o que ele faz com você: Hex desabilita qualquer coisa que você esteja prestes a lançar, incluindo o cast de Cursed Crown ou Bramble Maze. Finger of Death é dano massivo de alvo único, pode te matar sozinha se Hex já tiver travado você antes
 - o que você faz com ele: Mana Drain é canalizado e rouba sua mana. Antes do Aghanim's Shard dele (25:48) dá pra interromper o canal com Cursed Crown, mas depois do Shard ele fica imune a debuff e com 60% de resistência mágica enquanto canaliza (aghs_desc), então interromper deixa de funcionar e a única resposta é matar ele rápido ou sair do alcance
@@ -109,7 +107,7 @@ fontes:
 
 ## Contra Spirit Breaker (spirit_breaker)
 - placar: 64 vitórias em 130 jogos de pro, 49,2% (OpenDota explorer, matchups de Dark Willow)
-- por que importa: nono mais jogado contra ela e mesma posição 4. Sem lane fixa em comum, porque Spirit Breaker costuma rotear cedo, mas o Charge dele caça à distância, então ele ameaça você em qualquer parte do mapa, não só na lane
+- por que importa: mesma posição 4. Sem lane fixa em comum, porque Spirit Breaker costuma rotear cedo, mas o Charge dele caça à distância, então ele ameaça você em qualquer parte do mapa, não só na lane
 - janelas: Spirit Breaker liga cedo com Chainmail (7:36) e Phase Boots (9:24, pro_dados/spirit_breaker.json), sem precisar de Blink pra caçar, já que Charge of Darkness alcança o mapa inteiro desde o nível 1. O Shadow Blade dele (22:54) chega antes do seu Blink (25:54), dando a ele uma forma extra de se aproximar sem ser vista. Antes dos 25 min ele costuma caçar mais do que é caçado, porque você não tem nenhuma mobilidade própria no kit base pra fugir do Charge
 - o que ele faz com você: Charge of Darkness mira você de qualquer distância visível no mapa e acelera até o impacto, Greater Bash no contato atordoa e empurra. Bulldoze dá resistência a status enquanto ele carrega, então um root sozinho de Bramble Maze não quebra o Charge com certeza
 - o que você faz com ele: Bramble Maze plantada na rota de Charge pelo menos reduz a chance de ele furar com Bulldoze ativo, e ainda causa dano ao longo do tempo nele. Cursed Crown pré-castada, se ele já estiver perto o bastante, estoura antes dele conseguir fechar o Nether Strike, que precisa de alcance maior pra ativar
@@ -168,9 +166,9 @@ fontes:
 - fonte: pro_dados/dark_willow.json; pro_dados/treant.json; constants_abilities.json (treant_overgrowth, treant_living_armor, treant_leech_seed, dark_willow_cursed_crown, dark_willow_shadow_realm)
 
 ## Contra Alchemist (alchemist)
-- placar: 11 vitórias em 33 jogos de pro, 33,3%, terceira maior desvantagem da lista, amostra no limite dos 30 jogos (OpenDota explorer, matchups de Dark Willow)
-- por que importa: terceira pior taxa de vitória dela contra heróis com amostra relevante, e sem nenhuma lane em comum (Alchemist é carry 1 que farma a jungle a partida inteira). É exatamente o confronto que não aparece na lane mas decide o jogo: ela caça suporte e core isolado, ele é o core que mais cresce rápido desta lista inteira
-- janelas: Alchemist é disparado o farm mais rápido da lista, 63 last hits aos 10 min contra 7 dela (pro_dados/alchemist.json e pro_dados/dark_willow.json), puxado por Greevil's Greed, que dá ouro extra a cada abate. Radiance sai aos 13:54 (672 de 796 jogos) e já limpa camp grande sozinho. O Black King Bar dele sai aos 25:06, antes do seu Blink (25:54), então na primeira vez que você tenta engajar nele com o combo completo, ele já está imune a feitiço há quase um minuto
+- placar: 11 vitórias em 33 jogos de pro, 33,3%, uma das maiores desvantagens da lista, amostra no limite dos 30 jogos (OpenDota explorer, matchups de Dark Willow)
+- por que importa: uma das piores taxas de vitória dela contra heróis com amostra relevante, e sem nenhuma lane em comum (Alchemist é carry 1 que farma a jungle a partida inteira). É exatamente o confronto que não aparece na lane mas decide o jogo: ela caça suporte e core isolado, ele é o core com o maior ganho de ouro por minuto desta lista inteira
+- janelas: Alchemist tem o maior gpm da lista (768, pro_dados/alchemist.json), puxado por Greevil's Greed, que dá ouro extra a cada abate: 63 last hits aos 10 min contra 7 dela (pro_dados/alchemist.json e pro_dados/dark_willow.json), embora o farm em last hits de Shadow Fiend (78) seja ainda maior. Radiance sai aos 13:54 (672 de 796 jogos) e já limpa camp grande sozinho. O Black King Bar dele sai aos 25:06, antes do seu Blink (25:54), então na primeira vez que você tenta engajar nele com o combo completo, ele já está imune a feitiço há quase um minuto
 - o que ele faz com você: Chemical Rage reduz o cooldown de ataque e aumenta regen, fazendo ele te caçar de volta em vez de só fugir do farm. Unstable Concoction atordoa em área e quanto mais tempo ele carrega mais dano e atordoamento dura, pode punir você se aproximando sozinha
 - o que você faz com ele: antes do BKB dele (25:06), Cursed Crown mais Bramble Maze travam ele e cortam o farm por alguns segundos, o que dói muito num herói que vive de ouro por minuto. Depois do BKB, nenhuma das suas habilidades fura (bkbpierce: No em todas), então não existe resposta de controle sua sozinha, só focar ele com o time quando o BKB cair
 - itens que viram: o Black King Bar dele (25:06) é a linha, chega antes do seu Blink (25:54) e apaga de vez o seu win condition de controle. O Radiance (13:54) é o que financia o resto da build rápido o bastante pra isso acontecer

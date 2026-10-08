@@ -24,13 +24,6 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/gyrocopter.md
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/alchemist.md
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/morphling.md
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/shadow_fiend.md
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/tiny.md
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/luna.md
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 
@@ -75,12 +68,12 @@ Gyrocopter é carry (pos1) quase sempre, sem lane fixa contra metade dos heróis
 
 - placar: 113V/235 (48,1%) a favor do Gyro (`pro_dados/gyrocopter.json`, confrontos).
 - por que importa: 4º oponente com mais jogos profissionais contra o Gyro e mesma função: carry de agilidade que também fecha Falcon Blade e Treads cedo, com muita lane em comum na fase 1.
-- janelas: até 5 min, os dois abrem quase igual (SF Falcon Blade 4:48, Gyro 5:18, `content/porque_itens/shadow_fiend.md`); quem acerta mais Shadowraze ou Rocket Barrage puxa a lane. 10-16 min, SF fecha Mask of Madness (10:36) e dobra o ritmo de farm; o Gyro ainda está montando o crit. Depois de 18 min, o Gyro fecha Scepter (18:30) e o Side Gunner (bkb-pierce) resolve contra um BKB que SF só fecha bem mais tarde (26:24).
+- janelas: até 6 min, os dois abrem perto (SF Falcon Blade 6:12, Gyro 5:18, partidas pro 7.40-7.41 (OpenDota)); quem acerta mais Shadowraze ou Rocket Barrage puxa a lane. 10-16 min, SF fecha Mask of Madness (10:12) e dobra o ritmo de farm; o Gyro ainda está montando o crit. Depois de 18 min, o Gyro fecha Scepter (18:30) e o Side Gunner (bkb-pierce) resolve contra um BKB que SF só fecha bem mais tarde (25:12).
 - o que ele faz com você: Shadowraze (3 posições, sem stun, mas escala com Necromastery) chunka seu HP de longe se você ficar parado perto da linha de creep; Requiem of Souls (até 20 almas, dano em área ao redor do próprio SF) pune quem entra perto dele depois do nível 6.
 - o que você faz com ele: SF não tem stun nem escape no kit; Homing Missile (stun até 2,5s) trava ele parado pro resto do combo, e Flak Cannon ignora o Manta Style que ele compra (16:00), porque as imagens dele tomam 300% de dano de qualquer jeito.
-- itens que viram: seu Black King Bar (24:36) fecha quase 2 minutos antes do dele (26:24): nessa janela você pode iniciar sem medo do combo de Raze.
+- itens que viram: seu Black King Bar (24:36) fecha pouco antes do dele (25:12): nessa janela você pode iniciar sem medo do combo de Raze.
 - como jogar: na lane, respeite o alcance do Shadowraze e não fique parado em cima de creep morto; depois do seu Scepter, cace SF isolado, porque ele não tem como fugir do Homing Missile.
-- fonte: pro_dados/gyrocopter.json; pro_dados/nevermore.json; content/porque_itens/shadow_fiend.md; constants_abilities.json (nevermore_shadowraze1, nevermore_requiem)
+- fonte: pro_dados/gyrocopter.json; pro_dados/nevermore.json; constants_abilities.json (nevermore_shadowraze1, nevermore_requiem)
 
 ## Contra Snapfire (snapfire)
 
@@ -108,12 +101,12 @@ Gyrocopter é carry (pos1) quase sempre, sem lane fixa contra metade dos heróis
 
 - placar: 107V/211 (50,7%) a favor do Gyro (`pro_dados/gyrocopter.json`, confrontos).
 - por que importa: carry pos1 clássico, com 211 jogos profissionais contra o Gyro; mesma função, os dois são carries de item rápido que também conseguem iniciar sozinhos.
-- janelas: até 6 min, Tiny fecha Treads (6:00, `content/porque_itens/tiny.md`) perto do Gyro (7:30), mas o Gyro tem sustain de mana com Falcon Blade (5:18). 12-18 min, Tiny fecha Echo Sabre (11:48) e ameaça o combo Avalanche+Toss; o Gyro ainda não tem Scepter. Depois de 18 min, o Gyro puxa Scepter (18:30) e o Flak Cannon ignora o Shadow Blade (17:36) de Tiny assim que ele sai da invisibilidade, porque o dano em área já está ligado.
+- janelas: até 6 min, Tiny fecha Treads (6:06, partidas pro 7.40-7.41 (OpenDota)) perto do Gyro (7:30), mas o Gyro tem sustain de mana com Falcon Blade (5:18). 12-18 min, Tiny fecha Echo Sabre (12:06) e ameaça o combo Avalanche+Toss; o Gyro ainda não tem Scepter. Depois de 18 min, o Gyro puxa Scepter (18:30) e o Flak Cannon ignora o Shadow Blade (17:36) de Tiny assim que ele sai da invisibilidade, porque o dano em área já está ligado.
 - o que ele faz com você: Avalanche (stun em área) seguido de Toss (te agarra e te joga) é o combo clássico de pickoff; sem fuga própria, quem é pego nesse combo raramente sai.
 - o que você faz com ele: Homing Missile (stun 1,3 a 2,5s) interrompe o Toss antes dele agarrar; Flak Cannon bate nele mesmo corpo a corpo, porque o raio de 1250 cobre a distância toda.
-- itens que viram: seu BKB (24:36) bloqueia o Avalanche; ele fecha o Silver Edge (25:36) depois pra te pegar sem passiva, então vale visão contra invisível nessa fase.
+- itens que viram: seu BKB (24:36) bloqueia o Avalanche; mesmo sem upgrade, o Shadow Blade (17:36) já deixa Tiny reentrar invisível, então vale visão contra invisível nessa fase.
 - como jogar: não ande sozinho perto de árvores (Toss precisa de alvo próximo pra jogar); depois do seu BKB, o combo dele deixa de te travar e o Flak Cannon resolve a troca.
-- fonte: pro_dados/gyrocopter.json; pro_dados/tiny.json; content/porque_itens/tiny.md; constants_abilities.json (tiny_avalanche, tiny_toss)
+- fonte: pro_dados/gyrocopter.json; pro_dados/tiny.json; constants_abilities.json (tiny_avalanche, tiny_toss)
 
 ## Contra Windranger (windrunner)
 
@@ -185,12 +178,12 @@ Gyrocopter é carry (pos1) quase sempre, sem lane fixa contra metade dos heróis
 
 - placar: 11V/34 (32,4%) contra o Gyro (`pro_dados/gyrocopter.json`, confrontos).
 - por que importa: 3ª maior desvantagem do Gyro entre os confrontos com 30+ jogos, e o exemplo clássico de dois hard carries sem lane em comum: os dois são quase sempre pos1, raramente na mesma rota, mas disputam o mesmo espaço de farm e o mesmo horário de luta.
-- janelas: até 14 min, Alchemist puxa Radiance (13:54, `content/porque_itens/alchemist.md`) e já farma 2 camps ao mesmo tempo; o Gyro, mesmo com Falcon Blade (5:18) e Treads (7:30) prontos, ainda está montando o crit (13:12) e perde a corrida de farm nessa janela. 18-23 min, Alchemist fecha o Scepter (22:24) e segue pro Blink Dagger, montando o combo Unstable Concoction; o Gyro fecha o Scepter dele antes disso (18:30), mas ainda sem BKB. Depois de 24 min, o Gyro fecha BKB (24:36), que bloqueia o stun do Unstable Concoction, e o Flak Cannon ignora a evasão do Talisman of Evasion que o Alchemist carrega; a partir daí a troca pende pro Gyro.
+- janelas: até 14 min, Alchemist puxa Radiance (13:54, `pro_dados/alchemist.json`) e já farma 2 camps ao mesmo tempo; o Gyro, mesmo com Falcon Blade (5:18) e Treads (7:30) prontos, ainda está montando o crit (13:12) e perde a corrida de farm nessa janela. 18-23 min, Alchemist fecha o Scepter (22:24) e segue pro Blink Dagger, montando o combo Unstable Concoction; o Gyro fecha o Scepter dele antes disso (18:30), mas ainda sem BKB. Depois de 24 min, o Gyro fecha BKB (24:36), que bloqueia o stun do Unstable Concoction, e o Flak Cannon ignora a evasão do Talisman of Evasion que o Alchemist carrega; a partir daí a troca pende pro Gyro.
 - o que ele faz com você: Unstable Concoction carregado seguido de Blink é o combo de all-in: até 360 de dano físico e um stun que, sem BKB, te tira da luta antes dela começar; Chemical Rage (mais regen e velocidade de ataque) deixa ele sustentar a troca por mais tempo que você.
 - o que você faz com ele: Flak Cannon (bkb-pierce) acerta mesmo que ele feche o BKB próprio; Homing Missile (stun) interrompe a aproximação dele antes do Unstable Concoction detonar.
 - itens que viram: seu BKB (24:36) bloqueia o stun do Unstable Concoction; antes disso, a janela 14-24 min é a pior pra te engajar sozinho contra ele.
 - como jogar: não dispute farm de jungle direto com Alchemist antes do seu BKB, porque ele vence essa corrida; depois do seu BKB, vire caçador, porque ele perde o único disable que tinha.
-- fonte: pro_dados/gyrocopter.json; pro_dados/alchemist.json; content/porque_itens/alchemist.md; constants_abilities.json (alchemist_unstable_concoction, alchemist_chemical_rage)
+- fonte: pro_dados/gyrocopter.json; pro_dados/alchemist.json; constants_abilities.json (alchemist_unstable_concoction, alchemist_chemical_rage)
 
 ## Contra Morphling (morphling)
 
@@ -201,7 +194,7 @@ Gyrocopter é carry (pos1) quase sempre, sem lane fixa contra metade dos heróis
 - o que você faz com ele: Homing Missile tem 2,5s de pré-voo e pode ser abatido, então raramente pega um Morphling atento; Flak Cannon (bkb-pierce) continua acertando mesmo que ele feche BKB, e ele não tem spell immunity própria fora do item.
 - itens que viram: seu Scepter (18:30) chega praticamente junto do Manta dele (18:24), mas o seu dano em área não perde valor contra imagem, porque as dele tomam 300% de dano; seu BKB (24:36) fecha bem antes do dele.
 - como jogar: não gaste o Homing Missile de longe esperando acerto garantido, porque ele destrói o míssil ou sai da rota; na troca direta, o Flak Cannon ganha a corrida de DPS enquanto ele ainda não tem BKB.
-- fonte: pro_dados/gyrocopter.json; pro_dados/morphling.json; content/porque_itens/morphling.md; constants_abilities.json (morphling_waveform, morphling_adaptive_strike_agi, gyrocopter_homing_missile)
+- fonte: pro_dados/gyrocopter.json; pro_dados/morphling.json; constants_abilities.json (morphling_waveform, morphling_adaptive_strike_agi, gyrocopter_homing_missile)
 
 ## Contra Luna (luna)
 

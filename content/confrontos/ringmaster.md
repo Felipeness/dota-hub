@@ -23,24 +23,6 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
 - https://api.opendota.com/api/constants/aghs_desc
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/ringmaster.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/jakiro.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/hoodwink.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/tusk.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/disruptor.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/rubick.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/mars.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/snapfire.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/warlock.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/phoenix.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/skywrath_mage.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/troll_warlord.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/vengefulspirit.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/keeper_of_the_light.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/lycan.md
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/alchemist.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/alchemist.json
 ---
 
 ## Contra Jakiro (jakiro)
@@ -49,9 +31,9 @@ fontes:
 - janelas: os dois sobem Arcane Boots quase juntos (Ringmaster 11,9 min, Jakiro 11,7) e TP perto dos 17 min (17,1 contra 16,6). Dos 17 aos 22 min é fase de poke, Dual Breath (850 de alcance) contra Impalement Arts (2400 de alcance, o Ringmaster bate de mais longe). Depois dos 22 o Ringmaster fecha utilidade de luta (Shadow Amulet 22,5, Glimmer Cape 23,7, Blink 28,0) enquanto Jakiro ainda está montando itens de luxo (sem minuto fino de Aghanim's Scepter na amostra local, mas o componente staff_of_wizardry sai mediana 25,1 min).
 - o que ele faz com você: Ice Path (alcance de conjuração 1100) forma uma parede que estuna quem toca; se Macropyre (alcance 1400, 10s de dano em área de 100 a 200/s) cai em cima de você logo depois, o efeito não tem dispel nenhum, nem forte nem básico, sair da área é a única saída.
 - o que você faz com ele: Jakiro tem vida baixa e zero mobilidade própria. Tame the Beasts (700 de alcance, até 480 de dano no canal cheio de 1s) e o fear de até 1,2s tiram ele de perto antes dele alinhar Ice Path, e Impalement Arts acerta ele de 2400 de distância enquanto ele ainda está fora do alcance de resposta.
-- itens que viram: seu Rod of Atos (raiz de 2s) garante o canal cheio do Tame the Beasts nele antes que ele fuja. O Black King Bar dele reduz o dano de Macropyre mas não limpa o fato de você estar pego na faixa, BKB sozinho não resolve o combo. Seu Glimmer Cape absorve quase inteiro um Dual Breath isolado.
+- itens que viram: seu Rod of Atos (raiz de 2s) garante o canal cheio do Tame the Beasts nele antes que ele fuja. O Black King Bar dele bloqueia o dano de Macropyre, mas não te tira da parede do Ice Path, BKB sozinho não resolve o combo. Seu Glimmer Cape absorve quase inteiro um Dual Breath isolado.
 - como jogar: não ande em linha reta perto de Jakiro depois do nível 6 dele, Ice Path é parede, cobre rota inteira, não é tiro pontual. Depois do seu Blink (28 min), pule nele antes dele alinhar Ice Path com Macropyre, sem isso ele não tem resposta de curto alcance.
-- fonte: pro_dados/ringmaster.json; pro_dados/jakiro.json; constants_abilities.json (jakiro_macropyre, jakiro_ice_path, jakiro_dual_breath, ringmaster_tame_the_beasts); content/fichas/jakiro.md; content/fichas/ringmaster.md.
+- fonte: pro_dados/ringmaster.json; pro_dados/jakiro.json; constants_abilities.json (jakiro_macropyre, jakiro_ice_path, jakiro_dual_breath, ringmaster_tame_the_beasts).
 
 ## Contra Hoodwink (hoodwink)
 - placar: Ringmaster venceu 139 de 283 (49,1%, equilibrado). Segundo oponente mais comum da base.
@@ -61,7 +43,7 @@ fontes:
 - o que você faz com ele: Hoodwink nasce com 75 de mana e 0 de regen, Tame the Beasts e Impalement Arts seguidos já pressionam o pool dela cedo. Ela não tem fuga garantida além de Blink e Scurry, Rod of Atos ou o fear do Tame the Beasts cobrem o tempo que falta pra Impalement Arts acertar duas vezes.
 - itens que viram: seu Black King Bar bloqueia o stun mágico do Bushwhack. Seu Aghanim's Scepter transforma o Escape Act lançado nela (ou em quem ela focou) em dano de área quando a caixa abre.
 - como jogar: evite ficar parado perto de árvore sem visão depois dos 10 min, Bushwhack rende pick fácil. Depois do seu Blink (28 min) force a troca à distância, onde Impalement Arts (2400 de alcance) bate primeiro que o kit curto dela.
-- fonte: pro_dados/ringmaster.json; pro_dados/hoodwink.json; constants_abilities.json (hoodwink_bushwhack); aghs_desc (hoodwink shard, ringmaster scepter); content/fichas/hoodwink.md; content/fichas/ringmaster.md.
+- fonte: pro_dados/ringmaster.json; pro_dados/hoodwink.json; constants_abilities.json (hoodwink_bushwhack); aghs_desc (hoodwink shard, ringmaster scepter).
 
 ## Contra Tusk (tusk)
 - placar: Ringmaster venceu 135 de 283 (47,7%, levemente desfavorável). Terceiro oponente mais comum da base.
@@ -71,7 +53,7 @@ fontes:
 - o que você faz com ele: Tusk tem farm baixo (mediana 300 de ouro/min e 6 last hits aos 10 min, todas as posições) e kit curto (Walrus Kick alcança só 250, Walrus Punch 150). Impalement Arts acerta ele de 2400 de distância antes dele chegar perto, e o fear do Tame the Beasts tira ele do alcance curto do próprio combo.
 - itens que viram: seu Rod of Atos trava ele a 2s de raiz antes dele fechar a distância. O Blink Dagger dele desativa 3s depois de levar dano de herói, acertar ele primeiro de longe atrasa a iniciação.
 - como jogar: antes dos 19 min, ele ainda não tem Blink, fique perto de torre ou de visão própria. Depois disso assuma que ele pode iniciar de fora da sua visão, mantenha Tame the Beasts ou Impalement prontos pra responder assim que ele sair do Snowball.
-- fonte: pro_dados/ringmaster.json; pro_dados/tusk.json; constants_abilities.json (tusk_walrus_kick, tusk_snowball); content/fichas/tusk.md; content/fichas/ringmaster.md.
+- fonte: pro_dados/ringmaster.json; pro_dados/tusk.json; constants_abilities.json (tusk_walrus_kick, tusk_snowball).
 
 ## Contra Disruptor (disruptor)
 - placar: Ringmaster venceu 124 de 239 (51,9%). Quarto oponente mais comum.
@@ -79,9 +61,9 @@ fontes:
 - janelas: o Blink de Disruptor sai mediana 24,0 min, antes do Blink do Ringmaster (28,0). Entre 24 e 28 min, com visão e blink prontos, ele abre a luta sozinho com Kinetic Field (900 de alcance, prende numa parede de raio 350) seguido de Static Storm (800 de alcance, silencia área de raio 550 por 6s) antes do Ringmaster ter o próprio blink pra responder.
 - o que ele faz com você: Kinetic Field prende você numa parede que só sai saltando ou com dispel de movimento; Static Storm silencia por 6s em área, cancelando Tame the Beasts, Impalement e Escape Act ao mesmo tempo. Com Aghanim's Scepter (comprado em 24,4% das partidas pro da amostra), o silêncio também bloqueia uso de item.
 - o que você faz com ele: Disruptor tem 75 de mana base e 0 de regen, igual ao Ringmaster, pressão de poke cedo seca o combo dele. Impalement Arts acerta de 2400 de distância antes dele chegar nos 800-900 do próprio kit.
-- itens que viram: Lotus Orb reflete o Kinetic Field ou a própria Static Storm de volta nele antes de acertar. Seu Aghanim's Shard (Spotlight) revela ele se tentar fugir com Glimmer Cape. Contra o Scepter dele que silencia item, o Black King Bar só ajuda se vier antes do silêncio começar.
+- itens que viram: seu Aghanim's Shard (Spotlight) revela ele se tentar fugir com Glimmer Cape. Contra o Scepter dele que silencia item, o Black King Bar só ajuda se vier antes do silêncio começar.
 - como jogar: não entre em luta sem saber onde está o Disruptor, Static Storm com Scepter apaga toda a sua utilidade de item de uma vez. Se ele gastar Kinetic Field cedo demais sem seguir com Static Storm, é a sua janela.
-- fonte: pro_dados/ringmaster.json; pro_dados/disruptor.json; constants_abilities.json (disruptor_kinetic_field, disruptor_static_storm); content/fichas/disruptor.md; content/fichas/ringmaster.md.
+- fonte: pro_dados/ringmaster.json; pro_dados/disruptor.json; constants_abilities.json (disruptor_kinetic_field, disruptor_static_storm).
 
 ## Contra Rubick (rubick)
 - placar: Ringmaster venceu só 108 de 237 (45,6%), a pior taxa entre os seis oponentes com mais jogos pro contra ele. Quinto oponente mais comum da base.
@@ -91,7 +73,7 @@ fontes:
 - o que você faz com ele: Rubick tem vida fixa baixa e não tem fuga própria antes do item (Blink mediana 21,6 min). Tame the Beasts e Impalement Arts acertam ele de longe antes do combo dele alinhar.
 - itens que viram: evite lançar Wheel of Wonder ou Escape Act perto de um Rubick livre sem necessidade, ele fica rondando pra roubar magia forte. Seu Black King Bar não impede o Spell Steal (fura imunidade), a defesa real é matar ele rápido ou gastar a magia roubável numa situação de baixo risco.
 - como jogar: não gaste seu combo principal perto dele se não precisar. Depois que ele gastar o Spell Steal numa magia fraca, é a sua janela, o roubo fica em recarga de 16 a 4s conforme o nível dele.
-- fonte: pro_dados/ringmaster.json; pro_dados/rubick.json; constants_abilities.json (rubick_spell_steal, rubick_telekinesis); content/fichas/rubick.md; content/fichas/ringmaster.md.
+- fonte: pro_dados/ringmaster.json; pro_dados/rubick.json; constants_abilities.json (rubick_spell_steal, rubick_telekinesis).
 
 ## Contra Mars (mars)
 - placar: Ringmaster venceu 124 de 235 (52,8%). Sexto oponente mais comum e único offlaner (pos3) da lista.
@@ -101,17 +83,17 @@ fontes:
 - o que você faz com ele: Mars é melee e precisa fechar distância. Tame the Beasts (até 480 de dano, fear) tira ele do alcance de ataque antes dele travar o combo, e Rod of Atos trava a raiz dele por 2s pra garantir um canal cheio ou uma fuga segura de aliado.
 - itens que viram: Escape Act com Aghanim's Scepter em cima de um aliado preso na Arena of Blood vira dano de área nos inimigos cercados. Black King Bar do Ringmaster não ajuda contra o dano físico do kit dele, melhor investir em Ghost Scepter ou disparar Escape Act antes do cerco fechar.
 - como jogar: antes dos 15 min, assuma que Mars pode iniciar sozinho com Spear mesmo fora da sua lane. Depois disso, mantenha Escape Act de reserva pra tirar quem ele prender na Arena of Blood antes do cerco acabar.
-- fonte: pro_dados/ringmaster.json; pro_dados/mars.json; constants_abilities.json (mars_spear, mars_arena_of_blood, mars_bulwark); content/fichas/mars.md; content/fichas/ringmaster.md.
+- fonte: pro_dados/ringmaster.json; pro_dados/mars.json; constants_abilities.json (mars_spear, mars_arena_of_blood, mars_bulwark).
 
 ## Contra Snapfire (snapfire)
 - placar: Ringmaster venceu 108 de 204 (52,9%). Sétimo oponente mais comum, e o suporte flex mais jogado da lista (pos 2 a 5 no pro).
 - por que importa: maior volume de jogos pro fora dos seis primeiros (204); mesma briga por iniciação de curto alcance que o Ringmaster, só que ela ataca de mais longe com Firesnap Cookie.
 - janelas: o Aghanim's Shard de Snapfire é o item mais comprado dela no meio de jogo (mediana 16,9 min, libera o combo de heal+dano no Firesnap Cookie), bem antes do Blink do Ringmaster (28,0). O Blink dela sai mediana 20,7 min, 7 min antes do dele; nessa janela de 17 a 28 min ela consegue abrir luta primeiro quase sempre.
-- o que ela faz com você: Firesnap Cookie salta e atordoa de 1 a 2,2s no pouso; Scatterblast dá até 30% mais dano e 50% mais slow em quem está a até 450 de distância (point-blank), se ela blinka em cima de você o combo estoura quase sozinho.
+- o que ela faz com você: Firesnap Cookie salta e atordoa de 1 a 2,2s no pouso; Scatterblast dá até 30% mais dano e a duração do slow dura 50% mais em quem está a até 450 de distância (point-blank), se ela blinka em cima de você o combo estoura quase sozinho.
 - o que você faz com ele: Snapfire depende de ficar perto pro bônus de Scatterblast. Impalement Arts acerta ela de 2400 de distância antes dela chegar nesse alcance, e o fear do Tame the Beasts tira ela do raio de 450 antes do bônus ativar.
 - itens que viram: seu Black King Bar bloqueia o stun mágico do Firesnap Cookie. A Shiva's Guard dela (situacional) desliga quem depende de attack speed alto, não afeta o Ringmaster diretamente.
 - como jogar: evite lutar parado perto de 450 de distância dela depois do shard (16-17 min). Force a troca de longe com Impalement Arts, onde o alcance curto dela não chega.
-- fonte: pro_dados/ringmaster.json; pro_dados/snapfire.json; constants_abilities.json (snapfire_firesnap_cookie, snapfire_scatterblast); content/fichas/snapfire.md; content/fichas/ringmaster.md.
+- fonte: pro_dados/ringmaster.json; pro_dados/snapfire.json; constants_abilities.json (snapfire_firesnap_cookie, snapfire_scatterblast).
 
 ## Contra Warlock (warlock)
 - placar: Ringmaster venceu 92 de 176 (52,3%). Oitavo oponente mais comum.
@@ -121,7 +103,7 @@ fontes:
 - o que você faz com ele: Warlock não tem fuga própria além de item. Impalement Arts acerta de 2400 de distância antes dele chegar nos 800-1000 do próprio kit, e o fear do Tame the Beasts corta o canal de Upheaval se ele ainda não travou o alvo.
 - itens que viram: seu Rod of Atos garante o canal cheio do Tame the Beasts nele. Escape Act tira um aliado do raio de Fatal Bonds antes do dano compartilhado estourar. O Golem de Chaotic Offering atravessa parte da sua utilidade defensiva, Glimmer Cape ou Blink valem mais que Escape Act contra o ultimate dele.
 - como jogar: não fique parado perto do Golem depois que ele cair, o stun de entrada já custa a troca. Pressione a mana de 0 de regen inicial dele cedo, antes do Arcane Boots dele sair (12,35 min).
-- fonte: pro_dados/ringmaster.json; pro_dados/warlock.json; constants_abilities.json (warlock_fatal_bonds, warlock_upheaval); content/fichas/warlock.md; content/fichas/ringmaster.md.
+- fonte: pro_dados/ringmaster.json; pro_dados/warlock.json; constants_abilities.json (warlock_fatal_bonds, warlock_upheaval).
 
 ## Contra Phoenix (phoenix)
 - placar: Ringmaster venceu só 70 de 162 (43,2%), desvantagem clara mesmo com amostra grande. Nono oponente mais comum.
@@ -131,7 +113,7 @@ fontes:
 - o que você faz com ele: Phoenix usa a própria vida como recurso de feitiço (120 de vida base, mas cresce rápido em Força). Impalement Arts (sangramento por % da vida máxima por segundo) converte isso contra ela, Rod of Atos trava o Icarus Dive antes dela sair da área.
 - itens que viram: Escape Act não impede o estuar de Supernova (é em área, não alvo único direcionável), a resposta real é sair do raio antes da explosão ou usar Glimmer Cape pra sumir durante a janela. Aghanim's Scepter do Ringmaster (Escape Act em área) ajuda a tirar um aliado preso perto do Sun Ray dela.
 - como jogar: fique de olho no nível 6 dela, Supernova muda o resultado de qualquer troca cedo mesmo contra BKB. Evite ficar dentro do raio do Sun Ray por tempo demais, é dano constante que o Ringmaster não tem como limpar.
-- fonte: pro_dados/ringmaster.json; pro_dados/phoenix.json; content/fichas/phoenix.md (bkbpierce de Supernova, Icarus Dive e Fire Spirits); content/fichas/ringmaster.md.
+- fonte: pro_dados/ringmaster.json; pro_dados/phoenix.json; constants_abilities.json (bkbpierce de phoenix_supernova, phoenix_icarus_dive, phoenix_fire_spirits).
 
 ## Contra Skywrath Mage (skywrath_mage)
 - placar: Ringmaster venceu 84 de 140 (60,0%), a maior vantagem da lista com amostra grande (140 jogos). Décimo oponente mais comum e o melhor confronto do Ringmaster entre quem mais joga contra ele.
@@ -141,7 +123,7 @@ fontes:
 - o que você faz com ele: nenhuma habilidade de Skywrath atravessa Black King Bar, seu BKB anula o combo inteiro, não só o silêncio. Impalement Arts (2400 de alcance) acerta ele de fora do alcance de resposta, e Skywrath tem vida base baixa.
 - itens que viram: Black King Bar é a resposta direta contra o combo dele inteiro. Rod of Atos trava a fuga dele por 2s, tempo suficiente pra fechar o Tame the Beasts ou o segundo Impalement.
 - como jogar: se ele não tiver conectado BKB em você, o combo dele (Ancient Seal + Mystic Flare) é curável só com distância, ele precisa ficar 2s parado canalizando, pressione ele nessa janela.
-- fonte: pro_dados/ringmaster.json; pro_dados/skywrath_mage.json; constants_abilities.json (skywrath_mage_mystic_flare, skywrath_mage_ancient_seal, bkbpierce); content/fichas/skywrath_mage.md; content/fichas/ringmaster.md.
+- fonte: pro_dados/ringmaster.json; pro_dados/skywrath_mage.json; constants_abilities.json (skywrath_mage_mystic_flare, skywrath_mage_ancient_seal, bkbpierce).
 
 ## Contra Keeper of the Light (keeper_of_the_light)
 - placar: Ringmaster venceu só 29 de 79 (36,7%), um dos piores confrontos da lista com amostra relevante (79 jogos, acima do piso de 30). Escolhido pela maior desvantagem.
@@ -151,7 +133,7 @@ fontes:
 - o que você faz com ele: KotL tem 120 de vida base e nenhuma fuga própria além do Force Staff. Se o Ringmaster conseguir fechar a distância, Tame the Beasts e Impalement acabam com ele rápido, o problema é chegar lá sem levar Illuminate no caminho.
 - itens que viram: Glimmer Cape absorve a maior parte de um Illuminate isolado (barreira de 375, mas não cobre o canal máximo inteiro). Rod of Atos trava o KotL por 2s assim que ele estiver no alcance, útil porque ele não tem fuga rápida.
 - como jogar: não force a aproximação em linha reta na visão dele, Illuminate acerta antes de você chegar perto. Espere o Force Staff dele ser gasto ou pegue ele fora de posição com Blink, parado ele não tem resposta de curto alcance.
-- fonte: pro_dados/ringmaster.json; pro_dados/keeper_of_the_light.json; constants_abilities.json (keeper_of_the_light_illuminate, keeper_of_the_light_blinding_light); content/fichas/keeper_of_the_light.md; content/fichas/ringmaster.md.
+- fonte: pro_dados/ringmaster.json; pro_dados/keeper_of_the_light.json; constants_abilities.json (keeper_of_the_light_illuminate, keeper_of_the_light_blinding_light).
 
 ## Contra Alchemist (alchemist)
 - placar: Ringmaster venceu só 16 de 55 (29,1%), o pior confronto de toda a base com amostra acima de 30 jogos. Carry farmado sem lane em comum, escolhido pela maior desvantagem.
@@ -161,17 +143,17 @@ fontes:
 - o que você faz com ele: Alchemist tem pouca saída de curto alcance além do próprio Blink. Se o Ringmaster conseguir iniciar primeiro com Rod of Atos ou pegar ele fora de posição antes do BKB dele estar pronto (antes dos 23 min), o fear do Tame the Beasts tira ele da luta a tempo do time reagir.
 - itens que viram: contra o Black King Bar dele, Tame the Beasts e Impalement não furam (nenhum tem bkbpierce confirmado), a resposta real é Glimmer Cape ou Blink pra sair da área do Unstable Concoction, não tentar prender ele de BKB ativo. Aghanim's Shard do Ringmaster (Spotlight) detecta se ele tentar farmar escondido com Smoke, mas não resolve o problema de dano.
 - como jogar: antes dos 23 min evite lutar sozinho perto dele, o patrimônio alto dele compra BKB cedo. Pressione o farm dele com visão nos camps grandes antes do Radiance (13,9 min) sair, é a única janela em que ele ainda não tem clear rápido nem o sustain do Chemical Rage completo.
-- fonte: pro_dados/ringmaster.json; pro_dados/alchemist.json; constants_abilities.json (alchemist_unstable_concoction, alchemist_chemical_rage); content/porque_itens/alchemist.md; app/public/data/herois/alchemist.json (power_spikes); content/fichas/ringmaster.md.
+- fonte: pro_dados/ringmaster.json; pro_dados/alchemist.json; constants_abilities.json (alchemist_unstable_concoction, alchemist_chemical_rage).
 
 ## Contra Vengeful Spirit (vengefulspirit)
 - placar: Ringmaster venceu 30 de 50 (60,0%), vantagem grande mesmo com o 7.41 tendo virado ela em carry. Escolhida pela maior vantagem com amostra válida (50 jogos).
 - por que importa: é o contraste inverso do Alchemist, outro herói que virou carry no 7.41 (Base Attack Time e velocidade melhorados), mas aqui o Ringmaster tem vantagem clara mesmo sem dividir lane.
-- janelas: Vengeful Spirit farma rápido (Power Treads cedo) e sobe Aghanim's Scepter cedo pros padrões dela (mediana 22,9 min local, cria uma ilusão forte ao morrer). O Blink do Ringmaster (28,0) chega depois, mas o kit dela não depende de blink pra lutar, Magic Missile (650 de alcance) e Nether Swap (850-1100 de alcance, cresce com o nível) já dão o disable e a troca de posição que ela precisa.
+- janelas: Vengeful Spirit sobe Aghanim's Scepter cedo pros padrões dela (mediana 22,9 min local, cria uma ilusão forte ao morrer). O Blink do Ringmaster (28,0) chega depois, mas o kit dela não depende de blink pra lutar, Magic Missile (650 de alcance) e Nether Swap (850-1100 de alcance, cresce com o nível) já dão o disable e a troca de posição que ela precisa.
 - o que ela faz com você: Magic Missile stuna de 1,2 a 1,8s e causa até 340 de dano. Nether Swap troca de posição com qualquer herói, amigo ou inimigo, interrompendo canalização, ela pode puxar você pra cima do time dela no meio de um Tame the Beasts.
 - o que você faz com ele: ela tem vida relativamente baixa pro perfil de carry. Impalement Arts (2400 de alcance) acerta ela de fora do alcance de Magic Missile (650), e o fear do Tame the Beasts atrapalha o posicionamento dela pra puxar o Nether Swap no momento certo.
-- itens que viram: evite canalizar Tame the Beasts perto dela sem BKB, o Nether Swap interrompe o canal e ainda troca você pro meio do time dela. Rod of Atos garante o segundo acerto de Impalement antes dela reagir com Nether Swap.
+- itens que viram: evite canalizar Tame the Beasts perto dela, o Nether Swap atravessa até Black King Bar e troca você pro meio do time dela, interrompendo o canal. Rod of Atos garante o segundo acerto de Impalement antes dela reagir com Nether Swap.
 - como jogar: mantenha distância de 850+ dela quando possível, é o alcance mínimo do Nether Swap. Force a troca à distância com Impalement Arts, onde ela não consegue responder sem gastar o próprio disable primeiro.
-- fonte: pro_dados/ringmaster.json; pro_dados/vengefulspirit.json; constants_abilities.json (vengefulspirit_magic_missile, vengefulspirit_nether_swap); content/fichas/vengefulspirit.md; content/fichas/ringmaster.md.
+- fonte: pro_dados/ringmaster.json; pro_dados/vengefulspirit.json; constants_abilities.json (vengefulspirit_magic_missile, vengefulspirit_nether_swap).
 
 ## Contra Troll Warlord (troll_warlord)
 - placar: Ringmaster venceu 21 de 34 (61,8%), a maior vantagem de toda a base, com a menor amostra da lista (34 jogos, ainda acima do piso de 30). Carry sem lane em comum, escolhido pela maior vantagem.
@@ -181,7 +163,7 @@ fontes:
 - o que você faz com ele: Troll não tem iniciação própria, só velocidade de ataque. Tame the Beasts (fear até 1,2s) e Impalement Arts de longe atrasam ele antes de empilhar Fervor em alguém, o fear sozinho já reseta o stack se ele estiver no meio de uma sequência.
 - itens que viram: seu Rod of Atos trava ele a 2s antes dele fechar distância. Escape Act tira o aliado que ele está empilhando Fervor em cima antes do bash (Skull Basher/Abyssal Blade) conectar. O Aghanim's Scepter dele dá dispel básico via Whirling Axes melee, então Rod of Atos (raiz) resiste melhor que um debuff comum.
 - como jogar: não deixe ele bater 3+ vezes seguidas no mesmo aliado, o Fervor estoura rápido. Use Escape Act preventivo em quem ele está perseguindo antes do bash de Basher conectar, já que ele ainda não tem BKB pronto antes dos 25 min.
-- fonte: pro_dados/ringmaster.json; pro_dados/troll_warlord.json; constants_abilities.json (troll_warlord_fervor, troll_warlord_berserkers_rage, troll_warlord_battle_trance); aghs_desc (troll_warlord scepter); content/fichas/troll_warlord.md; content/fichas/ringmaster.md.
+- fonte: pro_dados/ringmaster.json; pro_dados/troll_warlord.json; constants_abilities.json (troll_warlord_fervor, troll_warlord_berserkers_rage, troll_warlord_battle_trance); aghs_desc (troll_warlord scepter).
 
 ## Contra Lycan (lycan)
 - placar: Ringmaster venceu só 9 de 30 (30,0%), no piso mínimo de amostra (30 jogos) e ainda assim uma das piores taxas da base. Carry sem lane em comum, escolhido pela maior desvantagem.
@@ -191,4 +173,4 @@ fontes:
 - o que você faz com ele: Lycan é frágil fora do Shapeshift. Se o Ringmaster conseguir pegar ele sozinho puxando camp, Tame the Beasts (fear) e Impalement (sangramento por % da vida máxima) acabam rápido com ele, o problema real é achar ele, não vencer a troca.
 - itens que viram: Aghanim's Shard do Ringmaster (Spotlight) detecta os lobos invisíveis (nível 3+) e ainda revela o próprio Lycan se ele estiver escondido puxando camp, é o item que mais ajuda nesse matchup, porque o problema é visão, não dano.
 - como jogar: não tente vencer a corrida de farm, plante visão nos camps grandes e nos lobos cedo (antes dos 15 min) pra forçar o time a reagir ao push em vez de reagir ao Ringmaster. Guarde Escape Act pra tirar quem for pego pelo Shapeshift perseguindo, não pra tentar segurar o próprio Lycan.
-- fonte: pro_dados/ringmaster.json; pro_dados/lycan.json; constants_abilities.json (lycan_shapeshift, lycan_summon_wolves, lycan_howl); aghs_desc (ringmaster shard); content/fichas/lycan.md; content/fichas/ringmaster.md.
+- fonte: pro_dados/ringmaster.json; pro_dados/lycan.json; constants_abilities.json (lycan_shapeshift, lycan_summon_wolves, lycan_howl); aghs_desc (ringmaster shard).

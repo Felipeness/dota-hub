@@ -20,8 +20,6 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/jakiro.md
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 
@@ -39,7 +37,7 @@ fontes:
 - placar: 257 vitórias em 488 jogos de pro, 52,7% pra Jakiro (fonte: pro_dados/jakiro.json, confrontos)
 - por que importa: segundo confronto com mais jogos (488), também pos 5 clássico, outro suporte de zoneamento com ultimate de impacto. É o duelo "área contra golems".
 - janelas: fase de bot sem diferença de farm (Warlock Arcane Boots 10,7 min contra Jakiro 11,7 min). A partir do nível 6 o risco muda: Rain of Chaos (Chaotic Offering) não tem build-up, cai na hora com stun de 0,8s em raio 600 e um golem de até 3000 de vida, então pode interromper seu cast de Macropyre do nada. Depois dos 20 min os dois buscam proteção pro time: Warlock pega Glimmer Cape (20,5) e Solar Crest (22,2) perto do mesmo momento em que você pega o seu Glimmer Cape (22,8) e Force Staff (26,2).
-- o que ele faz com você: Fatal Bonds (alcance 1000, liga até 6 unidades por 18s) é lançada no SEU time; enquanto estiver ativa, parte do dano que o time dele causa em qualquer aliado ligado também bate em você, então você sofre dano mesmo fora de foco direto. Shadow Word em cima de você aplica até 45 de dano mágico por tick (dano total até 450 em 10s) enquanto cura o aliado dele ao mesmo tempo.
+- o que ele faz com você: Fatal Bonds (alcance 1000, liga até 6 unidades por 18s) é lançada no SEU time; enquanto estiver ativa, parte do dano que o time dele causa em qualquer aliado ligado também bate em você, então você sofre dano mesmo fora de foco direto. Shadow Word em cima de você aplica até 45 de dano mágico por segundo (dano total até 450 em 10s) enquanto cura o aliado dele ao mesmo tempo.
 - o que você faz com ele: Macropyre destrói os golems do Rain of Chaos rápido, porque mesmo com a resistência a feitiços que a habilidade dá a eles, o dano contínuo de até 200 por segundo esgota a vida fixa deles (até 3000) em poucos segundos. Dual Breath no nível 4 (-40% de velocidade) impede o Warlock de kitar enquanto ele tenta manter distância pra castar Shadow Word e Fatal Bonds.
 - itens que viram: Aeon Disk ou Glimmer Cape em você neutraliza o stun de 0,8s do Rain of Chaos bem na hora em que ele cai, te dando tempo de terminar sua própria ultimate antes de ser interrompido.
 - como jogar: não agrupe em cima de golem já formado, mate o golem com Macropyre antes de focar o Warlock; segure Dual Breath pra quando ele tentar poke de longe com Shadow Word.
@@ -47,7 +45,7 @@ fontes:
 
 ## Contra Snapfire (snapfire)
 - placar: 232 vitórias em 472 jogos de pro, 49,2% pra Jakiro (fonte: pro_dados/jakiro.json, confrontos)
-- por que importa: terceiro confronto com mais jogos (472). Snapfire aparece como suporte flexível (posições 2 a 5 no catálogo) mas no 7.41 é majoritariamente pos 4/5, então entra na mesma briga de zona de controle que Disruptor e Warlock.
+- por que importa: terceiro confronto com mais jogos (472). Snapfire é outro suporte de área que entra na mesma briga de zona de controle que Disruptor e Warlock.
 - janelas: Snapfire farma mais rápido cedo (lh10 de 21 contra o lh10 de 8 do Jakiro, pro_dados) e chega no Aghanim's Shard já aos 16,9 min, bem antes de qualquer item de luxo do Jakiro. Dos 17 aos 22 min os dois lutam por poke de longa distância: Mortimer Kisses (alcance 3000, 8 projéteis, até 360 de dano de impacto por nível 3) contra Dual Breath (alcance 850) e Macropyre (alcance 1400) favorece Snapfire em alcance bruto, mas a área do Macropyre é maior e mais difícil de evitar.
 - o que ele faz com você: Scatterblast point-blank (raio curto, até 280 de dano mais 30% de bônus perto) e o stun de Firesnap Cookie (até 2,2s no nível 4) formam o combo de iniciação dela; se ela te prender em cima do Cookie, Mortimer Kisses limpa sua vida de longe antes de você reagir.
 - o que você faz com ele: Ice Path (stun de área) cobre o salto errático do Firesnap Cookie melhor do que disable de alvo único, porque pega Snapfire mesmo se ela pular pra cima de um aliado. Liquid Fire reduz a velocidade de ataque dela em até 60% no nível 4, cortando o DPS do Lil' Shredder dela em luta corpo a corpo.

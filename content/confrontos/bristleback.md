@@ -22,29 +22,27 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/bristleback.md
 - https://api.opendota.com/api/constants/aghs_desc
+- https://api.opendota.com/api/explorer (lane_role por heroi, partidas de liga 7.40-7.41)
 - liquipedia.net (mecanica de Evasion, via busca)
-- dotacoach.gg/heroes/bristleback (via busca, goo e dispel)
 ---
 
 ## Como ler esta lista
 
-Bristleback é quase mono posição 3 (offlane): 91% das partidas dele são na pos 3 no 7.41f, segundo a ficha já verificada do site (fonte: content/fichas/bristleback.md, dotacoach.gg). O kit dele é fixo: Viscous Nasal Goo reduz armadura e velocidade (dano físico zero, só debuff), Quill Spray é dano físico em área que atravessa BKB (`bkbpierce: Yes` em constants_abilities.json), a passiva Bristleback reduz o dano que ele recebe de lado (até 20%) e de trás (até 40%), e Prickly amplifica o dano e a duração de debuff que ele causa em quem está atrás dele. Ele não tem dispel nem escape no kit base, por isso Lotus Orb, BKB e Aghanim's Shard (mediana de 18,4 min, p25 16,5 min, fonte: pro_dados/bristleback.json) viram prioridade (fonte: content/fichas/bristleback.md).
+Bristleback é quase mono posição 3 (offlane): 85,8% das partidas dele em pro nos patches 7.40 e 7.41 foram na offlane, contra 11,4% na safelane e 2,6% no mid (fonte: OpenDota explorer, partidas de liga 7.40-7.41). O kit dele é fixo: Viscous Nasal Goo reduz armadura e velocidade (dano físico zero, só debuff), Quill Spray é dano físico em área que atravessa BKB (`bkbpierce: Yes` em constants_abilities.json), a passiva Bristleback reduz o dano que ele recebe de lado (até 20%) e de trás (até 40%), e Prickly amplifica o dano e a duração de debuff que ele causa em quem está atrás dele. Ele não tem dispel nem escape no kit base, por isso Lotus Orb, BKB e Aghanim's Shard (mediana de 18,4 min, p25 16,5 min, fonte: pro_dados/bristleback.json) viram prioridade.
 
 Os 15 oponentes abaixo cobrem quatro critérios: os 6 com mais jogos de pro contra ele, os 3 pos 3 mais comuns em pro (mesma função dele), os 3 com maior vantagem dele (30+ jogos) e 3 confrontos claramente desfavoráveis a ele (30+ jogos). O "% placar" é sempre a taxa de vitória do Bristleback nesse confronto, calculada a partir de `confrontos` em pro_dados/bristleback.json (fonte: OpenDota `/heroes/99/matchups`, partidas de liga 7.40 e 7.41).
 
 ## Contra Rubick (rubick)
 
 - placar: Bristleback venceu 94 de 217 partidas de pro, 43,3% (fonte: pro_dados/bristleback.json).
-- por que importa: é o oponente mais comum do Bristleback em pro, de longe. Rubick é suporte roamer (pos 4/5, fonte: herois_catalogo.json), raramente divide lane com ele, mas aparece quase em todo draft porque é utilidade de time, e acaba decidindo a luta onde o Bristleback está.
+- por que importa: é o oponente mais comum do Bristleback em pro, de longe. Rubick é suporte (fonte: heroes.json, role Support), raramente divide lane com ele, mas aparece quase em todo draft porque é utilidade de time, e acaba decidindo a luta onde o Bristleback está.
 - janelas: até 10 min o Rubick não ameaça muito sozinho (ele sai de Arcane Boots mediana 10,3 min, fonte: pro_dados/rubick.json), então o Bristleback já está de Treads (mediana 8,7 min) puxando camp. O perigo do Rubick cresce com o Blink Dagger dele, mediana 21,6 min (p25 16,9), que coincide com a janela em que o Bristleback ainda não fechou Lotus Orb (mediana 17,7) nem BKB.
 - o que ele faz com você: Telekinesis (cd 22/19/16/13s, constants_abilities.json) te isola do time e te joga de volta no chão com stun em área, perfeito pra te separar antes que o Warpath suba. Fade Bolt reduz seu dano de ataque e de feitiço, cortando o Quill Spray.
 - o que você faz com ele: Rubick tem HP baixo (suporte puro) e nenhuma defesa contra dano físico sustentado. Se você chega nele sem ser pego pela Telekinesis primeiro, Quill Spray mais Warpath acumulado mata rápido, porque não atravessa BKB mas o Rubick raramente tem BKB.
 - itens que viram: Lotus Orb (constants_abilities.json: Echo Shell devolve a maioria dos feitiços direcionados, incluindo Telekinesis) e BKB pra atravessar o stun; do lado dele, Aghanim's Scepter de Rubick deixa roubar 2 feitiços em vez de 1, o que pode incluir Hairball seu se ele estiver perto quando você lançar (fonte: aghs_desc).
 - como jogar: na lane você quase nunca o vê perto, então o foco é farmar rápido e chegar na fase de grupo com Aghs Shard pronto. Em luta, mate as prioridades de dano antes de focar o Rubick, e tenha Lotus Orb ou BKB prontos pra não tomar Telekinesis parado.
-- fonte: pro_dados/bristleback.json; pro_dados/rubick.json; constants_abilities.json; herois_catalogo.json; aghs_desc; content/fichas/bristleback.md.
+- fonte: pro_dados/bristleback.json; pro_dados/rubick.json; constants_abilities.json; heroes.json; aghs_desc.
 
 ## Contra Tusk (tusk)
 
@@ -53,9 +51,9 @@ Os 15 oponentes abaixo cobrem quatro critérios: os 6 com mais jogos de pro cont
 - janelas: Tusk sai rápido de botas (Tranquil Boots mediana 8,4 min, fonte: pro_dados/tusk.json) pra rotacionar cedo, antes do seu Treads (8,7 min) estar pronto. O risco maior dele vem com o Blink Dagger, mediana 19,0 min, que ainda é antes do seu Lotus Orb (17,7) estar sempre pronto mas depois do Aghs Shard (18,4) já estar perto.
 - o que ele faz com você: Snowball te prende e te arrasta pro time dele, Ice Shards cria uma parede que corta sua rota de fuga (que você já não tem), e Walrus Punch é um crítico isolado que machuca mesmo seu pool de HP alto.
 - o que você faz com ele: Tusk é tanque de suporte, não morre fácil num 1x1 só, mas também não tem como te segurar sozinho: sem o time dele, Snowball sem aliado dentro vira só um stun fraco. Se ele erra o combo, Quill Spray mais Goo encurtam a vida dele rápido.
-- itens que viram: Lotus Orb devolve Snowball e Walrus Punch (alvo único direcionado); BKB atravessa o stun do Snowball e do Walrus Kick. O Aghanim's Scepter dele dá um Walrus Kick com cooldown reduzido pela metade contra creep, então ele some e volta rápido na lane se você estiver sozinho lá.
+- itens que viram: Lotus Orb devolve o Snowball, que é alvo único direcionado (`behavior: Unit Target`, constants_abilities.json); BKB atravessa o stun do Snowball, mas não o Walrus Punch, que ignora imunidade mágica (`bkbpierce: Yes`, constants_abilities.json) por ser um modificador de ataque, não um feitiço lançado em você. O Aghanim's Scepter dele dá um Walrus Kick com cooldown reduzido pela metade contra creep, então ele some e volta rápido na lane se você estiver sozinho lá.
 - como jogar: fique perto de aliados ou de torre nos primeiros 20 minutos pra não virar alvo fácil de Snowball; depois do Lotus Orb, você pode te expor mais, porque qualquer coisa direcionada nele volta pro time dele.
-- fonte: pro_dados/bristleback.json; pro_dados/tusk.json; constants_abilities.json; aghs_desc; content/fichas/bristleback.md.
+- fonte: pro_dados/bristleback.json; pro_dados/tusk.json; constants_abilities.json; aghs_desc.
 
 ## Contra Jakiro (jakiro)
 
@@ -71,13 +69,13 @@ Os 15 oponentes abaixo cobrem quatro critérios: os 6 com mais jogos de pro cont
 ## Contra Shadow Fiend (nevermore)
 
 - placar: Bristleback venceu 83 de 178, 46,6% (fonte: pro_dados/bristleback.json).
-- por que importa: quarto mais comum em pro. Shadow Fiend é mid pos 1 clássico (herois_catalogo.json), raramente divide lane com o offlaner, mas é o inimigo que mais rápido sai na frente em ouro: 658 de GPM mediano contra os seus 565 (fonte: pro_dados/nevermore.json e pro_dados/bristleback.json), então o confronto real é quem chega mais forte na primeira luta de grupo.
+- por que importa: quarto mais comum em pro. Shadow Fiend é core, dividido entre safelane e mid em pro (56,7% safelane, 42,9% mid, fonte: OpenDota explorer, partidas de liga 7.40-7.41), raramente divide lane com o offlaner, mas é o inimigo que mais rápido sai na frente em ouro: 658 de GPM mediano contra os seus 565 (fonte: pro_dados/nevermore.json e pro_dados/bristleback.json), então o confronto real é quem chega mais forte na primeira luta de grupo.
 - janelas: até os 10 min, Shadow Fiend já tem 78 de last hit mediano contra os seus 63 (fonte: resumo de cada json), uma vantagem de farm real. O primeiro pico dele é o Mask of Madness, mediana 10,2 min, que acelera o clear; o seu é o Treads, 8,7 min. Dos 18 aos 25 min ele está fechando Yasha mais Dragon Lance (13 a 14 min) e indo pra BKB (25,2 min), bem na janela em que você fecha Aghs Shard (18,4) e Lotus Orb (17,7).
 - o que ele faz com você: Shadowraze (três versões, cd 9s, 85 a 280 de dano base conforme nível, mais bônus por alma, constants_abilities.json) te pune se você chegar perto dele a pé, porque ele raza o chão onde você está parado sem precisar mirar em você. Com almas acumuladas (Necromastery, até 1,35 de dano bônus por alma) o burst dele cresce rápido depois de kills.
 - o que você faz com ele: Shadow Fiend é de papel sem Yasha/BKB. Se você entra no alcance de melee dele sem levar um Raze no caminho, Quill Spray mais Goo o derretem antes que ele consiga kitar, porque ele não tem slow nem stun pra te afastar.
 - itens que viram: BKB seu atravessa o Requiem of Souls (fear mais slow, área) e os Razes contam como dano direto que o BKB bloqueia; o Aghanim's Shard dele reduz o cooldown do Raze a cada herói acertado, então cada vez que ele acerta você em grupo, ele raza mais rápido.
 - como jogar: na rota separada o foco dele vai ser puxar farm, então sua janela de pressão é fazer ele perder XP/ouro com rotações suas no mid. Em luta, não ande reto na linha de Raze; chegue de ângulo ou use Hairball pra aplicar debuff antes de entrar no corpo a corpo.
-- fonte: pro_dados/bristleback.json; pro_dados/nevermore.json; constants_abilities.json; herois_catalogo.json; aghs_desc.
+- fonte: pro_dados/bristleback.json; pro_dados/nevermore.json; constants_abilities.json; OpenDota explorer (partidas de liga 7.40-7.41); aghs_desc.
 
 ## Contra Hoodwink (hoodwink)
 
@@ -86,53 +84,53 @@ Os 15 oponentes abaixo cobrem quatro critérios: os 6 com mais jogos de pro cont
 - janelas: antes dos 15 min ela está com Arcane Boots (12,2 min, pro_dados/hoodwink.json) kitando de longe com Acorn Shot; você já tem Treads (8,7). A virada é por volta dos 18 a 24 min, quando o Shard dela (Hunter's Boomerang com slow e vulnerabilidade a mágico) e o seu (Hairball à distância) ficam prontos quase juntos.
 - o que ele faz com você: Bushwhack (cd 15 a 12s conforme nível) te stuna perto de árvore e aplica dano ao longo do tempo; Sharpshooter (cd 45s) é um nuke de longo alcance com break, que desliga sua passiva Bristleback e o Prickly durante a janela de debuff.
 - o que você faz com ele: Hoodwink tem pouco HP e nenhuma defesa contra engajamento corpo a corpo direto. Se você fecha a distância sem levar um Sharpshooter cheio, ela morre rápido pro seu Quill Spray, porque Scurry só dá fuga breve, não imunidade.
-- itens que viram: BKB seu limpa o Break do Sharpshooter (dispel básico ao ativar, mesmo efeito já citado na ficha contra Silver Edge); Lotus Orb devolve Bushwhack, que é direcionado em área mas ainda conta como feitiço lançado nela. O Aghanim's Scepter dela deixa o Sharpshooter mais rápido e o slow mais forte, então ele fica mais difícil de escapar.
+- itens que viram: BKB seu limpa o Break do Sharpshooter (dispel básico ao ativar); Lotus Orb não resolve contra a Bushwhack, porque é uma armadilha de área (`behavior: Point Target, AOE`, constants_abilities.json), não um feitiço lançado direto em você. O Aghanim's Scepter dela deixa o Sharpshooter mais rápido e o slow mais forte, então ele fica mais difícil de escapar.
 - como jogar: não force engajamento quando ela estiver carregando Sharpshooter (ela fica parada e visível por 0,75s antes do tiro, use essa janela pra fechar distância); depois disso ela fica sem resposta corpo a corpo.
-- fonte: pro_dados/bristleback.json; pro_dados/hoodwink.json; constants_abilities.json; aghs_desc; content/fichas/bristleback.md.
+- fonte: pro_dados/bristleback.json; pro_dados/hoodwink.json; constants_abilities.json; aghs_desc.
 
 ## Contra Beastmaster (beastmaster)
 
 - placar: Bristleback venceu 91 de 174, 52,3% (fonte: pro_dados/bristleback.json).
-- por que importa: sexto mais comum em pro, e também o pos 3 mais jogado contra ele (herois_catalogo.json lista Beastmaster como 2/3). É o duelo clássico de offlane tanque contra offlane tanque, e o mais frequente dos dois na amostra.
+- por que importa: sexto mais comum em pro, e também o pos 3 mais jogado contra ele (50,6% das partidas de pro dele na offlane, 32,2% no mid, fonte: OpenDota explorer, partidas de liga 7.40-7.41). É o duelo clássico de offlane tanque contra offlane tanque, e o mais frequente dos dois na amostra.
 - janelas: os dois saem de Treads praticamente juntos, 6,8 min dele contra 8,7 seu (pro_dados/beastmaster.json). O pico dele chega cedo: Aghanim's Scepter mediano em 14,6 min, muito antes do seu Aghs Shard (18,4). Entre 14 e 19 min ele tem vantagem clara, porque o Scepter dele faz os ataques dele e dos bichos dele baterem um tambor que cura e machuca em área. Depois dos 20 min, com seu Shard e Lotus Orb prontos, a luta equilibra de novo.
-- o que ele faz com você: Primal Roar (cd 90/75/60s) te stuna de 3 a 4s e empurra o caminho, te deixando parado pro time dele acabar o combo, e seu kit não tem nenhuma resposta a isso além de BKB. Wild Axes amplifica o dano que ele e os bichos causam em você (5% a 8% por acerto).
+- o que ele faz com você: Primal Roar (cd 90/75/60s) te stuna de 3 a 4s e empurra o caminho, te deixando parado pro time dele acabar o combo. O stun ignora imunidade mágica (`bkbpierce: Yes`, constants_abilities.json), então BKB não resolve, só posicionamento. Wild Axes amplifica o dano que ele e os bichos causam em você (5% a 8% por acerto).
 - o que você faz com ele: você ataca de volta, no sentido literal: Beastmaster também depende de ficar perto da luta com os bichos dele, então Quill Spray acerta ele e os summons juntos. Se ele gastar o Primal Roar e errar, ele fica sem resposta pro seu sustain.
-- itens que viram: BKB atravessa o stun do Primal Roar; Lotus Orb não ajuda aqui porque Primal Roar é em área, não alvo único. Heaven's Halberd desarma ele e reduz o dano dos ataques que viram parte do dano do Drums of Slom.
+- itens que viram: nem BKB nem Lotus Orb ajudam contra o Primal Roar, porque ele ignora imunidade mágica e é em área, não alvo único. Heaven's Halberd desarma ele e reduz o dano dos ataques que viram parte do dano do Drums of Slom.
 - como jogar: guarde BKB pra iniciação dele, não pra farm; se ele jogar Primal Roar fora de posição, é a sua deixa pra entrar e punir com Quill Spray em cima dele e dos bichos.
-- fonte: pro_dados/bristleback.json; pro_dados/beastmaster.json; herois_catalogo.json; constants_abilities.json; aghs_desc.
+- fonte: pro_dados/bristleback.json; pro_dados/beastmaster.json; OpenDota explorer (partidas de liga 7.40-7.41); constants_abilities.json; aghs_desc.
 
 ## Contra Pangolier (pangolier)
 
 - placar: Bristleback venceu 64 de 146, 43,8% (fonte: pro_dados/bristleback.json).
-- por que importa: é o pos 2/3 mais jogado contra você depois do Beastmaster (herois_catalogo.json). Pangolier é flex mid/offlane e costuma te enfrentar como oponente direto de rota, com um kit de mobilidade que você não tem resposta nenhuma pra alcançar.
+- por que importa: é o pos 2/3 mais jogado contra você depois do Beastmaster (63,7% mid, 35,7% offlane em pro, fonte: OpenDota explorer, partidas de liga 7.40-7.41). Pangolier é flex mid/offlane e costuma te enfrentar como oponente direto de rota, com um kit de mobilidade que você não tem resposta nenhuma pra alcançar.
 - janelas: Pangolier farma rápido com Swashbuckle desde cedo e sai num Diffusal Blade mediano de 12,4 min (pro_dados/pangolier.json), bem antes do seu primeiro item grande. O pico de luta dele é o Blink Dagger, mediana 19,2 min, janela em que você ainda está sem Lotus Orb pronto (17,7 só na mediana, muitos jogos ainda não têm).
 - o que ele faz com você: Rolling Thunder (cd 90/85/80s) te stuna ao colidir durante o rolamento e dá a ele imunidade a debuff mais 80% de resistência mágica enquanto rola, então seu Goo não gruda nele nessa janela. Swashbuckle entra e sai da sua range de Quill rápido demais pra você alcançar sozinho.
 - o que você faz com ele: Pangolier é esquiva, não é tanque. Se ele erra o timing do Roll Up ou gasta Rolling Thunder fora de hora, ele fica parado no alcance do seu Quill Spray, que é dano físico constante, e ele não tem HP pra aguentar.
 - itens que viram: BKB não ajuda muito aqui porque Rolling Thunder tem dispel básico próprio; Heaven's Halberd desarma e reduz o dano dele quando ele tenta trocar no corpo a corpo fora do rolamento. O Aghanim's Scepter dele faz o Shield Crash lançar Swashbuckle em volta, então a luta de perto fica pior pra você se ele upar isso.
 - como jogar: evite trade isolado antes dele gastar Rolling Thunder; force ele a rolar em cima de creeps ou de uma zona ruim, porque fora da bola ele não tem defesa contra seu dano sustentado.
-- fonte: pro_dados/bristleback.json; pro_dados/pangolier.json; herois_catalogo.json; constants_abilities.json; aghs_desc.
+- fonte: pro_dados/bristleback.json; pro_dados/pangolier.json; OpenDota explorer (partidas de liga 7.40-7.41); constants_abilities.json; aghs_desc.
 
 ## Contra Mars (mars)
 
 - placar: Bristleback venceu 67 de 144, 46,5% (fonte: pro_dados/bristleback.json).
-- por que importa: pos 3 puro mais clássico contra você na amostra (herois_catalogo.json marca Mars só como pos 3). É o confronto de offlane direto mais frequente: dois tanques de força que vivem de ficar de frente, ou de costas, pro inimigo.
+- por que importa: pos 3 puro mais clássico contra você na amostra (96,3% das partidas de pro dele na offlane, fonte: OpenDota explorer, partidas de liga 7.40-7.41). É o confronto de offlane direto mais frequente: dois tanques de força que vivem de ficar de frente, ou de costas, pro inimigo.
 - janelas: os dois saem de botas quase juntos, Phase Boots dele aos 8,5 min contra seu Treads aos 8,7 (pro_dados/mars.json). O pico dele é o Blink Dagger, mediana 15,2 min, bem antes do seu Aghs Shard (18,4), uma janela em que ele pode te pegar isolado com Spear antes de você ter resposta.
 - o que ele faz com você: Spear of Mars (cd 14 a 11s) te empala numa árvore ou parede se acertar, te travando no lugar; Arena of Blood (cd 100/95/90s) cria uma arena que te prende dentro por 5,5s sem dispel nativo seu, enquanto lanceiros batem em quem está perto da borda.
 - o que você faz com ele: a ironia é que os dois jogam igual, de costas pro perigo: Bulwark dele bloqueia 40% a 70% do dano de ataque pela frente e 20% a 35% pelo lado (constants_abilities.json), mas isso é só contra ataque básico, não contra o seu Quill Spray, que é dano de habilidade mesmo sendo físico. Então o escudo dele não reduz seu principal dano.
-- itens que viram: BKB atravessa o stun do Spear e te tira da Arena of Blood se você ativar antes de ficar preso; Lotus Orb devolve o Spear, que é alvo único direcionado. O Aghanim's Shard dele faz o Spear empalar até 2 heróis e deixar rastro de fogo, então fica mais perigoso em luta de grupo.
+- itens que viram: BKB atravessa o stun do Spear e te tira da Arena of Blood se você ativar antes de ficar preso; Lotus Orb não resolve aqui, porque o Spear é lançado em direção (`behavior: Point Target`, constants_abilities.json), não em alvo único. O Aghanim's Shard dele faz o Spear empalar até 2 heróis e deixar rastro de fogo, então fica mais perigoso em luta de grupo.
 - como jogar: não ande em linha reta perto de árvore ou parede quando ele estiver com Spear disponível; se ele abrir Arena of Blood em cima de você, gaste BKB ou Lotus na hora, porque ficar preso lá dentro sem resposta é onde você perde a luta.
-- fonte: pro_dados/bristleback.json; pro_dados/mars.json; herois_catalogo.json; constants_abilities.json; aghs_desc.
+- fonte: pro_dados/bristleback.json; pro_dados/mars.json; OpenDota explorer (partidas de liga 7.40-7.41); constants_abilities.json; aghs_desc.
 
 ## Contra Tidehunter (tidehunter)
 
 - placar: Bristleback venceu 65 de 125, 52,0% (fonte: pro_dados/bristleback.json).
-- por que importa: terceiro pos 3 puro mais comum contra você (herois_catalogo.json). Outro tanque de força que disputa a mesma lane e o mesmo papel de iniciador/sustain do time.
+- por que importa: terceiro pos 3 puro mais comum contra você (98,6% das partidas de pro dele na offlane, fonte: OpenDota explorer, partidas de liga 7.40-7.41). Outro tanque de força que disputa a mesma lane e o mesmo papel de iniciador/sustain do time.
 - janelas: Tidehunter sai de Phase Boots aos 7,8 min (pro_dados/tidehunter.json), levemente antes do seu Treads (8,7). Farm dos dois é parecido (515 GPM dele contra 565 seu, fonte: resumo de cada json), então a corrida é equilibrada até o Blink Dagger dele, mediana 21,2 min, perto do seu Lotus Orb (17,7) e Aghs Shard (18,4) já prontos.
-- o que ele faz com você: Kraken Shell (cd 30s) bloqueia parte do seu dano de ataque físico e, ao cruzar um limiar de dano recebido (600 a 450 conforme nível, constants_abilities.json), remove debuffs negativos nele, incluindo o Goo, que a ficha do site já lista como removível por dispel (fonte: dotacoach.gg via busca). Anchor Smash reduz seu dano de ataque em até 40% por 6s.
+- o que ele faz com você: Kraken Shell (cd 30s) bloqueia parte do seu dano de ataque físico e, ao cruzar um limiar de dano recebido (600 a 450 conforme nível, constants_abilities.json), remove debuffs negativos nele, incluindo o Goo, que é removível por dispel (`dispellable: Yes`, constants_abilities.json). Anchor Smash reduz seu dano de ataque em até 40% por 6s.
 - o que você faz com ele: Tidehunter também não tem fuga própria sem Blink, e Ravage (cd 150/145/140s) exige ele ficar no meio da luta pra acertar, te dando a chance de aplicar Quill Spray nele e nos aliados dele ao mesmo tempo. Kraken Shell bloqueia uma fração fixa de dano por ataque, não o dano em área do Quill.
 - itens que viram: Heaven's Halberd reduz o dano de ataque básico dele, que é a arma principal do Kraken Shell pra ele sobreviver na troca corpo a corpo; BKB seu atravessa o stun do Ravage. O Aghanim's Shard dele transforma Gush numa onda que acerta todo mundo numa linha, então vira prioridade pra Lotus Orb só se for lançado em alvo único.
 - como jogar: na troca de lane, poupe o Quill Spray pra depois que o Kraken Shell dele já estiver em cooldown (ativo ele reduz 40% de velocidade, então dá pra identificar quando ele gastou); em luta de grupo, não deixe ele cruzar o Ravage sem ter BKB de prontidão.
-- fonte: pro_dados/bristleback.json; pro_dados/tidehunter.json; herois_catalogo.json; constants_abilities.json; aghs_desc; dotacoach.gg (via busca).
+- fonte: pro_dados/bristleback.json; pro_dados/tidehunter.json; OpenDota explorer (partidas de liga 7.40-7.41); constants_abilities.json; aghs_desc.
 
 ## Contra Brewmaster (brewmaster)
 
@@ -148,13 +146,13 @@ Os 15 oponentes abaixo cobrem quatro critérios: os 6 com mais jogos de pro cont
 ## Contra Templar Assassin (templar_assassin)
 
 - placar: Bristleback venceu 56 de 90, 62,2% (fonte: pro_dados/bristleback.json).
-- por que importa: segunda maior vantagem com amostra de 30+. Templar Assassin é pos 1 hard carry (herois_catalogo.json), raramente divide lane com você, mas é um dos carries mais jogados em pro no geral, e perde boa parte do tempo pra você mesmo sem lane em comum.
+- por que importa: segunda maior vantagem com amostra de 30+. Templar Assassin é pos 1 hard carry (83,9% das partidas de pro dela na safelane, 15,8% no mid, fonte: OpenDota explorer, partidas de liga 7.40-7.41), raramente divide lane com você, mas é um dos carries mais jogados em pro no geral, e perde boa parte do tempo pra você mesmo sem lane em comum.
 - janelas: TA sai muito rápido: Desolator mediano aos 14,3 min e Blink aos 17,4 (pro_dados/templar_assassin.json), um pico de farm e mobilidade cedo. Só que seu Aghs Shard (18,4) e Lotus Orb (17,7) chegam praticamente junto, então a partir dos 18 min a vantagem de burst dela esbarra na sua sobrevivência.
 - o que ele faz com você: Refraction dá a ela barreira e bônus de dano por um número de instâncias (3 a 6 conforme nível, constants_abilities.json), além de Meld pra emboscar com invisibilidade e bônus de dano. Psi Blades atravessam você e acertam quem está atrás.
 - o que você faz com ele: cada acerto do seu Quill Spray consome uma instância separada da Refraction dela, porque Quill dispara várias vezes em sequência contra alvo fixo. Em vez de ela absorver um ataque grande, o Quill Spray gasta as 3 a 6 cargas rápido, e depois disso ela fica exposta ao seu dano normal sem a camada de proteção. Refraction também tem cooldown de 14s, então se a luta dura mais que isso, ela fica sem resposta de novo.
-- itens que viram: BKB seu atravessa o Meld e o burst dela; Heaven's Halberd desarma, cortando o dano de ataque que é a arma principal dela fora do Refraction. O Aghanim's Shard dela aumenta o bônus de dano do Refraction e deixa ela lançar mesmo desabilitada, o que ajuda ela a reagir ao seu stun se você tiver algum aliado com disable.
+- itens que viram: BKB não impede o burst do Meld, porque é dano de ataque, não um feitiço, e ele ignora imunidade mágica de qualquer forma (`bkbpierce: Yes`, constants_abilities.json); Heaven's Halberd desarma, cortando o dano de ataque que é a arma principal dela fora do Refraction. O Aghanim's Shard dela aumenta o bônus de dano do Refraction e deixa ela lançar mesmo desabilitada, o que ajuda ela a reagir ao seu stun se você tiver algum aliado com disable.
 - como jogar: provoque o gasto da Refraction antes da luta principal (um Quill Spray de longe já consome cargas); depois disso ela precisa esperar o cooldown, e é sua janela pra fechar e matar.
-- fonte: pro_dados/bristleback.json; pro_dados/templar_assassin.json; herois_catalogo.json; constants_abilities.json; aghs_desc.
+- fonte: pro_dados/bristleback.json; pro_dados/templar_assassin.json; OpenDota explorer (partidas de liga 7.40-7.41); constants_abilities.json; aghs_desc.
 
 ## Contra Techies (techies)
 

@@ -22,8 +22,6 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/dawnbreaker.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 
@@ -33,14 +31,14 @@ fontes:
 - janelas: até os 10:18 Rubick ainda não tem Arcane Boots (pro_dados/rubick.json) e fica lento pra reposicionar; Dawnbreaker já com Phase Boots aos 8:12 consegue fechar antes disso. Dos 16:54 aos 21:36 ele segue sem Blink Dagger (mediana 21:36, p25 16:54), fase mais vulnerável a gank dela. Depois dos 21:36 ele ganha reposicionamento pra escapar ou pra roubar o último feitiço visível dela ou de um aliado. Com Scepter (27:24) ele guarda duas cópias de feitiço ao mesmo tempo.
 - o que ele faz com você: Spell Steal copia o último feitiço lançado por um herói inimigo visível; se ele vir Celestial Hammer ou Solar Guardian saindo, ganha a cópia por 180 a 300s (constants_abilities.json). Telekinesis (stun 0,9 a 1,5s) é bloqueada pelo seu Black King Bar (bkbpierce: No), então o risco real dele é te pegar antes do seu item de 25:00.
 - o que você faz com ele: Starbreaker atravessa qualquer Black King Bar dele porque a habilidade tem bkbpierce: Yes em constants_abilities.json, então mesmo que Rubick itemize BKB o combo de stun ainda conecta; Solar Guardian também ignora imunidade mágica pela mesma flag. Pouca vida de suporte, então o combo quase sempre mata.
-- itens que viram: seu Black King Bar (25:00) neutraliza o Telekinesis dele antes dele acontecer; o Aghanim's Shard dela (20:48) deixa o Starbreaker quase instantâneo e sem perda de velocidade, difícil de fugir mesmo com o blink dele pronto.
+- itens que viram: seu Black King Bar (25:00) neutraliza o Telekinesis dele antes dele acontecer; o Aghanim's Shard dela (20:48) dá imunidade a debuff, 50% de resistência mágica e movimento livre durante o Starbreaker (ainda com 35% de slow, mínimo 215 de velocidade), dificultando a fuga mesmo com o blink dele pronto.
 - como jogar: force o engage antes dos 21:36, enquanto ele ainda não tem blink; depois disso, lembre que seu Starbreaker/Solar Guardian passam pelo BKB dele ou de qualquer aliado que ele proteja, então não precisa esperar o Black King Bar deles caírem pra iniciar com a ult.
 - fonte: pro_dados/dawnbreaker.json; pro_dados/rubick.json; constants_abilities.json (dawnbreaker_fire_wreath, dawnbreaker_solar_guardian, rubick_telekinesis, rubick_spell_steal).
 
 ## Contra Snapfire (snapfire)
 - placar: Dawnbreaker venceu 107 de 250 (42,8%), abaixo da média geral dela contra os suportes do top 6. Fonte: pro_dados/dawnbreaker.json.
 - por que importa: 2º oponente com mais jogos contra ela em pro (250) e o único do top 6 em que ela fica claramente abaixo de 50%, sinal de que o kit de Snapfire é um problema real pra ela.
-- janelas: o Aghanim's Shard dela sai aos 16:54 (p25 15:12, pro_dados/snapfire.json), bem antes do Black King Bar dela (25:00) e antes até do Echo Sabre dela (14:48) terminar de render efeito. Nessa janela de 15 aos 25min, Snapfire já tem o combo completo de Gobble Up mais o Spit Out do shard (empurra o engolido pra fora com stun e poça de fogo) e Dawnbreaker ainda não tem resposta mágica. Depois do Black King Bar dela (25:00) o quadro muda bastante.
+- janelas: o Aghanim's Shard de Snapfire sai aos 16:54 (p25 15:12, pro_dados/snapfire.json) e deixa o Firesnap Cookie curar mais e lançar um Mortimer Kiss a distância com 40% do dano de impacto. Nessa janela de 15 a 25min, antes do Black King Bar de Dawnbreaker (25:00), Snapfire já ameaça com o combo completo de Scatterblast e Mortimer Kisses e Dawnbreaker ainda não tem resposta mágica. Depois do Black King Bar dela (25:00) o quadro muda bastante.
 - o que ele faz com você: Scatterblast (dano 100 a 280, cone, até 100% de slow em movimento e ataque à queima-roupa) e Mortimer Kisses (8 globos de até 360 de dano cada em 5,5s) são ambos bkbpierce: No em constants_abilities.json, ou seja, bloqueados pelo Black King Bar dela assim que ele sai; o problema é a janela de 15 aos 25min, antes disso.
 - o que você faz com ele: Starbreaker e Solar Guardian ignoram Black King Bar (bkbpierce: Yes), então uma vez que ela consegue fechar em cima de Snapfire, a pouca vida da suporte não aguenta o combo, mesmo que ela tenha itemizado algo contra magia.
 - itens que viram: o Black King Bar dela (25:00) apaga Scatterblast e Mortimer Kisses de uma vez; antes disso, o Harpoon (21:36) ajuda a fechar distância rápido demais pra Snapfire montar o combo de Gobble Up com calma.
@@ -89,7 +87,7 @@ fontes:
 
 ## Contra Axe (axe)
 - placar: Dawnbreaker venceu 100 de 186 (53,8%). Fonte: pro_dados/dawnbreaker.json.
-- por que importa: mesma posição principal (offlane, pos 3 no catálogo), o oponente de offlane x offlane mais jogado contra ela em pro (186 jogos) e o único com mesma função que ela vence com folga.
+- por que importa: mesma posição principal (offlane, pos 3), o oponente de offlane x offlane mais jogado contra ela em pro (186 jogos) e o único com mesma função que ela vence com folga.
 - janelas: os dois correm pro Black King Bar quase no mesmo ritmo (dela 25:00 contra Axe 25:54, p25 23:36, pro_dados/axe.json); antes disso, dos 7 aos 15min, Axe já tem Phase Boots (7:12) e Blade Mail (via chainmail/blades, componentes dele aos 6:54 e 6:36) pra punir quem bate nele, enquanto ela ainda está fechando o Echo Sabre (14:48). Depois dos 15:42 (Blink dele) a luta vira sobre quem inicia primeiro.
 - o que ele faz com você: Berserker's Call força você a atacar só ele por 2,1 a 3s e tem bkbpierce: Yes, ou seja, nem o seu Black King Bar te livra da call; Culling Blade causa 275 a 475 de dano puro (bkbpierce: Yes também) e executa quem está com pouca vida, não importa imunidade mágica.
 - o que você faz com ele: Starbreaker e Solar Guardian também ignoram Black King Bar (bkbpierce: Yes), então o duelo é simétrico nesse ponto, nenhum BKB impede o combo do outro; quem controla melhor o momento do engage (e chega com mais vida) tende a levar. Harpoon (21:36) te deixa puxar ele pra fora do alcance de reflexo do Blade Mail antes de bater.

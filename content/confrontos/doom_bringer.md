@@ -22,38 +22,28 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/doom_bringer.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/rubick.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/axe.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/centaur.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/tusk.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/pangolier.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
 - https://api.opendota.com/api/constants/aghs_desc
 - https://liquipedia.net/dota2/Basic_dispel
 - https://liquipedia.net/dota2/Strong_Dispel
-- https://wiki.cs.money/dota/heroes/doom
-- https://wiki.cs.money/dota/heroes/lifestealer
-- https://wiki.cs.money/dota/heroes/pangolier
-- https://winio.ai/wiki/dota2/heroes/abaddon-guide-best-build-skill-order-and-counters
+- https://api.opendota.com/api/explorer (partidas de liga, patches 7.40/7.41)
 ---
 
 ## Contra Rubick (rubick)
 - placar: Doom venceu 132 de 265 jogos de pro (49,8%). Fonte: pro_dados/doom_bringer.json (confrontos).
-- por que importa: é o oponente com mais jogos contra o Doom no banco de pro (265), porque ele ameaça roubar a própria ultimate "Doom" com Spell Steal, que tem recarga de só 16/10/4s e é lançada em média 16,6 vezes por partida pelo Rubick (3.976 casts em 239 jogos, fonte: content/fichas/rubick.md).
+- por que importa: é o oponente com mais jogos contra o Doom no banco de pro (265), porque ele ameaça roubar a própria ultimate "Doom" com Spell Steal, que tem recarga de só 16/10/4s e é lançada em média 14,8 vezes por partida pelo Rubick (59.115 casts em 3.982 partidas de pro 7.40-7.41, OpenDota explorer).
 - janelas: até os 7:0 (Phase Boots mediano do Doom, pro_dados/doom_bringer.json) nenhum dos dois fecha distância no outro; do nível 6 em diante o Rubick já é ameaça de roubo, mesmo sem item; a partir do Blink do Doom (19:7 mediano, pro_dados/doom_bringer.json) é o Doom quem decide quando a luta começa, e passa a valer mais pegar o Rubick isolado primeiro.
 - o que ele faz com você: se ele te ver lançar Doom em alguém do time dele e sobreviver, ele rouba a magia e te dooma de volta; Fade Bolt (dano que salta entre inimigos, reduz dano a cada salto) e Telekinesis (levanta e estuna em área ao cair) seguram seu combo até o time dele reagir.
 - o que você faz com ele: ele é muito mais frágil que você; se você fechar nele primeiro com Blink, a curse aplica 25/45/66 de dano puro por segundo (constants_abilities.json) e ele não consegue reagir, porque a curse bloqueia qualquer cast enquanto ativa.
 - itens que viram: Linken's Sphere nele bloqueia sua curse de cara (absorve 300 de dano do próximo alvo único, recarga de 14s, items.json); com Aghanim's Scepter seu, a curse passa a aplicar Break e se espalhar 350 de raio pros aliados perto dele (fonte: aghs_desc), útil se o Rubick estiver agrupado com outro suporte.
 - como jogar: nunca lance a ultimate perto de um Rubick vivo sem ter certeza de onde ele está; depois do Blink, priorize ele no engajamento antes de qualquer outro alvo, porque ele morre rápido e perde o jogo pro time dele se cair cedo.
-- fonte: pro_dados/doom_bringer.json; pro_dados/rubick.json; content/fichas/rubick.md; constants_abilities.json; items.json; https://api.opendota.com/api/constants/aghs_desc
+- fonte: pro_dados/doom_bringer.json; pro_dados/rubick.json; constants_abilities.json; items.json; https://api.opendota.com/api/constants/aghs_desc; partidas pro 7.40-7.41 (OpenDota explorer, rubick_spell_steal)
 
 ## Contra Hoodwink (hoodwink)
 - placar: Doom venceu 120 de 227 jogos de pro (52,9%). Fonte: pro_dados/doom_bringer.json (confrontos).
 - por que importa: é o 2º oponente com mais jogos contra ele no pro (227); suporte com root de área (Bushwhack) e um nuke de longo alcance que aplica Break, capaz de desligar o kit do Doom antes da luta começar.
 - janelas: 0-6min ela controla a troca de dano com Acorn Shot (bounce que desacelera) e Bushwhack perto de árvore (stun de 1,5 a 2,1s mais dano ao longo do tempo, constants_abilities.json); até os 7:0 (Phase Boots do Doom) a lane ainda é parelha porque nenhum dos dois tem item de spike; Sharpshooter (alcance 3000, carrega até 3s, dano até 1350 no nível 3) é a maior ameaça dela até o Doom ter BKB (24:0 mediano, pro_dados/doom_bringer.json) ou já estar cravando a curse de perto.
 - o que ele faz com você: Bushwhack trava você perto de árvore pro time dela fechar; Sharpshooter aplica Break (desliga suas habilidades por um tempo) e dano alto se você ficar parado no alcance dela por 3s de carregamento.
-- o que você faz com ele (dela): Scurry não dá imunidade a magia, só velocidade, evasão e passagem por árvore (constants_abilities.json: hoodwink_scurry), então sua curse ainda gruda nela enquanto ela foge; ela é muito frágil, Infernal Blade (stun de 0,66s mais 1-4% da vida máxima por 4s) já é dano relevante numa suporte.
+- o que você faz com ele: Scurry não dá imunidade a magia, só velocidade e passagem por árvore (constants_abilities.json: hoodwink_scurry), então sua curse ainda gruda nela enquanto ela foge; ela é muito frágil, Infernal Blade (stun de 0,66s mais 1-4% da vida máxima por 4s) já é dano relevante numa suporte.
 - itens que viram: BKB do Doom segura a Break do Sharpshooter se ele não tiver como evitar o tiro; Blink pra fechar antes dela terminar de carregar.
 - como jogar: não fique parado no alcance dela pra não levar o Sharpshooter cheio; force ela a gastar Scurry cedo e persiga com Infernal Blade em autocast, que rende dano de graça.
 - fonte: pro_dados/doom_bringer.json; pro_dados/hoodwink.json; constants_abilities.json
@@ -70,23 +60,23 @@ fontes:
 
 ## Contra Pangolier (pangolier)
 - placar: Doom venceu 104 de 182 jogos de pro (57,1%), boa vantagem. Fonte: pro_dados/doom_bringer.json (confrontos).
-- por que importa: é um dos oponentes com mais jogos contra o Doom (182, empatado com Shadow Fiend, só atrás de Rubick e Hoodwink) e domina a posição 2 (mid) em pro, 69% dos picks dele no 7.41 são pos 2 (155/224, 52,9% de vitória), contra 29% de pos 3 (fonte: content/fichas/pangolier.md, draft.csv); mesmo sem lane garantida, é um dos combatentes de meio de jogo mais agressivos do patch.
+- por que importa: é um dos oponentes com mais jogos contra o Doom (182, empatado com Shadow Fiend, só atrás de Rubick e Hoodwink) e domina a posição de mid em pro, 63,7% dos jogos dele no pro 7.40-7.41 são de mid (1.169 de 1.836, lane_role OpenDota explorer), contra 35,7% de offlane; mesmo sem lane garantida, é um dos combatentes de meio de jogo mais agressivos do patch.
 - janelas: desde o nível 6 ele já ameaça iniciar com Rolling Thunder; o Blink dele sai em 19:2 (pro_dados/pangolier.json), quase junto do Doom (19:7, pro_dados/doom_bringer.json), então quem fecha primeiro tende a vencer a troca, já que os dois têm alcance curto.
-- o que ele faz com você: durante Rolling Thunder ele fica debuff immune e com 80% de resistência mágica (constants_abilities.json: pangolier_gyroshell), então sua curse não gruda nele enquanto ele estiver rolando; Swashbuckle (dash mais 4 ataques rápidos) ainda conecta nele mesmo que ele esteja te atacando.
+- o que ele faz com você: durante Rolling Thunder ele fica debuff immune e com 80% de resistência mágica (constants_abilities.json: pangolier_gyroshell), então sua curse não gruda nele enquanto ele estiver rolando; Swashbuckle (dash mais 3 ataques rápidos) ainda conecta nele mesmo que ele esteja te atacando.
 - o que você faz com ele: fora da Rolling Thunder ele não tem HP extra de sobra; sua curse mais o Infernal Blade (% da vida máxima por segundo) cortam ele rápido, e se você doomar ele antes de rolar, ele perde acesso à própria ultimate enquanto a curse durar.
 - itens que viram: tente cravar a curse antes da Rolling Thunder, nunca durante; Shiva's Guard reduz a velocidade de ataque dele, que é a arma real do combo (Swashbuckle vira ataques e aciona Lucky Shot).
 - como jogar: espere o Rolling Thunder acabar ou pegue ele ainda carregando pra lançar a curse; depois disso ele não tem fuga própria contra seu dano contínuo.
-- fonte: pro_dados/doom_bringer.json; pro_dados/pangolier.json; content/fichas/pangolier.md; constants_abilities.json
+- fonte: pro_dados/doom_bringer.json; pro_dados/pangolier.json; constants_abilities.json; partidas pro 7.40-7.41 (OpenDota explorer, lane_role)
 
 ## Contra Tusk (tusk)
 - placar: Doom venceu 80 de 162 jogos de pro (49,4%). Fonte: pro_dados/doom_bringer.json (confrontos).
-- por que importa: é o suporte roamer com mais jogos contra ele no pro (162); no 7.41 ele é quase só 4/5 (79 pos 4 mais 54 pos 5, nenhuma vez pos 1 a 3, fonte: content/fichas/tusk.md, draft.csv) e ataca em janelas de gank cedo, antes de qualquer item grande.
+- por que importa: é o suporte roamer com mais jogos contra ele no pro (162); no 7.41 ele tem gpm baixo no pro (300, pro_dados/tusk.json), compatível com suporte, e ataca em janelas de gank cedo, antes de qualquer item grande.
 - janelas: 0-10min ele ganka com Snowball (rola buscando aliado pelo caminho) e Walrus Kick (lança o alvo 1200 de distância e o trava); como o Doom não tem fuga própria, esse é o período mais perigoso; depois do Blink dele (19:0, pro_dados/tusk.json), bem antes do Blink do Doom (19:7, pro_dados/doom_bringer.json), ele ainda consegue iniciar primeiro em quase qualquer luta aberta.
 - o que ele faz com você: Snowball te tira da lane sem aviso prévio; Walrus Kick te lança longe e te deixa travado pro time dele fechar o combo.
-- o que você faz com ele: ele é baixo de HP e de farm (352 de gpm médio em todas posições, OpenDota, fonte: content/fichas/tusk.md); se você sobreviver ao gank inicial, sua curse nele desliga o cast de Tag Team e ele não tem segundo disable forte sozinho.
+- o que você faz com ele: ele é baixo de HP e de farm (300 de gpm médio no pro 7.40-7.41, pro_dados/tusk.json); se você sobreviver ao gank inicial, sua curse nele desliga o cast de Tag Team e ele não tem segundo disable forte sozinho.
 - itens que viram: Wind Lace/botas cedo ajudam a sobreviver ao primeiro Snowball; depois do seu BKB, o combo dele sozinho fica bem mais fraco contra você.
 - como jogar: jogue a lane pedindo visão de longe nos primeiros 10 minutos, que é a janela onde ele decide o jogo; depois disso ele perde força relativa porque farma pouco.
-- fonte: pro_dados/doom_bringer.json; pro_dados/tusk.json; content/fichas/tusk.md; constants_abilities.json
+- fonte: pro_dados/doom_bringer.json; pro_dados/tusk.json; constants_abilities.json
 
 ## Contra Snapfire (snapfire)
 - placar: Doom venceu 85 de 154 jogos de pro (55,2%). Fonte: pro_dados/doom_bringer.json (confrontos).
@@ -94,7 +84,7 @@ fontes:
 - janelas: 0-16min ela é suporte de poke padrão (Lil' Shredder, Firesnap Cookie); depois do Shard (16,9min), Firesnap Cookie passa a curar o alvo e lançar um Mortimer Kiss extra com 40% do dano de impacto, uma segunda janela de perigo que chega quase junto do Blink do Doom (19:7, pro_dados/doom_bringer.json).
 - o que ele faz com você: Firesnap Cookie já estuna e causa dano na área de pouso mesmo sem Shard (desde o nível 1); com o Shard, ela ainda cura o alvo e manda um Mortimer Kiss extra em cima; Mortimer Kisses (barragem de 5,5s) pune quem fica parado perto dela.
 - o que você faz com ele: ela é frágil fisicamente e sem fuga própria forte; sua curse bloqueia ela de reativar Firesnap Cookie ou curar o aliado que ela estiver protegendo.
-- itens que viram: Shiva's Guard reduz o dano em área dela e facilita segurar a troca; BKB segura o stun do Firesnap/Shard.
+- itens que viram: BKB segura o stun do Firesnap/Shard, já que o dano dela é mágico.
 - como jogar: redobre o cuidado depois dos 17min, quando o Shard muda o combo dela; fora isso, ela não aguenta seu combo de perto.
 - fonte: pro_dados/doom_bringer.json; pro_dados/snapfire.json; https://api.opendota.com/api/constants/aghs_desc
 
@@ -102,21 +92,21 @@ fontes:
 - placar: Doom venceu 72 de 146 jogos de pro (49,3%), parelho. Fonte: pro_dados/doom_bringer.json (confrontos).
 - por que importa: rival direto de mesma posição principal (offlane); os dois são iniciadores tanque de Força que disputam a mesma lane e o mesmo papel no time no 7.41.
 - janelas: lane inicial equilibrada; Centaur costuma ter Vanguard cedo (8:5 mediano, pro_dados/centaur.json) pra segurar dano físico, enquanto o Doom depende do Scorched Earth pra sustentar; depois do Blink dele (19:6) e do Doom (19:7, pro_dados/doom_bringer.json), quem inicia primeiro ganha, porque Centaur quer Stampede em cima de alguém parado e o Doom quer a curse nele antes do Hoof Stomp.
-- o que ele faz com você: Hoof Stomp estuna em área; Retaliate devolve uma % do dano que ele recebe de ataque, inclusive atravessando BKB (fonte: content/fichas/centaur.md); Stampede empurra o time dele por cima de você.
+- o que ele faz com você: Hoof Stomp estuna em área; Retaliate devolve uma % do dano que ele recebe de ataque, inclusive atravessando BKB (constants_abilities.json: centaur_return, bkbpierce Yes); Stampede empurra o time dele por cima de você.
 - o que você faz com ele: Infernal Blade bate % da vida máxima por segundo, bom contra o HP alto dele; sua curse bloqueia qualquer cast dele, mas Retaliate é passiva de ataque recebido, então continua ativa mesmo com você doomando ele, a menos que a Break venha do seu Scepter.
 - itens que viram: Aghanim's Scepter seu (aghs_desc: a curse passa a aplicar Break) desliga de fato o Retaliate dele; sem o Scepter, prefira bater nele com Infernal Blade em autocast em vez de ficar trocando soco a soco.
 - como jogar: na lane, puna os momentos em que ele erra o Hoof Stomp; na late, feche a curse nele antes dele estourar o Stampede em cima do seu time.
-- fonte: pro_dados/doom_bringer.json; pro_dados/centaur.json; content/fichas/centaur.md; constants_abilities.json; https://api.opendota.com/api/constants/aghs_desc
+- fonte: pro_dados/doom_bringer.json; pro_dados/centaur.json; constants_abilities.json; https://api.opendota.com/api/constants/aghs_desc
 
 ## Contra Axe (axe)
 - placar: Doom venceu 58 de 124 jogos de pro (46,8%), leve desvantagem. Fonte: pro_dados/doom_bringer.json (confrontos).
-- por que importa: outro rival direto de mesma posição, 93% dos picks do Axe no 7.41 são pos 3 (133/143, 51% de vitória, fonte: content/fichas/axe.md); clássico duelo de offlane tanque contra tanque.
+- por que importa: outro rival direto de mesma posição, 97,7% dos jogos do Axe no pro 7.40-7.41 são na offlane (1.973 de 2.019, lane_role OpenDota explorer, 50,5% de vitória); clássico duelo de offlane tanque contra tanque.
 - janelas: lane dura dos dois lados porque Counter Helix pune quem bate nele e sua curse sozinha não desliga essa passiva; Axe costuma ter Blink mais cedo (15:7, pro_dados/axe.json) que o Doom (19:7, pro_dados/doom_bringer.json), então ele tende a iniciar roam/pickoff primeiro nesse intervalo.
 - o que ele faz com você: Berserker's Call obriga você a atacar ele (e ele ganha armadura), acionando Counter Helix de graça; Culling Blade executa baseado na vida que falta e reseta a recarga se matar, perigoso se ele te pegar com o Scorched Earth desligado.
 - o que você faz com ele: Infernal Blade bate % da vida máxima dele por segundo, bom contra o HP alto; sua curse bloqueia qualquer cast dele, mas Counter Helix é passiva de ataque, não precisa de cast pra disparar, então continua funcionando mesmo com você doomando ele, sem Scepter.
 - itens que viram: Aghanim's Scepter (aghs_desc: a curse passa a aplicar Break) desliga Counter Helix de vez; sem ele, evite ficar martelando nele corpo a corpo sem necessidade, use Infernal Blade em autocast à distância de ataque.
 - como jogar: não aceite o Berserker's Call parado nele sem plano; feche a curse nele de preferência com Blink, antes dele plantar o combo.
-- fonte: pro_dados/doom_bringer.json; pro_dados/axe.json; content/fichas/axe.md; constants_abilities.json; https://api.opendota.com/api/constants/aghs_desc
+- fonte: pro_dados/doom_bringer.json; pro_dados/axe.json; constants_abilities.json; https://api.opendota.com/api/constants/aghs_desc; partidas pro 7.40-7.41 (OpenDota explorer, lane_role)
 
 ## Contra Tidehunter (tidehunter)
 - placar: Doom venceu 67 de 121 jogos de pro (55,4%), boa vantagem. Fonte: pro_dados/doom_bringer.json (confrontos).
@@ -166,7 +156,7 @@ fontes:
 - o que você faz com ele: se o Doom conseguir doomar ele antes da Borrowed Time disparar, a curse bloqueia a cura por completo enquanto durar; o problema na prática é o timing, o gatilho automático dele costuma ser mais rápido que a aproximação do Doom.
 - itens que viram: só vale tentar a curse cedo na troca, antes dele cair pra faixa de vida que ativa a defesa automática; itens de burst/silêncio do time do Doom ajudam a adiantar esse timing.
 - como jogar: não gaste a curse reativamente quando ele já estiver com Borrowed Time ligada, o efeito provavelmente já passou por cima; tente pegar ele fora de posição, longe da vida baixa que ativa a defesa.
-- fonte: pro_dados/doom_bringer.json; pro_dados/abaddon.json; constants_abilities.json (abaddon_borrowed_time; doom_bringer_doom); https://winio.ai/wiki/dota2/heroes/abaddon-guide-best-build-skill-order-and-counters
+- fonte: pro_dados/doom_bringer.json; pro_dados/abaddon.json; constants_abilities.json (abaddon_borrowed_time; doom_bringer_doom)
 
 ## Contra Tiny (tiny)
 - placar: Doom venceu 76 de 152 jogos de pro (50,0%), parelho. Fonte: pro_dados/doom_bringer.json (confrontos).

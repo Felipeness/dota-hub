@@ -22,20 +22,17 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/lina.md
 - https://api.opendota.com/api/constants/aghs_desc
+- https://api.opendota.com/api/explorer (lane_role e patch de partidas de liga 7.40-7.41)
 - liquipedia.net (Stun, Invulnerable, Hide, mecânicas gerais de disable e invulnerabilidade)
-- dotacoach.gg/heroes/counters/lina (counters gerais citados por busca web)
-- oneesports.gg, esports.gg, rdy.gg (kit da Muerta, hero novo, números confirmados contra constants_abilities.json local)
 ---
 
 ## Escolha dos oponentes
 
-Lina é essencialmente mid no 7.41 (77% das partidas, dotacoach.gg via ficha-lina.md), então a maioria dos confrontos abaixo já é lane direta. Critério de escolha, com a fonte de cada grupo:
+Lina é essencialmente mid em pro (85% das partidas, partidas de liga 7.40-7.41, OpenDota explorer por lane_role), então a maioria dos confrontos abaixo já é lane direta. Critério de escolha, com a fonte de cada grupo:
 
 - **Mais jogados em pro (top 6 por volume)**: Shadow Fiend, Rubick, Ogre Magi, Snapfire, Dragon Knight, Lion. Fonte: OpenDota `/heroes/25/matchups`, partidas de liga 7.40+7.41 (pro_dados/lina.json).
-- **Mesma posição principal (mid puro, posição 2) mais jogados contra ela**: Queen of Pain, Invoker, Storm Spirit. Fonte: herois_catalogo.json (campo `posicoes`) cruzado com pro_dados/lina.json.
+- **Mesma posição principal (mid puro, posição 2) mais jogados contra ela**: Queen of Pain, Invoker, Storm Spirit. Fonte: OpenDota explorer, lane_role de partidas de liga 7.40-7.41 (Queen of Pain 88% mid, Invoker 94% mid, Storm Spirit 96% mid) cruzado com pro_dados/lina.json.
 - **Maior vantagem dela, só com 30+ jogos**: Sand King (63,3%), Void Spirit (58,3%), Dazzle (58,1%).
 - **Maior desvantagem dela, só com 30+ jogos**: Keeper of the Light (31,6%), Muerta (36,4%), Leshrac (37,1%).
 
@@ -49,7 +46,7 @@ Void Spirit e Storm Spirit também são mid puro, então aparecem reforçando do
 - o que ele faz com você: Shadowraze (85 a 280 de dano, acerta até 200 de distância na frente dele numa área de raio 250, não precisa mirar nela especificamente) pune qualquer posicionamento perto da linha; se ela errar o LSA, ele fecha com raze mais autoataque. Requiem of Souls no late é fear em área: não atravessa BKB dela (bkbpierce: não), mas o fear por si só já quebra o combo ao empurrá-la fora de alcance.
 - o que você faz com ele: LSA tem 700 de alcance e 0,5s de cast delay, o suficiente pra travar ele antes de ele fechar um raze de perto. Sem BKB, o combo completo (LSA 200 + Dragon Slave 245+burn + Laguna Blade 750) passa de 1300 de dano mágico e mata ele limpo antes dos 20 min.
 - itens que viram: Black King Bar nela é o item que mais importa no confronto, porque nenhuma magia dela atravessa BKB e ele compra o dele aos 25,2 min, fechando a janela de kill limpo. Do lado dele, Linken's Sphere bloqueia um Laguna Blade isolado.
-- como jogar: até os 15 min jogue a troca de poke, Dragon Slave recarrega mais rápido (11s contra 9s do Raze dele no nível 1) e o burn deixa o dano total dela maior. Guarde o combo completo pra matar ele antes do BKB dele fechar aos 25 min. Depois disso, ele vira tanque de magia, e só dano físico resolve.
+- como jogar: até os 15 min jogue a troca de poke, o burn do Slow Burn deixa o dano total dela maior mesmo com o Shadowraze dele recarregando mais rápido (9s contra 11s do Dragon Slave no nível 1). Guarde o combo completo pra matar ele antes do BKB dele fechar aos 25 min. Depois disso, ele vira tanque de magia, e só dano físico resolve.
 - fonte: OpenDota /heroes/25/matchups; pro_dados/lina.json; pro_dados/nevermore.json; constants_abilities.json (nevermore_shadowraze1, nevermore_requiem, nevermore_necromastery, lina_laguna_blade, lina_light_strike_array)
 
 ## Contra Rubick (rubick)
@@ -70,7 +67,7 @@ Void Spirit e Storm Spirit também são mid puro, então aparecem reforçando do
 - janelas: cedo ele é puramente nível-dependente: Fireblast (70 a 250 de dano, 1,2s de stun fixo em qualquer nível) já ameaça kill a partir do nível 2. O farm dele é baixo (gpm 315), então o poder dele vem de nível e do talento Multicast (chance de castar a magia 2x, 3x ou até 4x), não de item. A partir dos 18-19 min, quando ela fecha Scepter (19,2 min), ela sobrevive melhor ao stun porque Flame Cloak dá 35% de resistência mágica.
 - o que ele faz com você: Fireblast interrompe qualquer movimento ou canalização dela antes do LSA saber, e 1,2s é tempo de sobra pro parceiro dele fechar o combo nela. Com Multicast, o Fireblast pode sair 2 ou até 3 vezes na mesma troca se ele tiver Força suficiente.
 - o que você faz com ele: ele não tem fuga nenhuma (sem blink, sem invisibilidade própria), então o combo completo mata ele fácil fora de posição. Ele não tem item de burst pra competir no 1x1, é puramente utilidade de suporte.
-- itens que viram: Aghanim's Shard dele (26,1 min, Fire Shield) absorve os próximos 3 ataques inimigos no aliado protegido e devolve bola de fogo em quem acertar, então o combo dela pode não matar quem ele acabou de blindar. Pra ela, qualquer coisa que aumente alcance ou mobilidade evita o stun de 625 de distância do Fireblast.
+- itens que viram: Aghanim's Shard dele (26,1 min, Fire Shield) absorve os próximos 3 ataques inimigos no aliado protegido e devolve bola de fogo em quem acertar, então o combo dela pode não matar quem ele acabou de blindar. Pra ela, qualquer coisa que aumente alcance ou mobilidade evita o stun de 525 de distância do Fireblast.
 - como jogar: respeite o Fireblast desde o nível 2, ele interrompe sua rotação de combo. Puna ele fora de posição, sem fuga ele é alvo fácil. Depois do Shard dele, não gaste o combo completo em quem ele acabou de proteger com Fire Shield.
 - fonte: pro_dados/lina.json; pro_dados/ogre_magi.json; constants_abilities.json (ogre_magi_fireblast, ogre_magi_multicast); aghs_desc (shard do Ogre Magi)
 
@@ -78,18 +75,18 @@ Void Spirit e Storm Spirit também são mid puro, então aparecem reforçando do
 
 - placar: 95 vitórias em 197 jogos, 48,2% (fonte: OpenDota /heroes/25/matchups)
 - por que importa: quarto oponente mais jogado (197 jogos). Suporte com CC pesado em área que também pica de item muito cedo, quase junto com ela.
-- janelas: até os 10 min ela precisa fugir do raio de 300 do Firesnap Cookie e do cone do Scatterblast. Aos 16,9 min (mediana do item mais comprado pela Snapfire no 7.41) ela fecha o Shard, que aumenta em 40% o dano do Firesnap Cookie, o stun que ela mais usa pra abrir a troca, e o Maelstrom de Lina (11,1 min) já tá rodando há um tempo. Depois dos 20 min o Blink da Snapfire (20,7 min) permite iniciar de surpresa.
-- o que ele faz com você: Firesnap Cookie salta e atordoa (1 a 2,2s) numa área de 300, suficiente pra prender ela fora do alcance de reagir, e bate 40% mais forte depois do Shard. Scatterblast é em cone, então ela precisa ficar de lado pra não ser pega junto com o time. O Scepter da Snapfire tira o alcance mínimo de 600 da Mortimer Kisses (a ultimate), mas não aparece entre os itens mais comprados em pro, não é prioridade de build.
+- janelas: até os 10 min ela precisa fugir do raio de 300 do Firesnap Cookie e do cone do Scatterblast. Aos 16,9 min (mediana do item mais comprado pela Snapfire no 7.41) ela fecha o Shard, que faz o Firesnap Cookie também lançar uma Mortimer Kiss no ponto de impacto com 40% do dano da ultimate, além do stun que ela já usa pra abrir a troca, e o Maelstrom de Lina (11,1 min) já tá rodando há um tempo. Depois dos 20 min o Blink da Snapfire (20,7 min) permite iniciar de surpresa.
+- o que ele faz com você: Firesnap Cookie salta e atordoa (1 a 2,2s) numa área de 300, suficiente pra prender ela fora do alcance de reagir, e depois do Shard ainda lança uma Mortimer Kiss extra no local do impacto. Scatterblast é em cone, então ela precisa ficar de lado pra não ser pega junto com o time. O Scepter da Snapfire tira o alcance mínimo de 600 da Mortimer Kisses (a ultimate), mas não aparece entre os itens mais comprados em pro, não é prioridade de build.
 - o que você faz com ele: ela farma mais rápido no early (last hit 75 aos 10 min contra 21 da Snapfire) e chega no combo de burst primeiro. O kit dela é todo setup, sem fuga própria fora do Blink (20,7 min), então fora de posição ela morre pro combo completo antes de reagir.
 - itens que viram: Black King Bar nela quebra o Firesnap Cookie e o Scatterblast, nenhum dos dois atravessa BKB. Glimmer Cape da Snapfire (21,9 min) dá invisibilidade e resistência mágica de surpresa, atrapalha o combo se ela ativar antes do LSA saber.
-- como jogar: puna o farm dela cedo, last hit 21 aos 10 min é baixo pra um suporte com esse kit. Depois do Shard dela (16,9 min), respeite o Firesnap Cookie mais forte, 40% a mais de dano no stun que abre a troca dela. Depois do seu Scepter (19,2 min) a resistência mágica adicional ajuda a sobreviver ao burst dela.
+- como jogar: puna o farm dela cedo, last hit 21 aos 10 min é baixo pra um suporte com esse kit. Depois do Shard dela (16,9 min), respeite o dano extra da Mortimer Kiss que sai junto do Firesnap Cookie que abre a troca dela. Depois do seu Scepter (19,2 min) a resistência mágica adicional ajuda a sobreviver ao burst dela.
 - fonte: pro_dados/lina.json; pro_dados/snapfire.json; constants_abilities.json (snapfire_firesnap_cookie, snapfire_scatterblast, snapfire_mortimer_kisses); aghs_desc (Snapfire)
 
 ## Contra Dragon Knight (dragon_knight)
 
 - placar: 81 vitórias em 163 jogos, 49,7% (fonte: OpenDota /heroes/25/matchups)
 - por que importa: quinto oponente mais jogado (163 jogos). Carry tanque que sobrevive ao poke dela na lane graças à regeneração do Dragon Blood.
-- janelas: até os 10 min ele aguenta o poke dela por causa do +2 de regen e +2 de armadura do Dragon Blood (dobra na Elder Dragon Form). Aos 16,2 min o Blink dele destrava iniciação, enquanto ela só tem rotação plena aos 12,2 min (Travel Boots). Dos 19 aos 23 min ela está com Scepter (19,2 min) e ele ainda sem BKB (23,3 min): é a janela dela matar ele fora de posição antes dele virar um tanque resistente a magia.
+- janelas: até os 10 min ele aguenta o poke dela por causa do +2 de regen e +2 de armadura do Dragon Blood (aumenta 50% na Elder Dragon Form). Aos 16,2 min o Blink dele destrava iniciação, enquanto ela só tem rotação plena aos 12,2 min (Travel Boots). Dos 19 aos 23 min ela está com Scepter (19,2 min) e ele ainda sem BKB (23,3 min): é a janela dela matar ele fora de posição antes dele virar um tanque resistente a magia.
 - o que ele faz com você: Dragon Tail (stun de 1,8 a 2,4s em área) trava o combo dela antes de sair. Breathe Fire reduz o dano de ataque dela por 11s, cortando o DPS se ela precisar do bônus de velocidade de ataque do Fiery Soul. Na Elder Dragon Form nível 3 ele ganha resistência a lentidão de gelo, dificulta kitar.
 - o que você faz com ele: ele não tem fuga além do Blink, então LSA mais o combo completo trava e mata ele fora da defesa do time. Antes do Dragon Blood escalar em nível, ela tem vantagem clara de burst mágico contra a resistência mágica baixa dele.
 - itens que viram: Black King Bar nela segura o Dragon Tail. Scythe of Vyse hexa ele fora da Elder Dragon Form, ele perde a transformação enquanto hexado. Pro lado dele, BKB (23,3 min) o deixa imune ao combo completo dela por 9, 8 ou 7 segundos conforme o nível.
@@ -189,11 +186,11 @@ Void Spirit e Storm Spirit também são mid puro, então aparecem reforçando do
 - placar: 12 vitórias em 33 jogos, 36,4% (amostra razoável, fonte: OpenDota /heroes/25/matchups)
 - por que importa: segundo pior matchup da lista. Outra mid de dano mágico que também vira right-click forte, concorrendo pelo mesmo papel e vencendo a troca de burst.
 - janelas: cedo os dois trocam poke mágico (Dead Shot contra Dragon Slave). O spike grande dela é o Maelstrom aos 13,8 min, virando Mjollnir aos 19,7 min, dano em área de autoataque na mesma janela do Scepter da Lina (19,2 min). The Calling, que silencia quem atravessa os espectros, é o diferencial que quebra o combo da Lina no meio da troca.
-- o que ele faz com você: The Calling silencia quem passa pelos espectros, desligando o combo dela se ela estiver posicionada dentro da área. Dead Shot acerta o alvo com dano e lentidão e depois ricocheteia, causando fear em quem for atingido pelo ricochete. Pierce the Veil deixa Muerta imune a dano físico, então o bônus de velocidade de ataque do Fiery Soul não ajuda nessa janela, só o dano mágico do combo funciona.
-- o que você faz com ele: fora da área de silence do The Calling, o LSA trava Muerta normalmente. O combo mágico completo não é bloqueado pela Pierce the Veil, que só nega físico, então o burst do Laguna Blade ainda mata.
+- o que ele faz com você: The Calling silencia quem passa pelos espectros, desligando o combo dela se ela estiver posicionada dentro da área. Dead Shot acerta o alvo com dano e lentidão e depois ricocheteia, causando fear em quem for atingido pelo ricochete. Pierce the Veil faz os ataques da Muerta virarem dano mágico por 8s, então armadura não ajuda nessa janela, só resistência mágica ou disable cortam o DPS dela.
+- o que você faz com ele: fora da área de silence do The Calling, o LSA trava Muerta normalmente. O combo mágico completo não depende de dano físico, então o burst do Laguna Blade mata ela normalmente mesmo com Pierce the Veil ativo.
 - itens que viram: Black King Bar nela segura o silence do The Calling. Pra ela, manter distância do raio dos espectros vale mais que qualquer item. Pro lado dele, Mjollnir (19,7 min) e Black King Bar (27,5 min) dão sobrevivência e dano de longo prazo.
-- como jogar: evite ficar na área dos espectros do The Calling antes de soltar o combo. Aproveite que o combo mágico ainda funciona mesmo com a ult dela ativa, Pierce the Veil só bloqueia físico. Puna antes dela fechar Mjollnir aos 19,7 min, depois disso ela farma e luta melhor.
-- fonte: pro_dados/lina.json; pro_dados/muerta.json; constants_abilities.json (muerta_the_calling, muerta_dead_shot, muerta_pierce_the_veil); oneesports.gg, esports.gg (kit da Muerta)
+- como jogar: evite ficar na área dos espectros do The Calling antes de soltar o combo. Aproveite que o combo mágico ainda funciona mesmo com a ult dela ativa, já que não depende de dano físico. Puna antes dela fechar Mjollnir aos 19,7 min, depois disso ela farma e luta melhor.
+- fonte: pro_dados/lina.json; pro_dados/muerta.json; constants_abilities.json (muerta_the_calling, muerta_dead_shot, muerta_pierce_the_veil)
 
 ## Contra Leshrac (leshrac)
 

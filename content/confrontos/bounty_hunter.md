@@ -18,8 +18,6 @@ fontes:
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tidehunter.json
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/dark_willow.json
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/templar_assassin.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/bounty_hunter.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
 - https://api.opendota.com/api/constants/aghs_desc
@@ -32,12 +30,12 @@ Critério de escolha dos 14 oponentes: os 6 com mais jogos contra Bounty Hunter 
 ## Contra Tusk (tusk)
 - placar: 46V/86 jogos (53.5%) em pro 7.40+7.41, fonte pro_dados/bounty_hunter.json (matchups OpenDota)
 - por que importa: é o par mais frequente em pro contra Bounty Hunter (86 jogos), ambos pos 4 que vivem fora da própria lane, cruzando o mapa atrás do mesmo pick-off isolado
-- janelas: até 15 min nenhum dos dois farma de verdade (lh10 do BH é 10, do Tusk é 6), o jogo é só sobre quem acha o primeiro kill; dos 16 aos 19 min o Tusk ganha Blink Dagger (mediana 19.0 min, p25 16.8) e passa a iniciar Tag Team em quem estiver fora de posição; a partir dos 24-25 min ele carrega Dust of Appearance (mediana 24.7) que varre o Shadow Walk puro; o Blink do próprio Bounty Hunter só chega aos 29 min (fonte: ficha, dota-tier1 replay), então entre o Blink dele e o seu existe uma janela de uns 10 minutos em que ele caça e você só foge ou usa Force Staff (mediana 25 min)
+- janelas: até 15 min nenhum dos dois farma de verdade (lh10 do BH é 10, do Tusk é 6), o jogo é só sobre quem acha o primeiro kill; dos 16 aos 19 min o Tusk ganha Blink Dagger (mediana 19.0 min, p25 16.8) e passa a iniciar Tag Team em quem estiver fora de posição; a partir dos 24-25 min ele carrega Dust of Appearance (mediana 24.7) que varre o Shadow Walk puro; o Blink do próprio Bounty Hunter só chega aos 30.4 min (mediana, n=31, partidas pro 7.40-7.41 via OpenDota explorer), então entre o Blink dele e o seu existe uma janela de pouco mais de 11 minutos em que ele caça e você só foge ou usa Force Staff (mediana 25 min)
 - o que ele faz com você: Ice Shards (300 de dano no nível 4, 7 cacos num raio de 200) cria terreno impassável que prende mesmo um alvo invisível, porque não precisa ver pra travar passagem; Walrus Punch (crítico de até 300%) fecha o combo com dano instantâneo se ele te alcançar
 - o que você faz com ele: Shadow Walk seguido de Jinada (até 175 de dano bônus + 36 de ouro roubado no nível 4) é pick-off limpo contra ele antes do nível 6, já que o kit dele não tem stun confiável até ter Ice Shards disponível com frequência; Track amplifica até 16% o dano que ele toma quando se compromete com Tag Team sem saída
 - itens que viram: Dust (dele) neutraliza o Shadow Walk puro; Aghanim's Scepter seu (Shuriken Toss aplica Jinada e ganha alcance até 525 no nível 4) resolve isso te dando o pick-off à distância sem precisar fechar os 150 de alcance do Jinada normal
 - como jogar: force o pick-off antes dele ter Blink, ande sempre com Track pronto pra puxar o burst do time nele; depois que ele carregar Dust, troque pra Shard em aliado (Friendly Shadow) ou leve Scepter pra marcar e bater de longe
-- fonte: pro_dados/bounty_hunter.json; pro_dados/tusk.json; constants_abilities.json (tusk_ice_shards, tusk_walrus_punch, bounty_hunter_jinada); content/fichas/bounty_hunter.md; aghs_desc (bounty hunter scepter)
+- fonte: pro_dados/bounty_hunter.json; pro_dados/tusk.json; constants_abilities.json (tusk_ice_shards, tusk_walrus_punch, bounty_hunter_jinada); OpenDota explorer (blink dagger do Bounty Hunter em partidas pro 7.40-7.41, n=31); aghs_desc (bounty hunter scepter)
 
 ## Contra Chen (chen)
 - placar: 35V/72 jogos (48.6%), fonte pro_dados/bounty_hunter.json
@@ -61,7 +59,7 @@ Critério de escolha dos 14 oponentes: os 6 com mais jogos contra Bounty Hunter 
 
 ## Contra Jakiro (jakiro)
 - placar: 35V/69 jogos (50.7%), fonte pro_dados/bounty_hunter.json
-- por que importa: 4º mais comum em pro contra BH (69 jogos), pos 5 puro no catálogo, disputa a mesma função de controle de área e visão no mapa
+- por que importa: 4º mais comum em pro contra BH (69 jogos), pos 5 puro, disputa a mesma função de controle de área e visão no mapa
 - janelas: 9-12 min Jakiro monta Ring of Basilius (8.9) e Arcane Boots (11.7); 19-23 min chegam Fluffy Hat (19.1, componente de Pipe) e Dust (23.7); 25 min fecha o componente de Octarine (staff_of_wizardry, 25.1). O ultimate Macropyre (200 de dano/s no nível 3, 10s) só existe depois do nível 6, então antes disso BH tem liberdade de pick-off; depois, qualquer luta prolongada em área pequena pune muito quem fica parado, BH incluso
 - o que ele faz com você: Macropyre e Ice Path são Point Target, não precisam te ver pra acertar, então se o Jakiro adivinhar sua rota (bush, caminho de gank) o dano e o stun (até 2s) acontecem mesmo com Shadow Walk ativo; Dust de time remove a invisibilidade de vez
 - o que você faz com ele: Jakiro tem HP relativamente baixo pro grupo de suportes de magia, pick-off de Shadow Walk+Jinada no early resolve rápido antes dele ter Ice Path disponível com frequência; Track amplifica o burst em cima dele quando ele canaliza perto do próprio Macropyre

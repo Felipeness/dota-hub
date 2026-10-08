@@ -22,8 +22,6 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/mars.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 
@@ -59,7 +57,7 @@ fontes:
 
 ## Contra Snapfire (snapfire)
 - placar: Mars venceu 171 de 370 partidas de pro (46,2%). Fonte: pro_dados/mars.json.
-- por que importa: quarto oponente mais comum (370 jogos) e um suporte flex que também pode ir offlane (posições 2 a 5 no catálogo), então divide papel com Mars em parte das partidas.
+- por que importa: quarto oponente mais comum (370 jogos) e um suporte que também pode ir offlane, então divide papel com Mars em parte das partidas.
 - janelas: Snapfire farma mais que os outros suportes da lista (413 gpm, 21 last hit aos 10min) e fecha o próprio Shard aos 16:54 (pro_dados/snapfire.json), bem antes do Blink dela (20:42). Mortimer Kisses (alcance de 3000, cd de 120 a 100s) fica pronto perto do nível 6, antes do Blink de Mars (15:12) virar uma ameaça de verdade pra ela, então essa janela (nível 6 dela até ~15min) é a mais perigosa pro Mars se ele se expor sozinho.
 - o que ele faz com você: Mortimer Kisses é a maior ameaça, puxa Mars de até 3000 de distância e aplica impacto antes do Blink dele sair do lugar; Scatterblast não empurra, mas aplica 100% de slow de movimento por 1s (constants_abilities.json: snapfire_scatterblast), o que trava o posicionamento de Mars quase como um stun.
 - o que você faz com ele: o alcance do Spear (900 a 1200) acerta Snapfire antes dela terminar de carregar o Mortimer Kisses, já que o cast dela demora mais pra sair; Arena of Blood neutraliza a fuga pela Firesnap Cookie, porque as lanças seguram quem tenta sair pela borda.
@@ -89,7 +87,7 @@ fontes:
 
 ## Contra Axe (axe)
 - placar: Mars venceu 126 de 260 partidas de pro (48,5%). Fonte: pro_dados/mars.json.
-- por que importa: outro pos 3 clássico (offlane tanque de força) e o segundo rival mais comum de papel depois do Centaur, então é o segundo confronto direto de função.
+- por que importa: outro pos 3 clássico (offlane tanque de força), parecido com o papel do Centaur, então é mais um confronto direto de função.
 - janelas: Axe também farma rápido pra offlane (517 gpm, 63 last hit aos 10min) porque Counter Helix rende gold de creep enquanto ele leva dano, e fecha Phase Boots aos 7:12 (pro_dados/axe.json), perto da mesma hora que Mars fecha Chainmail/Blades (7:30/7:54). O nível 6 dele (Culling Blade, executa alvo com menos de 275 a 475 de HP) é a maior ameaça direta num Mars que já levou dano de luta, e o Shard do Axe (22:54) chega um pouco depois do de Mars (21:30), então Mars costuma ter vantagem de Shard nessa janela.
 - o que ele faz com você: Berserker's Call força Mars a atacar o Axe por até 3s e atravessa Black King Bar (bkbpierce: Yes); cada ataque forçado soma pro contador do Counter Helix (4 a 7 hits), que devolve dano puro em área, não reduzido por armadura nem pelo bloqueio físico do Bulwark; Culling Blade também atravessa BKB e executa Mars se o HP cair abaixo do limiar.
 - o que você faz com ele: a Arena of Blood cerca o Axe junto do time dele, então mesmo se ele usar o Call lá dentro, Mars pode desativar o Bulwark ou sair do alcance de auto-ataque entre as lanças; o Spear empurra o Axe pra fora de alcance do Call antes dela sair.
@@ -99,7 +97,7 @@ fontes:
 
 ## Contra Tidehunter (tidehunter)
 - placar: Mars venceu 114 de 252 partidas de pro (45,2%). Fonte: pro_dados/mars.json.
-- por que importa: terceiro offlane mais comum contra Mars (252 jogos), tanque de iniciação em área que compete pelo mesmo papel de abrir luta.
+- por que importa: offlane comum contra Mars (252 jogos), tanque de iniciação em área que compete pelo mesmo papel de abrir luta.
 - janelas: Tidehunter farma rápido (515 gpm, 56 last hit aos 10min) e fecha Phase Boots/Soul Ring aos 7:48/8:30 (pro_dados/tidehunter.json), praticamente junto com Mars. O 6 dele é Ravage, a maior ameaça de iniciação da lista em área (stun de 2 a 2,4s num raio de 1250, lançado à distância zero porque é centrado nele mesmo). Os dois chegam no Blink perto da mesma hora (Mars 15:12, Tidehunter 21:12), então Mars costuma ter a janela de iniciar primeiro entre 15:12 e 21:12.
 - o que ele faz com você: Ravage atravessa o time inteiro e stuna Mars onde ele estiver dentro do raio de 1250, cancelando qualquer plano de Arena of Blood; Kraken Shell bloqueia uma fatia do dano físico de Mars (15 a 75 de redução conforme o nível) e ainda limpa debuff quando acumula dano suficiente, o que pode incluir o próprio stun do Spear.
 - o que você faz com ele: o Spear interrompe o canal de Ravage se acertar o Tidehunter durante a janela de lançamento; Arena of Blood cerca o Tidehunter antes dele alcançar o time pra centralizar a ult.
@@ -109,7 +107,7 @@ fontes:
 
 ## Contra Timbersaw (shredder)
 - placar: Mars venceu 111 de 245 partidas de pro (45,3%). Fonte: pro_dados/mars.json.
-- por que importa: quarto offlane mais comum (245 jogos) e um dos maiores counters conceituais de herói de força corpo a corpo, então é o confronto que mais testa a decisão de item de Mars.
+- por que importa: offlane comum contra Mars (245 jogos) e um dos maiores counters conceituais de herói de força corpo a corpo, então é o confronto que mais testa a decisão de item de Mars.
 - janelas: Timbersaw farma muito rápido pra um offlane (587 gpm, 53 last hit aos 10min, nível final 21) porque Whirling Death dá gold de árvore destruída e Reactive Armor deixa ele sobreviver trocando cedo. O item que define ele é Kaya and Sange (18:06, pro_dados/shredder.json), que soma resistência mágica bem na janela em que Mars costuma iniciar com o Spear (Blink do Mars em 15:12, do Timbersaw em 22:30).
 - o que ele faz com você: Whirling Death reduz um atributo primário de Mars por um tempo e destrói árvore em volta, cortando rota de fuga; Reactive Armor conta ataque de herói como 4x, então bater nele sem plano só deixa ele mais tanque; Timber Chain (alcance crescente até 1200) dá mobilidade pra fugir do Spear ou perseguir Mars rápido demais pra reagir.
 - o que você faz com ele: o Spear empurra o Timbersaw pra longe de árvore, cortando a rota do Timber Chain; a Arena of Blood tranca o espaço antes dele correntear pra longe de novo.

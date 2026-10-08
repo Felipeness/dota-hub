@@ -22,11 +22,7 @@ fontes:
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/phoenix.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/void_spirit.md
 - https://api.opendota.com/api/constants/aghs_desc
-- https://dota2.fandom.com/wiki/Treant_Protector/Guide
-- https://dotacoach.gg/en/items/black-king-bar
 ---
 
 ## Contra Puck (puck)
@@ -55,7 +51,7 @@ fontes:
 - janelas: até 10 min: Jakiro farma quase nada (lh10 8) e fica trocando Dual Breath em área; 12-17 min: Arcane Boots (11,7min) chega antes do Shard do Void (17,0min), então nessa janela ele tem mais sustain de mana pra spamar feitiço; depois dos 20min o Macropyre dele (cd 90-70s) é a maior ameaça em luta parada, mas o Void consegue atravessar com Astral Step antes do dano acumular.
 - o que ele faz com você: Ice Path atordoa e desacelera numa linha reta, perigoso se pegar o Void parado antes de dar Astral Step; Dual Breath soma slow de gelo com dano contínuo de fogo numa área larga; Macropyre deixa uma linha de fogo persistente que machuca quem fica dentro, mas o Void consegue sair com dash em vez de correr.
 - o que você faz com ele: Astral Step atravessa a linha de Ice Path e de Macropyre sem precisar correr pelo chão, cortando o maior risco do kit dele; o Scepter silencia antes do Macropyre ser lançado numa troca; Dissimilate detona em área, bom pra punir ele parado canalizando feitiço.
-- itens que viram: o Shard do Void (17,0min) chega bem antes do Shard dele (22,8min, remove custo de mana do Liquid Frost e tira o cooldown compartilhado com Liquid Fire); Arcane Boots dele sustenta o spam de feitiço até lá, então antes dos 17min respeite a troca de dano em área.
+- itens que viram: o Shard do Void (17,0min) já está pronto no meio-jogo e dá o silêncio pra cancelar o combo de área dele; Arcane Boots dele (11,7min) sustenta o spam de feitiço até lá, então antes dos 17min respeite a troca de dano em área.
 - como jogar: não fique parado em linha reta com ele, Ice Path e Dual Breath punem isso; use Astral Step pra atravessar zona de Macropyre em vez de correr; depois do Shard pronto, silencie antes dele soltar o combo de área.
 - fonte: pro_dados/void_spirit.json; pro_dados/jakiro.json; constants_abilities.json (jakiro_ice_path, jakiro_dual_breath, jakiro_macropyre, void_spirit_astral_step); aghs_desc (void_spirit, jakiro)
 
@@ -161,30 +157,30 @@ fontes:
 
 ## Contra Nyx Assassin (nyx_assassin)
 - placar: Void Spirit venceu 27 de 85 partidas de pro (31,8%)
-- por que importa: amostra de 85 jogos (30+) e uma das piores desvantagens da lista (31,8%), já citada na própria ficha do Void como contador clássico: Impale e Spiked Carapace travam o combo de blink antes dele render.
+- por que importa: amostra de 85 jogos (30+) e uma das piores desvantagens da lista (31,8%): Impale e Spiked Carapace travam o combo de blink antes dele render.
 - janelas: até 10 min: Nyx farma pouco (lh10 10, gpm 322) e fica escondido esperando emboscada; 19-23 min: Cyclone (20,5min) e Blink (23,4min) dele chegam bem depois do Shard do Void (17,0min); o Shard dele (25,2min, reduz recarga de Vendetta e dá hasted por 15s) chega depois do Scepter do Void (25,1min), mas o combo de controle já funciona sem item desde o nível 6.
 - o que ele faz com você: Impale acerta numa linha reta e atordoa no ar, cd 17-11s; Spiked Carapace reflete o próximo dano recebido e atordoa quem acertou, cancela um Dissimilate que termine em ataque corpo a corpo nele; Vendetta dá invisibilidade e bônus de dano no primeiro ataque, a emboscada clássica dele.
 - o que você faz com ele: o Black King Bar resolve o Impale, que é a peça central do combo dele; o Scepter do Void silencia antes do Impale ser lançado, mas o timing é apertado porque o cast dele é rápido; o Shard do Void dá truesight ao redor do remnant, ajuda a revelar o Nyx durante o Vendetta.
 - itens que viram: contra Nyx, o item que mais resolve não é o Shard nem o Scepter do Void, é o Black King Bar: sem ele, qualquer Impale ou Spiked Carapace cancela o combo de blink; com BKB, o Void ignora os dois e ainda ganha o duelo de dano puro.
 - como jogar: priorize Black King Bar antes do Scepter nesse confronto específico, mesmo sendo fora da ordem padrão; não corra em linha reta perto dele, é onde o Impale acerta; use o Shard pra revelar emboscada antes de entrar em área suspeita.
-- fonte: pro_dados/void_spirit.json; pro_dados/nyx_assassin.json; content/fichas/void_spirit.md; constants_abilities.json (nyx_assassin_impale, nyx_assassin_spiked_carapace, nyx_assassin_vendetta, void_spirit_astral_step); aghs_desc (void_spirit, nyx_assassin)
+- fonte: pro_dados/void_spirit.json; pro_dados/nyx_assassin.json; constants_abilities.json (nyx_assassin_impale, nyx_assassin_spiked_carapace, nyx_assassin_vendetta, void_spirit_astral_step); aghs_desc (void_spirit, nyx_assassin)
 
 ## Contra Treant Protector (treant)
 - placar: Void Spirit venceu 32 de 89 partidas de pro (36,0%)
-- por que importa: amostra de 89 jogos (30+) e a pior desvantagem clássica da lista (36,0%, também citada na ficha do Void): Overgrowth bloqueia blink, invisibilidade e ataque ao mesmo tempo, exatamente o que o Void mais precisa pra funcionar.
-- janelas: até 12 min: Treant farma quase nada (lh10 7, gpm 301) e fica plantado perto da selva; 19-20 min: o Shard dele (19,0min, planta visão permanente numa árvore) chega antes do Shard do Void (17,0min só um pouco antes na verdade, janela bem próxima); 23-26 min: Solar Crest (23,7min) e Pavise (20,5min) protegem o time dele, e o Blink dele (26,4min) chega depois do Scepter do Void (25,1min).
+- por que importa: amostra de 89 jogos (30+) e uma das piores desvantagens da lista (36,0%): Overgrowth bloqueia blink, invisibilidade e ataque ao mesmo tempo, exatamente o que o Void mais precisa pra funcionar.
+- janelas: até 12 min: Treant farma quase nada (lh10 7, gpm 301) e fica plantado perto da selva; 17-19 min: o Shard do Void (17,0min) chega um pouco antes do Shard dele (19,0min, planta visão permanente numa árvore), janela próxima mas o Void sai na frente; 23-26 min: Solar Crest (23,7min) e Pavise (20,5min) protegem o time dele, e o Blink dele (26,4min) chega depois do Scepter do Void (25,1min).
 - o que ele faz com você: Overgrowth (cd 110-90s) prende todo mundo perto por um tempo fixo e, segundo o próprio texto da habilidade, impede mover, blincar, ficar invisível ou atacar, inclusive atravessando imunidade a feitiço; Leech Seed raiza e desarma o alvo no ataque, cura o time dele; Living Armor reduz dano físico recebido pelos aliados.
 - o que você faz com ele: não existe resposta de item direta pro Overgrowth, porque ele ignora BKB; a única saída real é não ficar no raio quando ele ativa, ou matar o Treant rápido antes dele conseguir posicionar o cast; Resonant Pulse com Scepter silencia antes do cast de Overgrowth, cortando o problema pela raiz.
 - itens que viram: nenhum item de escape físico (Astral Step, Dissimilate, Shadow Blade) funciona dentro de Overgrowth já ativo, então o silêncio preventivo do Scepter (25,1min) é a única resposta de item que realmente importa aqui.
 - como jogar: mantenha distância de visão dele antes de entrar em luta, Overgrowth tem alcance de cast considerável; guarde o silêncio do Scepter especificamente pro momento que ele for castar, não pra outra coisa; se ele já ativou Overgrowth em cima de você, não gaste Astral Step tentando escapar, ele não funciona.
-- fonte: pro_dados/void_spirit.json; pro_dados/treant.json; content/fichas/void_spirit.md; constants_abilities.json (treant_overgrowth, treant_leech_seed, void_spirit_resonant_pulse); aghs_desc (void_spirit, treant_protector); dota2.fandom.com/wiki/Treant_Protector/Guide (Overgrowth bloqueia blink/invisibilidade/ataque, atravessa imunidade a feitiço)
+- fonte: pro_dados/void_spirit.json; pro_dados/treant.json; constants_abilities.json (treant_overgrowth: bloqueia mover/blincar/invisibilidade/atacar, bkbpierce sim; treant_leech_seed, void_spirit_resonant_pulse); aghs_desc (void_spirit, treant_protector)
 
 ## Contra Phoenix (phoenix)
 - placar: Void Spirit venceu 60 de 165 partidas de pro (36,4%)
-- por que importa: maior amostra entre os matchups ruins da lista (165 jogos, 36,4%), também citada na ficha do Void: Supernova atordoa ignorando Black King Bar, a única resposta de item que o Void tem pra controle físico.
+- por que importa: maior amostra entre os matchups ruins da lista (165 jogos, 36,4%): Supernova atordoa ignorando Black King Bar, a única resposta de item que o Void tem pra controle físico.
 - janelas: até 9 min: Phoenix farma pouco (lh10 23, gpm 406) e sai de Tranquil Boots (8,8min) pra sustain barato; 23min: o Shard dele (23,3min) chega bem depois do Shard do Void (17,0min), então até lá o Void tem mais iniciativa; Supernova (sem minuto fixo, disponível desde o nível 6) é o único momento em que ele vira o jogo, sacrificando a própria vida pra travar a luta.
-- o que ele faz com você: Icarus Dive desacelera e causa dano numa linha reta, mas custa 15% da vida máxima dele pra usar; Supernova atordoa todo mundo perto no estouro final e cura o Phoenix de graça, e esse stun tem a flag de ignorar Black King Bar (dotacoach.gg); o sol pode ser destruído por ataques antes da explosão, o que cancela o reset de vida e mana dele.
+- o que ele faz com você: Icarus Dive desacelera e causa dano numa linha reta, mas custa 15% da vida máxima dele pra usar; Supernova atordoa todo mundo perto no estouro final e cura o Phoenix de graça, e esse stun tem a flag de ignorar Black King Bar (bkbpierce sim, constants_abilities.json); o sol pode ser destruído por ataques antes da explosão, o que cancela o reset de vida e mana dele.
 - o que você faz com ele: ataque o sol do Supernova direto, assim como qualquer herói, pra matar antes do estouro e cancelar o stun; Astral Step atravessa o dano em linha do Icarus Dive sem precisar desviar pelo chão; o silêncio do Scepter cancela Icarus Dive ou o cast de Supernova se usado a tempo, antes dele virar sol.
 - itens que viram: contra Phoenix, nenhum item de imunidade mágica (BKB) resolve a janela de maior risco, que é o stun de Supernova; o que realmente importa é dano de ataque concentrado pra destruir o sol rápido, e aqui o Aghanim's Shard do Void (17,0min) ajuda indiretamente, porque dá mais iniciativa pra focar o sol em grupo.
 - como jogar: sempre que ele castar Supernova, direcione ataque pro sol em vez de tentar fugir; antes dos 23min pressione, ele não tem resposta física nenhuma; depois que o Supernova sai do cooldown (120s), jogue mais cauteloso perto do fim de uma troca longa.
-- fonte: pro_dados/void_spirit.json; pro_dados/phoenix.json; content/fichas/void_spirit.md; constants_abilities.json (phoenix_icarus_dive, phoenix_supernova, void_spirit_astral_step); aghs_desc (void_spirit, phoenix); dotacoach.gg/en/items/black-king-bar
+- fonte: pro_dados/void_spirit.json; pro_dados/phoenix.json; constants_abilities.json (phoenix_icarus_dive, phoenix_supernova: bkbpierce, void_spirit_astral_step); aghs_desc (void_spirit, phoenix)

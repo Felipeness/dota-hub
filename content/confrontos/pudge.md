@@ -22,11 +22,8 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/pudge.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
 - https://api.opendota.com/api/constants/aghs_desc
 - https://dota2.fandom.com/wiki/Pudge
-- https://dotacoach.gg/en/heroes/counters/pudge
 ---
 
 ## Contra Shadow Fiend (nevermore)
@@ -67,7 +64,7 @@ fontes:
 - o que você faz com ele: Disruptor tem pouca vida; o Hook o pega de qualquer ângulo visível e, fora do alcance do Static Storm dele mesmo, o Dismember fecha sem resistência.
 - itens que viram: seu Aghanim's Scepter (17:12) ajuda bastante aqui porque aumenta o raio e o dano do Rot (mais 200 de raio, mais 90 de dano, -20% de cura no alvo, segundo o changelog da habilidade e https://api.opendota.com/api/constants/aghs_desc), então mesmo se ele te silenciar dentro da nuvem, o Rot já ativado continua batendo nele; o Aghanim's Scepter dele (mediana 34:54, pro_dados/disruptor.json) é tardio, então a maior parte do jogo ele não tem a versão turbinada de Static Storm.
 - como jogar: ligue o Rot antes de entrar no alcance do Static Storm, assim o dano de área continua mesmo silenciado; gankeie Disruptor antes dele ter ult (nível 6) sempre que possível.
-- fonte: pro_dados/pudge.json; pro_dados/disruptor.json; constants_abilities.json (disruptor_static_storm, disruptor_glimpse); https://api.opendota.com/api/constants/aghs_desc (pudge scepter); content/fichas/pudge.md (número do Scepter de Pudge).
+- fonte: pro_dados/pudge.json; pro_dados/disruptor.json; constants_abilities.json (disruptor_static_storm, disruptor_glimpse); https://api.opendota.com/api/constants/aghs_desc (pudge scepter).
 
 ## Contra Ogre Magi (ogre_magi)
 - placar: Pudge venceu 144 de 308 partidas (46,8%), levemente desfavorável. Fonte: pro_dados/pudge.json.
@@ -81,7 +78,7 @@ fontes:
 
 ## Contra Snapfire (snapfire)
 - placar: Pudge venceu 139 de 297 partidas (46,8%), levemente desfavorável. Fonte: pro_dados/pudge.json.
-- por que importa: 6º mais jogado contra Pudge (297) e o suporte pos 4 mais jogado em pro no geral (ela também aparece como 2, 3 e 5 no catálogo), direto concorrente de função: os dois vivem fora da lane fixa, caçando e controlando zona.
+- por que importa: 6º mais jogado contra Pudge (297), suporte pos 4 clássico da meta atual, direto concorrente de função: os dois vivem fora da lane fixa, caçando e controlando zona.
 - janelas: ela compra Aghanim's Shard muito cedo pros padrões do item, mediana 16:54 (pro_dados/snapfire.json), bem antes do Blink (20:42) ou do Glimmer Cape (21:54). Antes dos 16:54 ela ainda não tem o Shard de Firesnap Cookie turbinado; é a janela em que seu Hook puro tem mais chance de pegá-la isolada, já que depois disso ela ganha mais utilidade de save.
 - o que ele faz com você: Mortimer Kisses lança 8 globos de até 360 de dano cada ao longo de 5,5s numa área de 275 de raio por impacto, com queima de 60 a 100 por segundo; se ela acertar essa ult em cima de você durante um Dismember (você fica parado canalizando), o dano de área some boa parte da sua vida mesmo com Flesh Heap acumulado.
 - o que você faz com ele: Snapfire tem HP inicial relativamente alto pra suporte, mas sem disable de escape forte cedo; o Hook ainda o alcança de longe (1300) e o Dismember fecha, principalmente antes do Glimmer Cape dela (invisibilidade + resistência mágica) sair.
@@ -91,7 +88,7 @@ fontes:
 
 ## Contra Mars (mars)
 - placar: Pudge venceu 125 de 242 partidas (51,7%). Fonte: pro_dados/pudge.json.
-- por que importa: mesma posição principal no catálogo (offlane, pos 3), o rival de offlane mais jogado contra Pudge em pro (242 jogos). Os dois disputam a mesma rota e o mesmo papel de iniciador de força.
+- por que importa: mesma posição principal (offlane), o rival de offlane mais jogado contra Pudge em pro (242 jogos). Os dois disputam a mesma rota e o mesmo papel de iniciador de força.
 - janelas: os dois correm pro item de spike quase junto: Mars com Blink mediana 15:12 (pro_dados/mars.json) contra o seu Blink em 19:30 (p25 16:00), então na prática Mars costuma chegar primeiro no reposicionamento. Antes disso, dos 8:30 aos 15min, Spear of Mars (alcance 900 a 1200, bem maior que o seu Hook de perto) ameaça iniciar à distância antes de você alinhar o gancho.
 - o que ele faz com você: Spear of Mars te acerta a até 1200 de distância e, se você bater numa árvore, estrutura ou penhasco, fica preso e estunado (1,3 a 2,2s); Arena of Blood cria uma arena de 550 de raio por 5,5s com lanceiros batendo em quem fica perto da borda, o que pode te prender dentro sem alcançar o alvo certo pro Hook.
 - o que você faz com ele: Mars tem bastante Força e Bulwark reduz 40 a 70% do dano físico de frente, mas Dismember e Rot são mágicos/puros, então o escudo dele não ajuda contra seu combo; o Hook ainda o puxa mesmo com Bulwark ativo, já que não é dano físico de ataque.
@@ -163,15 +160,15 @@ fontes:
 - placar: Pudge venceu 41 de 110 partidas (37,3%), 2ª maior desvantagem da lista com amostra boa. Fonte: pro_dados/pudge.json.
 - por que importa: mesma posição principal (offlane) e o pior resultado de Pudge entre os heróis que de fato dividem a mesma rota, porque o ult de Doom desliga o seu kit inteiro.
 - janelas: até os 19:42 Doom ainda não tem Blink (pro_dados/doom_bringer.json), então ele depende de alcance de ataque ou Devour pra chegar perto; o Aghanim's Shard dele (18:42) sai antes do Blink e já melhora o Devour. A partir do nível 6, a qualquer momento que ele tiver mana, o Doom (feitiço) pode virar o confronto independente de item.
-- o que ele faz com você: Doom (dano Puro, bkbpierce: Yes, dispel básico) te impede de lançar qualquer feitiço, inclusive Hook, Rot e Dismember, por 12 a 16s, além de causar 25 a 66 de dano por segundo; se ele acertar isso em você antes do seu combo sair, você vira um herói sem habilidades pelo resto da luta.
+- o que ele faz com você: Doom (dano Puro, bkbpierce: Yes, não removível por dispel, constants_abilities.json) te impede de lançar qualquer feitiço, inclusive Hook, Rot e Dismember, por 12 a 16s, além de causar 25 a 66 de dano por segundo; se ele acertar isso em você antes do seu combo sair, você vira um herói sem habilidades pelo resto da luta.
 - o que você faz com ele: fora da janela de Doom, Doom (o herói) tem Força razoável mas nenhuma defesa própria contra disable; o Hook ainda o pega de longe e o Dismember fecha normal, desde que você consiga agir antes dele te acertar com o próprio ult.
-- itens que viram: Aghanim's Scepter dele (não aparece no top 30 de compras, pro_dados/doom_bringer.json) e Black King Bar (24:00) chegam no mid/late e dão mais sobrevida a ele, mas o que decide o 1x1 é sempre o Doom, não item; do seu lado, não existe item que livre você do efeito do Doom uma vez acertado, nem BKB ajuda já que o dispel dele é básico mas o impedimento de cast não é removível por imunidade a magia.
+- itens que viram: Aghanim's Scepter dele (não aparece no top 30 de compras, pro_dados/doom_bringer.json) e Black King Bar (24:00) chegam no mid/late e dão mais sobrevida a ele, mas o que decide o 1x1 é sempre o Doom, não item; do seu lado, não existe item que livre você do efeito do Doom uma vez acertado, nem BKB ajuda já que o Doom atravessa imunidade a magia e o efeito não é removível por dispel algum.
 - como jogar: gankeie Doom antes do nível 6 sempre que possível; depois disso, tente abrir o combo antes dele, porque se ele te acertar o Doom primeiro, você perde toda a utilidade da luta.
-- fonte: pro_dados/pudge.json; pro_dados/doom_bringer.json; constants_abilities.json (doom_bringer_doom); https://dotacoach.gg/en/heroes/counters/pudge (Doom como ameaça ao combo de Pudge, contexto geral).
+- fonte: pro_dados/pudge.json; pro_dados/doom_bringer.json; constants_abilities.json (doom_bringer_doom).
 
 ## Contra Magnus (magnataur)
 - placar: Pudge venceu 29 de 74 partidas (39,2%), 3ª maior desvantagem da lista com amostra boa. Fonte: pro_dados/pudge.json.
-- por que importa: outro iniciador de força que compete em parte pela mesma rota (offlane/mid no catálogo) e uma das piores taxas de Pudge com amostra confiável, porque o combo dele estoura antes do Hook sequer sair.
+- por que importa: outro iniciador de força que compete em parte pela mesma rota (offlane/mid) e uma das piores taxas de Pudge com amostra confiável, porque o combo dele estoura antes do Hook sequer sair.
 - janelas: Magnus corre pro Blink cedo, mediana 13:36 (pro_dados/magnataur.json), bem antes do seu (19:30); essa é a fase mais perigosa, porque ele pode iniciar Reverse Polarity em cima do seu time antes de você conseguir se posicionar pra um Hook. Echo Sabre dele sai aos 16:12, dando ainda mais iniciação com Empower.
 - o que ele faz com você: Reverse Polarity (dano Mágico mas atravessa imunidade a magia, bkbpierce: Yes, cd fixo de 115s) puxa todo mundo num raio de 430 e estuna 2,5 a 3,5s instantaneamente, sem precisar de alinhamento como o Hook; Skewer te arrasta 800 a 1100 de distância na direção que ele mirar, podendo te tirar de uma posição segura no meio de um Rot ou Dismember.
 - o que você faz com ele: Magnus não tem HP excepcionalmente alto pra um iniciador; o Hook ainda o pega de longe, mas como ele tem Blink mais cedo que o seu, geralmente ele consegue reposicionar ou iniciar antes de você montar o combo completo.

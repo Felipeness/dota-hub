@@ -7,7 +7,6 @@ fontes:
 - pro_dados/<oponente>.json (mesma fonte, resumo e timing de itens dos oponentes)
 - constants_abilities.json e constants_hero_abilities.json (OpenDota, numeros de habilidade do patch)
 - api.opendota.com/api/constants/aghs_desc (Aghanim's Scepter e Shard da Death Prophet)
-- app/public/data/herois_catalogo.json (posicao principal de cada heroi)
 - dotacoach.gg/en/heroes/counters/death-prophet (notas de gameplay 7.41f)
 ---
 

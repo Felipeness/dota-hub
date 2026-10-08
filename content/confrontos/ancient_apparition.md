@@ -22,29 +22,13 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/ancient_apparition.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/jakiro.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/ogre_magi.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/snapfire.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/tusk.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/disruptor.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/rubick.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/largo.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/warlock.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/necrolyte.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/sniper.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/mars.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/leshrac.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/spirit_breaker.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/clinkz.md
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/shadow_fiend.md
 - https://api.opendota.com/api/constants/aghs_desc
+- https://api.opendota.com/api/explorer (partidas de liga, patches 7.40-7.41)
 ---
 
 ## Como essa lista foi montada
 
-12 confrontos vêm do critério de volume: os 6 com mais partidas de pro contra o AA (`confrontos` do `pro_dados`) mais os suportes de posição 4/5 que mais aparecem em pro contra ele (Rubick, Largo, Warlock entram por aí, Jakiro/Ogre Magi/Disruptor já entram pelo volume). Os outros 6 vêm do critério de vantagem/desvantagem: Necrophos e Sniper são os 2 maiores win rates do AA entre confrontos com 30+ jogos (62,9% e 60,0%); Mars completa o trio de vantagem como o confronto de maior amostra (88 jogos, 58,0% de vitórias) entre os heróis que ainda não entraram na lista por volume. Leshrac, Spirit Breaker e Clinkz são as 3 maiores derrotas com 30+ jogos. Nenhum dos 15 tem amostra abaixo de 30 jogos. AA é suporte puro (pos 5 em 55,7% das partidas, pos 4 em 36,7%, fonte winio.ai), então o critério "sempre incluir os carries mais jogados mesmo sem lane em comum" não se aplica a ele; Shadow Fiend e Sniper entram por volume e vantagem, não por regra de carry.
+9 confrontos vêm do critério de volume: os 6 com mais partidas de pro contra o AA (`confrontos` do `pro_dados`) mais os suportes de posição 4/5 que mais aparecem em pro contra ele (Rubick, Largo, Warlock entram por aí, Jakiro/Ogre Magi/Disruptor já entram pelo volume). Os outros 6 vêm do critério de vantagem/desvantagem: Necrophos e Sniper são os 2 maiores win rates do AA entre confrontos com 30+ jogos (62,9% e 60,0%); Mars completa o trio de vantagem como o confronto de maior amostra (88 jogos, 58,0% de vitórias) entre os heróis que ainda não entraram na lista por volume. Leshrac, Spirit Breaker e Clinkz são as 3 maiores derrotas com 30+ jogos. Nenhum dos 15 tem amostra abaixo de 30 jogos. AA tem gpm mediano baixo (312, `ancient_apparition.json` resumo) típico de suporte puro, então o critério "sempre incluir os carries mais jogados mesmo sem lane em comum" não se aplica a ele; Shadow Fiend e Sniper entram por volume e vantagem, não por regra de carry.
 
 ## Contra Jakiro (jakiro)
 
@@ -61,18 +45,18 @@ fontes:
 
 - placar: 63/117 pro AA (53,8%), fonte: `ancient_apparition.json` (confrontos, hero_id 11)
 - por que importa: 2ª maior amostra de pro do confronto (117 jogos). É mid carregador de jogo (gpm mediano 658, xpm 813, fonte `nevermore.json`), não divide lane com o AA, mas é um dos picks mais comuns do patch e sem fuga própria até o meio de jogo, exatamente o perfil que o kit do AA pune.
-- janelas: até 21min Shadow Fiend não tem nenhuma forma de fuga: a sequência confirmada é Falcon Blade aos 4,8min, Power Treads aos 5,9min, Mask of Madness aos 10,6min (dobra o last hit de 8,2 pra 16,8 por minuto) e Manta Style aos 16,0min (fonte: `porque_itens/shadow_fiend.md`), nenhum desses dá escape. O primeiro item de saída só chega com Hurricane Pike aos 23,0min (mediana `nevermore.json`) ou Black King Bar aos 25,2min. É exatamente a janela em que o Ice Blast do AA (disponível desde o nível 6, mediana de Aghanim's Shard do AA aos 24,4min pra reforçar o combo) executa sem resposta: sem blink, sem invisibilidade, sem dispel até o BKB.
+- janelas: até 21min Shadow Fiend não tem nenhuma forma de fuga: a sequência mediana de pro é Falcon Blade aos 6,2min, Power Treads aos 5,9min, Mask of Madness aos 10,2min e Manta Style aos 18,5min (partidas pro 7.40-7.41, OpenDota), nenhum desses dá escape. O primeiro item de saída só chega com Hurricane Pike aos 23,0min (mediana `nevermore.json`) ou Black King Bar aos 25,2min. É exatamente a janela em que o Ice Blast do AA (disponível desde o nível 6, mediana de Aghanim's Shard do AA aos 24,4min pra reforçar o combo) executa sem resposta: sem blink, sem invisibilidade, sem dispel até o BKB.
 - o que ele faz com você: Shadowraze (85-280 de dano, cast point 0,55s, 3 variantes de curto alcance) e Requiem of Souls (cast point 1,67s, até 20 almas convertidas em slow e redução de resistência em área de 1000) acabam com o HP baixo do AA (vida base baixa de int puro) numa única rodada se o AA for pego sem Cold Feet ativo primeiro.
 - o que você faz com ele: Ice Blast ignora BKB e bloqueia toda cura/regen por até 12s, cortando o sustain que viria de Satanic (item de late game do SF); o cast point longo de Requiem (1,67s) dá tempo de interromper com Cold Feet se a curse já estiver rodando perto do fim dos 4s.
 - itens que viram: Rod of Atos do AA (root de 2,0s, mediana 19,7min nos dados de pro do herói) cai bem antes do Hurricane Pike do SF (23,0min) ficar pronto, fechando a janela de fuga que ele ainda não tem.
 - como jogar: gankar o SF antes dos 20min é onde o AA ganha o confronto, porque ele não tem recurso de escape nenhum até lá. Depois do Hurricane Pike e do BKB, o AA precisa gastar os dois (Cold Feet pro stun, Ice Blast pro corte de cura) na mesma rodada, porque separado o SF escapa ou atravessa o BKB sem sentir a curse.
-- fonte: ancient_apparition.json (confrontos); nevermore.json (resumo, itens); porque_itens/shadow_fiend.md (timings verificados: Falcon Blade, Mask of Madness, Manta Style, Hurricane Pike, BKB, Satanic); constants_abilities.json (ancient_apparition_ice_blast, nevermore_requiem, nevermore_shadowraze1)
+- fonte: ancient_apparition.json (confrontos); nevermore.json (resumo, itens); partidas pro 7.40-7.41 (OpenDota, item manta); constants_abilities.json (ancient_apparition_ice_blast, nevermore_requiem, nevermore_shadowraze1)
 
 ## Contra Ogre Magi (ogre_magi)
 
 - placar: 53/112 pro AA (47,3%), fonte: `ancient_apparition.json` (confrontos, hero_id 84)
 - por que importa: 3ª maior amostra de pro do confronto (112 jogos). Mesma posição principal (pos 5), confronto direto de suporte duro contra suporte duro.
-- janelas: até 10-11min a troca é parelha, os dois com Magic Wand e bota cedo. A partir do nível 2, Fireblast de Ogre Magi (cast range 525, stun 1,2s, cast point 0,45s) é mais curto de alcance que o Cold Feet do AA (até 1000 no nível 4), então o AA pode poke de fora do alcance do stun do Ogre. O perigo do Ogre cresce com Multicast (chance de repetir qualquer feitiço de graça, escala com Força via Dumb Luck): depois do nível 6-7, um Fireblast ou Ignite multicastado dobra o dano sem custo extra de mana, e aí a troca vira ruim pro AA se ele ficar perto. Depois dos 20min, Aghanim's Shard do Ogre (Fire Shield, absorve 85% dos 3 próximos ataques e devolve bola de fogo, mediana 26,1min, p25 23,2) protege o carry do Ogre do Chilling Touch do AA.
+- janelas: até 10-11min a troca é parelha, os dois com Magic Wand e bota cedo. A partir do nível 2, Fireblast de Ogre Magi (cast range 525, stun 1,2s, cast point 0,45s) é mais curto de alcance que o Cold Feet do AA (até 1000 no nível 4), então o AA pode poke de fora do alcance do stun do Ogre. O perigo do Ogre cresce com Multicast (chance de repetir qualquer feitiço de graça, escala com Força): depois do nível 6-7, um Fireblast ou Ignite multicastado dobra o dano sem custo extra de mana, e aí a troca vira ruim pro AA se ele ficar perto. Depois dos 20min, Aghanim's Shard do Ogre (Fire Shield, absorve 85% dos 3 próximos ataques e devolve bola de fogo, mediana 26,1min, p25 23,2) protege o carry do Ogre do Chilling Touch do AA.
 - o que ele faz com você: Fireblast com Multicast pode travar o AA duas vezes seguidas (a cada 0,6s de delay de multicast) antes dele completar o Cold Feet.
 - o que você faz com ele: Cold Feet alcança mais longe que o Fireblast em todos os níveis (700-1000 contra 525 fixo), então o AA pune qualquer avanço do Ogre antes dele chegar perto o bastante pra stunar.
 - itens que viram: Blink Dagger de qualquer um dos dois decide quem fecha a distância primeiro, já que nenhum herói tem mobilidade própria no kit.
@@ -83,8 +67,8 @@ fontes:
 
 - placar: 39/103 pro AA (37,9%), fonte: `ancient_apparition.json` (confrontos, hero_id 128)
 - por que importa: 4ª maior amostra de pro do confronto (103 jogos) e também uma das maiores desvantagens do AA no recorte: é a iniciadora que mais fecha distância em cima dele antes do Cold Feet funcionar.
-- janelas: Snapfire joga mid, offlane, pos 4 e pos 5 no 7.41 (dotacoach.gg), então a janela que mais importa é a de iniciação: Blink Dagger entra por volta dos 20min (pico de compra entre 15-30min, `snapfire.json`) e Aghanim's Shard é o item mais comprado dela no meio de jogo (mediana 16,9min). Com Shard pronto, Firesnap Cookie (alcance 650, cast point 0,2s) cura o alvo e ainda solta uma Mortimer Kisses fraca no pouso: ela ataca em dois tempos rápidos, mais rápido que o combo de 4s do Cold Feet.
-- o que ela faz com você: Blink + Firesnap Cookie salta e atordoa quem aterrissa, fechando o gap que o AA não tem recurso pra evitar sozinho; dentro de 450 de distância, Scatterblast ainda dá 30% mais dano e 50% mais slow (bônus point-blank), punindo o AA se ele for pego perto.
+- janelas: a janela que mais importa é a de iniciação: Blink Dagger entra por volta dos 20min (pico de compra entre 15-30min, `snapfire.json`) e Aghanim's Shard é o item mais comprado dela no meio de jogo (mediana 16,9min). Com Shard pronto, Firesnap Cookie (alcance 650, cast point 0,2s) cura o alvo e ainda solta uma Mortimer Kisses fraca no pouso: ela ataca em dois tempos rápidos, mais rápido que o combo de 4s do Cold Feet.
+- o que ela faz com você: Blink + Firesnap Cookie salta e atordoa quem aterrissa, fechando o gap que o AA não tem recurso pra evitar sozinho; dentro de 450 de distância, Scatterblast ainda dá 30% mais dano e 50% mais duração de slow (bônus point-blank), punindo o AA se ele for pego perto.
 - o que você faz com ele: Ice Vortex de 1200 de alcance marca o combo de Blink da Snapfire antes dela chegar perto, e o Cold Feet, se já estiver rodando quando ela aterrissa o Firesnap Cookie, ainda fecha o stun porque a curse não depende do estado do AA, só da distância do alvo.
 - itens que viram: Black King Bar da Snapfire (comprado em boa parte das partidas no fim de jogo) atravessa o Cold Feet, já que a habilidade não tem `bkbpierce`; o Ice Blast do AA, que tem `bkbpierce: Yes`, segue acertando mesmo assim.
 - como jogar: mantenha distância de mais de 1200 (fora do blink dela) sempre que possível e não ande sozinho perto de arbustos depois dos 15min. Depois que ela tiver Shard e Blink prontos, jogue o Cold Feet preventivo em vez de reativo, porque reagir ao salto geralmente é tarde.
@@ -93,10 +77,10 @@ fontes:
 ## Contra Tusk (tusk)
 
 - placar: 39/99 pro AA (39,4%), fonte: `ancient_apparition.json` (confrontos, hero_id 100)
-- por que importa: 5ª maior amostra de pro do confronto (99 jogos). Dupla de suporte (pos 4/5, 100% dos picks do herói no patch) que usa o mesmo papel de roam e visão que o AA, mas com um combo de burst físico rápido.
+- por que importa: 5ª maior amostra de pro do confronto (99 jogos). Dupla de suporte que usa o mesmo papel de roam e visão que o AA, mas com um combo de burst físico rápido.
 - janelas: até 19-21min nenhum dos dois tem o item-chave pronto: Blink Dagger do Tusk tem mediana de 19,0min (p25 16,8), quase no mesmo tempo do Aghanim's Shard do AA (24,4min, um pouco depois). Antes disso, o combo do Tusk (Ice Shards pra bloquear, Snowball, Walrus Kick a 250 de alcance e 550 de dano fixo) depende de perseguição a pé, que o Cold Feet já pune de longe. Depois do Blink, o Tusk fecha o combo inteiro (Snowball com aliados dentro, Tag Team, Walrus Kick) em menos de 2s, rápido demais pro AA reagir se for pego primeiro.
 - o que ele faz com você: Blink no meio do grupo, Snowball arrastando aliados, Walrus Kick de 550 de dano fixo: é dano físico alto e instantâneo, perigoso pro HP baixo do AA.
-- o que você faz com ele: Cold Feet alcança 700-1000 contra os 250 do Walrus Kick e os 0 do Snowball (habilidade sem alvo, precisa perseguir rolando), então o AA controla a distância na troca de poke antes do nível 6 do Tusk.
+- o que você faz com ele: Cold Feet alcança 700-1000 contra os 250 do Walrus Kick, então o AA controla a distância do poke antes do Tusk fechar o combo corpo a corpo.
 - itens que viram: Rod of Atos do AA (root de 2,0s, mediana 19,7min) trava o Tusk antes do Blink dele ficar pronto na maioria das partidas, zerando a vantagem de iniciação; depois dos 20min, quem tiver o próprio Blink pronto primeiro dita quem inicia.
 - como jogar: evite ficar isolado perto de arbustos depois dos 15min, porque é quando o Blink do Tusk costuma ficar pronto. Use o Cold Feet assim que ele se aproximar a pé, antes do nível 6 dele, pra negar o combo inteiro de uma vez.
 - fonte: ancient_apparition.json (confrontos); tusk.json (resumo, itens); constants_abilities.json (ancient_apparition_cold_feet, tusk_walrus_kick)
@@ -115,13 +99,13 @@ fontes:
 ## Contra Rubick (rubick)
 
 - placar: 42/97 pro AA (43,3%), fonte: `ancient_apparition.json` (confrontos, hero_id 86)
-- por que importa: mesma posição principal (pos 4/5, 90% dos picks do Rubick no recorte) e um risco mecânico direto: Spell Steal (bkbpierce sim, alcance 1000) rouba a última magia lançada pelo AA, incluindo o próprio Ice Blast.
-- janelas: até 10-11min os dois jogam bota e Magic Wand cedo (Rubick arcane boots 10,3min, AA 11,7min). Rubick usa a ultimate em média 16,6 vezes por partida (fonte: `rubick.md`, `usos_ult_bkb.parquet`), e cada cast perto do AA é risco de perder o próprio Ice Blast ou Cold Feet pro inimigo pelo resto da duração do roubo (180-300s). Depois do nível 6 do AA, Telekinesis do Rubick (alcance 550-625, stun 0,9-1,5s) ainda é mais curto que o Cold Feet, então o AA pode poke de fora antes do Rubick chegar perto o bastante pra roubar algo.
+- por que importa: mesma posição principal (pos 4/5) e um risco mecânico direto: Spell Steal (bkbpierce sim, alcance 1000) rouba a última magia lançada pelo AA, incluindo o próprio Ice Blast.
+- janelas: até 10-11min os dois jogam bota e Magic Wand cedo (Rubick arcane boots 10,3min, AA 11,7min). Rubick usa a ultimate em média 14,8 vezes por partida (partidas pro 7.40-7.41, OpenDota), e cada cast perto do AA é risco de perder o próprio Ice Blast ou Cold Feet pro inimigo pelo resto da duração do roubo (180-300s). Depois do nível 6 do AA, Telekinesis do Rubick (alcance 550-625, stun 0,9-1,5s) ainda é mais curto que o Cold Feet, então o AA pode poke de fora antes do Rubick chegar perto o bastante pra roubar algo.
 - o que ele faz com você: Spell Steal rouba o Cold Feet ou o Ice Blast do próprio AA assim que um dos dois é lançado perto dele, e Telekinesis interrompe qualquer canalização.
 - o que você faz com ele: Cold Feet (até 1000 de alcance no nível 4) acerta o Rubick de fora do alcance de Telekinesis dele (máximo 625), então o AA pode poke sem risco de perder o próprio combo pro Spell Steal, desde que não lance o Ice Blast perto demais do Rubick antes de precisar.
 - itens que viram: nenhum item resolve o roubo de feitiço; a única resposta é sequência (gastar o Ice Blast só quando o Rubick já castou algo diferente há pouco, porque Spell Steal pega sempre a última magia vista).
 - como jogar: não lance Ice Blast ou Cold Feet perto do Rubick sem necessidade, porque qualquer um dos dois vira arma dele por até 5 minutos. Prefira acertar o Cold Feet de fora do alcance de Telekinesis e force ele a gastar mana cedo antes de você precisar do seu combo principal.
-- fonte: ancient_apparition.json (confrontos); rubick.json (resumo, itens, teamfight_participantes.parquet via ficha); constants_abilities.json (ancient_apparition_cold_feet, rubick_spell_steal, rubick_telekinesis)
+- fonte: ancient_apparition.json (confrontos); rubick.json (resumo, itens); partidas pro 7.40-7.41 (OpenDota, ability_uses rubick_spell_steal); constants_abilities.json (ancient_apparition_cold_feet, rubick_spell_steal, rubick_telekinesis)
 
 ## Contra Largo (largo)
 
@@ -137,7 +121,7 @@ fontes:
 ## Contra Warlock (warlock)
 
 - placar: 34/78 pro AA (43,6%), fonte: `ancient_apparition.json` (confrontos, hero_id 37)
-- por que importa: único suporte puro de pos 5 (100% dos picks no recorte Tier 1) do mesmo peso de amostra que entra na lista, disputa de área contra área.
+- por que importa: único suporte puro de pos 5 do mesmo peso de amostra que entra na lista, disputa de área contra área.
 - janelas: até 10-11min a troca é de poke a distância (AA Ice Vortex 1200 de alcance x Shadow Word de Warlock, 650-800 de alcance). O risco de Warlock cresce no nível 6 com Chaotic Offering (alcance 900, convoca Golem de 1500-3000 HP que tanka e atordoa na queda), e no meio de jogo com Fatal Bonds (alcance 1000, amarra até 6 inimigos visíveis por 18s, compartilhando parte do dano recebido entre eles).
 - o que ele faz com você: Shadow Word à distância dilacera o AA sem precisar se expor, e o Golem da ultimate tanka qualquer troca direta que o AA tente sozinho.
 - o que você faz com ele: Ice Blast (dano contínuo que bloqueia cura por até 12s) se torna ainda mais forte contra um grupo marcado por Fatal Bonds, porque o dano que o alvo direto sofre também é sentido pelos aliados amarrados, espalhando o corte de cura pelo grupo inteiro.
@@ -148,7 +132,7 @@ fontes:
 ## Contra Necrophos (necrolyte)
 
 - placar: 22/35 pro AA (62,9%), fonte: `ancient_apparition.json` (confrontos, hero_id 36)
-- por que importa: maior vantagem do AA entre os confrontos com 30+ jogos. Necrophos joga carry/offlane/mid no 7.41 (sem nenhum pick de suporte no recorte, `necrolyte.md`), não divide lane com o AA, mas é o exemplo mais direto do "dois heróis que não se enfrentam na lane mas um anula o outro": ele vive de cura (Death Pulse) e o Ice Blast bloqueia cura por até 12s.
+- por que importa: maior vantagem do AA entre os confrontos com 30+ jogos. Necrophos joga carry/offlane/mid no 7.41, não divide lane com o AA, mas é o exemplo mais direto do "dois heróis que não se enfrentam na lane mas um anula o outro": ele vive de cura (Death Pulse) e o Ice Blast bloqueia cura por até 12s.
 - janelas: o build de pro passa por Radiance (mediana 13,7min, p25 12,3) pro clear rápido e aura de dano, depois Aghanim's Shard (mediana 17,8min) e itens de vida alta como Heart (30,5min) e Shiva's Guard (31,4min) pro late game (`necrolyte.json`). O AA não precisa esperar o próprio Ice Blast pronto cedo pra incomodar: desde o nível 6 (geralmente antes dos 15min), qualquer Ice Blast que acerte o Necrophos corta o Death Pulse como forma de sustain por até 12s, uma janela enorme pro resto do time acabar o kill.
 - o que ele faz com você: Heartstopper Aura (corrói % da vida máxima de quem está perto, ignora Black King Bar) é perigosa se o AA blinkar perto demais tentando fechar Cold Feet; Reaper's Scythe (alcance 600, cast point 0,45s, stun 1,5s) executa o AA se ele estiver com pouco HP.
 - o que você faz com ele: Ice Blast bloqueia o Death Pulse como fonte de cura e, se o HP do Necrophos já estiver abaixo do limiar de 12-14% (shatter health threshold), o Ice Blast sozinho fecha o kill sem precisar de dano extra do time.
@@ -159,7 +143,7 @@ fontes:
 ## Contra Sniper (sniper)
 
 - placar: 21/35 pro AA (60,0%), fonte: `ancient_apparition.json` (confrontos, hero_id 35)
-- por que importa: 2ª maior vantagem do AA entre os confrontos com 30+ jogos. Sniper é mid no 7.41 (61,0% dos picks, `sniper.md`), sem lane com o AA, mas é o segundo exemplo claro de "carry sem mobilidade que o kit do AA executa à distância".
+- por que importa: 2ª maior vantagem do AA entre os confrontos com 30+ jogos. Sniper é mid no 7.41, sem lane com o AA, mas é o segundo exemplo claro de "carry sem mobilidade que o kit do AA executa à distância".
 - janelas: o build de pro sobe Power Treads (5,9min), Maelstrom/Mjollnir (12,5min/19,0min) e Dragon Lance (16,5min) pra farmar e bater de longe, sem nenhum item de escape até Force Staff (22,8min) ou Hurricane Pike (23,4min) (`sniper.json`). É a mesma janela de execução do Shadow Fiend: antes dos ~23min, Sniper não tem recurso nenhum pra escapar do Cold Feet ou do Ice Blast.
 - o que ele faz com você: Assassinate (3000 de alcance, cast point 2s, 300-500 de dano) outranga qualquer coisa do kit do AA e pode abrir uma troca de longe, mas o cast point de 2s é tempo de sobra pra interromper com Cold Feet se a curse já estiver perto de fechar o stun.
 - o que você faz com ele: Cold Feet e Ice Vortex alcançam mais do que o Take Aim básico de Sniper nos primeiros níveis, e o Ice Blast executa o HP baixo dele (12-14% de limiar) sem o Sniper conseguir correr, já que ele não tem fuga própria no kit.
@@ -170,7 +154,7 @@ fontes:
 ## Contra Mars (mars)
 
 - placar: 51/88 pro AA (58,0%), fonte: `ancient_apparition.json` (confrontos, hero_id 129)
-- por que importa: vantagem do AA com a maior amostra do grupo (88 jogos, 58,0% de vitórias). Mars é offlane no 7.41 (100% dos picks no recorte Tier 1, `mars.md`), geralmente não compartilha lane direta com o AA suporte, mas o motivo mecânico da vantagem é específico: Bulwark só reduz dano físico, não mágico, então o escudo que faz Mars ser tanque contra carries não funciona contra o Cold Feet nem o Ice Blast do AA.
+- por que importa: vantagem do AA com a maior amostra do grupo (88 jogos, 58,0% de vitórias). Mars é offlane no 7.41, geralmente não compartilha lane direta com o AA suporte, mas o motivo mecânico da vantagem é específico: Bulwark só reduz dano físico, não mágico, então o escudo que faz Mars ser tanque contra carries não funciona contra o Cold Feet nem o Ice Blast do AA.
 - janelas: build de pro sobe Phase Boots (8,5min), Blink Dagger (15,2min) e depois itens de sobrevivência física (Black King Bar 26,5min). Spear of Mars (alcance até o nível 4, dano 100-325, stun 1,3-2,2s) é a ameaça real cedo, mas Arena of Blood (ultimate, raio 550, prende sem dispensar magia) não impede o Ice Blast de acertar dentro da arena, porque é um ponto lançado de fora, não precisa entrar.
 - o que ele faz com você: Spear trava o AA de longe e Arena of Blood prende o grupo inteiro pra luta corpo a corpo, onde o Bulwark dele brilha contra dano físico.
 - o que você faz com ele: Cold Feet e Ice Blast atravessam o Bulwark normalmente, porque ele só reduz físico (40-70% de frente, 20-35% dos lados); Ice Blast dentro da própria Arena of Blood ainda acerta Mars e o time dele sem escape, já que a arena impede saída, não impede dano mágico de entrar.
@@ -181,7 +165,7 @@ fontes:
 ## Contra Leshrac (leshrac)
 
 - placar: 9/31 pro AA (29,0%), fonte: `ancient_apparition.json` (confrontos, hero_id 52)
-- por que importa: maior desvantagem do AA entre todos os confrontos com 30+ jogos. Leshrac é mid de burst mágico puro (71% dos picks no recorte Tier 1, `leshrac.md`) que estoura o próprio HP baixo do AA antes dele completar qualquer combo.
+- por que importa: maior desvantagem do AA entre todos os confrontos com 30+ jogos. Leshrac é mid de burst mágico puro que estoura o próprio HP baixo do AA antes dele completar qualquer combo.
 - janelas: até 15min Leshrac já tem Staff of Wizardry (14,9min) e Kaya (15,9min) prontos, poke de dano mágico alto e barato (Lightning Storm recarrega em 4s). Blink Dagger (mediana 15,0min) chega cedo e dá o fechamento de distância que o AA depende de manter aberta. Diabolic Edict (raio 450, dano puro que ignora Black King Bar e magia) soma com Split Earth (alcance 650, stun em área) num combo que atravessa qualquer defesa mágica do AA.
 - o que ele faz com você: Split Earth trava o grupo, Diabolic Edict aplica dano puro que nenhum item do AA bloqueia (nem BKB, porque dano puro ignora resistência mágica e física), e o Blink fecha a distância que o AA normalmente usaria pra kitar.
 - o que você faz com ele: Cold Feet e Ice Vortex alcançam mais longe que o Split Earth (650) antes do Blink de Leshrac estar pronto, então a janela de vantagem do AA é só nos primeiros 15min, antes do blink e do burst mágico escalarem.
@@ -192,7 +176,7 @@ fontes:
 ## Contra Spirit Breaker (spirit_breaker)
 
 - placar: 19/58 pro AA (32,8%), fonte: `ancient_apparition.json` (confrontos, hero_id 71)
-- por que importa: 2ª maior desvantagem do AA com amostra robusta (58 jogos). Spirit Breaker é suporte de roaming (pos 4, nunca carry no recorte Tier 1, `spirit_breaker.md`) com gap-closer global, o perfil que mais ameaça um suporte parado plantando ward como o AA.
+- por que importa: 2ª maior desvantagem do AA com amostra robusta (58 jogos). Spirit Breaker é suporte de roaming (pos 4) com gap-closer global, o perfil que mais ameaça um suporte parado plantando ward como o AA.
 - janelas: até 9min já tem Phase Boots (9,4min) e começa a roamar com Charge of Darkness (alcance global, cast point 0,1s). Greater Bash (17% de chance, dano de 25-40% da velocidade de movimento e stun 0,9-1,5s) vira letal a partir do nível 6-7. Nether Strike (alcance 700, 150-350 de dano, fade 1s) chega como combo de burst extra no meio de jogo.
 - o que ele faz com você: Charge of Darkness ignora a maioria dos slows enquanto acelera, então o Cold Feet não impede o avanço dele até o impacto; Greater Bash na chegada é dano alto e instantâneo contra o HP baixo do AA.
 - o que você faz com ele: depois que a Charge termina e ele está parado atacando, Cold Feet funciona normalmente (a distância de quebra já não importa, ele já chegou), e o Ice Blast corta qualquer sustain que ele tente puxar durante a luta.
@@ -203,8 +187,8 @@ fontes:
 ## Contra Clinkz (clinkz)
 
 - placar: 15/43 pro AA (34,9%), fonte: `ancient_apparition.json` (confrontos, hero_id 56)
-- por que importa: 3ª maior desvantagem do AA com 30+ jogos. Clinkz é carry ranged de ataque básico (único pick real do herói no 7.41, `clinkz.md`) que ganha o duelo porque a invisibilidade dele quebra justamente a condição do Cold Feet: o AA não consegue acertar nem manter o stun em quem ele não vê.
-- janelas: build de pro passa por Power Treads (6,6min) e Desolator (14,3min) pro dano de ataque, com Aghanim's Shard (16,7min) reforçando o combo de invisibilidade com Strafe. Skeleton Walk dá invisibilidade quase instantânea (fade time 0,6s) desde o nível 1, então mesmo cedo o Clinkz pode recusar qualquer tentativa de Cold Feet simplesmente sumindo.
+- por que importa: 3ª maior desvantagem do AA com 30+ jogos. Clinkz é carry ranged de ataque básico que ganha o duelo porque a invisibilidade dele quebra justamente a condição do Cold Feet: o AA não consegue acertar nem manter o stun em quem ele não vê.
+- janelas: build de pro passa por Power Treads (6,6min) e Desolator (14,3min) pro dano de ataque, com Aghanim's Shard (16,7min) somando o nuke em linha de Burning Barrage ao combo de dano à distância. Skeleton Walk dá invisibilidade quase instantânea (fade time 0,6s) desde o nível 1, então mesmo cedo o Clinkz pode recusar qualquer tentativa de Cold Feet simplesmente sumindo.
 - o que ele faz com você: Strafe (alcance 1200, dobra velocidade de ataque sem quebrar a invisibilidade) deixa o Clinkz atirando de longe sem o AA conseguir ver de onde vem o dano, e Skeleton Walk cancela qualquer perseguição.
 - o que você faz com ele: sem Sentry Ward no raio certo, o AA não consegue nem mirar o Cold Feet; com visão (Sentry ou Dust), o Cold Feet ainda alcança mais longe do que o Clinkz precisa pra manter distância, e o Ice Blast corta a cura que ele puxaria de Death Pact.
 - itens que viram: Sentry Ward e Dust of Appearance são os itens que realmente viram esse confronto, não um item de combate; sem visão garantida, nenhuma habilidade do AA acerta o Clinkz escondido.

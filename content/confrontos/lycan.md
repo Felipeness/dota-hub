@@ -23,8 +23,6 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/lycan.md
 - https://api.opendota.com/api/constants/aghs_desc
 - liquipedia.net/dota2/Debuff_Immunity (via busca)
 - dotacoach.gg (tabelas de piercing de Ensnare e Song of the Siren, via busca)
@@ -36,7 +34,7 @@ Lycan tem 384 partidas de pro nos patches 7.40 e 7.41 (pro_dados/lycan.json), co
 
 ## Como os 16 oponentes foram escolhidos
 - Os 6 primeiros são os que mais aparecem contra o Lycan nos dados de pro (pro_dados/lycan.json, campo confrontos): Rubick, Mars, Disruptor, Hoodwink, Shadow Fiend e Pangolier.
-- Centaur Warrunner e Tidehunter entram porque são os outros dois offlaners (posição 3, mesma função do Lycan no catálogo) mais comuns contra ele em pro, depois do Mars.
+- Centaur Warrunner e Tidehunter entram porque são os outros dois offlaners (posição 3, mesma função do Lycan) mais comuns contra ele em pro, depois do Mars.
 - Underlord, Void Spirit e Axe entram como 3 dos confrontos mais favoráveis ao Lycan com amostra de 30+ jogos (dentro deste conjunto de 16, não necessariamente os 3 melhores do herói contra todo o elenco).
 - Naga Siren, Beastmaster e Bane são os 3 confrontos com maior desvantagem do Lycan (30+ jogos).
 - Terrorblade e Morphling entram como os dois carries de posição 1 mais relevantes em pro que não tipicamente compartilham lane com o Lycan, o caso descrito no pedido (duas HC comparando power spike e janela de duelo mesmo sem brigar na mesma rota).
@@ -53,7 +51,7 @@ Lycan tem 384 partidas de pro nos patches 7.40 e 7.41 (pro_dados/lycan.json), co
 
 ## Contra Mars (mars)
 - placar: 41 vitórias em 71 jogos de pro (57,7%). Fonte: pro_dados/lycan.json.
-- por que importa: segundo oponente mais comum do Lycan em pro e também o offlaner (posição 3) que mais disputa a mesma função nos dados do catálogo.
+- por que importa: segundo oponente mais comum do Lycan em pro e também o offlaner (posição 3) que mais disputa a mesma função que ele.
 - janelas: Mars sai de Phase Boots aos 8:30, Blink aos 15:12, Shard aos 21:30 e BKB aos 26:30 (pro_dados/mars.json). O Lycan chega no Overlord (14:30) praticamente junto com o Blink do Mars, então o meio-jogo é sobre quem fecha a luta primeiro: Mars com blink mais Spear, ou Lycan com os lobos mais Howl.
 - o que ele faz com você: Arena of Blood cria uma barreira impassável que bloqueia movimento e ataque de quem está dentro contra quem está fora, então ele consegue te prender (ou te trancar pra fora) do seu próprio camp de farm. Spear of Mars empala e empurra o primeiro herói que acerta, te tirando do meio dos lobos se você exagerar no posicionamento.
 - o que você faz com ele: Howl reduz a armadura e o dano de ataque dele, o que ajuda os lobos a vencerem a troca de dano. Apex Predator (18% de dano extra em creep neutro) faz o Lycan puxar torre mais rápido que o Mars consegue defender sozinho em duas rotas.
@@ -83,7 +81,7 @@ Lycan tem 384 partidas de pro nos patches 7.40 e 7.41 (pro_dados/lycan.json), co
 
 ## Contra Shadow Fiend (nevermore)
 - placar: 33 vitórias em 63 jogos de pro (52,4%). Fonte: pro_dados/lycan.json.
-- por que importa: quinto oponente mais comum do Lycan em pro e, segundo o catálogo, o carry de posição 1 mais jogado em pro no patch atual (3.990 partidas no pro_dados dele), então entra também como o duelo HC contra HC mais frequente da lista.
+- por que importa: quinto oponente mais comum do Lycan em pro e também o carry de posição 1 mais jogado em pro no patch atual (3.990 partidas no pro_dados dele), então entra também como o duelo HC contra HC mais frequente da lista.
 - janelas: Shadow Fiend sai de botas aos 3:06 (o item mais rápido entre os 17 heróis desta página), Power Treads aos 5:54 e Blade of Alacrity aos 12:42 (pro_dados/nevermore.json). Ele fica forte muito antes do Lycan: Necromastery empilha alma a cada kill/assist/último hit e amplifica o dano dos Shadowraze, então dos 6 aos 15 minutos ele costuma ganhar qualquer troca de farm direta.
 - o que ele faz com você: os três Shadowraze (cooldown de 9s cada) acertam a área em volta do Shadow Fiend sem precisar de mira em alvo, bom pra zonear os lobos e o creep dominado no camp de jungle. Requiem (ult) estoura dano alto em área se você estiver agrupado perto dele sem Shapeshift.
 - o que você faz com ele: depois do Overlord e do Shard (14:30 e 16:36), os lobos com Feral Impulse (mais dano e regen) já têm HP e DPS suficiente pra sobreviver às razes e vencer um 1x1 corpo a corpo, porque Shadow Fiend é frágil fora do Frenzy.
@@ -95,7 +93,7 @@ Lycan tem 384 partidas de pro nos patches 7.40 e 7.41 (pro_dados/lycan.json), co
 - placar: 30 vitórias em 61 jogos de pro (49,2%). Fonte: pro_dados/lycan.json.
 - por que importa: sexto oponente mais comum do Lycan em pro, e o placar quase 50/50 mostra que a mobilidade dele neutraliza boa parte da vantagem de farm do Lycan.
 - janelas: Pangolier sai de Diffusal Blade aos 12:24, Blink aos 19:12, Shard aos 23:12 e Scepter aos 24:54 (pro_dados/pangolier.json). Antes dos 19 minutos ele não tem blink pra fechar distância rápido, então a rota do Lycan costuma estar livre; depois disso, Swashbuckle mais Rolling Thunder alcançam um split push isolado.
-- o que ele faz com você: Rolling Thunder (a forma rolante da ulti, já disponível no nível 6, sem precisar de Shard) nasce imune a debuff e com 80% de resistência mágica, então ele atravessa árvore e ignora Howl ou Wolf Bite enquanto estiver rolando pra interceptar uma rota; o Aghanim's Shard dele (Roll Up) soma a isso virar, frear e lançar Swashbuckle ou Shield Crash no meio da rolagem.
+- o que ele faz com você: Rolling Thunder (a forma rolante da ulti, já disponível no nível 6, sem precisar de Shard) nasce imune a debuff e com 80% de resistência mágica, então ele atravessa árvore e ignora Howl ou Wolf Bite enquanto estiver rolando pra interceptar uma rota; o Aghanim's Shard dele (Roll Up) soma a isso virar, frear e recastar Rolling Thunder ou Shield Crash no meio da rolagem.
 - o que você faz com ele: Pangolier não tem stun duro no kit básico, só slow (Swashbuckle) e um proc de sorte (Lucky Shot); Shapeshift ignora o slow, então ele raramente te trava de verdade sozinho.
 - itens que viram: Diffusal dele (12:24) queima sua mana, mas Shapeshift não usa mana contínua, então o efeito prático é baixo; seu BKB (30:36) não bloqueia Gyroshell porque ele é imune a debuff por conta própria, então a luta se decide no dano puro.
 - como jogar: não brigue puxando torre sozinho depois que ele tiver Blink (19:12); antes disso, farme livre e force ele a escolher entre te perseguir ou ficar com o time.
@@ -167,7 +165,7 @@ Lycan tem 384 partidas de pro nos patches 7.40 e 7.41 (pro_dados/lycan.json), co
 - janelas: Beastmaster sai do Scepter já aos 14:36, muito adiantado pra um item caro (pro_dados/beastmaster.json), Blink aos 18:36 e BKB aos 23:36. O Scepter dele (Drums of Slom: ataque cura e causa dano em área pra ele e as unidades controladas) chega praticamente no mesmo minuto do seu Overlord (14:30), transformando o meio-jogo numa corrida direta de qual conjunto de unidades bate mais forte.
 - o que ele faz com você: os Hawks (Summon Raptor) mergulham e aplicam raiz periodicamente, e têm alcance de visão que pode revelar os lobos mesmo com a invisibilidade permanente do nível 3 de Summon Wolves. Primal Roar (ult) estuna em linha e empurra, não é slow, então o Shapeshift não bloqueia.
 - o que você faz com ele: Howl reduz o dano de ataque dele e das unidades dele; Apex Predator (18% extra em creep neutro) ainda dá uma vantagem de clear que o kit dele não tem equivalente direto.
-- itens que viram: o Scepter dele (14:36) é o item que decide a primeira metade do jogo, saindo quase junto com o seu Overlord; seu BKB (30:36) ignora o stun do Primal Roar.
+- itens que viram: o Scepter dele (14:36) é o item que decide a primeira metade do jogo, saindo quase junto com o seu Overlord; o Primal Roar atravessa debuff immunity, então nem seu BKB (30:36) bloqueia o stun dele.
 - como jogar: dispute os camps grandes de perto, ele também depende deles pra alimentar Wild Axes e Inner Beast; depois dos 15 minutos, cuidado redobrado com o Scepter dele em qualquer camp compartilhado.
 - fonte: pro_dados/lycan.json; pro_dados/beastmaster.json; constants_abilities.json.
 

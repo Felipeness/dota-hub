@@ -21,8 +21,6 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/dark_seer.md
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 
@@ -48,7 +46,7 @@ fontes:
 
 ## Contra Ember Spirit (ember_spirit)
 - placar: Dark Seer venceu 65 de 98 partidas de pro (66,3%)
-- por que importa: é o segundo mid mais comum contra o Dark Seer em pro (98 jogos, atrás só do Shadow Fiend) e também o melhor confronto registrado da lista pra ele (66,3%): um mid ágil que o kit físico do Dark Seer atropela.
+- por que importa: é o segundo mid mais comum contra o Dark Seer em pro (98 jogos, atrás só do Shadow Fiend) e um dos melhores confrontos registrados da lista pra ele (66,3%): um mid ágil que o kit físico do Dark Seer atropela.
 - janelas: até 9 min: Ember sai rápido com Bottle (1,5min) e Phase Boots (9,1min) pra farmar fácil e trocar Fire Remnant por XP; 9-20 min: ele ganha mobilidade pra invadir a offlane, mas sem Flame Guard alta ainda é frágil contra o dano físico do time do Dark Seer; 20-25 min: Shiva's do Dark Seer (23,7min) tira a maior fraqueza do Ember, que é attack speed em cima dele quando preso; ele só fecha BKB (27,1min) e Aghanim's Shard (25,3min) depois disso, mais tarde que o pacote de iniciação do Dark Seer.
 - o que ele faz com você: Searing Chains prende até 2 unidades por até 2,75s causando 100 de dano por segundo, perigoso se pegar o Dark Seer saindo do blink; Sleight of Fist dá um surto de ataques em área com bônus de até 170 de dano contra herói.
 - o que você faz com ele: Shiva's Guard reduz 45 de attack speed num raio de 1200, o que neutraliza metade do dano do Sleight of Fist (ele depende de intervalo de ataque curto, 0,25s, pra acertar várias vezes); Ion Shell bate 90 por segundo em raio de 275, dano constante que o Flame Guard dele (barreira máxima de 300) não segura por muito tempo; Vacuum puxa ele pra dentro do grupo antes dele ativar Fire Remnant pra escapar.
@@ -78,7 +76,7 @@ fontes:
 
 ## Contra Windranger (windrunner)
 - placar: Dark Seer venceu 41 de 79 partidas de pro (51,9%)
-- por que importa: quinto herói com mais jogos contra o Dark Seer em pro, roaming de mid/4 que costuma passar pela offlane cedo pra ganks com Shackleshot.
+- por que importa: sexto herói com mais jogos contra o Dark Seer em pro, roaming de mid/4 que costuma passar pela offlane cedo pra ganks com Shackleshot.
 - janelas: até 13 min: Windranger farma rápido pro Maelstrom (13,4min); 13-18 min: Mjollnir (18,3min) dá attack speed alto, perigoso justo quando o Dark Seer ainda não tem Shiva's; depois dos 23-24min o BKB dela (24,4min) chega quase junto do Shiva's+Blink do Dark Seer (23,7-24,8min), corrida apertada de itens nessa janela.
 - o que ele faz com você: Shackleshot prende o Dark Seer numa árvore ou unidade atrás dele por até 3,25s, o stun mais longo da lista, cancelando qualquer tentativa de Surge pra escapar; Focus Fire dá até 500 de bônus de attack speed contra um alvo só, ameaça direta se focar o Dark Seer sem Shiva's.
 - o que você faz com ele: Vacuum tem raio parecido com o alcance de reposicionamento dela sem Windrun, então pega ela se errar o timing de evasão; Shiva's reduz attack speed exatamente quando ela mais precisa dele (com Mjollnir ou no Focus Fire), cortando boa parte do DPS.
@@ -107,8 +105,8 @@ fontes:
 - fonte: pro_dados/dark_seer.json; pro_dados/abyssal_underlord.json; constants_abilities.json (abyssal_underlord_atrophy_aura, abyssal_underlord_firestorm, abyssal_underlord_pit_of_malice); aghs_desc (abyssal_underlord)
 
 ## Contra Slardar (slardar)
-- placar: Dark Seer venceu 34 de 54 partidas de pro (63,0%)
-- por que importa: rival direto de offlane na maioria dos picks (os dois disputam a pos 3) e uma das melhores marcas do Dark Seer na lista inteira entre amostras de 30+ jogos: o farm mais rápido com Ion Shell e o combo Vacuum + Wall of Replica atacam justo o ponto fraco do kit do Slardar.
+- placar: Dark Seer venceu 20 de 54 partidas de pro (37,0%)
+- por que importa: rival direto de offlane na maioria dos picks (os dois disputam a pos 3) e um dos piores confrontos do Dark Seer na lista entre amostras de 30+ jogos: o blink do Slardar chega 11-12min antes do seu e costuma garantir a iniciação pra ele primeiro.
 - janelas: Dark Seer farma rápido com Ion Shell (CD de 9s, dano em área constante) desde o nível 1, chegando a 569 de gpm e 64 last hit aos 10 min (pro_dados/dark_seer.json), acima do próprio Slardar. Até os 13 min, o blink dele (13,3min) chega antes do do Dark Seer, abrindo uma janela de iniciação física cedo; depois disso, Vacuum (CD 60-30s) puxa o grupo todo pra dentro de uma área, cancelando a iniciação parcial do Slardar e agrupando pra Wall of Replica, que transforma quem atravessa em réplica lutando do lado do Dark Seer, incluindo o próprio Slardar se ele for pego. O BKB dele (25,1min) chega tarde o bastante pra sobrar uma janela de 18-25min onde o controle do Dark Seer funciona livre.
 - o que ele faz com você: Slithereen Crush atordoa 0,8s e desacelera movimento (até 35%) e ataque (até 35 de redução) por até 6s, perigoso na janela antes do seu Shiva's/Blink estarem prontos; Bash of the Deep bate a cada 3 ataques com até 200 de dano extra; o shard dele adiciona Corrosive Haze, reduzindo sua armadura justo no momento do stun.
 - o que você faz com ele: Vacuum devolve a iniciativa mesmo com o blink dele chegando primeiro, puxando-o pra dentro do grupo antes dele fechar o combo sozinho; Wall of Replica vira ele em réplica se atravessar, lutando contra o próprio time dele; Ion Shell corrói a vida dele o jogo inteiro na troca de farm, e Shiva's reduz a attack speed que o Bash dele precisa pra proc (3 ataques).
@@ -127,23 +125,23 @@ fontes:
 - fonte: pro_dados/dark_seer.json; pro_dados/axe.json; constants_abilities.json (axe_berserkers_call, axe_counter_helix, axe_culling_blade); aghs_desc (axe)
 
 ## Contra Terrorblade (terrorblade)
-- placar: Dark Seer venceu 35 de 54 partidas de pro (64,8%)
-- por que importa: não compartilha lane com o Dark Seer (é carry de safelane, Dark Seer joga offlane), mas é uma das melhores marcas da lista inteira pra ele entre amostras de 50 ou mais jogos: contra-pick clássico de split push e ilusão, Ion Shell é feito pra limpar exatamente o que o Conjure Image produz.
-- janelas: Dark Seer não farma rápido nos dados de pro (Helm of the Dominator aos 8:48, pro_dados/dark_seer.json, focado em sustentar lane), fica trocando Ion Shell até fechar Ring of Tarrasque (18:36); só depois parte pra Platemail (21:42) e Blink (24:48) pra virar tanque de luta. Terrorblade segue a curva normal até o Manta (15:00-16:00); entre o nível 6 do Dark Seer, quando libera Vacuum, e o blink dele (24:48), o Dark Seer consegue agrupar o Terrorblade e as ilusões antes dele ter alcance pra kitar.
-- o que ele faz com você: Sunder troca uma % da vida atual dos dois (mínimo 25-35%, conforme o nível), perigoso se você estiver com vida baixa depois de iniciar; Manta Style (15:00-16:00) dá ilusões fortes e dispel; Metamorphosis muda quem vence a troca de longe, mas só depois de fechar blink (24:48).
+- placar: Dark Seer venceu 19 de 54 partidas de pro (35,2%)
+- por que importa: não compartilha lane com o Dark Seer (é carry de safelane, Dark Seer joga offlane), mas é o pior confronto registrado da lista entre amostras de 50 ou mais jogos: mesmo com Ion Shell pensado pra limpar o Conjure Image, o Terrorblade farma rápido e ganha alcance pra kitar antes do Dark Seer conseguir impor o combo.
+- janelas: Dark Seer não farma rápido nos dados de pro (Helm of the Dominator aos 8:48, pro_dados/dark_seer.json, focado em sustentar lane), fica trocando Ion Shell até fechar Ring of Tarrasque (18:36); só depois parte pra Platemail (21:42) e Blink (24:48) pra virar tanque de luta. Terrorblade segue a curva normal até o Manta (17:06); entre o nível 6 do Dark Seer, quando libera Vacuum, e o blink dele (24:48), a janela pra agrupar o Terrorblade e as ilusões antes dele ter alcance pra kitar é curta.
+- o que ele faz com você: Sunder troca uma % da vida atual dos dois (mínimo 25-35%, conforme o nível), perigoso se você estiver com vida baixa depois de iniciar; Manta Style (17:06) dá ilusões fortes e dispel; Metamorphosis muda quem vence a troca de longe, mas só depois de fechar blink (24:48).
 - o que você faz com ele: Ion Shell é dano em área de raio 275 que limpa ilusão de baixa vida rápido e ainda farma os creeps dele mesmo; Vacuum puxa o Terrorblade e qualquer ilusão perto pro mesmo ponto, cancelando split push e forçando luta em grupo; Wall of Replica, se ele cruzar, cria uma réplica dele do seu lado, o próprio kit de ilusão dele pode virar arma contra ele.
-- itens que viram: Ion Shell é a habilidade que mais pesa nesse confronto, sem item do Terrorblade que a anule de forma direta; o Manta dele (15:00-16:00) ainda ajuda porque multiplica alvo, mas não evita o dano em área do shell; guarde Sunder dele como o maior risco se você iniciar a luta com vida baixa.
+- itens que viram: Ion Shell é a habilidade que mais pesa nesse confronto, sem item do Terrorblade que a anule de forma direta; o Manta dele (17:06) ainda ajuda porque multiplica alvo, mas não evita o dano em área do shell; guarde Sunder dele como o maior risco se você iniciar a luta com vida baixa.
 - como jogar: não deixe ilusão dele parada dentro de área de creep onde você costuma jogar Ion Shell; antes do Manta dele, ilusões cedo ainda fazem dano; depois, abra duas frentes de farm fora do alcance de 800 do seu Ion Shell nele até ele ter blink; não inicie com vida baixa, o Sunder pune exatamente isso.
 - fonte: pro_dados/dark_seer.json; pro_dados/terrorblade.json; constants_abilities.json (terrorblade_sunder, terrorblade_metamorphosis, terrorblade_reflection, dark_seer_ion_shell, dark_seer_vacuum, dark_seer_wall_of_replica); aghs_desc (terrorblade)
 
 ## Contra Phoenix (phoenix)
-- placar: Dark Seer venceu só 15 de 52 partidas de pro (28,8%)
-- por que importa: é o pior confronto registrado do Dark Seer entre todas as amostras com 30+ jogos (perde 71,2% das vezes): Dark Seer farma rápido com Ion Shell e inicia em grupo com Vacuum, mas não tem nenhuma ferramenta boa contra uma Supernova que atravessa BKB.
+- placar: Dark Seer venceu 37 de 52 partidas de pro (71,2%)
+- por que importa: é a melhor marca registrada do Dark Seer entre todas as amostras com 30+ jogos: Dark Seer farma rápido com Ion Shell e inicia em grupo com Vacuum, mesmo sem ter uma ferramenta boa contra uma Supernova que atravessa BKB.
 - janelas: Dark Seer sobe Arcane Boots (8,0 min), Mekansm (12,2) e Shiva's Guard (23,7, pro_dados/dark_seer.json), bem parecido com o Shiva's Guard do próprio Phoenix (23,6, raro ver os dois lados do mesmo confronto comprando o mesmo item quase no mesmo minuto). Vacuum (CD de 60 a 30s, dano de até 250) puxa unidades numa área, perigoso em grupo mas não mata sozinho; Supernova é o único momento em que o Phoenix ganha iniciativa, sacrificando a própria vida pra travar a luta, e não existe janela de item do Dark Seer que resolva isso sozinha.
 - o que ele faz com você: Icarus Dive desacelera (até 25%) e causa até 80 de dano por segundo numa linha, mas custa 15% da vida máxima dele pra usar; Supernova atordoa todo mundo perto no final (até 2,4s), cura o Phoenix de graça e atravessa qualquer BKB que você compre, já que ele raramente precisa de disable duro pra ativar; o stun em área dela (até 1200 de raio) é maior que o seu próprio Vacuum.
 - o que você faz com ele: Vacuum te puxa pra dentro de uma área fechada, mas não impede a Supernova; Ion Shell soma dano se ele ficar perto da unidade afetada por tempo longo; o sol da Supernova pode ser destruído por ataques antes do estouro (de 6 a 10 ataques, conforme o nível), é a única ameaça real dele que dá pra negar.
-- itens que viram: os dois fecham Shiva's Guard quase no mesmo minuto (23,7 contra 23,6), a corrida de redução de armadura e slow em área empata; sem conseguir focar o sol da Supernova antes do estouro, o reset de vida/mana/cooldown dele decide boa parte das trocas de meio de jogo contra você.
-- como jogar: foque matar o sol do Supernova antes do estouro sempre que possível; não entre em grupo dentro do raio do Vacuum sem HP de sobra; respeite a troca de dano cru nesse confronto, ela favorece o Phoenix o jogo inteiro.
+- itens que viram: os dois fecham Shiva's Guard quase no mesmo minuto (23,7 contra 23,6), a corrida de redução de armadura e slow em área empata; sem conseguir focar o sol da Supernova antes do estouro, o reset de vida/mana/cooldown dele ainda vira risco pontual em trocas de meio de jogo.
+- como jogar: foque matar o sol do Supernova antes do estouro sempre que possível; não entre em grupo dentro do raio do Vacuum sem HP de sobra; fora da janela do ultimate dele, a troca de dano cru e o farm com Ion Shell favorecem o Dark Seer.
 - fonte: pro_dados/dark_seer.json; pro_dados/phoenix.json; constants_abilities.json (phoenix_icarus_dive, phoenix_supernova, phoenix_sun_ray, dark_seer_vacuum, dark_seer_ion_shell)
 
 ## Contra Keeper of the Light (keeper_of_the_light)

@@ -21,14 +21,12 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/dazzle.md
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 
 ## Como esses 14 oponentes foram escolhidos
 
-Dazzle é 100% pos 5 em pro no patch atual (`content/fichas/dazzle.md`, leitura de replay do Atlas tier 1). A lista mistura os 6 que mais jogam contra ele em pro, os suportes 4/5 que mais aparecem no mesmo papel, os extremos de vitória/derrota com amostra de 30+ jogos, e carries que quase nunca compartilham lane com ele mas pesam no resultado da partida de qualquer forma:
+Dazzle joga como suporte puro em pro no patch atual: lh10 de 11, o número mais baixo de prioridade de farm que aparece nesta análise (pro_dados/dazzle.json, partidas pro 7.40-7.41, OpenDota). A lista mistura os 6 que mais jogam contra ele em pro, os suportes 4/5 que mais aparecem no mesmo papel, os extremos de vitória/derrota com amostra de 30+ jogos, e carries que quase nunca compartilham lane com ele mas pesam no resultado da partida de qualquer forma:
 
 - **Mais jogos contra ele (top 6)**: Jakiro, Axe, Mars, Snapfire, Shadow Fiend, Hoodwink.
 - **Mesma posição (suporte 4/5 em pro)**: Disruptor, Shadow Demon (os dois já aparecem com volume grande e caem também na categoria de desvantagem abaixo).
@@ -55,7 +53,7 @@ Todos os 14 têm 30 ou mais partidas de pro no confronto, então nenhum bloco ab
 - janelas: antes dos 15 min Axe anda a pé, sem blink, então Berserker's Call (raio 315, dura até 3s, força ataque) só funciona se ele já estiver perto. A partir dos 15,7 min (mediana do Blink dele) ele fecha de qualquer ângulo; o jogo vira corrida entre o blink dele e a reação do Dazzle. Culling Blade (275 a 475 de dano puro fixo, não cresce com o HP do alvo) executa um suporte de HP baixo quase sempre, então tudo depende de quem reage primeiro no momento do blink
 - o que ele faz com você: Blink + Call trava o Dazzle perto dele, e se ele não tiver Shallow Grave disponível, Culling Blade mata de graça por ser dano puro fixo
 - o que você faz com ele: Shallow Grave ignora BKB e qualquer dano do combo (é imune a dispel também), então se Dazzle reage no instante do Call já sobrevive ao Culling Blade inteiro; Poison Touch desacelera o retorno dele pra fora da troca
-- itens que viram: Aghanim's Shard do Axe (mediana 22,9 min) empilha Battle Hunger, reduzindo a regeneração do time de Dazzle e cortando parte do valor de Shadow Wave; Blink Dagger do Dazzle (mediana 30,4 min, bem mais tarde que o de Axe) é a resposta de longo prazo pra chegar no aliado puxado pelo Call antes da execução
+- itens que viram: Aghanim's Shard do Axe (mediana 22,9 min) empilha Battle Hunger, somando dano contínuo em cima do alvo e cortando parte do valor líquido da cura de Shadow Wave; Blink Dagger do Dazzle (mediana 30,4 min, bem mais tarde que o de Axe) é a resposta de longo prazo pra chegar no aliado puxado pelo Call antes da execução
 - como jogar: na lane, nunca fica parado a até 315 de distância de árvore sem ver o Axe; depois dos 15 min guarda Shallow Grave de prontidão sempre que alguém do time avançar sozinho
 - fonte: pro_dados/dazzle.json; pro_dados/axe.json; constants_abilities.json (axe_berserkers_call, axe_culling_blade); aghs_desc (axe shard)
 
@@ -67,7 +65,7 @@ Todos os 14 têm 30 ou mais partidas de pro no confronto, então nenhum bloco ab
 - o que ele faz com você: Spear empala contra parede e prende por até 2,2s; se cair dentro da Arena of Blood, Dazzle fica preso junto do time inimigo sem conseguir alcançar o aliado que precisa salvar
 - o que você faz com ele: Shallow Grave aguenta todo o dano da sequência Spear + Arena mesmo sob o stun, porque ignora BKB e não pode ser dispelada; só não resolve a prisão territorial da Arena
 - itens que viram: Aghanim's Shard de Mars (mediana 21,5 min) deixa a Spear empalar dois heróis com rastro de queimadura, dobrando o risco de pick em cima de dois suportes ao mesmo tempo
-- como jogar: evita ficar colado em parede/árvore na faixa de alcance da Spear (até 900 de distância), e se a Arena cair com Dazzle dentro, usa Shallow Grave em quem for focado em vez de tentar sair primeiro
+- como jogar: evita ficar colado em parede/árvore na faixa de alcance da Spear (até 1200 de distância com a habilidade no nível máximo), e se a Arena cair com Dazzle dentro, usa Shallow Grave em quem for focado em vez de tentar sair primeiro
 - fonte: pro_dados/dazzle.json; pro_dados/mars.json; constants_abilities.json (mars_spear, mars_arena_of_blood); aghs_desc (mars shard)
 
 ## Contra Snapfire (snapfire)
@@ -120,7 +118,7 @@ Todos os 14 têm 30 ou mais partidas de pro no confronto, então nenhum bloco ab
 - por que importa: mesma posição (suporte 4/5) e também uma das maiores desvantagens do Dazzle com volume de jogos relevante, o que indica que não é acaso de amostra pequena
 - janelas: até os 20 min o Dazzle ainda segura bem com Shadow Wave em área. Dos 20 min em diante, Shadow Demon com nível de ultimate (Disruption, banimento de 2,75s) consegue isolar justamente o aliado que o Dazzle quer proteger: o alvo some do campo por quase 3s e volta exposto, enquanto Shadow Poison empilhado (dano retardado de 1x a 16x o valor base conforme as cargas) detona tudo de uma vez quando libera
 - o que ele faz com você: bane o alvo que você quer salvar por quase 3s, tirando o timing do seu Shallow Grave, e o Shadow Poison empilhado pode somar um dano retardado grande demais pra sua cura segurar sozinha
-- o que você faz com ele: Shallow Grave ainda funciona assim que o aliado volta do banimento, mas o problema é justamente a demora, não a proteção em si; Weave reduz a armadura dele se ele entrar em combate corpo a corpo
+- o que você faz com ele: Shallow Grave ainda funciona assim que o aliado volta do banimento, mas o problema é justamente a demora, não a proteção em si; Weave reduz a armadura dele toda vez que uma habilidade do Dazzle (Shadow Wave ou Poison Touch) acerta ele
 - itens que viram: Aghanim's Scepter de Shadow Demon dá 2 cargas de Demonic Purge, removendo buffs positivos do time de Dazzle (não remove Shallow Grave, que é imune a dispel, mas tira outros buffs como o da ativa de Holy Locket)
 - como jogar: não gasta Shallow Grave no instante do banimento, espera o aliado voltar pra reposicionar primeiro, e tenta negar o combo de Shadow Poison interrompendo o fight antes dele empilhar 5 cargas
 - fonte: pro_dados/dazzle.json; pro_dados/shadow_demon.json; constants_abilities.json (shadow_demon_disruption, shadow_demon_shadow_poison, shadow_demon_demonic_purge); aghs_desc (shadow demon scepter)
@@ -164,7 +162,7 @@ Todos os 14 têm 30 ou mais partidas de pro no confronto, então nenhum bloco ab
 - por que importa: é o espelho direto de suporte mágico de burst, mas pela amostra de pro, quando Dazzle vence esse confronto costuma vencer de goleada; vale entender por que, já que no papel Skywrath parece mais perigoso
 - janelas: antes do nível 6 (Mystic Flare é a ultimate) os dois são zoneadores fracos, equilibrado. A partir daí, Mystic Flare no nível máximo distribui 1600 de dano em 2s num raio de só 170; contra um suporte isolado isso é quase sempre morte certa, e Ancient Seal (silêncio de 3 a 6s) bloqueia Shallow Grave e Shadow Wave por completo se vier antes do cast. Apesar disso, o winrate favorece o Dazzle, porque o Skywrath também é frágil e qualquer troca que não mate o Dazzle de primeira vira punição pesada pro time dele
 - o que ele faz com você: Ancient Seal silencia e deixa o Dazzle sem resposta nenhuma, e Mystic Flare é dano suficiente pra matar um suporte de HP baixo sozinho
-- o que você faz com ele: Poison Touch já ameaça o combo dele de longe (alcance de até 800 com os talentos), e como Skywrath também tem HP baixo, qualquer engajamento que ele erre o timing vira kill fácil pro time do Dazzle
+- o que você faz com ele: Poison Touch já ameaça o combo dele de longe (alcance de até 800 com a habilidade no nível máximo), e como Skywrath também tem HP baixo, qualquer engajamento que ele erre o timing vira kill fácil pro time do Dazzle
 - itens que viram: Aghanim's Scepter dele faz Mystic Flare acertar um segundo alvo aleatório, então mesmo se o foco não for o Dazzle ele pode ser pego de brinde; Glimmer Cape do Dazzle (23,9 min) é a principal defesa contra o combo de burst dele
 - como jogar: trata esse confronto como corrida de quem silencia ou estuna primeiro; segura Glimmer Cape pronto assim que o Skywrath atinge nível 6 e nunca entra em visão dele sozinho
 - fonte: pro_dados/dazzle.json; pro_dados/skywrath_mage.json; constants_abilities.json (skywrath_mage_mystic_flare, skywrath_mage_ancient_seal); aghs_desc (skywrath mage scepter)
@@ -175,7 +173,7 @@ Todos os 14 têm 30 ou mais partidas de pro no confronto, então nenhum bloco ab
 - por que importa: outro carry que raramente compartilha lane com um suporte 5, mas entra na lista porque é o segundo maior winrate do Dazzle entre os extremos, e o motivo é mecânico: Shallow Grave anula exatamente o que o Clinkz faz
 - janelas: antes do Desolator dele (mediana 14,3 min) o Clinkz ainda bate fraco contra armadura alta. Depois disso ele tenta pick-offs solo saindo da invisibilidade (Wind Walk), mas contra um Dazzle com Shallow Grave de cooldown livre, o combo completo dele (Strafe + Searing Arrows + Death Pact) gasta tudo e o alvo simplesmente não morre
 - o que ele faz com você: sai da invisibilidade, usa Strafe pra bater mais rápido e tenta executar o alvo mais fraco antes dele reagir
-- o que você faz com ele: Shallow Grave anula o burst inteiro dele, porque é imune a dispel e ignora BKB; Weave reduz a armadura dele se ele ficar perto demais tentando confirmar o kill
+- o que você faz com ele: Shallow Grave anula o burst inteiro dele, porque é imune a dispel e ignora BKB; Weave reduz a armadura dele toda vez que uma habilidade do Dazzle (Shadow Wave ou Poison Touch) acerta ele
 - itens que viram: Aghanim's Shard do Clinkz (16,7 min, Burning Barrage) dá uma forma de dano em área que passa por cima de unidades, mas ainda não mata através de Shallow Grave
 - como jogar: guarda sempre uma Shallow Grave de prontidão pro carry mais visado quando o Clinkz já tem nível pra engajar sozinho, porque isso sozinho já neutraliza a maior parte do valor dele
 - fonte: pro_dados/dazzle.json; pro_dados/clinkz.json; constants_abilities.json (dazzle_shallow_grave, clinkz_strafe, clinkz_death_pact); aghs_desc (clinkz shard)

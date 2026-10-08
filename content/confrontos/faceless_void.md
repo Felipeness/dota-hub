@@ -21,8 +21,6 @@ fontes:
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/templar_assassin.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/faceless_void.md
 - https://api.opendota.com/api/constants/aghs_desc
 - https://liquipedia.net/dota2/Debuff_Immunity
 - https://liquipedia.net/dota2/Spell_immunity
@@ -40,7 +38,7 @@ Os 6 primeiros são os que mais jogaram contra o Void em partida profissional (7
 - por que importa: é o herói que mais jogou contra o Void em pro no patch atual, de longe. Tusk é suporte/offlane e quase nunca compartilha lane com ele, mas aparece no draft dos dois lados o tempo todo porque os dois escalam bem com farm de aliado.
 - janelas: até os 10 min Tusk não tem pico nenhum, só Ice Shards pra zonear o rio (lh10 de 6 contra 48 do Void, fonte: resumo dos dois pro_dados). Dos 15 aos 20 min ele junta o Blink Dagger (mediana 19:00, 2.655 jogos) e vira ameaça de iniciação; o Void nessa janela já tem Treads (6:18) e está construindo o Battle Fury (mediana 15:18, p25 13:54). Depois dos 25 min o jogo é sobre o time do Tusk conseguir isolar o Void antes da Chronosphere, porque sozinho ele não ganha a troca.
 - o que ele faz com você: Snowball (dano base 80 a 260 mais bônus por aliado que entra na bola) pega o Void fora de posição e o arrasta pro resto do time; Ice Shards (300 de dano total, 7 segundos de barreira) corta sua rota de fuga pro Time Walk; Tag Team amplifica o dano físico que você toma de 25 a 100 por 6 segundos, então se você entrar auto-atacando em cima de um alvo marcado, o time dele te pune.
-- o que você faz com ele: Time Walk (650 a 925 de alcance, invulnerável e desfaz o dano dos últimos 2s) escapa de Snowball se ativado a tempo. Chronosphere (raio 500, 3,75 a 4,75s, atravessa imunidade a feitiço) trava o Tusk e o resto do time dele junto, sem exceção pra Walrus Punch ou pra bola em movimento.
+- o que você faz com ele: Time Walk (650 a 800 de alcance, invulnerável e desfaz o dano dos últimos 2s) escapa de Snowball se ativado a tempo. Chronosphere (raio 500, 3,75 a 4,75s, atravessa imunidade a feitiço) trava o Tusk e o resto do time dele junto, sem exceção pra Walrus Punch ou pra bola em movimento.
 - itens que viram: Mjollnir (mediana 21:48) aumenta sua chance de acertar Time Lock contra um Tusk que não tem escape de verdade fora do Blink; Black King Bar (28:12) segura o stun da Snowball e o combo com o resto do time dele.
 - como jogar: na lane só farme, Tusk não te ameaça sozinho. No meio de jogo, puxe a luta pra perto de onde seus aliados já estão, porque o maior perigo dele é o combo em grupo, não o 1x1. Guarde a Chrono pra quando ele já tiver gastado Snowball ou Ice Shards, assim ele entra na esfera sem recurso.
 - fonte: pro_dados/tusk.json; pro_dados/faceless_void.json; constants_abilities.json (tusk_snowball, tusk_ice_shards, tusk_tag_team, faceless_void_chronosphere, faceless_void_time_walk)
@@ -81,7 +79,7 @@ Os 6 primeiros são os que mais jogaram contra o Void em partida profissional (7
 - janelas: o grande marco dela é o Aghanim's Shard, mediana 16:54 (1.919 de 2.456 jogos, a maioria das partidas compra). Isso cai bem na janela em que o Void ainda está completando o Battle Fury (15:18) e é mais vulnerável a ser pego parado numa camp.
 - o que ele faz com você: Mortimer Kisses (8 globos de 180 a 360 de dano em 5,5s) e Scatterblast (100 a 280 de dano em cone) formam dano de área que te tira de farm; com o Shard, o Firesnap Cookie vira um segundo estouro de controle.
 - o que você faz com ele: Chronosphere anula toda a utilidade dela de uma vez, Snapfire não tem nenhum escape individual fora de Firesnap Cookie nela mesma, que também fica presa se lançada contra ela própria dentro do raio.
-- itens que viram: Black King Bar seu não bloqueia o Spit Out do Shard porque é dano de impacto mais stun que aplica antes da sua janela de reação; o retorno é farmar rápido o bastante pra não depender de lane contra ela.
+- itens que viram: Black King Bar seu não bloqueia o Spit Out do Scepter porque é dano de impacto mais stun que aplica antes da sua janela de reação; o retorno é farmar rápido o bastante pra não depender de lane contra ela.
 - como jogar: evite ficar parado limpando camp perto de onde ela pode te alcançar com Scatterblast depois do nível 7. Puxe fights pra longe da visão dela, Snapfire perde quase todo o valor sem conseguir mirar.
 - fonte: pro_dados/snapfire.json; pro_dados/faceless_void.json; constants_abilities.json (snapfire_mortimer_kisses, snapfire_scatterblast); aghs_desc (snapfire shard)
 
@@ -100,7 +98,7 @@ Os 6 primeiros são os que mais jogaram contra o Void em partida profissional (7
 - por que importa: não está no top 6 de jogos, mas é o carry/suporte híbrido mais recorrente contra o Void fora dele, cobrindo o confronto carry contra carry mesmo quando ela joga de pos 4.
 - janelas: os dois constroem a mesma árvore de dano, Windranger sai com Maelstrom aos 13:24 e vira Mjollnir aos 18:18; o Void sai de Battle Fury (15:18) pra Mjollnir (21:48). Até os 18 min ela ataca mais rápido que você; depois dos 22, quando os dois já têm Mjollnir, o combate vira sobre quem consegue isolar o outro.
 - o que ele faz com você: Shackleshot prende você numa árvore ou creep perto se você andar perto de linha reta com algo atrás; Powershot (170 a 470 de dano, reduz conforme atravessa unidades) ameaça de longe antes de qualquer troca corpo a corpo.
-- o que você faz com ele: Chronosphere trava ela antes que consiga usar Windrun pra escapar, já que Windrun dá evasão a ataque físico mas não remove a prisão da Chrono; Time Lock ignora a evasão porque conta como segundo acerto do mesmo ataque, não um ataque novo.
+- o que você faz com ele: Chronosphere trava ela antes que consiga usar Windrun pra escapar, já que Windrun dá evasão a ataque físico mas não remove a prisão da Chrono.
 - itens que viram: Black King Bar (24:24 dela, 28:12 seu) é quem resolve o Shackleshot; os dois correndo pro mesmo Mjollnir faz a troca de dano direta decidir quem sobra vivo primeiro.
 - como jogar: ataque em linha reta sem árvore ou creep logo atrás pra não deixar o Shackleshot pegar; depois do seu Battle Fury, você tem mais HP e sustenta melhor a troca prolongada que ela.
 - fonte: pro_dados/windrunner.json; pro_dados/faceless_void.json; constants_abilities.json (windrunner_shackleshot, windrunner_powershot, windrunner_windrun, faceless_void_time_lock)
@@ -149,7 +147,7 @@ Os 6 primeiros são os que mais jogaram contra o Void em partida profissional (7
 - placar: 14 vitórias em 40 jogos de pro, 35%, 2ª maior desvantagem do Void em pro (fonte: OpenDota matchups, pro_dados/faceless_void.json)
 - por que importa: o kit dele ataca justamente o que sustenta o Void, velocidade de ataque e o proc de Time Lock.
 - janelas: Viper monta Aghanim's Scepter cedo pros padrões dele, mediana 18:12 (742 de 1.427 jogos), que dá um Nethertoxin em área ao redor dele mesmo. Isso cai bem antes do Battle Fury do Void estar pronto o bastante pra ele tankar uma troca prolongada.
-- o que ele faz com você: Nethertoxin (15 a 125 de dano por segundo crescente, reduz 30 a 60% de velocidade de ataque) desliga seu DPS de right-click; Viper Strike aplica Break, que desativa habilidades passivas, incluindo o Time Lock do Void enquanto o debuff durar (mecânica confirmada em fontes públicas, ver liquipedia Disabling Orders).
+- o que ele faz com você: Nethertoxin (45 a 125 de dano por segundo crescente, reduz 30 a 60% de velocidade de ataque) desliga seu DPS de right-click; Viper Strike aplica Break, que desativa habilidades passivas, incluindo o Time Lock do Void enquanto o debuff durar (mecânica confirmada em fontes públicas, ver liquipedia Disabling Orders).
 - o que você faz com ele: Chronosphere ainda trava ele, mas sem reduzir o dano que o Nethertoxin já tiver aplicado antes de ele ser pego; o melhor uso da Chrono aqui é antecipar o combo dele, não reagir depois.
 - itens que viram: Black King Bar não limpa o Break do Viper Strike (debuffs de ultimate costumam atravessar imunidade a feitiço), então a resposta real é posicionamento e dodge, não item; Manta ajuda a dividir o alvo do Nethertoxin entre ilusões.
 - como jogar: evite trocar com ele parado, o Nethertoxin é área e dano crescente; se ele soltar Viper Strike em você, Time Lock para de proc, então jogue essa troca pelo dano bruto do Battle Fury, não pelo proc.
@@ -170,7 +168,7 @@ Os 6 primeiros são os que mais jogaram contra o Void em partida profissional (7
 - por que importa: carry com alto volume de jogos em pro no patch (1.708 partidas no total, fonte: resumo.n de pro_dados/dragon_knight.json), e um confronto claro de hard carry contra hard carry mesmo sem lane em comum, como o Alchemist contra o Morphling.
 - janelas: Dragon Knight farma parecido com o Void (lh10 de 63 contra 48) e não tem nenhum disable de longo alcance além de Dragon Tail (stun curto, até 2,4s). Até os 20 min a troca é de right-click puro; depois disso, sem iniciação própria forte, ele fica refém de o time dele abrir a luta, e é justamente aí que a Chronosphere do Void decide sozinha.
 - o que ele faz com você: Breathe Fire (até 320 de dano em cone, reduz seu dano de ataque) enfraquece sua troca de DPS; Dragon Tail trava você por até 2,4s, tempo suficiente pro time dele burstar em cima.
-- o que você faz com ele: Chronosphere trava ele sem nenhuma resposta, DK não tem blink nem escape instantâneo fora de Elder Dragon Form (nível 4+, tarde), que só dá alcance e velocidade, não imunidade a controle.
+- o que você faz com ele: Chronosphere trava ele sem nenhuma resposta, DK não tem blink nem escape instantâneo fora de Elder Dragon Form, que só dá alcance e velocidade, não imunidade a controle.
 - itens que viram: o Battle Fury seu (15:18) sobe DPS mais rápido do que o Power Treads dele (6:00) sozinho resolve; Black King Bar dos dois (23:18 dele, 28:12 seu) decide quem pode iniciar sem medo do stun do outro.
 - como jogar: evite ficar no alcance do Dragon Tail sem iniciar primeiro; depois que a Chrono estiver disponível, qualquer troca prolongada tende a favorecer você.
 - fonte: pro_dados/dragon_knight.json; pro_dados/faceless_void.json; constants_abilities.json (dragon_knight_dragon_tail, dragon_knight_breathe_fire, faceless_void_chronosphere)

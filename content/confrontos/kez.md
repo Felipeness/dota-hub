@@ -5,23 +5,21 @@ patch: 7.41
 fontes:
 - OpenDota /heroes/{id}/matchups (partidas de liga, patches 7.40 e 7.41), via pro_dados/*.json
 - OpenDota /heroes/{id}/itemTimings agregados de partidas pro, via pro_dados/*.json
-- dota2.com datafeed herodata (hero_id 145, Kez), reaproveitado do guia já verificado app/public/data/herois/kez.json
+- dota2.com datafeed herodata (hero_id 145, Kez)
 - api.opendota.com/api/constants/aghs_desc (textos de Aghanim's Scepter e Shard)
 - OpenDota constants_abilities.json e constants_hero_abilities.json (textos de habilidade do patch local)
-- herois_catalogo.json (posição principal de cada herói)
-- rdy.gg/en/dota2/heroes/kez (conferência de números de habilidade do Kez)
-- dotacoach.gg/en/heroes/muerta (conferência do kit da Muerta)
 ---
 
 ## Contra Shadow Fiend (nevermore)
 
 - placar: 131V/244J, 53,7% para o Kez em partidas de liga 7.40 e 7.41 (fonte: pro_dados/kez.json, matchups OpenDota)
 - por que importa: é o confronto mais jogado de todos (244 partidas) e o exemplo clássico que você pediu: os dois são carries de patrimônio alto que raramente dividem lane (Kez vai pra safelane, Shadow Fiend geralmente pro mid), mas um power spike bate direto no outro no meio de jogo
-- janelas: até 5 min, Shadow Fiend sai na frente em XP de lane com Shadowraze e Necromastery se pegar abate; dos 5 aos 9 min o Kez vira a chave, nível 6 com Raptor Dance (mediana pro 7,1 a 7,8 min) e Katana logo depois no máximo, sangramento de 12% por segundo; Shadow Fiend responde com Dragon Lance mediano aos 14,0 min pra kitar de longe e Eye of Skadi fechando perto dos 24 min (Claymore 24,2 min); dos 16 aos 25 min o Kez tem a vantagem física com Desolator (mediana 16,8 min) e BKB (25,2 min) batendo antes do Skadi completo do Fiend
+- janelas: até 5 min, Shadow Fiend sai na frente em XP de lane com Shadowraze e Necromastery se pegar abate; dos 5 aos 9 min o Kez vira a chave, nível 6 com Raptor Dance e Katana logo depois no máximo, sangramento de 12% por segundo; Shadow Fiend responde com Dragon Lance mediano aos 14,0 min pra kitar de longe e Eye of Skadi fechando perto dos 24 min (Claymore 24,2 min); dos 16 aos 25 min o Kez tem a vantagem física com Desolator (mediana 16,8 min) e BKB (25,2 min) batendo antes do Skadi completo do Fiend
 - o que ele faz com você: Shadowraze em linha reta punha engajamentos previsíveis, cada raze seguido empilha um amplificador de dano no Kez; se ele já tem muitas almas guardadas (kill em lane), o combo de 3 razes mais Requiem of Souls no nível 6 mata rápido quem não tem BKB
 - o que você faz com ele: Grappling Claw fecha a distância por até 950 de alcance no nível máximo antes que ele consiga posicionar as razes; Raven's Veil te deixa invisível pra iniciar fora do alcance de visão dele, e Talon Toss silencia pra cortar o Requiem of Souls ou qualquer raze reativa
 - itens que viram: Desolator e BKB do Kez neutralizam a vantagem de dano mágico do Fiend; do lado dele, Eye of Skadi (lifesteal via staff_of_wizardry 18,9 min + claymore 24,2 min) é o que estabiliza a vida baixa que ele carrega a vida toda
 - como jogar: evite trocar perto de árvores ou paredes onde ele consegue alinhar raze; depois do nível 6 force luta antes dele completar o Skadi, porque sua curva de Katana sobe mais rápido que a sustentação dele nessa janela
+- fonte: pro_dados/kez.json; pro_dados/nevermore.json; constants_abilities.json (kez_kazurai_katana, kez_grappling_claw, kez_ravens_veil, kez_talon_toss, nevermore_shadowraze1, nevermore_necromastery, nevermore_requiem).
 
 ## Contra Hoodwink (hoodwink)
 
@@ -32,6 +30,7 @@ fontes:
 - o que você faz com ele: Grappling Claw ignora a Scurry dela se você pegar o cast antes da fase de invisibilidade/tree-walk; Talon Toss silencia antes do canalizar do Sharpshooter, que é a única ameaça de kill real que ela tem solo
 - itens que viram: Mage Slayer do Kez (-40% no dano de feitiço do alvo) reduz bastante o Sharpshooter e o Bushwhack mágico; o Shard dela (boomerang com slow e vulnerabilidade a feitiço) é o item que mais machuca se você não tiver magic resist
 - como jogar: não fique parado perto de árvore na fase de laning; depois do nível 7 do Kez, pressione antes dela conseguir o Shard, porque sem ele ela não tem resposta pro seu burst corpo a corpo
+- fonte: pro_dados/kez.json; pro_dados/hoodwink.json; constants_abilities.json (hoodwink_bushwhack, hoodwink_scurry, hoodwink_sharpshooter, hoodwink_hunters_boomerang, kez_grappling_claw, kez_talon_toss); aghs_desc (Hoodwink).
 
 ## Contra Jakiro (jakiro)
 
@@ -42,16 +41,18 @@ fontes:
 - o que você faz com ele: Talon Toss silencia antes do Macropyre ou do combo Dual Breath+Ice Path; Raven's Veil deixa você invisível pra flanquear por fora do alcance de Dual Breath (que é em linha reta)
 - itens que viram: Mage Slayer do Kez corta o dano mágico do combo dele quase pela metade; BKB do Kez (25,2 min) torna o combo dele inútil em luta, já que nada do kit dele atravessa imunidade mágica
 - como jogar: na lane, jogue de longe do caminho reto do Dual Breath e force a troca só depois do nível 7 do Kez; depois do BKB, Jakiro deixa de ser ameaça individual
+- fonte: pro_dados/kez.json; pro_dados/jakiro.json; constants_abilities.json (jakiro_ice_path, jakiro_dual_breath, jakiro_macropyre, kez_talon_toss, kez_ravens_veil).
 
 ## Contra Windranger (windrunner)
 
 - placar: 85V/193J, 44,0% para o Kez, abaixo de 50% (fonte: pro_dados/kez.json)
-- por que importa: é o pior matchup do Kez entre os mais jogados (193 jogos) e também aparece como herói "all" que vai de pos 1 a pos 4, então encontra o Kez tanto na lane quanto em matchups de carry; o guia público do Kez (Divine+ 7.41f) também marca Windranger como vantagem contra ele (44,3%), confirmando o padrão em dois níveis de jogo diferentes
+- por que importa: é o pior matchup do Kez entre os mais jogados (193 jogos) e também aparece como herói "all" que vai de pos 1 a pos 4, então encontra o Kez tanto na lane quanto em matchups de carry
 - janelas: do início até os 9-10 min ela farma rápido com Maelstrom (mediana 13,4 min) e Desolator via Mithril Hammer (15,6 min); dos 13 aos 21 min ela entra na janela mais perigosa, Focus Fire com attack speed somado a Desolator; o Kez só reequilibra depois do BKB (25,2 min), porque antes disso o combo Shackleshot+Powershot+Focus Fire mata sem ele conseguir reagir
 - o que ele faz com você: Shackleshot te prende numa árvore ou unidade atrás de você, Powershot cruza o mapa com slow, e Focus Fire ignora evasão e dá attack speed fixo nela contra você, isso destrói sua vida rápido se pego fora de posição
 - o que você faz com ele: Windrun dá evasão física por alguns segundos, então gaste Talon Toss (silêncio) ou Echo Slash (dano em área, não depende de acerto físico) nessa janela em vez de autoataque puro; Grappling Claw fecha a distância antes do Shackleshot land
 - itens que viram: BKB do Kez neutraliza Shackleshot e o slow do Powershot; pelo lado dela, o Desolator reduz sua armadura justamente quando o Mage Slayer do Kez já cortou o dano de feitiço, então a luta vira física dos dois lados depois dos 20 min
 - como jogar: evite ficar perto de árvore sem visão antes do seu BKB; depois dele, o duelo físico favorece quem tiver o Desolator primeiro, geralmente você, porque sua mediana (16,8 min) é mais cedo que a dela (15,6 min só do hammer, acabado depois)
+- fonte: pro_dados/kez.json; pro_dados/windrunner.json; constants_abilities.json (windrunner_shackleshot, windrunner_powershot, windrunner_focusfire, windrunner_windrun, kez_talon_toss, kez_echo_slash, kez_grappling_claw).
 
 ## Contra Rubick (rubick)
 
@@ -62,6 +63,7 @@ fontes:
 - o que você faz com ele: lance Raptor Dance ou Falcon Rush só quando ele não estiver por perto pra evitar o Spell Steal; Grappling Claw ignora o posicionamento dele a distância e Talon Toss silencia antes do Blink dele completar o combo
 - itens que viram: o Aghanim's Scepter dele (rouba 2 feitiços e upgrade pra versão Scepter) é o item que mais muda o confronto, porque ele pode guardar Echo Slash ou Talon Toss junto de outro roubo; BKB seu neutraliza o Telekinesis
 - como jogar: controle a ordem de cast em luta, gaste primeiro o feitiço que você não quer ver roubado ou segure até ter certeza que ele não vai ter chance de reagir
+- fonte: pro_dados/kez.json; pro_dados/rubick.json; constants_abilities.json (rubick_telekinesis, rubick_fade_bolt, rubick_spell_steal, kez_raptor_dance, kez_falcon_rush, kez_grappling_claw, kez_talon_toss); aghs_desc (Rubick).
 
 ## Contra Mars (mars)
 
@@ -72,6 +74,7 @@ fontes:
 - o que você faz com ele: Grappling Claw pega ele de surpresa antes do Spear carregar; depois do nível 7, seu sangramento de Katana mais Raptor Dance (dano baseado em HP máximo) ignora boa parte do Bulwark, que só bloqueia ataque básico, não habilidade
 - itens que viram: BKB seu cancela o stun do Spear contra parede; o Shard dele (Spear impala 2 heróis + rastro de fogo) é o item que mais perigo traz depois dos 20 min, enquanto seu Desolator reduz a armadura que o Bulwark tenta compensar
 - como jogar: na lane, jogue longe de árvore e prédio pra negar o combo de Spear; força troca assim que pegar nível 6, porque sua curva sobe mais rápido que a dele nesse intervalo
+- fonte: pro_dados/kez.json; pro_dados/mars.json; constants_abilities.json (mars_spear, mars_bulwark, mars_arena_of_blood, kez_grappling_claw, kez_kazurai_katana, kez_raptor_dance); aghs_desc (Mars).
 
 ## Contra Tiny (tiny)
 
@@ -82,6 +85,7 @@ fontes:
 - o que você faz com ele: depois do seu nível 6, Raptor Dance cura você de parte do dano de burst dele; Grappling Claw cancela o combo antes dele carregar o Blink; Talon Toss silencia o Toss/Avalanche combo
 - itens que viram: BKB seu (25,2 min) neutraliza o stun de Avalanche; o combo dele depende de magia, então Mage Slayer já corta uma fatia relevante
 - como jogar: respeite o combo isolado antes do seu nível 6 e evite ficar sozinho visível; depois disso, a troca sustentada é sua, force a luta ao invés de recuar
+- fonte: pro_dados/kez.json; pro_dados/tiny.json; constants_abilities.json (tiny_avalanche, tiny_toss, kez_raptor_dance, kez_grappling_claw, kez_talon_toss, kez_kazurai_katana).
 
 ## Contra Templar Assassin (templar_assassin)
 
@@ -92,6 +96,7 @@ fontes:
 - o que você faz com ele: Grappling Claw revela o Meld dela (interrompe a invisibilidade); espere as cargas de Refraction acabarem antes de engajar com autoataque, ou abra com Echo Slash, que acerta duas vezes num cast só e gasta duas cargas da barreira de uma vez, mais rápido que picar com autoataque isolado
 - itens que viram: o Aghanim's Scepter dela (traps passam a silenciar) muda a lane, mas não aparece tanto em pro (apenas Shard, mediano 24,6 min, que aumenta o dano bônus e permite usar Refraction enquanto desabilitada); seu Mage Slayer reduz o retorno de feitiço dela e seu Desolator cancela parte da armadura que o Meld reduz do seu lado
 - como jogar: conte as cargas de Refraction antes de engajar; depois do seu nível 7, force troca prolongada, porque o sustain do Katana vence o burst dela numa luta mais longa
+- fonte: pro_dados/kez.json; pro_dados/templar_assassin.json; constants_abilities.json (templar_assassin_refraction, templar_assassin_meld, kez_grappling_claw, kez_echo_slash); aghs_desc (Templar Assassin).
 
 ## Contra Ursa (ursa)
 
@@ -102,6 +107,7 @@ fontes:
 - o que você faz com ele: Grappling Claw interrompe o posicionamento antes do Earthshock; Talon Toss silencia o combo de iniciação; Raptor Dance cura você durante a troca, o que neutraliza parte do Fury Swipes acumulado
 - itens que viram: Enrage dela (dispel forte + redução de dano) cancela boa parte do seu burst mágico de habilidade, mas não impede dano físico contínuo; o Shard dela (Earthshock aplica 3 stacks de Fury Swipes de cara) acelera o acúmulo de dano se você ficar parado durante o pulo
 - como jogar: não fique parado no alcance do Earthshock; abra você a troca em vez de esperar, porque sua cura do Raptor Dance compensa melhor numa luta que você inicia
+- fonte: pro_dados/kez.json; pro_dados/ursa.json; constants_abilities.json (ursa_earthshock, ursa_overpower, ursa_fury_swipes, ursa_enrage, kez_grappling_claw, kez_talon_toss, kez_raptor_dance); aghs_desc (Ursa).
 
 ## Contra Muerta (muerta)
 
@@ -112,6 +118,7 @@ fontes:
 - o que você faz com ele: Raven's Veil te deixa invisível pra fechar a distância sem ela perceber; Grappling Claw no nível máximo cobre praticamente todo o alcance de kite dela; depois de fechar, seu combo corpo a corpo não dá tempo dela reposicionar
 - itens que viram: Mage Slayer do Kez reduz o dano mágico de Dead Shot; BKB cancela a raiz/silêncio de The Calling assim que ativado; do lado dela, Pierce the Veil é o item que mais reabre distância se ela sobreviver ao engajamento inicial
 - como jogar: não gaste Grapple de longe sem certeza de conexão, porque sem ele você não alcança; depois de pegar o Desolator, iniciar antes dela ver você é o que garante a troca
+- fonte: pro_dados/kez.json; pro_dados/muerta.json; constants_abilities.json (muerta_dead_shot, muerta_the_calling, muerta_pierce_the_veil, kez_ravens_veil, kez_grappling_claw).
 
 ## Contra Sand King (sand_king)
 
@@ -122,6 +129,7 @@ fontes:
 - o que você faz com ele: Grappling Claw alcança ele antes do Blink dele ficar pronto; seu burst de nível 6 em diante mata rápido um herói sem fuga própria e com vida baixa
 - itens que viram: BKB seu cancela o stun do Burrowstrike e o slow do Epicenter; o Scepter dele (Stingers em área) só vira ameaça real depois dos 20 min, quando a luta já costuma estar decidida a seu favor
 - como jogar: pressione antes do Blink dele sair, e depois disso jogue em grupo pra não dar o combo isolado de Burrowstrike nele
+- fonte: pro_dados/kez.json; pro_dados/sand_king.json; constants_abilities.json (sandking_burrowstrike, sandking_caustic_finale, sandking_epicenter, kez_grappling_claw); aghs_desc (Sand King).
 
 ## Contra Troll Warlord (troll_warlord)
 
@@ -132,6 +140,7 @@ fontes:
 - o que você faz com ele: Talon Toss silencia antes do Battle Trance ou da troca de stance; Grappling Claw inicia antes dele conseguir alinhar Whirling Axes
 - itens que viram: BKB seu cancela o prendimento do Berserker's Rage; o Shard dele (chance de tiro extra com Fervor, mediano 31,2 min) é tardio demais pra mudar o resultado na maioria das partidas dessa amostra
 - como jogar: abra a troca você, de preferência com silêncio antes do Battle Trance, porque deixar ele escolher o momento é o que vira o jogo a favor dele
+- fonte: pro_dados/kez.json; pro_dados/troll_warlord.json; constants_abilities.json (troll_warlord_berserkers_rage, troll_warlord_battle_trance, troll_warlord_whirling_axes_melee, kez_talon_toss, kez_grappling_claw); aghs_desc (Troll Warlord).
 
 ## Contra Lifestealer (life_stealer)
 
@@ -142,6 +151,7 @@ fontes:
 - o que você faz com ele: Talon Toss silencia e impede Rage (imunidade a debuff) bem na hora que você quer aplicar slow ou stun; sem Rage ativo, seus stuns de Katana e Grapple grudam normal
 - itens que viram: o silêncio é o item que mais vira esse confronto, porque sem Rage ele não tem resposta pro seu controle; o Scepter dele (mediano 29,9 min, Infest em herói inimigo com regeneração) é tardio e raro nessa amostra
 - como jogar: guarde o Talon Toss pra abrir a troca, não pra reagir, porque o objetivo é impedir o Rage antes dele ativar, não depois
+- fonte: pro_dados/kez.json; pro_dados/life_stealer.json; constants_abilities.json (life_stealer_open_wounds, life_stealer_feast, life_stealer_rage, kez_talon_toss); aghs_desc (Lifestealer).
 
 ## Contra Lone Druid (lone_druid)
 
@@ -152,6 +162,7 @@ fontes:
 - o que você faz com ele: foque sempre o Urso primeiro em luta (ele cai, Lone Druid perde metade do dano do time); Grappling Claw e Talon Toss funcionam nos dois, mas priorize matar o Urso antes dele reaparecer (cooldown de Spirit Bear é longo, 120s/nível menor)
 - itens que viram: o Scepter dele (mediano 21,7 min, Entangle com mais stacks e raio maior) e o Shard (24,5 min, dispel + velocidade compartilhada entre os dois) seguram ainda mais a dupla; seu BKB ajuda a ignorar o Entangle, mas não resolve o problema de ser pego em dois lugares
 - como jogar: jogue em grupo contra essa dupla, nunca sozinho; priorize abater o Urso e force o jogo antes dele ter Mjollnir pronto
+- fonte: pro_dados/kez.json; pro_dados/lone_druid.json; constants_abilities.json (lone_druid_entangle, lone_druid_savage_roar, lone_druid_spirit_bear, kez_grappling_claw, kez_talon_toss); aghs_desc (Lone Druid).
 
 ## Contra Keeper of the Light (keeper_of_the_light)
 
@@ -162,6 +173,7 @@ fontes:
 - o que você faz com ele: Raven's Veil (invisibilidade) ignora boa parte do controle de visão dele; Grappling Claw fecha rápido antes do Illuminate carregar; Talon Toss silencia antes da canalização
 - itens que viram: Mage Slayer do Kez reduz o retorno mágico de Illuminate e Blinding Light; BKB cancela a cegueira; mas como boa parte do dano dele é farm/zoneamento e não burst isolado, o problema real não é item único, é o atraso que ele causa no seu farm
 - como jogar: priorize silenciar antes de engajar, pra cortar Illuminate no cast, e não dependa só de autoataque pra limpar camp perto da visão dele
+- fonte: pro_dados/kez.json; pro_dados/keeper_of_the_light.json; constants_abilities.json (keeper_of_the_light_illuminate, keeper_of_the_light_blinding_light, keeper_of_the_light_spirit_form, kez_ravens_veil, kez_grappling_claw, kez_talon_toss).
 
 ## Contra Treant Protector (treant)
 
@@ -172,3 +184,4 @@ fontes:
 - o que você faz com ele: ataque ele primeiro pra consumir o Leech Seed antes de engajar o carry protegido; Talon Toss silencia antes do Overgrowth, e se o silêncio pegar o cast, ele não consegue prender ninguém
 - itens que viram: BKB seu dá imunidade mágica, mas o desarme de Leech Seed não é mágico puro (é efeito de ataque), então BKB ajuda menos aqui do que nos outros confrontos da lista; o melhor item é mesmo o silêncio pra negar o cast do Overgrowth antes dele sair
 - como jogar: não dependa só de autoataque quando ele estiver perto, tenha Talon Toss sempre de prontidão pra cortar o Overgrowth, e foque ele primeiro se puder, porque sem Leech Seed ativo o resto do kit do Treant é bem mais fraco
+- fonte: pro_dados/kez.json; pro_dados/treant.json; constants_abilities.json (treant_leech_seed, treant_living_armor, treant_overgrowth, kez_talon_toss); aghs_desc (Treant Protector).

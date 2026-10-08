@@ -21,14 +21,12 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/wisp.md
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 
 ## Como esses 14 oponentes foram escolhidos
 
-Io é majoritariamente suporte em pro no patch atual: 23 de 62 picks reais de Tier 1 saem pos4 (65% de vitória) e 14 pos5 (29%), contra só 16 pos1 "funil" (`content/fichas/wisp.md`, leitura de replay). A lista mistura os 6 adversários com mais jogos de pro contra Io, os suportes que mais disputam o mesmo papel, os extremos de vitória e derrota com amostra de 30 ou mais jogos, e o carry mais jogado contra Io mesmo sem dividir lane com ele:
+Io é majoritariamente suporte em pro no patch atual: 147 de 438 partidas saem pos4 (33,6%) e 200 pos5 (45,7%), contra só 41 pos1 (9,4%), partidas pro 7.40-7.41 (OpenDota). A lista mistura os 6 adversários com mais jogos de pro contra Io, os suportes que mais disputam o mesmo papel, os extremos de vitória e derrota com amostra de 30 ou mais jogos, e o carry mais jogado contra Io mesmo sem dividir lane com ele:
 
 - **Mais jogos contra ele (top 6)**: Hoodwink, Rubick, Snapfire, Tusk, Queen of Pain, Phoenix.
 - **Mesma posição (suporte 4/5 em pro)**: Disruptor, Lion (os dois já entram também nos extremos de vitória/derrota abaixo).
@@ -40,7 +38,7 @@ Todos os 14 têm 30 ou mais partidas de pro no confronto, então nenhum bloco ab
 
 ## Contra Hoodwink (hoodwink)
 
-- placar: 45 vitórias em 80 jogos de pro, 56,2% pra Io (pro_dados/wisp.json, confrontos hero_id 123)
+- placar: 45 vitórias em 80 jogos de pro, 56,3% pra Io (pro_dados/wisp.json, confrontos hero_id 123)
 - por que importa: é o oponente com mais jogos de pro contra Io no patch, e divide o mesmo papel (suporte 4/5), então a disputa é literal por controle de mapa e visão
 - janelas: os dois saem pra roam cedo; Magic Wand de Io (mediana 6,8 min) chega perto do Arcane Boots de Hoodwink (12,2 min, pro_dados/hoodwink.json). Até os 15 min o risco real é Bushwhack perto de árvore (estuna até 2,1s, 90 a 360 de dano total, constants_abilities.json), que também zera a visão do alvo durante o stun, perigoso porque os dois roam pela mesma selva. Mekansm de Io (14,7) e os wards dos dois chegam quase no mesmo minuto. Depois dos 23-24 min, Aghanim's Shard de Hoodwink (23,8) dá o boomerang que aplica vulnerabilidade a dano mágico, bem perto do Black King Bar de Io (25,5)
 - o que ele faz com você: Bushwhack perto de árvore prende e cega por até 2,1s, e se acertar o alvo tetherado, Sharpshooter carregado (até 3s, até 1350 de dano, aplica break e slow) executa quem estiver preso
@@ -111,7 +109,7 @@ Todos os 14 têm 30 ou mais partidas de pro no confronto, então nenhum bloco ab
 - janelas: até o nível 6 de Disruptor (Static Storm é a ultimate), os dois trocam ward e harass leve, ritmo parecido. A diferença real aparece quando a troca cai dentro da Static Storm (raio 550, 6s, dano até 350 por segundo): ela é bloqueada por Black King Bar (bkbpierce: No), então o BKB de Io (25,5) resolve de vez a partir do meio-jogo
 - o que ele faz com você: Static Storm silencia a área inteira e impede qualquer cast novo de Io ou do aliado tetherado durante os 6s; Glimpse puxa o alvo de volta 4s no tempo, cancelando avanços recentes
 - o que você faz com ele: o Tether já está ativo antes da Storm cair, então os bônus de velocidade e Overcharge continuam valendo mesmo em silêncio, porque são buffs contínuos, não casts novos; isso ajuda o aliado tetherado a sair da área mesmo sem conseguir lançar nada
-- itens que viram: Black King Bar de Io (25,5) anula Static Storm por completo quando pronto, o que explica boa parte da vantagem no meio-jogo pra frente; Aghanim's Shard de Disruptor (Kinetic Fence) separa fisicamente o aliado tetherado de Io, mas não quebra o Tether em si
+- itens que viram: Black King Bar de Io (25,5) anula Static Storm por completo quando pronto, o que explica boa parte da vantagem no meio-jogo pra frente; Aghanim's Shard de Disruptor (Kinetic Field) separa fisicamente o aliado tetherado de Io, mas não quebra o Tether em si
 - como jogar: antes do BKB, nunca entra em troca sem checar se Disruptor já tem Static Storm disponível; depois dele pronto, a troca vira seguramente favorável
 - fonte: pro_dados/wisp.json; pro_dados/disruptor.json; constants_abilities.json (disruptor_static_storm, disruptor_glimpse, wisp_tether, wisp_overcharge); aghs_desc (disruptor shard)
 
@@ -155,7 +153,7 @@ Todos os 14 têm 30 ou mais partidas de pro no confronto, então nenhum bloco ab
 - janelas: com Bottle (1,4) e os componentes de int (Robe 11,1, Staff of Wizardry 13,0, Kaya 13,7), Storm já farma muito rápido (lh10 de 67 e XPM de 787, os maiores da lista toda, pro_dados/storm_spirit.json). A partir daí ele rotaciona o mapa inteiro gastando mana em Ball Lightning, exatamente nas janelas em que Io está sozinho fazendo deward ou salvando aliado longe
 - o que ele faz com você: Ball Lightning aparece do nada em cima de Io isolado; Static Remnant (100 a 280 de dano, bloqueado por BKB, bkbpierce: No) soma burst, e Overload (slow de até 90% de velocidade de ataque e 80% de movimento por 0,8s) trava o alvo pro resto do combo
 - o que você faz com ele: Black King Bar de Io (25,5) bloqueia o dano de Static Remnant, mas chega bem depois do pico de rotação de Storm; a defesa real é não ficar sozinho e visível em áreas abertas depois que ele tem Bottle e nível 6
-- itens que viram: Black King Bar dele (mediana 26,1, pro_dados/storm_spirit.json) neutraliza o slow do Tether durante o combo; antes disso, o Tether ainda atrasa a fuga dele se ele errar o Ball Lightning
+- itens que viram: Black King Bar dele (mediana 26,1, pro_dados/storm_spirit.json) não livra ele do slow do Tether, que ignora imunidade a feitiço (bkbpierce: Yes, wisp_tether); o Tether ainda atrasa a fuga dele se ele errar o Ball Lightning
 - como jogar: evita rotas previsíveis de roaming sozinho depois que Storm bate nível 6 com mana suficiente pro Ball Lightning; anda sempre perto de visão de time nessa janela
 - fonte: pro_dados/wisp.json; pro_dados/storm_spirit.json; constants_abilities.json (storm_spirit_ball_lightning, storm_spirit_static_remnant, storm_spirit_overload, wisp_tether)
 

@@ -22,15 +22,14 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/batrider.md
+- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 - https://api.opendota.com/api/constants/aghs_desc
 - https://dota2.fandom.com/wiki/Batrider (secao Flaming Lasso: quebra, spell block)
 ---
 
 ## Como ler esta página
 
-Batrider é offlane (pos 3) ou suporte de roaming (pos 4) no 7.41, conforme o catálogo do site e a ficha já publicada. O kit inteiro gira em torno de três coisas: Sticky Napalm empilha dano e lentidão numa área, Firefly dá velocidade voadora e um rastro de fogo, e Flaming Lasso prende o alvo por até 3,25s (4s com o talento de nível 25) a só 200 de distância de cast, mas **atravessa Black King Bar** (é bloqueado só por spell block tipo Linken's, não por imunidade a feitiço). Sem Blink Dagger ele depende de Firefly pra chegar perto, o que avisa o inimigo antes. Isso define quase todo confronto abaixo: o jogo é sobre quem fecha distância primeiro.
+Batrider é offlane (pos 3) ou suporte de roaming (pos 4) no 7.41. O kit inteiro gira em torno de três coisas: Sticky Napalm empilha dano e lentidão numa área, Firefly dá velocidade voadora e um rastro de fogo, e Flaming Lasso prende o alvo por até 3,25s (4s com o talento de nível 25) a só 200 de distância de cast, mas **atravessa Black King Bar** (é bloqueado só por spell block tipo Linken's, não por imunidade a feitiço). Sem Blink Dagger ele depende de Firefly pra chegar perto, o que avisa o inimigo antes. Isso define quase todo confronto abaixo: o jogo é sobre quem fecha distância primeiro.
 
 Os 15 oponentes aqui foram escolhidos por quatro critérios, usando só partidas de liga (pro) dos dados locais: os 6 com mais jogos registrados contra Batrider (Jakiro, Tusk, Hoodwink, Disruptor, Queen of Pain, Tiny); os heróis de posição principal igual à dele (offlane pos 3: Mars e Tidehunter; suporte de roaming pos 4: Shadow Demon) que mais aparecem em pro; vantagens grandes com amostra de 30+ jogos (Bristleback 63,4%, Weaver 61,3%, Medusa 61,9%, dentre as maiores da lista completa de 127 heróis); e desvantagens grandes com 30+ jogos (Enigma 32,4% e Oracle 35,6% são as duas piores da lista completa; Bane 38,2% entra no lugar de uma desvantagem um pouco maior mas com amostra menor, por ter o dobro de jogos de pro). Bristleback entra em duas categorias ao mesmo tempo (mesma posição e vantagem grande).
 
@@ -67,7 +66,7 @@ Os 15 oponentes aqui foram escolhidos por quatro critérios, usando só partidas
 - placar: 118 vitórias em 209 jogos de pro, 56,5% pra você (fonte: pro_dados/batrider.json, confrontos).
 - por que importa: terceiro confronto mais registrado. Hoodwink também é pos 4/5 roaming, e tem a única habilidade do grupo que interrompe um cast de Lasso de forma confiável: Bushwhack (raiz de até 2,1s, alcance 1100).
 - janelas: até os 12 min Hoodwink zoneia com Acorn Shot (dano + lentidão em ricochete) e evita ficar perto o bastante pro Lasso de 200 de alcance. Dos 18 aos 24 min, quando Hoodwink compra o Aghanim's Shard dela (mediana 23,8min, n=1224/2917, pro_dados/hoodwink.json) e ganha o Hunter's Boomerang (dano + lentidão de 25% + 20% de vulnerabilidade a dano mágico, sem atordoamento), ela passa a conseguir punir a aproximação do Batrider à distância antes dele chegar perto o bastante. É a janela mais perigosa pra ele nesse confronto.
-- o que ele faz com você: Bushwhack (raiz em área, 265 de raio) cancela a aproximação do Batrider antes do cast do Lasso, já que a raiz impede ele de mover até ficar no alcance de 200. Scurry dá evasão e redução de recarga quando ela é atacada, então bater nela com autoataque enquanto ela foge raramente compensa.
+- o que ele faz com você: Bushwhack (raiz em área, 265 de raio) cancela a aproximação do Batrider antes do cast do Lasso, já que a raiz impede ele de mover até ficar no alcance de 200. Scurry dobra a chance de redirecionamento de ataque dela (de 14% pra 28%, passiva Mistwoods Wayfarer) e dá bônus de velocidade, então bater nela com autoataque enquanto ela foge raramente compensa.
 - o que você faz com ele: Firefly dá velocidade voadora suficiente pra fechar o espaço antes dela reagir com Scurry (que precisa ser atacada primeiro pra ativar o bônus). Uma vez lassada, ela não consegue usar Sharpshooter (alcance 3000, até 1350 de dano) porque Lasso bloqueia qualquer uso de habilidade do alvo.
 - itens que viram: Aghanim's Shard de Hoodwink (Hunter's Boomerang, dano e lentidão à distância) é o item que mais muda esse confronto; antes dele, Batrider ganha a maioria das trocas de iniciativa. Blink do Batrider ainda é decisivo pra garantir que ele chega antes da raiz.
 - como jogar: force a troca antes dos 20 min, antes do Shard dela. Depois disso, use Firefly pra entrar por um ângulo onde Bushwhack não alcança em linha reta, e guarde BKB pra atravessar a raiz se ela acertar primeiro.
@@ -122,8 +121,8 @@ Os 15 oponentes aqui foram escolhidos por quatro critérios, usando só partidas
 - o que ele faz com você: Spear of Mars (impala em linha, até 325 de dano + atordoamento de até 2,2s) consegue travar Batrider antes dele soltar o Lasso, já que o alcance do Spear (900-1200) é bem maior que os 200 do Lasso. Bulwark reduz até 70% do dano físico recebido de frente, mas não afeta nada do dano mágico do Batrider (Napalm, Firefly, Lasso são todos mágicos).
 - o que você faz com ele: Lasso em Mars ignora o escudo do Bulwark (que só reduz físico, não bloqueia habilidades) e ignora o BKB dele se comprar. Como o dano do Batrider é quase todo mágico, o Bulwark dele é inútil nessa troca especificamente.
 - itens que viram: o Aghanim's Shard de Mars (Spear atinge 2 alvos, mediana 21,5min) é o item que mais aumenta o risco pro Batrider, porque passa a ameaçar ele junto com um aliado próximo. BKB dos dois chega quase junto (Mars 26,5min, Batrider 26,7min).
-- como jogar: fique fora do alcance de 900-1200 do Spear antes de iniciar, ou use Firefly pra entrar por um ângulo que corte a linha de visão. Como o dano dele é físico e o seu é mágico, Shiva's Guard (situacional já confirmada na ficha do Batrider) neutraliza o autoataque dele sem fazer efeito nenhum contra o seu próprio combo.
-- fonte: pro_dados/batrider.json; pro_dados/mars.json; constants_abilities.json (mars_spear, mars_bulwark); aghs_desc (Mars)
+- como jogar: fique fora do alcance de 900-1200 do Spear antes de iniciar, ou use Firefly pra entrar por um ângulo que corte a linha de visão. Como o dano dele é físico e o seu é mágico, Shiva's Guard (+17 de armadura e Freezing Aura, que reduz a velocidade de ataque em área, constants: items.json) neutraliza o autoataque dele sem fazer efeito nenhum contra o seu próprio combo.
+- fonte: pro_dados/batrider.json; pro_dados/mars.json; constants_abilities.json (mars_spear, mars_bulwark); aghs_desc (Mars); items.json (shivas_guard)
 
 ---
 
@@ -143,13 +142,13 @@ Os 15 oponentes aqui foram escolhidos por quatro critérios, usando só partidas
 ## Contra Shadow Demon (shadow_demon)
 
 - placar: 78 vitórias em 163 jogos de pro, 47,9% pra você, você perde a maioria (fonte: pro_dados/batrider.json, confrontos).
-- por que importa: suporte de roaming (pos 4) com mais jogos contra Batrider em pro depois de Tusk e Hoodwink, e um dos poucos nessa lista em que o Batrider já aparece em desvantagem com amostra grande. A ficha pública do Batrider (OpenDota, todas as partidas) também cita Shadow Demon como um dos piores confrontos dele, então o padrão se confirma nos dois recortes.
+- por que importa: suporte de roaming (pos 4) com mais jogos contra Batrider em pro depois de Tusk e Hoodwink, e um dos poucos nessa lista em que o Batrider já aparece em desvantagem com amostra grande.
 - janelas: os dois são suportes de mana curta até os 15 min, sem spike forte de nenhum lado. A partir dos 19-24 min, quando Shadow Demon fecha o Shard (mediana 25,4min, n=788/2022, pro_dados/shadow_demon.json) ou o Blink (mediana 23,9min, n=1318/2022), ele passa a conseguir banir um aliado do Batrider pro ar por 2,75s logo antes dele soltar o Lasso, cancelando a troca.
-- o que ele faz com você: Disruption bane um aliado por 2,75s e cria uma ilusão dele que sofre 300% de dano e causa de 20% a 50% mais dano (com até +65 de dano base bônus no nível 4), bom pra isolar o alvo que o Batrider ia tentar lassar. Demonic Purge reduz a velocidade de movimento em até 100% e dissipa buffs, incluindo o bônus de velocidade do Firefly.
+- o que ele faz com você: Disruption bane um aliado por 2,75s e cria duas ilusões dele que sofrem 300% de dano e causam de 20% a 50% mais dano (com até +65 de dano base bônus no nível 4), bom pra isolar o alvo que o Batrider ia tentar lassar. Demonic Purge reduz a velocidade de movimento em até 100% e dissipa buffs, incluindo o bônus de velocidade do Firefly.
 - o que você faz com ele: Lasso em Shadow Demon ignora o BKB dele, e ele tem pouca vida própria pra aguentar o combo direto (gpm baixo, 314, igual a outros suportes puros). Se ele gastar Disruption no aliado errado antes do seu engajamento, ele fica sem resposta pro resto da troca (carga única, recarrega em 20-26s).
 - itens que viram: Aghanim's Shard de Shadow Demon (Demonic Cleanse, mediana 25,4min) permite ele limpar debuffs negativos de um aliado, incluindo os efeitos do Sticky Napalm, isso atrasa a vantagem do Batrider depois dessa compra. Demonic Purge dele cancela o bônus de velocidade do Firefly no meio da aproximação.
 - como jogar: force a troca antes dele ter o Shard pronto (antes dos 20-25 min). Preste atenção em qual aliado ele vai banir com Disruption antes de comprometer o Lasso nele, ele costuma proteger o alvo mais ameaçado primeiro.
-- fonte: pro_dados/batrider.json; pro_dados/shadow_demon.json; constants_abilities.json (shadow_demon_disruption, shadow_demon_demonic_purge); aghs_desc (Shadow Demon); content/fichas/batrider.md (confronto citado também no recorte público)
+- fonte: pro_dados/batrider.json; pro_dados/shadow_demon.json; constants_abilities.json (shadow_demon_disruption, shadow_demon_demonic_purge); aghs_desc (Shadow Demon)
 
 ---
 

@@ -23,8 +23,6 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/necrolyte.md
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 ## Contra Rubick (rubick)
@@ -40,12 +38,12 @@ fontes:
 ## Contra Shadow Fiend (nevermore)
 - placar: 90/170 em pro, 52,9% de vitória pra você (pro_dados/necrolyte.json, confrontos).
 - por que importa: 2º oponente mais comum em pro (170 jogos) e os dois são carries que puxam farm pro próprio lado: a clássica corrida de power spike entre dois core sem precisar de lane em comum.
-- janelas: SF sai na frente rápido: Power Treads aos 5:54 e Mask of Madness aos 10:12 (pro_dados/nevermore.json) já dão attack speed e lifesteal pra ele puxar camp e ganhar troca cedo, com Necromastery empilhando 1,35 de dano por alma acumulada (constants_abilities.json). Seu primeiro spike real como pos 1 é o Radiance aos 12:43 (ficha necrolyte.md, pos 1), então até os 12-13 min ele farma e troca melhor. Dos 13 aos 18 min o jogo empata: SF está fechando Yasha (13:18) e Dragon Lance (14:00) enquanto você finaliza Shard (16:43 na ficha, pos 1) e sua aura começa a render. Depois dos 18-20, com SF ainda montando pro Octarine/Scepter (Staff of Wizardry 18:54) e você com Heart (28:42) ou Shiva's (31:43) a caminho, a vantagem de atrito é sua.
+- janelas: SF sai na frente rápido: Power Treads aos 5:54 e Mask of Madness aos 10:12 (pro_dados/nevermore.json) já dão attack speed e lifesteal pra ele puxar camp e ganhar troca cedo, com Necromastery empilhando 1,35 de dano por alma acumulada (constants_abilities.json). Seu primeiro spike real é o Radiance aos 13:42 (pro_dados/necrolyte.json, resumo), então até lá ele farma e troca melhor. Dos 14 aos 18 min o jogo empata: SF está fechando Yasha (13:18) e Dragon Lance (14:00) enquanto você fecha o Shard (17:48) e sua aura começa a render. Depois dos 18-20, com SF ainda montando pro Octarine/Scepter (Staff of Wizardry 18:54) e você com Heart (30:30) ou Shiva's (31:24) a caminho, a vantagem de atrito é sua.
 - o que ele faz com você: Shadowraze (três variantes) e Requiem of Souls são dano mágico sem bkbpierce (constants_abilities.json), ou seja, seu BKB (27:30 agregado) bloqueia a Requiem se você vestir a tempo; o problema é que ela cresce com o número de almas e pode te zerar antes disso se ele estiver fechando build muito mais rápido.
 - o que você faz com ele: Heartstopper Aura drena % de vida dele mesmo com ele parado farmando longe de você, e furou BKB; se ele vestir King Bar tarde pra te matar de perto, sua aura continua rendendo.
 - itens que viram: seu Shiva's Guard (armadura + slow em área) neutraliza o DPS de ataque básico dele numa troca prolongada; o Black King Bar dele anula sua Reaper's Scythe (bkbpierce não), então contra SF com BKB a execução precisa vir da aura, não da ultimate.
 - como jogar: evite trocar ataque básico com ele antes do seu Radiance; depois disso, jogue pra atrito longo (Heartstopper + Death Pulse), não pra all-in rápido, porque ele ainda vence burst cru até sua aura ter tempo de render.
-- fonte: pro_dados/necrolyte.json; pro_dados/nevermore.json; content/fichas/necrolyte.md; constants_abilities.json (nevermore_requiem, nevermore_necromastery, necrolyte_heartstopper_aura)
+- fonte: pro_dados/necrolyte.json; pro_dados/nevermore.json; constants_abilities.json (nevermore_requiem, nevermore_necromastery, necrolyte_heartstopper_aura)
 
 ## Contra Snapfire (snapfire)
 - placar: 67/146 em pro, 45,9% de vitória pra você (pro_dados/necrolyte.json, confrontos).
@@ -79,23 +77,23 @@ fontes:
 
 ## Contra Axe (axe)
 - placar: 66/122 em pro, 54,1% de vitória pra você (pro_dados/necrolyte.json, confrontos).
-- por que importa: 6º mais comum em pro (122 jogos) e é a rival de offlane mais direta: os dois disputam pos 3 em pro (44 jogos seus de pos 3, ficha necrolyte.md) e Culling Blade executa exatamente do mesmo jeito que sua Reaper's Scythe, só que em pure damage.
-- janelas: Axe tem spike cedo: Blink aos 15:42 (pro_dados/axe.json) liga o combo Call + Culling Blade bem antes do padrão de outros offlaners. Seu Radiance (13:42-15:31 dependendo da posição) chega quase junto; a partir dos 15-16 min quem conecta primeiro na troca decide. Depois dos 22-23 min ele tem Aghanim's Shard (22:54) turbinando Counter Helix e BKB (25:54); seu BKB sai antes (27:30 agregado é mais tarde, mas sua Heart/Shiva's na faixa 28-31 min reequilibram pela sustentação).
+- por que importa: 6º mais comum em pro (122 jogos) e é a rival de offlane mais direta: Culling Blade executa exatamente do mesmo jeito que sua Reaper's Scythe, só que em pure damage.
+- janelas: Axe tem spike cedo: Blink aos 15:42 (pro_dados/axe.json) liga o combo Call + Culling Blade bem antes do padrão de outros offlaners. Seu Radiance (13:42) chega quase junto; a partir dos 15-16 min quem conecta primeiro na troca decide. Depois dos 22-23 min ele tem Aghanim's Shard (22:54) turbinando Counter Helix e BKB (25:54); seu BKB sai antes (27:30 agregado é mais tarde, mas sua Heart/Shiva's na faixa 28-31 min reequilibram pela sustentação).
 - o que ele faz com você: Berserker's Call (bkbpierce sim) te obriga a atacar ele por até 3s, te impedindo de lançar Death Pulse/Scythe mesmo com BKB vestido; Culling Blade é pure damage com bkbpierce sim e executa quem está com pouca vida igual sua Scythe faz com o time dele.
 - o que você faz com ele: Heartstopper Aura ignora o BKB dele e corrói % de vida contínua enquanto ele tenta Call+Helix em você; se ele errar o timing do Culling Blade, sua vida regenera rápido com Death Pulse + Sadist.
 - itens que viram: Blade Mail dele reflete seu Death Pulse/Scythe de volta se ele ativar no momento certo, então não acerte ultimate nele com Blade Mail ligado; do seu lado, Shiva's Guard (armadura + slow em área) neutraliza o DPS dele numa troca de ataque básico forçada pelo Call.
 - como jogar: carregue vida alta antes de entrar no alcance do Call (315 de raio) e só solte a Scythe nele se tiver certeza que o HP dele já está baixo o bastante pra não virar um Culling Blade de volta; depois do seu Radiance, vença pelo atrito, não pelo all-in.
-- fonte: pro_dados/necrolyte.json; pro_dados/axe.json; content/fichas/necrolyte.md; constants_abilities.json (axe_berserkers_call, axe_culling_blade, necrolyte_heartstopper_aura)
+- fonte: pro_dados/necrolyte.json; pro_dados/axe.json; constants_abilities.json (axe_berserkers_call, axe_culling_blade, necrolyte_heartstopper_aura)
 
 ## Contra Tiny (tiny)
 - placar: 60/111 em pro, 54,1% de vitória pra você (pro_dados/necrolyte.json, confrontos).
 - por que importa: carry contra carry clássico mesmo sem lane em comum (igual Alchemist x Morphling): os dois puxam farm pro próprio lado e o confronto se decide no momento em que as builds se cruzam numa luta, não na lane.
-- janelas: Tiny monta Blink aos 15:54 (pro_dados/tiny.json), ligando o combo Toss + Avalanche bem na janela em que seu Radiance (12:43 como pos 1, ficha necrolyte.md) já saiu mas seu Shard (16:43) ainda não. Entre 14 e 17 min ele consegue iniciar o combo em você antes da sua aura render; depois dos 17-18, com Shard pronto, a sua Heartstopper já está corroendo e o Avalanche dele (dano fixo) não acompanha.
+- janelas: Tiny monta Blink aos 15:54 (pro_dados/tiny.json), ligando o combo Toss + Avalanche bem na janela em que seu Radiance (13:42, pro_dados/necrolyte.json) já saiu mas seu Shard (17:48) ainda não. Entre 14 e 17 min ele consegue iniciar o combo em você antes da sua aura render; depois dos 17-18, com Shard pronto, a sua Heartstopper já está corroendo e o Avalanche dele (dano fixo) não acompanha.
 - o que ele faz com você: Avalanche + Toss combinados chegam a mais de 700 de dano físico/mágico num só combo no nível 4 de cada (constants_abilities.json), suficiente pra matar você antes do Death Pulse curar se pegar os dois.
 - o que você faz com ele: Heartstopper Aura corrói % de vida dele continuamente mesmo ele tankando com Grow (bônus de armadura e dano, mas não de resistência mágica); seu Death Pulse cura o burst do combo se você sobreviver ao estouro inicial.
 - itens que viram: Black King Bar seu segura o stun do Avalanche (não furou BKB, constants_abilities.json) e o impede de te tossar com segurança; do lado dele, Ogre Axe (18:30) e Blink seguem sendo os itens que habilitam o combo, sem resposta direta pra sua aura.
 - como jogar: mantenha distância de 275+ (raio do Toss) até ter BKB ou Shard pronto; depois disso, jogue pra atrito longo, já que o burst dele é tudo-ou-nada por combo.
-- fonte: pro_dados/necrolyte.json; pro_dados/tiny.json; content/fichas/necrolyte.md; constants_abilities.json (tiny_avalanche, tiny_toss)
+- fonte: pro_dados/necrolyte.json; pro_dados/tiny.json; constants_abilities.json (tiny_avalanche, tiny_toss)
 
 ## Contra Luna (luna)
 - placar: 56/108 em pro, 51,9% de vitória pra você (pro_dados/necrolyte.json, confrontos).
@@ -138,41 +136,41 @@ fontes:
 - fonte: pro_dados/necrolyte.json; pro_dados/bristleback.json; constants_abilities.json (bristleback_quill_spray, bristleback_bristleback, necrolyte_heartstopper_aura)
 
 ## Contra Night Stalker (night_stalker)
-- placar: 11/31 em pro, 35,5% de vitória pra você, pior matchup medido com 30+ jogos (pro_dados/necrolyte.json, confrontos; confirma o pior-matchups já listado em content/fichas/necrolyte.md).
+- placar: 11/31 em pro, 35,5% de vitória pra você, pior matchup medido com 30+ jogos (pro_dados/necrolyte.json, confrontos).
 - por que importa: um dos piores confrontos medidos do herói: silence de área que te impede de lançar Death Pulse/Scythe justo na janela em que você ainda não tem Radiance pronto.
-- janelas: Night Stalker não depende de item pra ser forte: Crippling Fear (silence em área) e Void já estão disponíveis desde o nível 6 (~8-10 min), bem antes do seu Radiance (13:42-15:31 dependendo da posição). De noite a duração do silence sobe pra até 6s (constants_abilities.json) e ele some de dia, voltando ameaçador a cada ciclo. Mesmo com Blink dele saindo só aos 17:06 (pro_dados/night_stalker.json), o gank pré-15min sem blink já é suficiente contra um Necrophos sem itens.
+- janelas: Night Stalker não depende de item pra ser forte: Crippling Fear (silence em área) e Void já estão disponíveis desde o nível 6 (~8-10 min), bem antes do seu Radiance (13:42). De noite a duração do silence sobe pra até 6s (constants_abilities.json) e ele some de dia, voltando ameaçador a cada ciclo. Mesmo com Blink dele saindo só aos 17:06 (pro_dados/night_stalker.json), o gank pré-15min sem blink já é suficiente contra um Necrophos sem itens.
 - o que ele faz com você: Crippling Fear silencia e causa dano contínuo por segundo (até 40, escalando com nível) enquanto você fica perto; Void slow 50% de movimento e ataque, com mini-stun de noite, te impedindo de kitar ou de castar a tempo.
 - o que você faz com ele: depois do seu Radiance e Shard, sua aura já está corroendo % de vida dele, mas a janela de perigo real (pré-15min) é toda dele, não sua; seu Ghost Shroud ajuda a sobreviver ao físico dele mas não ao silence.
 - itens que viram: Black King Bar bloqueia Crippling Fear e Void (bkbpierce não nos dois, constants_abilities.json), ao contrário do que acontece contra Axe/Bristleback, então aqui o BKB resolve de verdade; Linken's Sphere bloqueia o Void de alvo único uma vez a cada 14s como alternativa mais barata.
 - como jogar: evite farmar sozinho de noite antes do seu nível 6/BKB; priorize Arcane Boots/Wand cedo pra sustentar e peça gank do seu time contra ele antes dos 15 min, porque depois do seu Radiance o jogo vira a seu favor.
-- fonte: pro_dados/necrolyte.json; pro_dados/night_stalker.json; content/fichas/necrolyte.md; constants_abilities.json (night_stalker_crippling_fear, night_stalker_void)
+- fonte: pro_dados/necrolyte.json; pro_dados/night_stalker.json; constants_abilities.json (night_stalker_crippling_fear, night_stalker_void)
 
 ## Contra Shadow Demon (shadow_demon)
-- placar: 14/39 em pro, 35,9% de vitória pra você, amostra média, confirma pior-matchup já listado em content/fichas/necrolyte.md (pro_dados/necrolyte.json, confrontos).
+- placar: 14/39 em pro, 35,9% de vitória pra você, amostra média (pro_dados/necrolyte.json, confrontos).
 - por que importa: um dos piores confrontos medidos: ele te bane da luta no momento exato em que você ia lançar o combo.
 - janelas: ele não depende de item (GPM 314); Disruption e Demonic Purge já ameaçam desde o nível 6 (~8-10 min), bem antes do seu Radiance. Blink dele sai tarde (23:54, pro_dados/shadow_demon.json), então o perigo real é early/mid, não um spike de item específico.
 - o que ele faz com você: Disruption te bane do campo de batalha por 2,75s e cria duas ilusões suas com dano bônus quando você volta (constants_abilities.json), interrompendo seu Death Pulse/Scythe no momento do cast; Demonic Purge remove seus buffs positivos (incluindo Ghost Shroud) e causa até 600 de dano mágico furando BKB (bkbpierce sim).
 - o que você faz com ele: Heartstopper Aura corrói % de vida dele enquanto ele fica perto tentando acertar o combo; Sadist te dá regen extra se você conseguir uma kill no meio da troca, compensando o tempo perdido banido.
 - itens que viram: Black King Bar bloqueia o Disruption (bkbpierce não, constants_abilities.json) mas não o dano do Demonic Purge depois (bkbpierce sim); Linken's Sphere bloqueia o Disruption de alvo único uma vez a cada 14s, o que é a resposta mais direta que você tem contra o cast inicial.
 - como jogar: jogue Linken's Sphere como prioridade situacional contra ele; evite engajar sozinho fora do alcance do seu time, porque o Disruption sozinho já cancela seu combo inteiro.
-- fonte: pro_dados/necrolyte.json; pro_dados/shadow_demon.json; content/fichas/necrolyte.md; constants_abilities.json (shadow_demon_disruption, shadow_demon_demonic_purge); items.json (sphere)
+- fonte: pro_dados/necrolyte.json; pro_dados/shadow_demon.json; constants_abilities.json (shadow_demon_disruption, shadow_demon_demonic_purge); items.json (sphere)
 
 ## Contra Ancient Apparition (ancient_apparition)
-- placar: 13/35 em pro, 37,1% de vitória pra você, amostra média, confirma pior-matchup já listado em content/fichas/necrolyte.md (pro_dados/necrolyte.json, confrontos).
+- placar: 13/35 em pro, 37,1% de vitória pra você, amostra média (pro_dados/necrolyte.json, confrontos).
 - por que importa: o contra-argumento direto do seu plano de jogo tardio: Ice Blast impede regeneração/cura e executa quem cai abaixo de ~12-14% de vida, o que anula Heart of Tarrasque, Sadist e até o Death Pulse no alvo marcado.
 - janelas: o spike dela é de nível, não de item: Ice Blast (ultimate, nível 6, ~8-10 min) já é ameaça de execução desde o early game. O único item de impacto é o Aghanim's Shard aos 24:24 (pro_dados/ancient_apparition.json, 384 dos ~761 jogos), que congela quem já estiver sob Cold Feet. Isso significa que o período perigoso dela é o jogo inteiro, não uma janela específica: mesmo depois do seu Heart (30:30), um Frostbitten te deixa sem curar.
 - o que ela faz com você: Ice Blast é dano mágico com bkbpierce sim (constants_abilities.json) que te impede de regenerar/curar por até 12s e te mata instantaneamente se sua vida cair abaixo de ~12-14% enquanto Frostbitten; nenhum BKB resolve isso.
 - o que você faz com ela: Heartstopper Aura corrói % de vida dela desde o início, e ela tem HP baixo de suporte; sua melhor resposta é matar ela antes que ela acerte o Ice Blast, não sobreviver depois de acertado.
 - itens que viram: Linken's Sphere bloqueia o Cold Feet de alvo único (ele não furou, constants_abilities.json), cortando a combinação que trava o Ice Blast; contra o Ice Blast em si (ele é AoE e furou BKB) a única resposta real é distância e timing, não item defensivo.
 - como jogar: nunca jogue vida baixa perto dela depois que o Ice Blast estiver disponível; priorize focá-la primeiro em teamfight, já que seu plano de regen tardio simplesmente não funciona enquanto ela estiver viva.
-- fonte: pro_dados/necrolyte.json; pro_dados/ancient_apparition.json; content/fichas/necrolyte.md; constants_abilities.json (ancient_apparition_ice_blast); items.json (sphere)
+- fonte: pro_dados/necrolyte.json; pro_dados/ancient_apparition.json; constants_abilities.json (ancient_apparition_ice_blast); items.json (sphere)
 
 ## Contra Crystal Maiden (crystal_maiden)
-- placar: 31/82 em pro, 37,8% de vitória pra você, pior matchup com mais jogos medidos (82 jogos, pro_dados/necrolyte.json, confrontos; confirma pior-matchup já listado em content/fichas/necrolyte.md).
+- placar: 31/82 em pro, 37,8% de vitória pra você, pior matchup com mais jogos medidos (82 jogos, pro_dados/necrolyte.json, confrontos).
 - por que importa: é o pior confronto com amostra grande o suficiente pra confiar: ela te interrompe com root e nuke bem antes do seu primeiro item.
 - janelas: Frostbite (nível 1) já está disponível na lane, prendendo você sem poder atacar ou se mover por até 3s; Freezing Field (ultimate, nível 6, ~8-10 min) é um channel de dano em área que pode te queimar boa vida antes do seu Radiance (13:42). O item de impacto dela é o Aghanim's Shard aos 17:42 (pro_dados/crystal_maiden.json, 719 dos ~1341 jogos), quase no mesmo minuto do seu Shard (17:48): ambos ficam mais fortes juntos.
 - o que ela faz com você: Frostbite imobiliza e causa dano contínuo (100 por segundo contra a maioria dos alvos), cortando sua rota de farm/combo cedo; Freezing Field com Aghanim's Scepter permite ela se mover e atacar durante o channel, aumentando o risco de ela te acertar em cheio sem precisar ficar parada.
 - o que você faz com ela: Heartstopper Aura corrói % de vida dela desde o primeiro contato, e ela tem o HP mais baixo da lista (hard support); se você sobreviver ao root inicial, Death Pulse cura o que ela queimou.
 - itens que viram: Black King Bar bloqueia Freezing Field inteira se você já estiver com ele ativo quando ela começar a canalizar (bkbpierce não, constants_abilities.json); Linken's Sphere bloqueia o Frostbite de alvo único uma vez a cada 14s, resposta mais barata pra lane.
 - como jogar: jogue a lane com cautela de posicionamento contra o Frostbite; depois do seu nível 6/Shard, force o confronto antes dela conseguir setup de Freezing Field num espaço fechado, porque seu plano de atrito simplesmente não tem tempo de render se ela te prender primeiro.
-- fonte: pro_dados/necrolyte.json; pro_dados/crystal_maiden.json; content/fichas/necrolyte.md; constants_abilities.json (crystal_maiden_frostbite, crystal_maiden_freezing_field); items.json (sphere)
+- fonte: pro_dados/necrolyte.json; pro_dados/crystal_maiden.json; constants_abilities.json (crystal_maiden_frostbite, crystal_maiden_freezing_field); items.json (sphere)

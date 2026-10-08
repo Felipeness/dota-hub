@@ -22,12 +22,10 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/tidehunter.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
 ---
 
 ## Como essa lista foi montada
-Tidehunter é jogado quase só como pos 3 offlane no 7.41 (ficha verificada do herói). Os 15 oponentes abaixo cobrem quatro critérios: os 6 com mais jogos de pro contra ele (Rubick, Shadow Fiend, Jakiro, Tiny, Tusk, Ember Spirit), os pos 3 mais comuns pra ele enfrentar em pro além desses (Mars, Axe, Centaur Warrunner, Slardar), dois dos matchups mais favoráveis com 30+ jogos (Faceless Void, Necrophos) e os mais desfavoráveis com 30+ jogos (Lone Druid, Clockwerk, Huskar). Faceless Void e Lone Druid não compartilham lane com Tide (são carries pos 1 que farmam sozinhos), mas entram porque são dois dos carries mais jogados em pro no período e porque o confronto de mobilidade e counter-iniciação entre eles decide luta mesmo sem história de lane, do jeito que o Alchemist e o Morphling se afetam sem nunca trocar hit na lane.
+Tidehunter é offlane (pos 3) em 98,6% das partidas de pro no 7.40-7.41, 2.423 de 2.457 (partidas pro 7.40-7.41, OpenDota). Os 15 oponentes abaixo cobrem quatro critérios: os 6 com mais jogos de pro contra ele (Rubick, Shadow Fiend, Jakiro, Tiny, Tusk, Ember Spirit), os pos 3 mais comuns pra ele enfrentar em pro além desses (Mars, Axe, Centaur Warrunner, Slardar), dois dos matchups mais favoráveis com 30+ jogos (Faceless Void, Necrophos) e os mais desfavoráveis com 30+ jogos (Lone Druid, Clockwerk, Huskar). Faceless Void e Lone Druid não compartilham lane com Tide (são carries pos 1 que farmam sozinhos), mas entram porque são dois dos carries mais jogados em pro no período e porque o confronto de mobilidade e counter-iniciação entre eles decide luta mesmo sem história de lane, do jeito que o Alchemist e o Morphling se afetam sem nunca trocar hit na lane.
 
 ## Contra Rubick (rubick)
 - placar: 174 vitórias em 366 jogos de pro, 47,5% (pro_dados/tidehunter.json)
@@ -37,7 +35,7 @@ Tidehunter é jogado quase só como pos 3 offlane no 7.41 (ficha verificada do h
 - o que você faz com ele: iniciar de ângulo que Rubick não está vendo, ou fechar o combo Blink + Ravage rápido o bastante pra matar ou afastar Rubick antes dele conseguir reagir dentro do alcance de Spell Steal
 - itens que viram: Blink Dagger de Tide encurta a janela de reação do Rubick; Aghanim's Shard (Dead in the Water) trava Rubick se ele tentar se afastar depois de ver o cast
 - como jogar: checar a posição do Rubick antes de qualquer iniciação marcada, e se ele já estiver plantado perto, esperar ele gastar mana em outra coisa ou perder linha de visão antes de castar Ravage
-- fonte: pro_dados/tidehunter.json; pro_dados/rubick.json; constants_abilities.json (rubick_spell_steal, tidehunter_ravage); content/fichas/tidehunter.md (combo Blink+Ravage)
+- fonte: pro_dados/tidehunter.json; pro_dados/rubick.json; constants_abilities.json (rubick_spell_steal, tidehunter_ravage); items.json (blink)
 
 ## Contra Shadow Fiend (nevermore)
 - placar: 141 vitórias em 311 jogos de pro, 45,3% (pro_dados/tidehunter.json)
@@ -123,7 +121,7 @@ Tidehunter é jogado quase só como pos 3 offlane no 7.41 (ficha verificada do h
 - placar: 103 vitórias em 238 jogos de pro, 43,3% (pro_dados/tidehunter.json)
 - por que importa: mais um pos 3 comum contra Tide em pro (238 jogos), com uma interação mecânica direta contra o bloqueio de dano do Kraken Shell
 - janelas: Slardar sobe Power Treads (7,3 min) e Blink (mediana 13,3 min, bem antes do de Tide) e o spike dele é o Aghanim's Shard (17,2 min), que dá Corrosive Haze (Amplify Damage) em área
-- o que ele faz com você: Amplify Damage reduz 10 a 20 de armadura e revela invisibilidade, então mesmo com o bloqueio fixo do Kraken Shell, o dano de ataque que passa fica proporcionalmente maior; Bash dá 35 a 200 de dano bônus por ataque com chance crescente, que também soma como instância separada de dano físico além do bloqueio
+- o que ele faz com você: Amplify Damage reduz 10 a 20 de armadura e revela invisibilidade, então mesmo com o bloqueio fixo do Kraken Shell, o dano de ataque que passa fica proporcionalmente maior; Bash dá 35 a 200 de dano bônus garantido a cada 3 ataques, que também soma como instância separada de dano físico além do bloqueio
 - o que você faz com ele: Ravage pega Slardar junto do grupo, e Anchor Smash reduz o dano de ataque dele, que é a principal fonte de pressão em luta
 - itens que viram: o Aghanim's Shard do Slardar (Corrosive Haze em área) e o Blink dele, que sai quase 8 minutos antes do de Tide (13,3 contra 21,2 min), fazem ele capaz de iniciar sozinho bem mais cedo
 - como jogar: não gastar o bloqueio do Kraken Shell contra poke cedo de Slardar, guardando pro burst de Bash somado ao Amplify Damage que costuma vir junto da iniciação dele
@@ -173,7 +171,7 @@ Tidehunter é jogado quase só como pos 3 offlane no 7.41 (ficha verificada do h
 - placar: 26 vitórias em 67 jogos de pro, 38,8% (pro_dados/tidehunter.json)
 - por que importa: outro matchup desfavorável com amostra válida (67 jogos), relevante porque o dano principal dele ignora completamente o bloqueio físico de Tide
 - janelas: Huskar sobe Armlet cedo (mediana 9,1 min) e já fica perigoso em autoataque puro desde então. O spike real chega com Sange and Yasha (20,0 min) ou BKB (23,2 min), quando Burning Spear somado ao Berserker's Blood (attack speed sobe conforme ele perde vida) viram DPS alto em cima de quem está com pouca vida
-- o que ele faz com você: Burning Spear é dano mágico por ataque que empilha e ignora o bloqueio físico do Kraken Shell por completo; Life Break dá um dash que causa dano baseado em porcentagem da vida atual de Huskar e ainda reduz a velocidade de movimento e de ataque de quem é atingido
+- o que ele faz com você: Burning Spear é dano mágico por ataque que empilha e ignora o bloqueio físico do Kraken Shell por completo; Life Break dá um dash que causa dano baseado em porcentagem da vida atual de quem é atingido, custando a Huskar a mesma porcentagem da própria vida, e ainda reduz a velocidade de movimento e de ataque do alvo
 - o que você faz com ele: Anchor Smash reduz o dano de ataque dele na parte física do combo; Ravage trava Huskar antes dele conseguir empilhar Burning Spear numa troca prolongada
 - itens que viram: Armlet acelera a curva de vida perdida de Huskar, que alimenta Berserker's Blood e Life Break, deixando ele mais perigoso justamente quando está "ferido"; BKB de Huskar neutraliza o Ravage se já estiver ligado antes
 - como jogar: evitar troca de autoataque prolongada contra Huskar com Armlet ligado, e tentar fechar a luta rápido em grupo antes dele empilhar Burning Spear em vários hits

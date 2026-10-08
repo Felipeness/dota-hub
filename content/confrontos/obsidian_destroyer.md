@@ -3,15 +3,13 @@ id: confrontos-obsidian_destroyer
 heroi: Outworld Destroyer
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/obsidian_destroyer.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/{nevermore,rubick,disruptor,snapfire,lion,pudge,invoker,queenofpain,dragon_knight,lich,dark_willow,beastmaster,tusk,templar_assassin,legion_commander}.json
+- C:/Users/felip/Desktop/dota-hub/content/pro_dados/obsidian_destroyer.json
+- C:/Users/felip/Desktop/dota-hub/content/pro_dados/{nevermore,rubick,disruptor,snapfire,lion,pudge,invoker,queenofpain,dragon_knight,lich,dark_willow,beastmaster,tusk,templar_assassin,legion_commander}.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 - https://api.opendota.com/api/constants/aghs_desc
-- C:/Users/felip/Desktop/dota-hub/content/fichas/obsidian_destroyer.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
 ---
 
 Base de comparação: nos 394 jogos de pro do patch 7.40/7.41 (pro_dados/obsidian_destroyer.json), Outworld Destroyer fecha Null Talisman com mediana de 2,5 min, Power Treads aos 7,4 min, Witch Blade (via Oblivion Staff 11,6 + Chainmail 12,1 + Orb of Venom 12,7) aos 13,7 min, Blink Dagger aos 19,3 min, e o componente Mystic Staff da Scythe of Vyse aparece com mediana de 33 min, ou seja, o Sheepstick cravado costuma sair perto dos 35 min. Antes da Witch Blade ele é fraco: o Arcane Orb só causa 10 a 13% do mana atual dele (constants_abilities.json), e no início do jogo esse pool ainda é pequeno.
@@ -59,10 +57,10 @@ Base de comparação: nos 394 jogos de pro do patch 7.40/7.41 (pro_dados/obsidia
 ## Contra Lion (lion)
 - placar: 29/52, 55,77% a seu favor em pro (pro_dados/obsidian_destroyer.json)
 - por que importa: empatado em volume de jogos com Snapfire (52); Hex e Finger of Death são o counter de controle clássico pro seu combo, mas o placar geral favorece você.
-- janelas: até 7 min ele farma pouco; a partir do nível 6 (Finger of Death, até 850 de dano mágico no alvo) ele ameaça te matar de longe; dos 18 min em diante o blink dele (18,2 min) aproxima o combo de Impale + Hex.
-- o que ele faz com você: Hex desabilita todas as suas magias por até 3,2s no nível 4 (dispellable só por strong dispel, constants_abilities.json), cortando seu combo inteiro; Finger of Death causa até 850 de dano mágico; Impale stuna em linha pra abrir a sequência.
+- janelas: até 7 min ele farma pouco; a partir do nível 6 (Finger of Death, até 850 de dano mágico no alvo) ele ameaça te matar de longe; dos 18 min em diante o blink dele (18,2 min) aproxima o combo de Earth Spike + Hex.
+- o que ele faz com você: Hex desabilita todas as suas magias por até 3,2s no nível 4 (dispellable só por strong dispel, constants_abilities.json), cortando seu combo inteiro; Finger of Death causa até 850 de dano mágico; Earth Spike stuna em linha pra abrir a sequência.
 - o que você faz com ele: Astral Imprisonment nele elimina a maior ameaça de kill isolado antes dele acertar o Hex; ele tem pouca vida, então seu Arcane Orb sozinho já ajuda a fechar a troca.
-- itens que viram: seu BKB bloqueia tanto o Hex quanto o Finger of Death (nenhum tem bkbpierce, constants_abilities.json); Linken's Sphere bloqueia só o Finger of Death, que é de alvo único.
+- itens que viram: seu BKB bloqueia tanto o Hex quanto o Finger of Death (nenhum tem bkbpierce, constants_abilities.json); Linken's Sphere bloqueia o primeiro dos dois que te acertar, já que os dois são de alvo único.
 - como jogar: trate Lion como prioridade de kill ou de Astral Imprisonment antes da luta grande, porque o Hex dele anula seu combo se sair primeiro.
 - fonte: pro_dados/obsidian_destroyer.json; pro_dados/lion.json; constants_abilities.json
 
@@ -110,7 +108,7 @@ Base de comparação: nos 394 jogos de pro do patch 7.40/7.41 (pro_dados/obsidia
 - placar: 21/33, 63,64% a seu favor em pro (pro_dados/obsidian_destroyer.json)
 - por que importa: sua maior vantagem com amostra robusta (63,6% em 33 jogos), ele é jogado contra você como pick de controle, mas o resultado não confirma isso 1x1.
 - janelas: até 8 min ele farma devagar, suporte puro; dos 16 (shadow amulet) aos 23 min (Shard) ele ganha mobilidade e utilidade, mas o dano dele sozinho contra você continua baixo.
-- o que ele faz com você: Frost Nova e Chain Frost (até 10 saltos, dano crescente a cada salto, constants_abilities.json) causam dano em área e slow de até -65%, mas são fracos 1x1; Sinister Gaze canaliza e drena 20% do seu mana por segundo se acertar.
+- o que ele faz com você: Frost Nova causa dano em área e reduz sua velocidade de ataque; Chain Frost (até 10 saltos, dano crescente a cada salto, constants_abilities.json) desacelera você em até -65%, mas os dois são fracos 1x1; Sinister Gaze canaliza e drena 20% do seu mana por segundo se acertar.
 - o que você faz com ele: Astral Imprisonment nele interrompe a Sinister Gaze no meio da canalização; seu Arcane Orb ignora o Frost Shield, que só reduz dano de ataque, não dano mágico puro.
 - itens que viram: seu BKB segura a Sinister Gaze (sem bkbpierce, constants_abilities.json); sua vantagem já é grande, então o foco é não deixar ele canalizar livre em cima de você.
 - como jogar: interrompa a Sinister Gaze assim que ele começar; fora disso, ele raramente ganha a troca direta sozinho.
@@ -118,10 +116,10 @@ Base de comparação: nos 394 jogos de pro do patch 7.40/7.41 (pro_dados/obsidia
 
 ## Contra Dark Willow (dark_willow)
 - placar: 21/34, 61,76% a seu favor em pro (pro_dados/obsidian_destroyer.json)
-- por que importa: sua segunda maior vantagem com amostra boa (61,8% em 34 jogos); controle mágico que na teoria trava seu combo, mas o resultado em pro pende pra você.
+- por que importa: sua terceira maior vantagem com amostra boa (61,8% em 34 jogos), atrás só de Lich e Dragon Knight; controle mágico que na teoria trava seu combo, mas o resultado em pro pende pra você.
 - janelas: até 11 min ela é frágil no corpo a corpo; dos 17 aos 21 min ela ganha o Eul's Scepter (cyclone, 21,2 min) pra se proteger ou abrir combo; aos 29,2 min o Aghs Shard melhora o Cursed Crown.
 - o que ela faz com você: Cursed Crown stuna em área depois de um delay de 4s; Bramble Maze te enraíza se você pisar num galho, até 2,5s no nível 4; Shadow Realm deixa ela te atacar com bônus de dano enquanto fica invisível pra você.
-- o que você faz com ela: Astral Imprisonment nela cancela o delay do Cursed Crown antes dele estourar; o Shadow Realm dela não é evasão, é untargetable (constants_abilities.json), então nem seu Arcane Orb acerta nela enquanto durar, o que resolve é matar ela antes ou depois da janela, não durante.
+- o que você faz com ela: Astral Imprisonment nela antes do Cursed Crown saído evita a curse inteira, porque ela fica presa e não consegue castar; depois da curse já lançada no alvo, prender ela não cancela mais o estouro, o delay roda sozinho; o Shadow Realm dela não é evasão, é untargetable (constants_abilities.json), então nem seu Arcane Orb acerta nela enquanto durar, o que resolve é matar ela antes ou depois da janela, não durante.
 - itens que viram: seu BKB bloqueia tanto o Cursed Crown quanto a raiz do Bramble Maze (nenhum dos dois tem bkbpierce, constants_abilities.json).
 - como jogar: ande fora dos galhos plantados; puna ela assim que gastar o Cyclone de defesa, antes de recarregar.
 - fonte: pro_dados/obsidian_destroyer.json; pro_dados/dark_willow.json; constants_abilities.json; aghs_desc (OpenDota API)
@@ -148,17 +146,17 @@ Base de comparação: nos 394 jogos de pro do patch 7.40/7.41 (pro_dados/obsidia
 
 ## Contra Templar Assassin (templar_assassin)
 - placar: 10/24, 41,67% a seu favor em pro, amostra pequena (pro_dados/obsidian_destroyer.json)
-- por que importa: counter clássico de mecânica citado na própria ficha do site (Refraction bloqueia boa parte do Arcane Orb e da Sanity's Eclipse); mesmo com amostra pequena, é um confronto que todo OD precisa saber jogar.
+- por que importa: counter clássico de mecânica, a Refraction bloqueia boa parte do Arcane Orb e da Sanity's Eclipse (constants_abilities.json); mesmo com amostra pequena, é um confronto que todo OD precisa saber jogar.
 - janelas: até 7 min a troca de lane é parelha, os dois são frágeis cedo; aos 14,3 min o Desolator dela chega quase junto da sua Witch Blade (13,7 min); quem bate primeiro leva vantagem. Dos 17,4 min (Blink) aos 28,1 min (BKB) ela fecha o kit de right-click.
 - o que ela faz com você: Refraction dá até 6 instâncias de barreira (30 de absorção cada) e até 60 de dano bônus por instância (tem bkbpierce, constants_abilities.json), absorvendo boa parte do seu Arcane Orb hit a hit; Meld (invisível, dano bônus fixo no ataque que sai da invisibilidade, não é crítico) ameaça seu corpo a corpo frágil.
 - o que você faz com ela: Astral Imprisonment nela não gasta carga de Refraction (é disable, não dano, constants_abilities.json) e cancela o Meld; Sanity's Eclipse é um dano único em área grande, então o excesso que passa de cada instância da barreira ainda soma.
 - itens que viram: com o Aghanim's Scepter dela (não o Shard, aghs_desc OpenDota API), as Psionic Trap passam a silenciar quem pisar nelas; seu BKB segura essa silence (sem bkbpierce); contra a Refraction, prefira abrir com Astral Imprisonment em vez de gastar Arcane Orb repetido nas barreiras dela.
 - como jogar: não gaste Arcane Orb tentando estourar a Refraction, é ineficiente; abra com Astral Imprisonment e feche com Sanity's Eclipse de uma vez.
-- fonte: pro_dados/obsidian_destroyer.json; pro_dados/templar_assassin.json; constants_abilities.json; aghs_desc (OpenDota API); content/fichas/obsidian_destroyer.md
+- fonte: pro_dados/obsidian_destroyer.json; pro_dados/templar_assassin.json; constants_abilities.json; aghs_desc (OpenDota API)
 
 ## Contra Legion Commander (legion_commander)
 - placar: 11/24, 45,83% a seu favor em pro, amostra pequena (pro_dados/obsidian_destroyer.json)
-- por que importa: counter de mecânica pelo Duel, citado na ficha do site como favorável na teoria (Astral Imprisonment salva um aliado do Duel), mas a amostra de pro, pequena, mostra um resultado parelho, levemente a favor dela.
+- por que importa: counter de mecânica pelo Duel, já que Astral Imprisonment num aliado salva ele do Duel (constants_abilities.json), mas a amostra de pro, pequena, mostra um resultado parelho, levemente a favor dela.
 - janelas: até 7 min ela farma rápido em trilane; dos 12,7 min (Blade Mail) aos 15,3 min (Blink) ela monta a janela de all-in isolado via Duel; depois dos 15 min o Duel decide boa parte das trocas 1x1.
 - o que ela faz com você: Duel força vocês dois a só se atacar por até 5s, sem itens pra nenhum dos dois e sem magias pra você (só o alvo do Duel perde acesso às habilidades, quem conjura mantém as próprias, constants_abilities.json), e tem bkbpierce, ela costuma vencer essa troca de ataque básico por ter mais força e o Moment of Courage, contra-ataque com até 85% de lifesteal; Overwhelming Odds causa dano crescente por inimigo adjacente.
 - o que você faz com ele: Astral Imprisonment num aliado tira ele do Duel se ela puxar nele; se o Duel sair em você, seu Arcane Orb continua procando, porque ataques básicos não são bloqueados pelo Duel, então a mana que sobrar ainda vira dano.

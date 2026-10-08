@@ -19,17 +19,12 @@ fontes:
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/keeper_of_the_light.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/winter_wyvern.md
 - https://api.opendota.com/api/constants/aghs_desc
-- https://dotacoach.gg/en/heroes/counters/winter-wyvern
-- https://dotacoach.gg/en/heroes/winter-wyvern/builds/support
-- https://dota2protracker.com/hero/Winter%20Wyvern
 ---
 
 ## Como foi montada essa lista
 
-Winter Wyvern é quase só pos 5 em pro (93% dos picks dela no Atlas tier 1, segundo a ficha). Os 13 oponentes abaixo vêm de quatro critérios: os 6 com mais jogos de pro contra ela (`winter_wyvern.json`, campo `confrontos`); os suportes de pos 4/5 que mais aparecem contra ela, porque são rivais de função direta; os 2-3 matchups de maior vantagem com 30+ jogos; e os 2-3 de maior desvantagem com 30+ jogos. Um detalhe mecânico corre por trás de quase todo mundo aqui: Winter's Curse deixa o alvo "imune a todo dano de inimigos, com exceção do dano da própria Winter Wyvern" (`constants_abilities.json`, winter_wyvern_winters_curse). Isso quer dizer que forçar todo mundo a bater no alvo não causa dano de verdade, quem mata é só o ataque dela, turbinado por Arctic Burn. Isso aparece em quase todo "o que você faz com ele" abaixo.
+Winter Wyvern aparece quase só como suporte de trilane em pro: lh10 mediano de 7 e GPM de 307 no resumo (pro_dados/winter_wyvern.json), perfil baixo pra carry. Os 13 oponentes abaixo vêm de quatro critérios: os 6 com mais jogos de pro contra ela (`winter_wyvern.json`, campo `confrontos`); os suportes de pos 4/5 que mais aparecem contra ela, porque são rivais de função direta; os 2-3 matchups de maior vantagem com 30+ jogos; e os 2-3 de maior desvantagem com 30+ jogos. Um detalhe mecânico corre por trás de quase todo mundo aqui: Winter's Curse deixa o alvo "imune a todo dano de inimigos, com exceção do dano da própria Winter Wyvern" (`constants_abilities.json`, winter_wyvern_winters_curse). Isso quer dizer que forçar todo mundo a bater no alvo não causa dano de verdade, quem mata é só o ataque dela, turbinado por Arctic Burn. Isso aparece em quase todo "o que você faz com ele" abaixo.
 
 ## Contra Hoodwink (hoodwink)
 - placar: 78 vitórias em 144 jogos de pro, 54,2% (pro_dados/winter_wyvern.json, confrontos).
@@ -63,7 +58,7 @@ Winter Wyvern é quase só pos 5 em pro (93% dos picks dela no Atlas tier 1, seg
 
 ## Contra Windranger (windrunner)
 - placar: 52 vitórias em 113 jogos de pro, 46,0%.
-- por que importa: 4º em jogos de pro (113); ela também é suporte/utilidade flexível (pos 1 ou pos 4 pelo catálogo) e disputa a mesma janela de poke e pick mágico que a WW.
+- por que importa: 4º em jogos de pro (113); ela também é utilidade flexível e disputa a mesma janela de poke e pick mágico que a WW.
 - janelas: Windranger sai na frente cedo com Power Treads aos 7:12 (1.610 jogos) e Maelstrom aos 13:24 (1.452), period em que ela já ameaça kill com Shackleshot. A WW só fecha Arcane Boots aos 12:18 e ainda não tem combo de kill pronto. Dos 18 aos 24 min a Windranger soma Mjollnir (18:18) e BKB (24:24, 1.059), period que coincide com o Blink da WW (23:00): quem inicia o engajamento primeiro leva vantagem.
 - o que ele faz com você: Shackleshot (CD 10-16s) prende a WW numa unidade ou árvore atrás dela, e o Windrun dá evasão total de 100% por até 6s pra ela fugir do combo depois de errar o Shackleshot.
 - o que você faz com ele: Winter's Curse na Windranger ignora o Windrun (bkbpierce, e o Windrun não dá imunidade a magia, só evasão contra ataque físico), então mesmo ela correndo a curse ainda prende no lugar.
@@ -153,7 +148,7 @@ Winter Wyvern é quase só pos 5 em pro (93% dos picks dela no Atlas tier 1, seg
 
 ## Contra Keeper of the Light (keeper_of_the_light)
 - placar: 17 vitórias em 47 jogos de pro, 36,2%. 3ª maior desvantagem dela com 30+ jogos.
-- por que importa: joga pos 4 ou pos 2 pelo catálogo, então às vezes divide lane com ela e às vezes não, mas em qualquer um dos dois casos ele poka de mais longe do que ela consegue responder, o que explica o placar ruim.
+- por que importa: às vezes divide lane com ela e às vezes não, mas em qualquer um dos dois casos ele poka de mais longe do que ela consegue responder, o que explica o placar ruim.
 - janelas: Keeper of the Light sai cedo com Urn of Shadows aos 4:54 (483 jogos) e Diadem aos 7:48 (454), e já farma rápido por causa do Illuminate em linha. Ele junta Holy Locket aos 15:18 (629) pra sustentar o carry, enquanto a WW ainda está fechando o Arcane Boots (12:18). Até os 23 min, quando a WW finalmente tem Blink, o KotL já pokou o laning inteiro sem precisar chegar perto.
 - o que ele faz com você: Illuminate (canalizado até 3s) causa até 500 de dano numa linha de 1.550 de alcance, e o Blinding Light dá 45% de chance de errar ataque por 4s, o que corta justamente o dano de auto-attack que sustenta o Arctic Burn da WW.
 - o que você faz com ele: Winter's Curse nele funciona normal (ele não tem spell immunity própria), mas como o alcance de Illuminate é maior que qualquer coisa que a WW consiga alcançar sem Blink, ela precisa fechar a distância primeiro pra ameaçar ele de volta.

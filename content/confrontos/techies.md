@@ -22,13 +22,11 @@ fontes:
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/phoenix.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/techies.md
 ---
 
 ## Como essa lista foi montada
 
-Techies é posição 4/5 (suporte) segundo o catálogo do site, então os confrontos de "mesma posição" aqui são contra outros suportes de visão/controle de área, não contra carries de lane. Mesmo assim a lista inclui carries que nunca dividem rota com ele (Chaos Knight, Viper, Axe, Monkey King, Shadow Fiend), porque o que decide esses confrontos não é lane, é quem consegue punir o outro primeiro: Techies minando a rota de farm deles, ou eles caçando o suporte squishy antes da mina virar relevante. Critérios usados: (1) os 6 oponentes com mais jogos pro contra ele; (2) os suportes pos 4/5 mais comuns em pro além desses 6; (3) as 3 maiores vantagens e as 3 maiores desvantagens do Techies com 30+ jogos de amostra. "Placar" sempre no sentido de vitórias do Techies sobre o total de jogos daquele confronto em partidas profissionais (fonte: OpenDota `/heroes/{id}/matchups`, patches 7.40 e 7.41, consolidado em `pro_dados/techies.json`).
+Techies joga como suporte 4/5 em partidas pro: lh10 de apenas 9 e nível final mediano de 17 (pro_dados/techies.json, perfil de farm baixo típico de suporte), então os confrontos de "mesma posição" aqui são contra outros suportes de visão/controle de área, não contra carries de lane. Mesmo assim a lista inclui carries que nunca dividem rota com ele (Chaos Knight, Viper, Axe, Monkey King, Shadow Fiend), porque o que decide esses confrontos não é lane, é quem consegue punir o outro primeiro: Techies minando a rota de farm deles, ou eles caçando o suporte squishy antes da mina virar relevante. Critérios usados: (1) os 6 oponentes com mais jogos pro contra ele; (2) os suportes pos 4/5 mais comuns em pro além desses 6; (3) as 3 maiores vantagens e as 3 maiores desvantagens do Techies com 30+ jogos de amostra. "Placar" sempre no sentido de vitórias do Techies sobre o total de jogos daquele confronto em partidas profissionais (fonte: OpenDota `/heroes/{id}/matchups`, patches 7.40 e 7.41, consolidado em `pro_dados/techies.json`).
 
 ## Contra Rubick (rubick)
 
@@ -80,7 +78,7 @@ Techies é posição 4/5 (suporte) segundo o catálogo do site, então os confro
 - por que importa: 5º oponente mais comum (139 jogos), mesma função 4/5, ambos suportes de pick-off com disable forte de alvo único.
 - janelas: ritmo de boots quase igual (Techies 5:42, Lion 5:00). O pico do Lion é cedo e de nível: Hex já desabilita no nível 2 e Finger of Death destrava no 6, igual ao Blast Off do Techies. O item que muda o jogo pra ele é o Blink Dagger (18:12), que libera o combo Hex+ulti de perto; o Techies fecha a visão completa quase junto (19-21 min), então essa janela fica equilibrada. Dos 25 min em diante os dois só reforçam utilidade (Lion: Aghanim's Shard e Glimmer Cape, ambos 25:48; Techies: Aether Lens 22:06 e Force Staff 25:24).
 - o que ele faz com você: Hex (silence+desarme+120 de velocidade por até 3,2s) trava o Techies pra morrer; Finger of Death (até 850 de dano no nível 3) mata ele num golpe só se não estiver com vida alta.
-- o que você faz com ele: Reactive Tazer dá um dispel básico que limpa o Hex se usado logo após o cast; Proximity Mines punem o blink solo dele pra iniciar; Blast Off entrega o mesmo tipo de burst de alvo único que ele faz, só que em área.
+- o que você faz com ele: Reactive Tazer desarma quem ataca o aliado protegido, mas o dispel dele é básico e não remove o Hex, que só cai com dispel forte; Proximity Mines punem o blink solo dele pra iniciar; Blast Off entrega o mesmo tipo de burst de alvo único que ele faz, só que em área.
 - itens que viram: Aether Lens deixa plantar mina e Sticky Bomb fora do alcance de blink dele; Force Staff dá um pulo de distância que pode tirar o Techies do alcance de Hex (575-650) antes do cast completar.
 - como jogar: nunca ficar parado sozinho no alcance de blink dele, guardar Reactive Tazer pro aliado que ele costuma hexar, e minar o ponto onde ele costuma blinkar pra abrir a troca.
 - fonte: pro_dados/techies.json; pro_dados/lion.json; constants_abilities.json (lion_voodoo, lion_finger_of_death)
@@ -92,7 +90,7 @@ Techies é posição 4/5 (suporte) segundo o catálogo do site, então os confro
 - janelas: até os 9 min ela já tem Javelin pronto pra Maelstrom (9:18); o Techies só sai de Arcane Boots aos 12:48. O primeiro pico real dela é o Maelstrom (13:24, proc em área) somado ao nível 6 de Focus Fire, que a deixa rápida o bastante pra caçar um suporte sozinho. Mjollnir fecha aos 18:18, junto da janela em que o Techies termina a visão completa (19-21 min). O BKB dela só chega aos 24:24, então entre 13 e 24 min ela está no pico ofensivo sem imunidade a stun.
 - o que ele faz com você: Shackleshot (stun de até 3,25s se prender o Techies numa árvore ou unidade atrás dele) e Powershot (até 470 de dano num tiro de 3000 de alcance que atravessa linha) matam de longe sem precisar chegar perto da mina.
 - o que você faz com ele: Proximity Mines no meio de árvore reduzem o valor do Shackleshot (precisa de algo atrás do alvo pra prender); Reactive Tazer limpa o slow do Powershot com o dispel básico.
-- itens que viram: Aether Lens aumenta o alcance do Sticky Bomb pra fora do alcance de reação dela antes do BKB (24:24) ficar pronto; depois disso o BKB não bloqueia o dano físico de área da mina, mas bloqueia o stun do Blast Off.
+- itens que viram: Aether Lens aumenta o alcance do Sticky Bomb pra fora do alcance de reação dela antes do BKB (24:24) ficar pronto; depois disso o BKB também bloqueia o dano mágico da mina e o stun do Blast Off, já que nenhum dos dois atravessa imunidade a magia.
 - como jogar: evitar lane com árvore ou unidade atrás no alcance do Shackleshot, guardar Reactive Tazer pro aliado focado pelo Powershot, e priorizar mina antes dos 24 min, quando ela ainda não tem BKB pro Blast Off.
 - fonte: pro_dados/techies.json; pro_dados/windrunner.json; constants_abilities.json (windrunner_shackleshot, windrunner_powershot)
 
@@ -115,7 +113,7 @@ Techies é posição 4/5 (suporte) segundo o catálogo do site, então os confro
 - o que ele faz com você: Frost Blast (até 160 de dano direto mais até 200 de dano em área ao redor, slow de ataque até -60) acerta o Techies de 575-650 de distância sem ele conseguir revidar; Chain Frost (até 550 por salto, 10 saltos) limpa o grupo inteiro se o Techies ficar perto de aliados.
 - o que você faz com ele: Proximity Mines punem o posicionamento estático dele perto de ward; Reactive Tazer desarma o auto-attack caso ele precise finalizar last hit.
 - itens que viram: Aether Lens deixa o Techies responder o Frost Blast com Sticky Bomb de uma distância que ele não alcança de volta.
-- como jogar: não trocar Frost Blast parado, usar mina pra punir ele quando for sozinho revisitar ward, e guardar Reactive Tazer pro aliado que ele focar com Frostbite.
+- como jogar: não trocar Frost Blast parado, usar mina pra punir ele quando for sozinho revisitar ward, e guardar Reactive Tazer pro aliado que ele focar com Frost Blast.
 - fonte: pro_dados/techies.json; pro_dados/lich.json; constants_abilities.json (lich_frost_nova, lich_chain_frost)
 
 ## Contra Ogre Magi (ogre_magi)
@@ -124,7 +122,7 @@ Techies é posição 4/5 (suporte) segundo o catálogo do site, então os confro
 - por que importa: pos 5 recorrente em pro (103 jogos) e uma das maiores vantagens do Techies com amostra relevante (30+ jogos).
 - janelas: os dois fecham Arcane Boots quase junto (Techies 12:48, Ogre 11:12). O Techies passa na frente na janela de visão (19-21 min) enquanto o Ogre só fecha Hand of Midas aos 18:54, item de farm que não ajuda em luta. O primeiro power spike real dele é mais de nível (Multicast passivo escala com força) do que de item, e o Aghanim's Shard dele só chega tarde, mediana 26:06.
 - o que ele faz com você: Fireblast (stun de 1,2s, até 250 de dano, pode multicast) interrompe um cast de Techies no meio do combo; Ignite (dano ao longo do tempo em até 2 alvos) aplica pressão constante.
-- o que você faz com ele: Proximity Mines punem o farm de Hand of Midas dele numa rota isolada; Reactive Tazer dá dispel básico que limpa o Fireblast se reagir rápido; sem fuga própria, o Ogre morre fácil pra um Blast Off bem posicionado.
+- o que você faz com ele: Proximity Mines punem o farm de Hand of Midas dele numa rota isolada; o dispel do Reactive Tazer é básico e não remove o stun do Fireblast (precisa de dispel forte), mas ainda desarma quem ataca o aliado protegido; sem fuga própria, o Ogre morre fácil pra um Blast Off bem posicionado.
 - itens que viram: Aether Lens aumenta o alcance do Sticky Bomb pra fora do alcance de 525 do Fireblast; Force Staff joga o Ogre isolado pra cima de mina já plantada.
 - como jogar: punir a rota de farm do Midas dele com mina, não ficar parado no alcance curto do Fireblast, e fechar Aether Lens antes dele pra manter distância de cast.
 - fonte: pro_dados/techies.json; pro_dados/ogre_magi.json; constants_abilities.json (ogre_magi_fireblast, ogre_magi_multicast)
@@ -187,12 +185,12 @@ Techies é posição 4/5 (suporte) segundo o catálogo do site, então os confro
 ## Contra Monkey King (monkey_king)
 
 - placar: Techies vence 19 de 54 (35,2%), segunda maior desvantagem com amostra boa (54 jogos).
-- por que importa: uma das piores janelas do Techies no recorte; MK não divide lane fixa com um pos 4/5, mas Mischief (disfarce) e Boundless Strike resolvem justamente o que a mina do Techies tenta impedir, que é se aproximar sem ser visto.
-- janelas: MK farma rápido (lh10=53) e fecha Power Treads aos 6:00; o pico dele é de burst, com Diffusal Blade (14:06) e Desolator (18:18) chegando bem antes do Techies fechar Aether Lens (22:06). Com Mischief (disfarce, sem cooldown de detecção por mina) ele se aproxima do Techies sem disparar a área de 500 da Proximity Mine do jeito que outros heróis disparariam.
-- o que ele faz com você: Mischief deixa ele se disfarçar de objeto do cenário e se aproximar sem ativar mina nem ser visto chegando; Boundless Strike (stun em linha, true strike, 1100 de alcance) garante o acerto mesmo contra o pouco controle que o Techies tem; Jingu Mastery dá lifesteal alto depois de 4 acertos seguidos.
-- o que você faz com ele: Reactive Tazer desarma ele depois que se revelar pra atacar (Mischief quebra com qualquer ataque ou cast); Proximity Mines ainda acertam se ele atacar ou usar item perto, porque isso quebra o disfarce.
-- itens que viram: nenhum item do Techies detecta Mischief diretamente; Aether Lens pelo menos estende o Sticky Bomb pra tentar acertar ele assim que o disfarce quebrar, mas a defesa real é vigiar o momento em que ele se revela.
-- como jogar: ficar atento a qualquer objeto suspeito do cenário perto de ward, nunca ficar sozinho parado em área que ele possa estar disfarçado, e guardar Reactive Tazer pro instante exato em que ele se revelar pra atacar.
+- por que importa: uma das piores janelas do Techies no recorte; MK não divide lane fixa com um pos 4/5, mas Boundless Strike resolve de forma simples o pouco controle que o Techies tem pra impedir o all-in.
+- janelas: MK farma rápido (lh10=53) e fecha Power Treads aos 6:00; o pico dele é de burst, com Diffusal Blade (14:06) e Desolator (18:18) chegando bem antes do Techies fechar Aether Lens (22:06). Mischief disfarça ele de objeto do cenário, dificultando notar a aproximação visualmente, mas não evita a Proximity Mine: a mina detona pela presença do inimigo na área, não pela visão dele, então dispara igual em MK disfarçado ou não.
+- o que ele faz com você: Mischief disfarça ele de objeto do cenário, mas isso é só visual (quebra com qualquer ataque, dano recebido ou uso de item/habilidade), não dá imunidade a detecção por mina; Boundless Strike (stun em linha, true strike, 1100 de alcance) garante o acerto mesmo contra o pouco controle que o Techies tem; Jingu Mastery dá lifesteal alto depois de 4 acertos seguidos.
+- o que você faz com ele: Reactive Tazer desarma ele depois que se revelar pra atacar; Proximity Mines detonam nele do mesmo jeito que em qualquer herói, disfarçado ou não, porque a mina reage à presença na área.
+- itens que viram: nenhum item do Techies precisa detectar Mischief, já que a mina já pega ele de qualquer forma; Aether Lens estende o alcance do Sticky Bomb pra acertar ele assim que o disfarce quebrar por ataque ou dano.
+- como jogar: não depender de identificar o disfarce pra minar, já que a Proximity Mine detona nele igual; ficar atento ao momento em que ele se revelar pra atacar e guardar Reactive Tazer pra esse instante.
 - fonte: pro_dados/techies.json; pro_dados/monkey_king.json; constants_abilities.json (monkey_king_mischief, monkey_king_boundless_strike)
 
 ## Contra Phoenix (phoenix)
@@ -201,7 +199,7 @@ Techies é posição 4/5 (suporte) segundo o catálogo do site, então os confro
 - por que importa: terceira pior janela do Techies no recorte, mesma posição 5 (as duas disputam visão direto), mas Phoenix tem ferramenta específica contra setup de área que o Techies não neutraliza bem.
 - janelas: ritmo de visão quase igual até os 20 min (Phoenix entre 20:06 e 21:54, Techies entre 18:54 e 21:06). O power spike dela é o Aghanim's Shard, mediana 23:18, que libera o Sun Ray mesmo durante o Supernova, somando dano de canalização ao burst da ultimate; o Techies só fecha Aether Lens aos 22:06 e Force Staff aos 25:24 no mesmo intervalo, sem ganho de dano correspondente.
 - o que ele faz com você: Supernova (até 120 dps em raio 1200, atravessa imunidade a magia) limpa um campo minado inteiro e qualquer agrupamento de heróis de uma vez, incluindo o próprio Techies se estiver perto; Icarus Dive atravessa o campo de batalha ignorando terreno, fugindo do alcance de mina terrestre.
-- o que você faz com ele: Proximity Mines ainda acertam o entorno do Supernova se ela ficar parada perto; Reactive Tazer desarma e dispela o Sun Ray se ela estiver canalizando cura em cima de aliado.
+- o que você faz com ele: Proximity Mines ainda acertam o entorno do Supernova se ela ficar parada perto; focar o alvo do Sun Ray em vez de tentar interromper o canal, que não é dispellable nem quebra por desarme.
 - itens que viram: nenhum item do Techies impede bem o Supernova (atravessa imunidade a magia); a resposta prática é focar o ovo (ela morre se destruída antes do tempo) em vez de confiar só em mina.
 - como jogar: não agrupar mina nem heróis num raio de 1200 quando ela tiver a ultimate pronta (nível 6+), e focar o ovo assim que ela usar Supernova em vez de recuar pro meio de mais mina.
 - fonte: pro_dados/techies.json; pro_dados/phoenix.json; constants_abilities.json (phoenix_supernova, phoenix_icarus_dive)

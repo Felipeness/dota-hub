@@ -22,18 +22,13 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/centaur.md
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/faceless_void.md
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/medusa.md
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/terrorblade.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
 - https://api.opendota.com/api/constants/aghs_desc
 - https://liquipedia.net/dota2/Centaur_Warrunner
 ---
 
 ## Como escolhi os confrontos
 
-Centaur é pos 3 quase exclusivo no 7.41 (ficha verificada do site). A lista abaixo mistura quatro critérios: os 6 heróis que mais jogaram contra ele em pro (Jakiro, Mars, Ember Spirit, Shadow Fiend, Tusk, Windranger), os outros rivais de offlane que mais aparecem em pro além do Mars (Slardar, Axe, Tidehunter), os maiores contrastes de taxa de vitória com amostra de 30+ jogos pra cada lado (Medusa, Faceless Void e Terrorblade favorecem o Centaur; Treant, Bounty Hunter e Timbersaw favorecem o oponente) e os carries mais jogados em pro mesmo sem lane em comum, que é o próprio critério das três vantagens: Medusa, Void e Terrorblade não cruzam lane com Centaur, mas o choque de power spike entre um iniciador de offlane e um hard carry late é exatamente o tipo de confronto que decide o jogo mesmo sem brigar de línea.
+Centaur é pos 3 quase exclusivo no 7.41 (itens core em pro_dados/centaur.json: blink, ring_of_tarrasque e vanguard, padrão de iniciador de offlane). A lista abaixo mistura quatro critérios: os 6 heróis que mais jogaram contra ele em pro (Jakiro, Mars, Ember Spirit, Shadow Fiend, Tusk, Windranger), os outros rivais de offlane que mais aparecem em pro além do Mars (Slardar, Axe, Tidehunter), os maiores contrastes de taxa de vitória com amostra de 30+ jogos pra cada lado (Medusa, Faceless Void e Terrorblade favorecem o Centaur; Treant, Bounty Hunter e Timbersaw favorecem o oponente) e os carries mais jogados em pro mesmo sem lane em comum, que é o próprio critério das três vantagens: Medusa, Void e Terrorblade não cruzam lane com Centaur, mas o choque de power spike entre um iniciador de offlane e um hard carry late é exatamente o tipo de confronto que decide o jogo mesmo sem brigar de línea.
 
 ## Contra Jakiro (jakiro)
 
@@ -116,12 +111,12 @@ Centaur é pos 3 quase exclusivo no 7.41 (ficha verificada do site). A lista aba
 
 - placar: Centaur venceu 129 de 229 partidas pro, 56,3%, a melhor taxa entre os rivais de mesma posição.
 - por que importa: é o duelo clássico de dois tanques de força que vivem de iniciar e aguentar dano, os dois dependem de força pra escalar dano, o que torna o confronto uma corrida de quem fica mais forte primeiro.
-- janelas: até os 12 min, Axe monta Blade Mail (12:36) como resposta defensiva cedo. O Blink dele sai aos 15:42, antes do Centaur (19:36). Depois dos 22, Axe tem Aghanim's Shard (22:54, dá stack de Counter Helix que reduz dano recebido) e Black King Bar (25:54), virando praticamente impossível de matar sozinho.
+- janelas: até os 12 min, Axe monta Blade Mail (12:36) como resposta defensiva cedo. O Blink dele sai aos 15:42, antes do Centaur (19:36). Depois dos 22, Axe tem Aghanim's Shard (22:54, deixa Battle Hunger acumular várias vezes no mesmo alvo) e Black King Bar (25:54), virando praticamente impossível de matar sozinho.
 - o que ele faz com você: Berserker's Call força Centaur a atacar só o Axe por até 3s; cada ataque que o Centaur dá nessa janela conta pro Counter Helix dele (100 a 160 de dano puro em área a cada 4 a 7 ataques).
 - o que você faz com ele: cada vez que o Axe ataca o Centaur durante o próprio Call, o Retaliate devolve dano físico que atravessa BKB, incluindo durante o Call. É uma troca de punição mútua: quem tem mais vida e mais força no momento da troca ganha o duelo.
 - itens que viram: Heart of Tarrasque (Ring of Tarrasque 17:30 mais Reaver 24:36 na build do Centaur) decide o duelo de atrito, porque os dois lados vivem de HP e regen; quem fecha o Heart primeiro ganha a guerra de desgaste.
 - como jogar: não troque dentro do Call sem necessidade, deixe o Counter Helix dele gastar em creep. Se ele chamar, use Double Edge nele assim mesmo, porque dano mágico não é reduzido pelo armor bônus do Call.
-- fonte: pro_dados/centaur.json; pro_dados/axe.json; constants_abilities.json (axe_berserkers_call, axe_counter_helix, centaur_return, centaur_double_edge).
+- fonte: pro_dados/centaur.json; pro_dados/axe.json; constants_abilities.json (axe_berserkers_call, axe_counter_helix, centaur_return, centaur_double_edge); https://api.opendota.com/api/constants/aghs_desc.
 
 ## Contra Tidehunter (tidehunter)
 
@@ -138,34 +133,34 @@ Centaur é pos 3 quase exclusivo no 7.41 (ficha verificada do site). A lista aba
 
 - placar: Centaur venceu 33 de 48 partidas pro, 68,8% (amostra pequena, mas é o maior contraste de vantagem da lista).
 - por que importa: hard carry sem lane em comum com o Centaur, mas é exatamente o tipo de confronto que o jogador pediu: dois core que nunca trocam na lane, e o choque de power spike entre o iniciador de offlane e o hiper carry late decide boa parte dos jogos onde cruzam.
-- janelas: Medusa é frágil e lenta de montar até o Manta (mediana pro 15:21 a 16:32, fonte porque_itens/medusa.md) e o Butterfly (22:12). O Blink do Centaur fecha aos 19:36, bem no meio dessa janela de fragilidade: ele consegue pegar a Medusa pronta pra morrer antes do Butterfly e da evasão que viria com ele. Depois dos 28 (Eye of Skadi, fonte porque_itens/medusa.md), ela já tem vida e kite o bastante pra virar o duelo.
+- janelas: Medusa é frágil e lenta de montar até o Manta (mediana pro 15:00, p25 14:00, 480 jogos) e o Butterfly (22:12, 376 jogos). O Blink do Centaur fecha aos 19:36, bem no meio dessa janela de fragilidade: ele consegue pegar a Medusa pronta pra morrer antes do Butterfly e da evasão que viria com ele. Depois dos 28:24 (Eye of Skadi, 228 jogos), ela já tem vida e kite o bastante pra virar o duelo.
 - o que ele faz com você: Mystic Snake (90 a 240 de dano, tira mana) e Stone Gaze (slow 35%, petrifica depois de 2s olhando pra ela) são as únicas ferramentas de defesa antes do Butterfly; nenhuma das duas impede o blink do Centaur.
 - o que você faz com ele: Hoof Stomp e Double Edge são dano mágico, então nem Mana Shield (absorve 98% em troca de mana, mas ainda recebe o dano real) nem o Butterfly tardio (evasão só contra físico) seguram o combo; Mana Shield na real faz Medusa perder mana rápido demais pro nuke do Centaur, acelerando a morte dela em vez de evitar.
 - itens que viram: Blink Dagger do Centaur é o item que decide o confronto, porque sem gap closer ela não tem como escapar do alcance de perseguição dele; do lado dela, Butterfly tardio ajuda contra os auto-ataques do Centaur mas não contra o nuke.
 - como jogar: cace a Medusa antes dela fechar o Manta (antes dos 16 min), ela não tem disjoint nenhum. Depois do Butterfly, troque só com o combo completo de uma vez, não com auto-ataque.
-- fonte: pro_dados/centaur.json; pro_dados/medusa.json; C:/Users/felip/Desktop/dota-hub/content/porque_itens/medusa.md; constants_abilities.json (medusa_mana_shield, medusa_stone_gaze, centaur_hoof_stomp, centaur_double_edge).
+- fonte: pro_dados/centaur.json; pro_dados/medusa.json; constants_abilities.json (medusa_mana_shield, medusa_stone_gaze, centaur_hoof_stomp, centaur_double_edge).
 
 ## Contra Faceless Void (faceless_void)
 
 - placar: Centaur venceu 32 de 48 partidas pro, 66,7% (amostra pequena).
 - por que importa: outro hard carry sem lane em comum, mas com uma ultimate (Chronosphere) que pode virar o resultado se ele sobreviver até lá, então o confronto é literalmente uma corrida contra o tempo de farm dele.
-- janelas: Void vive de Battle Fury (mediana pro 14:45, fonte porque_itens/faceless_void.md), que quase dobra o LH por minuto dele (de 7,9 pra 13,5). Antes disso ele é frágil e sem escape real, só Time Walk (recarga 21s no nível 1, cai pra 6s no nível 4). O Blink do Centaur (19:36) chega depois do Battle Fury dele, mas Void ainda não tem Black King Bar (28:12) nem joga Chronosphere com segurança nessa fase.
+- janelas: Void vive de Battle Fury (mediana pro 15:18, p25 13:54, 253 jogos), item que acelera o farm dele bem antes da fase de luta. Antes disso ele é frágil e sem escape real, só Time Walk (recarga 21s no nível 1, cai pra 6s no nível 4). O Blink do Centaur (19:36) chega depois do Battle Fury dele, mas Void ainda não tem Black King Bar (28:12) nem joga Chronosphere com segurança nessa fase.
 - o que ele faz com você: Time Walk desfaz o dano recebido nos últimos 2s ao se teleportar, o que pode salvar ele de um combo lento do Centaur, mas não de um Hoof Stomp instantâneo seguido de Double Edge no mesmo golpe. Chronosphere (raio 500, até 4,75s) travaria o time inteiro do Centaur no meio de uma Stampede, mas só fica forte depois que ele tem nível 6 e consegue proteger o cast.
 - o que você faz com ele: antes dos 14 min, Void não tem Battle Fury nem vida pra trocar; Hoof Stomp mais Double Edge mata ele de forma direta porque o Time Walk sozinho não desfaz dano mágico em área que já acertou fora da janela de 2s.
-- itens que viram: nos jogos pro que entram Battle Fury até 14:00, o Void ganha 76% das vezes (fonte porque_itens/faceless_void.md); depois dos 17:00, só 1 em 8. Ou seja, o Centaur que não deixa o Void chegar no Battle Fury cedo já ganhou boa parte do confronto antes da primeira luta de verdade.
+- itens que viram: Battle Fury é o item que define o ritmo de farm do Void (mediana pro 15:18, 253 jogos); atrasar essa compra atrasa toda a curva dele, porque o resto do build (Mjollnir, Black King Bar) depende do gold gerado por ele. O Centaur que pressiona a jungle do Void antes desse horário já ganhou boa parte do confronto antes da primeira luta de verdade.
 - como jogar: pressione a jungle do Void antes dos 14 min pra atrasar o Battle Fury. Depois que ele tiver Chronosphere, não agrupe o time antes de saber onde ele está.
-- fonte: pro_dados/centaur.json; pro_dados/faceless_void.json; C:/Users/felip/Desktop/dota-hub/content/porque_itens/faceless_void.md; constants_abilities.json (faceless_void_time_walk, faceless_void_chronosphere, centaur_hoof_stomp).
+- fonte: pro_dados/centaur.json; pro_dados/faceless_void.json; constants_abilities.json (faceless_void_time_walk, faceless_void_chronosphere, centaur_hoof_stomp).
 
 ## Contra Terrorblade (terrorblade)
 
 - placar: Centaur venceu 58 de 89 partidas pro, 65,2%.
 - por que importa: terceiro hard carry sem lane em comum na lista, com o maior volume de jogos entre os três (89), hiper carry que depende quase totalmente de chegar vivo até o late pra valer o pick.
-- janelas: Terrorblade monta Power Treads cedo (5:00, fonte porque_itens/terrorblade.md) e entra na mini jungle com Falcon Blade no nível 6 (7:00 a 8:00), mas o core de verdade, Manta Style, só fecha aos 17:06. O Blink do Centaur (19:36) chega logo depois disso, numa janela em que o TB ainda não tem Metamorphosis sustentada em luta nem Skadi (28:12).
+- janelas: Terrorblade monta Power Treads cedo (mediana pro 5:48, 884 jogos) e entra na mini jungle com Falcon Blade no nível 6 (mediana pro 7:48, 745 jogos), mas o core de verdade, Manta Style, só fecha aos 17:06 (850 jogos). O Blink do Centaur (19:36) chega logo depois disso, numa janela em que o TB ainda não tem Metamorphosis sustentada em luta nem Skadi (28:12).
 - o que ele faz com você: Sunder troca uma % da vida atual dos dois (mínimo 25 a 35% pro próprio TB fica), ferramenta de sobrevivência, não de dano; fora da Metamorphosis, as ilusões dele batem fraco (25 a 40% do dano) e não ameaçam o tankiness do Centaur sozinhas.
 - o que você faz com ele: Terrorblade tem força base baixa (18, com ganho de 2 por nível) e nenhum escape fora da Metamorphosis, então Double Edge (que escala com a força do próprio Centaur, não a dele) mata rápido antes da Metamorphosis virar sustentável em luta prolongada; Hoof Stomp trava ele pro resto do time acabar o combo.
 - itens que viram: Manta Style é o divisor real, antes dele TB não tem DPS nem farm de duas frentes; se o Centaur impede esse item (pressão na jungle antes dos 17 min), o resto do jogo já fica a favor do offlane.
 - como jogar: pressione a jungle dele antes do Manta. Se ele sunder pra fugir, não persiga, ele já pagou o preço em vida; gaste o tempo reorganizando o resto da luta.
-- fonte: pro_dados/centaur.json; pro_dados/terrorblade.json; C:/Users/felip/Desktop/dota-hub/content/porque_itens/terrorblade.md; constants_abilities.json (terrorblade_sunder, terrorblade_metamorphosis, centaur_double_edge).
+- fonte: pro_dados/centaur.json; pro_dados/terrorblade.json; constants_abilities.json (terrorblade_sunder, terrorblade_metamorphosis, centaur_double_edge).
 
 ## Contra Treant Protector (treant)
 

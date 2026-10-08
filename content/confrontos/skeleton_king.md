@@ -23,16 +23,13 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois/wraith_king.json
-- C:/Users/felip/Desktop/dota-hub/content/porque_itens/wraith_king.md
 - https://api.opendota.com/api/constants/aghs_desc
 - https://esportstales.com/dota-2/rubick-spell-interactions-how-steal-and-use-strength-spells
 ---
 
 ## Como escolhi os confrontos
 
-Wraith King é quase sempre pos1 puro (catálogo verificado do site: só posição 1, nenhum registro de flex). A lista mistura quatro critérios: os 6 heróis com mais jogos contra ele em pro (Rubick, Shadow Fiend, Lion, Ogre Magi, Pudge, Skywrath Mage), que na prática são quase todos suportes muito escalados no pro play atual, não uma rivalidade de lane específica; os outros carries pos1 que mais aparecem em pro além do Shadow Fiend (Luna, Chaos Knight, Templar Assassin); os maiores contrastes de taxa de vitória com amostra de 30 ou mais jogos pra cada lado (Zeus, Abaddon e Timbersaw favorecem o Wraith King; Grimstroke e Tusk favorecem o oponente); e os hard carries mais jogados em pro mesmo sem lane em comum com ele, Alchemist e Morphling, o par que motivou esse documento. Os dois raramente disputam a safelane com o Wraith King, cada time normalmente só escala um pos1 ali, mas são justamente o tipo de confronto que decide o jogo tarde: dois carries cujo power spike relativo (quando cada um fica forte, com que item) importa mais do que qualquer troca de lane. A amostra desses dois é pequena (12 e 16 jogos de pro no período coberto), sinal de que o confronto direto é raro mesmo no cenário profissional, mas o resultado (50% e 56,2% a favor do Wraith King) ainda indica quem sai na frente quando os caminhos cruzam.
+Wraith King é quase sempre pos1 puro no cenário profissional atual. A lista mistura quatro critérios: os 6 heróis com mais jogos contra ele em pro (Rubick, Shadow Fiend, Lion, Ogre Magi, Pudge, Skywrath Mage), que na prática são quase todos suportes muito escalados no pro play atual, não uma rivalidade de lane específica; os outros carries pos1 que mais aparecem em pro além do Shadow Fiend (Luna, Chaos Knight, Templar Assassin); os maiores contrastes de taxa de vitória com amostra de 30 ou mais jogos pra cada lado (Zeus, Abaddon e Timbersaw favorecem o Wraith King; Grimstroke e Tusk favorecem o oponente); e os hard carries mais jogados em pro mesmo sem lane em comum com ele, Alchemist e Morphling, o par que motivou esse documento. Os dois raramente disputam a safelane com o Wraith King, cada time normalmente só escala um pos1 ali, mas são justamente o tipo de confronto que decide o jogo tarde: dois carries cujo power spike relativo (quando cada um fica forte, com que item) importa mais do que qualquer troca de lane. A amostra desses dois é pequena (12 e 16 jogos de pro no período coberto), sinal de que o confronto direto é raro mesmo no cenário profissional, mas o resultado (50% e 56,2% a favor do Wraith King) ainda indica quem sai na frente quando os caminhos cruzam.
 
 ## Contra Rubick (rubick)
 
@@ -126,7 +123,7 @@ Wraith King é quase sempre pos1 puro (catálogo verificado do site: só posiç�
 
 - placar: Wraith King venceu 36 de 61 partidas pro, 59,0%, o melhor resultado entre os carries pos1 "puros" da lista.
 - por que importa: terceiro carry mais jogado contra o Wraith King e a prova de que Refraction sozinha não resolve contra um herói de crítico único e grande.
-- janelas: Templar Assassin sai muito mais rápido no early (73 LH aos 10 min contra 56 do Wraith King); Desolator (14,3 min) e Blink (17,4 min) chegam bem antes do Blink dele (20,7). A corrida muda de lado depois disso: o Radiance (16,3) e o Shard (23,7) do Wraith King dão sustentação e burst que a Templar Assassin não responde fácil sem o próprio BKB, o mais tardio da lista de carries aqui (28,1 min).
+- janelas: Templar Assassin sai muito mais rápido no early (73 LH aos 10 min contra 56 do Wraith King); Desolator (14,3 min) e Blink (17,4 min) chegam bem antes do Blink dele (20,7). A corrida muda de lado depois disso: o Radiance (16,3) e o Shard (23,7) do Wraith King dão sustentação e burst que a Templar Assassin não responde fácil sem o próprio BKB, que sai tarde (28,1 min).
 - o que ela faz com você: Refraction absorve um número fixo de instâncias de dano físico e mágico por 17s e, com Aghanim's Shard, pode ser recastada mesmo enquanto atordoada, ou seja, ela pode reaplicar Refraction durante o seu Wraithfire Blast. Psi Blades causam dano puro em linha, ignorando a armadura alta que o Wraith King acumula tarde.
 - o que você faz com ela: Templar Assassin tem HP baixo fora de itens; um crítico de Mortal Strike costuma gastar as cargas de Refraction de uma vez, e a maldição do seu Aghanim's Shard (75% do crítico, dano puro 3s depois) ainda chega mesmo que ela tenha absorvido o golpe inicial, porque a maldição é aplicada como debuff no momento do crítico, não depois.
 - itens que viram: o seu Aghanim's Shard pesa mais aqui, porque a maldição ignora o que a Refraction consumiu; do lado dela, o Desolator ajuda a furar a sua armadura mais cedo, mas não resolve contra o burst duplo de crítico mais maldição.
@@ -140,7 +137,7 @@ Wraith King é quase sempre pos1 puro (catálogo verificado do site: só posiç�
 - janelas: Zeus sai Arcane Boots (9,7 min) e empurra lane com Arc Lightning desde cedo, incomodando sem impedir o farm. O Wraith King sobe a curva normal (Radiance 16,3, Blink 20,7, Shard 23,7) enquanto Zeus ainda está montando Aghanim's Shard (16,1 min) ou Scepter (23,3 min).
 - o que ele faz com você: Thundergod's Wrath causa até 650 de dano mágico global e dá visão verdadeira por 3s no mapa inteiro, útil pra achar o Wraith King escondido, mas sozinho não mata contra o lifesteal inato dele. Static Field soma dano passivo a cada feitiço acertado. Nenhum dos dois atravessa BKB (bkbpierce: No).
 - o que você faz com ele: Zeus tem HP baixo e nenhum disable; travado pelo Wraithfire Blast, não tem como fugir, e o crítico resolve rápido.
-- itens que viram: Black King Bar apaga o kit inteiro dele; mesmo sem BKB, o dano mágico de Zeus raramente compete com o lifesteal de 20% a 35% inato do Wraith King (Vampiric Spirit, 20% + 0,5% por nível, app/public/data/herois/wraith_king.json).
+- itens que viram: Black King Bar apaga o kit inteiro dele; mesmo sem BKB, o dano mágico de Zeus raramente compete com o lifesteal inato do Wraith King (Vampiric Spirit, 14% de vampirismo, constants_abilities.json: skeleton_king_vampiric_spirit).
 - como jogar: não tenha medo de caçar o Zeus cedo, ele não tem como impedir. A única atenção real é a visão verdadeira do ultimate, que pode revelar sua posição pro time inteiro.
 - fonte: pro_dados/skeleton_king.json; pro_dados/zuus.json; constants_abilities.json (zuus_thundergods_wrath, zuus_static_field).
 
@@ -169,12 +166,12 @@ Wraith King é quase sempre pos1 puro (catálogo verificado do site: só posiç�
 ## Contra Grimstroke (grimstroke)
 
 - placar: Wraith King venceu 11 de 30 partidas pro, 36,7%, o pior resultado de toda a lista com 30 ou mais jogos.
-- por que importa: o único confronto da lista em que um disable do oponente atravessa o Black King Bar do Wraith King por completo.
+- por que importa: um dos poucos confrontos da lista em que o controle do oponente atravessa o Black King Bar do Wraith King por completo.
 - janelas: Grimstroke é um suporte padrão (wards perto dos 19 min, Arcane Boots 10,9 min) que segura mana até o nível 6 pra garantir o Soulbind na hora certa; o perigo real dele não depende de item, é o ultimate em si, disponível desde o nível 6 com recarga de 70s.
-- o que ele faz com você: Soulbind amarra o Wraith King a um aliado por até 8s, fazendo parte do dano que um dos dois toma ser espelhado no outro, e atravessa BKB por completo (bkbpierce: Yes, constants_abilities.json), a única habilidade de toda a lista que faz isso. Com Aghanim's Shard, Ink Swell ainda cura e protege o aliado dentro da troca.
+- o que ele faz com você: Soulbind amarra o Wraith King a um aliado por até 8s, fazendo parte do dano que um dos dois toma ser espelhado no outro, e atravessa BKB por completo (bkbpierce: Yes, constants_abilities.json). Com Aghanim's Shard, Ink Swell ainda cura e protege o aliado dentro da troca.
 - o que você faz com ele: Grimstroke tem HP baixo; se o Wraithfire Blast acerta ele antes do Soulbind sair, o combo nem acontece, mas ele costuma lançar o ultimate de longe (700 a 900 de alcance) antes de se expor.
 - itens que viram: nenhum item seu bloqueia Soulbind, nem BKB; a resposta é matar o Grimstroke primeiro ou focar o aliado amarrado junto com você pra zerar o espelhamento rápido, não arrastar a troca.
-- como jogar: trate o Grimstroke como prioridade de kill assim que ele aparecer na luta, ele é a única coisa da lista que o seu BKB não resolve.
+- como jogar: trate o Grimstroke como prioridade de kill assim que ele aparecer na luta, o seu BKB não resolve o Soulbind.
 - fonte: pro_dados/skeleton_king.json; pro_dados/grimstroke.json; constants_abilities.json (grimstroke_soul_chain); https://api.opendota.com/api/constants/aghs_desc (Grimstroke Aghanim's Shard).
 
 ## Contra Tusk (tusk)
@@ -197,7 +194,7 @@ Wraith King é quase sempre pos1 puro (catálogo verificado do site: só posiç�
 - o que você faz com ele: sem BKB, o Unstable Concoction do Alchemist trava o Wraith King primeiro, então a ordem da troca importa. Uma vez que o Wraithfire Blast acerta, ele não tem fuga real fora do Chemical Rage, e o crítico resolve rápido porque não é um herói de armadura alta.
 - itens que viram: a corrida de Radiance decide até os 20 min, quem fecha primeiro farma mais rápido no meio do mapa; depois disso, a maldição de dano puro do seu Shard ignora qualquer sustentação que o Chemical Rage ofereça.
 - como jogar: não brigue de farm puro contra um Alchemist que já tem Radiance, vá atrás dele com o Wraithfire Blast antes que ele feche Scepter (22,4 min) ou BKB (25,1 min) próprios. Depois do seu Shard, a troca 1x1 já favorece o Wraith King.
-- fonte: pro_dados/skeleton_king.json; pro_dados/alchemist.json; app/public/data/herois/wraith_king.json (guia.evitar_quando, nota sobre Alchemist como carry de farm igual ou melhor); constants_abilities.json (alchemist_unstable_concoction, alchemist_chemical_rage).
+- fonte: pro_dados/skeleton_king.json; pro_dados/alchemist.json; constants_abilities.json (alchemist_unstable_concoction, alchemist_chemical_rage).
 
 ## Contra Morphling (morphling)
 

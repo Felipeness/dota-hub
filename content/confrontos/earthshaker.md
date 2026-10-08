@@ -21,7 +21,6 @@ fontes:
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/pugna.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 
@@ -72,8 +71,8 @@ fontes:
 ## Contra Mars (mars)
 
 - placar: Earthshaker venceu 41 de 92 (44,6%), fonte pro_dados/earthshaker.json.
-- por que importa: 5º em volume de jogos pro e o principal rival de offlane: os dois disputam a mesma posição (33,1% de seleção como offlane pra Earthshaker, catálogo do site; Mars é majoritariamente offlane também).
-- janelas: a lane é equilibrada, lh10 49 do Mars contra 48 seu. Os dois saem com Soul Ring por volta dos 6-8 min (7,9 min do Mars, 6 min do seu offlane, ficha earthshaker.md). A diferença aparece com Spear of Mars, que já tem 900-1200 de alcance desde o nível 1, maior que o alcance de aproximação que você precisa pro Fissure.
+- por que importa: 5º em volume de jogos pro e o principal rival de offlane: os dois costumam disputar a mesma posição, já que Mars também joga majoritariamente offlane.
+- janelas: a lane é equilibrada, lh10 49 do Mars contra 48 seu. O Mars sai com Soul Ring em mediana de 7,9 min (2.204 jogos pro). A diferença aparece com Spear of Mars, que já tem 900-1200 de alcance desde o nível 1, maior que o alcance de aproximação que você precisa pro Fissure.
 - o que ele faz com você: Spear of Mars empala o alvo contra árvore, prédio ou penhasco por até 2,2s no nível 4, cancelando sua iniciação antes mesmo de você chegar perto; God's Rebuke tem acerto garantido (True Strike), então evasão não ajuda a fugir do combo dele.
 - o que você faz com ele: ficar fora dos 900-1200 de alcance da Spear até estar pronto pra blinkar evita ser travado primeiro; mirar Echo Slam nele quando ele estiver no meio da própria Arena of Blood, já que ele precisa ficar perto pra ela valer a pena.
 - itens que viram: o Aghanim's Shard dele empala até 2 heróis e deixa um rastro de fogo que desacelera, perigoso se vocês dois entrarem juntos numa troca; o Scepter dele reduz o cooldown da Arena of Blood e cura aliados dentro dela a cada abate, prolongando a janela em que ele quer te prender lá dentro.
@@ -84,7 +83,7 @@ fontes:
 
 - placar: Earthshaker venceu 43 de 89 (48,3%), fonte pro_dados/earthshaker.json.
 - por que importa: 6º em volume de jogos pro, outro suporte de controle que compete por quem trava o combo primeiro.
-- janelas: os dois chegam no Arcane Boots por volta dos 11-12 min (12,2 min a dela, 11 min a sua versão de suporte, ficha earthshaker.md). Bushwhack dela depende de árvore perto, então em lanes com floresta densa ela ameaça seu Blink antes de 12,2 min.
+- janelas: ela chega no Arcane Boots em mediana de 12,2 min (2.147 jogos). Bushwhack dela depende de árvore perto, então em lanes com floresta densa ela ameaça seu Blink antes de 12,2 min.
 - o que ela faz com você: Bushwhack precisa de árvore na área e stuna de 1,5 a 2,1s, além de zerar sua visão durante o stun; Scurry dá velocidade, movimento fantasma e capacidade de andar sobre árvores, deixando ela atravessar a parede da sua Fissure que bloquearia qualquer outro herói.
 - o que você faz com ele: Blink de longe, fora do alcance onde ela consegue achar árvore pra Bushwhack, evita ser travado primeiro; evitar lutar colado em floresta tira a ferramenta de escape dela (Scurry sem árvore por perto rende menos).
 - itens que viram: o Aghanim's Shard dela (Hunter's Boomerang, bumerangue que volta e deixa o alvo mais vulnerável a dano de feitiço) soma dano mágico extra bem na hora que seu Echo Slam cai; seu Aghanim's Shard estende o controle da Fissure antes dela ter tempo de usar Scurry pra sumir.
@@ -95,17 +94,17 @@ fontes:
 
 - placar: Earthshaker venceu 44 de 87 (50,6%), fonte pro_dados/earthshaker.json. Praticamente par.
 - por que importa: maior volume de jogos pro entre os suportes que não entraram no top 6 por pouco (87 contra 89 do Hoodwink), e o duelo mais parecido no papel: dois disablers de suporte que vivem de acertar o primeiro stun.
-- janelas: farm idêntico e baixo nos dois, lh10 8 pro Ogre Magi. Os dois saem com Arcane Boots por volta dos 11 min (11,2 min dele, 11 min seu). A diferença é velocidade de cast: Fireblast dele quase não tem tempo de lançamento, enquanto seu combo precisa de posicionamento em linha pro Fissure.
+- janelas: farm baixo de suporte dos dois lados, mas o seu é bem maior: lh10 48 contra 8 do Ogre Magi. Ele sai com Arcane Boots em mediana de 11,2 min (1.926 jogos pro). A diferença real é velocidade de cast: Fireblast dele quase não tem tempo de lançamento, enquanto seu combo precisa de posicionamento em linha pro Fissure.
 - o que ele faz com você: Fireblast estuna 1,2s e, com Multicast (até 75% de chance de 2x, mais Força soma chance de 3x/4x), pode emendar dois ou mais stuns seguidos sozinho, te travando antes de você chegar perto o bastante pra iniciar.
 - o que você faz com ele: Aftershock soma dano em qualquer feitiço seu, então mesmo numa troca de poke você sai na frente em dano de área; manter distância do alcance curto do Fireblast até estar pronto pra blinkar evita ser preso primeiro.
-- itens que viram: o Aghanim's Scepter dele (Fireblast vira "Unrefined Fireblast": 150 + 1,5x Força de dano e stun, custando 35% da mana atual) transforma o stun dele num nuke pesado cedo; seu Kaya (mediana 19-28 min conforme a posição, ficha earthshaker.md) amplifica o dano do seu Aftershock e Echo Slam de volta.
+- itens que viram: o Aghanim's Scepter dele (Fireblast vira "Unrefined Fireblast": 150 + 1,5x Força de dano e stun, custando 35% da mana atual) transforma o stun dele num nuke pesado cedo; seu Kaya (mediana 19,1 min, 219 jogos pro) amplifica o dano do seu Aftershock e Echo Slam de volta.
 - como jogar: não dê o primeiro movimento visível contra ele, porque Fireblast é mais rápido de lançar que seu combo de posicionamento. Vença pelo Aftershock em troca de poke, não pela iniciação direta.
 - fonte: pro_dados/earthshaker.json; pro_dados/ogre_magi.json; constants_abilities.json (ogre_magi_fireblast, ogre_magi_multicast); aghs_desc (Ogre Magi)
 
 ## Contra Ember Spirit (ember_spirit)
 
 - placar: Earthshaker venceu só 28 de 72 (38,9%), fonte pro_dados/earthshaker.json.
-- por que importa: um dos rivais de mid mais jogados contra Earthshaker em pro (25,8% de seleção como mid, catálogo do site), e também uma das piores janelas do herói.
+- por que importa: um dos rivais de mid mais jogados contra Earthshaker em pro, e também uma das piores janelas do herói.
 - janelas: ele já farma muito mais rápido que você cedo, lh10 53 contra 48, com Urn of Shadows saindo em mediana de 7,3 min (1.889 jogos) e Phase Boots em 9,1 min. A mobilidade dele vem de Fire Remnant, que não custa item e está disponível desde o nível 1, então mesmo antes do seu Blink (12,2 min) ele já escapa de qualquer troca ruim.
 - o que ele faz com você: Sleight of Fist dá dano bônus contra heróis num dash de ataque em área, perigoso se você ficar parado perto dele sozinho; Flame Guard absorve 70% do dano mágico recebido até estourar a barreira, cortando boa parte do seu combo Fissure + Aftershock + Echo Slam.
 - o que você faz com ele: mirar ele primeiro no Echo Slam antes que ele tenha tempo de reagir com Remnant; cortar a rota de fuga lançando Fissure na direção pra onde ele costuma mandar o Remnant.
@@ -131,15 +130,15 @@ fontes:
 - janelas: Dragon Knight farma muito mais rápido, lh10 63 contra 48 seu, e chega em Power Treads aos 6 min. Mas ele não tem nenhuma mobilidade própria antes do Blink Dagger dele, que sai em mediana de 16,2 min (1.304 jogos), 4 min depois do seu (12,2 min). Essa janela de 12 a 16 min é inteiramente sua.
 - o que ele faz com você: Breathe Fire reduz o dano de ataque de quem acerta, o que pouco importa porque seu dano vem de feitiço; Elder Dragon Form (nível 6+) dá alcance e ataque à distância, útil pra poke, mas nenhuma das duas spells ajuda ele a fugir do combo.
 - o que você faz com ele: Blink + Fissure + Echo Slam fecham antes dele ter qualquer resposta de mobilidade, principalmente entre os 12 e 16 min quando ele ainda está sem Blink.
-- itens que viram: o Aghanim's Shard dele (bola de fogo com dano ao longo do tempo numa área) é poke, não escape; o Scepter dele sobe o nível da forma de dragão e adiciona uma quarta forma com movimento livre, mas isso é ganho de combate, não de fuga do seu stun.
+- itens que viram: o Aghanim's Shard dele (incendeia uma área à frente, com dano ao longo do tempo em quem ficar dentro) é poke, não escape; o Scepter dele sobe o nível da forma de dragão e adiciona uma quarta forma com movimento livre, mas isso é ganho de combate, não de fuga do seu stun.
 - como jogar: priorize ele antes dos 16 min. Depois disso, com Blink e Armlet (13,3 min) prontos, ele já troca dano suficiente pra virar uma decisão mais cara.
 - fonte: pro_dados/earthshaker.json; pro_dados/dragon_knight.json; constants_abilities.json (dragon_knight_breathe_fire, dragon_knight_elder_dragon_form); aghs_desc (Dragon Knight)
 
 ## Contra Timbersaw (shredder)
 
 - placar: Earthshaker venceu só 18 de 53 (34,0%), fonte pro_dados/earthshaker.json. Pior matchup de offlane da lista (amostra de 53, acima do corte de 30).
-- por que importa: rival direto de offlane (33,1% de seleção nessa posição pro Earthshaker, catálogo do site) e a maior desvantagem entre heróis da mesma função.
-- janelas: ele farma mais rápido, lh10 53 contra 48, com Soul Ring e Power Treads saindo por volta dos 7,6-7,8 min, bem parecido com o seu timing de offlane (Soul Ring aos 6 min, ficha earthshaker.md). A diferença real não é de item, é de Timber Chain, disponível desde o nível 1 e sem custo de mana alto.
+- por que importa: rival direto de offlane e a maior desvantagem entre heróis da mesma função.
+- janelas: ele farma mais rápido, lh10 53 contra 48, com Soul Ring e Power Treads saindo por volta dos 7,6-7,8 min. A diferença real não é de item, é de Timber Chain, disponível desde o nível 1 e sem custo de mana alto.
 - o que ele faz com você: Timber Chain agarra a árvore mais próxima e puxa ele até lá, atravessando a parede da sua Fissure que bloquearia qualquer outro herói; Whirling Death reduz o atributo primário de quem está perto, cortando sua Força (vida e regen) numa troca prolongada.
 - o que você faz com ele: lançar Fissure na direção da árvore mais próxima antes dele usar Timber Chain corta a rota de fuga; focar outro alvo costuma valer mais, porque Timbersaw sozinho é osso duro de prender.
 - itens que viram: o Aghanim's Shard dele (lança-chamas em cone que desacelera e causa dano ao longo do tempo) adiciona uma ferramenta de pressão que não depende de pegar você no Fissure; seu Black King Bar (28,3 min) ajuda a tankar a troca prolongada, já que o combo de burst isolado não resolve contra a fuga dele.
@@ -159,14 +158,14 @@ fontes:
 
 ## Contra Gyrocopter (gyrocopter)
 
-- placar: Earthshaker venceu só 14 de 45 (31,1%), fonte pro_dados/earthshaker.json. Pior matchup de toda a lista (amostra de 45, acima do corte de 30), apesar de quase nunca dividirem lane: Gyrocopter é carry (posição 1) e Earthshaker praticamente não joga essa posição (0,9% de seleção, ficha earthshaker.md).
-- por que importa: é o par que o próprio pedido original descreve, dois heróis que raramente se enfrentam na lane mas decidem o jogo um contra o outro no meio-jogo. Gyrocopter farma muito mais rápido que você (gpm 643 contra seu 503) e tem a ferramenta de área que mais te pune.
+- placar: Earthshaker venceu só 14 de 45 (31,1%), fonte pro_dados/earthshaker.json. Pior matchup de toda a lista (amostra de 45, acima do corte de 30), apesar de quase nunca dividirem lane: Gyrocopter é carry (posição 1) e Earthshaker praticamente não joga essa posição.
+- por que importa: um duelo clássico de carry contra suporte iniciador, dois heróis que raramente se enfrentam na lane mas decidem o jogo um contra o outro no meio-jogo. Gyrocopter farma muito mais rápido que você (gpm 643 contra seu 503) e tem a ferramenta de área que mais te pune.
 - janelas: até 10 min ele já está muito à frente em ouro (lh10 62 contra 48 seu), com Power Treads aos 7,5 min e Dragon Lance aos 13,1 min. Entre os 12 e 15 min, quando você tenta usar o Blink pra entrar sozinho, ele já tem alcance de controle (Homing Missile) maior que o seu alcance de iniciação.
 - o que ele faz com você: Homing Missile persegue a distância crescente e estuna de 1,3 a 2,5s no nível 4, suficiente pra cancelar seu Blink ou interromper o cast da Fissure antes dela sair; Flak Cannon ataca todo mundo num raio de 1250 por até 7 ataques, o que limpa você sozinho no meio do time dele se o combo falhar.
 - o que você faz com ele: nunca iniciar sozinho contra um Gyrocopter com Flak Cannon disponível, porque ele te pune em área sem precisar mirar; iniciar em grupo faz o Flak Cannon gastar os ataques no seu time inteiro, não só em você, e aí a Fissure ainda corta a rota de fuga dele.
-- itens que viram: o Aghanim's Shard dele (dispara a versão atual do Rocket Barrage numa área de 700, 1s depois de lançado o Homing Missile) soma dano de área bem na hora que ele já te travou; o Scepter dele adiciona um artilheiro que ataca sozinho durante o Flak Cannon, aumentando ainda mais o dano em área que te pune por entrar perto.
+- itens que viram: o Aghanim's Shard dele (dispara a versão atual do Rocket Barrage numa área de 700, 1s depois de lançado o Homing Missile) soma dano de área bem na hora que ele já te travou; o Scepter dele adiciona um artilheiro que ataca sozinho a cada 1,3s e passa a atacar 2 alvos ao mesmo tempo quando o Flak Cannon está ativo, aumentando ainda mais o dano em área que te pune por entrar perto.
 - como jogar: trate esse duelo como jogo de distância, não de 1x1 direto. Espere o time, corte a rota de fuga dele com a Fissure assim que ele gastar Homing Missile em outro alvo.
-- fonte: pro_dados/earthshaker.json; pro_dados/gyrocopter.json; herois_catalogo.json; constants_abilities.json (gyrocopter_homing_missile, gyrocopter_flak_cannon); aghs_desc (Gyrocopter)
+- fonte: pro_dados/earthshaker.json; pro_dados/gyrocopter.json; constants_abilities.json (gyrocopter_homing_missile, gyrocopter_flak_cannon); aghs_desc (Gyrocopter)
 
 ## Contra Vengeful Spirit (vengefulspirit)
 

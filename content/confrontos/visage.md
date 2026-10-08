@@ -21,13 +21,12 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/visage.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
+- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 ---
 
 ## Por que esses 14
 
-Visage não tem posição fixa: no recorte do Dota Coach pro 7.41f ele é 37,2% mid, 38,5% offlane, 13,8% suporte de roaming e 9,6% suporte duro (ficha visage.md). Os confrontos de OpenDota (`pro_dados/visage.json`, partidas de liga 7.40+7.41) têm no máximo 36 jogos cada, então a régua de "30+ jogos" quase não é cumprida: só Shadow Fiend (36), Snapfire (36) e Rubick (33) passam dela. Por isso a lista mistura os quatro critérios pedidos: volume bruto contra Visage, rivais de mesma posição (mid 2, offlane 3, suporte 4/5, conforme `herois_catalogo.json`), os extremos de vitória disponíveis e, nos casos de amostra pequena, aviso explícito no texto.
+Visage não tem posição fixa: joga tanto mid quanto offlane e suporte, dependendo do draft. Os confrontos de OpenDota (`pro_dados/visage.json`, partidas de liga 7.40+7.41) têm no máximo 36 jogos cada, então a régua de "30+ jogos" quase não é cumprida: só Shadow Fiend (36), Snapfire (36) e Rubick (33) passam dela. Por isso a lista mistura os quatro critérios pedidos: volume bruto contra Visage, rivais de posição parecida (mid, offlane ou suporte), os extremos de vitória disponíveis e, nos casos de amostra pequena, aviso explícito no texto.
 
 ## Contra Shadow Fiend (nevermore)
 - placar: 17 vitórias em 36 jogos de pro para Visage, 47,2% (pro_dados/visage.json, confrontos)
@@ -35,18 +34,19 @@ Visage não tem posição fixa: no recorte do Dota Coach pro 7.41f ele é 37,2% 
 - janelas: antes dos 10 min Shadow Fiend já ameaça de primeira, Necromastery rouba alma de quem ele mata (até 20 almas, 1,35 de dano cada) e Shadowraze bate 85 a 280 de dano num raio de 250 sem quase cast point (constants_abilities.json). Visage só tem sustain real por volta de 8 min (tranquil_boots, mediana de 140 jogos de pro) e o primeiro item de peso (Drum/ancient_janggo) sai aos 11,4 min. Dos 12 aos 20 min o Shadow Fiend de pro já fechou Power Treads (5,9 min), Boots of Elves (6,9) e Blade of Alacrity (12,7), puro dano de ataque; depois dos 22-23 min, com Aghanim's Shard (mediana 22,9 min) e Vladmir's (14,1 min) prontos, Visage vira o jogo em luta de grupo
 - o que ele faz com você: Shadowraze repetido (cooldown de 3s por raze, 3 razes) controla o espaço de farm e pune Visage parado na lane; Requiem of Souls (até 20 linhas, cast de 1,67s) estoura mesmo que Shadow Fiend morra no processo, então ele não precisa sobreviver pra te acertar
 - o que você faz com ele: Grave Chill rouba 25 a 70 de velocidade de ataque dele por 5s, cortando o DPS de auto-attack bem na hora que ele mais precisa fechar o farm; Soul Assumption ignora a mobilidade dele, já que é bolt de 1000 de velocidade
-- itens que viram: Orchid Malevolence em Visage (já no kit de pos 2 segundo a ficha do herói) silencia o Shadow Fiend antes da Requiem; do lado dele, Linken's ou Lotus Orb neutralizam o pick-off de Soul Assumption/Stone Form
+- itens que viram: Orchid Malevolence em Visage silencia o Shadow Fiend por 5s antes da Requiem (items.json); do lado dele, Linken's ou Lotus Orb neutralizam o pick-off de Soul Assumption/Stone Form
 - como jogar: evite trocar auto-attack antes dos 10 min, deixe o Familiar tankar a primeira raze, e guarde Soul Assumption pra quando o time inimigo já tiver gastado follow-up nele
+- fonte: pro_dados/visage.json; pro_dados/nevermore.json; constants_abilities.json (nevermore_shadowraze1, nevermore_requiem, visage_grave_chill, visage_soul_assumption); items.json (orchid)
 
 ## Contra Snapfire (snapfire)
 - placar: 19 vitórias em 36 jogos de pro para Visage, 52,8% (pro_dados/visage.json)
-- por que importa: empatado com Shadow Fiend no volume de jogos, e os dois jogam nas mesmas posições de suporte que Visage também ocupa (4 e 5, herois_catalogo.json)
-- janelas: Snapfire tem curva parecida com a de Visage (gpm 413 contra 486, lh10 21 contra 34, pro_dados). O divisor é o nível 6: Mortimer Kisses já é ameaça por volta dos 7-10 min, 8 projéteis de 180 a 360 de dano cada num raio de 275 (constants_abilities.json), e o Shard dela sai cedo pra suporte, mediana de 16,9 min. Visage só tem resposta de verdade com Pipe of Insight, item tardio (fase late segundo a ficha do herói)
+- por que importa: empatado com Shadow Fiend no volume de jogos, e as duas funcionam como suporte, papel que Visage também ocupa
+- janelas: Snapfire tem curva parecida com a de Visage (gpm 413 contra 486, lh10 21 contra 34, pro_dados). O divisor é o nível 6: Mortimer Kisses já é ameaça por volta dos 7-10 min, 8 projéteis de 180 a 360 de dano cada num raio de 275 (constants_abilities.json), e o Shard dela sai cedo pra suporte, mediana de 16,9 min. Visage só tem resposta de verdade com Pipe of Insight, item de 3725 de ouro (items.json) que fica pronto tarde
 - o que ela faz com você: Mortimer Kisses acerta os dois Familiares de uma vez se eles estiverem perto de Visage, porque o raio de 275 por impacto cobre o aglomerado inteiro; Firesnap Cookie (stun de 1 a 2,2s, recarga de 21 a 15s com carga) trava o combo antes que Visage reaja
 - o que você faz com ela: Grave Chill rouba a velocidade dela bem na hora que ela precisa reposicionar depois da ultimate; Soul Assumption carrega rápido porque o combo dela (Scatterblast + Mortimer Kisses) já passa de 100 de dano em qualquer herói perto
-- itens que viram: Pipe of Insight (barreira de 425 de dano mágico, raio 1200, items.json via ficha do herói) é a resposta direta à Mortimer Kisses em área; separar os Familiares em vez de andar grudados em Visage reduz o dano por impacto
+- itens que viram: Pipe of Insight (barreira de 425 de dano mágico, raio 1200, items.json) é a resposta direta à Mortimer Kisses em área; separar os Familiares em vez de andar grudados em Visage reduz o dano por impacto
 - como jogar: não agrupe os Familiares perto de Visage quando ela estiver com mana pra ultimate; puna a Snapfire fora da janela da Firesnap Cookie, logo depois dela usar
-- fonte: pro_dados/visage.json; pro_dados/snapfire.json; constants_abilities.json (snapfire_mortimer_kisses, snapfire_firesnap_cookie, visage_grave_chill, visage_soul_assumption); content/fichas/visage.md
+- fonte: pro_dados/visage.json; pro_dados/snapfire.json; constants_abilities.json (snapfire_mortimer_kisses, snapfire_firesnap_cookie, visage_grave_chill, visage_soul_assumption); items.json (pipe)
 
 ## Contra Rubick (rubick)
 - placar: 19 vitórias em 33 jogos de pro para Visage, 57,6% (pro_dados/visage.json)
@@ -60,7 +60,7 @@ Visage não tem posição fixa: no recorte do Dota Coach pro 7.41f ele é 37,2% 
 
 ## Contra Tusk (tusk)
 - placar: 12 vitórias em 26 jogos de pro para Visage, 46,2%, amostra média (pro_dados/visage.json)
-- por que importa: quarto em volume de jogos, e divide com Visage o papel de suporte 4/5 que inicia troca em vez de farmar (herois_catalogo.json)
+- por que importa: quarto em volume de jogos, e divide com Visage o papel de suporte que inicia troca em vez de farmar
 - janelas: Tusk é perigoso de nível 1, Ice Shards e Walrus Punch não dependem de item, mas o grande salto dele é o Blink Dagger próprio, mediana de 19 min (pro_dados/tusk.json). Antes disso, dos 0 aos 10 min, é a pior janela de Visage na lane, sem sustain ainda (tranquil só sai aos 8,4 min de mediana)
 - o que ele faz com você: Snowball (stun de 0,6 a 1,2s, dano crescente com aliado embarcado, alcance de 1150) fecha roam de longe; Walrus Punch é crítico de 200 a 300% com empurrão de 1000 de distância, alto risco pra Visage sem Familiar perto pra bloquear
 - o que você faz com ele: Grave Chill rouba a velocidade dele no corpo a corpo, reduzindo o dano por segundo do Walrus Punch; Soul Assumption carrega rápido porque Tusk troca vida de perto; os Familiares bloqueiam fisicamente o caminho do Snowball
@@ -70,7 +70,7 @@ Visage não tem posição fixa: no recorte do Dota Coach pro 7.41f ele é 37,2% 
 
 ## Contra Pudge (pudge)
 - placar: 10 vitórias em 25 jogos de pro para Visage, 40%, a pior porcentagem entre os confrontos de alto volume (pro_dados/visage.json)
-- por que importa: quinto em volume de jogos e divide lane 3/4 com Visage em boa parte dos drafts (herois_catalogo.json)
+- por que importa: quinto em volume de jogos e divide lane com Visage em boa parte dos drafts
 - janelas: Pudge ameaça desde o minuto 0, Meat Hook (150 a 360 de dano, alcance de 1300, sem custo de item) não precisa de build pra acertar. Visage é alvo fácil de hook até sair da fase solo, porque não tem blink nem dash próprio. Depois dos 15-16 min os dois convergem pra Blink Dagger (Pudge mediana 19,5 min) e a luta vira mais sobre posicionamento em grupo do que sobre a lane
 - o que ele faz com você: um hook conectado seguido de Dismember (canalizado 2,75s, 80 a 120 de dano por tick x6 ticks, cura o Pudge pelo total) mata Visage sozinho antes do nível 6 se ele estiver sem Familiar perto; Rot (dano em área, também machuca o próprio Pudge) pune Visage parado junto dos Familiares
 - o que você faz com ele: depois de hookado, Grave Chill trava a fuga via Rot-kite dele; Stone Form do Familiar mais Soul Assumption completam o combo de abate se o time seguir rápido, já que Dismember cura mas não evita stun
@@ -80,17 +80,17 @@ Visage não tem posição fixa: no recorte do Dota Coach pro 7.41f ele é 37,2% 
 
 ## Contra Ember Spirit (ember_spirit)
 - placar: 12 vitórias em 24 jogos de pro para Visage, 50%, equilibrado (pro_dados/visage.json)
-- por que importa: mesma posição 2 de Visage (37,2% das partidas dele são mid, herois_catalogo.json classifica Ember como pos 2), e um dos seis confrontos mais jogados
+- por que importa: mesma rota de Visage quando ele joga de mid, e um dos seis confrontos mais jogados
 - janelas: Ember farma rápido (gpm 558, lh10 53, pro_dados/ember_spirit.json) e ganha mobilidade pelo Fire Remnant desde o nível 6 (3 cargas, recarga de 35s cada), então a janela de pick-off dele começa cedo e se repete a cada troca de carga. Visage só equilibra o duelo depois do Drum (11,4 min) e principalmente do Vladmir's (14,1 min), quando os Familiares aguentam mais o combo de Sleight of Fist
 - o que ele faz com você: Sleight of Fist ataca tudo num raio de até 550 com bônus de 50 a 170 de dano contra herói (constants_abilities.json), dano instantâneo que os Familiares (450 a 750 de vida) sentem rápido; Searing Chains prende Visage parado pro resto do combo
 - o que você faz com ele: Grave Chill rouba a fuga dele bem no momento em que ele tenta sair depois de um remnant; o dash de Ember não tem imunidade a debuff, então Stone Form bem cronometrado interrompe a sequência antes do Sleight
 - itens que viram: BKB nos dois lados decide essa troca, quem tiver primeiro ignora o stun/chain do outro; Pipe em Visage reduz o burst de área de Sleight of Fist no grupo
 - como jogar: espalhe os Familiares em vez de andar colados em Visage perto de onde Ember tem remnant plantado
-- fonte: pro_dados/visage.json; pro_dados/ember_spirit.json; constants_abilities.json (ember_spirit_sleight_of_fist, ember_spirit_fire_remnant); herois_catalogo.json
+- fonte: pro_dados/visage.json; pro_dados/ember_spirit.json; constants_abilities.json (ember_spirit_sleight_of_fist, ember_spirit_fire_remnant)
 
 ## Contra Tidehunter (tidehunter)
 - placar: 10 vitórias em 23 jogos de pro para Visage, 43,5%, amostra média, não chega nos 30 jogos (pro_dados/visage.json)
-- por que importa: uma das piores taxas da lista fora do grupo de 30+ jogos, e rival direto de offlane (posição 3, herois_catalogo.json e os 38,5% de partidas de Visage na lane solo offlane)
+- por que importa: uma das piores taxas da lista fora do grupo de 30+ jogos, e rival direto de offlane, lane que Visage também disputa
 - janelas: Tide farma bem na solo (lh10 56, pro_dados/tidehunter.json) e vira iniciador depois do próprio Blink, mediana de 21,2 min. Antes disso o confronto é de poke: Gush dele (100 a 280 de dano, -40% de velocidade, 700 de alcance) contra o Grave Chill de Visage. Visage junta sustain (tranquil 8,4 min) e depois o Shard (22,9 min) perto da mesma época do Blink dele, então mesmo com o placar desfavorável o fim de jogo fica mais parelho do que a diferença de posição sugere
 - o que ele faz com você: Ravage (stun de 2 a 2,4s, raio de 1250) organiza o time inteiro em cima de Visage se ele estiver mal posicionado; Anchor Smash é cleave físico, bom contra os Familiares agrupados
 - o que você faz com ele: Gravekeeper's Cloak reduz justamente o tipo de dano que Tide mais usa (físico, Anchor Smash), até 80% com as 4 camadas no talento máximo (20% por camada, constants_abilities.json); Soul Assumption ignora Kraken Shell, que só bloqueia dano físico
@@ -110,7 +110,7 @@ Visage não tem posição fixa: no recorte do Dota Coach pro 7.41f ele é 37,2% 
 
 ## Contra Mars (mars)
 - placar: 11 vitórias em 21 jogos de pro para Visage, 52,4% (pro_dados/visage.json)
-- por que importa: rival direto de offlane (posição 3, herois_catalogo.json), os dois competindo pela mesma lane solo em boa parte dos drafts de 7.41
+- por que importa: rival direto de offlane, os dois competindo pela mesma lane solo em boa parte dos drafts de 7.41
 - janelas: Mars tem o Blink mais cedo de toda essa lista, mediana de 15,2 min (pro_dados/mars.json), bem antes do Shard de Visage (22,9 min). Entre os 15 e os 23 min é a janela de risco de Visage pra uma iniciação de Arena of Blood. Na lane antes disso, Spear of Mars (900 a 1200 de alcance, empala em árvore/parede, stun de 1,3 a 2,2s) já ameaça desde o nível 1
 - o que ele faz com você: Arena of Blood (raio de 550, 5,5s, lanças de 80 a 240 de dano nas bordas) prende Visage e os Familiares juntos, sem espaço pra escapar o cerco; Bulwark bloqueia 40 a 70% do dano físico de frente, então ele aguenta bem o Familiar
 - o que você faz com ele: o kit de Visage é todo mágico (Soul Assumption, dano do Stone Form), e Bulwark só reduz dano físico, não faz nada contra isso; Grave Chill nega a perseguição dele depois de uma Spear errada
@@ -120,7 +120,7 @@ Visage não tem posição fixa: no recorte do Dota Coach pro 7.41f ele é 37,2% 
 
 ## Contra Timbersaw (shredder)
 - placar: 13 vitórias em 18 jogos de pro para Visage, 72,2%, amostra pequena (pro_dados/visage.json)
-- por que importa: maior vantagem de toda a lista, mesmo com amostra pequena, e também rival de offlane (posição 3, herois_catalogo.json)
+- por que importa: maior vantagem de toda a lista, mesmo com amostra pequena, e também rival de offlane
 - janelas: Timbersaw escala com árvore, Whirling Death ganha dano extra por árvore destruída (9 a 30 por árvore, constants_abilities.json) e Reactive Armor empilha armadura só contra ataque (4x o valor por acerto de herói). Isso não ajuda em nada contra o kit 100% mágico de Visage. O item de defesa dele, Kaya and Sange (mediana 18,1 min), dá resistência a status, que encurta o stun de Visage mas não apaga o dano mágico
 - o que ele faz com você: Whirling Death rouba atributo (13% do primário, 5% universal) e dói em área, boa troca contra Familiar agrupado; Timber Chain fecha distância rápido se tiver árvore por perto
 - o que você faz com ele: Soul Assumption e o dano do Stone Form ignoram tanto a Reactive Armor (só reduz físico) quanto boa parte da resistência a status do Kaya and Sange (ela encurta duração de debuff, não elimina dano); Gravekeeper's Cloak reduz o dano mágico dele de volta
@@ -130,7 +130,7 @@ Visage não tem posição fixa: no recorte do Dota Coach pro 7.41f ele é 37,2% 
 
 ## Contra Dawnbreaker (dawnbreaker)
 - placar: 13 vitórias em 18 jogos de pro para Visage, 72,2%, amostra pequena, mesma vantagem de Timbersaw (pro_dados/visage.json)
-- por que importa: segunda maior vantagem da lista, e rival de offlane/suporte (posição 3, herois_catalogo.json), lane que Visage também disputa em 38,5% das partidas dele
+- por que importa: segunda maior vantagem da lista, e rival de offlane/suporte, lane que Visage também disputa
 - janelas: Dawnbreaker é mais perigosa corpo a corpo antes dos 10 min, quando Luminosity (a cada 3º ataque, 125 a 200 de dano bônus mais cura) já rende trade. Phase Boots dela saem aos 8,2 min, perto da própria janela de sustain de Visage (tranquil 8,4 min). O Shard dela (mediana 20,8 min) reforça a Solar Guardian perto da mesma época do Shard de Visage (22,9), então os dois picos coincidem
 - o que ela faz com você: no corpo a corpo, Luminosity come os Familiares rápido, baixa armadura deles; Solar Guardian pode estourar e atordoar Visage de qualquer ponto do mapa se um aliado dela estiver a até 350 de distância dele
 - o que você faz com ele: Grave Chill rouba a velocidade de ataque que alimenta os procs de Luminosity, atrasando a cura dela; Soul Assumption é um nuke só, mais rápido que a cura percentual dela consegue repor cedo no jogo
@@ -140,7 +140,7 @@ Visage não tem posição fixa: no recorte do Dota Coach pro 7.41f ele é 37,2% 
 
 ## Contra Queen of Pain (queenofpain)
 - placar: 12 vitórias em 24 jogos de pro para Visage, 50% (pro_dados/visage.json)
-- por que importa: rival de posição 2 (mid, herois_catalogo.json), confronto parelho mesmo com o kit de burst dela mais forte no early/mid game
+- por que importa: rival de mid, confronto parelho mesmo com o kit de burst dela mais forte no early/mid game
 - janelas: QoP farma rápido (gpm 572, lh10 56) e já fecha Kaya aos 13,9 min, item que amplifica o nuke dela bem antes do Shard de Visage (22,9 min). Sonic Wave (325 a 625 de dano, raio final de 450) já ameaça desde o nível 6, e o Blink dela não depende de item, só de cast point (0,33s). Até Visage chegar no próprio pico dos 22-23 min, ela está na frente na maioria das janelas
 - o que ela faz com você: Blink mais Sonic Wave aperta um Familiar inteiro (450 a 750 de vida) numa tacada só; Shadow Strike (50 a 140 de dano inicial mais DoT, slow de até 55%) prende Visage pra ela ou pro time fechar
 - o que você faz com ela: Grave Chill rouba a velocidade dela durante os 5s de duração, atrasando o reposicionamento depois de um Blink gasto; Stone Form, se vier primeiro, interrompe o combo antes do Sonic Wave sair
@@ -150,7 +150,7 @@ Visage não tem posição fixa: no recorte do Dota Coach pro 7.41f ele é 37,2% 
 
 ## Contra Dragon Knight (dragon_knight)
 - placar: 10 vitórias em 17 jogos de pro para Visage, 58,8%, amostra pequena a média (pro_dados/visage.json)
-- por que importa: rival de mid/offlane flex (posições 2 e 1 no herois_catalogo.json, cruza com os 37,2% de partidas de Visage no mid)
+- por que importa: rival de mid/offlane flex, cruza com as partidas de Visage no mid
 - janelas: DK é tanque, não burst. Dragon Blood dá regen e armadura passiva (dobrada em Elder Dragon Form) desde cedo, e ele vira atirador de longo alcance com splash a partir do nível 6, mas sem dano mágico de verdade. O Blink dele sai aos 16,2 min, perto da própria curva de Visage. Como o kit dele é físico e sustentado, não burst mágico, Visage aguenta melhor essa troca do que o nome "carry" sugere
 - o que ele faz com você: Dragon Tail (stun de 1,8 a 2,4s) trava Visage pro resto do time; em Elder Dragon Form, o splash do ataque dele já é 75% em área de 275 no nível 3 (vai a 100% em 350 só com Aghanim's Scepter, constants_abilities.json) e atinge os Familiares agrupados
 - o que você faz com ele: Soul Assumption ignora armadura e regen, que é toda a defesa dele; Grave Chill rouba a velocidade de ataque dele, cortando justamente o DPS sustentado que é a força principal de DK
@@ -160,7 +160,7 @@ Visage não tem posição fixa: no recorte do Dota Coach pro 7.41f ele é 37,2% 
 
 ## Contra Spirit Breaker (spirit_breaker)
 - placar: 10 vitórias em 21 jogos de pro para Visage, 47,6% (pro_dados/visage.json)
-- por que importa: rival direto de suporte iniciador (posição 4, herois_catalogo.json), o tipo de herói cuja função inteira é caçar um alvo solo como Visage
+- por que importa: rival direto de suporte iniciador, o tipo de herói cuja função inteira é caçar um alvo solo como Visage
 - janelas: Charge of Darkness tem alcance global e não depende de item, então a ameaça começa assim que ele sobe de nível, bem antes de qualquer power spike de Visage. Phase Boots dele saem aos 9,4 min (pro_dados/spirit_breaker.json), o maior salto de item da curva dele. Depois disso o jogo dele é sobre achar brecha pra engajar, não sobre itemização
 - o que ele faz com você: Charge termina em Greater Bash garantido (stun de 1,3 a 2,2s) em cima de Visage se ele estiver sozinho na lane; depois disso, o proc passivo de 17% de Greater Bash em cada ataque mantém o stun-chain
 - o que você faz com ele: Grave Chill rouba a velocidade dele assim que a Charge termina, reduzindo a chance de perseguição seguinte; posicionar um Familiar na frente faz o bash inicial da Charge acertar o Familiar em vez de Visage

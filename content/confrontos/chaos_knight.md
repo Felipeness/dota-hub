@@ -24,14 +24,12 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/chaos_knight.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 
 ## Como escolhi os confrontos
 
-Chaos Knight é quase sempre pos 1, às vezes pos 2 (ficha verificada do site, 6 das 7 partidas pro de 7.41 no Atlas Tier1 foram pos 1). A lista mistura quatro critérios: os 6 heróis com mais jogos contra ele em pro (Rubick, Shadow Fiend, Ogre Magi, Luna, Pudge, Skywrath Mage), os outros carries de mesma função que mais aparecem em pro além da Luna (Dragon Knight, Wraith King, Lifestealer), os maiores contrastes de taxa de vitória com amostra de 30+ jogos pra cada lado (Lich e Templar Assassin favorecem o CK; Techies e Mars favorecem o oponente) e os hard carries mais jogados em pro mesmo sem lane em comum com o CK: Morphling, Terrorblade e Faceless Void quase nunca disputam a safelane com ele (cada time normalmente só tem um pos 1), mas são justamente o tipo de confronto que decide o jogo tarde, dois hypercarries cujo power spike relativo importa mais do que qualquer troca de lane. É o mesmo padrão de Alchemist contra Morphling: carries que raramente se enfrentam cedo, mas cujo 1x1 de poder no late é o que de fato manda no resultado.
+Chaos Knight é quase sempre pos 1, às vezes pos 2 (6 das 7 partidas pro de 7.41 no Atlas Tier1 foram pos 1, partidas pro 7.40-7.41 via OpenDota). A lista mistura quatro critérios: os 6 heróis com mais jogos contra ele em pro (Rubick, Shadow Fiend, Ogre Magi, Luna, Pudge, Skywrath Mage), os outros carries de mesma função que mais aparecem em pro além da Luna (Dragon Knight, Wraith King, Lifestealer), os maiores contrastes de taxa de vitória com amostra de 30+ jogos pra cada lado (Lich e Templar Assassin favorecem o CK; Techies e Mars favorecem o oponente) e os hard carries mais jogados em pro mesmo sem lane em comum com o CK: Morphling, Terrorblade e Faceless Void quase nunca disputam a safelane com ele (cada time normalmente só tem um pos 1), mas são justamente o tipo de confronto que decide o jogo tarde, dois hypercarries cujo power spike relativo importa mais do que qualquer troca de lane. É o mesmo padrão de Alchemist contra Morphling: carries que raramente se enfrentam cedo, mas cujo 1x1 de poder no late é o que de fato manda no resultado.
 
 ## Contra Rubick (rubick)
 
@@ -82,7 +80,7 @@ Chaos Knight é quase sempre pos 1, às vezes pos 2 (ficha verificada do site, 6
 - placar: Chaos Knight venceu 54 de 102 partidas pro, 52,9%.
 - por que importa: quinto em volume de jogos, ganker clássico cujo Meat Hook pode puxar o CK isolado antes dele sequer ter Blink.
 - janelas: Pudge costuma montar o Aghanim's Scepter (17,2 min) antes do próprio Blink (19,5), ritmo de hook ameaçador entre os 15 e 19 min, exatamente a fase em que o CK ainda está farmando rumo ao seu próprio Blink (21,2). Depois disso, com Echo Sabre (16,6) e Blink prontos, é o CK que consegue fechar a distância nele e não o contrário.
-- o que ele faz com você: Meat Hook atordoa e puxa o CK de longe, isolando ele do time antes dele ter escape; Dismember prende e drena vida, curando o Pudge com o próprio dano que causa, perigoso justamente contra um herói com HP alto como o CK.
+- o que ele faz com você: Meat Hook causa dano e puxa o CK de longe, isolando ele do time antes dele ter escape (o hook não atordoa, só arrasta); Dismember prende e drena vida, curando o Pudge com o próprio dano que causa, perigoso justamente contra um herói com HP alto como o CK.
 - o que você faz com ele: Pudge é surpreendentemente frágil fora da pilha de Flesh Heap; se ele erra o hook ou o CK alcança ele primeiro, o Chaos Strike crítico resolve rápido, já que ele não tem velocidade de ataque nem dano consistente de volta.
 - itens que viram: nenhum item do CK desvia o Meat Hook (não é um dash que disjunta projétil); a resposta real é visão de rio e das rotas de hook antes de farmar sozinho.
 - como jogar: carregue ward nas rotas onde o Pudge costuma se esconder e evite ficar sozinho fora de alcance de socorro antes do seu Blink. Depois dele, vire o jogo: é você que caça o Pudge.
@@ -92,7 +90,7 @@ Chaos Knight é quase sempre pos 1, às vezes pos 2 (ficha verificada do site, 6
 
 - placar: Chaos Knight venceu 46 de 93 partidas pro, 49,5%.
 - por que importa: sexto em volume de jogos, suporte de burst mágico puro cujo combo Ancient Seal mais Mystic Flare é o nuke mais perigoso da lista contra um herói de força sem resistência mágica no kit.
-- janelas: o power spike do Skywrath é mais de nível que de item, Mystic Flare destrava no nível 6, geralmente bem antes do CK ter qualquer buffer de vida além do Helm of Iron Will (8,8 min). O Aghanim's shard dele (22,3 min) chega logo depois do Blink do CK (21,2), duplicando o Mystic Flare num segundo alvo próximo.
+- janelas: o power spike do Skywrath é mais de nível que de item, Mystic Flare destrava no nível 6, geralmente bem antes do CK ter qualquer buffer de vida além do Helm of Iron Will (8,8 min). O Aghanim's shard dele (22,3 min) chega logo depois do Blink do CK (21,2) e transforma o Arcane Bolt em três projéteis, um no alvo original e dois em outros inimigos próximos, dano extra se o CK brigar perto de aliados (quem dobra o Mystic Flare em dois alvos é o Aghanim's Scepter, não o shard).
 - o que ele faz com você: Ancient Seal silencia e aumenta o dano de feitiço recebido (confirmado na descrição da habilidade); Mystic Flare canaliza um dano mágico altíssimo dividido entre os heróis atingidos, e se o CK estiver sozinho, ele recebe o burst inteiro sem diluir com aliados.
 - o que você faz com ele: Skywrath tem HP baixíssimo e nenhuma forma de disjoint; o Reality Rift puxa ele pra perto e o Chaos Strike crítico mata antes dele conseguir se reposicionar.
 - itens que viram: o CK não roda nenhum item de resistência mágica no build core (pro_dados/chaos_knight.json), então a resposta é de posicionamento, sair andando assim que ver a animação de canalização do Mystic Flare, já que não é uma raiz.
@@ -115,7 +113,7 @@ Chaos Knight é quase sempre pos 1, às vezes pos 2 (ficha verificada do site, 6
 - placar: Chaos Knight venceu 35 de 73 partidas pro, 47,9%.
 - por que importa: outro carry de força rival direto, com uma ultimate (Reincarnation) que literalmente anula a primeira tentativa de abate do CK.
 - janelas: o Radiance de Wraith King (16,3 min) chega bem antes do Blink do CK (21,2), queimando qualquer cópia do Phantasm que ficar perto dele; os dois Blinks saem quase juntos (20,7 contra 21,2), então depois dos 21 min a luta é decidida por quem inicia primeiro.
-- o que ele faz com você: Hellfire Blast atordoa e aplica queimadura contínua pra começar a troca; sua vampiria passiva (Vampiric Spirit) sustenta ele durante o combo do CK, e a Reincarnation faz o primeiro abate do CK virar só um atraso de alguns segundos, não uma morte real.
+- o que ele faz com você: Wraithfire Blast atordoa e aplica queimadura contínua pra começar a troca; sua vampiria passiva (Vampiric Spirit) sustenta ele durante o combo do CK, e a Reincarnation faz o primeiro abate do CK virar só um atraso de alguns segundos, não uma morte real.
 - o que você faz com ele: o lifesteal do Chaos Strike (até 60% no nível máximo) compete direto com o sustain dele, e a redução de armadura do Reality Rift ajuda as ilusões a derrubar o HP dele antes do timer de Reincarnation acabar.
 - itens que viram: o Radiance dele é o item que mais importa pro CK gerenciar, nunca agrupe as cópias do Phantasm em cima de um Wraith King com Radiance, o dano passivo acerta todas.
 - como jogar: espalhe as ilusões em vez de clumar nele. Depois de matar ele a primeira vez, continue focando em vez de andar embora, ele ainda tem que sobreviver à reincarnação.
@@ -136,9 +134,9 @@ Chaos Knight é quase sempre pos 1, às vezes pos 2 (ficha verificada do site, 6
 
 - placar: Chaos Knight venceu 31 de 43 partidas pro, 72,1%, o maior contraste de vantagem da lista com amostra de 30+ jogos.
 - por que importa: suporte de área cujo kit é feito pra atrapalhar grupos e ondas, resposta ruim contra um carry isolado e pior ainda contra um aglomerado de ilusões do Phantasm.
-- janelas: Lich não tem nenhum disable ou burst confiável antes do nível 6; o Helm of Iron Will mais o Armlet do CK seguram a poke de Frost Nova sem esforço. O único item defensivo dele, Glimmer Cape, só sai aos 19,8 min, pouco antes do Blink do CK (21,2).
-- o que ele faz com você: Frost Nova é um nuke de área que lentifica, não um stun, fácil de andar pra fora dele; Chain Frost salta entre unidades próximas (até 10 vezes), e contra um grupo de Phantasm os saltos se espalham entre as ilusões em vez de focar o CK de verdade, o oposto do que o Lich precisa.
-- o que você faz com ele: Lich tem HP baixíssimo; um Reality Rift bem lido mais um crítico do Chaos Strike mata antes da lentidão da Frost Nova sequer importar.
+- janelas: Lich não tem nenhum disable ou burst confiável antes do nível 6; o Helm of Iron Will mais o Armlet do CK seguram a poke de Frost Blast sem esforço. O único item defensivo dele, Glimmer Cape, só sai aos 19,8 min, pouco antes do Blink do CK (21,2).
+- o que ele faz com você: Frost Blast é um nuke de área que lentifica, não um stun, fácil de andar pra fora dele; Chain Frost salta entre unidades próximas (até 10 vezes), e contra um grupo de Phantasm os saltos se espalham entre as ilusões em vez de focar o CK de verdade, o oposto do que o Lich precisa.
+- o que você faz com ele: Lich tem HP baixíssimo; um Reality Rift bem lido mais um crítico do Chaos Strike mata antes da lentidão da Frost Blast sequer importar.
 - itens que viram: Glimmer Cape é a única saída real dele; antes dos 20 min não existe resposta de item pra uma investida limpa do CK.
 - como jogar: cace o Lich direto sempre que ele estiver sozinho, os números não pedem sutileza aqui.
 - fonte: pro_dados/chaos_knight.json; pro_dados/lich.json; constants_abilities.json (lich_frost_nova, lich_chain_frost).
@@ -179,9 +177,9 @@ Chaos Knight é quase sempre pos 1, às vezes pos 2 (ficha verificada do site, 6
 ## Contra Morphling (morphling)
 
 - placar: Chaos Knight venceu 17 de 27 partidas pro, 63,0% (amostra pequena).
-- por que importa: hard carry clássico que raramente compartilha lane com o CK, cada time geralmente só tem um pos 1, mas com uma ultimate (Replicate) capaz de clonar o próprio Chaos Knight; é exatamente o tipo de confronto que o pedido original citou, dois hypercarries cujo power spike relativo decide mais do que qualquer troca de lane.
+- por que importa: hard carry clássico que raramente compartilha lane com o CK, cada time geralmente só tem um pos 1, mas com uma ultimate (Morph) capaz de clonar o próprio Chaos Knight; é exatamente o tipo de confronto que o pedido original citou, dois hypercarries cujo power spike relativo decide mais do que qualquer troca de lane.
 - janelas: até os 14 min Morphling é frágil e sem escape de verdade, Waveform tem curto alcance e cooldown alto cedo. O Manta dele (18,4 min) chega pouco antes do Blink do CK (21,2), dando a ele dispel e ilusões próprias bem na janela em que o CK finalmente consegue puxar a luta. Depois do Butterfly dele (25,8 min), ele já tem evasão alta contra os ataques físicos do CK.
-- o que ele faz com você: Adaptive Strike atordoa e empurra à distância, podendo travar o CK antes dele chegar perto; Replicate pode copiar o próprio CK ou outro herói com atributos altos, criando uma cópia que briga com as mesmas armas dele; Waveform dá invulnerabilidade durante o dash, útil pra escapar de um Reality Rift se usado no tempo certo.
+- o que ele faz com você: Adaptive Strike atordoa e empurra à distância, podendo travar o CK antes dele chegar perto; Morph pode copiar o próprio CK ou outro herói com atributos altos, criando uma cópia que briga com as mesmas armas dele; Waveform dá invulnerabilidade durante o dash, útil pra escapar de um Reality Rift se usado no tempo certo.
 - o que você faz com ele: antes do Manta, Morphling não tem como remover o Chaos Bolt, e o Chaos Strike crítico mata rápido um herói sem HP alto pra sustentar a troca.
 - itens que viram: o Manta Style do lado dele é o item que decide, remove vários efeitos ao ativar (descrição do item) e ainda cria ilusões próprias pra confundir o foco do CK; a corrida real é o Blink do CK contra o Manta dele.
 - como jogar: cace o Morphling antes dos 18 min, ele não tem disjoint de verdade cedo. Depois do Manta dele, não force Chaos Bolt sozinho, feche com Reality Rift e brigue com o Chaos Strike.
@@ -193,8 +191,8 @@ Chaos Knight é quase sempre pos 1, às vezes pos 2 (ficha verificada do site, 6
 - por que importa: o hard carry com maior presença geral em pro entre os sem lane em comum (887 partidas no patch, resumo do pro_dados), e como o CK, constrói o jogo inteiro em cima de ilusões, o que torna o confronto um espelho direto de quem usa melhor o próprio exército de cópias.
 - janelas: Conjure Image dá a Terrorblade ilusões desde cedo na lane dele, mas ele é extremamente frágil fora da Metamorfose. O Manta (17,1 min) e o Aghanim's shard (17,4 min) dele chegam quase juntos, um pouco antes do Blink do CK (21,2), dando a ele ferramentas de ataque à distância bem na janela em que o CK ainda não consegue fechar a distância de verdade.
 - o que ele faz com você: Metamorphosis transforma Terrorblade num atacante à distância e transforma junto as ilusões dele que estiverem a até 1200 de distância, multiplicando o dano antes do CK alcançar; Sunder troca uma % da vida atual dos dois, podendo salvar ele de um combo já em andamento ou virar contra ele se o CK estiver com mais vida no momento certo.
-- o que você faz com ele: Terrorblade tem 0 de força base; uma vez que o CK fecha a distância com o Reality Rift, o Chaos Strike crítico mata rápido antes da Metamorfose virar sustentável. As próprias ilusões do Phantasm competem direto com as dele numa guerra de clones, e o crítico do CK (até 260% de bônus no nível máximo) costuma bater mais forte por ilusão do que o dano reduzido das cópias do Terrorblade.
-- itens que viram: o Aghanim's shard dele (Terror Wave, medo em área mais Metamorfose rápida) é o que mais vira esse confronto cedo, dando um engajamento de área que o CK só resolve chegando antes dele comprar.
+- o que você faz com ele: fora da Metamorfose ele não aguenta troca; uma vez que o CK fecha a distância com o Reality Rift, o Chaos Strike crítico mata rápido antes dela virar sustentável. As próprias ilusões do Phantasm competem direto com as dele numa guerra de clones, e o crítico do CK (até 260% de bônus no nível máximo) costuma bater mais forte por ilusão do que o dano reduzido das cópias do Terrorblade.
+- itens que viram: o Aghanim's shard dele (Demon Zeal) troca parte do HP atual por velocidade de movimento, regeneração e velocidade de ataque pra ele e as ilusões por perto, mas não funciona durante a Metamorfose; antes dos 17 min, sem esse shard nem o Manta prontos, uma investida limpa do CK ainda vence a troca.
 - como jogar: pressione a jungle do Terrorblade antes do Manta e do shard dele, antes dos 17 min. Depois disso, não persiga se ele usar Sunder, ele já pagou o preço em vida.
 - fonte: pro_dados/chaos_knight.json; pro_dados/terrorblade.json; constants_abilities.json (terrorblade_metamorphosis, terrorblade_sunder, terrorblade_conjure_image, chaos_knight_chaos_strike).
 

@@ -3,33 +3,31 @@ id: confrontos-abaddon
 heroi: Abaddon
 patch: 7.41
 fontes:
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/abaddon.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/jakiro.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/snapfire.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/queenofpain.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/tusk.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/dragon_knight.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/axe.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/mars.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/disruptor.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/troll_warlord.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/terrorblade.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/legion_commander.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/skeleton_king.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/keeper_of_the_light.json
-- C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/treant.json
+- C:/Users/felip/Desktop/dota-hub/content/pro_dados/abaddon.json
+- C:/Users/felip/Desktop/dota-hub/content/pro_dados/jakiro.json
+- C:/Users/felip/Desktop/dota-hub/content/pro_dados/snapfire.json
+- C:/Users/felip/Desktop/dota-hub/content/pro_dados/queenofpain.json
+- C:/Users/felip/Desktop/dota-hub/content/pro_dados/tusk.json
+- C:/Users/felip/Desktop/dota-hub/content/pro_dados/dragon_knight.json
+- C:/Users/felip/Desktop/dota-hub/content/pro_dados/axe.json
+- C:/Users/felip/Desktop/dota-hub/content/pro_dados/mars.json
+- C:/Users/felip/Desktop/dota-hub/content/pro_dados/disruptor.json
+- C:/Users/felip/Desktop/dota-hub/content/pro_dados/troll_warlord.json
+- C:/Users/felip/Desktop/dota-hub/content/pro_dados/terrorblade.json
+- C:/Users/felip/Desktop/dota-hub/content/pro_dados/legion_commander.json
+- C:/Users/felip/Desktop/dota-hub/content/pro_dados/skeleton_king.json
+- C:/Users/felip/Desktop/dota-hub/content/pro_dados/keeper_of_the_light.json
+- C:/Users/felip/Desktop/dota-hub/content/pro_dados/treant.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/abaddon.md
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 
 ## Como essa lista foi montada
-Abaddon joga quase só pos 3, 4 e 5 em pro (fonte: ficha verificada, dotacoach.gg/en/heroes/abaddon, tabela "Stats by Role" do 7.41f). Os 14 oponentes abaixo cobrem: os 6 com mais jogos de pro contra ele, os heróis de offlane/suporte (pos 3/4/5) mais comuns na mesma faixa, os 3 confrontos de maior vantagem com amostra de 30+ jogos e os 3 de maior desvantagem com 30+ jogos. Placar sempre do ponto de vista do Abaddon (fonte: pro_dados/abaddon.json, campo `confrontos`, que vem do endpoint `/heroes/{id}/matchups` do OpenDota filtrado pra partidas de liga 7.40-7.41). O Aghanim's Scepter/Shard de cada herói vem do endpoint `aghs_desc` do OpenDota, que descreve a versão atual.
+O resumo de pro_dados/abaddon.json mostra lh10 de 50 e gpm de 551 em 720 partidas de liga 7.40-7.41, perfil de suporte/offlane, bem abaixo da curva de um carry pos 1 (fonte: partidas pro 7.40-7.41, OpenDota). Os 14 oponentes abaixo cobrem: os 6 com mais jogos de pro contra ele, os heróis de offlane/suporte (pos 3/4/5) mais comuns na mesma faixa, os 3 confrontos de maior vantagem com amostra de 30+ jogos e os 3 de maior desvantagem com 30+ jogos. Placar sempre do ponto de vista do Abaddon (fonte: pro_dados/abaddon.json, campo `confrontos`, que vem do endpoint `/heroes/{id}/matchups` do OpenDota filtrado pra partidas de liga 7.40-7.41). O Aghanim's Scepter/Shard de cada herói vem do endpoint `aghs_desc` do OpenDota, que descreve a versão atual.
 
-Uma ressalva sobre os dados de item do próprio Abaddon: no recorte de 720 partidas de liga do `pro_dados/abaddon.json`, uma fatia grande das partidas mostra Radiance, Manta, Orchid/Bloodthorn e Hyperstone, uma build de carry que contradiz o perfil real dele (91,9% das partidas gerais são pos 3/4/5 contra só 6,6% de pos 1, com winrate abaixo de 50% nessa posição, fonte: ficha verificada/dotacoach.gg). Isso sugere que o recorte de liga do OpenDota pega campeonatos de nível misto, não só tier 1. Por isso as janelas de power spike do Abaddon abaixo usam os itens cedo que batem com os dois datasets (Boots, Phase Boots, Blink) e o nível/cooldown de Borrowed Time, que é o relógio real do herói independente da build.
+Uma ressalva sobre os dados de item do próprio Abaddon: no recorte de 720 partidas de liga do `pro_dados/abaddon.json`, uma fatia grande das partidas mostra Radiance, Manta, Orchid/Bloodthorn e Hyperstone, uma build de carry que contradiz o lh10 de 50 e o gpm de 551 do resumo do mesmo dataset (fonte: pro_dados/abaddon.json), perfil baixo demais pra carry pos 1. Isso sugere que o recorte de liga do OpenDota pega campeonatos de nível misto, não só tier 1. Por isso as janelas de power spike do Abaddon abaixo usam os itens cedo que batem com os dois datasets (Boots, Phase Boots, Blink) e o nível/cooldown de Borrowed Time, que é o relógio real do herói independente da build.
 
 ## Contra Jakiro (jakiro)
 - placar: 130/244 (53,3%) a favor do Abaddon em partidas de liga 7.40-7.41 (fonte: pro_dados/abaddon.json).
@@ -47,7 +45,7 @@ Uma ressalva sobre os dados de item do próprio Abaddon: no recorte de 720 parti
 - janelas: cedo, Scatterblast (cone com knockback) e Firesnap Cookie (cd 18/17/16/15s, stun de pulo) ameaçam o Abaddon tentando salvar o carry, mas o dano isolado é baixo. O divisor é o nível 6: Mortimer Kisses, a ultimate dela (cd 120/110/100s, 8 globos de ~180-360 de dano em 5,5s), é um nuke de área gigante que o Aphotic Shield de Abaddon não segura sozinho se vários globos acertam o mesmo alvo. Em itens, o Aghanim's Shard dela sai aos 16,9 min (mediana, 1.919 partidas), bem antes do Blink do Abaddon (24,9 min, 374 partidas) virar opção de fechar distância.
 - o que ele faz com você: Mortimer Kisses em área cobre o raio do Aphotic Shield e ainda deixa poça de fogo que continua batendo depois que o escudo estoura. Firesnap Cookie com Shard cura e lança um Mortimer Kiss reduzido (40% do dano de impacto) no pouso, dando um segundo nuke de cortesia no mesmo cast (fonte: aghs_desc, shard de Firesnap Cookie).
 - o que você faz com ele: Curse of Avernus desacelera Snapfire o suficiente pra ela não escapar depois de usar as ativas dela em você; Mist Coil no "Mortimer" (a montaria) corta a janela de cast dela se ela estiver em pouca vida.
-- itens que viram: Lotus Orb no Abaddon (situacional, fonte: ficha/abaddon.md) devolve o stun do Firesnap Cookie pra ela; Glimmer Cape salva o alvo marcado antes do Mortimer Kisses cair.
+- itens que viram: Glimmer Cape salva o alvo marcado antes do Mortimer Kisses cair.
 - como jogar: não agrupe o time num raio de 275 (o impacto do globo) quando ela estiver com a ultimate disponível (nível 6+, respeitando o cd de 100-120s). Gaste o Aphotic Shield no aliado mais ameaçado assim que ela começar a canalizar, não depois.
 - fonte: pro_dados/abaddon.json; pro_dados/snapfire.json; constants_abilities.json; aghs_desc.
 
@@ -59,7 +57,7 @@ Uma ressalva sobre os dados de item do próprio Abaddon: no recorte de 720 parti
 - o que você faz com ele: Aphotic Shield no alvo que ela tentar executar anula o burst inicial do combo; Withering Mist corta a cura que ela ganharia de itens de lifesteal se ela cair abaixo de 40% de vida tentando trocar.
 - itens que viram: Aghanim's Shard de QoP dá um silence de 1,75s ao redor do blink dela (fonte: aghs_desc), que pode travar a ativação manual de Borrowed Time se pegar o Abaddon no momento certo; sobra o gatilho automático abaixo de 400 de vida, que não é bloqueado por silence.
 - como jogar: não force all-in sem saber se ela já tem Sonic Wave liberada (nível 6+, cd 80-110s). Guarde Aphotic Shield pro aliado que ela for focar primeiro, normalmente o de menos vida.
-- fonte: pro_dados/abaddon.json; pro_dados/queenofpain.json; constants_abilities.json; aghs_desc; content/fichas/abaddon.md.
+- fonte: pro_dados/abaddon.json; pro_dados/queenofpain.json; constants_abilities.json; aghs_desc.
 
 ## Contra Tusk (tusk)
 - placar: 102/177 (57,6%) a favor do Abaddon (fonte: pro_dados/abaddon.json).
@@ -77,7 +75,7 @@ Uma ressalva sobre os dados de item do próprio Abaddon: no recorte de 720 parti
 - janelas: early game DK é fraco em duelo (farm de LH10 alto, 63, mas sem ameaça real antes do nível 6). A partir do nível 6, Elder Dragon Form dá ataque à distância e dano mágico em área, só que o pico real dele é no late: ele fecha Black King Bar aos 23,3 min (mediana, 814 partidas) e crítico (Lesser/Greater Crit, 23,7 e 27,4 min) logo depois, virando uma máquina de dano sustentado que ignora magic damage com BKB ativo.
 - o que ele faz com você: dentro do BKB, Breathe Fire (dano em cone) e os ataques de Elder Dragon Form ignoram o Curse of Avernus e o Withering Mist, porque BKB bloqueia debuff mágico; o dano físico sustentado dele é exatamente o tipo de ameaça que o Aphotic Shield segura melhor, mas só uma vez por 6-12s de cooldown.
 - o que você faz com ele: Aphotic Shield absorve a rajada inicial de Breathe Fire; fora do BKB, Curse of Avernus reduz a troca sustentada dele, que é o ponto forte do herói.
-- itens que viram: Heaven's Halberd no Abaddon (situacional pos 4, fonte: ficha/abaddon.md) soma evasão contra o ataque físico sustentado de DK por cima do que o escudo já absorve; Aghanim's Scepter de DK adiciona um dragão nível 4 com resistência mágica própria, que não é afetado pelo Withering Mist (fonte: aghs_desc).
+- itens que viram: Aghanim's Scepter de DK adiciona um dragão nível 4 com resistência mágica própria, que não é afetado pelo Withering Mist (fonte: aghs_desc).
 - como jogar: gaste os disables fora do BKB dele, não durante. Depois dos 23 min, trate o DK como dano físico puro: Aphotic Shield no alvo focado, Mist Coil só pra cura.
 - fonte: pro_dados/abaddon.json; pro_dados/dragon_knight.json; constants_abilities.json; aghs_desc.
 
@@ -104,12 +102,12 @@ Uma ressalva sobre os dados de item do próprio Abaddon: no recorte de 720 parti
 ## Contra Disruptor (disruptor)
 - placar: 89/147 (60,5%) a favor do Abaddon (fonte: pro_dados/abaddon.json).
 - por que importa: mesma posição principal (suporte 4/5), bastante volume (147 jogos) e uma das maiores vantagens da lista com amostra grande; é o confronto mais citado de "como travar o Borrowed Time".
-- janelas: cedo os dois são suportes de ward/poke, sem ameaça de kill grande. A partir do nível 6, Static Storm (cd 100-70s, silencia 6s numa área de 550) é o divisor: ela mutila itens e trava a ativação manual de Borrowed Time, mas não impede o gatilho automático abaixo de 400 de vida (fonte: ficha/abaddon.md, seção "Interações e contras"). Disruptor fecha Blink aos 24,0 min (mediana, 1.128 partidas), bem depois do Abaddon já ter Phase Boots havia muito (6,5 min).
+- janelas: cedo os dois são suportes de ward/poke, sem ameaça de kill grande. A partir do nível 6, Static Storm (cd 100-70s, silencia 6s numa área de 550) é o divisor: ela mutila itens e trava a ativação manual de Borrowed Time, mas não impede o gatilho automático abaixo de 400 de vida, que a própria habilidade ativa sozinha sem custo de mana (fonte: constants_abilities.json, abaddon_borrowed_time). Disruptor fecha Blink aos 24,0 min (mediana, 1.128 partidas), bem depois do Abaddon já ter Phase Boots havia muito (6,5 min).
 - o que ele faz com você: Static Storm silencia o time inteiro numa área, inclusive o Abaddon, então qualquer plano de ativar Borrowed Time precisa ser antes da Storm cair ou depender só do gatilho automático; Kinetic Field prende o Abaddon longe do aliado que ele quer proteger.
 - o que você faz com ele: Aphotic Shield dispensa e absorve o Thunder Strike que Disruptor costuma abrir a luta; Curse of Avernus desacelera ele o bastante pra não reposicionar depois de usar as ativas.
 - itens que viram: Aghanim's Scepter de Disruptor faz Static Storm silenciar itens (fonte: aghs_desc), o que não afeta diretamente o Borrowed Time (não é item) mas tira qualquer BKB/Lotus Orb de reação do Abaddon durante a janela; Glimmer Cape no Abaddon (situacional) dá resistência mágica contra o dano crescente da própria Static Storm.
 - como jogar: se ele tiver Static Storm disponível (nível 6+), ative Borrowed Time manualmente antes dela cair em vez de esperar o gatilho automático, porque depois de silenciado só sobra o automático sob 400 de vida.
-- fonte: pro_dados/abaddon.json; pro_dados/disruptor.json; constants_abilities.json; aghs_desc; content/fichas/abaddon.md.
+- fonte: pro_dados/abaddon.json; pro_dados/disruptor.json; constants_abilities.json; aghs_desc.
 
 ## Contra Troll Warlord (troll_warlord)
 - placar: 29/41 (70,7%) a favor do Abaddon (fonte: pro_dados/abaddon.json).
@@ -119,7 +117,7 @@ Uma ressalva sobre os dados de item do próprio Abaddon: no recorte de 720 parti
 - o que você faz com ele: Aphotic Shield no alvo da Battle Trance anula boa parte do lifesteal porque reduz o dano recebido antes de virar roubo de vida pro Troll; Withering Mist corta ainda mais essa cura se o Troll cair abaixo de 40% de vida no meio da luta.
 - itens que viram: Aghanim's Shard do Troll dá chance de ataque adicional à distância mesmo fora de Battle Trance (fonte: aghs_desc, "Fervor"), o que soma dano constante contra escudo cedo; Heaven's Halberd no Abaddon (situacional) desarma o Troll bem no meio da Battle Trance, cortando o combo pela metade.
 - como jogar: gaste Aphotic Shield no alvo que ele focar assim que a Battle Trance sair (nível 6+, cd 70-90s), não espere o lifesteal já ter acontecido. Fora da Trance, o Troll é frágil em troca direta.
-- fonte: pro_dados/abaddon.json; pro_dados/troll_warlord.json; constants_abilities.json; aghs_desc; content/fichas/abaddon.md.
+- fonte: pro_dados/abaddon.json; pro_dados/troll_warlord.json; constants_abilities.json; aghs_desc.
 
 ## Contra Terrorblade (terrorblade)
 - placar: 57/86 (66,3%) a favor do Abaddon (fonte: pro_dados/abaddon.json).
@@ -154,8 +152,8 @@ Uma ressalva sobre os dados de item do próprio Abaddon: no recorte de 720 parti
 ## Contra Keeper of the Light (keeper_of_the_light)
 - placar: 18/47 (38,3%) a favor do Abaddon, segunda maior desvantagem da lista com amostra válida (47 jogos) (fonte: pro_dados/abaddon.json).
 - por que importa: segundo pior matchup com 30+ jogos. KOTL é suporte/mid de longo alcance, então mesmo sem trocar soco a soco ele força o Abaddon a jogar reativo o jogo inteiro.
-- janelas: cedo, Illuminate (canalizado até 3s, até 500 de dano em linha de 1550 de alcance) ameaça de longe sem o Abaddon conseguir revidar; Chakra Magic devolve mana pro time antes de cada rotação. Ele fecha itens de suporte cedo (Arcane/Travel Boots por volta dos 14-15 min) e não depende de farm pra ser relevante, diferente da maioria dos confrontos acima.
-- o que ele faz com você: Illuminate em linha reta pune qualquer agrupamento perto do Abaddon antes mesmo de uma luta começar; Mana Leak (debuff de silêncio parcial) atrasa a resposta do Abaddon numa troca cedo.
+- janelas: cedo, Illuminate (canalizado até 3s, até 500 de dano em linha de 1550 de alcance) ameaça de longe sem o Abaddon conseguir revidar; Chakra Magic devolve mana pro time antes de cada rotação. Ele fecha Travel Boots aos 14,8 min (mediana, 453 partidas) e não depende de farm pra ser relevante, diferente da maioria dos confrontos acima.
+- o que ele faz com você: Illuminate em linha reta pune qualquer agrupamento perto do Abaddon antes mesmo de uma luta começar; Blinding Light empurra o Abaddon pra fora da área e cega por 4s, com 45% de chance de errar ataque, atrasando a resposta dele numa troca cedo.
 - o que você faz com ele: Aphotic Shield absorve o Illuminate inteiro se lançado a tempo, porque é dano mágico instantâneo contra um barreira que dispensa debuff; Curse of Avernus pune qualquer tentativa dele de ficar perto pra confirmar o combo com o time.
 - itens que viram: Aghanim's Scepter de KOTL não toca no Illuminate, ele melhora o Will-O-Wisp (já existente no kit): o olho fica alternando aceso/apagado e atrai os inimigos pelo brilho (fonte: aghs_desc), perigoso justamente porque agrupa o time do Abaddon antes de um nuke maior; Glimmer Cape no Abaddon ajuda a cruzar o alcance de 1550 do Illuminate sem ser visto.
 - como jogar: não cruze linhas retas longas sem necessidade enquanto ele estiver vivo e com mana. Gaste Aphotic Shield no primeiro aliado que for pego pelo Illuminate, antes do resto da combinação chegar.

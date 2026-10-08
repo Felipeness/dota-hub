@@ -24,12 +24,10 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 - https://api.opendota.com/api/constants/aghs_desc
-- C:/Users/felip/Desktop/dota-hub/content/fichas/snapfire.md
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
 ---
 ## Como foram escolhidos os 15
 
-Base: pro_dados/snapfire.json, confrontos vêm do OpenDota `/heroes/128/matchups` (só liga pro, 7.40+7.41, 2456 jogos da Snapfire no total). Critério 1, os 6 com mais jogos contra ela (Rubick, Jakiro, Shadow Fiend, Tusk, Hoodwink, Lion). Critério 2, quem joga nas mesmas posições que ela (ficha diz pos 2/3/4/5, suporte-roam e mid) com bastante jogo em pro além dos 6 de cima: Disruptor, Mars, Queen of Pain. Critério 3, maior vantagem e maior desvantagem com 30+ jogos: Earthshaker, Tinker e Death Prophet (ela ganha muito), Io, Clinkz e Keeper of the Light (ela perde muito). Snapfire não é carry fixo (fichas/snapfire.md: 38,4% suporte, 28,9% suporte duro, 23,8% mid, 7,9% offlane, carry é só 0,9% e fora da curva), então o critério 4 (carries sem lane em comum) não se aplica a ela do jeito que se aplicaria a um Alchemist; Shadow Fiend entrou porque é o 3º par mais jogado em pro mesmo sendo carry puro, o equivalente pra ela do exemplo do Alch x Morph.
+Base: pro_dados/snapfire.json, confrontos vêm do OpenDota `/heroes/128/matchups` (só liga pro, 7.40+7.41, 2456 jogos da Snapfire no total). Critério 1, os 6 com mais jogos contra ela (Rubick, Jakiro, Shadow Fiend, Tusk, Hoodwink, Lion). Critério 2, quem joga nas mesmas posições que ela em pro (offlane e mid, as lanes mais jogadas por ela) com bastante jogo em pro além dos 6 de cima: Disruptor, Mars, Queen of Pain. Critério 3, maior vantagem e maior desvantagem com 30+ jogos: Earthshaker, Tinker e Death Prophet (ela ganha muito), Io, Clinkz e Keeper of the Light (ela perde muito). Snapfire não é carry fixo em pro (partidas pro 7.40-7.41, OpenDota, lane_role de 2456 jogos de liga: offlane 54,9%, safelane 23,9%, mid 21,1%, jungle perto de zero), então o critério 4 (carries sem lane em comum) não se aplica a ela do jeito que se aplicaria a um Alchemist; Shadow Fiend entrou porque é o 3º par mais jogado em pro mesmo sendo carry puro, o equivalente pra ela do exemplo do Alch x Morph.
 
 ## Contra Rubick (rubick)
 
@@ -90,7 +88,7 @@ Base: pro_dados/snapfire.json, confrontos vêm do OpenDota `/heroes/128/matchups
 
 - placar: 233 vitórias em 408 jogos de pro, 57,1% (pro_dados/snapfire.json, confrontos hero_id 26)
 - por que importa: 6º par mais jogado e a maior vitória dela entre os suportes que mais jogam contra ela, mesma função de hard lockdown.
-- janelas: Lion blinca mais cedo (18,2 min contra 20,7 min dela), então em teoria ele inicia primeiro; mas o farm dele é o mais baixo da lista (gpm 286, lh10 6, pro_dados/lion.json), ele é puro suporte sem dano de auto-ataque, e o Finger of Death (600-850 de dano verdadeiro) só fica forte com talento ou nível alto de ultimate. Isso explica o placar a favor dela: mesmo sendo travada primeiro, ela sobrevive ao combo dele e devolve mais dano bruto.
+- janelas: Lion blinca mais cedo (18,2 min contra 20,7 min dela), então em teoria ele inicia primeiro; mas o farm dele é o mais baixo da lista (gpm 286, lh10 6, pro_dados/lion.json), ele é puro suporte sem dano de auto-ataque, e o Finger of Death (600-850 de dano) só fica forte com talento ou nível alto de ultimate. Isso explica o placar a favor dela: mesmo sendo travada primeiro, ela sobrevive ao combo dele e devolve mais dano bruto.
 - o que ele faz com você: Earth Spike (105-300 de dano, 1,3-2,2s de stun) seguido de Hex (2-3,2s de silêncio/transformação) trava por quase 5s somados; Mana Drain (canalização de 5s) seca a mana que ela precisa pro combo de Shard.
 - o que você faz com ele: Firesnap Cookie (alcance 650) alcança antes do Impale dele (que precisa de linha reta), e como Lion também tem HP baixo de suporte, Scatterblast ou Mortimer Kisses fecham a troca já que ele não tem nenhum escape no kit, só ofensiva.
 - itens que viram: os dois blincam perto um do outro (18,2 contra 20,7 min), então visão nesse intervalo decide quem inicia; o Shard dela cura e ainda solta dano, o Shard dele (Mana Drain afetando 2 alvos extra, imunidade a debuff durante o canal) é mais defensivo e situacional, o que ajuda a explicar o placar.
@@ -111,7 +109,7 @@ Base: pro_dados/snapfire.json, confrontos vêm do OpenDota `/heroes/128/matchups
 ## Contra Mars (mars)
 
 - placar: 199 vitórias em 370 jogos de pro, 53,8% (pro_dados/snapfire.json, confrontos hero_id 129)
-- por que importa: mesma posição no offlane (ela joga pos 3 em 7,9% das partidas por role, fichas/snapfire.md), grande amostra em pro.
+- por que importa: mesma posição no offlane (54,9% das partidas dela são offlane em pro, partidas pro 7.40-7.41, OpenDota), grande amostra em pro.
 - janelas: Mars blinca muito cedo, aos 15,2 min, quase 5,5 min antes dela (20,7 min), então na janela de 15 a 20 min ele pode iniciar sozinho sem resposta de blink dela. O Shard dela (16,9 min) cai bem nessa janela e ajuda a segurar; depois dos 21,5 min o Shard dele (Spear acerta 2 heróis e deixa rastro de fogo) deixa o combo dele ainda mais perigoso.
 - o que ele faz com você: Spear of Mars (325 de dano, 1,3-2,2s de stun, atinge o primeiro herói ou parede no caminho) te prende contra qualquer parede perto; Arena of Blood (raio 550, 5,5s) cria uma arena que bloqueia ataques à distância vindos de fora, prendendo ela lá dentro longe do time.
 - o que você faz com ele: Firesnap Cookie trava ele antes da lança sair, já que o Spear precisa de linha reta; se ele errar a lança ele fica sem nenhum outro CC, e Scatterblast ou Mortimer Kisses fecham a troca.
@@ -122,7 +120,7 @@ Base: pro_dados/snapfire.json, confrontos vêm do OpenDota `/heroes/128/matchups
 ## Contra Queen of Pain (queenofpain)
 
 - placar: 181 vitórias em 347 jogos de pro, 52,2% (pro_dados/snapfire.json, confrontos hero_id 39)
-- por que importa: mesma posição de mid (23,8% das partidas dela no dotacoach 7.41f é a maior taxa de vitória das quatro roles reais, fichas/snapfire.md), grande amostra em pro.
+- por que importa: mesma posição de mid (21,1% das partidas dela em pro, partidas pro 7.40-7.41, OpenDota, é a lane com maior taxa de vitória: 56,1% contra 51,4% no safelane e 48,7% no offlane), grande amostra em pro.
 - janelas: QoP farma muito mais rápido no meio (lh10 56 contra 21 dela, pro_dados/queenofpain.json) e tende a bater nível 6 primeiro com Sonic Wave pronto. De 8 a 17 min, antes do Shard da Snapfire (16,9 min), QoP tem vantagem clara de burst à distância. Depois dos 17 min a Snapfire já tem combo de volta.
 - o que ela faz com você: Blink (cd 12-6s, recarga rápida) reposiciona pra bater de qualquer ângulo; Sonic Wave (325-625 de dano em linha) ou Scream of Pain (90-345 de dano em área) podem matar a Snapfire sozinha se ela for pega sem o combo pronto.
 - o que você faz com ela: Firesnap Cookie (1-2,2s de stun) trava QoP antes do Blink dela salvar, e como ela é extremamente frágil, Scatterblast ponto-a-ponto ou Mortimer Kisses fecham rápido.
@@ -183,7 +181,7 @@ Base: pro_dados/snapfire.json, confrontos vêm do OpenDota `/heroes/128/matchups
 - o que você faz com ele: se ela tiver visão (ward, Sentry) antes dele entrar invisível, Firesnap Cookie ainda trava ele, mas o problema é justamente não ter essa visão na maioria das trocas.
 - itens que viram: Sentry Ward e Dust (os dois já fazem parte do build padrão dela, pro_dados/snapfire.json: sentry mediana 17,9 min, dust mediana 22,7 min) são a resposta direta ao Wind Walk, não um item ofensivo novo.
 - como jogar: priorize sentry cedo quando pegar esse confronto, não ande sozinha em área sem visão depois dos 15 min, e puxe a luta pra perto de ward em vez de perseguir ele no escuro.
-- fonte: pro_dados/snapfire.json; pro_dados/clinkz.json; constants_abilities.json (clinkz_wind_walk, clinkz_strafe, snapfire_firesnap_cookie); aghs_desc (clinkz)
+- fonte: pro_dados/snapfire.json; pro_dados/clinkz.json; constants_abilities.json (clinkz_wind_walk, clinkz_strafe, snapfire_firesnap_cookie); aghs_desc (clinkz); aghs_desc (clinkz)
 
 ## Contra Keeper of the Light (keeper_of_the_light)
 

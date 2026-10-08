@@ -21,11 +21,9 @@ fontes:
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/antimage.json
 - C:/Users/felip/Desktop/dota-hub-conteudo-novo/pro_dados/phantom_lancer.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_abilities.json
+- C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
 - https://api.opendota.com/api/constants/aghs_desc
-- C:/Users/felip/Desktop/dota-hub/content/fichas/arc_warden.md
-- C:/Users/felip/Desktop/dota-hub/content/fichas/dragon_knight.md
 ---
 
 ## Contra Ogre Magi (ogre_magi)
@@ -61,12 +59,12 @@ fontes:
 ## Contra Snapfire (snapfire)
 - placar: 13 vitórias em 28 jogos de pro, 46,4%, amostra pequena (fonte: pro_dados/arc_warden.json)
 - por que importa: terceiro em volume de jogos contra o AW em pro, mas isso reflete popularidade geral do pick, o suporte mais flexível do patch (4 ou 5), mais do que um counter desenhado pro AW.
-- janelas: Snapfire pega o Aghanim's Shard cedo pra suporte (16,9 min, pro_dados/snapfire.json), bem perto do Maelstrom do AW (12,5 min). Entre 15 e 20 min ela já tem engajamento com stun e empurrão enquanto o AW ainda está montando o Mjollnir.
-- o que ele faz com você: Scatterblast empurra e desacelera em cone, bom pra separar a Double do AW de verdade numa luta. Firesnap Cookie com Shard faz a vítima saltar e ainda leva um Mortimer Kiss extra no pouso.
+- janelas: Snapfire pega o Aghanim's Shard cedo pra suporte (16,9 min, pro_dados/snapfire.json), bem perto do Maelstrom do AW (12,5 min). Entre 15 e 20 min ela já tem engajamento com stun e desaceleração em cone enquanto o AW ainda está montando o Mjollnir.
+- o que ele faz com você: Scatterblast desacelera em cone (até 100% de lentidão de movimento e ataque por 1s, fonte: constants_abilities.json, snapfire_scatterblast), bom pra separar a Double do AW de verdade numa luta. Firesnap Cookie com Shard faz a vítima saltar e ainda leva um Mortimer Kiss extra no pouso.
 - o que você faz com ele: ela é ranged mas sem fuga própria além do movimento normal. Flux isolando ela fora do alcance de suporte do time tira o Scatterblast de jogo rápido.
-- itens que viram: Orchid silencia antes do combo Scatterblast mais Cookie. Magnetic Field (100% de evasão de fora do campo) ajuda a tankar o empurrão em luta.
+- itens que viram: Orchid silencia antes do combo Scatterblast mais Cookie. Magnetic Field (100% de evasão de fora do campo) ajuda a segurar o dano físico da troca enquanto o slow do Scatterblast atrasa vocês.
 - como jogar: não entre no cone do Scatterblast com a Double e o AW juntos, puxe ela sozinha com Spark Wraith antes de forçar a luta.
-- fonte: pro_dados/arc_warden.json; pro_dados/snapfire.json; aghs_desc (snapfire shard)
+- fonte: pro_dados/arc_warden.json; pro_dados/snapfire.json; constants_abilities.json (snapfire_scatterblast); aghs_desc (snapfire shard)
 
 ## Contra Disruptor (disruptor)
 - placar: 13 vitórias em 26 jogos de pro, 50,0%, amostra pequena (fonte: pro_dados/arc_warden.json)
@@ -74,9 +72,9 @@ fontes:
 - janelas: Thunder Strike já incomoda desde o nível 1. O spike real é Static Storm (cooldown de 100 a 70s, disponível no nível 6), que silencia área bem na fase em que o AW ainda depende de castar Flux e Spark Wraith pra fazer dano, antes do Mjollnir (18 a 19 min).
 - o que ele faz com você: Kinetic Field (cooldown de 20 a 14s) prende o AW e a Double numa barreira circular que nenhum dos dois atravessa, cancelando split e fuga ao mesmo tempo. Static Storm silencia os dois dentro da área, travando Flux, Spark Wraith e o cast da própria Tempest Double.
 - o que você faz com ele: Disruptor não tem HP de sobra. Spark Wraith lançado antes do Kinetic Field formar ainda acerta, por ser um disparo instantâneo e não um cast contínuo.
-- itens que viram: BKB (citado na ficha já verificada do site, content/fichas/arc_warden.md) segura o silêncio de Static Storm pra continuar castando e atacando. O Scepter do AW dá silêncio ao Flux com o alvo sozinho, útil pra isolar o próprio Disruptor fora do time antes dele abrir o combo.
+- itens que viram: BKB segura o silêncio de Static Storm pra continuar castando e atacando. A habilidade não atravessa imunidade a magia (fonte: constants_abilities.json, disruptor_static_storm). O Scepter do AW dá silêncio ao Flux com o alvo sozinho, útil pra isolar o próprio Disruptor fora do time antes dele abrir o combo.
 - como jogar: não entre em luta que já tem Kinetic Field formado sem BKB, e priorize matar o Disruptor rápido, já que ele não tem fuga própria depois de usar o combo.
-- fonte: pro_dados/arc_warden.json; pro_dados/disruptor.json; constants_abilities.json (disruptor_static_storm, disruptor_kinetic_field); content/fichas/arc_warden.md; aghs_desc (arc_warden scepter)
+- fonte: pro_dados/arc_warden.json; pro_dados/disruptor.json; constants_abilities.json (disruptor_static_storm, disruptor_kinetic_field); aghs_desc (arc_warden scepter)
 
 ## Contra Pudge (pudge)
 - placar: 12 vitórias em 24 jogos de pro, 50,0%, amostra pequena (fonte: pro_dados/arc_warden.json)
@@ -84,7 +82,7 @@ fontes:
 - janelas: Meat Hook (cooldown de 18 a 12s, 1300 de alcance, fonte: constants_abilities.json) é perigo constante desde o nível 1. O spike de item do Pudge é tardio e secundário (Blink Dagger aos 19,5 min, pro_dados/pudge.json), porque ele vive de HP e magia, não de dano por item.
 - o que ele faz com você: Hook pode puxar o AW ou a Double de longe enquanto ele farma sozinho numa lane, cancelando split push. Dismember, um channel que escala com a Força do Pudge, deleta uma Double com vida baixa se ela ficar presa nele.
 - o que você faz com ele: Flux isola o Pudge quando ele avança sozinho atrás de um Hook, e Spark Wraith cobre a rota que ele usaria pra fugir depois de errar.
-- itens que viram: BKB segura o channel de Dismember. Hurricane Pike empurra 425 de distância assim que o Hook conecta, criando espaço antes do Dismember alcançar.
+- itens que viram: BKB não segura o channel de Dismember, a habilidade atravessa imunidade a magia (fonte: constants_abilities.json, pudge_dismember). Hurricane Pike empurra 425 de distância assim que o Hook conecta, criando espaço antes do Dismember alcançar.
 - como jogar: não farme numa lane isolada sem visão de Pudge depois do nível 6, e use o alcance do Flux (500 a 800) pra punir qualquer Hook errado dele.
 - fonte: pro_dados/arc_warden.json; pro_dados/pudge.json; constants_abilities.json (pudge_meat_hook, pudge_dismember)
 
@@ -104,9 +102,9 @@ fontes:
 - janelas: Zeus tem spike por nível, não por item (gpm de 429, pro_dados/zuus.json, o mais baixo entre os mids desta lista). O primeiro Thundergod's Wrath (cooldown de 130s, custo de mana alto) costuma sair por volta dos 7 a 9 min de jogo em pro, assim que ele junta mana suficiente.
 - o que ele faz com você: Thundergod's Wrath dá True Sight ao redor de cada herói inimigo antes do dano, revelando onde o AW e a Double estão splitando o mapa mesmo escondidos. O dano em si é baixo cedo, mas a visão sozinha já tira o valor do split.
 - o que você faz com ele: Zeus não tem fuga própria fora de teleporte. Flux isolando ele sozinho numa rota de farm aplica o DoT completo, e ele morre rápido pra qualquer burst físico por ter pouco HP.
-- itens que viram: Shadow Blade (item situacional do AW, citado na ficha do site) perde valor direto contra Zeus porque o True Sight do ult revela mesmo invisível. Prefira Blink ou Hurricane Pike pra fechar nele.
+- itens que viram: Shadow Blade perde valor direto contra Zeus. O True Sight do ult revela quem está invisível pelo item (fonte: items.json, invis_sword; constants_abilities.json, zuus_thundergods_wrath). Prefira Blink ou Hurricane Pike pra fechar nele.
 - como jogar: não deixe a Double sozinha splitando uma lane distante sem visão própria depois que o Zeus tiver o ult pronto, porque o cooldown de 130s não é tão longo assim e ele vai saber onde ela está.
-- fonte: pro_dados/arc_warden.json; pro_dados/zuus.json; constants_abilities.json (zuus_thundergods_wrath); content/fichas/arc_warden.md (item situacional invis_sword)
+- fonte: pro_dados/arc_warden.json; pro_dados/zuus.json; constants_abilities.json (zuus_thundergods_wrath); items.json (invis_sword)
 
 ## Contra Windranger (windrunner)
 - placar: 13 vitórias em 19 jogos de pro, 68,4%, amostra pequena (fonte: pro_dados/arc_warden.json)
@@ -124,13 +122,13 @@ fontes:
 - janelas: Shadow Shaman não tem spike de item, só de nível. Voodoo no 6 transforma o alvo em criatura inofensiva por um tempo que cresce com o nível, mas o AW também já tem a Double a partir do 6, então sempre sobra um AW livre mesmo se o outro for hexado.
 - o que ele faz com você: Voodoo neutraliza por completo quem for pego, sem atacar nem castar. Shackles (channel) imobiliza e drena vida de um alvo só, enquanto Mass Serpent Ward (10 wards, imunes a magia) empurra lane sozinho.
 - o que você faz com ele: ele é extremamente frágil e sem fuga própria fora do Ether Shock de área curta. Com dois AW atacando, mesmo perdendo um pro Voodoo, o outro mata o Shaman antes do combo render.
-- itens que viram: BKB não ajuda contra Voodoo, que vira o alvo em critter mudo e desarmado mesmo com imunidade mágica em alguns casos, então o plano é matar o Shaman antes do combo, não tankar depois. Mjollnir acelera essa troca.
+- itens que viram: BKB segura o combo inteiro, nem Voodoo nem Shackles atravessam imunidade a magia (fonte: constants_abilities.json, shadow_shaman_voodoo, shadow_shaman_shackles). Mjollnir acelera a troca depois que o combo for anulado.
 - como jogar: não force 1x1 contra ele sem a Double por perto, porque o combo Voodoo mais Shackles mata um alvo isolado rápido. Com os dois juntos, ele não tem disable pros dois.
 - fonte: pro_dados/arc_warden.json; pro_dados/shadow_shaman.json; constants_abilities.json (shadow_shaman_voodoo, shadow_shaman_shackles, shadow_shaman_mass_serpent_ward)
 
 ## Contra Sniper (sniper)
 - placar: 11 vitórias em 17 jogos de pro, 64,7%, amostra pequena (fonte: pro_dados/arc_warden.json)
-- por que importa: terceira maior vantagem do AW na amostra. Sniper também disputa farm por item (carry ou mid, conforme o catálogo) e tem o maior alcance de ataque do jogo, mas pouquíssima mobilidade e vida.
+- por que importa: terceira maior vantagem do AW na amostra. Sniper também disputa farm por item, carry ou mid conforme o draft, e tem o maior alcance de ataque do jogo, mas pouquíssima mobilidade e vida.
 - janelas: Sniper tem lh10 alto (72, pro_dados/sniper.json) e spike de item cedo, Maelstrom aos 12,5 min, igual ao do AW. O problema dele aparece depois: contra dois alvos vindo rápido, o alcance não compensa a falta de escape, já que Shrapnel e Assassinate são as únicas ferramentas de controle que ele tem.
 - o que ele faz com você: Assassinate (cooldown de 20 a 10s, mira travada) pode executar a Double com vida baixa à distância. Shrapnel zona uma área e desacelera quem tenta fechar nele.
 - o que você faz com ele: Magnetic Field dá velocidade e evasão pra fechar a distância que o alcance dele compensaria. Com dois corpos simultâneos, um puxando o foco de Assassinate e outro fechando, Sniper raramente sobrevive ao engajamento.
@@ -140,19 +138,19 @@ fontes:
 
 ## Contra Dragon Knight (dragon_knight)
 - placar: 5 vitórias em 17 jogos de pro, 29,4%, amostra pequena (fonte: pro_dados/arc_warden.json)
-- por que importa: maior desvantagem do AW com volume de jogos relevante (17, posição de farm que às vezes cruza com a dele no catálogo). DK tanka o dano físico dobrado das duas cópias melhor que qualquer outro oponente da lista.
+- por que importa: maior desvantagem do AW com volume de jogos relevante (17). DK tanka o dano físico dobrado das duas cópias melhor que qualquer outro oponente da lista.
 - janelas: até 15 min, os dois correm Power Treads e componentes de dano num ritmo parecido. Dos 16 aos 20 min, DK chega no Blink (16,2 min, pro_dados/dragon_knight.json) antes do AW ter o Mjollnir pronto (18 a 19 min), abrindo a iniciação. Depois dos 20 min, Breathe Fire (cooldown de 14 a 11s, dano em percentual da vida máxima) já está disponível há muito tempo e pune os dois AW igual, por ser dano percentual.
-- o que ele faz com você: Breathe Fire é dano baseado em percentual da vida máxima em área, então acerta o AW e a Double igualzinho, clonar não dilui esse tipo de dano. Dragon Tail (stun de 1,8 a 2,4s conforme o nível, fonte: content/fichas/dragon_knight.md) prende um dos dois pro resto do combo. Elder Dragon Form dá alcance, splash e resistência mágica que seguram o burst de Flux e Spark Wraith.
+- o que ele faz com você: Breathe Fire é dano baseado em percentual da vida máxima em área, então acerta o AW e a Double igualzinho, clonar não dilui esse tipo de dano. Dragon Tail (stun de 1,8 a 2,4s conforme o nível, fonte: constants_abilities.json, dragon_knight_dragon_tail) prende um dos dois pro resto do combo. Elder Dragon Form dá alcance, splash e resistência mágica que seguram o burst de Flux e Spark Wraith.
 - o que você faz com ele: Flux isolando ele sozinho ainda aplica o DoT completo, mas o HP alto do Dragon Knight segura bem. O jeito real de ganhar é evitar a troca direta e focar farm, deixando a luta pro resto do time.
-- itens que viram: MKB não ajuda aqui, DK não depende de evasão. O que importa é Skadi (citado na ficha do site) pra travar a mobilidade dele depois do Blink, já que sem isso ele entra e sai livre.
+- itens que viram: MKB não ajuda aqui, DK não depende de evasão. O que importa é Skadi pra travar a mobilidade dele depois do Blink. O item aplica slow de movimento e de ataque em quem leva o hit (fonte: items.json, skadi), já que sem isso ele entra e sai livre.
 - como jogar: evite trocar Flux mais auto-ataque corpo a corpo com Dragon Knight sozinho, porque Breathe Fire devolve o dano em cima dos dois AW ao mesmo tempo. Jogue pelo farm e pela vantagem de split, não pelo confronto direto.
-- fonte: pro_dados/arc_warden.json; pro_dados/dragon_knight.json; constants_abilities.json (dragon_knight_breathe_fire); content/fichas/dragon_knight.md; content/fichas/arc_warden.md (item Skadi)
+- fonte: pro_dados/arc_warden.json; pro_dados/dragon_knight.json; constants_abilities.json (dragon_knight_breathe_fire, dragon_knight_dragon_tail); items.json (skadi)
 
 ## Contra Timbersaw (shredder)
 - placar: 1 vitória em 14 jogos de pro, 7,1%, amostra muito pequena, abaixo de 15 jogos (fonte: pro_dados/arc_warden.json). O resultado é extremo o bastante pra merecer atenção mesmo com poucos jogos.
 - por que importa: pior winrate de toda a lista de confrontos do AW em pro. O kit de Timbersaw ataca justamente os pontos fracos do AW, mobilidade curta e pouco HP real.
 - janelas: Timber Chain (cooldown fixo de 4s, puxa ele até a árvore mais próxima no caminho) está disponível desde o nível 1, dando mobilidade que o AW não responde rápido. O core dele sai cedo (Kaya and Sange por volta de 13 a 18 min, pro_dados/shredder.json), reforçando dano mágico bem na janela em que o AW ainda depende de Flux e Spark Wraith pra ferir.
-- o que ele faz com você: Timber Chain fecha distância instantânea onde tiver árvore por perto, e o mapa de Dota tem árvore quase em todo canto, negando o pouco espaço que o Magnetic Field cria. Whirling Death reduz armadura a cada acerto, empilhando contra quem já tomou dano físico de perto.
+- o que ele faz com você: Timber Chain fecha distância instantânea onde tiver árvore por perto, e o mapa de Dota tem árvore quase em todo canto, negando o pouco espaço que o Magnetic Field cria. Whirling Death reduz o atributo primário de quem for pego por um tempo curto e ainda causa dano bônus por árvore destruída perto dele (fonte: constants_abilities.json, shredder_whirling_death).
 - o que você faz com ele: Flux e Spark Wraith são dano mágico e não dependem de armadura, então ainda funcionam normalmente. O problema real é chegar numa posição de castar sem levar o gap close do Timber Chain primeiro.
 - itens que viram: Hurricane Pike ajuda a recriar distância depois do Timber Chain, já que ele não tem outro dash. Orchid silencia pra impedir um segundo Timber Chain de fuga.
 - como jogar: trate como matchup de respeito mesmo com amostra pequena, mantenha distância de árvores quando ele estiver por perto e não dependa só do Magnetic Field pra escapar, porque o Timber Chain ignora distância normal.
@@ -162,11 +160,11 @@ fontes:
 - placar: 0 vitórias em 5 jogos de pro, 0%, amostra muito pequena, não dá pra tratar como estatística confiável (fonte: pro_dados/arc_warden.json)
 - por que importa: é o exemplo mais direto do confronto "duas carries que raramente dividem lane". Morphling é o carry de farm puro mais parecido com o AW em filosofia (sobrevive sozinho, escala com item, não precisa de time pra crescer), e os dois decidem o jogo no mesmo minuto 25 a 35, só que em pontos diferentes do mapa.
 - janelas: até 15 min, Morphling farma rápido (lh10 de 60, pro_dados/morphling.json) e já tem Waveform desde o nível 1. Dos 16 aos 20 min, os dois chegam perto do mesmo marco de item, Morphling no Manta (18,4 min) e o AW no Mjollnir (18 a 19 min). Depois dos 25 min, Morphling pega Butterfly (25,8 min) e vira muito difícil de acertar com dano físico sem True Strike.
-- o que ele faz com você: Waveform deixa Morphling invulnerável durante o dash, então ele atravessa Spark Wraith e foge limpo. Adaptive Strike, um stun com dano que escala com Agilidade roubada, ameaça matar a Double de uma vez quando ela está sozinha. O roubo de atributo via Morph deixa ele cada vez mais tanque e com mais dano quanto mais a luta dura.
+- o que ele faz com você: Waveform deixa Morphling invulnerável durante o dash, então ele atravessa Spark Wraith e foge limpo. Adaptive Strike, um stun com dano que escala com a própria Agilidade dele (que ele infla via Morph), ameaça matar a Double de uma vez quando ela está sozinha. O roubo de atributo via Morph deixa ele cada vez mais tanque e com mais dano quanto mais a luta dura.
 - o que você faz com ele: Flux aplica um DoT que o Waveform não cancela, só a invulnerabilidade durante o cast em si protege, então acertar antes ou depois dessa janela curta funciona. Mjollnir e Maelstrom dobrados pelas duas cópias superam a regeneração dele se o combate durar o suficiente.
-- itens que viram: MKB ou Bloodthorn (28,2 min, pro_dados/arc_warden.json) são praticamente obrigatórios contra o Butterfly dele (35% de evasão no 7.41f, confirmado na ficha do site), porque sem True Strike o dano físico simplesmente erra. Skadi trava a velocidade dele fora da invulnerabilidade do Waveform.
+- itens que viram: MKB ou Bloodthorn (28,2 min, pro_dados/arc_warden.json) são praticamente obrigatórios contra o Butterfly dele (35% de evasão, fonte: items.json, butterfly), porque sem True Strike o dano físico simplesmente erra. Skadi trava a velocidade dele fora da invulnerabilidade do Waveform.
 - como jogar: não brigue contra o Waveform sem controle de área já aplicado (Flux no alvo antes dele ativar), e priorize montar MKB ou Bloodthorn assim que ele aproximar do Butterfly, porque depois disso o Mjollnir sozinho não resolve mais.
-- fonte: pro_dados/arc_warden.json; pro_dados/morphling.json; constants_abilities.json (morphling_waveform, morphling_adaptive_strike_agi); content/fichas/arc_warden.md (Butterfly 7.41f, MKB, Bloodthorn)
+- fonte: pro_dados/arc_warden.json; pro_dados/morphling.json; constants_abilities.json (morphling_waveform, morphling_adaptive_strike_agi); items.json (butterfly)
 
 ## Contra Anti-Mage (antimage)
 - placar: 4 vitórias em 5 jogos de pro, 80%, amostra muito pequena, não dá pra tirar conclusão de vantagem real (fonte: pro_dados/arc_warden.json)
@@ -176,7 +174,7 @@ fontes:
 - o que você faz com ele: Flux isolando o AM sozinho numa jungle (ele farma sozinho boa parte do jogo) aplica o DoT completo sem interrupção. Spark Wraith nas rotas de jungle dele avisa e já dá o primeiro tick de dano antes dele perceber.
 - itens que viram: MKB ou Bloodthorn contra o Butterfly dele, igual no caso do Morphling. Orchid silencia antes do Blink reposicionar.
 - como jogar: use Spark Wraith pra vigiar as rotas de jungle que ele mais usa e puna o farm isolado dele, já que ele é tão item-dependente quanto o AW mas sem nenhuma magia de longo alcance pra responder ao Flux.
-- fonte: pro_dados/arc_warden.json; pro_dados/antimage.json; constants_abilities.json (antimage_blink, antimage_mana_break); content/fichas/arc_warden.md (MKB, Bloodthorn)
+- fonte: pro_dados/arc_warden.json; pro_dados/antimage.json; constants_abilities.json (antimage_blink, antimage_mana_break)
 
 ## Contra Phantom Lancer (phantom_lancer)
 - placar: 5 vitórias em 9 jogos de pro, 55,6%, amostra pequena (fonte: pro_dados/arc_warden.json)

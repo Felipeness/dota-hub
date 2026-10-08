@@ -24,8 +24,6 @@ fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/constants_hero_abilities.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/items.json
-- C:/Users/felip/Desktop/dota-hub/app/public/data/herois_catalogo.json
-- C:/Users/felip/Desktop/dota-hub/content/fichas/magnataur.md
 - https://api.opendota.com/api/constants/aghs_desc
 ---
 
@@ -91,43 +89,43 @@ fontes:
 
 ## Contra Mars
 - placar: Magnus venceu 35 de 76 partidas de pro, 46,1% (pro_dados magnataur.json confrontos).
-- por que importa: o offlaner mais jogado em pro na mesma posição principal de Magnus (posição 3, catálogo herois_catalogo.json), direto na mesma lane quase toda partida.
+- por que importa: o herói com o farm mais parecido ao de Magnus na lista em partidas de pro (487 gpm contra 466 gpm, pro_dados mars.json e magnataur.json), o que explica o volume alto de jogos na mesma lane.
 - janelas: Mars tira Phase Boots aos 8,5 min (2273/2339) e Blink aos 15,2 min (2136/2339), pouco depois do seu Blink (13,6 min). Isso dá a você uma pequena janela, entre 13,6 e 15,2 min, em que só você tem blink pra abrir luta. Spear of Mars (alcance de 900 a 1200, stun de 1,3 a 2,2s) compete direto com sua Reverse Polarity pelo papel de abrir o combate: quem acerta o spear ou a RP primeiro dita a luta.
 - o que ele faz com você: Spear te trava antes do seu Blink se ele reagir rápido; Arena of Blood (raio 550) te impede de fugir e ainda cura o time dele se alguém morrer lá dentro.
 - o que você faz com ele: sua janela de Blink mais cedo (13,6 vs 15,2 min) deixa você iniciar primeiro na maioria das partidas; Bulwark reduz dano físico frontal, mas não reduz a sua RP (dano mágico).
 - itens que viram: seu BKB (26,2 min) passa perto do Aghanim's Shard dele (21,5 min, que dá stun em até 2 heróis no Spear); o BKB também segura o Spear em si, já que ele não atravessa imunidade.
 - como jogar: use a vantagem de Blink mais cedo pra iniciar antes dele conseguir setar o Spear; depois do seu BKB, o duelo fica mais a seu favor.
-- fonte: pro_dados/magnataur.json; pro_dados/mars.json; herois_catalogo.json; constants_abilities.json (mars_spear, mars_bulwark, mars_arena_of_blood)
+- fonte: pro_dados/magnataur.json; pro_dados/mars.json; constants_abilities.json (mars_spear, mars_bulwark, mars_arena_of_blood)
 
 ## Contra Pudge
 - placar: Magnus venceu 45 de 74 partidas de pro, 60,8% (pro_dados magnataur.json confrontos).
-- por que importa: décimo em volume de jogos contra Magnus (74 partidas) e também joga posição 3/4 (herois_catalogo.json), cruzando lane ou rotação com frequência.
+- por que importa: décimo em volume de jogos contra Magnus (74 partidas); o lh10 dele é baixo pra um core em pro (32, pro_dados pudge.json), sinal de que ele passa parte do early game rotacionando em vez de puxar lane sozinho, cruzando caminho com Magnus com frequência.
 - janelas: Pudge sai de Phase Boots aos 6,9 min (861/1764) e Blink aos 19,5 min (1085/1764), bem depois do seu (13,6 min). O combo clássico dele é Meat Hook (1300 de alcance, 150 a 360 de dano) seguido de Dismember (canal de 2,75s, 80 a 120 de dano por tick multiplicado por Força). O problema pra ele é que esse mesmo hook agrupa o time inimigo pra você: se ele hookar alguém do seu time perto do resto, sua RP de 430 de raio pega o grupo formado por ele.
 - o que ele faz com você: Dismember trava e drena você por quase 3 segundos se ele te hookar, e nem BKB livra você disso: Meat Hook e Dismember atravessam imunidade a feitiço (bkbpierce = Yes nos dois, constants_abilities.json), então a única defesa real é não ficar sozinho no alcance do hook.
 - o que você faz com ele: Blink até onde ele hookou e solte RP: o agrupamento que ele criou se vira contra o time dele. Flesh Heap (bloqueio de dano) ajuda a sobreviver, mas não reduz a duração do stun.
 - itens que viram: nenhum item seu neutraliza o Dismember em si, já que ele ignora BKB. Aghanim's Scepter do Pudge (17,2 min, 809/1764) aumenta o raio e o dano do Rot, perigoso se você ficar perto demais em corpo a corpo sem sustain.
 - como jogar: puna qualquer hook que ele acerte em aliado seu: é basicamente um convite pra RP. Evite ficar sozinho no alcance de 1300 do hook antes do BKB.
-- fonte: pro_dados/magnataur.json; pro_dados/pudge.json; herois_catalogo.json; constants_abilities.json (pudge_meat_hook bkbpierce, pudge_dismember bkbpierce); aghs_desc (pudge_rot scepter)
+- fonte: pro_dados/magnataur.json; pro_dados/pudge.json; constants_abilities.json (pudge_meat_hook bkbpierce, pudge_dismember bkbpierce); aghs_desc (pudge_rot scepter)
 
 ## Contra Axe
 - placar: Magnus venceu 32 de 61 partidas de pro, 52,5% (pro_dados magnataur.json confrontos).
-- por que importa: outro offlaner de posição 3 (herois_catalogo.json) direto na mesma lane, com 61 partidas de pro contra Magnus.
+- por que importa: outro herói de farm e timing parecidos aos de Magnus em pro (517 gpm, pro_dados axe.json), o que explica os 61 jogos de cruzamento direto de lane.
 - janelas: os dois saem de Phase Boots e Blink em timing parecido (Axe: Phase Boots 7,2 min, Blink 15,7 min contra 2273/2339 do Mars como referência de offlane; aqui 1786/2015 e 1898/2015). O Blink de Axe (15,7 min) sai pouco depois do seu (13,6 min), outra pequena janela a seu favor. Berserker's Call (raio 315, 2,1 a 3s) força você a atacar ele em vez do time dele, o que desperdiça o cleave do Empower em um alvo errado se você não cancelar a autoatacar.
 - o que ele faz com você: Culling Blade executa com até 475 de dano se sua vida cair abaixo do corte, e BKB não ajuda aqui: a execução atravessa imunidade a feitiço (bkbpierce = Yes, constants_abilities.json). A única defesa é não deixar sua vida cair abaixo do corte dele.
 - o que você faz com ele: sua Reverse Polarity não é ataque, então o Berserker's Call não te impede de castar ela; você pode RP o time dele mesmo forçado a atacar o Axe.
 - itens que viram: Blade Mail dele (12,6 min, 1652/2015) reflete dano se você atacar ele sob Call; prefira castar Shockwave ou RP em vez de autoatacar enquanto estiver chamado.
 - como jogar: ignore o impulso de autoatacar o Axe durante o Call, use suas skills no resto do time dele enquanto isso.
-- fonte: pro_dados/magnataur.json; pro_dados/axe.json; herois_catalogo.json; constants_abilities.json (axe_berserkers_call, axe_culling_blade)
+- fonte: pro_dados/magnataur.json; pro_dados/axe.json; constants_abilities.json (axe_berserkers_call, axe_culling_blade)
 
 ## Contra Queen of Pain (queenofpain)
 - placar: Magnus venceu 34 de 66 partidas de pro, 51,5% (pro_dados magnataur.json confrontos).
-- por que importa: a mid mais jogada em pro contra Magnus, com 66 partidas. Magnus também aparece como posição 2 em parte das partidas (herois_catalogo.json lista posições 2 e 3 pra ele), mesmo sua rota principal sendo offlane.
+- por que importa: a mid mais jogada em pro contra Magnus, com 66 partidas, mesmo com rotas de lane diferentes entre os dois.
 - janelas: QoP sai de Power Treads aos 8,3 min (2032/2225) e Kaya aos 13,9 min (1940/2225) pra amplificar o burst mágico. Sonic Wave (325 a 625 de dano) mais Scream of Pain formam um combo de kill rápido contra você antes do seu BKB (26,2 min). O Blink dela (65 de mana, cooldown de 6 a 12s conforme o nível, alcance de até 1300) é bem mais barato e mais rápido de recarregar que o seu: ela reposiciona bem mais vezes por luta em volta da sua RP.
 - o que ele faz com você: se ela reagir rápido, o Blink dela consegue tirar ela de dentro do raio de 430 da sua RP antes do stun aplicar, já que o blink dela não tem canal.
 - o que você faz com ele: ela tem pouca vida; se a RP conectar antes do blink de reação dela, ela morre fácil pro Empower.
 - itens que viram: Ultimate Scepter dela (23,5 min, 1396/2225) aumenta o dano do Sonic Wave, o que torna o trade mais perigoso pra você perto dos 24 min se ela chegar antes com o combo.
 - como jogar: solte a RP o quanto antes puder depois do Blink: qualquer hesitação dá tempo pra ela reagir com o próprio blink.
-- fonte: pro_dados/magnataur.json; pro_dados/queenofpain.json; herois_catalogo.json; constants_abilities.json (queenofpain_blink, queenofpain_sonic_wave)
+- fonte: pro_dados/magnataur.json; pro_dados/queenofpain.json; constants_abilities.json (queenofpain_blink, queenofpain_sonic_wave)
 
 ## Contra Skywrath Mage (skywrath_mage)
 - placar: Magnus venceu 36 de 55 partidas de pro, 65,5%: a maior vantagem de Magnus na lista, com amostra de 55 jogos (pro_dados magnataur.json confrontos).
@@ -161,30 +159,30 @@ fontes:
 
 ## Contra Juggernaut
 - placar: Magnus venceu só 11 de 42 partidas de pro, 26,2%: a maior desvantagem de Magnus na lista, amostra de 42 jogos (pro_dados magnataur.json confrontos).
-- por que importa: os dois são cores de farm prioritário que raramente compartilham lane (Juggernaut é posição 1 safelane, Magnus é posição 3 offlane, herois_catalogo.json), mas é o confronto que mais pesa no winrate de Magnus entre os carries mais jogados em pro.
+- por que importa: os dois são heróis de farm prioritário, mas com volumes bem diferentes em pro (639 gpm do Juggernaut contra 466 gpm do Magnus, pro_dados juggernaut.json e magnataur.json), o que raramente deixa os dois na mesma lane. Ainda assim é o confronto que mais pesa no winrate de Magnus entre os carries mais jogados em pro.
 - janelas: Juggernaut sai de Power Treads muito cedo (5,5 min, 876/963) e Battle Fury aos 13,6 min (881/963), quase no mesmo minuto do seu Blink. Dali em diante ele já farma rápido com Blade Fury limpando onda e dando imunidade a feitiço por 5s. Yasha (17,2 min) e Manta Style (20,7 min, 719/963) chegam bem antes do seu BKB (26,2 min) e do seu Harpoon (22,0 min).
 - o que ele faz com você: Blade Fury dá imunidade a feitiço, e tanto Shockwave quanto Skewer não atravessam imunidade (bkbpierce = No nos dois, constants_abilities.json). Na prática, ele gira pra fora do seu combo de engajamento em vez de levar o controle.
 - o que você faz com ele: sua Reverse Polarity atravessa Blade Fury (bkbpierce = Yes), então se ele estiver girando dentro do raio de 430 quando você soltar, ainda estuna. O problema é chegar até lá: ele já saiu na frente em farm e em item antes do seu combo ficar pronto.
 - itens que viram: nenhum item seu neutraliza o Blade Fury em si; a única resposta é forçar o engajamento quando ele não tiver o Blade Fury disponível (cooldown de 18 a 36s, dependendo do nível, constants_abilities.json) ou focar ele com RP mesmo girando, já que o stun ainda acerta.
 - como jogar: não gaste Shockwave ou Skewer em cima de Blade Fury ativo, é desperdício. Espere o cooldown dele cair ou vá direto de Blink mais RP, que ainda funciona através da imunidade.
-- fonte: pro_dados/magnataur.json; pro_dados/juggernaut.json; herois_catalogo.json; constants_abilities.json (juggernaut_blade_fury, magnataur_shockwave, magnataur_skewer, magnataur_reverse_polarity)
+- fonte: pro_dados/magnataur.json; pro_dados/juggernaut.json; constants_abilities.json (juggernaut_blade_fury, magnataur_shockwave, magnataur_skewer, magnataur_reverse_polarity)
 
 ## Contra Ember Spirit (ember_spirit)
 - placar: Magnus venceu 15 de 45 partidas de pro, 33,3%: segunda maior desvantagem de Magnus na lista, amostra de 45 jogos (pro_dados magnataur.json confrontos).
-- por que importa: outro core de farm rápido que raramente compartilha lane com Magnus (Ember é mid, posição 2, herois_catalogo.json), mas tem resposta direta pra engajamento de área.
+- por que importa: outro core de farm rápido que raramente compartilha lane com Magnus, com farm bem acima do dele em pro (558 gpm contra 466 gpm, pro_dados ember_spirit.json e magnataur.json), mas tem resposta direta pra engajamento de área.
 - janelas: Ember sai de Phase Boots aos 9,1 min (2173/2699) e Flame Guard logo seguida, dando um escudo que absorve 70% do dano mágico recebido até um teto de 60 a 300 por nível. Isso reduz boa parte do dano da sua Shockwave e da sua Reverse Polarity (as duas são mágicas). Fire Remnant (0 de mana, alcance 1400, recarrega em 35s por carga) dá reposicionamento rápido antes ou depois de qualquer engajamento seu.
 - o que ele faz com você: Sleight of Fist (bônus de até 170 de dano contra herói) ataca e some rápido no early game, antes do seu Blink (13,6 min) sequer sair; Flame Guard reduz o quanto sua RP e Shockwave realmente tiram dele.
 - o que você faz com ele: sem Flame Guard ativo (recarrega a cada uso), ele perde o escudo e vira alvo normal pro seu combo; sua RP ainda estuna mesmo com o escudo, só o dano que fica reduzido.
 - itens que viram: seu BKB (26,2 min) chega bem antes do dele (27,1 min, 1130/2699), então na janela entre 26 e 27 min você tem vantagem de iniciação que ele ainda não tem resposta de imunidade.
 - como jogar: cheque se o Flame Guard dele está de cooldown antes de abrir a luta: sem o escudo, sua RP mais Empower tira dano cheio.
-- fonte: pro_dados/magnataur.json; pro_dados/ember_spirit.json; herois_catalogo.json; constants_abilities.json (ember_spirit_flame_guard, ember_spirit_fire_remnant, ember_spirit_sleight_of_fist)
+- fonte: pro_dados/magnataur.json; pro_dados/ember_spirit.json; constants_abilities.json (ember_spirit_flame_guard, ember_spirit_fire_remnant, ember_spirit_sleight_of_fist)
 
 ## Contra Invoker
 - placar: Magnus venceu 21 de 58 partidas de pro, 36,2%: terceira maior desvantagem de Magnus na lista, amostra de 58 jogos (pro_dados magnataur.json confrontos).
-- por que importa: terceiro core de farm que não compartilha lane com Magnus (Invoker é mid, posição 2, herois_catalogo.json), mas o alcance do kit dele é o problema real pra quem depende de blink corpo a corpo.
+- por que importa: terceiro core de farm que não compartilha lane com Magnus, com farm acima do dele em pro (564 gpm contra 466 gpm, pro_dados invoker.json e magnataur.json), mas o alcance do kit dele é o problema real pra quem depende de blink corpo a corpo.
 - janelas: Invoker sai de Boots of Travel aos 18,7 min (1447/2026) e Ultimate Scepter aos 20,2 min (1310/2026), bem antes do seu BKB (26,2 min). Sun Strike (175 a 675 de dano, alcance global com 1,7s de delay) e o combo Tornado mais EMP (lift de 1,2 a 3,2s e queima de até 850 de mana convertida em dano) acontecem a uma distância que seu kit corpo a corpo não alcança sem Blink.
 - o que ele faz com você: Cold Snap trava você em stuns curtos repetidos toda vez que ele lança uma skill durante a janela; Tornado mais EMP desabilita e queima mana antes de você chegar perto o suficiente pra usar Skewer ou RP.
 - o que você faz com ele: uma vez que seu Blink te coloca dentro de 1200 de distância, a Reverse Polarity ainda cancela o combo dele e estuna mesmo sob BKB (bkbpierce = Yes). O problema é sobreviver até chegar lá.
 - itens que viram: seu BKB (26,2 min) é a resposta direta pro Cold Snap e pro EMP; antes dele, respeite o alcance de Invoker e não force engajamento sozinho.
 - como jogar: espere o BKB antes de forçar a luta contra um Invoker com itens prontos; depois dele, o Blink mais RP ainda neutraliza o combo de longo alcance.
-- fonte: pro_dados/magnataur.json; pro_dados/invoker.json; herois_catalogo.json; constants_abilities.json (invoker_sun_strike, invoker_tornado, invoker_emp, invoker_cold_snap, magnataur_reverse_polarity)
+- fonte: pro_dados/magnataur.json; pro_dados/invoker.json; constants_abilities.json (invoker_sun_strike, invoker_tornado, invoker_emp, invoker_cold_snap, magnataur_reverse_polarity)
