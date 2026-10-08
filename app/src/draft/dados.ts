@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { z } from "zod";
 import { loadJson } from "../data/load";
-import { heroisSchema } from "../data/schemas";
+import { heroisCatalogoSchema } from "../data/schemas";
 import { erroAoVivo, type ErroAoVivo } from "../live/erros";
 import { registrarNoConsole } from "../live/registro";
 import { useServicosAoVivo } from "../live/servicos";
@@ -55,9 +55,10 @@ export const slugDoHeroi = (nome: string) => nome.toLowerCase().replace(/'/g, ""
 export const retratoLocal = (nome: string) => `/data/retratos/herois/${slugDoHeroi(nome)}.webp`;
 export const retratoDoCdn = (npc: string) => `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${npc}.png`;
 
+/** paginas: hero_id -> id da página em /herois (guia completo ou ficha por posição, todos os heróis do catálogo). */
 export type Guias = Readonly<{ guias: readonly GuiaDraft[]; paginas: ReadonlyMap<HeroId, string>; falhas: number }>;
 
-/** Os 22 guias (herois.json lista quais existem). Um guia que não carrega só sai dos motivos; o resto segue. */
+/** Os 22 guias e a página de cada herói (guia ou ficha, pelo catálogo). Um guia que não carrega só sai dos motivos; o resto segue. */
 export function useGuias(): Guias | null {
   const [guias, setGuias] = useState<Guias | null>(null);
   useEffect(() => {
@@ -70,8 +71,9 @@ export function useGuias(): Guias | null {
 
 /** Um arquivo só com o que o draft usa (~13% do peso dos 22 guias inteiros), em vez de baixar cada ficha de herói. */
 async function carregarGuias(): Promise<Guias> {
-  const indice = await loadJson("/data/herois.json", heroisSchema);
-  const resumo = await loadJson("/data/draft_guias.json", draftGuiasSchema);
+  const [indice, resumo] = await Promise.all([
+    loadJson("/data/herois_catalogo.json", heroisCatalogoSchema), loadJson("/data/draft_guias.json", draftGuiasSchema),
+  ]);
   if (!indice.ok) {
     registrarNoConsole({ nivel: "warn", operacao: "draft-guias", codigo: null, detalhe: indice.motivo });
     return { guias: [], paginas: new Map(), falhas: 1 };
