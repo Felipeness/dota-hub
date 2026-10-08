@@ -8,8 +8,8 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-from . import (amigos, conteudo, fontes, herois, icones, jogadores, jogo, mapa, modelos, relevo, retratos, roshan,
-               rotas, trajetorias, unidades, validar)
+from . import (amigos, conteudo, fontes, herois, icones, jogadores, jogo, mapa, modelos, porque_itens, relevo, retratos,
+               roshan, rotas, trajetorias, unidades, validar)
 
 RAIZ = Path(__file__).resolve().parents[2]
 DESTINO = RAIZ / "app" / "public" / "data"
@@ -61,7 +61,7 @@ def main() -> None:
     altura = relevo.relevo()
     altura.save(DESTINO / "relevo_512.png")
     pacotes["relevo"] = relevo.grade(altura)
-    fichas = herois.todos(frozenset(r["id"] for r in todas_rotas))
+    fichas = herois.todos(frozenset(r["id"] for r in todas_rotas), porque_itens.carregar(RAIZ / "content" / "porque_itens"))
     _gravar_colecao("herois", "heroi", fichas)
     pacotes["herois"] = herois.indice(fichas)
     pacotes["draft_guias"] = herois.draft_resumo(fichas)
