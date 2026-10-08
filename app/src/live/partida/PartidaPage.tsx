@@ -53,7 +53,7 @@ function Partida({ detalhe, onAtualizar }: { detalhe: DetalheDaPartida; onAtuali
           <SeletorDeJanela duracaoS={detalhe.duracaoS} janela={janela} onJanela={setJanela} />
           <Curvas detalhe={detalhe} janela={janela} />
           <RotaPorTempo detalhe={detalhe} janela={janela} />
-          <BuildDaPartida detalhe={detalhe} />
+          <BuildDaPartida detalhe={detalhe} pro={pro} />
         </>
       ) : (
         <p role="status" className="ao-vivo-vazio">
@@ -112,11 +112,13 @@ function Curvas({ detalhe, janela }: { detalhe: DetalheDaPartida; janela: IdJane
   const { referencia } = detalhe;
   const ouro = series(detalhe, (c) => c.ouro, referencia?.ouroPorMin ?? null);
   const lh = series(detalhe, (c) => c.lh, referencia?.lhPorMin ?? null);
+  const patrimonio = series(detalhe, (c) => c.patrimonio, null);
   return (
     <section className="partida-curvas" aria-labelledby="titulo-curvas">
-      <h2 id="titulo-curvas">Ouro e last hits por minuto</h2>
+      <h2 id="titulo-curvas">Ouro, patrimônio e last hits por minuto</h2>
       <div className="partida-curvas-grade">
         <CurvaDaPartida titulo="Ouro ganho" unidade="Ouro ganho no total (gold_t do OpenDota)" series={ouro} eventos={detalhe.eventos} duracaoS={detalhe.duracaoS} janela={janela} />
+        <CurvaDaPartida titulo="Patrimônio" unidade="Ouro + valor dos itens (networth_t do OpenDota)" series={patrimonio} eventos={detalhe.eventos} duracaoS={detalhe.duracaoS} janela={janela} />
         <CurvaDaPartida titulo="Last hits" unidade="Last hits, com neutros" series={lh} eventos={detalhe.eventos} duracaoS={detalhe.duracaoS} janela={janela} />
       </div>
       {referencia && (

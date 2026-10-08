@@ -3,7 +3,8 @@ import { tempoDaPartida, type Compra, type DetalheDaPartida } from "./detalhe";
 import { JANELAS } from "./janelas";
 
 /** Itens core e last hits aos 10 min dos pros, da ficha do herói no app (só existe para parte dos heróis). */
-export type DadosPro = Readonly<{ itensCore: readonly Readonly<{ nome: string; minuto_alvo: number | null }>[]; lh10: number | null }>;
+export type ItemCoreDoGuia = Readonly<{ nome: string; minuto_alvo: number | null; base: string }>;
+export type DadosPro = Readonly<{ itensCore: readonly ItemCoreDoGuia[]; lh10: number | null }>;
 
 const MINUTO_DA_LANE = 10;
 const LANE_EQUILIBRADA = 300;
@@ -42,8 +43,25 @@ function fraseDosLastHits(d: DetalheDaPartida, pro: DadosPro | null): string | n
   return `${lh} last hits aos 10 min.`;
 }
 
-const alvoDoGuia = (compra: Compra, pro: DadosPro | null) =>
-  pro?.itensCore.find((i) => i.minuto_alvo !== null && i.nome.toLowerCase().startsWith(compra.nome.toLowerCase()))?.minuto_alvo ?? null;
+/**
+ * O guia registra upgrades como "Skull Basher -> Abyssal Blade": compara cada segmento entre "->" (e o nome
+ * inteiro) com o nome da compra, nos dois sentidos, pra casar tanto a peça quanto o item final montado.
+ */
+function bateComGuia(nomeDoGuia: string, nomeDaCompra: string): boolean {
+  const compra = nomeDaCompra.toLowerCase();
+  return nomeDoGuia.split("->").some((segmento) => {
+    const guia = segmento.trim().toLowerCase();
+    return guia.startsWith(compra) || compra.startsWith(guia);
+  });
+}
+
+export const itemDoGuia = (compra: Compra, pro: DadosPro | null): ItemCoreDoGuia | null =>
+  pro?.itensCore.find((i) => bateComGuia(i.nome, compra.nome)) ?? null;
+
+const alvoDoGuia = (compra: Compra, pro: DadosPro | null) => {
+  const item = itemDoGuia(compra, pro);
+  return item?.minuto_alvo ?? null;
+};
 
 function fraseDoItemPrincipal(d: DetalheDaPartida, pro: DadosPro | null): string | null {
   const grandes = d.compras.filter((c) => c.grande);
