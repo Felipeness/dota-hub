@@ -38,7 +38,8 @@ const camp = (tamanho: string, anfibio: boolean) => ({ id: "c", tipo: "camp", no
 it.each([
   { tamanho: "small", anfibio: false, esperado: ["kobold"] },
   { tamanho: "medium", anfibio: false, esperado: ["centaur"] },
-  { tamanho: "small", anfibio: true, esperado: ["pollywog", "froglet"] },
+  { tamanho: "small", anfibio: true, esperado: ["pollywog"] },
+  { tamanho: "medium", anfibio: true, esperado: ["froglet"] },
 ])("camp $tamanho anfíbio=$anfibio pode nascer como $esperado", ({ tamanho, anfibio, esperado }) => {
   expect(tiposDoCamp(camp(tamanho, anfibio), TIPOS).map((t) => t.id)).toEqual(esperado);
 });

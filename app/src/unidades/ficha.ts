@@ -43,10 +43,10 @@ export function textoDoCrescimento(c: CrescimentoPorNivel): string {
   return `A cada ${minutos(c.a_cada_s)} de jogo: ${ganhos.join(", ")} e +${fmt(c.xp)} de XP, até o nível ${c.nivel_max}.`;
 }
 
-// Camp seco sorteia entre os tipos secos do mesmo tamanho; camp anfíbio segue a linha dos sapos, que evolui com o tempo.
+// Camp seco sorteia entre os tipos secos do mesmo tamanho; camp anfíbio sorteia entre os sapos do mesmo tamanho.
 export function tiposDoCamp(camp: Objetivo, tipos: readonly TipoCamp[]): TipoCamp[] {
-  if (camp.detalhes["anfibio"] === true) return tipos.filter((t) => t.terreno === "inundado");
-  return tipos.filter((t) => t.terreno === "seco" && t.tamanho === camp.detalhes["tipo"]);
+  const terreno = camp.detalhes["anfibio"] === true ? "inundado" : "seco";
+  return tipos.filter((t) => t.terreno === terreno && t.tamanho === camp.detalhes["tipo"]);
 }
 
 const ROTULO_TAMANHO = { small: "pequeno", medium: "médio", large: "grande", ancient: "ancient" } as const satisfies Record<TipoCamp["tamanho"], string>;
