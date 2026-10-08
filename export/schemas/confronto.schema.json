@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "texto": {"type": "string", "minLength": 1},
+    "texto_ou_nulo": {"type": ["string", "null"], "minLength": 1},
+    "slug": {"type": "string", "pattern": "^[a-z0-9_]+$"},
+    "spike": {"type": "object", "additionalProperties": false, "required": ["item", "nome", "minuto", "n", "chave"],
+      "properties": {"item": {"$ref": "#/$defs/slug"}, "nome": {"$ref": "#/$defs/texto"}, "minuto": {"type": "number", "minimum": 0},
+        "n": {"type": "integer", "minimum": 1}, "chave": {"type": "boolean"}}},
+    "bloco": {"type": "object", "additionalProperties": false,
+      "required": ["oponente", "vitorias", "jogos", "placar", "por_que_importa", "janelas", "ele_faz", "voce_faz", "itens", "como_jogar", "fontes"],
+      "properties": {
+        "oponente": {"type": "object", "additionalProperties": false, "required": ["id", "nome", "nome_interno", "hero_id"],
+          "properties": {"id": {"$ref": "#/$defs/slug"}, "nome": {"$ref": "#/$defs/texto"}, "nome_interno": {"$ref": "#/$defs/slug"}, "hero_id": {"type": "integer"}}},
+        "vitorias": {"type": "integer", "minimum": 0}, "jogos": {"type": "integer", "minimum": 1},
+        "placar": {"$ref": "#/$defs/texto"}, "por_que_importa": {"$ref": "#/$defs/texto"}, "janelas": {"$ref": "#/$defs/texto"},
+        "ele_faz": {"$ref": "#/$defs/texto_ou_nulo"}, "voce_faz": {"$ref": "#/$defs/texto_ou_nulo"},
+        "itens": {"$ref": "#/$defs/texto"}, "como_jogar": {"$ref": "#/$defs/texto"},
+        "fontes": {"type": "array", "items": {"$ref": "#/$defs/texto"}}}}
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "nome", "nome_interno", "hero_id", "patch", "jogos_pro", "spikes", "confrontos"],
+  "properties": {
+    "id": {"$ref": "#/$defs/slug"},
+    "nome": {"$ref": "#/$defs/texto"},
+    "nome_interno": {"$ref": "#/$defs/slug"},
+    "hero_id": {"type": "integer"},
+    "patch": {"type": "string"},
+    "jogos_pro": {"type": "integer", "minimum": 1},
+    "spikes": {"type": "array", "items": {"$ref": "#/$defs/spike"}},
+    "confrontos": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/bloco"}}
+  }
+}
