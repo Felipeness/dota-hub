@@ -511,6 +511,17 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .ficha-topo > p, .ficha-topo > dl, .ficha-topo > details { grid-column: 1 / -1; }
 .abertura { margin: 0; max-width: 62ch; font-size: 18px; line-height: 1.55; color: var(--cor-texto-leitura); }
 .ficha-heroi .destaques dd { font-size: 22px; }
+.ficha-heroi .build-icone { width: 40px; height: 30px; border-radius: 4px; object-fit: cover; font-size: 11px; }
+.ficha-heroi .tempo-base { font-size: 12px; color: var(--cor-texto-3); }
+.aba-funcao { font-weight: 500; font-size: 12px; opacity: 0.75; }
+.itens-iniciais { display: flex; flex-wrap: wrap; gap: var(--espaco-2); margin: 0 0 0.8em; padding: 0; list-style: none; }
+.itens-iniciais li {
+  display: flex; align-items: center; gap: var(--espaco-2); padding: 4px 10px 4px 4px;
+  border-radius: var(--raio-pequeno); background: var(--cor-superficie-2); border: 1px solid var(--cor-linha-forte); color: var(--cor-texto);
+}
+.grupo-posicao { display: flex; flex-direction: column; gap: var(--espaco-3); }
+.grupo-posicao h2 { display: flex; align-items: baseline; gap: var(--espaco-2); font-size: 28px; font-weight: 700; color: var(--cor-texto); }
+.selos-heroi { display: flex; flex-wrap: wrap; gap: 6px; }
 .recolhivel { border-top: 1px solid var(--cor-linha); }
 .recolhivel > summary { display: flex; align-items: center; gap: var(--espaco-2); min-height: var(--alvo-toque); cursor: pointer; color: var(--cor-texto-2); }
 .recolhivel > summary h3 { margin: 0; }

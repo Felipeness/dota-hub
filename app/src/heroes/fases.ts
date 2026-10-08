@@ -1,5 +1,5 @@
-import type { Fase, HeroiResumo, Indice, Objetivo, Passo, RotaResumo, Spike } from "../data/schemas";
-import { minutoDaJanela, normalizar, rotaDaCelula, type Lado } from "../routes/filtros";
+import type { Fase, Indice, Objetivo, Passo, RotaResumo, Spike } from "../data/schemas";
+import { minutoDaJanela, rotaDaCelula, type Lado } from "../routes/filtros";
 
 // Fase sem fim (ate null) vale até o fim do jogo.
 export function faseNoMinuto(fases: readonly Fase[], minuto: number): Fase | null {
@@ -8,11 +8,6 @@ export function faseNoMinuto(fases: readonly Fase[], minuto: number): Fase | nul
 
 export function proximoSpike(spikes: readonly Spike[], minuto: number): Spike | null {
   return spikes.find((s) => s.minuto !== null && s.minuto >= minuto) ?? null;
-}
-
-export function filtrarHerois(herois: readonly HeroiResumo[], texto: string): HeroiResumo[] {
-  const alvo = normalizar(texto.trim());
-  return herois.filter((h) => normalizar(`${h.nome} ${h.id}`).includes(alvo));
 }
 
 export function objetivosDosPassos(passos: readonly Pick<Passo, "alvo">[], objetivos: readonly Objetivo[]): Objetivo[] {

@@ -2,16 +2,13 @@ import { useState, type ReactNode } from "react";
 import { Link } from "react-router";
 import { indiceSchema, minutoComoTexto, rotaSchema, rotasResumoSchema, type ConteudoItem, type Fase, type Heroi, type Objetivo, type Spike } from "../data/schemas";
 import { Indisponivel, useData } from "../data/useData";
-import { ListaDeFontes } from "../layout/Fontes";
-import { IconeOuIniciais } from "../live/partida/BuildDaPartida";
 import { ListaPassos } from "../routes/RouteDetail";
 import type { Lado } from "../routes/filtros";
 import { MapView } from "../map/MapView";
 import { objetivosDosPassos, variacoesDaFase } from "./fases";
-import { destaquesDoHeroi, dividirResumo, linhaDoTempoDaBuild, urlDoRetrato } from "./resumo";
+import { DetalheDoPorque, IconeDoItem, Secao, TopoDoHeroi } from "./partes";
+import { destaquesDoHeroi, linhaDoTempoDaBuild } from "./resumo";
 import { useRitmoEsperado } from "./useRitmoEsperado";
-
-const urlDoIconeDeItem = (item: string) => `/data/retratos/itens/${item}.webp`;
 
 const ABAS = { guia: "Guia", spikes: "Power spikes", rotas: "Rotas", pros: "Pros", roshan: "Roshan" } as const;
 type Aba = keyof typeof ABAS;
@@ -23,30 +20,13 @@ const numero = (n: number) => n.toLocaleString("pt-BR");
 
 const Lista = ({ itens }: { itens: readonly string[] }) => <ul>{itens.map((i) => <li key={i}>{i}</li>)}</ul>;
 
-type SecaoProps = { titulo: string; aberta?: boolean; contagem?: number; children: ReactNode };
-
-/** Seção fechada sem contagem no título é indistinguível de uma seção vazia; por isso o número no resumo. */
-function Secao({ titulo, aberta = false, contagem, children }: SecaoProps) {
-  return (
-    <details className="recolhivel" open={aberta}>
-      <summary><h3 className="sobretitulo">{titulo}{contagem !== undefined && ` (${contagem})`}</h3></summary>
-      {children}
-    </details>
-  );
-}
-
 function Topo({ heroi }: { heroi: Heroi }) {
-  const { abertura, resto } = dividirResumo(heroi.resumo);
   return (
-    <header className="ficha-topo">
-      <img className="retrato" src={urlDoRetrato(heroi.id)} alt="" width={128} height={72} />
-      <div><span className="sobretitulo">Herói</span><h1>{heroi.nome}</h1></div>
-      <p className="abertura">{abertura}</p>
+    <TopoDoHeroi id={heroi.id} nome={heroi.nome} sobretitulo="Herói" resumo={heroi.resumo}>
       <dl className="destaques">
         {destaquesDoHeroi(heroi).map(([rotulo, valor]) => <div key={rotulo}><dt>{rotulo}</dt><dd>{valor}</dd></div>)}
       </dl>
-      {resto && <details className="recolhivel"><summary>Ler o resumo completo</summary><p>{resto}</p></details>}
-    </header>
+    </TopoDoHeroi>
   );
 }
 
@@ -61,19 +41,6 @@ function Fontes({ heroi }: { heroi: Heroi }) {
 
 type ItemCore = Heroi["guia"]["itens_core"][number];
 type ItemSituacional = Heroi["guia"]["itens_situacionais"][number];
-type Porque = NonNullable<ItemSituacional["porque"]>;
-
-/** Detalhe do porquê pesquisado: o "contra" vem destacado porque é o que decide a compra contra um herói específico. */
-function DetalheDoPorque({ porque }: { porque: Porque }) {
-  return (
-    <>
-      {porque.detalhe && <p>{porque.detalhe}</p>}
-      {porque.contra && <p className="item-contra"><strong>Resolve contra:</strong> {porque.contra}</p>}
-      {porque.combo && <p><strong>Combo:</strong> {porque.combo}</p>}
-      {porque.fontes.length > 0 && <p className="fonte">Fontes: <ListaDeFontes fontes={porque.fontes} /></p>}
-    </>
-  );
-}
 
 /** O power spike só complementa quando diz algo além do porquê pesquisado. */
 const spikeComplementar = ({ porque, spike }: ItemCore) => (porque && spike && spike.texto !== porque.texto ? spike : null);
@@ -84,7 +51,7 @@ function ItemDaBuild({ item }: { item: ItemCore }) {
   const complemento = spikeComplementar(item);
   return (
     <li>
-      <IconeOuIniciais src={urlDoIconeDeItem(item.item)} nome={item.nome_curto} classe="build-icone" />
+      <IconeDoItem item={item.item} nome={item.nome_curto} />
       <div>
         <strong>{item.nome_curto}</strong>{" "}
         <span className="tempo">{item.minuto_alvo === null ? "sem minuto" : minutoComoTexto(item.minuto_alvo)}</span>
@@ -119,7 +86,7 @@ function MarcoDoSpike({ spike }: { spike: Spike }) {
 function Situacional({ item }: { item: ItemSituacional }) {
   return (
     <li>
-      <IconeOuIniciais src={urlDoIconeDeItem(item.item)} nome={item.nome} classe="build-icone" />
+      <IconeDoItem item={item.item} nome={item.nome} />
       <div>
         <strong>{item.nome}</strong>
         <p>{item.quando}</p>

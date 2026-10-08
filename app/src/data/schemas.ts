@@ -133,6 +133,35 @@ export const heroiResumoSchema = z.object({
   id: z.string(), nome: z.string(), hero_id: z.number(), patch: z.string(), resumo: z.string(), tem_por_minuto: z.boolean(),
 });
 export const heroisSchema = z.array(heroiResumoSchema);
+
+export const POSICOES = [1, 2, 3, 4, 5] as const;
+export const ATRIBUTOS_DE_HEROI = ["str", "agi", "int", "all"] as const;
+const posicaoSchema = z.literal(POSICOES);
+
+// Ficha por posição dos 105 heróis sem guia completo (content/fichas). Campo que a ficha não traz vem null.
+const itemDaFichaSchema = z.object({
+  item: z.string().nullable(), nome: z.string(), minuto: z.string().nullable(), quando: z.string().nullable(),
+  porque: z.string().nullable(), detalhe: z.string().nullable(), contra: z.string().nullable(), combo: z.string().nullable(),
+  fontes: textos,
+});
+const posicaoDaFichaSchema = z.object({
+  posicao: posicaoSchema, funcao: z.string(), quando_pegar: z.string().nullable(),
+  itens_iniciais: z.object({ itens: z.array(z.object({ item: z.string(), nome: z.string() })), nota: z.string().nullable() }).nullable(),
+  fontes: textos, nota_build: z.string().nullable(), build: z.array(itemDaFichaSchema),
+  nota_situacionais: z.string().nullable(), situacionais: z.array(itemDaFichaSchema),
+});
+export const fichaSchema = z.object({
+  id: z.string(), nome: z.string(), nome_interno: z.string(), hero_id: z.number(), patch: z.string(), resumo: z.string(),
+  posicoes: z.array(posicaoDaFichaSchema).min(1), roshan: z.string(),
+  extras: z.array(z.object({ titulo: z.string(), texto: z.string() })), fontes: textos,
+});
+
+// Os 127 heróis com a página que abre em /herois/<id>: guia completo (22) ou ficha por posição (105).
+export const heroiDoCatalogoSchema = z.object({
+  id: z.string(), nome: z.string(), hero_id: z.number(), nome_interno: z.string(), atributo: z.enum(ATRIBUTOS_DE_HEROI),
+  posicoes: z.array(posicaoSchema).min(1), pagina: z.enum(["guia", "ficha"]),
+});
+export const heroisCatalogoSchema = z.array(heroiDoCatalogoSchema);
 export const heroiSchema = heroiResumoSchema.omit({ tem_por_minuto: true }).extend({
   // Phantom Lancer traz a confiança detalhada por tema; a ficha mostra só o nível geral.
   confianca: z.union([z.string(), z.object({ geral: z.string() }).transform((c) => c.geral)]),
@@ -204,6 +233,12 @@ export type Fase = z.infer<typeof faseSchema>;
 export type Spike = z.infer<typeof spikeSchema>;
 export type HeroiResumo = z.infer<typeof heroiResumoSchema>;
 export type Heroi = z.infer<typeof heroiSchema>;
+export type Posicao = (typeof POSICOES)[number];
+export type AtributoDeHeroi = (typeof ATRIBUTOS_DE_HEROI)[number];
+export type Ficha = z.infer<typeof fichaSchema>;
+export type PosicaoDaFicha = Ficha["posicoes"][number];
+export type ItemDaFicha = PosicaoDaFicha["build"][number];
+export type HeroiDoCatalogo = z.infer<typeof heroiDoCatalogoSchema>;
 export type GraficoDados = z.infer<typeof graficoSchema>;
 export type Painel = z.infer<typeof painelSchema>;
 export type JogadorResumo = z.infer<typeof jogadorResumoSchema>;
