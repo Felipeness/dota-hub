@@ -3,7 +3,7 @@ id: ficha-disruptor
 titulo: "Disruptor"
 heroi: Disruptor
 patch: 7.41
-posicoes: [4, 5]
+posicoes: [5, 4]
 fontes:
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroes.json
 - C:/Users/felip/Desktop/dota-imortal/data/opendota/heroStats.json
