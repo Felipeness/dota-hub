@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import type { GuiaDraft, HeroId } from "./guia";
-import { formatarPp, type Motivo, type Sugestao, type TipoDeMotivo } from "./pontuacao";
+import { formatarPp, type HeroiDraft, type Motivo, type Sugestao, type TipoDeMotivo } from "./pontuacao";
 import { Retrato } from "./Retrato";
 
 const MOTIVOS_VISIVEIS = 3;
@@ -14,6 +14,8 @@ type Props = Readonly<{
   onAcao: (id: HeroId) => void;
   guias: ReadonlyMap<HeroId, GuiaDraft>;
   paginas: ReadonlyMap<HeroId, string>;
+  /** Só nos picks: o link do 1x1 contra o inimigo mais perigoso faz sentido para o seu lado do draft. */
+  linkDoConfronto?: ReadonlyMap<HeroId, HeroiDraft>;
 }>;
 
 function LinhaDeMotivo({ motivo, comDetalhe }: { motivo: Motivo; comDetalhe: boolean }) {
@@ -28,7 +30,10 @@ function LinhaDeMotivo({ motivo, comDetalhe }: { motivo: Motivo; comDetalhe: boo
   );
 }
 
-function Cartao({ sugestao, posicao, acao, onAcao, guia, pagina }: { sugestao: Sugestao; posicao: number; acao: string; onAcao: (id: HeroId) => void; guia: GuiaDraft | undefined; pagina: string | undefined }) {
+function Cartao({ sugestao, posicao, acao, onAcao, guia, pagina, inimigoPerigoso }: {
+  sugestao: Sugestao; posicao: number; acao: string; onAcao: (id: HeroId) => void;
+  guia: GuiaDraft | undefined; pagina: string | undefined; inimigoPerigoso: HeroiDraft | undefined;
+}) {
   const { heroi, nota, motivos } = sugestao;
   return (
     <li className="draft-sugestao">
@@ -41,6 +46,11 @@ function Cartao({ sugestao, posicao, acao, onAcao, guia, pagina }: { sugestao: S
       {motivos.length === 0
         ? <p className="draft-nota">Sem motivo com dado: só aparece porque não tem nada contra.</p>
         : <ul className="draft-motivos">{motivos.slice(0, MOTIVOS_VISIVEIS).map((m) => <LinhaDeMotivo key={m.curto} motivo={m} comDetalhe={false} />)}</ul>}
+      {inimigoPerigoso && (
+        <Link to={`/confronto/${heroi.npc}/${inimigoPerigoso.npc}`} className="draft-nota">
+          Como jogar {heroi.nome} contra {inimigoPerigoso.nome}
+        </Link>
+      )}
       {(motivos.length > 0 || guia) && (
         <details className="draft-porque">
           <summary>Por quê, em detalhe</summary>
@@ -53,14 +63,18 @@ function Cartao({ sugestao, posicao, acao, onAcao, guia, pagina }: { sugestao: S
   );
 }
 
-export function Sugestoes({ titulo, explicacao, sugestoes, acao, onAcao, guias, paginas }: Props) {
+export function Sugestoes({ titulo, explicacao, sugestoes, acao, onAcao, guias, paginas, linkDoConfronto }: Props) {
   return (
     <section className="draft-coluna" aria-label={titulo}>
       <h2>{titulo}</h2>
       <p className="draft-explicacao">{explicacao}</p>
       <ol className="draft-sugestoes">
         {sugestoes.map((s, i) => (
-          <Cartao key={s.heroi.id} sugestao={s} posicao={i + 1} acao={acao} onAcao={onAcao} guia={guias.get(s.heroi.id)} pagina={paginas.get(s.heroi.id)} />
+          <Cartao
+            key={s.heroi.id} sugestao={s} posicao={i + 1} acao={acao} onAcao={onAcao}
+            guia={guias.get(s.heroi.id)} pagina={paginas.get(s.heroi.id)}
+            inimigoPerigoso={s.maisPerigoso !== null ? linkDoConfronto?.get(s.maisPerigoso) : undefined}
+          />
         ))}
       </ol>
     </section>
