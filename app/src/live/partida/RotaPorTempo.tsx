@@ -43,6 +43,7 @@ export function RotaPorTempo({ detalhe, janela }: Props) {
 }
 
 function AvisoDaRota({ temReplay, detalhe }: { temReplay: boolean; detalhe: DetalheDaPartida }) {
+  const laneDivergente = detalhe.lane !== null && detalhe.laneDoMapa !== null && detalhe.lane !== detalhe.laneDoMapa;
   if (temReplay) {
     return (
       <p className="partida-aviso">
@@ -56,6 +57,9 @@ function AvisoDaRota({ temReplay, detalhe }: { temReplay: boolean; detalhe: Deta
       <strong>Aproximado.</strong> O OpenDota não guarda a posição contínua. A mancha é a posição da fase de lane (0 a ~10 min,
       lane pelo mapa: {nomeDaLane(detalhe.laneDoMapa)}); wards e mortes em lutas têm posição registrada; abates, runas, itens e
       buybacks só têm o tempo e aparecem na lista sem pino. A rota completa minuto a minuto só vem do replay.
+      {laneDivergente && (
+        <> O OpenDota registrou {nomeDaLane(detalhe.lane)}, mas pela posição real da fase de lane parece {nomeDaLane(detalhe.laneDoMapa)}.</>
+      )}
     </p>
   );
 }
