@@ -1,13 +1,14 @@
 import { useState, type ReactNode } from "react";
 import { Link } from "react-router";
-import { indiceSchema, minutoComoTexto, rotaSchema, rotasResumoSchema, type ConteudoItem, type Fase, type Heroi, type Objetivo } from "../data/schemas";
+import { indiceSchema, minutoComoTexto, rotaSchema, rotasResumoSchema, type ConteudoItem, type Fase, type Heroi, type Objetivo, type Spike } from "../data/schemas";
 import { Indisponivel, useData } from "../data/useData";
 import { IconeOuIniciais } from "../live/partida/BuildDaPartida";
 import { ListaPassos } from "../routes/RouteDetail";
 import type { Lado } from "../routes/filtros";
 import { MapView } from "../map/MapView";
 import { objetivosDosPassos, variacoesDaFase } from "./fases";
-import { destaquesDoHeroi, dividirResumo, itensCoreNaLinhaDoTempo, urlDoRetrato } from "./resumo";
+import { destaquesDoHeroi, dividirResumo, linhaDoTempoDaBuild, urlDoRetrato } from "./resumo";
+import { useRitmoEsperado } from "./useRitmoEsperado";
 
 const urlDoIconeDeItem = (item: string) => `/data/retratos/itens/${item}.webp`;
 
@@ -57,7 +58,7 @@ function Fontes({ heroi }: { heroi: Heroi }) {
   );
 }
 
-/** Um item da build: ícone, nome curto e minuto num resumo escaneável; a estatística completa fica atrás de "ver detalhe". */
+/** Um item da build: ícone, nome curto, minuto e o porquê num resumo escaneável; a estatística completa fica atrás de "ver detalhe". */
 function ItemDaBuild({ item }: { item: Heroi["guia"]["itens_core"][number] }) {
   return (
     <li>
@@ -65,11 +66,26 @@ function ItemDaBuild({ item }: { item: Heroi["guia"]["itens_core"][number] }) {
       <div>
         <strong>{item.nome_curto}</strong>{" "}
         <span className="tempo">{item.minuto_alvo === null ? "sem minuto" : minutoComoTexto(item.minuto_alvo)}</span>
+        {item.porque && <p>{item.porque.texto}</p>}
         <details className="recolhivel">
           <summary>Ver detalhe (tempo dos pros, D2PT e sua média)</summary>
           <p>{item.nome}</p>
           <p>{item.base}</p>
+          {item.porque && <p className="fonte">Fonte: {item.porque.fonte}</p>}
         </details>
+      </div>
+    </li>
+  );
+}
+
+/** Um power spike que não é a compra de um item core (nível, combo, janela de luta): mesma linha do tempo, sem ícone. */
+function MarcoDoSpike({ spike }: { spike: Spike }) {
+  return (
+    <li className="marco-spike">
+      <div>
+        <span className="tempo">{spike.minuto === null ? spike.faixa : minutoComoTexto(spike.minuto)}</span>{" "}
+        <strong>{spike.marco}</strong>
+        <p>{spike.o_que_fazer}</p>
       </div>
     </li>
   );
@@ -84,9 +100,21 @@ function Situacional({ item }: { item: Heroi["guia"]["itens_situacionais"][numbe
   );
 }
 
+/** GPM e last hits/min esperados nos percentis 50 e 80 do OpenDota, pra saber se o ritmo de farm está no nível. */
+function RitmoEsperado({ heroId }: { heroId: number }) {
+  const ritmo = useRitmoEsperado(heroId);
+  if (!ritmo) return null;
+  return (
+    <p className="painel-nota">
+      Ritmo esperado (OpenDota, todos os ranks): {numero(ritmo.gpmMediana)}–{numero(ritmo.gpmTopo)} GPM e{" "}
+      {numero(ritmo.lhMediana)}–{numero(ritmo.lhTopo)} LH/min entre a mediana e o top 20%.
+    </p>
+  );
+}
+
 function AbaGuia({ heroi }: { heroi: Heroi }) {
   const { guia } = heroi;
-  const itensDaBuild = itensCoreNaLinhaDoTempo(guia.itens_core);
+  const linhaDoTempo = linhaDoTempoDaBuild(guia.itens_core, heroi.power_spikes);
   return (
     <div className="painel-texto">
       <Secao titulo="Quando pegar" aberta contagem={guia.bom_quando.length}><Lista itens={guia.bom_quando} /></Secao>
@@ -103,9 +131,14 @@ function AbaGuia({ heroi }: { heroi: Heroi }) {
         <Lista itens={guia.lane.dicas} />
       </Secao>
       <Secao titulo="Quando começar a farmar a selva"><p>{guia.condicao_para_farmar.explicacao}</p></Secao>
-      <Secao titulo="Itens" aberta contagem={itensDaBuild.length}>
-        <p className="painel-nota">Linha do tempo da build, do item mais cedo ao mais tarde. O minuto é o alvo observado nos replays dos pros.</p>
-        <ol className="cartoes-texto">{itensDaBuild.map((i) => <ItemDaBuild key={i.item} item={i} />)}</ol>
+      <Secao titulo="Itens" aberta contagem={guia.itens_core.length}>
+        <p className="painel-nota">Linha do tempo da build e dos power spikes, do mais cedo ao mais tarde. O minuto é o alvo observado nos replays dos pros.</p>
+        <RitmoEsperado heroId={heroi.hero_id} />
+        <ol className="cartoes-texto">
+          {linhaDoTempo.map((e) => e.tipo === "item"
+            ? <ItemDaBuild key={`item-${e.item.item}`} item={e.item} />
+            : <MarcoDoSpike key={`spike-${e.spike.marco}-${e.spike.faixa}`} spike={e.spike} />)}
+        </ol>
       </Secao>
       <Secao titulo="Situacionais" contagem={guia.itens_situacionais.length}>
         <p className="painel-nota">Contra quem ou quando pegar cada item em vez da build padrão.</p>
@@ -273,6 +306,7 @@ export function FichaHeroi({ heroi, objetivos, solos, roshan }: Props) {
       </div>
       <div role="tabpanel" id={`painel-${aba}`} aria-labelledby={`aba-${aba}`}>{conteudo[aba]()}</div>
       <Fontes heroi={heroi} />
+      <p><Link to={`/confronto?contra=${heroi.hero_id}`}>Como jogar contra {heroi.nome}</Link></p>
     </article>
   );
 }

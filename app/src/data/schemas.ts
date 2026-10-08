@@ -137,6 +137,8 @@ export const heroiSchema = heroiResumoSchema.omit({ tem_por_minuto: true }).exte
     skill_build: z.array(z.object({ nivel: z.union([z.number(), z.string()]), skill: z.string() })),
     itens_core: z.array(z.object({
       item: z.string(), nome_curto: z.string(), nome: z.string(), minuto_alvo: z.number().nullable(), base: z.string(),
+      // Porquê do item: texto curto extraído do power spike do mesmo item, com a fonte. null = nenhuma fonte citou o item (não inventa).
+      porque: z.object({ texto: z.string(), fonte: z.string() }).nullable(),
     })),
     itens_situacionais: z.array(z.object({ item: z.string(), nome: z.string(), quando: z.string() })),
     condicao_para_farmar: z.object({ nivel: z.union([z.number(), z.string()]), minuto_tipico: z.number().nullable(), explicacao: z.string() }),

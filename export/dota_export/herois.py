@@ -84,14 +84,26 @@ def _nome_item(chave: str) -> str:
     return _itens().get(chave, {}).get("dname", chave)
 
 
-def _guia(d: dict) -> dict:
+def _porque_do_item(nome: str, minuto_alvo: float | None, spikes: list[dict]) -> dict | None:
+    """Porquê do item core: o power spike que cita o nome dele já diz pra que ele serve agora (sem inventar)."""
+    base = nome.split(" (")[0]
+    candidatos = [s for s in spikes if base in s["marco"]]
+    if not candidatos:
+        return None
+    escolhido = candidatos[0] if minuto_alvo is None else min(
+        candidatos, key=lambda s: abs((s["minuto"] if s["minuto"] is not None else minuto_alvo) - minuto_alvo))
+    return {"texto": escolhido["o_que_fazer"], "fonte": f"Power spike: {escolhido['marco']} ({escolhido['faixa']})"}
+
+
+def _guia(d: dict, spikes: list[dict]) -> dict:
     q, lane, itens, cf = d["quando_pegar"], d["lane"], d["itens"], d["condicao_para_farmar"]
     return {
         "bom_quando": q["bom_quando"], "evitar_quando": q["evitar_quando"], "momento_do_draft": q["momento_do_draft"],
         "lane": {"objetivo": lane["objetivo"], "itens_iniciais": lane["itens_iniciais"], "dicas": lane["dicas"]},
         "skill_build": [{"nivel": s["nivel"], "skill": s["skill"]} for s in d["skill_build"]],
         "itens_core": [{"item": i["item"], "nome_curto": _nome_item(i["item"]), "nome": i["nome"],
-                        "minuto_alvo": _numero(i["minuto_alvo"]), "base": i["base_do_numero"]}
+                        "minuto_alvo": (alvo := _numero(i["minuto_alvo"])), "base": i["base_do_numero"],
+                        "porque": _porque_do_item(i["nome"], alvo, spikes)}
                        for i in itens["core"]],
         "itens_situacionais": [{"item": i["item"], "nome": i.get("nome") or _nome_item(i["item"]), "quando": i["quando"]}
                                for i in itens["situacionais"]],
@@ -140,9 +152,10 @@ def _fonte(f) -> str:
 def heroi(caminho: Path, rotas_validas: frozenset[str] = frozenset()) -> dict:
     d = _ler(caminho)
     hid = caminho.name.removeprefix("hero_").removesuffix("_corrigido.json")
+    spikes = [spike(s) for s in d["power_spikes"]]
     return {
         "id": hid, "nome": d["hero"], "hero_id": d["hero_id"], "patch": d["patch"], "resumo": d["resumo"],
-        "confianca": d["confianca"], "guia": _guia(d), "power_spikes": [spike(s) for s in d["power_spikes"]],
+        "confianca": d["confianca"], "guia": _guia(d, spikes), "power_spikes": spikes,
         "por_minuto": _por_minuto(hid),
         "rotas": {"radiant": [fase(hid, "radiant", f) for f in d["rota_radiant"]],
                   "dire": [fase(hid, "dire", f) for f in d["rota_dire"]]},

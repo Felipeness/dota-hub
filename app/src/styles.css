@@ -341,6 +341,7 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .cartao-numero { font-family: var(--fonte-display); font-weight: 700; font-size: 30px; line-height: 1; color: var(--cor-destaque); }
 .cartoes-texto .tempo { font-family: var(--fonte-num); font-weight: 700; color: var(--cor-destaque); }
 .painel-nota { font-size: 13px; color: var(--cor-texto-3); }
+.marco-spike { grid-template-columns: 1fr; opacity: 0.8; }
 .painel footer {
   margin-top: auto; padding-top: 14px; border-top: 1px solid var(--cor-linha);
   font-family: var(--fonte-num); font-size: 11px; color: var(--cor-texto-3);
