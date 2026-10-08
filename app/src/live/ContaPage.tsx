@@ -1,4 +1,6 @@
 import { Link, useParams } from "react-router";
+import { urlDoRetrato } from "../heroes/resumo";
+import { IconeOuIniciais } from "./partida/BuildDaPartida";
 import { lerId, resumoDaConta } from "./contas";
 import { erroAoVivo, mensagemDoErro } from "./erros";
 import { ErroAoVivoView } from "./ErroAoVivo";
@@ -23,7 +25,7 @@ function ContaAoVivo({ id }: { id: number }) {
     <article className="conta-ao-vivo">
       <header>
         <h1>{dados.conta.nome}</h1>
-        {dados.conta.medalha && <p>Medalha: {dados.conta.medalha}</p>}
+        <p>Medalha: {dados.conta.medalha ?? "sem dado (perfil privado ou calibrando)"}</p>
         <FrescorView frescor={dados.frescor} onAtualizar={conta.tentarDeNovo} />
       </header>
       <dl className="destaques">
@@ -31,12 +33,18 @@ function ContaAoVivo({ id }: { id: number }) {
         <div><dt>Vitórias</dt><dd>{porcentagem(dados.totais.vitorias, dados.totais.partidas)}</dd></div>
         <div><dt>Últimas {dados.ultimas.partidas}</dt><dd>{porcentagem(dados.ultimas.vitorias, dados.ultimas.partidas)}</dd></div>
       </dl>
-      <h2>Heróis mais jogados</h2>
+      <h2>Heróis mais jogados (histórico completo)</h2>
       <table>
         <thead><tr><th>Herói</th><th>Partidas</th><th>Vitórias</th></tr></thead>
         <tbody>
           {dados.herois.map((h) => (
-            <tr key={h.heroi}><td>{h.heroi}</td><td>{h.partidas}</td><td>{porcentagem(h.vitorias, h.partidas)}</td></tr>
+            <tr key={h.heroi}>
+              <td className="conta-heroi-nome">
+                <IconeOuIniciais src={urlDoRetrato(h.retrato)} nome={h.heroi} classe="conta-heroi-retrato" />
+                {h.heroi}
+              </td>
+              <td>{h.partidas}</td><td>{porcentagem(h.vitorias, h.partidas)}</td>
+            </tr>
           ))}
         </tbody>
       </table>
@@ -55,8 +63,12 @@ function ListaDePartidas({ partidas, conta }: { partidas: readonly PartidaDaCont
       {partidas.map((p) => (
         <li key={p.id}>
           <Link to={`/ao-vivo/partidas/${p.id}?conta=${conta}`}>
-            <strong>{p.heroi}</strong> {textoDoResultado(p.venceu)} · {p.abates}/{p.mortes}/{p.assistencias}
-            {" · "}{minutos(p.duracaoS)} · {nomeDaLane(p.lane)} · {dataCurta(p.inicio)}
+            <IconeOuIniciais src={urlDoRetrato(p.retrato)} nome={p.heroi} classe="conta-heroi-retrato" />
+            <strong>{p.heroi}</strong> {textoDoResultado(p.venceu)} · K/D/A {p.abates}/{p.mortes}/{p.assistencias}
+            {" · "}{minutos(p.duracaoS)}
+            {" · "}<span title={p.lane ? undefined : "a fonte não registrou a lane dessa partida"}>{nomeDaLane(p.lane)}</span>
+            {" · "}{dataCurta(p.inicio)}
+            {!p.analisada && <span className="conta-partida-parcial" title="dados ainda não totalmente processados pela fonte"> · dados parciais</span>}
           </Link>
         </li>
       ))}

@@ -97,22 +97,25 @@ it("link do perfil no Dotabuff vai direto para a conta", async () => {
   expect(caminhos).toContain(`/players/${YATORO}`);
 });
 
-it("busca real gravada lista contas com link para a conta", async () => {
+it("busca real gravada lista contas com link e o número da conta, para diferenciar homônimos", async () => {
   abrir("/ao-vivo?q=yatoro");
   const contas = await screen.findByRole("list", { name: "Contas" });
-  expect(within(contas).getAllByRole("link").length).toBeGreaterThan(0);
+  const links = within(contas).getAllByRole("link");
+  expect(links.length).toBeGreaterThan(0);
+  expect(links[0]).toHaveTextContent(/conta \d+/);
 });
 
 it("conta pública mostra nome, medalha, 10 heróis e as partidas das respostas gravadas", async () => {
   const { container } = abrir(`/ao-vivo/contas/${YATORO}`);
   const nome = jogadorFonte.parse(amostra("jogador")).profile?.personaname ?? "";
   expect(await screen.findByRole("heading", { level: 1, name: nome })).toBeInTheDocument();
+  expect(screen.getByRole("heading", { level: 2, name: "Heróis mais jogados (histórico completo)" })).toBeInTheDocument();
   expect(within(screen.getByRole("table")).getAllByRole("row")).toHaveLength(11);
   const recentes = partidasRecentesFonte.parse(amostra("partidas-recentes"));
   const partidas = within(screen.getByRole("list", { name: "Últimas partidas" }));
   expect(partidas.getAllByRole("listitem")).toHaveLength(recentes.length);
   expect(partidas.getAllByRole("link")[0]).toHaveAttribute("href", `/ao-vivo/partidas/${recentes[0]?.match_id}?conta=${YATORO}`);
-  expect(container.querySelector("img")).toBeNull();
+  expect(container.querySelectorAll("img").length).toBeGreaterThan(0);
 });
 
 it("conta privada mostra o perfil e o aviso no lugar das partidas", async () => {
