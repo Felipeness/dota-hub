@@ -352,7 +352,7 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .cartao-numero { font-family: var(--fonte-display); font-weight: 700; font-size: 30px; line-height: 1; color: var(--cor-destaque); }
 .cartoes-texto .tempo { font-family: var(--fonte-num); font-weight: 700; color: var(--cor-destaque); }
 .painel-nota { font-size: 13px; color: var(--cor-texto-3); }
-.cartoes-texto > li.marco-spike { grid-template-columns: 1fr; opacity: 0.8; }
+.cartoes-texto > li.marco-spike { grid-template-columns: minmax(0, 1fr); opacity: 0.8; }
 .item-porque { margin: 4px 0 0.6em; color: var(--cor-texto); }
 .item-contra {
   padding: var(--espaco-2) var(--espaco-3); border-left: 3px solid var(--cor-radiant);
@@ -502,7 +502,7 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 /* Heróis */
 .herois, .ficha-heroi { display: flex; flex-direction: column; gap: 18px; }
 .herois-cobertura, .herois-contagem { margin: 0; font-size: 13px; color: var(--cor-texto-3); }
-.grade-herois { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr; gap: var(--espaco-3); }
+.grade-herois { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-3); }
 .grade-herois a {
   display: flex; align-items: flex-start; gap: 14px; height: 100%; padding: var(--espaco-4);
   border-radius: var(--raio); background: var(--cor-superficie-2); border: 1px solid var(--cor-linha-forte);
