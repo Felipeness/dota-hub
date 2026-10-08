@@ -1,6 +1,5 @@
 /* Página da partida da busca ao vivo. Cada janela de tempo tem uma cor, a mesma no seletor, na faixa das curvas e na trilha do mapa. */
-.ao-vivo:has(> .partida) { max-width: 1200px; }
-.partida { display: grid; gap: var(--espaco-5); min-width: 0; }
+.partida { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-5); min-width: 0; }
 .partida h2 {
   margin: 0 0 var(--espaco-3); font-family: var(--fonte-display); font-size: 15px; font-weight: 600;
   letter-spacing: 0.1em; text-transform: uppercase; color: var(--cor-texto-3);

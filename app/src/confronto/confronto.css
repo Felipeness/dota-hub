@@ -1,6 +1,6 @@
 /* Confronto 1x1 */
 /* minmax(0, 1fr): sem isso a coluna implícita cresce até o min-content do resumo nowrap e estoura a página */
-.cf { max-width: 860px; margin: 0 auto; padding: var(--espaco-5) var(--espaco-4) var(--espaco-6); display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-5); }
+.cf { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-5); }
 .cf-topo h1 { font-size: clamp(32px, 7vw, 48px); letter-spacing: 0.01em; }
 .cf-sub { margin: var(--espaco-2) 0 0; color: var(--cor-texto-2); }
 
