@@ -93,7 +93,7 @@ function CartaoBanir({ ban, destaque }: { ban: Ban; destaque: boolean }) {
         )}
         {ban.leitura_contexto && <span className="chave-leitura">{ban.leitura_contexto}</span>}
         <span className="chave-selos">
-          <span className="chave-selo chave-selo-indicio">{ban.ban_confirma === true ? "confirmado" : "indício"}</span>
+          <span className={`chave-selo ${ban.ban_confirma === true ? "chave-selo-confirmado" : "chave-selo-indicio"}`}>{ban.ban_confirma === true ? "confirmado" : "indício"}</span>
           {ban.ban_confirma !== true && <span className={`chave-selo ${selo.classe}`}>{selo.texto}</span>}
           {ban.forca_contexto && <span className={`chave-selo ${SELO_DO_CONTEXTO[ban.forca_contexto].classe}`}>{SELO_DO_CONTEXTO[ban.forca_contexto].texto}</span>}
         </span>
@@ -137,6 +137,12 @@ function CartaoContra({ heroi }: { heroi: Chaves["herois_contra"][number] }) {
 
 type Lado = "vitoria" | "derrota";
 
+// correlacao: pode ser efeito do jogo (ex.: time já perdendo joga pior), não causa; provavel: o efeito se mantém mesmo controlando o estado do jogo aos 15 min.
+const CAUSALIDADE: Readonly<Record<string, { texto: string; classe: string; titulo: string }>> = {
+  correlacao: { texto: "correlação", classe: "chave-selo-indicio", titulo: "pode ser efeito do jogo (ex.: já estar perdendo), não causa" },
+  provavel: { texto: "provável causa", classe: "chave-selo-confirmado", titulo: "o efeito se mantém mesmo controlando o estado do jogo aos 15 min" },
+};
+
 // Positivo pesa mais para eles nos fatores de vitória; negativo, nos de derrota (CONTRATO_CHAVES.md).
 function comparacaoComLiga(vs: number, lado: Lado): string {
   const maisForte = lado === "vitoria" ? vs > 0 : vs < 0;
@@ -167,6 +173,19 @@ function CartaoFator({ fator, maior, lado }: { fator: FatorChave; maior: number;
         {temValor(fator.ic_baixo) && temValor(fator.ic_alto) ? ` · IC ${pct(fator.ic_baixo)} a ${pct(fator.ic_alto)}` : ""}
       </span>
       {temValor(fator.vs_liga_pp) && <span className="chave-liga">{comparacaoComLiga(fator.vs_liga_pp, lado)}</span>}
+      {fator.causalidade && (() => {
+        const selo = CAUSALIDADE[fator.causalidade] ?? { texto: fator.causalidade, classe: "chave-selo-nao", titulo: "" };
+        return (
+          <span className="chave-selos">
+            <span className={`chave-selo ${selo.classe}`} title={selo.titulo}>{selo.texto}</span>
+            {temValor(fator.efeito_dentro_estado_pp) && (
+              <span className="chave-papel">
+                mesmo em jogos no mesmo estado aos 15 min, o efeito continua em {pp(fator.efeito_dentro_estado_pp)}
+              </span>
+            )}
+          </span>
+        );
+      })()}
       <SeloConfianca confianca={fator.confianca} n={fator.n_com} />
     </li>
   );

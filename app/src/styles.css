@@ -900,7 +900,8 @@ button.pino:hover { transform: translate(-50%, -50%) scale(1.2); }
 .lane-contra { margin: 0; padding: var(--espaco-3); border-left: 3px solid var(--cor-destaque); background: var(--cor-destaque-fundo); font-size: 14px; line-height: 1.5; color: var(--cor-texto); }
 .lane-lista h4 { margin: 0 0 4px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cor-texto-3); }
 .lane-lista ul { margin: 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: 4px; font-size: 13px; line-height: 1.45; color: var(--cor-texto-2); }
-.lane-lista summary, .lane-detalhe summary { cursor: pointer; font-size: 12px; color: var(--cor-texto-3); }
+.lane-lista summary, .lane-detalhe summary, .atlas-detalhe summary { cursor: pointer; font-size: 12px; color: var(--cor-texto-3); }
+.atlas-detalhe { margin-top: 4px; }
 .lane-lista .lane-matchups { list-style: none; padding: 0; flex-direction: row; flex-wrap: wrap; }
 .lane-matchups li { padding: 2px 8px; border-radius: var(--raio-pilula); background: var(--cor-superficie-3); font-size: 12px; }
 

@@ -25,6 +25,18 @@ const ROTULO_GAMEPLAN: Readonly<Record<string, string>> = {
   smoke: "Smoke", objetivos: "Objetivos", lutas: "Lutas", win_condition: "Win condition",
 };
 const INICIO_PREPARO_S = -180;
+// Seção curta fica toda à vista; a partir daqui, só o primeiro parágrafo aparece e o resto some num "ver mais".
+const LIMIAR_RESUMO_SECAO = 500;
+
+// Corta no primeiro parágrafo em branco; sem um parágrafo curto por perto, corta na frase mais próxima do limiar.
+function dividirSecao(md: string): { resumo: string; resto: string } | null {
+  if (md.length <= LIMIAR_RESUMO_SECAO) return null;
+  const paragrafo = md.indexOf("\n\n");
+  if (paragrafo > 0 && paragrafo <= LIMIAR_RESUMO_SECAO * 2) return { resumo: md.slice(0, paragrafo), resto: md.slice(paragrafo) };
+  const fimDaFrase = md.indexOf(". ", LIMIAR_RESUMO_SECAO);
+  const corte = fimDaFrase > 0 && fimDaFrase <= LIMIAR_RESUMO_SECAO * 1.5 ? fimDaFrase + 1 : LIMIAR_RESUMO_SECAO;
+  return { resumo: md.slice(0, corte), resto: md.slice(corte) };
+}
 
 // Títulos do Markdown descem dois níveis (a seção já é h2) e tabela ganha rolagem própria em vez de alargar a página.
 const MARKDOWN: Components = {
@@ -209,13 +221,20 @@ function LanesDoTime({ id, nome }: { id: string; nome: string }) {
 }
 
 function SecaoDoTime({ secao }: { secao: Secao }) {
+  const divisao = dividirSecao(secao.texto_md);
   return (
     <section className="atlas-secao" aria-labelledby={`secao-${secao.id}`}>
       <div className="atlas-secao-topo">
         <h2 id={`secao-${secao.id}`}>{secao.titulo}</h2>
         <span className={`selo selo-confianca-${secao.confianca}`}>{ROTULO_CONFIANCA[secao.confianca]}</span>
       </div>
-      <div className="painel-texto atlas-md"><ReactMarkdown remarkPlugins={[remarkGfm]} components={MARKDOWN}>{secao.texto_md}</ReactMarkdown></div>
+      <div className="painel-texto atlas-md"><ReactMarkdown remarkPlugins={[remarkGfm]} components={MARKDOWN}>{divisao ? divisao.resumo : secao.texto_md}</ReactMarkdown></div>
+      {divisao && (
+        <details className="atlas-detalhe">
+          <summary>Leitura completa</summary>
+          <div className="painel-texto atlas-md"><ReactMarkdown remarkPlugins={[remarkGfm]} components={MARKDOWN}>{divisao.resto}</ReactMarkdown></div>
+        </details>
+      )}
     </section>
   );
 }
