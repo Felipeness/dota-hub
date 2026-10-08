@@ -621,6 +621,10 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .partidas > li > a { display: flex; align-items: center; flex-wrap: wrap; gap: 0 4px; min-height: var(--alvo-toque); padding: var(--espaco-2) var(--espaco-3); border: 1px solid var(--cor-linha); border-radius: var(--raio-pequeno); background: var(--cor-superficie); color: var(--cor-texto-2); text-decoration: none; }
 .partidas > li > a strong { color: var(--cor-texto); }
 .partidas > li > a:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
+.conta-heroi-retrato { width: 32px; height: 24px; border-radius: 4px; object-fit: cover; font-size: 11px; flex: none; }
+.conta-heroi-nome { display: flex; align-items: center; gap: var(--espaco-1); }
+.ao-vivo-conta-id { font-size: 12px; color: var(--cor-texto-3); font-variant-numeric: tabular-nums; }
+.conta-partida-parcial { color: var(--cor-texto-3); font-size: 12px; }
 .busca li.busca-nada { display: block; padding: var(--espaco-3); font-size: 14px; }
 .busca li.busca-nada:hover { background: none; }
 .busca li.atalho-ao-vivo { grid-template-columns: minmax(0, 1fr); border-top: 1px solid var(--cor-linha); }
