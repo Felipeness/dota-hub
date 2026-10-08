@@ -4,7 +4,8 @@ import type { Fila } from "../fila";
 import { registrarNoConsole, type Registrar, type Registro } from "../registro";
 
 export const BASE_OPENDOTA = "https://api.opendota.com/api";
-const TEMPO_MAXIMO_MS = 4_000;
+/** Em 07/10/2026 o /search do OpenDota levou 17 s numa busca nova (os outros endpoints, menos de 1 s); com 4 s a busca por nome falhava. */
+const TEMPO_MAXIMO_MS = 20_000;
 const MAXIMO_DE_TENTATIVAS = 3;
 /** Em 06/10/2026 o 429 por minuto veio com {"error":"minute rate limit exceeded"}; o do dia não foi visto, então casa "day" ou "daily". */
 const LIMITE_DO_DIA = /\bday\b|daily/i;
