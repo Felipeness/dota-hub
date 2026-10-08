@@ -90,7 +90,8 @@ def _guia(d: dict) -> dict:
         "bom_quando": q["bom_quando"], "evitar_quando": q["evitar_quando"], "momento_do_draft": q["momento_do_draft"],
         "lane": {"objetivo": lane["objetivo"], "itens_iniciais": lane["itens_iniciais"], "dicas": lane["dicas"]},
         "skill_build": [{"nivel": s["nivel"], "skill": s["skill"]} for s in d["skill_build"]],
-        "itens_core": [{"item": i["item"], "nome": i["nome"], "minuto_alvo": _numero(i["minuto_alvo"]), "base": i["base_do_numero"]}
+        "itens_core": [{"item": i["item"], "nome_curto": _nome_item(i["item"]), "nome": i["nome"],
+                        "minuto_alvo": _numero(i["minuto_alvo"]), "base": i["base_do_numero"]}
                        for i in itens["core"]],
         "itens_situacionais": [{"item": i["item"], "nome": i.get("nome") or _nome_item(i["item"]), "quando": i["quando"]}
                                for i in itens["situacionais"]],

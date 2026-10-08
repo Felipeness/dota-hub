@@ -1,12 +1,15 @@
 import { useState, type ReactNode } from "react";
 import { Link } from "react-router";
-import { indiceSchema, rotaSchema, rotasResumoSchema, type ConteudoItem, type Fase, type Heroi, type Objetivo } from "../data/schemas";
+import { indiceSchema, minutoComoTexto, rotaSchema, rotasResumoSchema, type ConteudoItem, type Fase, type Heroi, type Objetivo } from "../data/schemas";
 import { Indisponivel, useData } from "../data/useData";
+import { IconeOuIniciais } from "../live/partida/BuildDaPartida";
 import { ListaPassos } from "../routes/RouteDetail";
 import type { Lado } from "../routes/filtros";
 import { MapView } from "../map/MapView";
 import { objetivosDosPassos, variacoesDaFase } from "./fases";
-import { destaquesDoHeroi, dividirResumo, urlDoRetrato } from "./resumo";
+import { destaquesDoHeroi, dividirResumo, itensCoreNaLinhaDoTempo, urlDoRetrato } from "./resumo";
+
+const urlDoIconeDeItem = (item: string) => `/data/retratos/itens/${item}.webp`;
 
 const ABAS = { guia: "Guia", spikes: "Power spikes", rotas: "Rotas", pros: "Pros", roshan: "Roshan" } as const;
 type Aba = keyof typeof ABAS;
@@ -18,10 +21,13 @@ const numero = (n: number) => n.toLocaleString("pt-BR");
 
 const Lista = ({ itens }: { itens: readonly string[] }) => <ul>{itens.map((i) => <li key={i}>{i}</li>)}</ul>;
 
-function Secao({ titulo, aberta = false, children }: { titulo: string; aberta?: boolean; children: ReactNode }) {
+type SecaoProps = { titulo: string; aberta?: boolean; contagem?: number; children: ReactNode };
+
+/** Seção fechada sem contagem no título é indistinguível de uma seção vazia; por isso o número no resumo. */
+function Secao({ titulo, aberta = false, contagem, children }: SecaoProps) {
   return (
     <details className="recolhivel" open={aberta}>
-      <summary><h3 className="sobretitulo">{titulo}</h3></summary>
+      <summary><h3 className="sobretitulo">{titulo}{contagem !== undefined && ` (${contagem})`}</h3></summary>
       {children}
     </details>
   );
@@ -46,32 +52,70 @@ function Fontes({ heroi }: { heroi: Heroi }) {
   return (
     <details className="recolhivel fonte">
       <summary>Fontes e confiança</summary>
-      <p>Patch {heroi.patch}. Confiança: {heroi.confianca} Fontes: {heroi.fontes.join("; ")}</p>
+      <p>Patch {heroi.patch}. Confiança: {heroi.confianca}. Fontes: {heroi.fontes.join("; ")}</p>
     </details>
+  );
+}
+
+/** Um item da build: ícone, nome curto e minuto num resumo escaneável; a estatística completa fica atrás de "ver detalhe". */
+function ItemDaBuild({ item }: { item: Heroi["guia"]["itens_core"][number] }) {
+  return (
+    <li>
+      <IconeOuIniciais src={urlDoIconeDeItem(item.item)} nome={item.nome_curto} classe="build-icone" />
+      <div>
+        <strong>{item.nome_curto}</strong>{" "}
+        <span className="tempo">{item.minuto_alvo === null ? "sem minuto" : minutoComoTexto(item.minuto_alvo)}</span>
+        <details className="recolhivel">
+          <summary>Ver detalhe (tempo dos pros, D2PT e sua média)</summary>
+          <p>{item.nome}</p>
+          <p>{item.base}</p>
+        </details>
+      </div>
+    </li>
+  );
+}
+
+function Situacional({ item }: { item: Heroi["guia"]["itens_situacionais"][number] }) {
+  return (
+    <li>
+      <IconeOuIniciais src={urlDoIconeDeItem(item.item)} nome={item.nome} classe="build-icone" />
+      <div><strong>{item.nome}</strong><p>{item.quando}</p></div>
+    </li>
   );
 }
 
 function AbaGuia({ heroi }: { heroi: Heroi }) {
   const { guia } = heroi;
+  const itensDaBuild = itensCoreNaLinhaDoTempo(guia.itens_core);
   return (
     <div className="painel-texto">
-      <Secao titulo="Quando pegar" aberta><Lista itens={guia.bom_quando} /></Secao>
-      <Secao titulo="Quando evitar"><Lista itens={guia.evitar_quando} /><p>{guia.momento_do_draft}</p></Secao>
-      <Secao titulo="Lane"><p>{guia.lane.objetivo}</p><Lista itens={guia.lane.itens_iniciais} /><Lista itens={guia.lane.dicas} /></Secao>
-      <Secao titulo="Quando começar a farmar a selva"><p>{guia.condicao_para_farmar.explicacao}</p></Secao>
-      <Secao titulo="Itens">
-        <ol>{guia.itens_core.map((i) => (
-          <li key={i.nome}><strong>{i.nome}</strong>{i.minuto_alvo !== null && ` · ${numero(i.minuto_alvo)} min`}<small> {i.base}</small></li>
-        ))}</ol>
+      <Secao titulo="Quando pegar" aberta contagem={guia.bom_quando.length}><Lista itens={guia.bom_quando} /></Secao>
+      <Secao titulo="Quando evitar" aberta contagem={guia.evitar_quando.length}>
+        <Lista itens={guia.evitar_quando} />
+        <h4 className="sobretitulo">Momento do draft</h4>
+        <p>{guia.momento_do_draft}</p>
       </Secao>
-      <Secao titulo="Situacionais">
-        <ul>{guia.itens_situacionais.map((i) => <li key={i.nome}><strong>{i.nome}</strong>: {i.quando}</li>)}</ul>
+      <Secao titulo="Lane">
+        <p>{guia.lane.objetivo}</p>
+        <h4 className="sobretitulo">Itens iniciais</h4>
+        <Lista itens={guia.lane.itens_iniciais} />
+        <h4 className="sobretitulo">Dicas de lane</h4>
+        <Lista itens={guia.lane.dicas} />
+      </Secao>
+      <Secao titulo="Quando começar a farmar a selva"><p>{guia.condicao_para_farmar.explicacao}</p></Secao>
+      <Secao titulo="Itens" aberta contagem={itensDaBuild.length}>
+        <p className="painel-nota">Linha do tempo da build, do item mais cedo ao mais tarde. O minuto é o alvo observado nos replays dos pros.</p>
+        <ol className="cartoes-texto">{itensDaBuild.map((i) => <ItemDaBuild key={i.item} item={i} />)}</ol>
+      </Secao>
+      <Secao titulo="Situacionais" contagem={guia.itens_situacionais.length}>
+        <p className="painel-nota">Contra quem ou quando pegar cada item em vez da build padrão.</p>
+        <ul className="cartoes-texto">{guia.itens_situacionais.map((i) => <Situacional key={i.item} item={i} />)}</ul>
       </Secao>
       <Secao titulo="Habilidades">
         <ol>{guia.skill_build.map((s) => <li key={`${s.nivel}-${s.skill}`}>Nível {s.nivel}: {s.skill}</li>)}</ol>
       </Secao>
       <Secao titulo="Depois dos 20 min"><Lista itens={guia.depois_dos_20} /></Secao>
-      <Secao titulo="Erros comuns"><Lista itens={guia.erros_comuns} /></Secao>
+      <Secao titulo="Erros comuns" contagem={guia.erros_comuns.length}><Lista itens={guia.erros_comuns} /></Secao>
     </div>
   );
 }
@@ -87,16 +131,21 @@ function AbaSpikes({ heroi }: { heroi: Heroi }) {
           </li>
         ))}
       </ol>
-      {heroi.por_minuto && (
-        <div className="tabela-rolavel">
-          <table>
-            <thead><tr><th>Min</th><th>Nível</th><th>Habilidade</th><th>Item</th><th>Objetivo de farm</th></tr></thead>
-            <tbody>{heroi.por_minuto.map((m) => (
-              <tr key={m.minuto}><td>{m.minuto}</td><td>{m.nivel}</td><td>{m.habilidade}</td><td>{m.item}</td><td>{m.objetivo_farm}</td></tr>
-            ))}</tbody>
-          </table>
-        </div>
-      )}
+      {heroi.por_minuto
+        ? (
+          <div className="tabela-rolavel">
+            <table>
+              <thead><tr><th>Min</th><th>Nível</th><th>Habilidade</th><th>Item</th><th>Próximo marco</th><th>Objetivo de farm</th></tr></thead>
+              <tbody>{heroi.por_minuto.map((m) => (
+                <tr key={m.minuto}>
+                  <td>{m.minuto}</td><td>{m.nivel}</td><td>{m.habilidade}</td><td>{m.item}</td>
+                  <td>{m.proximo_spike}</td><td>{m.objetivo_farm}</td>
+                </tr>
+              ))}</tbody>
+            </table>
+          </div>
+        )
+        : <p className="painel-nota">Tabela minuto a minuto ainda não disponível para este herói.</p>}
     </>
   );
 }
@@ -217,10 +266,12 @@ export function FichaHeroi({ heroi, objetivos, solos, roshan }: Props) {
       <Topo heroi={heroi} />
       <div role="tablist" className="abas-pilula">
         {(Object.keys(ABAS) as Aba[]).map((a) => (
-          <button key={a} role="tab" aria-selected={aba === a} onClick={() => setAba(a)}>{ABAS[a]}</button>
+          <button key={a} id={`aba-${a}`} role="tab" aria-selected={aba === a} aria-controls={`painel-${a}`} onClick={() => setAba(a)}>
+            {ABAS[a]}
+          </button>
         ))}
       </div>
-      <div role="tabpanel">{conteudo[aba]()}</div>
+      <div role="tabpanel" id={`painel-${aba}`} aria-labelledby={`aba-${aba}`}>{conteudo[aba]()}</div>
       <Fontes heroi={heroi} />
     </article>
   );

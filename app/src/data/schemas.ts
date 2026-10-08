@@ -135,7 +135,9 @@ export const heroiSchema = heroiResumoSchema.omit({ tem_por_minuto: true }).exte
     bom_quando: textos, evitar_quando: textos, momento_do_draft: z.string(),
     lane: z.object({ objetivo: z.string(), itens_iniciais: textos, dicas: textos }),
     skill_build: z.array(z.object({ nivel: z.union([z.number(), z.string()]), skill: z.string() })),
-    itens_core: z.array(z.object({ item: z.string(), nome: z.string(), minuto_alvo: z.number().nullable(), base: z.string() })),
+    itens_core: z.array(z.object({
+      item: z.string(), nome_curto: z.string(), nome: z.string(), minuto_alvo: z.number().nullable(), base: z.string(),
+    })),
     itens_situacionais: z.array(z.object({ item: z.string(), nome: z.string(), quando: z.string() })),
     condicao_para_farmar: z.object({ nivel: z.union([z.number(), z.string()]), minuto_tipico: z.number().nullable(), explicacao: z.string() }),
     depois_dos_20: textos, erros_comuns: textos,

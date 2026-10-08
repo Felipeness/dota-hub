@@ -19,6 +19,40 @@ const heroi: Heroi = {
   pros: { linhas: [{ jogador: "Satanic", jogos: 5, vitorias: 3, lh10: 62 }], leitura: null }, fontes: ["herodata"],
 };
 
+it("mostra a lista de 'quando evitar' aberta e com contagem, mesmo quando o texto é longo", () => {
+  const comEvitar: Heroi = {
+    ...heroi,
+    guia: { ...heroi.guia, evitar_quando: ["Contra silêncio longo.", "Sem salvamento contra iniciação em grupo."] },
+  };
+  render(<MemoryRouter><FichaHeroi heroi={comEvitar} objetivos={[]} solos={[]} /></MemoryRouter>);
+  expect(screen.getByText("Quando evitar (2)")).toBeInTheDocument();
+  expect(screen.getByText("Contra silêncio longo.")).toBeVisible();
+  expect(screen.getByText("Sem salvamento contra iniciação em grupo.")).toBeVisible();
+});
+
+it("mostra o item da build com nome curto e ícone, não o texto longo do guia", () => {
+  const comItem: Heroi = {
+    ...heroi,
+    guia: {
+      ...heroi.guia,
+      itens_core: [{
+        item: "manta", nome_curto: "Manta Style",
+        nome: "Manta Style (4.650: Yasha + Diadem), alvo 18:35", minuto_alvo: 18.6, base: "Pros 18:36 (58 de 63 jogos).",
+      }],
+    },
+  };
+  render(<MemoryRouter><FichaHeroi heroi={comItem} objetivos={[]} solos={[]} /></MemoryRouter>);
+  expect(screen.getAllByText("Manta Style").length).toBeGreaterThan(0);
+  expect(screen.getAllByText("18:36").length).toBeGreaterThan(0);
+  expect(screen.queryByText(/4\.650: Yasha \+ Diadem/)).not.toBeVisible();
+});
+
+it("avisa quando não há tabela minuto a minuto para o herói", () => {
+  render(<MemoryRouter><FichaHeroi heroi={heroi} objetivos={[]} solos={[]} /></MemoryRouter>);
+  fireEvent.click(screen.getByRole("tab", { name: "Power spikes" }));
+  expect(screen.getByText("Tabela minuto a minuto ainda não disponível para este herói.")).toBeInTheDocument();
+});
+
 it("mostra o guia e troca para power spikes e pros", () => {
   render(<MemoryRouter><FichaHeroi heroi={heroi} objetivos={[]} solos={[]} /></MemoryRouter>);
   expect(screen.getByText("Carry de jogo longo.")).toBeInTheDocument();
