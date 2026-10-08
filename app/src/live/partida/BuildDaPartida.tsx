@@ -131,6 +131,7 @@ function SkillBuild({ habilidades }: { habilidades: readonly NivelDeHabilidade[]
   const linhas = [...new Map(habilidades.filter((h) => !h.talento).map((h) => [h.chave, h.nome])).entries()];
   const talentos = habilidades.filter((h) => h.talento);
   const niveis = habilidades.map((h) => h.nivel);
+  const talentoNoNivel = new Map(talentos.map((t) => [t.nivel, t.nome]));
   return (
     <div className="build-bloco">
       <h3>Skill build</h3>
@@ -144,6 +145,15 @@ function SkillBuild({ habilidades }: { habilidades: readonly NivelDeHabilidade[]
                 {habilidades.map((h) => <td key={h.nivel}>{h.chave === chave ? <span className="build-ponto" aria-label={`nível ${h.nivel}`}>●</span> : ""}</td>)}
               </tr>
             ))}
+            {talentos.length > 0 && (
+              <tr>
+                <th scope="row"><span className="build-habilidade"><span className="iniciais">TA</span>Talento</span></th>
+                {niveis.map((n) => {
+                  const talento = talentoNoNivel.get(n);
+                  return <td key={n}>{talento ? <span className="build-ponto talento" aria-label={`nível ${n}: ${talento}`} title={talento}>●</span> : ""}</td>;
+                })}
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
