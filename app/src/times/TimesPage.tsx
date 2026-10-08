@@ -5,7 +5,7 @@ import { CAMINHO_INDICE, indiceAtlasSchema, type Classificacao, type Cluster, ty
 
 export function SeloAmostra({ nivel }: { nivel: TimeNoIndice["amostra"] }) {
   if (nivel !== "low") return null;
-  return <span className="selo selo-amostra-baixa" title="Poucas partidas: confiança reduzida">LOW SAMPLE</span>;
+  return <span className="selo selo-amostra-baixa" title="Poucas partidas: confiança reduzida">AMOSTRA BAIXA</span>;
 }
 
 export function SeloFronteira({ classificacao }: { classificacao: Classificacao }) {

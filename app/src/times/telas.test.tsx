@@ -33,14 +33,14 @@ function abrir(caminho: string, arquivos = ARQUIVOS) {
 
 afterEach(() => vi.unstubAllGlobals());
 
-it("a grade mostra os times com estilo, amostra e o selo LOW SAMPLE só no de amostra pequena", async () => {
+it("a grade mostra os times com estilo, amostra e o selo AMOSTRA BAIXA só no de amostra pequena", async () => {
   abrir("/times");
   const a = await screen.findByRole("link", { name: /Time Exemplo A/ });
   const b = screen.getByRole("link", { name: /Time Exemplo B/ });
   expect(a).toHaveAttribute("href", "/times/time-exemplo-a");
   expect(within(a).getByText(/40 partidas · 32 replays/)).toBeInTheDocument();
-  expect(within(a).queryByText("LOW SAMPLE")).toBeNull();
-  expect(within(b).getByText("LOW SAMPLE")).toBeInTheDocument();
+  expect(within(a).queryByText("AMOSTRA BAIXA")).toBeNull();
+  expect(within(b).getByText("AMOSTRA BAIXA")).toBeInTheDocument();
 });
 
 it("o mapa de estilos usa os eixos do índice e troca de eixo pelo seletor", async () => {
@@ -197,7 +197,7 @@ describe("tela do time", () => {
 
   it("mostra resumo, como jogar contra, assinatura e seções com o selo de confiança", async () => {
     abrir("/times/time-exemplo-b");
-    expect(await screen.findByRole("heading", { level: 1, name: /Time Exemplo B/ })).toHaveTextContent("LOW SAMPLE");
+    expect(await screen.findByRole("heading", { level: 1, name: /Time Exemplo B/ })).toHaveTextContent("AMOSTRA BAIXA");
     const contra = screen.getByRole("region", { name: "Como jogar contra" });
     expect(within(contra).getByText("Win condition")).toBeInTheDocument();
     expect(screen.getByRole("region", { name: "Assinatura temporal" })).toHaveTextContent("primeira rotação do pos 4");

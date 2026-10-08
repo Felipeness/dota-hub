@@ -23,7 +23,7 @@ export function PlayersPage() {
       <section><h2>Times</h2>
         {times.estado === "indisponivel" && <Indisponivel motivo={times.motivo} />}
         {times.estado === "ok" && <ul className="cartoes">{times.dados.map((t) => (
-          <li key={t.id}><Link to={`/jogadores/times/${t.id}`}><strong>{t.nome}</strong><span>{t.jogadores.length} jogador(es) nas análises</span></Link></li>
+          <li key={t.id}><Link to={`/jogadores/times/${t.id}`}><strong>{t.nome}</strong><span>{t.jogadores.length === 1 ? "1 jogador nas análises" : `${t.jogadores.length} jogadores nas análises`}</span></Link></li>
         ))}</ul>}
       </section>
     </section>
