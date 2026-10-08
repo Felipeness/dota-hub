@@ -65,3 +65,12 @@ it("pede heróis diferentes quando os dois são iguais", async () => {
   abrir("/confronto/slark/slark");
   expect(await screen.findByText("Escolha dois heróis diferentes.")).toBeInTheDocument();
 });
+
+it("Morphling contra Axe: o cartão do controle mostra o Manta no tempo certo e o Shard, com fonte", async () => {
+  abrir("/confronto/morphling/axe");
+  const porque = await screen.findByRole("region", { name: /Por que/ });
+  expect(within(porque).getByText(/Ative o Manta no fim da conjuração do Call/)).toBeInTheDocument();
+  expect(within(porque).getByText(/sai da faixa do Culling Blade/)).toBeInTheDocument();
+  expect(within(porque).getByText(/Aperte entre 0,2 s e 0,3 s/)).toBeInTheDocument();
+  expect(within(porque).getByRole("link", { name: "dota2.fandom.com, Manta_Style" })).toHaveAttribute("href", "https://dota2.fandom.com/wiki/Manta_Style");
+});

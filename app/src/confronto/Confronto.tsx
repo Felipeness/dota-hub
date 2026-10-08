@@ -8,6 +8,7 @@ import type { PopularidadeFonte } from "./fonte";
 import { dicasDoConfronto, trechosDoGuia, type Dica, type Fase } from "./dicas";
 import { analisarMecanicas, itensDoConfronto, type Achado } from "./mecanicas";
 import { urlDoItem, type Heroi, type Item } from "./modelo";
+import type { Recurso } from "./respostas";
 import { vantagem, vezesComprado, type Vantagem, type Veredito } from "./vantagem";
 
 type Props = Readonly<{ meu: Heroi; inimigo: Heroi; itens: ReadonlyMap<string, Item> }>;
@@ -23,7 +24,7 @@ export function Confronto({ meu, inimigo, itens }: Props) {
       <BlocoDicas meu={meu} inimigo={inimigo} />
       <BlocoGuias meu={meu} inimigo={inimigo} />
       <p className="cf-fontes">
-        Fontes: OpenDota (constants/heroes, hero_abilities, abilities e items; heroes/{meu.id}/matchups e itemPopularity) e os guias do Hub.
+        Fontes: OpenDota (constants/heroes, hero_abilities, abilities, items e aghs_desc; heroes/{meu.id}/matchups e itemPopularity) e os guias do Hub.
         Os textos entre aspas são do próprio jogo, em inglês, como o OpenDota entrega.
       </p>
     </>
@@ -98,12 +99,42 @@ function BlocoMecanicas({ inimigo, achados }: { inimigo: Heroi; achados: readonl
               {a.trunfos.length > 0 && (
                 <p className="cf-trunfo">Do seu lado: {a.trunfos.map((t) => `${t.habilidade} (${t.trecho})`).join("; ")}</p>
               )}
+              {a.recursos.length > 0 && (
+                <ul className="cf-provas">
+                  {a.recursos.map((r) => <li key={r.id}><RecursoView recurso={r} /></li>)}
+                </ul>
+              )}
               <small className="cf-fonte">Fonte: OpenDota, constants/abilities (descrição, atributos, bkbpierce e dispellable).</small>
             </details>
           </li>
         ))}
       </ul>
     </section>
+  );
+}
+
+function rotuloDaFonte(url: string): string {
+  const { hostname, pathname } = new URL(url);
+  const fim = pathname.split("/").filter(Boolean).at(-1);
+  return fim ? `${hostname}, ${fim}` : hostname;
+}
+
+function RecursoView({ recurso }: { recurso: Recurso }) {
+  return (
+    <>
+      <p><b>{recurso.rotulo}</b>: {recurso.resumo}</p>
+      <details className="cf-detalhe">
+        <summary>Por que e de onde vem</summary>
+        {recurso.detalhes.map((d) => <p key={d}>{d}</p>)}
+        {recurso.prova && <p>“{recurso.prova}”</p>}
+        <small className="cf-fonte">
+          {recurso.patch ? `Conferido no patch ${recurso.patch}. ` : ""}Fontes:{" "}
+          {recurso.fontes.map((f, i) => (
+            <span key={f}>{i > 0 && "; "}<a href={f} target="_blank" rel="noreferrer">{rotuloDaFonte(f)}</a></span>
+          ))}
+        </small>
+      </details>
+    </>
   );
 }
 
