@@ -113,15 +113,20 @@ def _painel_de_replay(partidas: list[dict]) -> dict:
     rotulos = [f"{p['data']} {p['heroi']}" for p in partidas]
     return {"id": slug(nome), "nome": nome, "tipo": "pro",
             "time": next((p["time"].strip() for p in partidas if p.get("time")), None),
-            "amostra": f"{len(partidas)} replay(s) de liga lidos segundo a segundo", "fontes": [FONTE_PADROES],
+            "amostra": f"{len(partidas)} {'replay' if len(partidas) == 1 else 'replays'} de liga "
+                       f"{'lido' if len(partidas) == 1 else 'lidos'} segundo a segundo",
+            "fontes": [FONTE_PADROES],
             "destaques": [destaque("Replays lidos", len(partidas), "jogos", FONTE_PADROES),
-                          destaque("Vitórias", sum(p["resultado"] == "vitória" for p in partidas), "jogos", FONTE_PADROES)],
+                          destaque("Vitórias", sum(p["resultado"] == "vitória" for p in partidas), "vitórias", FONTE_PADROES)],
             "graficos": [{"id": "farm_por_replay", "titulo": "Last hits de lane e de neutro por replay", "tipo": "barra",
                           "x": {"rotulo": "partida", "valores": rotulos},
                           "series": [{"nome": "Lane", "valores": [p["lh_lane"] for p in partidas]},
                                      {"nome": "Neutros", "valores": [p["lh_neutro"] for p in partidas]}],
                           "unidade": "last hits", "fonte": FONTE_PADROES, "nota": "minutos 4 a 30 de cada replay"}],
-            "achados": [], "replays": sorted({str(p["match_id"]) for p in partidas})}
+            "achados": [{"texto": f"Amostra pequena ({len(partidas)} "
+                                   f"{'replay' if len(partidas) == 1 else 'replays'}): dá para ver os números, "
+                                   "mas não para tirar um padrão confiável do jogo dele.", "fonte": FONTE_PADROES}],
+            "replays": sorted({str(p["match_id"]) for p in partidas})}
 
 
 def pros_de_replay() -> list[dict]:
@@ -138,12 +143,15 @@ def indice(paineis: list[dict]) -> list[dict]:
 
 
 def times(paineis: list[dict]) -> list[dict]:
+    time_atual = {p["id"]: p["time"].strip() for p in paineis if p["time"]}
     membros: dict[str, set[str]] = defaultdict(set)
-    for painel in paineis:
-        if painel["time"]:
-            membros[painel["time"].strip()].add(painel["id"])
+    for id_, nome in time_atual.items():
+        membros[nome].add(id_)
     for chave, lista in _compare()["times_nas_partidas"].items():
         for nome, _ in lista:
-            membros[nome.strip()].add(chave)
+            nome = nome.strip()
+            if chave in time_atual and nome != time_atual[chave]:
+                continue  # time antigo do jogador: o painel dele já mostra o time atual
+            membros[nome].add(chave)
     return [{"id": slug(nome), "nome": nome, "jogadores": sorted(ids), "fonte": f"{FONTE_COMPARE}; {FONTE_PADROES}"}
             for nome, ids in sorted(membros.items())]
