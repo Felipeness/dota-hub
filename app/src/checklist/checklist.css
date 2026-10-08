@@ -1,0 +1,36 @@
+/* Checklist de pré e pós jogo por herói: resumo na linha, porquê no <details>, sem JS extra pra abrir/fechar. */
+.checklist-heroi, .checklist-lista { display: grid; gap: var(--espaco-5); min-width: 0; }
+.checklist-legenda { margin: 0 0 var(--espaco-2); font-size: 13px; color: var(--cor-texto-3); max-width: 70ch; }
+
+.checklist-itens { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--espaco-2); }
+.checklist-item {
+  border: 1px solid var(--cor-linha); border-left: 3px solid var(--cor-linha-forte);
+  border-radius: var(--raio-pequeno); background: var(--cor-superficie-2);
+}
+.checklist-item summary {
+  display: flex; align-items: center; gap: var(--espaco-2); flex-wrap: wrap; cursor: pointer;
+  padding: var(--espaco-2) var(--espaco-3); font-size: 14px; color: var(--cor-texto-2); list-style: none;
+}
+.checklist-item summary::-webkit-details-marker { display: none; }
+.checklist-item p { margin: 0; padding: 0 var(--espaco-3) var(--espaco-3); font-size: 13px; line-height: 1.5; color: var(--cor-texto-3); }
+.checklist-marca { font-family: var(--fonte-num); font-weight: 700; width: 1.2em; text-align: center; flex: none; }
+.check-ok { border-left-color: var(--cor-radiant); }
+.check-ok .checklist-marca { color: var(--cor-radiant); }
+.check-falhou { border-left-color: var(--cor-dire); }
+.check-falhou .checklist-marca { color: var(--cor-dire); }
+.check-neutro .checklist-marca { color: var(--cor-texto-3); }
+.checklist-feito {
+  margin-left: auto; border-radius: var(--raio-pilula); font-size: 12px; padding: 2px var(--espaco-3);
+}
+.checklist-feito[aria-pressed="true"] { background: var(--cor-radiant); color: var(--cor-fundo); }
+
+.checklist-form { display: grid; gap: var(--espaco-2); margin-bottom: var(--espaco-3); max-width: 420px; }
+.checklist-form label { display: grid; gap: 4px; font-size: 13px; color: var(--cor-texto-2); }
+.checklist-recentes { margin: 0 0 var(--espaco-3); padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: var(--espaco-2); }
+.checklist-recentes button { border-radius: var(--raio-pilula); font-size: 12px; padding: 4px var(--espaco-3); }
+.checklist-vazio { font-size: 13px; color: var(--cor-texto-3); }
+
+@media (max-width: 480px) {
+  .checklist-item summary { font-size: 13px; }
+  .checklist-feito { margin-left: 0; }
+}

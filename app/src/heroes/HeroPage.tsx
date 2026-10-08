@@ -13,5 +13,6 @@ export function HeroPage() {
   if (heroi.estado === "indisponivel") return <Indisponivel motivo={heroi.motivo} />;
   const doHeroi = dadosOuVazio(solos).filter((s) => s.extras["heroi"] === heroi.dados.nome);
   return <><FichaHeroi heroi={heroi.dados} objetivos={dadosOuVazio(objetivos)} solos={doHeroi} roshan={<SoloRoshan solos={doHeroi} />} />
-    <p><Link to={`/confronto?contra=${heroi.dados.hero_id}`}>Como jogar contra {heroi.dados.nome}</Link></p></>;
+    <p><Link to={`/confronto?contra=${heroi.dados.hero_id}`}>Como jogar contra {heroi.dados.nome}</Link></p>
+    <p><Link to={`/checklist/${heroi.dados.id}`}>Checklist de antes e depois da partida</Link></p></>;
 }
