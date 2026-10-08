@@ -38,6 +38,7 @@ it("mostra o item da build com nome curto e ícone, não o texto longo do guia",
       itens_core: [{
         item: "manta", nome_curto: "Manta Style",
         nome: "Manta Style (4.650: Yasha + Diadem), alvo 18:35", minuto_alvo: 18.6, base: "Pros 18:36 (58 de 63 jogos).",
+        porque: null,
       }],
     },
   };
