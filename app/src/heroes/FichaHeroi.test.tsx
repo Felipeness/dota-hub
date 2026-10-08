@@ -38,7 +38,7 @@ it("mostra o item da build com nome curto e ícone, não o texto longo do guia",
       itens_core: [{
         item: "manta", nome_curto: "Manta Style",
         nome: "Manta Style (4.650: Yasha + Diadem), alvo 18:35", minuto_alvo: 18.6, base: "Pros 18:36 (58 de 63 jogos).",
-        porque: null,
+        spike: null, porque: null,
       }],
     },
   };
@@ -117,4 +117,50 @@ it("aba Rotas mostra só os alvos da fase e troca para a rota da situação", as
 
 it("devolve o fetch original depois de um teste que o trocou", () => {
   expect(globalThis.fetch).toBe(fetchOriginal);
+});
+
+describe("porquê de cada item", () => {
+  const porque = {
+    texto: "Duas imagens limpam a wave.", detalhe: "2 imagens por 18 s.", contra: "Silencer: o dispel tira o Global Silence.",
+    combo: "Manta + Vladmir's.", fontes: ["items.json do OpenDota (patch 7.41)", "https://liquipedia.net/dota2/Manta_Style"],
+  };
+  const manta = {
+    item: "manta", nome_curto: "Manta Style", nome: "Manta Style, alvo 18:35", minuto_alvo: 18.6, base: "Pros 18:36.",
+    spike: { texto: "Farm acelera.", fonte: "Power spike: Manta (18:36)" }, porque,
+  };
+  const comPorque: Heroi = {
+    ...heroi,
+    guia: { ...heroi.guia, itens_core: [manta], itens_situacionais: [{ item: "sphere", nome: "Linken's Sphere", quando: "Contra Lion.", porque }] },
+  };
+
+  it("mostra a frase pesquisada visível e guarda detalhe, contra, combo e fontes no 'ver detalhe'", () => {
+    render(<MemoryRouter><FichaHeroi heroi={comPorque} objetivos={[]} solos={[]} /></MemoryRouter>);
+    const [core] = screen.getAllByText("Duas imagens limpam a wave.");
+    expect(core).toBeVisible();
+    const [contra] = screen.getAllByText("Resolve contra:");
+    const [verDetalhe] = screen.getAllByText("Ver detalhe");
+    if (!verDetalhe) throw new Error("item sem 'ver detalhe'");
+    expect(contra).not.toBeVisible();
+    fireEvent.click(verDetalhe);
+    expect(contra).toBeVisible();
+    expect(screen.getAllByText("Silencer: o dispel tira o Global Silence.")[0]).toBeVisible();
+    expect(screen.getByText("Farm acelera.")).toBeVisible();
+    expect(screen.getAllByRole("link", { name: "liquipedia.net/dota2/Manta_Style" })[0]).toHaveAttribute("href", "https://liquipedia.net/dota2/Manta_Style");
+  });
+
+  it("sem pesquisa, o power spike volta a ser o porquê principal", () => {
+    const soSpike: Heroi = { ...heroi, guia: { ...heroi.guia, itens_core: [{ ...manta, porque: null }] } };
+    render(<MemoryRouter><FichaHeroi heroi={soSpike} objetivos={[]} solos={[]} /></MemoryRouter>);
+    expect(screen.getByText("Farm acelera.")).toBeVisible();
+    expect(screen.queryByText("Resolve contra:")).not.toBeInTheDocument();
+  });
+
+  it("situacional em cartão com o mesmo padrão", () => {
+    render(<MemoryRouter><FichaHeroi heroi={comPorque} objetivos={[]} solos={[]} /></MemoryRouter>);
+    const cartao = screen.getByText("Linken's Sphere").closest("li");
+    if (!cartao) throw new Error("situacional fora de cartão");
+    expect(within(cartao).getByText("Contra Lion.")).toBeInTheDocument();
+    expect(within(cartao).getByText("Duas imagens limpam a wave.")).toBeInTheDocument();
+    expect(within(cartao).getByText("Resolve contra:")).toBeInTheDocument();
+  });
 });

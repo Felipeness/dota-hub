@@ -27,13 +27,14 @@ def test_mortes_de_roshan_dos_replays(kills):
     assert all(k["solo"] == (k["aliados_perto"] == 0) for k in kills)
 
 
-def test_solo_vem_de_replay_com_fonte_741():
+def test_solo_tem_fonte_legivel_do_741():
     solos = conteudo.carregar(SOLO)
     ids = {s["id"] for s in solos}
-    assert {"roshan-solo-huskar", "roshan-solo-ursa"} <= ids
+    assert {"roshan-solo-huskar", "roshan-solo-ursa", "roshan-solo-morphling"} <= ids
     for s in solos:
         assert s["patch"] == "7.41"
-        assert s["fontes"] and all(f.startswith("replay ") for f in s["fontes"])
+        # Além dos replays, os solos citam os dados da pesquisa e páginas da web; caminho da máquina não vai pro site.
+        assert s["fontes"] and not [f for f in s["fontes"] if "C:/" in f], s["id"]
         assert s["secoes"]["basico"] and s["secoes"]["avancado"]
 
 

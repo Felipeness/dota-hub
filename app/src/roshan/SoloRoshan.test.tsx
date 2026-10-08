@@ -43,3 +43,15 @@ it("sem nenhum solo avisa que ainda não foi escrito", () => {
   render(<SoloRoshan solos={[]} />);
   expect(screen.getByText("Ainda não escrito.")).toBeInTheDocument();
 });
+
+it("sem replay confirmado não mostra o selo de replays", () => {
+  render(<SoloRoshan solos={[solo("Sven", "0", [])]} />);
+  expect(screen.queryByText(/Visto em/)).not.toBeInTheDocument();
+  expect(screen.getByText("Básico do Sven.")).toBeInTheDocument();
+});
+
+it("fonte com URL vira link", () => {
+  const comLink: ConteudoItem = { ...ursa, fontes: ["replay 1", "https://liquipedia.net/dota2/Roshan"] };
+  render(<SoloRoshan solos={[comLink]} />);
+  expect(screen.getByRole("link", { name: "liquipedia.net/dota2/Roshan" })).toHaveAttribute("href", "https://liquipedia.net/dota2/Roshan");
+});

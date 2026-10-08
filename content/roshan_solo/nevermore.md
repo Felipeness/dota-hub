@@ -9,6 +9,8 @@ fontes:
 - replay 8831059296
 - replay 8957890399
 - replay 8960577698
+- https://dotacoach.gg/en/items/mask-of-madness
+- C:/Users/felip/Desktop/dota-roshan-solo/work/solos_linha_a_linha.md
 heroi: Shadow Fiend
 solos: 6
 origem: replay
@@ -38,6 +40,10 @@ Passo a passo que se repete:
 Exemplo, 8803535564 (pro): de 15:37 a 16:20, nível 14. Mask of Madness, Butterfly, Power Treads e Magic Wand. Shadowraze 11 e
 10 s antes, Frenzy e Mask no 1º golpe, Frenzy de novo aos 31 s. Entrou com 1.418 de vida e saiu com 167. Foi o mais arriscado:
 os outros dois solos cedo saíram com mais de 1.000 de vida.
+
+Por que Mask of Madness nos solos cedo: dá 22% de roubo de vida e +100 de velocidade de ataque por 6 s no Berserk (patch 7.41f; o items.json do OpenDota ainda mostra 24%, valor de antes do nerf). É o que sustenta a vida durante o solo sem ninguém curando.
+
+Dois solos mais tardios, com ajuda curta, mudam o combo: 8957890399 (nível 21, ~28:45) com Hurricane Pike, Manta e BKB; 8960577698 (nível 26, ~42:30) com Satanic, Daedalus, Silver Edge, Pike e Manta. O Roshan dessa fase tem mais vida (9.640 e 11.460, contra 7.950 a 8.080 nos solos cedo).
 
 O que o time faz:
 - Ward própria perto do fosso em 0 de 6.

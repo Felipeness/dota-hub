@@ -10,8 +10,8 @@ const heroi: Heroi = {
     skill_build: [], itens_situacionais: [], depois_dos_20: [], erros_comuns: [],
     condicao_para_farmar: { nivel: 6, minuto_tipico: 8, explicacao: "" },
     itens_core: [
-      { item: "power_treads", nome_curto: "Power Treads", nome: "Power Treads", minuto_alvo: 7, base: "base treads", porque: null },
-      { item: "bfury", nome_curto: "Battle Fury", nome: "Battle Fury", minuto_alvo: 14, base: "base bfury", porque: null },
+      { item: "power_treads", nome_curto: "Power Treads", nome: "Power Treads", minuto_alvo: 7, base: "base treads", spike: null, porque: null },
+      { item: "bfury", nome_curto: "Battle Fury", nome: "Battle Fury", minuto_alvo: 14, base: "base bfury", spike: null, porque: null },
     ],
   },
   power_spikes: [

@@ -27,12 +27,12 @@ export type EventoDaBuild =
 const fonteDoSpike = (s: Pick<Spike, "marco" | "faixa">) => `Power spike: ${s.marco} (${s.faixa})`;
 
 /**
- * Linha do tempo da build e dos power spikes juntos, por minuto. Spikes já citados como fonte do "porquê" de algum
+ * Linha do tempo da build e dos power spikes juntos, por minuto. Spikes já citados no campo spike de algum
  * item core (ex.: o spike "Null Talisman e Magic Wand" que explica o item Null Talisman) não repetem na lista.
  */
 export function linhaDoTempoDaBuild(itens: readonly ItemCore[], spikes: readonly Spike[]): EventoDaBuild[] {
   const itensOrdenados = itensCoreNaLinhaDoTempo(itens);
-  const fontesJaMostradas = new Set(itensOrdenados.flatMap((i) => (i.porque ? [i.porque.fonte] : [])));
+  const fontesJaMostradas = new Set(itensOrdenados.flatMap((i) => (i.spike ? [i.spike.fonte] : [])));
   const eventos: EventoDaBuild[] = [
     ...itensOrdenados.map((item): EventoDaBuild => ({ tipo: "item", minuto: item.minuto_alvo, item })),
     ...spikes.filter((s) => !fontesJaMostradas.has(fonteDoSpike(s))).map((spike): EventoDaBuild => ({ tipo: "spike", minuto: spike.minuto, spike })),

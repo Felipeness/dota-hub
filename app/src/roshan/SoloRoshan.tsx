@@ -2,18 +2,21 @@ import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import type { ConteudoItem } from "../data/schemas";
 import { textoExtra } from "../glossary/filtros";
+import { ListaDeFontes } from "../layout/Fontes";
 import { ordenarSolos, quantosSolos, replaysDoSolo } from "./solos";
 
 function GuiaDoSolo({ solo }: { solo: ConteudoItem }) {
+  // Sem replay confirmado (ex.: Sven, só candidatos; Lifestealer, recomendado) o selo diria "Visto em 0 replays".
+  const replays = replaysDoSolo(solo);
   return (
     <article className="solo-guia" aria-label={textoExtra(solo, "heroi") ?? solo.titulo}>
-      <span className="selo selo-replay">Visto em {replaysDoSolo(solo)} replays</span>
+      {replays > 0 && <span className="selo selo-replay">Visto em {replays} replays</span>}
       <h4>Básico</h4>
       <ReactMarkdown>{solo.secoes.basico}</ReactMarkdown>
       {solo.secoes.avancado && <><h4>Avançado</h4><ReactMarkdown>{solo.secoes.avancado}</ReactMarkdown></>}
       <details className="solo-fontes">
         <summary>Patch {solo.patch}. Fontes</summary>
-        <p className="fonte">{solo.fontes.join("; ")}</p>
+        <p className="fonte"><ListaDeFontes fontes={solo.fontes} /></p>
       </details>
     </article>
   );

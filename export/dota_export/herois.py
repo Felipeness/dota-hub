@@ -3,7 +3,7 @@ import json
 from functools import cache
 from pathlib import Path
 
-from . import fontes, rotas
+from . import fontes, porque_itens, rotas
 
 PROS = (("dados_felipe", "Felipe"), ("dados_satanic", "Satanic"), ("dados_yatoro", "Yatoro"), ("dados_watson", "Watson"))
 CAMPOS_POR_MINUTO = ("minuto", "nivel", "habilidade", "item", "proximo_spike", "objetivo_farm")
@@ -84,8 +84,8 @@ def _nome_item(chave: str) -> str:
     return _itens().get(chave, {}).get("dname", chave)
 
 
-def _porque_do_item(nome: str, minuto_alvo: float | None, spikes: list[dict]) -> dict | None:
-    """Porquê do item core: o power spike que cita o nome dele já diz pra que ele serve agora (sem inventar)."""
+def _spike_do_item(nome: str, minuto_alvo: float | None, spikes: list[dict]) -> dict | None:
+    """O power spike que cita o nome do item core já diz pra que ele serve agora (sem inventar)."""
     base = nome.split(" (")[0]
     candidatos = [s for s in spikes if base in s["marco"]]
     if not candidatos:
@@ -95,7 +95,7 @@ def _porque_do_item(nome: str, minuto_alvo: float | None, spikes: list[dict]) ->
     return {"texto": escolhido["o_que_fazer"], "fonte": f"Power spike: {escolhido['marco']} ({escolhido['faixa']})"}
 
 
-def _guia(d: dict, spikes: list[dict]) -> dict:
+def _guia(d: dict, spikes: list[dict], porques: dict[str, dict]) -> dict:
     q, lane, itens, cf = d["quando_pegar"], d["lane"], d["itens"], d["condicao_para_farmar"]
     return {
         "bom_quando": q["bom_quando"], "evitar_quando": q["evitar_quando"], "momento_do_draft": q["momento_do_draft"],
@@ -103,10 +103,10 @@ def _guia(d: dict, spikes: list[dict]) -> dict:
         "skill_build": [{"nivel": s["nivel"], "skill": s["skill"]} for s in d["skill_build"]],
         "itens_core": [{"item": i["item"], "nome_curto": _nome_item(i["item"]), "nome": i["nome"],
                         "minuto_alvo": (alvo := _numero(i["minuto_alvo"])), "base": i["base_do_numero"],
-                        "porque": _porque_do_item(i["nome"], alvo, spikes)}
+                        "spike": _spike_do_item(i["nome"], alvo, spikes), "porque": porque_itens.buscar(porques, i["item"])}
                        for i in itens["core"]],
-        "itens_situacionais": [{"item": i["item"], "nome": i.get("nome") or _nome_item(i["item"]), "quando": i["quando"]}
-                               for i in itens["situacionais"]],
+        "itens_situacionais": [{"item": i["item"], "nome": i.get("nome") or _nome_item(i["item"]), "quando": i["quando"],
+                                "porque": porque_itens.buscar(porques, i["item"])} for i in itens["situacionais"]],
         "condicao_para_farmar": {"nivel": cf["nivel"], "minuto_tipico": _numero(cf["minuto_tipico"]),
                                  "explicacao": cf["explicacao"]},
         "depois_dos_20": d["depois_dos_20"], "erros_comuns": d["erros_comuns"],
@@ -149,13 +149,13 @@ def _fonte(f) -> str:
     return f if isinstance(f, str) else " | ".join(str(f[k]) for k in ("nome", "url", "uso", "confianca") if k in f)
 
 
-def heroi(caminho: Path, rotas_validas: frozenset[str] = frozenset()) -> dict:
+def heroi(caminho: Path, rotas_validas: frozenset[str] = frozenset(), porques: dict[str, dict] | None = None) -> dict:
     d = _ler(caminho)
     hid = caminho.name.removeprefix("hero_").removesuffix("_corrigido.json")
     spikes = [spike(s) for s in d["power_spikes"]]
     return {
         "id": hid, "nome": d["hero"], "hero_id": d["hero_id"], "patch": d["patch"], "resumo": d["resumo"],
-        "confianca": d["confianca"], "guia": _guia(d, spikes), "power_spikes": spikes,
+        "confianca": d["confianca"], "guia": _guia(d, spikes, (porques or {}).get(d["hero"], {})), "power_spikes": spikes,
         "por_minuto": _por_minuto(hid),
         "rotas": {"radiant": [fase(hid, "radiant", f) for f in d["rota_radiant"]],
                   "dire": [fase(hid, "dire", f) for f in d["rota_dire"]]},
@@ -164,8 +164,9 @@ def heroi(caminho: Path, rotas_validas: frozenset[str] = frozenset()) -> dict:
     }
 
 
-def todos(rotas_validas: frozenset[str] = frozenset()) -> list[dict]:
-    return [heroi(c, rotas_validas) for c in fontes.guias_de_heroi()]
+def todos(rotas_validas: frozenset[str] = frozenset(), porques: dict[str, dict] | None = None) -> list[dict]:
+    """porques: nome do herói -> slug do item -> porquê pesquisado (porque_itens.carregar)."""
+    return [heroi(c, rotas_validas, porques) for c in fontes.guias_de_heroi()]
 
 
 def indice(fichas: list[dict]) -> list[dict]:
@@ -177,7 +178,8 @@ def draft_resumo(fichas: list[dict]) -> list[dict]:
     """Só o que a tela de draft usa: bom_quando/evitar_quando/momento/itens situacionais. ~13% do tamanho das fichas inteiras."""
     return [{"id": f["id"], "hero_id": f["hero_id"], "guia": {
         "bom_quando": f["guia"]["bom_quando"], "evitar_quando": f["guia"]["evitar_quando"],
-        "momento_do_draft": f["guia"]["momento_do_draft"], "itens_situacionais": f["guia"]["itens_situacionais"],
+        "momento_do_draft": f["guia"]["momento_do_draft"],
+        "itens_situacionais": [{k: i[k] for k in ("item", "nome", "quando")} for i in f["guia"]["itens_situacionais"]],
     }} for f in fichas]
 
 

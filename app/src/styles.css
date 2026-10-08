@@ -342,6 +342,12 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .cartoes-texto .tempo { font-family: var(--fonte-num); font-weight: 700; color: var(--cor-destaque); }
 .painel-nota { font-size: 13px; color: var(--cor-texto-3); }
 .marco-spike { grid-template-columns: 1fr; opacity: 0.8; }
+.item-porque { margin: 4px 0 0.6em; color: var(--cor-texto); }
+.item-contra {
+  padding: var(--espaco-2) var(--espaco-3); border-left: 3px solid var(--cor-radiant);
+  border-radius: 0 var(--raio) var(--raio) 0; background: rgb(91 191 122 / 0.08); color: var(--cor-texto);
+}
+.item-contra strong { color: var(--cor-radiant); }
 .painel footer {
   margin-top: auto; padding-top: 14px; border-top: 1px solid var(--cor-linha);
   font-family: var(--fonte-num); font-size: 11px; color: var(--cor-texto-3);

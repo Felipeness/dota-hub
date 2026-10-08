@@ -7,6 +7,7 @@ fontes:
 - replay 8943038404
 - replay 9006604405
 - replay 9008436237
+- C:/Users/felip/Desktop/dota-roshan-solo/data/solos.json
 heroi: Kez
 solos: 4
 origem: replay
@@ -28,5 +29,15 @@ Passo a passo que se repete:
 
 O que fazer com a Aegis:
 - Ficou com o Kez em 4 de 4. Torre nos 3 min seguintes em 4 de 4. Morreu nos 3 min em 3 de 4.
+
+Combo item a item de cada solo (inventário no início):
+- 35:48, nível 23 (9006604405): Desolator, Satanic, Aghanim's Scepter, Black King Bar, Mage Slayer, Power Treads.
+- 50:49, nível 29 (8943038404): Mage Slayer, Black King Bar, Swift Blink, Desolator, Power Treads, Eye of Skadi.
+- 57:11, nível 27 (8828731237): Black King Bar, Nullifier, Butterfly, Aghanim's Scepter, Daedalus (mochila: Manta).
+- 67:07, nível 30 (9008436237): Satanic, Nullifier, Manta, Black King Bar, Daedalus, Swift Blink.
+
+Black King Bar está nos 4. Depois disso o combo vai pela linha de dano (Desolator, Daedalus, Mage Slayer) ou pela de sobrevivência (Satanic, Manta, Butterfly, Nullifier).
+
+Com suporte no fosso (não entram nos 4 solos), ambos no replay 8828731237: 47:48 (nível 26: Butterfly, Manta, Crystalys, Scepter, BKB, Power Treads na mochila) e 67:53 (nível 30: Manta, Swift Blink, Nullifier, BKB, Butterfly, Daedalus).
 
 Ressalva: só fim de jogo e de uma única fonte. Não serve para dizer quando dá cedo.
