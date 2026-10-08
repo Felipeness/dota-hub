@@ -9,11 +9,11 @@ function destino(texto: string): string {
   return conta === null ? `/ao-vivo?q=${encodeURIComponent(texto)}` : `/ao-vivo/contas/${conta}`;
 }
 
-export function AtalhoAoVivo({ consulta, onIr }: { consulta: string; onIr: () => void }) {
+export function AtalhoAoVivo({ consulta, ativo = false, onIr }: { consulta: string; ativo?: boolean; onIr: () => void }) {
   const texto = consulta.trim();
   if (texto.length < TEXTO_MINIMO) return null;
   return (
-    <li className="atalho-ao-vivo">
+    <li className={ativo ? "atalho-ao-vivo ativo" : "atalho-ao-vivo"} data-navegavel>
       <Link to={destino(texto)} onClick={onIr}>Buscar ao vivo: “{texto}”</Link>
     </li>
   );

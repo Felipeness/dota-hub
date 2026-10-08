@@ -132,7 +132,9 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .busca > p { padding: var(--espaco-3); font-size: 14px; }
 .busca li { display: grid; grid-template-columns: 84px minmax(0, 1fr); align-items: center; gap: var(--espaco-2); padding: 0 var(--espaco-3); }
 .busca li a { display: block; padding: 11px 0; color: var(--cor-texto); text-decoration: none; }
-.busca li:hover { background: var(--cor-superficie-2); }
+.busca li:hover, .busca li.ativo { background: var(--cor-superficie-2); }
+.etiqueta-com-icone { display: flex; align-items: center; gap: var(--espaco-1); }
+.busca-icone { border-radius: 2px; }
 .etiqueta { font-family: var(--fonte-num); font-size: 11px; color: var(--cor-destaque); text-transform: uppercase; }
 .rodape { padding: var(--espaco-2) var(--espaco-3); font-family: var(--fonte-num); font-size: 11px; text-align: center; color: var(--cor-texto-3); }
 

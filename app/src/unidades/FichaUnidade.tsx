@@ -14,7 +14,7 @@ function Icone({ habilidade }: { habilidade: Habilidade }) {
 }
 
 function OQueMuda({ texto }: { texto: Habilidade["o_que_muda"] }) {
-  if (!texto) return <p className="o-que-muda o-que-muda-vazio">O que isso muda para você: ainda não escrito.</p>;
+  if (!texto) return null;
   return (
     <div className="o-que-muda">
       <h5>O que isso muda para você</h5>
