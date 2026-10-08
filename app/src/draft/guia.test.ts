@@ -63,8 +63,13 @@ describe("extrairMencoes", () => {
 describe("situações", () => {
   it("acha o item do guia para a situação", () => {
     expect(conselhosDaSituacao("evasao", [JUGGERNAUT])).toEqual([
-      { tipo: "item", heroId: 8, item: "Monkey King Bar", texto: "Contra evasão e miss (Butterfly inimigo)." },
+      { tipo: "item", heroId: 8, item: "Monkey King Bar", trecho: "Contra evasão e miss (Butterfly inimigo).", texto: "Contra evasão e miss (Butterfly inimigo)." },
     ]);
+  });
+
+  it("ignora \"contra\" que só compara números", () => {
+    const guia = { ...JUGGERNAUT, bom: ["Vence 52% com stun no time contra 48% sem."], itensSituacionais: [] };
+    expect(conselhosDaSituacao("controle", [guia])).toEqual([]);
   });
 
   it("só lista situações que algum guia cita", () => {

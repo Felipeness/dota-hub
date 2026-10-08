@@ -97,25 +97,34 @@ export const SITUACOES = [
 ] as const;
 export type SituacaoId = (typeof SITUACOES)[number]["id"];
 
+/** `trecho` é a frase do guia que fala da situação; `texto`, o item inteiro. */
 export type Conselho = Readonly<
-  | { tipo: "pegar" | "evitar"; heroId: HeroId; texto: string }
-  | { tipo: "item"; heroId: HeroId; item: string; texto: string }
+  | { tipo: "pegar" | "evitar"; heroId: HeroId; trecho: string; texto: string }
+  | { tipo: "item"; heroId: HeroId; item: string; trecho: string; texto: string }
 >;
 
-const FALA_DO_INIMIGO = /inimig|contra/i;
+// "contra 48,3%" é comparação de números, não fala do inimigo.
+const FALA_DO_INIMIGO = /inimig|contra(?! \d)/i;
 const frases = (texto: string) => texto.split(/(?<=[.;])\s+(?=\p{Lu})/u);
-const falaDaSituacao = (texto: string, padrao: RegExp) => frases(texto).some((f) => FALA_DO_INIMIGO.test(f) && padrao.test(f));
+const trechoDaSituacao = (texto: string, padrao: RegExp) => frases(texto).find((f) => FALA_DO_INIMIGO.test(f) && padrao.test(f));
+
+function conselhosDaLista(guia: GuiaDraft, tipo: "pegar" | "evitar", padrao: RegExp): Conselho[] {
+  return (tipo === "pegar" ? guia.bom : guia.evitar).flatMap((texto) => {
+    const trecho = trechoDaSituacao(texto, padrao);
+    return trecho ? [{ tipo, heroId: guia.heroId, trecho, texto }] : [];
+  });
+}
 
 export function conselhosDaSituacao(id: SituacaoId, guias: readonly GuiaDraft[]): Conselho[] {
   const situacao = SITUACOES.find((s) => s.id === id);
   if (!situacao) return [];
   const { padrao } = situacao;
   return guias.flatMap((guia): Conselho[] => [
-    ...guia.bom.filter((t) => falaDaSituacao(t, padrao)).map((texto) => ({ tipo: "pegar" as const, heroId: guia.heroId, texto })),
-    ...guia.evitar.filter((t) => falaDaSituacao(t, padrao)).map((texto) => ({ tipo: "evitar" as const, heroId: guia.heroId, texto })),
+    ...conselhosDaLista(guia, "pegar", padrao),
+    ...conselhosDaLista(guia, "evitar", padrao),
     ...guia.itensSituacionais
       .filter((i) => padrao.test(i.quando))
-      .map((i) => ({ tipo: "item" as const, heroId: guia.heroId, item: i.nome, texto: i.quando })),
+      .map((i) => ({ tipo: "item" as const, heroId: guia.heroId, item: i.nome, trecho: i.quando, texto: i.quando })),
   ]);
 }
 
