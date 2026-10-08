@@ -62,6 +62,17 @@ it("mostra o guia e troca para power spikes e pros", () => {
   expect(screen.getByRole("cell", { name: "Satanic" })).toBeInTheDocument();
 });
 
+it("aba Power spikes mostra o próximo spike da tabela por minuto", () => {
+  const comPorMinuto: Heroi = {
+    ...heroi,
+    por_minuto: [{ minuto: 4, nivel: "3", habilidade: "no nível 3: Blade Fury 2/4", item: "itens iniciais", proximo_spike: "Power Treads (em Agilidade) e nível 5 (~6:18 nos replays)", objetivo_farm: "Camps próximos." }],
+  };
+  render(<MemoryRouter><FichaHeroi heroi={comPorMinuto} objetivos={[]} solos={[]} /></MemoryRouter>);
+  fireEvent.click(screen.getByRole("tab", { name: "Power spikes" }));
+  expect(screen.getByRole("columnheader", { name: "Próximo spike" })).toBeInTheDocument();
+  expect(screen.getByText("Power Treads (em Agilidade) e nível 5 (~6:18 nos replays)")).toBeInTheDocument();
+});
+
 it("aba Roshan avisa que ainda não foi escrita", () => {
   render(<MemoryRouter><FichaHeroi heroi={heroi} objetivos={[]} solos={[]} /></MemoryRouter>);
   fireEvent.click(screen.getByRole("tab", { name: "Roshan" }));

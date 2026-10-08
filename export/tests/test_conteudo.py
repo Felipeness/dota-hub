@@ -33,6 +33,11 @@ def test_origem_replay_sem_id_falha(tmp_path):
     else:
         raise AssertionError("esperava ValueError")
 
+def test_valor_entre_aspas_perde_as_aspas(tmp_path):
+    (tmp_path / "x.md").write_text('---\nid: x\ntitulo: "Solo de Roshan: Beastmaster"\norigem: recomendado\n---\n## Básico\nTexto.\n', encoding="utf-8")
+    item = conteudo.carregar(tmp_path)[0]
+    assert item["titulo"] == "Solo de Roshan: Beastmaster"
+
 def test_extras_guardam_chaves_fora_do_padrao(tmp_path):
     (tmp_path / "x.md").write_text("---\nid: x\ntitulo: X\norigem: recomendado\nitens:\n- BKB\n---\n## Básico\nTexto.\n", encoding="utf-8")
     item = conteudo.carregar(tmp_path)[0]

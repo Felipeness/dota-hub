@@ -18,8 +18,9 @@ def _frontmatter(texto: str) -> tuple[dict, str]:
             continue
         chave, _, valor = linha.partition(":")
         chave = chave.strip()
-        if valor.strip():
-            meta[chave] = valor.strip()
+        valor = valor.strip()
+        if valor:
+            meta[chave] = valor[1:-1] if len(valor) >= 2 and valor[0] == valor[-1] == '"' else valor
     return meta, corpo
 
 

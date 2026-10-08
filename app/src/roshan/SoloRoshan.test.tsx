@@ -26,6 +26,12 @@ it("ao escolher um herói mostra o básico, o avançado e quantos replays", () =
   expect(screen.getByText("Avançado do Huskar.")).toBeInTheDocument();
 });
 
+it("usa o nome do herói no aria-label em vez do título bruto com aspas", () => {
+  const comAspas: ConteudoItem = { ...solo("Beastmaster", "7", ["1"]), titulo: '"Solo de Roshan: Beastmaster"' };
+  render(<SoloRoshan solos={[comAspas]} />);
+  expect(screen.getByRole("article", { name: "Beastmaster" })).toBeInTheDocument();
+});
+
 it("com um herói só abre direto, sem lista", () => {
   render(<SoloRoshan solos={[ursa]} />);
   expect(screen.queryByRole("button")).not.toBeInTheDocument();
