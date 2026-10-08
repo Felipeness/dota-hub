@@ -79,6 +79,23 @@ describe("resumoComparativo", () => {
     expect(resumo).toContain("farm e late");
   });
 
+  it.each([
+    { nome: "forte cedo contra forte no late", meu: { early: 0.7, farm: 0.3 }, deles: { early: 0.4, farm: 0.6 }, plano: "lute e pressione antes dos 30 min" },
+    { nome: "fraco cedo e forte no late", meu: { early: 0.4, farm: 0.6 }, deles: { early: 0.7, farm: 0.3 }, plano: "evite lutas antes dos 30 min" },
+  ])("planeja pelo tempo de jogo: $nome", ({ meu, deles, plano }) => {
+    const base = { luta: 0.5, push: 0.5, pickoff: 0.5, sustain: 0.5 };
+    expect(resumoComparativo(comparar({ ...base, ...meu }, { ...base, ...deles }))).toContain(plano);
+  });
+
+  it("lista todos os eixos em que cada lado está na frente", () => {
+    const meu = { luta: 0.3, farm: 0.7, push: 0.7, pickoff: 0.5, early: 0.5, sustain: 0.7 };
+    const deles = { luta: 0.6, farm: 0.4, push: 0.4, pickoff: 0.5, early: 0.5, sustain: 0.4 };
+    const resumo = resumoComparativo(comparar(meu, deles)) ?? "";
+    for (const eixo of ["farm e late", "push e limpar wave", "sobrevivência e sustain"]) expect(resumo).toContain(eixo);
+    expect(resumo).toContain("O adversário está na frente em luta em grupo.");
+    expect(resumo).not.toContain("escala");
+  });
+
   it("não quebra quando os dois times estão empatados em tudo", () => {
     const eixos = { luta: 0.5, farm: 0.5, push: 0.5, pickoff: 0.5, early: 0.5, sustain: 0.5 };
     expect(resumoComparativo(comparar(eixos, eixos))).toBeNull();

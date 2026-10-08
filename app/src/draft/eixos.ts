@@ -89,20 +89,31 @@ export function comparar(meu: Readonly<Record<EixoId, number>>, deles: Readonly<
 }
 
 const titulo = (eixo: EixoId) => EIXOS[eixo].titulo.toLowerCase();
-/** A primeira comparação com a maior (ou, invertido, a menor) diferença; null numa lista vazia. */
-const extremo = (comparacoes: readonly Comparacao[], melhorQue: (a: Comparacao, b: Comparacao) => boolean): Comparacao | null =>
-  comparacoes.reduce<Comparacao | null>((melhor, c) => (!melhor || melhorQue(c, melhor) ? c : melhor), null);
+/** "a", "a e b", "a, b e c". */
+const listar = (itens: readonly string[]) => (itens.length < 2 ? itens.join("") : `${itens.slice(0, -1).join(", ")} e ${itens.at(-1)}`);
+const porDiferenca = (comparacoes: readonly Comparacao[]) => comparacoes.toSorted((a, b) => Math.abs(b.diferenca) - Math.abs(a.diferenca));
+const diferencaEm = (comparacoes: readonly Comparacao[], eixo: EixoId) => comparacoes.find((c) => c.eixo === eixo)?.diferenca ?? 0;
 
-/** "Seu draft é mais forte em X; o deles escala melhor em Y. Jogue para Z." Null se os dois times estão vazios. */
+/** O tempo de jogo decide o plano antes de qualquer outro eixo: forte cedo contra forte no late. */
+function planoDeJogo(comparacoes: readonly Comparacao[], meusEixos: readonly Comparacao[]): string | null {
+  const early = diferencaEm(comparacoes, "early");
+  const late = diferencaEm(comparacoes, "farm");
+  if (early > 0 && late < 0) return "Seu draft é mais forte cedo e o deles no late: lute e pressione antes dos 30 min.";
+  if (early < 0 && late > 0) return "O deles é mais forte cedo e o seu no late: evite lutas antes dos 30 min, farme e jogue para depois.";
+  const principal = meusEixos[0];
+  return principal ? `Jogue para ${CONSELHO_DO_EIXO[principal.eixo]}.` : null;
+}
+
+/** "Seu draft está na frente em X e Y. O adversário está na frente em Z. <plano>". Null sem diferença em nenhum eixo. */
 export function resumoComparativo(comparacoes: readonly Comparacao[]): string | null {
-  const comDiferenca = comparacoes.filter((c) => c.diferenca !== 0);
-  const meuMelhor = extremo(comDiferenca, (a, b) => a.diferenca > b.diferenca);
-  const delesMelhor = extremo(comDiferenca, (a, b) => a.diferenca < b.diferenca);
-  if (!meuMelhor || !delesMelhor) return null;
+  const meus = porDiferenca(comparacoes.filter((c) => c.diferenca > 0));
+  const deles = porDiferenca(comparacoes.filter((c) => c.diferenca < 0));
+  if (meus.length + deles.length === 0) return null;
 
-  if (meuMelhor.diferenca <= 0) {
-    return `O draft adversário está na frente em ${titulo(delesMelhor.eixo)}. Jogue para ${CONSELHO_DO_EIXO[delesMelhor.eixo]} e não entrar no jogo dele.`;
-  }
-  const vantagemDeles = delesMelhor.diferenca < 0 ? ` O time adversário escala melhor em ${titulo(delesMelhor.eixo)}.` : "";
-  return `Seu draft é mais forte em ${titulo(meuMelhor.eixo)}.${vantagemDeles} Jogue para ${CONSELHO_DO_EIXO[meuMelhor.eixo]}.`;
+  const frases = [
+    meus.length > 0 ? `Seu draft está na frente em ${listar(meus.map((c) => titulo(c.eixo)))}.` : null,
+    deles.length > 0 ? `O adversário está na frente em ${listar(deles.map((c) => titulo(c.eixo)))}.` : null,
+    planoDeJogo(comparacoes, meus),
+  ];
+  return frases.filter((frase) => frase !== null).join(" ");
 }
