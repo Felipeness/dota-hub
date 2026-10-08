@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useSearchParams } from "react-router";
 import { ATRIBUTOS_DE_HEROI, heroisCatalogoSchema, heroisSchema, POSICOES, type AtributoDeHeroi, type HeroiDoCatalogo, type HeroiResumo, type Posicao } from "../data/schemas";
+import { indiceDeConfrontosSchema } from "../confronto/analise";
 import { dadosOuVazio, Indisponivel, useData } from "../data/useData";
 import { agruparPorPosicao, filtrarCatalogo, posicaoDoParametro, ROTULO_DA_POSICAO, ROTULO_DO_ATRIBUTO } from "./catalogo";
 import { urlDoRetrato } from "./resumo";
@@ -17,10 +18,10 @@ function resumoCurto(texto: string): string {
 
 const atributoDoParametro = (valor: string | null): AtributoDeHeroi | null => ATRIBUTOS_DE_HEROI.find((a) => a === valor) ?? null;
 
-type CartaoProps = Readonly<{ heroi: HeroiDoCatalogo; posicao: Posicao; guia: HeroiResumo | undefined }>;
+type CartaoProps = Readonly<{ heroi: HeroiDoCatalogo; posicao: Posicao; guia: HeroiResumo | undefined; confrontos: number }>;
 
 /** Ficha leva direto à aba da posição do grupo em que foi clicada; guia completo vai sempre pro mesmo lugar. */
-function CartaoDoHeroi({ heroi, posicao, guia }: CartaoProps) {
+function CartaoDoHeroi({ heroi, posicao, guia, confrontos }: CartaoProps) {
   const destino = heroi.pagina === "ficha" ? `/herois/${heroi.id}?pos=${posicao}` : `/herois/${heroi.id}`;
   return (
     <li>
@@ -33,6 +34,7 @@ function CartaoDoHeroi({ heroi, posicao, guia }: CartaoProps) {
               ? <span className="selo selo-destaque">guia completo</span>
               : <span className="selo">ficha por posição</span>}
             {guia?.tem_por_minuto && <span className="selo selo-destaque">minuto a minuto</span>}
+            {confrontos > 0 && <span className="selo">{confrontos} confrontos analisados</span>}
           </span>
           <span>{resumoCurto(heroi.resumo)}</span>
         </span>
@@ -57,6 +59,7 @@ function FiltroDePilulas<T extends string | number>({ rotulo, opcoes, rotulos, a
 export function HeroesPage() {
   const catalogo = useData("/data/herois_catalogo.json", heroisCatalogoSchema);
   const guias = useData("/data/herois.json", heroisSchema);
+  const confrontos = useData("/data/confrontos_indice.json", indiceDeConfrontosSchema);
   const [busca, setBusca] = useSearchParams();
   const [texto, setTexto] = useState("");
   if (catalogo.estado === "carregando") return <p>Carregando…</p>;
@@ -70,6 +73,7 @@ export function HeroesPage() {
     return nova;
   }, { replace: true });
   const guiaPorId = new Map(dadosOuVazio(guias).map((g) => [g.id, g]));
+  const confrontosPorId = confrontos.estado === "ok" ? confrontos.dados : {};
   const encontrados = filtrarCatalogo(catalogo.dados, { texto, posicao, atributo });
   const grupos = agruparPorPosicao(encontrados, posicao);
   const comGuia = catalogo.dados.filter((h) => h.pagina === "guia").length;
@@ -89,7 +93,7 @@ export function HeroesPage() {
           <section key={g.posicao} className="grupo-posicao" aria-labelledby={`grupo-pos-${g.posicao}`}>
             <h2 id={`grupo-pos-${g.posicao}`}>{ROTULO_DA_POSICAO[g.posicao]} <span className="herois-contagem">{g.herois.length}</span></h2>
             <ul className="grade-herois">
-              {g.herois.map((h) => <CartaoDoHeroi key={h.id} heroi={h} posicao={g.posicao} guia={guiaPorId.get(h.id)} />)}
+              {g.herois.map((h) => <CartaoDoHeroi key={h.id} heroi={h} posicao={g.posicao} guia={guiaPorId.get(h.id)} confrontos={confrontosPorId[h.id] ?? 0} />)}
             </ul>
           </section>
         ))}
