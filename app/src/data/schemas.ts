@@ -159,7 +159,7 @@ export const fichaSchema = z.object({
 // Os 127 heróis com a página que abre em /herois/<id>: guia completo (22) ou ficha por posição (105).
 export const heroiDoCatalogoSchema = z.object({
   id: z.string(), nome: z.string(), hero_id: z.number(), nome_interno: z.string(), atributo: z.enum(ATRIBUTOS_DE_HEROI),
-  posicoes: z.array(posicaoSchema).min(1), pagina: z.enum(["guia", "ficha"]),
+  posicoes: z.array(posicaoSchema).min(1), pagina: z.enum(["guia", "ficha"]), resumo: z.string(),
 });
 export const heroisCatalogoSchema = z.array(heroiDoCatalogoSchema);
 export const heroiSchema = heroiResumoSchema.omit({ tem_por_minuto: true }).extend({

@@ -34,7 +34,7 @@ function CartaoDoHeroi({ heroi, posicao, guia }: CartaoProps) {
               : <span className="selo">ficha por posição</span>}
             {guia?.tem_por_minuto && <span className="selo selo-destaque">minuto a minuto</span>}
           </span>
-          {guia && <span>{resumoCurto(guia.resumo)}</span>}
+          <span>{resumoCurto(heroi.resumo)}</span>
         </span>
       </Link>
     </li>
