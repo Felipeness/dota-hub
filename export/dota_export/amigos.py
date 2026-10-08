@@ -71,7 +71,7 @@ def leonardo() -> dict:
         "fontes": [fonte, "dota-leonardo/work/resumo-para-o-leonardo.md"],
         "destaques": [destaque("Partidas", len(todas), "jogos", fonte), destaque("Vitórias", pct_vitoria(todas), "%", fonte),
                       *_destaques_de_heroi(mid, "Invoker", fonte), *_destaques_de_heroi(mid, "Snapfire", fonte),
-                      destaque("Vitórias nas últimas 20", sum(map(_venceu, ultimas)), "jogos", fonte)],
+                      destaque("Vitórias nas últimas 20", sum(map(_venceu, ultimas)), "vitórias", fonte)],
         "graficos": [
             _barras("vitoria_por_heroi_mid", "Vitória por herói no mid (10 mais jogados)",
                     _mais_jogados(_grupos(mid, lambda l: l["heroi"]), 10), fonte),
