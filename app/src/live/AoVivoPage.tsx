@@ -64,7 +64,7 @@ function Explicacao() {
       <p>Consulta o OpenDota agora, sem cadastro, e mostra os números de hoje, não os do export.</p>
       <dl>
         <div><dt>Dá para buscar</dt><dd>jogador pelo nome do perfil, pelo número da conta ou pelo link do perfil no Dotabuff, OpenDota ou STRATZ; time pelo nome.</dd></div>
-        <div><dt>No resultado</dt><dd>medalha, taxa de vitória, heróis mais jogados, partidas recentes e a rota aproximada de cada partida no mapa.</dd></div>
+        <div><dt>No resultado</dt><dd>medalha, taxa de vitória, heróis mais jogados e partidas recentes; ao abrir uma partida, também a rota aproximada no mapa.</dd></div>
       </dl>
     </div>
   );
@@ -122,7 +122,7 @@ function Resultados({ busca, consulta, onAtualizar }: { busca: Busca; consulta: 
           {busca.contas.map((c) => (
             <li key={c.id}>
               <Link to={`/ao-vivo/contas/${c.id}`}>
-                <strong>{c.nome}</strong>
+                <strong>{c.nome}</strong> <span className="ao-vivo-conta-id">conta {c.id}</span>
                 {c.ultimaPartida && <span>última partida {dataCurta(Date.parse(c.ultimaPartida) / 1_000)}</span>}
               </Link>
             </li>

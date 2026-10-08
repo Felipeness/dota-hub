@@ -55,8 +55,8 @@ it("monta o resumo com 10 heróis, nomes, medalha, lane e partidas sem análise"
   expect(resumo.totais).toEqual({ partidas: 100, vitorias: 60 });
   expect(resumo.ultimas).toEqual({ partidas: 2, vitorias: 1 });
   expect(resumo.herois).toHaveLength(10);
-  expect(resumo.herois[0]).toEqual({ heroi: "Anti-Mage", partidas: 20, vitorias: 10 });
-  expect(resumo.partidas[0]).toMatchObject({ heroi: "Juggernaut", venceu: true, lane: "safe", analisada: true });
+  expect(resumo.herois[0]).toEqual({ heroi: "Anti-Mage", retrato: "anti_mage", partidas: 20, vitorias: 10 });
+  expect(resumo.partidas[0]).toMatchObject({ heroi: "Juggernaut", retrato: "juggernaut", venceu: true, lane: "safe", analisada: true });
   expect(resumo.partidas[1]).toMatchObject({ venceu: false, lane: null, analisada: false });
   expect(resumo.temDadosPublicos).toBe(true);
 });

@@ -50,10 +50,13 @@ export const venceu = (p: Pick<PartidaRecenteFonte, "player_slot" | "radiant_win
 
 const laneDoPapel = (papel: number | null | undefined): Lane | null => (papel == null ? null : LANE_POR_PAPEL[papel] ?? null);
 const nomeDoHeroi = (nomes: Nomes, id: number) => nomes[String(id)]?.localized_name ?? `Herói ${id}`;
+// Duplicado de partida/detalhe.ts (não importamos de lá: esse módulo já importa de contas.ts, e um import de volta criaria ciclo).
+const slugDoHeroi = (nome: string) => nome.toLowerCase().replaceAll("'", "").replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, "");
 
 function partidaDaConta(p: PartidaRecenteFonte, nomes: Nomes): PartidaDaConta {
+  const heroi = nomeDoHeroi(nomes, p.hero_id);
   return {
-    id: String(p.match_id), heroi: nomeDoHeroi(nomes, p.hero_id), venceu: venceu(p),
+    id: String(p.match_id), heroi, retrato: slugDoHeroi(heroi), venceu: venceu(p),
     abates: p.kills, mortes: p.deaths, assistencias: p.assists, duracaoS: p.duration, inicio: p.start_time,
     lane: laneDoPapel(p.lane_role), analisada: p.version != null,
   };
@@ -65,7 +68,10 @@ export function montarResumo({ id, jogador, vitorias, herois, recentes, nomes, f
     totais: { partidas: vitorias.win + vitorias.lose, vitorias: vitorias.win },
     ultimas: { partidas: recentes.length, vitorias: recentes.filter((p) => venceu(p) === true).length },
     herois: [...herois].sort((a, b) => b.games - a.games).slice(0, MAXIMO_DE_HEROIS)
-      .map((h) => ({ heroi: nomeDoHeroi(nomes, h.hero_id), partidas: h.games, vitorias: h.win })),
+      .map((h) => {
+        const heroi = nomeDoHeroi(nomes, h.hero_id);
+        return { heroi, retrato: slugDoHeroi(heroi), partidas: h.games, vitorias: h.win };
+      }),
     partidas: recentes.map((p) => partidaDaConta(p, nomes)),
     temDadosPublicos: recentes.length > 0,
     frescor,
