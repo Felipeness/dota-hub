@@ -6,7 +6,7 @@ import { ordenarSolos, quantosSolos, replaysDoSolo } from "./solos";
 
 function GuiaDoSolo({ solo }: { solo: ConteudoItem }) {
   return (
-    <article className="solo-guia" aria-label={solo.titulo}>
+    <article className="solo-guia" aria-label={textoExtra(solo, "heroi") ?? solo.titulo}>
       <span className="selo selo-replay">Visto em {replaysDoSolo(solo)} replays</span>
       <h4>Básico</h4>
       <ReactMarkdown>{solo.secoes.basico}</ReactMarkdown>
