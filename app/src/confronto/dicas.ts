@@ -1,5 +1,4 @@
-// Dicas práticas do confronto, tiradas dos números do OpenDota, e trechos dos guias do Hub que citam o outro herói.
-import type { Heroi as Guia } from "../data/schemas";
+// Dicas práticas do confronto, tiradas dos números do OpenDota.
 import { ehPassiva, ehUltimate, temDano, type Habilidade, type Heroi } from "./modelo";
 
 export type Fase = "lane" | "meio" | "luta";
@@ -61,23 +60,4 @@ function dicaDeBkb(inimigo: Heroi): Dica[] {
 
 export function dicasDoConfronto(meu: Heroi, inimigo: Heroi): Dica[] {
   return [...dicaDeAlcance(meu, inimigo), ...dicaDeVelocidade(meu, inimigo), ...dicasDeTroca(inimigo), ...dicasDeUltimate(inimigo), ...dicaDeBkb(inimigo)];
-}
-
-export type Trecho = Readonly<{ secao: string; texto: string }>;
-
-const escapar = (texto: string) => texto.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-const citaOHeroi = (nome: string) => new RegExp(`(^|[^\\p{L}])${escapar(nome)}($|[^\\p{L}])`, "iu");
-
-/** Trechos do guia do Hub que citam o outro herói pelo nome. */
-export function trechosDoGuia(guia: Guia, nomeDoOutro: string): Trecho[] {
-  const cita = citaOHeroi(nomeDoOutro);
-  const secoes: ReadonlyArray<readonly [string, readonly string[]]> = [
-    ["Bom quando", guia.guia.bom_quando],
-    ["Evite quando", guia.guia.evitar_quando],
-    ["Na lane", guia.guia.lane.dicas],
-    ["Item situacional", guia.guia.itens_situacionais.map((i) => `${i.nome}: ${i.quando}`)],
-    ["Depois dos 20 min", guia.guia.depois_dos_20],
-    ["Erro comum", guia.guia.erros_comuns],
-  ];
-  return secoes.flatMap(([secao, textos]) => textos.filter((t) => cita.test(t)).map((texto) => ({ secao, texto })));
 }

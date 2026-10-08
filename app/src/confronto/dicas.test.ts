@@ -1,10 +1,6 @@
-/// <reference types="node" />
-import { readFileSync } from "node:fs";
-import { heroiSchema } from "../data/schemas";
 import { heroi } from "./amostras/gravadas";
-import { dicasDoConfronto, trechosDoGuia } from "./dicas";
+import { dicasDoConfronto } from "./dicas";
 
-const guia = (id: string) => heroiSchema.parse(JSON.parse(readFileSync(`public/data/herois/${id}.json`, "utf-8")));
 const textos = (meu: string, inimigo: string) => dicasDoConfronto(heroi(meu), heroi(inimigo)).map((d) => d.texto);
 
 it("avisa quando o inimigo bate de longe e você de perto", () => {
@@ -24,14 +20,4 @@ it("dá a janela do ultimate do inimigo pela recarga real", () => {
 it("lista o que atravessa BKB na luta", () => {
   const luta = dicasDoConfronto(heroi("antimage"), heroi("faceless_void")).filter((d) => d.fase === "luta");
   expect(luta[0]?.texto).toMatch(/^BKB não segura: .*Chronosphere/);
-});
-
-it("acha no guia do Slark os trechos que citam a Medusa", () => {
-  const trechos = trechosDoGuia(guia("slark"), "Medusa");
-  expect(trechos.length).toBeGreaterThan(0);
-  expect(trechos.every((t) => t.texto.includes("Medusa"))).toBe(true);
-});
-
-it("não confunde nome dentro de outra palavra", () => {
-  expect(trechosDoGuia(guia("slark"), "Lin").every((t) => /(^|[^\p{L}])Lin($|[^\p{L}])/u.test(t.texto))).toBe(true);
 });
