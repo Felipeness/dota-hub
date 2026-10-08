@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
-import { useNavigate, useParams, useSearchParams } from "react-router";
+import { Link, useNavigate, useParams, useSearchParams } from "react-router";
+import { heroisCatalogoSchema } from "../data/schemas";
+import { dadosOuVazio, useData } from "../data/useData";
 import { ErroAoVivoView } from "../live/ErroAoVivo";
 import { FrescorView } from "../live/Frescor";
 import { useAoVivo } from "../live/useAoVivo";
@@ -55,11 +57,33 @@ function ConfrontoEscolhido({ herois, itens, children }: Escolha) {
         <button type="button" className="cf-trocar" onClick={() => ir(inimigo, meu)} aria-label="Trocar os heróis de lado">⇄</button>
         <SeletorDeHeroi rotulo="Inimigo" herois={herois} escolhido={inimigo} onEscolher={(h) => ir(meu, h)} />
       </div>
+      <PaginasDosHerois herois={[meu, inimigo]} />
       <datalist id="cf-herois">{herois.map((h) => <option key={h.id} value={h.nome} />)}</datalist>
       {children}
       {meu && inimigo && meu.id !== inimigo.id && <Confronto meu={meu} inimigo={inimigo} itens={itens} />}
       {meu && inimigo && meu.id === inimigo.id && <p role="status">Escolha dois heróis diferentes.</p>}
     </article>
+  );
+}
+
+/** Link pra página de cada herói escolhido no Hub: guia completo ou ficha por posição, pelo catálogo. */
+function PaginasDosHerois({ herois }: { herois: readonly (Heroi | null)[] }) {
+  const catalogo = useData("/data/herois_catalogo.json", heroisCatalogoSchema);
+  const porId = new Map(dadosOuVazio(catalogo).map((h) => [h.hero_id, h]));
+  const paginas = herois.flatMap((h) => {
+    const pagina = h ? porId.get(h.id) : undefined;
+    return pagina ? [pagina] : [];
+  });
+  if (paginas.length === 0) return null;
+  return (
+    <p className="cf-sub">
+      {paginas.map((p, i) => (
+        <span key={`${i}-${p.id}`}>
+          {i > 0 && " · "}
+          <Link to={`/herois/${p.id}`}>{p.pagina === "guia" ? "Guia completo" : "Ficha"} do {p.nome}</Link>
+        </span>
+      ))}
+    </p>
   );
 }
 
