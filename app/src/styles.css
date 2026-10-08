@@ -616,9 +616,10 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .painel-jogador ul { color: var(--cor-texto-2); line-height: 1.6; }
 .painel-jogador ul a { color: var(--cor-info); }
 .painel-jogador h3 { margin: 0 0 var(--espaco-2); font-family: var(--fonte-display); font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cor-texto-2); }
-.destaques { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--espaco-3); }
+/* auto-fit: 3, 4 ou 5 destaques fecham uma linha só, sem cartão órfão na linha de baixo. */
+.destaques { margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--espaco-3); }
 .destaques div { display: flex; flex-direction: column-reverse; gap: var(--espaco-1); padding: var(--espaco-4); border-radius: var(--raio); background: var(--cor-superficie-2); border: 1px solid var(--cor-linha-forte); }
-.destaques dd { margin: 0; font-family: var(--fonte-num); font-variant-numeric: tabular-nums; font-size: 28px; color: var(--cor-destaque); }
+.destaques dd { margin: 0; font-family: var(--fonte-num); font-variant-numeric: tabular-nums; font-size: 24px; line-height: 1.15; text-wrap: balance; color: var(--cor-destaque); }
 .destaques dt { font-size: 12px; color: var(--cor-texto-3); }
 .grafico { margin: 0; padding: var(--espaco-4); border-radius: var(--raio); background: var(--cor-superficie); border: 1px solid var(--cor-linha); display: flex; flex-direction: column; gap: var(--espaco-3); min-width: 0; }
 .grafico figcaption { font-family: var(--fonte-display); font-size: 20px; color: var(--cor-texto); }
@@ -629,7 +630,6 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .rolagem th, .rolagem td { padding: var(--espaco-1) var(--espaco-3); border-bottom: 1px solid var(--cor-linha); text-align: left; white-space: nowrap; }
 .grafico-fonte, .jogadores .fonte, .painel-jogador .fonte { margin: 0; font-size: 12px; color: var(--cor-texto-3); }
 @media (min-width: 900px) {
-  .destaques { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .cartoes { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .grafico-area { height: 360px; }
 }
