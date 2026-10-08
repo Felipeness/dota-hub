@@ -19,6 +19,7 @@ export function checklistAntes(heroi: Heroi): readonly ItemAntes[] {
     { id: "evitar-quando", titulo: "Evitar se o inimigo tiver", porque: guia.evitar_quando.join(" ") },
     { id: "itens-iniciais", titulo: "Itens iniciais", porque: itensIniciais },
     { id: "objetivo-lane", titulo: "Objetivo da lane (10 min)", porque: guia.lane.objetivo },
+    { id: "condicao-farmar", titulo: "Quando ir pra selva", porque: guia.condicao_para_farmar.explicacao },
     ...itensCoreNaLinhaDoTempo(guia.itens_core).slice(0, MAXIMO_DE_ITENS).map((item): ItemAntes => ({
       id: `item-${item.item}`,
       titulo: item.minuto_alvo === null ? `Comprar: ${item.nome_curto}` : `Comprar: ${item.nome_curto} até ${item.minuto_alvo} min`,

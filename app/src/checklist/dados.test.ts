@@ -28,7 +28,7 @@ const heroi: Heroi = {
 it("monta o checklist antes com draft, itens iniciais, objetivo e itens core", () => {
   const itens = checklistAntes(heroi);
   expect(itens.map((i) => i.id)).toEqual([
-    "bom-quando", "evitar-quando", "itens-iniciais", "objetivo-lane", "item-power_treads", "item-bfury",
+    "bom-quando", "evitar-quando", "itens-iniciais", "objetivo-lane", "condicao-farmar", "item-power_treads", "item-bfury",
   ]);
   expect(itens.find((i) => i.id === "item-power_treads")?.titulo).toBe("Comprar: Power Treads até 7 min");
 });
