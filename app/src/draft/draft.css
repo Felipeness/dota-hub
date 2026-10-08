@@ -20,6 +20,7 @@
 .draft-bans { --cor-lado: var(--cor-texto-3); }
 .draft-fileira h2 { display: flex; justify-content: space-between; margin-bottom: var(--espaco-2); }
 .draft-vagas { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; margin: 0; padding: 0; list-style: none; }
+.draft-vagas > li { min-width: 0; }
 .draft-bans .draft-vagas { grid-template-columns: repeat(7, minmax(0, 1fr)); }
 .draft-bans .draft-nota { grid-column: 1 / -1; }
 .draft-vaga {
@@ -88,7 +89,37 @@
 }
 .draft-contra-time .selo { align-self: flex-start; }
 
+/* Posição e lane no slot do time */
+.draft-posicao-slot { display: flex; flex-direction: column; gap: 2px; width: 100%; min-width: 0; font-size: 10px; text-align: center; margin-top: 2px; }
+.draft-posicao-select { width: 100%; min-width: 0; font-size: 10px; min-height: 22px; padding: 0 2px; border-radius: 6px; }
+.draft-posicao-lane { color: var(--cor-texto-3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Confrontos de lane */
+.draft-lanes { display: flex; flex-direction: column; gap: var(--espaco-2); }
+.draft-lane-pares { display: grid; gap: var(--espaco-2); margin: 0; padding: 0; list-style: none; }
+.draft-lane-par {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: var(--espaco-2) var(--espaco-3); border: 1px solid var(--cor-linha); border-radius: var(--raio); background: var(--cor-superficie);
+}
+.draft-lane-titulo { font-family: var(--fonte-display); font-size: 13px; color: var(--cor-texto-2); }
+.draft-lane-confronto { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.draft-lane-retrato { width: 40px; max-width: 40px; }
+
+/* Comparação de drafts */
+.draft-comparacao { display: flex; flex-direction: column; gap: var(--espaco-2); }
+.draft-resumo-comparacao { margin: 0; padding: var(--espaco-2) var(--espaco-3); border-left: 3px solid var(--cor-destaque); background: var(--cor-superficie-2); color: var(--cor-texto-leitura); font-size: 14px; }
+.draft-eixos { display: grid; gap: var(--espaco-2); margin: 0; padding: 0; list-style: none; }
+.draft-eixo { display: flex; flex-direction: column; gap: 4px; padding: var(--espaco-2) var(--espaco-3); border: 1px solid var(--cor-linha); border-radius: var(--raio); background: var(--cor-superficie); }
+.draft-eixo-topo { display: flex; justify-content: space-between; align-items: baseline; gap: var(--espaco-2); font-size: 14px; }
+.draft-eixo-topo .a-favor { color: var(--cor-radiant); }
+.draft-eixo-topo .contra { color: var(--cor-dire); }
+.draft-eixo-barra { position: relative; display: block; height: 8px; width: 100%; background: var(--cor-superficie-3); border-radius: 4px; overflow: hidden; }
+.draft-eixo-barra i { display: block; height: 100%; border-radius: 4px; }
+.draft-barra-aliado { background: var(--cor-radiant); }
+.draft-barra-inimigo { background: var(--cor-dire); }
+
 @media (min-width: 900px) {
+  .draft-eixos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .draft-tabuleiro { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
   .draft-colunas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .draft-colunas-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
