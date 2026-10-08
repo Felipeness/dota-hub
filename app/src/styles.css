@@ -564,6 +564,7 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .painel-jogador header a { color: var(--cor-destaque); }
 .painel-jogador ul { color: var(--cor-texto-2); line-height: 1.6; }
 .painel-jogador ul a { color: var(--cor-info); }
+.painel-jogador h3 { margin: 0 0 var(--espaco-2); font-family: var(--fonte-display); font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cor-texto-2); }
 .destaques { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--espaco-3); }
 .destaques div { display: flex; flex-direction: column-reverse; gap: var(--espaco-1); padding: var(--espaco-4); border-radius: var(--raio); background: var(--cor-superficie-2); border: 1px solid var(--cor-linha-forte); }
 .destaques dd { margin: 0; font-family: var(--fonte-num); font-variant-numeric: tabular-nums; font-size: 28px; color: var(--cor-destaque); }
