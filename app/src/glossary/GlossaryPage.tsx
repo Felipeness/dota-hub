@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router";
 import { useMemo, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { conteudoSchema, heroisSchema, objetivosSchema, rotasResumoSchema, type ConteudoItem } from "../data/schemas";
+import { conteudoSchema, heroisCatalogoSchema, objetivosSchema, rotasResumoSchema, type ConteudoItem } from "../data/schemas";
 import { dadosOuVazio, Indisponivel, useData } from "../data/useData";
 import { normalizar } from "../routes/filtros";
 import { CATEGORIAS, filtrarTermos, textoExtra } from "./filtros";
@@ -27,7 +27,7 @@ const rotuloDaCategoria = (termo: ConteudoItem): string | null => {
 };
 
 function Relacionados({ termo, termos }: { termo: ConteudoItem; termos: ConteudoItem[] }) {
-  const herois = useData("/data/herois.json", heroisSchema);
+  const herois = useData("/data/herois_catalogo.json", heroisCatalogoSchema);
   const rotas = useData("/data/rotas_resumo.json", rotasResumoSchema);
   const objetivos = useData("/data/objetivos.json", objetivosSchema);
   const catalogo = useMemo(
