@@ -173,6 +173,14 @@ def indice(fichas: list[dict]) -> list[dict]:
              "tem_por_minuto": f["por_minuto"] is not None} for f in fichas]
 
 
+def draft_resumo(fichas: list[dict]) -> list[dict]:
+    """Só o que a tela de draft usa: bom_quando/evitar_quando/momento/itens situacionais. ~13% do tamanho das fichas inteiras."""
+    return [{"id": f["id"], "hero_id": f["hero_id"], "guia": {
+        "bom_quando": f["guia"]["bom_quando"], "evitar_quando": f["guia"]["evitar_quando"],
+        "momento_do_draft": f["guia"]["momento_do_draft"], "itens_situacionais": f["guia"]["itens_situacionais"],
+    }} for f in fichas]
+
+
 def itens_dos_guias(fichas: list[dict]) -> set[str]:
     """Slugs de item citados na build (core e situacionais) de cada ficha, pra exportar o ícone deles também.
 

@@ -2,7 +2,7 @@ import type { Mencao } from "./guia";
 import { avaliar, placarContra, sugerir, type Contexto, type HeroiDraft } from "./pontuacao";
 
 const heroi = (id: number, nome: string, funcoes: string[], divine = { jogos: 10_000, vitorias: 5_000 }): HeroiDraft =>
-  ({ id, nome, npc: nome.toLowerCase(), funcoes, divine });
+  ({ id, nome, npc: nome.toLowerCase(), funcoes, atributo: "all", divine });
 
 const JUGG = heroi(8, "Juggernaut", ["Carry"]);
 const AXE = heroi(2, "Axe", ["Initiator", "Disabler"]);
@@ -50,6 +50,15 @@ describe("avaliar", () => {
     const mencao: Mencao = { dono: JUGG.id, alvo: OMNI.id, lista: "evitar", lado: "inimigo", pp: -4.4, texto: "O inimigo tem Omniknight (-4,4 pp)." };
     const motivo = avaliar(contexto([mencao]), OMNI, draft, "ban").motivos.find((m) => m.tipo === "guia");
     expect(motivo).toMatchObject({ pp: 4.4, curto: "Guia do Juggernaut: sofre contra Omniknight (−4,4 pp)" });
+  });
+
+  it("aponta o inimigo com a pior taxa de vitória pra linkar o confronto 1x1", () => {
+    expect(avaliar(contexto(), LION, draft, "pick").maisPerigoso).toBe(AXE.id);
+  });
+
+  it("não aponta inimigo sem amostra suficiente de matchup", () => {
+    const soComPoucoJogo = { aliados: [JUGG.id], inimigos: [SVEN.id], bans: [] };
+    expect(avaliar(contexto(), AXE, soComPoucoJogo, "pick").maisPerigoso).toBeNull();
   });
 });
 

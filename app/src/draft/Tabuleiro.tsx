@@ -1,12 +1,20 @@
 import { useState } from "react";
 import { adicionar, estaNoDraft, ladoCheio, LIMITES, remover, type Lado } from "./estado";
 import type { HeroId } from "./guia";
-import type { Draft, HeroiDraft } from "./pontuacao";
+import { ATRIBUTOS, NOME_DO_ATRIBUTO, type Atributo, type Draft, type HeroiDraft } from "./pontuacao";
 import { Retrato } from "./Retrato";
 
 const ROTULO: Readonly<Record<Lado, string>> = { aliados: "Seu time", inimigos: "Inimigo", bans: "Bans" };
 const LADOS: readonly Lado[] = ["aliados", "inimigos", "bans"];
 const VAZIO: Draft = { aliados: [], inimigos: [], bans: [] };
+const TODOS = "todos";
+
+/** Funções do OpenDota que aparecem nos heróis carregados, na ordem em que surgem pela primeira vez. */
+function funcoesPresentes(herois: readonly HeroiDraft[]): string[] {
+  return [...new Set(herois.flatMap((h) => h.funcoes))];
+}
+
+const paraAtributo = (valor: string): Atributo | typeof TODOS => ATRIBUTOS.find((a) => a === valor) ?? TODOS;
 
 type Props = Readonly<{
   herois: readonly HeroiDraft[];
@@ -43,8 +51,13 @@ function Fileira({ lado, draft, porId, onMudar }: Omit<Props, "herois"> & { lado
 export function Tabuleiro({ herois, porId, draft, onMudar }: Props) {
   const [ladoAtivo, setLadoAtivo] = useState<Lado>("inimigos");
   const [filtro, setFiltro] = useState("");
+  const [funcao, setFuncao] = useState<string>(TODOS);
+  const [atributo, setAtributo] = useState<Atributo | typeof TODOS>(TODOS);
   const termo = filtro.trim().toLowerCase();
-  const visiveis = termo === "" ? herois : herois.filter((h) => h.nome.toLowerCase().includes(termo));
+  const visiveis = herois
+    .filter((h) => termo === "" || h.nome.toLowerCase().includes(termo))
+    .filter((h) => funcao === TODOS || h.funcoes.includes(funcao))
+    .filter((h) => atributo === TODOS || h.atributo === atributo);
   const cheio = ladoCheio(draft, ladoAtivo);
 
   return (
@@ -58,7 +71,17 @@ export function Tabuleiro({ herois, porId, draft, onMudar }: Props) {
             <button key={lado} type="button" aria-pressed={ladoAtivo === lado} onClick={() => setLadoAtivo(lado)}>{ROTULO[lado]}</button>
           ))}
         </div>
-        <input type="search" aria-label="Filtrar heróis" placeholder="Buscar herói" value={filtro} onChange={(e) => setFiltro(e.target.value)} />
+        <div className="draft-filtros">
+          <input type="search" aria-label="Filtrar heróis" placeholder="Buscar herói" value={filtro} onChange={(e) => setFiltro(e.target.value)} />
+          <select aria-label="Filtrar por função" value={funcao} onChange={(e) => setFuncao(e.target.value)}>
+            <option value={TODOS}>Toda função</option>
+            {funcoesPresentes(herois).map((f) => <option key={f} value={f}>{f}</option>)}
+          </select>
+          <select aria-label="Filtrar por atributo" value={atributo} onChange={(e) => setAtributo(paraAtributo(e.target.value))}>
+            <option value={TODOS}>Todo atributo</option>
+            {ATRIBUTOS.map((a) => <option key={a} value={a}>{NOME_DO_ATRIBUTO[a]}</option>)}
+          </select>
+        </div>
         {cheio && <p className="draft-nota" role="status">{ROTULO[ladoAtivo]} está completo. Toque num herói acima para tirar.</p>}
         <ul className="draft-grade" aria-label={`Heróis para ${ROTULO[ladoAtivo]}`}>
           {visiveis.map((h) => (

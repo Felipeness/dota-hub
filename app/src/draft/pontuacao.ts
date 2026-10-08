@@ -5,12 +5,17 @@ import type { HeroId, Mencao } from "./guia";
 
 export type Funcao = "Carry" | "Support" | "Initiator" | "Disabler" | "Nuker" | "Durable" | "Escape" | "Pusher";
 
+export const ATRIBUTOS = ["str", "agi", "int", "all"] as const;
+export type Atributo = (typeof ATRIBUTOS)[number];
+export const NOME_DO_ATRIBUTO: Readonly<Record<Atributo, string>> = { str: "Força", agi: "Agilidade", int: "Inteligência", all: "Universal" };
+
 export type HeroiDraft = Readonly<{
   id: HeroId;
   nome: string;
   /** Nome interno sem o prefixo npc_dota_hero_: é o nome do retrato no CDN da Valve. */
   npc: string;
   funcoes: readonly string[];
+  atributo: Atributo;
   /** Partidas na faixa Divine do OpenDota (heroStats, última semana). */
   divine: Readonly<{ jogos: number; vitorias: number }>;
 }>;
@@ -29,7 +34,7 @@ export type Contexto = Readonly<{
 
 export type TipoDeMotivo = "matchup" | "guia" | "funcao" | "patch";
 export type Motivo = Readonly<{ tipo: TipoDeMotivo; pp: number; curto: string; detalhe: string }>;
-export type Sugestao = Readonly<{ heroi: HeroiDraft; nota: number; motivos: readonly Motivo[] }>;
+export type Sugestao = Readonly<{ heroi: HeroiDraft; nota: number; motivos: readonly Motivo[]; maisPerigoso: HeroId | null }>;
 
 /** "pick": o herói é para o seu time. "ban": o herói é o que o inimigo pegaria contra você. */
 export type Perspectiva = "pick" | "ban";
@@ -53,6 +58,15 @@ export function placarContra(matchups: Matchups, heroi: HeroId, rival: HeroId): 
   if (direto) return direto;
   const inverso = matchups.get(rival)?.get(heroi);
   return inverso ? { jogos: inverso.jogos, vitorias: inverso.jogos - inverso.vitorias } : null;
+}
+
+/** O rival com a pior taxa de vitória do candidato, para linkar o 1x1 de quem mais ameaça; null sem amostra suficiente. */
+function inimigoMaisPerigoso(matchups: Matchups, candidato: HeroId, inimigos: readonly HeroId[]): HeroId | null {
+  const comPlacar = inimigos.flatMap((rival) => {
+    const placar = placarContra(matchups, candidato, rival);
+    return placar && placar.jogos >= MINIMO_DE_JOGOS_NO_MATCHUP ? [{ rival, taxa: placar.vitorias / placar.jogos }] : [];
+  });
+  return comPlacar.toSorted((a, b) => a.taxa - b.taxa)[0]?.rival ?? null;
 }
 
 function motivoDeMatchup(contexto: Contexto, candidato: HeroId, rival: HeroId, perspectiva: Perspectiva): Motivo | null {
@@ -166,7 +180,8 @@ export function avaliar(contexto: Contexto, heroi: HeroiDraft, draft: Draft, per
   ].filter((m): m is Motivo => m !== null);
   const nota = motivos.reduce((soma, m) => soma + m.pp, 0);
   const visiveis = motivos.filter((m) => Math.abs(m.pp) >= MOTIVO_IRRELEVANTE_PP).toSorted((a, b) => Math.abs(b.pp) - Math.abs(a.pp));
-  return { heroi, nota, motivos: visiveis };
+  const maisPerigoso = inimigoMaisPerigoso(contexto.matchups, heroi.id, inimigos);
+  return { heroi, nota, motivos: visiveis, maisPerigoso };
 }
 
 const ocupados = (draft: Draft) => new Set([...draft.aliados, ...draft.inimigos, ...draft.bans]);

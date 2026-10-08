@@ -1,12 +1,15 @@
 import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router";
+import { carregarBase } from "../confronto/carregar";
 import { ErroAoVivoView } from "../live/ErroAoVivo";
+import { useAoVivo } from "../live/useAoVivo";
 import { ContraTime } from "./ContraTime";
 import { useGuias, useHeroStats, useMatchups, type Guias } from "./dados";
 import { adicionar, escreverDraft, estaNoDraft, lerDraft, type Lado } from "./estado";
 import { extrairMencoes, type HeroId } from "./guia";
 import { sugerir, type Contexto, type Draft, type HeroiDraft } from "./pontuacao";
 import { Situacoes } from "./Situacoes";
+import { situacoesDosInimigos } from "./situacoesDoInimigo";
 import { Sugestoes } from "./Sugestoes";
 import { Tabuleiro } from "./Tabuleiro";
 import "./draft.css";
@@ -32,6 +35,12 @@ function Painel({ herois, guias }: { herois: readonly HeroiDraft[]; guias: Guias
   // ~28 mil buscas de nome nos textos dos guias: o app não usa o React Compiler, então guarda à mão.
   const mencoes = useMemo(() => guias.guias.flatMap((g) => extrairMencoes(g, herois)), [guias, herois]);
   const contexto: Contexto = { herois: porId, matchups, mencoes };
+  // Mesma chave de cache do Confronto 1x1: quem já visitou lá não baixa as habilidades de novo.
+  const base = useAoVivo("confronto:constantes", carregarBase);
+  const detectadas = useMemo(
+    () => (base.estado === "ok" ? situacoesDosInimigos(draft.inimigos, base.dados.herois) : []),
+    [base, draft.inimigos],
+  );
   const guiasPorId = new Map(guias.guias.map((g) => [g.heroId, g]));
   const colocar = (lado: Lado) => (id: HeroId) => mudarDraft(adicionar(draft, lado, id));
 
@@ -55,6 +64,7 @@ function Painel({ herois, guias }: { herois: readonly HeroiDraft[]; guias: Guias
               onAcao={colocar("aliados")}
               guias={guiasPorId}
               paginas={guias.paginas}
+              linkDoConfronto={porId}
             />
             <Sugestoes
               titulo="Banir"
@@ -76,7 +86,7 @@ function Painel({ herois, guias }: { herois: readonly HeroiDraft[]; guias: Guias
           onPegar={colocar("aliados")}
         />
       )}
-      {aba === "situacoes" && <Situacoes guias={guias.guias} porId={porId} paginas={guias.paginas} />}
+      {aba === "situacoes" && <Situacoes guias={guias.guias} porId={porId} paginas={guias.paginas} detectadas={detectadas} />}
     </>
   );
 }
@@ -89,6 +99,11 @@ export function DraftPage() {
       <div className="rotas-topo"><span className="sobretitulo">Draft</span><h1>Simulador de draft</h1></div>
       <p className="draft-explicacao">
         Monte os dois times e os bans. A lista mostra o que pegar e o que banir, sempre com o porquê e de onde veio o número.
+      </p>
+      <p className="draft-nota">
+        Em all pick de pub o draft não é tão coordenado assim. O que ajuda de verdade: o confronto 1x1 contra o herói que mais te
+        ameaça (cada pick já traz esse link) e o modo contra time tier 1 na aba ao lado. O simulador completo fica para quando
+        o seu time e o inimigo já estão fechados.
       </p>
       {herois.estado === "erro" && <ErroAoVivoView erro={herois.erro} onTentar={tentarDeNovo} />}
       {(herois.estado === "carregando" || guias === null) && herois.estado !== "erro" && <p>Carregando…</p>}
