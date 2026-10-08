@@ -1,11 +1,10 @@
-import { heroiSchema, heroisSchema } from "../data/schemas";
-import { useData } from "../data/useData";
 import { ErroAoVivoView } from "../live/ErroAoVivo";
 import { FrescorView } from "../live/Frescor";
 import { useAoVivo, type EstadoAoVivo } from "../live/useAoVivo";
 import { carregarEstatisticas, type Estatisticas } from "./carregar";
 import type { PopularidadeFonte } from "./fonte";
-import { dicasDoConfronto, trechosDoGuia, type Dica, type Fase } from "./dicas";
+import { AnaliseDePro } from "./AnaliseDePro";
+import { dicasDoConfronto, type Dica, type Fase } from "./dicas";
 import { analisarMecanicas, itensDoConfronto, type Achado } from "./mecanicas";
 import { urlDoItem, type Heroi, type Item } from "./modelo";
 import type { Recurso } from "./respostas";
@@ -19,12 +18,13 @@ export function Confronto({ meu, inimigo, itens }: Props) {
   return (
     <>
       <BlocoVantagem meu={meu} inimigo={inimigo} estatisticas={estatisticas} />
+      <AnaliseDePro meu={meu} inimigo={inimigo} />
       <BlocoMecanicas inimigo={inimigo} achados={achados} />
       <BlocoItens meu={meu} achados={achados} popularidade={estatisticas.estado === "ok" ? estatisticas.dados.popularidade : null} />
       <BlocoDicas meu={meu} inimigo={inimigo} />
-      <BlocoGuias meu={meu} inimigo={inimigo} />
       <p className="cf-fontes">
-        Fontes: OpenDota (constants/heroes, hero_abilities, abilities, items e aghs_desc; heroes/{meu.id}/matchups e itemPopularity) e os guias do Hub.
+        Fontes: OpenDota (constants/heroes, hero_abilities, abilities, items e aghs_desc; heroes/{meu.id}/matchups e itemPopularity)
+        e a análise de partidas pro dos patches 7.40 e 7.41 (OpenDota explorer, partidas de liga).
         Os textos entre aspas são do próprio jogo, em inglês, como o OpenDota entrega.
       </p>
     </>
@@ -193,48 +193,6 @@ function GrupoDeDicas({ titulo, dicas }: { titulo: string; dicas: readonly Dica[
       <ul className="cf-lista">
         {dicas.map((d) => <li key={d.texto} className="cf-dica"><p>{d.texto}</p><small className="cf-fonte">{d.fonte}</small></li>)}
       </ul>
-    </>
-  );
-}
-
-function BlocoGuias({ meu, inimigo }: { meu: Heroi; inimigo: Heroi }) {
-  const guias = useData("/data/herois.json", heroisSchema);
-  if (guias.estado !== "ok") return null;
-  const guiaDe = (h: Heroi) => guias.dados.find((g) => g.hero_id === h.id);
-  const doMeu = guiaDe(meu);
-  const doInimigo = guiaDe(inimigo);
-  if (!doMeu && !doInimigo) return null;
-  return (
-    <section className="cf-bloco" aria-labelledby="cf-guias">
-      <h2 id="cf-guias">O que os guias do Hub dizem</h2>
-      {doMeu && <TrechosDoGuia slug={doMeu.id} dono={meu.nome} citado={inimigo.nome} />}
-      {doInimigo && <TrechosDoGuia slug={doInimigo.id} dono={inimigo.nome} citado={meu.nome} />}
-    </section>
-  );
-}
-
-function TrechosDoGuia({ slug, dono, citado }: { slug: string; dono: string; citado: string }) {
-  const guia = useData(`/data/herois/${slug}.json`, heroiSchema);
-  if (guia.estado !== "ok") return null;
-  const trechos = trechosDoGuia(guia.dados, citado);
-  return (
-    <>
-      <h3 className="cf-fase">No guia do {dono}</h3>
-      {trechos.length === 0
-        ? <p>O guia do {dono} não cita o {citado}.</p>
-        : (
-          <ul className="cf-lista">
-            {trechos.map((t) => (
-              <li key={t.texto}>
-                <details className="cf-cartao">
-                  <summary><span className="cf-chip">{t.secao}</span> <span className="cf-resumo">{t.texto}</span></summary>
-                  <p>{t.texto}</p>
-                  <small className="cf-fonte">Guia do {dono} no Hub ({guia.dados.patch}), seção “{t.secao}”.</small>
-                </details>
-              </li>
-            ))}
-          </ul>
-        )}
     </>
   );
 }

@@ -1,4 +1,5 @@
 import { Link, Navigate, useLocation, useParams } from "react-router";
+import { ConfrontosAnalisados } from "../confronto/ConfrontosAnalisados";
 import { conteudoSchema, fichaSchema, heroiSchema, heroisCatalogoSchema, objetivosSchema } from "../data/schemas";
 import { dadosOuVazio, Indisponivel, useData } from "../data/useData";
 import { SoloRoshan } from "../roshan/SoloRoshan";
@@ -17,7 +18,12 @@ export function HeroPage() {
   const heroi = acharNoCatalogo(catalogo.dados, id);
   if (!heroi) return <Indisponivel motivo={`Herói "${id}" não encontrado.`} />;
   if (heroi.id !== id) return <Navigate replace to={`/herois/${heroi.id}${search}`} />;
-  return heroi.pagina === "guia" ? <PaginaDoGuia id={heroi.id} /> : <PaginaDaFicha id={heroi.id} />;
+  return (
+    <>
+      {heroi.pagina === "guia" ? <PaginaDoGuia id={heroi.id} /> : <PaginaDaFicha id={heroi.id} />}
+      <ConfrontosAnalisados heroi={heroi} />
+    </>
+  );
 }
 
 function PaginaDaFicha({ id }: { id: string }) {

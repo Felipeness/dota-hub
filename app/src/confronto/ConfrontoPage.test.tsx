@@ -39,7 +39,7 @@ function abrir(caminho: string) {
 
 afterEach(() => vi.unstubAllGlobals());
 
-it("mostra vantagem, mecânicas, itens, dicas e guia do Slark contra o Phantom Lancer", async () => {
+it("mostra vantagem, mecânicas, itens e dicas do Slark contra o Phantom Lancer, sem os guias do Hub", async () => {
   abrir("/confronto/slark/phantom_lancer");
   const vantagem = await screen.findByRole("region", { name: "Quem leva vantagem" });
   expect(await within(vantagem).findByText(/jogos \(\d+ vitórias\)/)).toBeInTheDocument();
@@ -47,7 +47,7 @@ it("mostra vantagem, mecânicas, itens, dicas e guia do Slark contra o Phantom L
   const itens = screen.getByRole("region", { name: "Itens que viram o confronto" });
   expect(within(itens).getByText("Battle Fury")).toBeInTheDocument();
   expect(screen.getByRole("region", { name: "Na prática" })).toBeInTheDocument();
-  expect(await screen.findByRole("heading", { name: "No guia do Slark" })).toBeInTheDocument();
+  expect(screen.queryByRole("region", { name: "O que os guias do Hub dizem" })).not.toBeInTheDocument();
   expect(screen.getByRole("link", { name: "Guia completo do Slark" })).toHaveAttribute("href", "/herois/slark");
 });
 

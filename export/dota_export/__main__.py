@@ -8,7 +8,7 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-from . import (amigos, conteudo, fontes, herois, icones, jogadores, jogo, mapa, modelos, porque_itens, relevo, retratos,
+from . import (amigos, confrontos, conteudo, fontes, herois, icones, jogadores, jogo, mapa, modelos, porque_itens, relevo, retratos,
                roshan, rotas, trajetorias, unidades, validar)
 from . import fichas as fichas_por_posicao
 
@@ -69,6 +69,10 @@ def main() -> None:
     por_posicao = fichas_por_posicao.carregar(RAIZ / "content" / "fichas")
     _gravar_colecao("fichas", "ficha", por_posicao)
     pacotes["herois_catalogo"] = fichas_por_posicao.catalogo(fichas, por_posicao)
+    analises = confrontos.carregar(RAIZ / "content" / "confrontos", RAIZ / "content" / "pro_dados",
+                                   confrontos.itens_core(fichas, por_posicao))
+    _gravar_colecao("confrontos", "confronto", analises)
+    pacotes["confrontos_indice"] = confrontos.indice(analises)
     paineis = [jogadores.felipe(), *(jogadores.pro_compare(c) for c in ("satanic", "yatoro", "watson")),
                *jogadores.pros_de_replay(), amigos.leonardo(), amigos.hane(), amigos.yuma()]
     _gravar_colecao("jogadores", "painel", paineis)
