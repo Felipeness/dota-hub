@@ -139,7 +139,7 @@ Os placares abaixo são sempre da perspectiva do Nyx Assassin (vitórias dele no
 - o que você faz com ele: Impale (750 de alcance) chega mais longe que o Frostbite (600) e cancela o canal da Freezing Field assim que acerta; Vendetta entra invisível direto nos 120 de vida dela, e o bônus de até 500 de dano sozinho já mata ou deixa perto da morte uma CM sem Glimmer Cape ativo.
 - itens que viram: o Aghanim's Shard da CM (17,7, gera um clone que desvia projétil e aplica Frostbite ao morrer) pode salvar ela de um primeiro Impale, mas não do bônus de dano da Vendetta se o Nyx já estiver colado; o Shard do Nyx (25,2) multiplica as janelas de pick-off contra uma CM que farma pouco e não tem mobilidade própria.
 - como jogar: priorize fechar o alcance de 750 do Impale antes dela usar o Frostbite de 600; depois do nível 6, a Vendetta sozinha já ameaça matar a CM se ela estiver fora de visão dos aliados.
-- fonte: pro_dados/nyx_assassin.json; pro_dados/crystal_maiden.json; constants_abilities.json (nyx_assassin_impale, nyx_assassin_vendetta, crystal_maiden_frostbite, crystal_maiden_freezing_field); aghs_desc (nyx_assassin, crystal_maiden); heroStats (base_health, base_armor)
+- fonte: pro_dados/nyx_assassin.json; pro_dados/crystal_maiden.json; constants_abilities.json (nyx_assassin_impale, nyx_assassin_vendetta, crystal_maiden_frostbite, crystal_maiden_freezing_field); aghs_desc (nyx_assassin, crystal_maiden); heroStats.json (base_health, base_armor)
 
 ## Contra Lich (lich)
 
