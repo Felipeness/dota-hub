@@ -30,9 +30,15 @@ export const partidaFonte = z.object({
     start: z.number(), end: z.number(),
     players: z.array(z.object({ deaths_pos: lanePos.nullable().optional() })),
   })),
+  // Vantagem do Radiant minuto a minuto; positivo = Radiant na frente. Ausente em partidas sem análise completa.
+  radiant_gold_adv: lista(z.number()),
+  radiant_xp_adv: lista(z.number()),
+  // team: 0 = Radiant, 1 = Dire. draft_timings costuma vir vazio; a ordem real é o campo order.
+  picks_bans: lista(z.object({ is_pick: z.boolean(), hero_id: z.number(), team: z.number(), order: z.number() })),
   players: z.array(z.object({
     account_id: z.number().nullable().optional(), player_slot: z.number(), hero_id: z.number(),
     lane_pos: lanePos.nullable().optional(), lane_role: z.number().nullable().optional(),
+    lane_efficiency_pct: z.number().nullable().optional().transform((v) => v ?? null),
     kills: z.number(), deaths: z.number(), assists: z.number(),
     gold_t: lista(z.number()), xp_t: lista(z.number()), lh_t: lista(z.number()), networth_t: lista(z.number()),
     purchase_log: lista(noTempo), kills_log: lista(noTempo), deaths_log: lista(noTempo), runes_log: lista(noTempo),

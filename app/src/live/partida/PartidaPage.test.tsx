@@ -22,10 +22,14 @@ it("partida real gravada mostra herói, resumo, curvas, rota e build", async () 
   const resumo = screen.getByRole("list", { name: "Resumo da partida" });
   expect(within(resumo).getByText("Vitória em 46 min de Slark, 13/5/12, safe lane.")).toBeInTheDocument();
   expect(within(resumo).getByText(/Perdeu a lane contra Necrophos/)).toBeInTheDocument();
+  expect(screen.getByRole("link", { name: "Como jogar contra Necrophos" })).toHaveAttribute("href", "/confronto/slark/necrolyte");
   expect(screen.getAllByRole("img", { name: /Ouro ganho por minuto|Last hits por minuto/ })).toHaveLength(2);
   expect(screen.getByRole("list", { name: "Ordem de compra" })).toHaveTextContent("Diffusal Blade");
   expect(screen.getByRole("heading", { name: "Por que esse item" })).toBeInTheDocument();
   expect(screen.getByRole("region", { name: "Skill build por nível" })).toBeInTheDocument();
+  // Amostra gravada é de antes do OpenDota trazer vantagem do time e picks_bans.
+  expect(screen.queryByRole("heading", { name: "Vantagem do time" })).not.toBeInTheDocument();
+  expect(screen.queryByRole("heading", { name: "Draft" })).not.toBeInTheDocument();
 });
 
 it("trocar a janela filtra e renumera os eventos", async () => {
