@@ -37,11 +37,16 @@ it.each([
 it.each([
   { detalhes: { lane: "top", tier: 1 }, esperado: [["Lane", "top"], ["Tier", "1"]] },
   { detalhes: { empilhavel: true, anfibio: false }, esperado: [["Dá stack", "sim"], ["Anfíbio", "não"]] },
-  { detalhes: { dist_torre_unidades: 1420, regra: "texto longo demais para caber numa célula da grade" }, esperado: [["Distância da torre", "1.420"]] },
+  { detalhes: { dist_torre_unidades: 1420, regra: "texto longo demais para caber numa célula da grade" }, esperado: [["Distância da torre", "1.420"], ["Regra", "texto longo demais p…"]] },
   { detalhes: { chave_nova: "x" }, esperado: [["chave nova", "x"]] },
   { detalhes: { lista: [1, 2] }, esperado: [] },
 ])("numerosDoObjetivo($detalhes) devolve $esperado", ({ detalhes, esperado }) => {
   expect(numerosDoObjetivo(detalhes)).toEqual(esperado);
+});
+
+it("não esconde o pull só porque a explicação é longa", () => {
+  const texto = "sim: safe lane (bot), pull clássico; double pull junto com rad_safe_large_1";
+  expect(numerosDoObjetivo({ puxavel: texto })).toEqual([["Dá pull", `${texto.slice(0, 20)}…`]]);
 });
 
 it("troca o id de outro objetivo pelo nome dele", () => {
