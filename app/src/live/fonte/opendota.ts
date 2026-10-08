@@ -4,6 +4,9 @@ import type { Fila } from "../fila";
 import { registrarNoConsole, type Registrar, type Registro } from "../registro";
 
 export const BASE_OPENDOTA = "https://api.opendota.com/api";
+/** Constantes do jogo só mudam com patch: o deploy publica uma cópia junto do site (scripts/espelhar-constantes.mjs) e a API fica de reserva. Em 08/10/2026 /constants/items passou de 20 s na API. */
+const PREFIXO_CONSTANTES = "/constants/";
+const BASE_ESPELHO = "/data/opendota";
 /** Em 07/10/2026 o /search do OpenDota levou 17 s numa busca nova (os outros endpoints, menos de 1 s); com 4 s a busca por nome falhava. */
 const TEMPO_MAXIMO_MS = 20_000;
 const MAXIMO_DE_TENTATIVAS = 3;
@@ -87,9 +90,18 @@ export function criarFonte({
     return pedirNaVez(url, schema, tentativa + 1);
   }
 
+  async function doEspelho<T>(caminho: string, schema: z.ZodType<T>): Promise<RespostaAoVivo<T> | null> {
+    if (!caminho.startsWith(PREFIXO_CONSTANTES)) return null;
+    const chamada = await chamar(`${BASE_ESPELHO}${caminho}.json`);
+    if (!chamada.ok || !chamada.dados.ok) return null;
+    const resposta = await interpretar(chamada.dados, schema);
+    return resposta.ok ? resposta : null;
+  }
+
   return async (caminho, schema) => {
     const inicio = agora();
-    const resposta = estaOnline() ? await pedirNaVez(`${BASE_OPENDOTA}${caminho}`, schema, 1) : falha(erroAoVivo("SEM_CONEXAO"));
+    const espelho = estaOnline() ? await doEspelho(caminho, schema) : null;
+    const resposta = espelho ?? (estaOnline() ? await pedirNaVez(`${BASE_OPENDOTA}${caminho}`, schema, 1) : falha(erroAoVivo("SEM_CONEXAO")));
     registrar(registroDaConsulta(caminho, resposta, agora() - inicio));
     return resposta;
   };

@@ -92,3 +92,18 @@ it("429 do dia não tenta de novo e as consultas seguintes nem chamam a fonte at
   expect(await fonte("/y", schema)).toEqual({ ok: false, erro: { codigo: "LIMITE_DIA", tenteEmS: 43_200 } });
   expect(pedidos).toHaveLength(1);
 });
+
+it("constante vem da cópia publicada com o site e não chama a API", async () => {
+  const { fonte, pedidos } = montar([resposta(200, '{"win":7}')]);
+  expect(await fonte("/constants/items", schema)).toEqual({ ok: true, dados: { win: 7 } });
+  expect(pedidos.map((p) => p.url)).toEqual(["/data/opendota/constants/items.json"]);
+});
+
+it.each([
+  { nome: "não publicada", copia: resposta(403, "<Error/>") },
+  { nome: "fora do schema", copia: resposta(200, '{"win":"três"}') },
+])("constante $nome cai na API", async ({ copia }) => {
+  const { fonte, pedidos } = montar([copia, resposta(200, '{"win":2}')]);
+  expect(await fonte("/constants/items", schema)).toEqual({ ok: true, dados: { win: 2 } });
+  expect(pedidos[1]?.url).toBe(`${BASE_OPENDOTA}/constants/items`);
+});

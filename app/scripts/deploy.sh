@@ -6,6 +6,7 @@ P="--profile pessoal"
 B=s3://dota-hub-968000946695
 DIST=E2HBYA8DQ0PFFO
 
+node scripts/espelhar-constantes.mjs
 npm run build
 aws s3 sync dist/assets $B/assets $P --only-show-errors --cache-control "public,max-age=31536000,immutable"
 aws s3 sync dist/data $B/data $P --only-show-errors --cache-control "public,max-age=3600" --delete

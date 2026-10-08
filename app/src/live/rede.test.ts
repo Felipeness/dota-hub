@@ -10,6 +10,7 @@ import { PARTIDA, SPIRIT, YATORO, filaSemIntervalo, fonteGravada } from "./teste
 import { resumoDoTime } from "./times";
 
 const NOVE_MINUTOS_MS = 9 * 60_000;
+const PROPRIO_SITE = "https://dota-hub.local";
 let bancosCriados = 0;
 
 /** Uma "abertura do navegador": fila e fonte novas, o mesmo banco IndexedDB de antes. */
@@ -36,7 +37,7 @@ it("critério 7: reabrir e abrir a mesma conta antes de 10 minutos não chama a 
   expect(reaberto).toEqual([]);
 });
 
-it("critério 8: a jornada completa só chama api.opendota.com, sem chave", async () => {
+it("critério 8: a jornada completa só chama o próprio site e api.opendota.com, sem chave", async () => {
   const enderecos: string[] = [];
   const consultar = abrirApp(`rede-${(bancosCriados += 1)}`, Date.now, enderecos);
   await buscar(consultar, "yatoro");
@@ -46,6 +47,9 @@ it("critério 8: a jornada completa só chama api.opendota.com, sem chave", asyn
   await resumoDoTime(consultar, SPIRIT);
 
   expect(enderecos.length).toBeGreaterThan(0);
-  expect(new Set(enderecos.map((e) => new URL(e).origin))).toEqual(new Set(["https://api.opendota.com"]));
+  // Endereço relativo é o próprio site (cópia das constantes publicada com o deploy).
+  const origens = new Set(enderecos.map((e) => new URL(e, PROPRIO_SITE).origin));
+  expect([...origens].every((o) => o === PROPRIO_SITE || o === "https://api.opendota.com")).toBe(true);
+  expect(origens.has("https://api.opendota.com")).toBe(true);
   expect(enderecos.filter((e) => /api_key=/.test(e))).toEqual([]);
 });
