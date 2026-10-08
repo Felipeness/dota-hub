@@ -1,5 +1,5 @@
 /* Draft: tabuleiro de times, sugestões com motivos, modo contra time e situações. Só tokens de styles/tokens.css. */
-.draft { display: flex; flex-direction: column; gap: var(--espaco-4); max-width: 1200px; margin: 0 auto; padding: var(--espaco-4); }
+.draft { display: flex; flex-direction: column; gap: var(--espaco-4); }
 .draft h2 { font-size: 22px; }
 .draft-explicacao { margin: 0; color: var(--cor-texto-2); font-size: 14px; max-width: 72ch; }
 .draft-nota { margin: 0; color: var(--cor-texto-3); font-size: 13px; }

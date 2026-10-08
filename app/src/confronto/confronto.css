@@ -1,18 +1,19 @@
 /* Confronto 1x1 */
-.cf { max-width: 860px; margin: 0 auto; padding: var(--espaco-5) var(--espaco-4) var(--espaco-6); display: grid; gap: var(--espaco-5); }
+/* minmax(0, 1fr): sem isso a coluna implícita cresce até o min-content do resumo nowrap e estoura a página */
+.cf { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-5); }
 .cf-topo h1 { font-size: clamp(32px, 7vw, 48px); letter-spacing: 0.01em; }
 .cf-sub { margin: var(--espaco-2) 0 0; color: var(--cor-texto-2); }
 
 .cf-escolha { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: end; gap: var(--espaco-3); }
 .cf-seletor { display: grid; gap: var(--espaco-2); min-width: 0; }
 .cf-retrato {
-  width: 100%; aspect-ratio: 16 / 9; height: auto; object-fit: cover;
+  width: 100%; max-width: 256px; aspect-ratio: 16 / 9; height: auto; object-fit: cover;
   border-radius: var(--raio-pequeno); border: 1px solid var(--cor-linha-forte); background: var(--cor-superficie-2);
 }
 .cf-retrato-vazio { display: grid; place-items: center; font: 600 32px var(--fonte-display); color: var(--cor-texto-3); }
 .cf-trocar { min-width: var(--alvo-toque); padding: 0; font-size: 20px; color: var(--cor-destaque); }
 
-.cf-bloco { display: grid; gap: var(--espaco-3); padding: var(--espaco-4); border: 1px solid var(--cor-linha); border-radius: var(--raio); background: var(--cor-superficie); }
+.cf-bloco { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-3); padding: var(--espaco-4); border: 1px solid var(--cor-linha); border-radius: var(--raio); background: var(--cor-superficie); }
 .cf-bloco h2 { font-size: 24px; }
 .cf-bloco p { margin: 0; }
 .cf-fase { font-size: 18px; color: var(--cor-texto-2); margin-top: var(--espaco-2); }

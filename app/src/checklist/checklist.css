@@ -1,5 +1,5 @@
 /* Checklist de pré e pós jogo por herói: resumo na linha, porquê no <details>, sem JS extra pra abrir/fechar. */
-.checklist-heroi, .checklist-lista { display: grid; gap: var(--espaco-5); min-width: 0; }
+.checklist-heroi, .checklist-lista { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-5); min-width: 0; }
 .checklist-legenda { margin: 0 0 var(--espaco-2); font-size: 13px; color: var(--cor-texto-3); max-width: 70ch; }
 
 .checklist-itens { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--espaco-2); }

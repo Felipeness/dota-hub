@@ -87,7 +87,18 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 
 /* Casca */
 .shell { min-height: 100vh; display: flex; flex-direction: column; }
-.shell > main { flex: 1; width: 100%; min-width: 0; }
+/* Container único das páginas: centralizado, com respiro lateral. Carregando, erro e vazio caem aqui também. */
+.shell > main {
+  flex: 1; width: 100%; min-width: 0; max-width: var(--largura-pagina); margin-inline: auto;
+  padding: var(--respiro-topo) var(--margem-pagina) var(--respiro-base);
+}
+/* Páginas de leitura (ficha, checklist do herói, confronto, conta ao vivo) usam coluna mais estreita. */
+.shell > main:has(> .ficha-heroi, > .checklist-heroi, > .cf, > .ao-vivo) { max-width: var(--largura-estreita); }
+.shell > main:has(> .ao-vivo > .partida) { max-width: var(--largura-pagina); }
+/* Ferramentas com mapa ou lateral fixa ocupam a janela inteira e cuidam do próprio respiro. */
+.shell > main:has(> .pagina-mapa, > .rotas, > .glossario, > .unidades-pagina, > .atlas-time) { max-width: none; padding: 0; }
+/* Texto corrido não passa da largura de leitura, mesmo numa página larga. */
+.shell > main :is(p, ul:not([class]) > li, ol:not([class]) > li) { max-width: var(--largura-leitura); }
 .topo {
   position: sticky; top: 0; z-index: 20;
   display: flex; flex-wrap: wrap; align-items: center; gap: var(--espaco-3) var(--espaco-5);
@@ -489,7 +500,7 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .selo-replay { border-color: transparent; background: rgba(79, 195, 232, 0.14); color: var(--cor-info); }
 
 /* Heróis */
-.herois, .ficha-heroi { display: flex; flex-direction: column; gap: 18px; padding: 28px var(--espaco-6) 40px; max-width: 1100px; }
+.herois, .ficha-heroi { display: flex; flex-direction: column; gap: 18px; }
 .herois-cobertura, .herois-contagem { margin: 0; font-size: 13px; color: var(--cor-texto-3); }
 .grade-herois { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr; gap: var(--espaco-3); }
 .grade-herois a {
@@ -585,12 +596,11 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
   .filtro-categorias button { flex-shrink: 0; }
   .termo { order: -1; padding: 28px var(--espaco-4); }
   .termo h1 { font-size: 44px; }
-  .herois, .ficha-heroi { padding: 20px var(--espaco-4) 28px; }
   .ficha-heroi h1 { font-size: 40px; }
 }
 
 /* Jogadores e times */
-.jogadores, .painel-jogador { display: flex; flex-direction: column; gap: 18px; padding: 28px var(--espaco-6) 40px; max-width: 1100px; min-width: 0; overflow-wrap: anywhere; }
+.jogadores, .painel-jogador { display: flex; flex-direction: column; gap: 18px; min-width: 0; overflow-wrap: anywhere; }
 .jogadores h2, .painel-jogador h2 { font-family: var(--fonte-display); font-size: 24px; margin: 0 0 var(--espaco-3); }
 .cartoes { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--espaco-3); }
 .cartoes a {
@@ -606,9 +616,10 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .painel-jogador ul { color: var(--cor-texto-2); line-height: 1.6; }
 .painel-jogador ul a { color: var(--cor-info); }
 .painel-jogador h3 { margin: 0 0 var(--espaco-2); font-family: var(--fonte-display); font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cor-texto-2); }
-.destaques { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--espaco-3); }
+/* auto-fit: 3, 4 ou 5 destaques fecham uma linha só, sem cartão órfão na linha de baixo. */
+.destaques { margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--espaco-3); }
 .destaques div { display: flex; flex-direction: column-reverse; gap: var(--espaco-1); padding: var(--espaco-4); border-radius: var(--raio); background: var(--cor-superficie-2); border: 1px solid var(--cor-linha-forte); }
-.destaques dd { margin: 0; font-family: var(--fonte-num); font-variant-numeric: tabular-nums; font-size: 28px; color: var(--cor-destaque); }
+.destaques dd { margin: 0; font-family: var(--fonte-num); font-variant-numeric: tabular-nums; font-size: 24px; line-height: 1.15; text-wrap: balance; color: var(--cor-destaque); }
 .destaques dt { font-size: 12px; color: var(--cor-texto-3); }
 .grafico { margin: 0; padding: var(--espaco-4); border-radius: var(--raio); background: var(--cor-superficie); border: 1px solid var(--cor-linha); display: flex; flex-direction: column; gap: var(--espaco-3); min-width: 0; }
 .grafico figcaption { font-family: var(--fonte-display); font-size: 20px; color: var(--cor-texto); }
@@ -619,17 +630,15 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .rolagem th, .rolagem td { padding: var(--espaco-1) var(--espaco-3); border-bottom: 1px solid var(--cor-linha); text-align: left; white-space: nowrap; }
 .grafico-fonte, .jogadores .fonte, .painel-jogador .fonte { margin: 0; font-size: 12px; color: var(--cor-texto-3); }
 @media (min-width: 900px) {
-  .destaques { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .cartoes { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .grafico-area { height: 360px; }
 }
 @media (max-width: 720px) {
-  .jogadores, .painel-jogador { padding: 20px var(--espaco-4) 28px; }
   .painel-jogador h1 { font-size: 40px; }
 }
 
 /* Busca ao vivo (.cartoes, .destaques, .manchas e .mancha já existem acima) */
-.ao-vivo { display: grid; gap: var(--espaco-4); padding: var(--espaco-4); max-width: 960px; margin: 0 auto; }
+.ao-vivo { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-4); }
 .ao-vivo form[role="search"] { display: flex; gap: var(--espaco-2); }
 .ao-vivo input[type="search"] { flex: 1; min-width: 0; min-height: var(--alvo-toque); }
 .ao-vivo button { min-height: var(--alvo-toque); }
@@ -665,6 +674,9 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .partidas > li > a:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
 .conta-heroi-retrato { width: 32px; height: 24px; border-radius: 4px; object-fit: cover; font-size: 11px; flex: none; }
 .conta-heroi-nome { display: flex; align-items: center; gap: var(--espaco-1); }
+.conta-ao-vivo { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-4); }
+.conta-ao-vivo > h2 { margin-top: var(--espaco-4); }
+.conta-ao-vivo ul:has(> .conta-heroi-nome) { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--espaco-1); }
 .ao-vivo-conta-id { font-size: 12px; color: var(--cor-texto-3); font-variant-numeric: tabular-nums; }
 .conta-partida-parcial { color: var(--cor-texto-3); font-size: 12px; }
 .busca li.busca-nada { display: block; padding: var(--espaco-3); font-size: 14px; }
@@ -714,7 +726,9 @@ button.pino:hover { transform: translate(-50%, -50%) scale(1.2); }
 .pino-3d .pino-texto { left: 100%; top: 0; transform: translate(4px, -60%); }
 @media (prefers-reduced-motion: reduce) { .pino { transition: none; } }
 
-.atlas { display: flex; flex-direction: column; gap: var(--espaco-5); padding: 28px var(--espaco-6) 48px; min-width: 0; }
+.atlas { display: flex; flex-direction: column; gap: var(--espaco-5); min-width: 0; }
+/* O atlas do time ocupa a janela inteira (mapa ao lado do texto) e repete o respiro do container. */
+.atlas-time { padding: var(--respiro-topo) var(--margem-pagina) var(--respiro-base); }
 .atlas-sub { margin: 0; color: var(--cor-texto-3); font-size: 14px; }
 .atlas-voltar { align-self: flex-start; color: var(--cor-texto-3); font-size: 13px; text-decoration: none; }
 .atlas-voltar:hover { color: var(--cor-destaque); }
@@ -982,7 +996,6 @@ button.pino:hover { transform: translate(-50%, -50%) scale(1.2); }
   .atlas-painel { position: absolute; left: 12px; bottom: 12px; z-index: 6; width: min(360px, calc(100% - 24px)); max-height: 46%; overflow-y: auto; margin: 0; box-shadow: 0 20px 40px rgb(0 0 0 / 0.55); }
 }
 @media (max-width: 720px) {
-  .atlas { padding: 20px var(--espaco-4) 28px; }
   .atlas-cabecalho h1 { font-size: 40px; }
   .atlas-contra { padding: var(--espaco-4); }
   .atlas-contra dl > div { grid-template-columns: minmax(0, 1fr); gap: 2px; }

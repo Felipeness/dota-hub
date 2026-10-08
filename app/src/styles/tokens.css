@@ -38,6 +38,14 @@
   --espaco-5: 24px;
   --espaco-6: 32px;
 
+  /* Layout de página: largura do container, respiro lateral e largura de leitura do texto corrido. */
+  --largura-pagina: 1200px;
+  --largura-estreita: 960px;
+  --largura-leitura: 72ch;
+  --margem-pagina: clamp(16px, 4vw, 40px);
+  --respiro-topo: clamp(20px, 3vw, 32px);
+  --respiro-base: clamp(28px, 4vw, 48px);
+
   --alvo-toque: 44px;
   --altura-barra-celular: 64px;
 }
