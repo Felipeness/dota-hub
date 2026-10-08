@@ -1,0 +1,61 @@
+import type { Mencao } from "./guia";
+import { avaliar, placarContra, sugerir, type Contexto, type HeroiDraft } from "./pontuacao";
+
+const heroi = (id: number, nome: string, funcoes: string[], divine = { jogos: 10_000, vitorias: 5_000 }): HeroiDraft =>
+  ({ id, nome, npc: nome.toLowerCase(), funcoes, divine });
+
+const JUGG = heroi(8, "Juggernaut", ["Carry"]);
+const AXE = heroi(2, "Axe", ["Initiator", "Disabler"]);
+const LION = heroi(26, "Lion", ["Support", "Disabler"]);
+const OMNI = heroi(57, "Omniknight", ["Support"], { jogos: 10_000, vitorias: 5_300 });
+const SVEN = heroi(18, "Sven", ["Carry"]);
+
+const contexto = (mencoes: Mencao[] = []): Contexto => ({
+  herois: new Map([JUGG, AXE, LION, OMNI, SVEN].map((h) => [h.id, h])),
+  // Axe venceu 60 de 200 contra o Lion: o Lion venceu 140 (70%).
+  matchups: new Map([[AXE.id, new Map([[LION.id, { jogos: 200, vitorias: 60 }], [SVEN.id, { jogos: 10, vitorias: 2 }]])]]),
+  mencoes,
+});
+
+describe("placarContra", () => {
+  it("inverte o placar quando só o rival tem o matchup carregado", () => {
+    expect(placarContra(contexto().matchups, LION.id, AXE.id)).toEqual({ jogos: 200, vitorias: 140 });
+  });
+});
+
+describe("avaliar", () => {
+  const draft = { aliados: [JUGG.id], inimigos: [AXE.id], bans: [] };
+
+  it("explica o matchup com taxa e amostra", () => {
+    const { motivos } = avaliar(contexto(), LION, draft, "pick");
+    expect(motivos.find((m) => m.tipo === "matchup")?.curto).toBe("Vence 70,0% contra Axe");
+  });
+
+  it("ignora matchup com menos de 20 jogos", () => {
+    expect(avaliar(contexto(), SVEN, draft, "pick").motivos.some((m) => m.tipo === "matchup")).toBe(false);
+  });
+
+  it("aponta a função que falta no time", () => {
+    const curtos = avaliar(contexto(), LION, draft, "pick").motivos.map((m) => m.curto);
+    expect(curtos).toContain("Seu time ainda precisa de suporte");
+  });
+
+  it("usa o guia do aliado que pede o candidato", () => {
+    const mencao: Mencao = { dono: JUGG.id, alvo: LION.id, lista: "bom", lado: "aliado", pp: 2.4, texto: "Seu time tem Lion +2,4 pp." };
+    const motivo = avaliar(contexto([mencao]), LION, draft, "pick").motivos.find((m) => m.tipo === "guia");
+    expect(motivo).toMatchObject({ pp: 2.4, curto: "Guia do Juggernaut: pede Lion no time (+2,4 pp)" });
+  });
+
+  it("no ban, conta o que o guia do seu herói teme", () => {
+    const mencao: Mencao = { dono: JUGG.id, alvo: OMNI.id, lista: "evitar", lado: "inimigo", pp: -4.4, texto: "O inimigo tem Omniknight (-4,4 pp)." };
+    const motivo = avaliar(contexto([mencao]), OMNI, draft, "ban").motivos.find((m) => m.tipo === "guia");
+    expect(motivo).toMatchObject({ pp: 4.4, curto: "Guia do Juggernaut: sofre contra Omniknight (−4,4 pp)" });
+  });
+});
+
+describe("sugerir", () => {
+  it("tira do ranking quem já foi pego ou banido e ordena pela nota", () => {
+    const ids = sugerir(contexto(), { aliados: [JUGG.id], inimigos: [AXE.id], bans: [SVEN.id] }, "pick", 5).map((s) => s.heroi.id);
+    expect(ids).toEqual([LION.id, OMNI.id]);
+  });
+});
