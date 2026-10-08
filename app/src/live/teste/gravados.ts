@@ -15,6 +15,7 @@ export const ROTAS_GRAVADAS: Readonly<Record<string, string>> = {
   [`/players/${YATORO}/wl`]: "vitorias",
   [`/players/${YATORO}/heroes`]: "herois-da-conta",
   [`/players/${YATORO}/recentMatches`]: "partidas-recentes",
+  [`/players/${YATORO}/rankings`]: "rankings",
   "/search?q=yatoro": "busca",
   [`/matches/${PARTIDA}`]: "partida",
   "/teams": "times",
@@ -27,6 +28,19 @@ export const ROTAS_GRAVADAS: Readonly<Record<string, string>> = {
   "/constants/ability_ids": "ids-de-habilidades",
   "/constants/abilities": "habilidades",
   "/benchmarks?hero_id=93": "benchmarks",
+  // Heróis únicos das partidas-recentes gravadas do Yatoro, além do 93 (gravados em 08/10/2026 para o comparativo de benchmark).
+  "/benchmarks?hero_id=1": "benchmarks-1",
+  "/benchmarks?hero_id=11": "benchmarks-11",
+  "/benchmarks?hero_id=12": "benchmarks-12",
+  "/benchmarks?hero_id=18": "benchmarks-18",
+  "/benchmarks?hero_id=19": "benchmarks-19",
+  "/benchmarks?hero_id=46": "benchmarks-46",
+  "/benchmarks?hero_id=47": "benchmarks-47",
+  "/benchmarks?hero_id=53": "benchmarks-53",
+  "/benchmarks?hero_id=54": "benchmarks-54",
+  "/benchmarks?hero_id=70": "benchmarks-70",
+  "/benchmarks?hero_id=109": "benchmarks-109",
+  "/benchmarks?hero_id=145": "benchmarks-145",
 };
 
 export const amostra = (nome: string): unknown => JSON.parse(readFileSync(`src/live/fonte/amostras/${nome}.json`, "utf-8"));
