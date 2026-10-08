@@ -1,0 +1,21 @@
+.termo-com-balao { position: relative; display: inline; }
+
+.termo-marcado {
+  display: inline; min-height: 0; padding: 0; margin: 0; border: 0;
+  background: none; color: inherit; font: inherit; cursor: help;
+  text-decoration: underline dotted var(--cor-texto-3); text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.termo-marcado:hover, .termo-marcado:focus-visible { text-decoration-color: var(--cor-destaque); }
+
+.termo-balao {
+  position: absolute; z-index: 30; top: calc(100% + 6px); left: 0;
+  display: flex; flex-direction: column; gap: 4px;
+  width: min(300px, calc(100vw - 32px));
+  padding: var(--espaco-3); border-radius: var(--raio-pequeno);
+  border: 1px solid var(--cor-linha-forte); background: var(--cor-superficie-3);
+  color: var(--cor-texto-2); font-size: 13px; line-height: 1.4;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+.termo-balao strong { color: var(--cor-texto); font-family: var(--fonte-display); }
+.termo-balao a { font-size: 12px; align-self: flex-start; }

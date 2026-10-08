@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useParams } from "react-router";
 import { heroiSchema, type Heroi } from "../data/schemas";
 import { Indisponivel, useData } from "../data/useData";
+import { TextoComTermos } from "../glossary/Termo";
 import { lerId, resumoDaConta } from "../live/contas";
 import { ErroAoVivoView } from "../live/ErroAoVivo";
 import { dataCurta, minutos, textoDoResultado } from "../live/formato";
@@ -25,7 +26,7 @@ function ChecklistLinha({ ok, titulo, porque, onAlternar }: ItemDepois & Partial
     <li className={`checklist-item ${classe}`}>
       <details>
         <summary>
-          <span className="checklist-marca" aria-hidden="true">{simbolo}</span> {titulo}
+          <span className="checklist-marca" aria-hidden="true">{simbolo}</span> <TextoComTermos texto={titulo} />
           {onAlternar && (
             // Botão mora dentro do <summary> pra ficar na mesma linha; sem isso o clique também abre/fecha o <details>.
             <button
@@ -36,7 +37,7 @@ function ChecklistLinha({ ok, titulo, porque, onAlternar }: ItemDepois & Partial
             </button>
           )}
         </summary>
-        <p>{porque}</p>
+        <p><TextoComTermos texto={porque} /></p>
       </details>
     </li>
   );

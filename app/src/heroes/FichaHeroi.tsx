@@ -2,6 +2,7 @@ import { useState, type ReactNode } from "react";
 import { Link } from "react-router";
 import { indiceSchema, minutoComoTexto, rotaSchema, rotasResumoSchema, type ConteudoItem, type Fase, type Heroi, type Objetivo, type Spike } from "../data/schemas";
 import { Indisponivel, useData } from "../data/useData";
+import { TextoComTermos } from "../glossary/Termo";
 import { ListaPassos } from "../routes/RouteDetail";
 import type { Lado } from "../routes/filtros";
 import { MapView } from "../map/MapView";
@@ -34,7 +35,7 @@ function Fontes({ heroi }: { heroi: Heroi }) {
   return (
     <details className="recolhivel fonte">
       <summary>Fontes e confiança</summary>
-      <p>Patch {heroi.patch}. Confiança: {heroi.confianca}. Fontes: {heroi.fontes.join("; ")}</p>
+      <p>Patch {heroi.patch}. <TextoComTermos texto={`Confiança: ${heroi.confianca}.`} /> Fontes: {heroi.fontes.join("; ")}</p>
     </details>
   );
 }
@@ -55,11 +56,11 @@ function ItemDaBuild({ item }: { item: ItemCore }) {
       <div>
         <strong>{item.nome_curto}</strong>{" "}
         <span className="tempo">{item.minuto_alvo === null ? "sem minuto" : minutoComoTexto(item.minuto_alvo)}</span>
-        {principal && <p className="item-porque">{principal}</p>}
+        {principal && <p className="item-porque"><TextoComTermos texto={principal} /></p>}
         <details className="recolhivel">
           <summary>Ver detalhe</summary>
           {item.porque && <DetalheDoPorque porque={item.porque} />}
-          {complemento && <p><strong>No power spike:</strong> {complemento.texto}</p>}
+          {complemento && <p><strong><TextoComTermos texto="No power spike:" /></strong> <TextoComTermos texto={complemento.texto} /></p>}
           <p>{item.nome}</p>
           <p>{item.base}</p>
           {item.spike && !item.porque && <p className="fonte">Fonte: {item.spike.fonte}</p>}
@@ -77,7 +78,7 @@ function MarcoDoSpike({ spike }: { spike: Spike }) {
       <div>
         <span className="tempo">{spike.minuto === null ? spike.faixa : minutoComoTexto(spike.minuto)}</span>{" "}
         <strong>{spike.marco}</strong>
-        <p>{spike.o_que_fazer}</p>
+        <p><TextoComTermos texto={spike.o_que_fazer} /></p>
       </div>
     </li>
   );
@@ -89,10 +90,10 @@ function Situacional({ item }: { item: ItemSituacional }) {
       <IconeDoItem item={item.item} nome={item.nome} />
       <div>
         <strong>{item.nome}</strong>
-        <p>{item.quando}</p>
+        <p><TextoComTermos texto={item.quando} /></p>
         {item.porque && (
           <>
-            <p className="item-porque">{item.porque.texto}</p>
+            <p className="item-porque"><TextoComTermos texto={item.porque.texto} /></p>
             <details className="recolhivel"><summary>Ver detalhe</summary><DetalheDoPorque porque={item.porque} /></details>
           </>
         )}
@@ -107,8 +108,8 @@ function RitmoEsperado({ heroId }: { heroId: number }) {
   if (!ritmo) return null;
   return (
     <p className="painel-nota">
-      Ritmo esperado (OpenDota, todos os ranks): {numero(ritmo.gpmMediana)}–{numero(ritmo.gpmTopo)} GPM e{" "}
-      {numero(ritmo.lhMediana)}–{numero(ritmo.lhTopo)} LH/min entre a mediana e o top 20%.
+      Ritmo esperado (OpenDota, todos os ranks): {numero(ritmo.gpmMediana)}–{numero(ritmo.gpmTopo)} <TextoComTermos texto="GPM" /> e{" "}
+      {numero(ritmo.lhMediana)}–{numero(ritmo.lhTopo)} <TextoComTermos texto="LH/min" /> entre a mediana e o top 20%.
     </p>
   );
 }
@@ -121,17 +122,17 @@ function AbaGuia({ heroi }: { heroi: Heroi }) {
       <Secao titulo="Quando pegar" aberta contagem={guia.bom_quando.length}><Lista itens={guia.bom_quando} /></Secao>
       <Secao titulo="Quando evitar" aberta contagem={guia.evitar_quando.length}>
         <Lista itens={guia.evitar_quando} />
-        <h4 className="sobretitulo">Momento do draft</h4>
-        <p>{guia.momento_do_draft}</p>
+        <h4 className="sobretitulo"><TextoComTermos texto="Momento do draft" /></h4>
+        <p><TextoComTermos texto={guia.momento_do_draft} /></p>
       </Secao>
       <Secao titulo="Lane">
-        <p>{guia.lane.objetivo}</p>
+        <p><TextoComTermos texto={guia.lane.objetivo} /></p>
         <h4 className="sobretitulo">Itens iniciais</h4>
         <Lista itens={guia.lane.itens_iniciais} />
         <h4 className="sobretitulo">Dicas de lane</h4>
         <Lista itens={guia.lane.dicas} />
       </Secao>
-      <Secao titulo="Quando começar a farmar a selva"><p>{guia.condicao_para_farmar.explicacao}</p></Secao>
+      <Secao titulo="Quando começar a farmar a selva"><p><TextoComTermos texto={guia.condicao_para_farmar.explicacao} /></p></Secao>
       <Secao titulo="Itens" aberta contagem={guia.itens_core.length}>
         <p className="painel-nota">Linha do tempo da build e dos power spikes, do mais cedo ao mais tarde. O minuto é o alvo observado nos replays dos pros.</p>
         <RitmoEsperado heroId={heroi.hero_id} />
@@ -236,7 +237,7 @@ function Variacoes({ fase, lado, heroi, atual, onEscolher }: VariacoesProps) {
 function PlanoDoGuia({ fase, objetivos }: { fase: Fase; objetivos: Objetivo[] }) {
   return (
     <>
-      <p className="abertura">{fase.objetivo}</p>
+      <p className="abertura"><TextoComTermos texto={fase.objetivo} /></p>
       <div className="rota-mapa"><MapView objetivos={objetivosDosPassos(fase.passos, objetivos)} rota={fase} onSelecionar={semAcao} /></div>
       <ListaPassos passos={fase.passos} />
     </>
@@ -250,7 +251,7 @@ function RotaDaVariacao({ id, objetivos }: { id: string; objetivos: Objetivo[] }
   const { pergunta, passos, fuga } = rota.dados;
   return (
     <>
-      <p className="abertura">{pergunta} <Link to={`/rotas/${id}`}>Abrir em Rotas</Link></p>
+      <p className="abertura"><TextoComTermos texto={pergunta} /> <Link to={`/rotas/${id}`}>Abrir em Rotas</Link></p>
       <div className="rota-mapa"><MapView objetivos={objetivosDosPassos(passos, objetivos)} rota={rota.dados} onSelecionar={semAcao} /></div>
       <ListaPassos passos={passos} fuga={fuga} />
     </>
@@ -281,7 +282,7 @@ function AbaPros({ heroi }: { heroi: Heroi }) {
           ))}</tbody>
         </table>
       </div>
-      {heroi.pros.leitura && <p>{heroi.pros.leitura}</p>}
+      {heroi.pros.leitura && <p><TextoComTermos texto={heroi.pros.leitura} /></p>}
     </>
   );
 }

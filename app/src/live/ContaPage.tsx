@@ -1,4 +1,5 @@
 import { Link, useParams } from "react-router";
+import { TextoComTermos } from "../glossary/Termo";
 import { urlDoRetrato } from "../heroes/resumo";
 import { IconeOuIniciais } from "./partida/BuildDaPartida";
 import { lerId, resumoDaConta } from "./contas";
@@ -27,7 +28,7 @@ function ContaAoVivo({ id }: { id: number }) {
     <article className="conta-ao-vivo">
       <header>
         <h1>{dados.conta.nome}</h1>
-        <p>Medalha: {dados.conta.medalha ?? "sem dado (perfil privado ou calibrando)"}</p>
+        <p><TextoComTermos texto="Medalha" />: {dados.conta.medalha ?? "sem dado (perfil privado ou calibrando)"}</p>
         <FrescorView frescor={dados.frescor} onAtualizar={conta.tentarDeNovo} />
       </header>
       <dl className="destaques">
@@ -109,7 +110,7 @@ function OQueMelhorar({ itens }: { itens: readonly ItemDoResumo[] }) {
       <ul>
         {itens.map((item) => (
           <li key={item.metrica}>
-            {item.metrica} abaixo da mediana do herói em {item.abaixo} de {item.total} partidas recentes.
+            <TextoComTermos texto={item.metrica} /> abaixo da mediana do herói em {item.abaixo} de {item.total} partidas recentes.
           </li>
         ))}
       </ul>
@@ -125,7 +126,7 @@ function HeroisMaisFortes({ herois }: { herois: readonly HeroiForte[] }) {
         {herois.map((h) => (
           <li key={h.heroi} className="conta-heroi-nome">
             <IconeOuIniciais src={urlDoRetrato(h.retrato)} nome={h.heroi} classe="conta-heroi-retrato" />
-            <strong>{h.heroi}</strong> {" · "}percentil {Math.round(h.percentil * 100)} entre os jogadores desse herói (/players/rankings do OpenDota)
+            <strong>{h.heroi}</strong> {" · "}<TextoComTermos texto="percentil" /> {Math.round(h.percentil * 100)} entre os jogadores desse herói (/players/rankings do OpenDota)
           </li>
         ))}
       </ul>

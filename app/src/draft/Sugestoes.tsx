@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { TextoComTermos } from "../glossary/Termo";
 import type { GuiaDraft, HeroId } from "./guia";
 import { formatarPp, type HeroiDraft, type Motivo, type Sugestao, type TipoDeMotivo } from "./pontuacao";
 import { Retrato } from "./Retrato";
@@ -21,10 +22,10 @@ type Props = Readonly<{
 function LinhaDeMotivo({ motivo, comDetalhe }: { motivo: Motivo; comDetalhe: boolean }) {
   return (
     <li className={motivo.pp >= 0 ? "a-favor" : "contra"}>
-      <span className="draft-etiqueta">{ETIQUETA[motivo.tipo]}</span>
+      <span className="draft-etiqueta"><TextoComTermos texto={ETIQUETA[motivo.tipo]} /></span>
       <span className="draft-motivo-texto">
-        {motivo.curto} <span className="numero draft-pp">{formatarPp(motivo.pp)}</span>
-        {comDetalhe && <span className="draft-detalhe">{motivo.detalhe}</span>}
+        <TextoComTermos texto={motivo.curto} /> <span className="numero draft-pp">{formatarPp(motivo.pp)}</span>
+        {comDetalhe && <span className="draft-detalhe"><TextoComTermos texto={motivo.detalhe} /></span>}
       </span>
     </li>
   );
@@ -55,7 +56,7 @@ function Cartao({ sugestao, posicao, acao, onAcao, guia, pagina, inimigoPerigoso
         <details className="draft-porque">
           <summary>Por quê, em detalhe</summary>
           <ul className="draft-motivos">{motivos.map((m) => <LinhaDeMotivo key={m.curto} motivo={m} comDetalhe />)}</ul>
-          {guia && <p className="draft-momento"><strong>Momento do draft, pelo guia:</strong> {guia.momento}</p>}
+          {guia && <p className="draft-momento"><strong><TextoComTermos texto="Momento do draft, pelo guia:" /></strong> <TextoComTermos texto={guia.momento} /></p>}
           {pagina && <Link to={`/herois/${pagina}`}>{guia ? "Guia completo" : "Ficha"} do {heroi.nome}</Link>}
         </details>
       )}
@@ -67,7 +68,7 @@ export function Sugestoes({ titulo, explicacao, sugestoes, acao, onAcao, guias, 
   return (
     <section className="draft-coluna" aria-label={titulo}>
       <h2>{titulo}</h2>
-      <p className="draft-explicacao">{explicacao}</p>
+      <p className="draft-explicacao"><TextoComTermos texto={explicacao} /></p>
       <ol className="draft-sugestoes">
         {sugestoes.map((s, i) => (
           <Cartao

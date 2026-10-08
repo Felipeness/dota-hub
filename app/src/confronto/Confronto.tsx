@@ -1,3 +1,4 @@
+import { TextoComTermos } from "../glossary/Termo";
 import { ErroAoVivoView } from "../live/ErroAoVivo";
 import { FrescorView } from "../live/Frescor";
 import { useAoVivo, type EstadoAoVivo } from "../live/useAoVivo";
@@ -63,15 +64,15 @@ function BlocoVantagem({ meu, inimigo, estatisticas }: ParaVantagem) {
 
 function Placar({ v, meu, inimigo }: { v: Vantagem; meu: Heroi; inimigo: Heroi }) {
   const fonte = `OpenDota, partidas de liga com ${meu.nome} contra ${inimigo.nome}: ${inteiro(v.jogos)} jogos`;
-  if (v.veredito === "sem-dado") return <p className="cf-placar-veredito">{VEREDITO[v.veredito](meu.nome, inimigo.nome)}. <small className="cf-fonte">{fonte}</small></p>;
+  if (v.veredito === "sem-dado") return <p className="cf-placar-veredito"><TextoComTermos texto={VEREDITO[v.veredito](meu.nome, inimigo.nome)} />. <small className="cf-fonte">{fonte}</small></p>;
   return (
     <div className={`cf-placar cf-placar-${v.veredito}`}>
-      <p className="cf-placar-veredito">{VEREDITO[v.veredito](meu.nome, inimigo.nome)}</p>
+      <p className="cf-placar-veredito"><TextoComTermos texto={VEREDITO[v.veredito](meu.nome, inimigo.nome)} /></p>
       <p className="cf-placar-numero numero">{pct(v.taxa)}</p>
-      <p>de vitória do {meu.nome} em {inteiro(v.jogos)} jogos ({inteiro(v.vitorias)} vitórias), margem de ±{pp(v.margem)}.</p>
+      <p>de vitória do {meu.nome} em {inteiro(v.jogos)} jogos ({inteiro(v.vitorias)} vitórias), <TextoComTermos texto={`margem de ±${pp(v.margem)}.`} /></p>
       <details className="cf-detalhe">
         <summary>Como ler</summary>
-        <p>A margem é o intervalo de 95% para esse número de jogos. Só chamamos de vantagem quando o intervalo inteiro fica de um lado dos 50%. Com menos de 20 jogos não damos veredito.</p>
+        <p><TextoComTermos texto="A margem é o intervalo de 95% para esse número de jogos. Só chamamos de vantagem quando o intervalo inteiro fica de um lado dos 50%. Com menos de 20 jogos não damos veredito." /></p>
       </details>
       <small className="cf-fonte">{fonte}</small>
     </div>
@@ -91,13 +92,13 @@ function BlocoMecanicas({ inimigo, achados }: { inimigo: Heroi; achados: readonl
                 <strong>{a.titulo}</strong>
                 <span className="cf-chips">{a.evidencias.map((e) => <span key={e.habilidade} className="cf-chip">{e.habilidade}</span>)}</span>
               </summary>
-              <p>{a.porque}</p>
+              <p><TextoComTermos texto={a.porque} /></p>
               <ul className="cf-provas">
                 {a.evidencias.map((e) => <li key={e.habilidade}><b>{e.habilidade}</b>: “{e.trecho}”</li>)}
               </ul>
-              {a.observacoes.map((o) => <p key={o} className="cf-alerta">{o}</p>)}
+              {a.observacoes.map((o) => <p key={o} className="cf-alerta"><TextoComTermos texto={o} /></p>)}
               {a.trunfos.length > 0 && (
-                <p className="cf-trunfo">Do seu lado: {a.trunfos.map((t) => `${t.habilidade} (${t.trecho})`).join("; ")}</p>
+                <p className="cf-trunfo">Do seu lado: <TextoComTermos texto={a.trunfos.map((t) => `${t.habilidade} (${t.trecho})`).join("; ")} /></p>
               )}
               {a.recursos.length > 0 && (
                 <ul className="cf-provas">
@@ -122,11 +123,11 @@ function rotuloDaFonte(url: string): string {
 function RecursoView({ recurso }: { recurso: Recurso }) {
   return (
     <>
-      <p><b>{recurso.rotulo}</b>: {recurso.resumo}</p>
+      <p><b>{recurso.rotulo}</b>: <TextoComTermos texto={recurso.resumo} /></p>
       <details className="cf-detalhe">
         <summary>Por que e de onde vem</summary>
-        {recurso.detalhes.map((d) => <p key={d}>{d}</p>)}
-        {recurso.prova && <p>“{recurso.prova}”</p>}
+        {recurso.detalhes.map((d) => <p key={d}><TextoComTermos texto={d} /></p>)}
+        {recurso.prova && <p>“<TextoComTermos texto={recurso.prova} />”</p>}
         <small className="cf-fonte">
           {recurso.patch ? `Conferido no patch ${recurso.patch}. ` : ""}Fontes:{" "}
           {recurso.fontes.map((f, i) => (
@@ -154,7 +155,7 @@ function BlocoItens({ meu, achados, popularidade }: Itens) {
               <img src={urlDoItem(item.chave)} alt="" width={44} height={32} loading="lazy" />
               <div>
                 <p><strong>{item.nome}</strong> <span className="cf-chip">{mecanica}</span></p>
-                <p>{motivo}</p>
+                <p><TextoComTermos texto={motivo} /></p>
                 <details className="cf-detalhe">
                   <summary>De onde vem</summary>
                   <p>“{prova}”</p>
@@ -191,7 +192,7 @@ function GrupoDeDicas({ titulo, dicas }: { titulo: string; dicas: readonly Dica[
     <>
       <h3 className="cf-fase">{titulo}</h3>
       <ul className="cf-lista">
-        {dicas.map((d) => <li key={d.texto} className="cf-dica"><p>{d.texto}</p><small className="cf-fonte">{d.fonte}</small></li>)}
+        {dicas.map((d) => <li key={d.texto} className="cf-dica"><p><TextoComTermos texto={d.texto} /></p><small className="cf-fonte">{d.fonte}</small></li>)}
       </ul>
     </>
   );
