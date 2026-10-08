@@ -42,6 +42,18 @@ const FONTE = {
   tauntLiquipedia: "https://liquipedia.net/dota2/Taunt",
   patch731: "https://www.dota2.com/patches/7.31",
   patch733: "https://www.dota2.com/patches/7.33",
+  abilidadesOpenDota: "https://api.opendota.com/api/constants/abilities",
+  invulneravelLiquipedia: "https://liquipedia.net/dota2/Invulnerability",
+  disjointLiquipedia: "https://liquipedia.net/dota2/Disjoint",
+  linaWiki: "https://dota2.fandom.com/wiki/Lina",
+  linaJogo: "https://github.com/SteamDatabase/GameTracking-Dota2/blob/master/game/dota/pak01_dir/scripts/npc/heroes/npc_dota_hero_lina.txt",
+  sniperWiki: "https://dota2.fandom.com/wiki/Sniper",
+  sniperJogo: "https://github.com/SteamDatabase/GameTracking-Dota2/blob/master/game/dota/pak01_dir/scripts/npc/heroes/npc_dota_hero_sniper.txt",
+  lionWiki: "https://dota2.fandom.com/wiki/Lion",
+  svenWiki: "https://dota2.fandom.com/wiki/Sven",
+  svenJogo: "https://github.com/SteamDatabase/GameTracking-Dota2/blob/master/game/dota/pak01_dir/scripts/npc/heroes/npc_dota_hero_sven.txt",
+  viperWiki: "https://dota2.fandom.com/wiki/Viper",
+  venomancerWiki: "https://dota2.fandom.com/wiki/Venomancer",
 } as const;
 
 export const INTERACOES: readonly Interacao[] = z.array(interacaoSchema).parse([
@@ -61,5 +73,50 @@ export const INTERACOES: readonly Interacao[] = z.array(interacaoSchema).parse([
       + "Com o Shard ele liga mesmo sob taunt ou stun (não sob silêncio nem hex). "
       + "Cada ponto de Força vira 22 de vida atual, e no nível 4 o Shift troca 16 pontos por segundo.",
     fontes: [FONTE.aghsOpenDota, FONTE.morphlingJogo, FONTE.morphlingWiki, FONTE.tauntLiquipedia, FONTE.axeWiki, FONTE.patch731, FONTE.patch733],
+  },
+  {
+    tipo: "desvio", id: "manta-laguna-blade", mecanica: "magico", contra: "lina_laguna_blade", item: "manta", patch: "7.41",
+    resumo: "Manta durante o atraso da Laguna Blade: você some e o dano não acontece.",
+    detalhe: "A Laguna Blade conjura em 0,3s e só aplica o dano 0,25s depois, quando o debuff que ela coloca no alvo expira; não é um efeito instantâneo nem um projétil. "
+      + "Quem está invulnerável ou escondido nesse instante de 0,25s pós-conjuração não recebe o dano, mesmo sem Black King Bar. "
+      + "O Manta Style deixa você invulnerável e escondido por 0,1s ao se dividir, então o aperto certo é perto do fim desses 0,25s, não no começo da conjuração.",
+    fontes: [FONTE.linaWiki, FONTE.linaJogo, FONTE.abilidadesOpenDota, FONTE.mantaWiki, FONTE.invulneravelLiquipedia],
+  },
+  {
+    tipo: "desvio", id: "manta-finger-of-death", mecanica: "magico", contra: "lion_finger_of_death", item: "manta", patch: "7.41",
+    resumo: "Manta durante o atraso do Finger of Death: o dano não chega.",
+    detalhe: "O Finger of Death conjura em 0,3s e só aplica o dano 0,25s depois, o mesmo padrão de atraso pós-conjuração da Laguna Blade. "
+      + "Ficar invulnerável ou escondido nesse intervalo de 0,25s evita o dano, mesmo sem Black King Bar. "
+      + "O Manta Style cobre isso com os 0,1s de invulnerabilidade da divisão, apertando perto do fim do atraso.",
+    fontes: [FONTE.lionWiki, FONTE.abilidadesOpenDota, FONTE.mantaWiki, FONTE.invulneravelLiquipedia],
+  },
+  {
+    tipo: "desvio", id: "manta-assassinate", mecanica: "magico", contra: "sniper_assassinate", item: "manta", patch: "7.41",
+    resumo: "Manta durante o voo da bala do Assassinate: o tiro perde o alvo.",
+    detalhe: "O Assassinate mira por 2s e só depois dispara um projétil de verdade, a 2500 de velocidade, que viaja até acertar; não é um efeito instantâneo. "
+      + "O Manta Style disjointa esse projétil quando ativado enquanto a bala ainda está no ar. "
+      + "O aperto certo é qualquer momento entre o fim da mira e o tiro chegar, não durante os 2s de mira.",
+    fontes: [FONTE.sniperWiki, FONTE.sniperJogo, FONTE.abilidadesOpenDota, FONTE.mantaWiki, FONTE.disjointLiquipedia],
+  },
+  {
+    tipo: "desvio", id: "manta-storm-hammer", mecanica: "controle", contra: "sven_storm_bolt", item: "manta", patch: "7.41",
+    resumo: "Manta durante o voo do Storm Hammer: o martelo perde o alvo.",
+    detalhe: "O Storm Hammer conjura em 0,2s e depois lança um martelo de verdade a 1000 de velocidade; o stun só pega quem o martelo atinge. "
+      + "O Manta Style disjointa esse projétil ao ser ativado durante o voo, e o martelo passa reto por onde você estava.",
+    fontes: [FONTE.svenWiki, FONTE.svenJogo, FONTE.abilidadesOpenDota, FONTE.mantaWiki, FONTE.disjointLiquipedia],
+  },
+  {
+    tipo: "desvio", id: "manta-viper-strike", mecanica: "magico", contra: "viper_viper_strike", item: "manta", patch: "7.41",
+    resumo: "Manta durante o voo do Viper Strike: o projétil some com você.",
+    detalhe: "O Viper Strike conjura em 0,2s e dispara um projétil teleguiado a 1500 de velocidade; o veneno só aplica no impacto. "
+      + "O Manta Style disjointa esse projétil durante o voo, antes que ele chegue.",
+    fontes: [FONTE.viperWiki, FONTE.abilidadesOpenDota, FONTE.mantaWiki, FONTE.disjointLiquipedia],
+  },
+  {
+    tipo: "desvio", id: "manta-noxious-plague", mecanica: "magico", contra: "venomancer_noxious_plague", item: "manta", patch: "7.41",
+    resumo: "Manta durante o voo da Noxious Plague: a praga erra o alvo.",
+    detalhe: "A Noxious Plague conjura em 0,15s e lança um projétil a 1200 de velocidade; o efeito inicial só pega no impacto (os respingos soltos depois, quando o "
+      + "debuff expira, não valem o mesmo desvio). O Manta Style disjointa o projétil primário durante o voo.",
+    fontes: [FONTE.venomancerWiki, FONTE.abilidadesOpenDota, FONTE.mantaWiki, FONTE.disjointLiquipedia],
   },
 ]);

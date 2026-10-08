@@ -33,7 +33,13 @@ const numero = (texto: string | undefined) => parseFloat(texto ?? "");
 const conjuracaoS = (h: Habilidade) => numero(h.atributos.find((a) => a.chave === "abilitycastpoint")?.valores[0]);
 const naoNulo = <T,>(v: T | null): v is T => v !== null;
 
+// Só vale pra habilidade que resolve no próprio fim da conjuração (ex.: Berserker's Call). Com atraso pós-conjuração
+// (damage_delay, Laguna Blade) ou projétil em voo (projectile_speed/bolt_speed, Assassinate), o efeito pega depois
+// do fim da conjuração, e essa conta erraria a janela; a interação curada explica o tempo certo na prosa do detalhe.
+const resolveNoFimDaConjuracao = (h: Habilidade) => !h.atributos.some((a) => /^(damage_delay|projectile_speed|bolt_speed)$/.test(a.chave));
+
 function janela(contra: Habilidade, item: Item): string | null {
+  if (!resolveNoFimDaConjuracao(contra)) return null;
   const conjuracao = conjuracaoS(contra);
   const invulneravel = numero(item.valores["invuln_duration"]);
   if (!(conjuracao > 0 && invulneravel > 0)) return null;
