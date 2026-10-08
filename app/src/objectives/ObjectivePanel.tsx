@@ -14,7 +14,8 @@ export function rotuloOrigem(marca: Marca): string | null {
   return `Visto em ${marca.replays.length} replays: ${marca.replays.join(", ")}.`;
 }
 
-const LIMITE_VALOR_CURTO = 20;
+// Alto o bastante pra notas tipo "sim: safe lane (bot), pull clássico; ..." não ficarem irreconhecíveis.
+export const LIMITE_VALOR_CURTO = 60;
 const ROTULO_LADO: Record<Objetivo["lado"], string> = { radiant: "Radiant", dire: "Dire", neutro: "Neutro" };
 // Rótulo das chaves de `detalhes` que o export grava hoje; chave nova aparece com o nome cru até ganhar rótulo aqui.
 const ROTULO_DETALHE: Readonly<Partial<Record<string, string>>> = {
