@@ -141,7 +141,23 @@
 .build-habilidade { display: inline-flex; align-items: center; gap: var(--espaco-2); white-space: nowrap; color: var(--cor-texto); font-size: 13px; }
 .build-habilidade .iniciais { width: 26px; height: 26px; border-radius: 4px; font-size: 10px; }
 .build-ponto { color: var(--cor-destaque); }
+.build-ponto.talento { color: var(--cor-info); }
 .build-talentos { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; font-size: 13px; color: var(--cor-texto-2); }
+
+/* Adversário de lane e eficiência, no cabeçalho */
+.partida-adversario, .partida-eficiencia { margin: 4px 0 0; font-size: 13px; color: var(--cor-texto-2); }
+.partida-eficiencia-explicacao { color: var(--cor-texto-3); }
+
+/* Draft: ordem real de picks e bans, com retrato */
+.partida-draft-lista { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: var(--espaco-2); }
+.partida-draft-lista li {
+  display: flex; align-items: center; gap: 6px; padding: 4px 10px 4px 4px;
+  border: 1px solid var(--cor-linha); border-radius: var(--raio-pequeno); background: var(--cor-superficie); font-size: 13px;
+}
+.partida-draft-lista li.seu-time { border-color: var(--cor-radiant); }
+.partida-draft-lista li.time-inimigo { border-color: var(--cor-dire); }
+.partida-draft-retrato { width: 28px; height: 28px; border-radius: 4px; object-fit: cover; font-size: 10px; }
+.partida-draft-tipo { font-family: var(--fonte-num); font-size: 11px; color: var(--cor-texto-3); text-transform: uppercase; }
 
 @media (max-width: 760px) {
   /* O botão do pino é redondo; o min-height de .ao-vivo button o esticaria. */

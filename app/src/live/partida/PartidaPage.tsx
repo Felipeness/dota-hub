@@ -44,14 +44,16 @@ function Partida({ detalhe, onAtualizar }: { detalhe: DetalheDaPartida; onAtuali
   const pro = ficha.estado === "ok" ? dadosPro(ficha.dados) : null;
   return (
     <article className="partida">
-      <Cabecalho detalhe={detalhe} onAtualizar={onAtualizar} />
+      <Cabecalho detalhe={detalhe} temGuia={ficha.estado === "ok"} onAtualizar={onAtualizar} />
       <ul className="partida-resumo" aria-label="Resumo da partida">
         {resumoDaPartida(detalhe, pro).map((frase) => <li key={frase}>{frase}</li>)}
       </ul>
+      {detalhe.draft.length > 0 && <DraftDaPartida draft={detalhe.draft} />}
       {detalhe.analisada ? (
         <>
           <SeletorDeJanela duracaoS={detalhe.duracaoS} janela={janela} onJanela={setJanela} />
           <Curvas detalhe={detalhe} janela={janela} />
+          <VantagemDoTime detalhe={detalhe} janela={janela} />
           <RotaPorTempo detalhe={detalhe} janela={janela} />
           <BuildDaPartida detalhe={detalhe} pro={pro} />
         </>
@@ -65,23 +67,52 @@ function Partida({ detalhe, onAtualizar }: { detalhe: DetalheDaPartida; onAtuali
   );
 }
 
-function Cabecalho({ detalhe, onAtualizar }: { detalhe: DetalheDaPartida; onAtualizar: () => void }) {
+function Cabecalho({ detalhe, temGuia, onAtualizar }: { detalhe: DetalheDaPartida; temGuia: boolean; onAtualizar: () => void }) {
   const resultado = textoDoResultado(detalhe.venceu);
+  const { adversario } = detalhe;
   return (
     <header className="partida-cabeca">
       <IconeOuIniciais src={detalhe.heroi.retrato ? urlDoRetrato(detalhe.heroi.retrato) : null} nome={detalhe.heroi.nome} classe="partida-retrato" />
       <div>
         <p className="partida-sobre">Partida {detalhe.partida} · {detalhe.lado === "radiant" ? "Radiant" : "Dire"}</p>
-        <h1>{detalhe.heroi.nome}</h1>
+        <h1>{temGuia ? <Link to={`/herois/${detalhe.heroi.retrato}`}>{detalhe.heroi.nome}</Link> : detalhe.heroi.nome}</h1>
         <p className="partida-placar">
           <span className={`partida-resultado resultado-${detalhe.venceu === null ? "nenhum" : detalhe.venceu ? "vitoria" : "derrota"}`}>{resultado}</span>
           <span>{detalhe.abates}/{detalhe.mortes}/{detalhe.assistencias}</span>
           <span>{Math.floor(detalhe.duracaoS / 60)} min</span>
           <span>{nomeDaLane(detalhe.lane)}</span>
         </p>
+        {adversario && (
+          <p className="partida-adversario">
+            <Link to={`/confronto/${detalhe.heroi.chave}/${adversario.heroi.chave}`}>Como jogar contra {adversario.heroi.nome}</Link>
+          </p>
+        )}
+        {detalhe.eficienciaDeLanePct !== null && (
+          <p className="partida-eficiencia">
+            Eficiência de lane: {Math.round(detalhe.eficienciaDeLanePct)}%.
+            <span className="partida-eficiencia-explicacao"> Ouro e experiência que você farmou contra o máximo possível na lane nesse período.</span>
+          </p>
+        )}
         <FrescorView frescor={detalhe.frescor} onAtualizar={onAtualizar} />
       </div>
     </header>
+  );
+}
+
+function DraftDaPartida({ draft }: { draft: DetalheDaPartida["draft"] }) {
+  return (
+    <section className="partida-draft" aria-labelledby="titulo-draft">
+      <h2 id="titulo-draft">Draft</h2>
+      <ol className="partida-draft-lista" aria-label="Ordem do draft">
+        {draft.map((p, i) => (
+          <li key={i} className={p.seuTime ? "seu-time" : "time-inimigo"}>
+            <IconeOuIniciais src={p.heroi.retrato ? urlDoRetrato(p.heroi.retrato) : null} nome={p.heroi.nome} classe="partida-draft-retrato" />
+            <span>{p.heroi.nome}</span>
+            <span className="partida-draft-tipo">{p.pick ? "pick" : "ban"}</span>
+          </li>
+        ))}
+      </ol>
+    </section>
   );
 }
 
@@ -127,6 +158,28 @@ function Curvas({ detalhe, janela }: { detalhe: DetalheDaPartida; janela: IdJane
           esticado em linha reta; serve de régua, não de curva real.
         </p>
       )}
+    </section>
+  );
+}
+
+function VantagemDoTime({ detalhe, janela }: { detalhe: DetalheDaPartida; janela: IdJanela }) {
+  const { vantagemDoTime } = detalhe;
+  if (vantagemDoTime.ouro.length === 0) return null;
+  const serie = (valores: readonly number[]): Serie[] => [{ nome: "Seu time", valores, estilo: "jogador" }];
+  return (
+    <section className="partida-vantagem" aria-labelledby="titulo-vantagem">
+      <h2 id="titulo-vantagem">Vantagem do time</h2>
+      <p className="partida-vazio">Positivo = seu time na frente; negativo = o time inimigo na frente.</p>
+      <div className="partida-curvas-grade">
+        <CurvaDaPartida
+          titulo="Vantagem de ouro" unidade="Diferença de ouro total entre os times (radiant_gold_adv do OpenDota)"
+          series={serie(vantagemDoTime.ouro)} eventos={detalhe.eventos} duracaoS={detalhe.duracaoS} janela={janela}
+        />
+        <CurvaDaPartida
+          titulo="Vantagem de experiência" unidade="Diferença de experiência total entre os times (radiant_xp_adv do OpenDota)"
+          series={serie(vantagemDoTime.xp)} eventos={detalhe.eventos} duracaoS={detalhe.duracaoS} janela={janela}
+        />
+      </div>
     </section>
   );
 }
