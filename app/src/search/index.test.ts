@@ -1,15 +1,23 @@
+import type { ConteudoItem } from "../data/schemas";
 import indice from "../times/amostras/indice.json";
 import { indiceAtlasSchema } from "../times/schemas";
 import { buscar, construirIndice, docsDeUnidades, sugerir } from "./index";
 
-const termos = [
+const termos: ConteudoItem[] = [
   { id: "roshan", titulo: "Roshan", patch: "7.41", fontes: [], secoes: { basico: "Chefe neutro do rio.", avancado: null }, origem: { basico: null, avancado: null }, links: [], extras: {} },
   { id: "pull", titulo: "Pull", patch: "7.41", fontes: [], secoes: { basico: "Puxar o camp para a wave.", avancado: null }, origem: { basico: null, avancado: null }, links: [], extras: {} },
+  { id: "manta-style", titulo: "Manta Style", patch: "7.41", fontes: [], secoes: { basico: "Dá ilusões.", avancado: null }, origem: { basico: null, avancado: null }, links: [], extras: { item: "manta" } },
 ];
 const busca = construirIndice({ rotas: [], objetivos: [], termos });
 
 it("acha com prefixo, acento e caixa diferentes", () => {
   for (const q of ["rosh", "Roshán", "ROSHAN"]) expect(buscar(busca, q)[0]?.id).toBe("roshan");
+});
+it("termo de item carrega o ícone do item", () => {
+  expect(buscar(busca, "manta")[0]).toMatchObject({ icone: "/data/retratos/itens/manta.webp" });
+});
+it("termo sem item não carrega ícone", () => {
+  expect(buscar(busca, "roshan")[0]).toMatchObject({ icone: null });
 });
 it("sem resultado sugere termos parecidos", () => {
   expect(buscar(busca, "pulll")).toEqual([]);
@@ -56,7 +64,7 @@ it("acha o time do atlas pelo nome e pela tag", () => {
 });
 
 const unidades = [{ id: "roshan", nome: "Roshan", grupo: "chefe" as const, papel: "chefe neutro", lado: "neutro" as const, modelo: "roshan", camps: [],
-  habilidades: [{ id: "roshan_slam", nome: "Porrada", nome_en: "Slam" }] },
+  habilidades: [{ id: "roshan_slam", nome: "Porrada", nome_en: "Slam", icone: "roshan_slam" }] },
   { id: "kobold", nome: "Kobold", grupo: "selva" as const, papel: "monstro da selva", lado: "neutro" as const, modelo: "k", camps: ["kobold"], habilidades: [] }];
 
 it.each([
@@ -69,7 +77,7 @@ it.each([
 });
 
 it("habilidade repetida entra uma vez e aponta para a primeira unidade", () => {
-  const golpe = { id: "golpe", nome: "Golpe", nome_en: "Bash" };
+  const golpe = { id: "golpe", nome: "Golpe", nome_en: "Bash", icone: null };
   const comum = { grupo: "selva" as const, papel: "", lado: "neutro" as const, camps: [] };
   const docs = docsDeUnidades([{ ...comum, id: "a", nome: "A", modelo: "a", habilidades: [golpe] },
     { ...comum, id: "b", nome: "B", modelo: "b", habilidades: [golpe] }]);

@@ -40,3 +40,21 @@ it("clicar num resultado não tira o foco do campo antes da navegação", async 
   // O Safari não dá foco ao link no clique: sem o preventDefault o campo perde o foco e a lista some antes do click.
   expect(fireEvent.mouseDown(link)).toBe(false);
 });
+
+it("ArrowDown/ArrowUp movem o item ativo e Enter navega", async () => {
+  const termos = [
+    { id: "roshan", titulo: "Roshan", patch: "7.41", fontes: [], secoes: { basico: "Chefe.", avancado: null }, origem: { basico: null, avancado: null } },
+    { id: "pull", titulo: "Pull", patch: "7.41", fontes: [], secoes: { basico: "Puxa.", avancado: null }, origem: { basico: null, avancado: null } },
+  ];
+  vi.stubGlobal("fetch", vi.fn((url: string) => Promise.resolve(new Response(JSON.stringify(url.endsWith("glossario.json") ? termos : [])))));
+  render(<MemoryRouter><SearchBox /></MemoryRouter>);
+  const campo = screen.getByRole("searchbox");
+  fireEvent.focus(campo);
+  fireEvent.change(campo, { target: { value: "ro" } });
+  await screen.findByRole("link", { name: "Roshan" });
+  fireEvent.keyDown(campo, { key: "ArrowDown" });
+  const primeiroItem = screen.getByRole("link", { name: "Roshan" }).closest("li");
+  expect(primeiroItem).toHaveClass("ativo");
+  fireEvent.keyDown(campo, { key: "ArrowDown" });
+  expect(primeiroItem).not.toHaveClass("ativo");
+});

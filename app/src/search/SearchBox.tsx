@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { type RefObject, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router";
 import { dadosOuVazio, Indisponivel, useData } from "../data/useData";
 import { conteudoSchema, heroisSchema, jogadoresSchema, objetivosSchema, rotasResumoSchema, timesSchema, unidadesSchema } from "../data/schemas";
@@ -11,9 +11,13 @@ const ETIQUETA = {
 } as const satisfies Record<Achado["tipo"], string>;
 
 // Os dados da busca só baixam quando a pessoa vai buscar, para não pesar na primeira tela.
+const ROTULO_BUSCA = "Buscar no Dota Hub: herói, time, rota, unidade…";
+
 export function SearchBox() {
   const [ativa, setAtiva] = useState(false);
   const [consulta, setConsulta] = useState("");
+  const [ativo, setAtivo] = useState(-1);
+  const lista = useRef<HTMLUListElement>(null);
   const campo = useRef<HTMLInputElement>(null);
   useEffect(() => {
     const focarComBarra = (e: KeyboardEvent) => {
@@ -24,20 +28,32 @@ export function SearchBox() {
     document.addEventListener("keydown", focarComBarra);
     return () => document.removeEventListener("keydown", focarComBarra);
   }, []);
+  // Zera o item ativo a cada digitação: o resultado em destaque mudou.
+  useEffect(() => setAtivo(-1), [consulta]);
+
+  function navegarResultados(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === "Escape") return setAtiva(false);
+    const itens = lista.current?.querySelectorAll("li[data-navegavel]");
+    if (!itens || itens.length === 0) return;
+    if (e.key === "ArrowDown") { e.preventDefault(); setAtivo((i) => (i + 1) % itens.length); return; }
+    if (e.key === "ArrowUp") { e.preventDefault(); setAtivo((i) => (i - 1 + itens.length) % itens.length); return; }
+    if (e.key === "Enter" && ativo >= 0) { e.preventDefault(); itens[ativo]?.querySelector("a")?.click(); }
+  }
+
   return (
     <div className="busca" onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setAtiva(false); }}>
       <label className="busca-campo">
         <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="7" /><path d="M20 20l-4-4" /></svg>
         <input
-          ref={campo} type="search" role="searchbox" value={consulta}
-          aria-label="Buscar herói, rota, objetivo ou termo" placeholder="Buscar herói, rota, objetivo ou termo"
+          ref={campo} type="search" role="searchbox" aria-expanded={ativa} value={consulta}
+          aria-label={ROTULO_BUSCA} placeholder={ROTULO_BUSCA}
           onFocus={() => setAtiva(true)}
           onChange={(e) => { setConsulta(e.target.value); setAtiva(true); }}
-          onKeyDown={(e) => { if (e.key === "Escape") setAtiva(false); }}
+          onKeyDown={navegarResultados}
         />
         <kbd aria-hidden="true">/</kbd>
       </label>
-      {ativa && <Resultados consulta={consulta} limpar={() => setConsulta("")} />}
+      {ativa && <Resultados consulta={consulta} ativo={ativo} listaRef={lista} limpar={() => setConsulta("")} />}
     </div>
   );
 }
@@ -46,7 +62,9 @@ function estaDigitando(alvo: EventTarget | null): boolean {
   return alvo instanceof HTMLElement && (alvo.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(alvo.tagName));
 }
 
-function Resultados({ consulta, limpar }: { consulta: string; limpar: () => void }) {
+function Resultados({ consulta, ativo, listaRef, limpar }: {
+  consulta: string; ativo: number; listaRef: RefObject<HTMLUListElement | null>; limpar: () => void;
+}) {
   const rotas = useData("/data/rotas_resumo.json", rotasResumoSchema);
   const objetivos = useData("/data/objetivos.json", objetivosSchema);
   const termos = useData("/data/glossario.json", conteudoSchema);
@@ -79,22 +97,25 @@ function Resultados({ consulta, limpar }: { consulta: string; limpar: () => void
     const parecidos = sugerir(busca, consulta);
     // Uma lista só: a mensagem e o atalho dividem a mesma caixa suspensa.
     return (
-      <ul onMouseDown={(e) => e.preventDefault()}>
+      <ul ref={listaRef} onMouseDown={(e) => e.preventDefault()}>
         <li className="busca-nada">Nada encontrado.{parecidos.length > 0 && ` Você quis dizer: ${parecidos.join(", ")}?`}</li>
-        <AtalhoAoVivo consulta={consulta} onIr={limpar} />
+        <AtalhoAoVivo consulta={consulta} ativo={ativo === 0} onIr={limpar} />
       </ul>
     );
   }
   // O Safari não dá foco ao link no clique: o preventDefault mantém o foco no campo e a lista não some antes do click.
   return (
-    <ul onMouseDown={(e) => e.preventDefault()}>
-      {achados.map((a) => (
-        <li key={`${a.tipo}:${a.id}`}>
-          <span className="etiqueta">{ETIQUETA[a.tipo]}</span>{" "}
+    <ul ref={listaRef} onMouseDown={(e) => e.preventDefault()}>
+      {achados.map((a, i) => (
+        <li key={`${a.tipo}:${a.id}`} data-navegavel className={i === ativo ? "ativo" : undefined}>
+          <span className="etiqueta-com-icone">
+            {a.icone && <img className="busca-icone" src={a.icone} alt="" width={24} height={24} />}
+            <span className="etiqueta">{ETIQUETA[a.tipo]}</span>
+          </span>
           <Link to={a.link} onClick={limpar}>{a.titulo}</Link>
         </li>
       ))}
-      <AtalhoAoVivo consulta={consulta} onIr={limpar} />
+      <AtalhoAoVivo consulta={consulta} ativo={ativo === achados.length} onIr={limpar} />
     </ul>
   );
 }

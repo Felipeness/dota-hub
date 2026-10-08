@@ -79,7 +79,7 @@ export const unidadeSchema = z.object({
 export const unidadeResumoSchema = z.object({
   id: z.string(), nome: z.string(), grupo: grupoUnidadeSchema, papel: z.string(), lado: ladoUnidadeSchema,
   modelo: z.string().nullable(), camps: z.array(z.string()),
-  habilidades: z.array(z.object({ id: z.string(), nome: z.string(), nome_en: z.string().nullable() })),
+  habilidades: z.array(z.object({ id: z.string(), nome: z.string(), nome_en: z.string().nullable(), icone: z.string().nullable() })),
 });
 export const unidadesSchema = z.array(unidadeResumoSchema);
 export const tipoCampSchema = z.object({
