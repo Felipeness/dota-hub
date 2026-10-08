@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router";
-import { heroiSchema, type Heroi } from "../../data/schemas";
+import { heroiSchema } from "../../data/schemas";
 import { useData } from "../../data/useData";
 import { urlDoRetrato } from "../../heroes/resumo";
 import { lerId } from "../contas";
@@ -13,7 +13,7 @@ import { BuildDaPartida, IconeOuIniciais } from "./BuildDaPartida";
 import { CurvaDaPartida, type Serie } from "./CurvaDaPartida";
 import { detalheDaPartida, type Curvas as CurvasDoJogador, type DetalheDaPartida } from "./detalhe";
 import { janelasDaPartida, type IdJanela } from "./janelas";
-import { resumoDaPartida, type DadosPro } from "./resumo";
+import { dadosPro, resumoDaPartida } from "./resumo";
 import { RotaPorTempo } from "./RotaPorTempo";
 import "./partida.css";
 
@@ -30,12 +30,6 @@ function PartidaAoVivo({ partida, conta }: { partida: string; conta: number }) {
   if (detalhe.estado === "parado" || detalhe.estado === "carregando") return <p className="ao-vivo-carregando">Buscando a partida no OpenDota…</p>;
   if (detalhe.estado === "erro") return <ErroAoVivoView erro={detalhe.erro} contexto="partida" onTentar={detalhe.tentarDeNovo} />;
   return <Partida detalhe={detalhe.dados} onAtualizar={detalhe.tentarDeNovo} />;
-}
-
-/** Linha dos pros com mais jogos e last hits aos 10 min; a linha do Felipe não é referência. */
-function dadosPro(heroi: Heroi): DadosPro {
-  const [linha] = heroi.pros.linhas.filter((l) => l.jogador !== "Felipe" && l.lh10 !== null).sort((a, b) => b.jogos - a.jogos);
-  return { itensCore: heroi.guia.itens_core, lh10: linha?.lh10 ?? null };
 }
 
 function Partida({ detalhe, onAtualizar }: { detalhe: DetalheDaPartida; onAtualizar: () => void }) {

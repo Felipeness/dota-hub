@@ -1,3 +1,4 @@
+import type { Heroi } from "../../data/schemas";
 import { nomeDaLane, textoDoResultado } from "../formato";
 import { tempoDaPartida, type Compra, type DetalheDaPartida } from "./detalhe";
 import { JANELAS } from "./janelas";
@@ -5,6 +6,12 @@ import { JANELAS } from "./janelas";
 /** Itens core e last hits aos 10 min dos pros, da ficha do herói no app (só existe para parte dos heróis). */
 export type ItemCoreDoGuia = Readonly<{ nome: string; minuto_alvo: number | null; base: string }>;
 export type DadosPro = Readonly<{ itensCore: readonly ItemCoreDoGuia[]; lh10: number | null }>;
+
+/** Linha dos pros com mais jogos e last hits aos 10 min; a linha do Felipe não é referência. */
+export function dadosPro(heroi: Heroi): DadosPro {
+  const [linha] = heroi.pros.linhas.filter((l) => l.jogador !== "Felipe" && l.lh10 !== null).sort((a, b) => b.jogos - a.jogos);
+  return { itensCore: heroi.guia.itens_core, lh10: linha?.lh10 ?? null };
+}
 
 const MINUTO_DA_LANE = 10;
 const LANE_EQUILIBRADA = 300;
