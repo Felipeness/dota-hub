@@ -3,7 +3,7 @@ import type { Indice, RotaResumo } from "../data/schemas";
 export type Lado = "radiant" | "dire";
 // id null quer dizer "a célula não tem rota": nada passa.
 export type FiltroRotas = { lado?: Lado; minuto?: number; texto?: string; pdf?: RotaResumo["pdf"]; id?: string | null };
-type Filtravel = Pick<RotaResumo, "id" | "lado" | "pdf" | "pergunta" | "titulo" | "janela">;
+type Filtravel = Pick<RotaResumo, "id" | "lado" | "pdf" | "pergunta" | "titulo" | "janela"> & { heroi?: string | null };
 
 export const normalizar = (s: string) => s.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
 export const minutoDaJanela = (mmss?: string) => (mmss ? Number(mmss.split(":")[0]) : NaN);
@@ -25,5 +25,5 @@ export function filtrarRotas<T extends Filtravel>(rotas: readonly T[], f: Filtro
     (!f.lado || r.lado === f.lado) &&
     (!f.pdf || r.pdf === f.pdf) &&
     (f.minuto === undefined || naJanela(r, f.minuto)) &&
-    (!texto || normalizar(`${r.id} ${r.pergunta} ${r.titulo}`).includes(texto)));
+    (!texto || normalizar(`${r.id} ${r.pergunta} ${r.titulo} ${r.heroi ?? ""}`).includes(texto)));
 }
