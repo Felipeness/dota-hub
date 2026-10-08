@@ -5,8 +5,11 @@ const minutos = (porMinuto: number, n = 31) => Array.from({ length: n }, (_, i) 
 const base: DetalheDaPartida = {
   partida: "1", conta: 7, slot: 0, duracaoS: 46 * 60, venceu: true, analisada: true,
   heroi: { id: 93, chave: "slark", nome: "Slark", retrato: "slark" }, lado: "radiant", lane: "safe",
-  abates: 13, mortes: 3, assistencias: 12, curvas: { ouro: minutos(500), lh: minutos(6) },
-  adversario: { heroi: { id: 36, chave: "necrolyte", nome: "Necrophos", retrato: "necrophos" }, curvas: { ouro: minutos(380), lh: minutos(3) } },
+  abates: 13, mortes: 3, assistencias: 12, curvas: { ouro: minutos(500), lh: minutos(6), patrimonio: minutos(700) },
+  adversario: {
+    heroi: { id: 36, chave: "necrolyte", nome: "Necrophos", retrato: "necrophos" },
+    curvas: { ouro: minutos(380), lh: minutos(3), patrimonio: minutos(560) },
+  },
   inimigos: [], eventos: [
     { t: 1_250, tipo: "morte", texto: "Morte", ponto: null }, { t: 1_400, tipo: "morte", texto: "Morte", ponto: null },
     { t: 1_700, tipo: "morte", texto: "Morte", ponto: null },
@@ -48,12 +51,12 @@ it.each([
   { adversario: 480, frase: "Lane equilibrada contra Necrophos (+200 de ouro aos 10 min)." },
   { adversario: 600, frase: "Perdeu a lane contra Necrophos (−1k de ouro aos 10 min)." },
 ])("lane com o adversário a $adversario/min: $frase", ({ adversario, frase }) => {
-  const d = { ...base, adversario: base.adversario && { ...base.adversario, curvas: { ouro: minutos(adversario), lh: [] } } };
+  const d = { ...base, adversario: base.adversario && { ...base.adversario, curvas: { ouro: minutos(adversario), lh: [], patrimonio: [] } } };
   expect(resumoDaPartida(d, null)[1]).toBe(frase);
 });
 
 it("sem curvas, sem compras e sem mortes, fica só o que existe", () => {
-  const d = { ...base, curvas: { ouro: [], lh: [] }, adversario: null, compras: [], mortes: 0, eventos: [] };
+  const d = { ...base, curvas: { ouro: [], lh: [], patrimonio: [] }, adversario: null, compras: [], mortes: 0, eventos: [] };
   expect(resumoDaPartida(d, null)).toEqual(["Vitória em 46 min de Slark, 13/0/12, safe lane.", "Não morreu nenhuma vez."]);
 });
 

@@ -17,8 +17,8 @@ export type EventoDaPartida = Readonly<{ t: number; tipo: TipoDeEvento; texto: s
 export type Compra = Readonly<{ t: number; chave: string; nome: string; custo: number | null; grande: boolean }>;
 export type Neutro = Readonly<{ t: number; chave: string; nome: string; tier: number | null }>;
 export type NivelDeHabilidade = Readonly<{ nivel: number; chave: string; nome: string; talento: boolean }>;
-/** Índice = minuto da partida (0 = buzina). `ouro` é o ouro ganho no total (gold_t do OpenDota). */
-export type Curvas = Readonly<{ ouro: readonly number[]; lh: readonly number[] }>;
+/** Índice = minuto da partida (0 = buzina). `ouro` é o ouro ganho no total (gold_t); `patrimonio` inclui o valor dos itens (networth_t). */
+export type Curvas = Readonly<{ ouro: readonly number[]; lh: readonly number[]; patrimonio: readonly number[] }>;
 /** Mediana do herói no /benchmarks do OpenDota (partidas públicas analisadas, não só pro). */
 export type Referencia = Readonly<{ ouroPorMin: number; lhPorMin: number }>;
 
@@ -78,7 +78,7 @@ function indiceDeHerois(nomes: Nomes) {
   };
 }
 
-const curvas = (j: JogadorDaPartidaFonte): Curvas => ({ ouro: j.gold_t, lh: j.lh_t });
+const curvas = (j: JogadorDaPartidaFonte): Curvas => ({ ouro: j.gold_t, lh: j.lh_t, patrimonio: j.networth_t });
 
 function adversarioDeLane(jogador: JogadorDaPartidaFonte, inimigos: readonly JogadorDaPartidaFonte[]) {
   const papel = jogador.lane_role == null ? undefined : PAPEL_ADVERSARIO[jogador.lane_role];
