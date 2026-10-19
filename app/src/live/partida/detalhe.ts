@@ -28,6 +28,8 @@ export type PickOuBan = Readonly<{ heroi: HeroiNaPartida; pick: boolean; seuTime
 export type DetalheDaPartida = Readonly<{
   partida: string; conta: number; slot: number; duracaoS: number; venceu: boolean | null; analisada: boolean;
   heroi: HeroiNaPartida; lado: Lado; lane: Lane | null; abates: number; mortes: number; assistencias: number;
+  /** gold_per_min do próprio OpenDota (o mesmo número da tela da partida); sem ele, a curva de ouro pela duração. */
+  gpm: number | null;
   curvas: Curvas; adversario: Readonly<{ heroi: HeroiNaPartida; curvas: Curvas }> | null;
   inimigos: readonly HeroiNaPartida[]; eventos: readonly EventoDaPartida[]; compras: readonly Compra[];
   neutros: readonly Neutro[]; habilidades: readonly NivelDeHabilidade[]; manchasDaLane: readonly Mancha[];
@@ -228,6 +230,12 @@ function referenciaDoHeroi(benchmarks: BenchmarksFonte | null): Referencia | nul
   return ouroPorMin === null || lhPorMin === null ? null : { ouroPorMin, lhPorMin };
 }
 
+/** Fallback de partida sem gold_per_min: gold_t é ouro acumulado, então o último ponto dividido pela duração. */
+function gpmDaCurva(ouro: readonly number[], duracaoS: number): number | null {
+  const ouroFinal = ouro.at(-1);
+  return ouroFinal === undefined || duracaoS <= 0 ? null : ouroFinal / (duracaoS / 60);
+}
+
 export function montarDetalhe({ partida, conta, constantes, benchmarks, frescor }: Entrada): RespostaAoVivo<DetalheDaPartida> {
   const indice = partida.players.findIndex((p) => p.account_id === conta);
   const jogador = partida.players[indice];
@@ -244,6 +252,7 @@ export function montarDetalhe({ partida, conta, constantes, benchmarks, frescor 
     heroi: herois.porId(jogador.hero_id), lado,
     lane: jogador.lane_role == null ? null : LANE_POR_PAPEL[jogador.lane_role] ?? null,
     abates: jogador.kills, mortes: jogador.deaths, assistencias: jogador.assists,
+    gpm: jogador.gold_per_min ?? gpmDaCurva(jogador.gold_t, partida.duration),
     curvas: curvas(jogador),
     adversario: adversario && { heroi: herois.porId(adversario.hero_id), curvas: curvas(adversario) },
     inimigos: inimigos.map((i) => herois.porId(i.hero_id)),

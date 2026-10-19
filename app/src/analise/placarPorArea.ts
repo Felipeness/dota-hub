@@ -29,9 +29,7 @@ function seloContraMedia(valor: number, media: number): Selo {
 }
 
 function areaFarm(ctx: Contexto): AreaDoPlacar {
-  const minutos = ctx.detalhe.duracaoS / 60;
-  const ouroFinal = ctx.detalhe.curvas.ouro.at(-1) ?? null;
-  const gpm = ouroFinal !== null && minutos > 0 ? ouroFinal / minutos : null;
+  const gpm = ctx.detalhe.gpm;
   const proDoHeroi = ctx.proDoHeroi;
   if (gpm === null || !proDoHeroi || proDoHeroi.forca.n < AMOSTRA_MINIMA) {
     return { area: "Farm", valor: gpm, unidade: "ouro/min", selo: "sem_benchmark", comparacao: "sem dado de pro suficiente para comparar (amostra pequena ou partida sem análise completa)." };

@@ -8,7 +8,7 @@ const HEROI = { id: 94, chave: "medusa", nome: "Medusa", retrato: "medusa" };
 function detalheMinimo(parcial: Partial<DetalheDaPartida>): DetalheDaPartida {
   return {
     partida: "1", conta: 1, slot: 0, duracaoS: 3_000, venceu: null, analisada: true, heroi: HEROI, lado: "radiant",
-    lane: null, abates: 0, mortes: 3, assistencias: 0, curvas: { ouro: [0, 30_000], lh: [], patrimonio: [] },
+    lane: null, abates: 0, mortes: 3, assistencias: 0, gpm: 600, curvas: { ouro: [0, 30_000], lh: [], patrimonio: [] },
     adversario: null, inimigos: [], eventos: [], compras: [], neutros: [], habilidades: [], manchasDaLane: [],
     laneDoMapa: null, referencia: null, frescor: { buscadoEm: 0, vencido: false }, vantagemDoTime: { ouro: [], xp: [] },
     eficienciaDeLanePct: null, draft: [], ...parcial,
@@ -25,7 +25,7 @@ function contexto(detalheParcial: Partial<DetalheDaPartida>, proDoHeroiParcial: 
 }
 
 it.each([
-  { gpmMedio: 500, esperado: "ponto_forte" }, // 600 ouro/min na partida (30000 em 50 min) vs média 500: +20%
+  { gpmMedio: 500, esperado: "ponto_forte" }, // 600 ouro/min na partida vs média 500: +20%
   { gpmMedio: 605, esperado: "dentro_da_faixa" }, // dentro de ±10% de 600
   { gpmMedio: 900, esperado: "abaixo_do_pro" },
 ])("farm: gpm_medio=$gpmMedio vira selo $esperado", ({ gpmMedio, esperado }) => {

@@ -43,6 +43,7 @@ export const partidaFonte = z.object({
     lane_pos: lanePos.nullable().optional(), lane_role: z.number().nullable().optional(),
     lane_efficiency_pct: z.number().nullable().optional().transform((v) => v ?? null),
     kills: z.number(), deaths: z.number(), assists: z.number(),
+    gold_per_min: z.number().nullable().optional().transform((v) => v ?? null),
     gold_t: lista(z.number()), xp_t: lista(z.number()), lh_t: lista(z.number()), networth_t: lista(z.number()),
     purchase_log: lista(noTempo), kills_log: lista(noTempo), deaths_log: lista(noTempo), runes_log: lista(noTempo),
     obs_log: lista(wardNoTempo), sen_log: lista(wardNoTempo), buyback_log: lista(z.object({ time: z.number() })),

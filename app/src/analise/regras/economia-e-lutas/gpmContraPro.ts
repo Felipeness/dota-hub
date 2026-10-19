@@ -13,12 +13,10 @@ const FONTE =
 const pesoDoErro = (razao: number): Peso => (razao < LIMIAR_ERRO_GRAVE ? "pesou_muito" : "pesou");
 
 function gpmContraPro(ctx: Contexto): Achado[] {
-  const minutos = ctx.detalhe.duracaoS / 60;
-  const ouroFinal = ctx.detalhe.curvas.ouro.at(-1);
+  const gpm = ctx.detalhe.gpm;
   const proDoHeroi = ctx.proDoHeroi;
-  if (ouroFinal === undefined || minutos <= 0 || !proDoHeroi || proDoHeroi.forca.n < AMOSTRA_MINIMA) return [];
+  if (gpm === null || !proDoHeroi || proDoHeroi.forca.n < AMOSTRA_MINIMA) return [];
 
-  const gpm = ouroFinal / minutos;
   const media = proDoHeroi.forca.gpm_medio;
   const razao = gpm / media;
   const numeros = { gpm: Math.round(gpm), mediaPro: Math.round(media), n: proDoHeroi.forca.n, razao: Number(razao.toFixed(2)) };
