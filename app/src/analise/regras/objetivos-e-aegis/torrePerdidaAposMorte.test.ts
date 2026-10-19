@@ -36,6 +36,24 @@ it("não acusa torre destruída pelo próprio time", () => {
   expect(REGRAS.flatMap((regra) => regra.avaliar(soTorreAliada))).toEqual([]);
 });
 
+it("não conta a mesma torre duas vezes quando duas mortes próximas abrem janelas que se sobrepõem", () => {
+  const ctx = contextoDaAmostra();
+  const duasMortesUmaTorre = {
+    ...ctx,
+    detalhe: {
+      ...ctx.detalhe,
+      eventos: ctx.detalhe.eventos.filter((e) => e.tipo !== "torre" && e.tipo !== "morte").concat([
+        { t: 1519, tipo: "morte" as const, texto: "Morte para Ursa", ponto: null },
+        { t: 1575, tipo: "morte" as const, texto: "Morte para Timbersaw", ponto: null },
+        { t: 1598, tipo: "torre" as const, texto: "Torre perdida", ponto: null },
+      ]),
+    },
+  };
+  const achados = REGRAS.flatMap((regra) => regra.avaliar(duasMortesUmaTorre));
+  expect(achados).toHaveLength(1);
+  expect(achados[0]?.evidencias.numeros?.minutoDaMorte).toBeCloseTo(1519 / 60, 5); // atribuída à 1ª morte que abriu a janela
+});
+
 it("não acusa quando a torre cai fora da janela de 90 s depois da última morte", () => {
   const ctx = contextoDaAmostra();
   const torreTardia = {

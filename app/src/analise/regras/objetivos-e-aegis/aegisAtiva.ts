@@ -1,9 +1,7 @@
 // Regra: lutar/morrer com a Aegis do time inimigo ainda ativa. Ver SPEC §"Famílias de regras" > objetivos-e-aegis.
-import { tempoDaPartida } from "../../../live/partida/detalhe";
+import { JANELA_DE_AEGIS_S, tempoDaPartida } from "../../../live/partida/detalhe";
 import type { Achado, Contexto, Regra } from "../../modelo";
 
-/** Aegis of the Immortal expira 5 min depois de pega (Dota 2 Wiki / Liquipedia: Roshan; estável em 7.41, 7.41c/e/f). */
-const JANELA_DE_AEGIS_S = 5 * 60;
 const FONTES_AEGIS: readonly string[] = [
   "objectives[] do OpenDota (CHAT_MESSAGE_ROSHAN_KILL)",
   "Dota 2 Wiki / Liquipedia: Roshan — Aegis of the Immortal expira em 5 minutos",
@@ -14,9 +12,13 @@ const emMinutos = (segundos: number) => segundos / 60;
 function mortesComAegisInimigaAtiva(ctx: Contexto): Achado[] {
   const roshansInimigos = ctx.detalhe.eventos.filter((e) => e.tipo === "roshan" && e.texto.includes("time inimigo"));
   const mortes = ctx.detalhe.eventos.filter((e) => e.tipo === "morte");
+  const aegisConsumidas = ctx.detalhe.eventos.filter((e) => e.tipo === "aegis-consumida");
   return mortes.flatMap((morte): Achado[] => {
     const roshanQueAtivouAAegis = roshansInimigos.find((r) => r.t <= morte.t && morte.t - r.t <= JANELA_DE_AEGIS_S);
     if (!roshanQueAtivouAAegis) return [];
+    // Portador já morreu com a Aegis antes da morte avaliada: ela já foi gasta, não está mais ativa.
+    const jaConsumida = aegisConsumidas.some((a) => a.t >= roshanQueAtivouAAegis.t && a.t <= morte.t);
+    if (jaConsumida) return [];
     const minutoDaMorte = emMinutos(morte.t);
     const minutoDoRoshan = emMinutos(roshanQueAtivouAAegis.t);
     return [{
