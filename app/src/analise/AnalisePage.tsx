@@ -3,7 +3,6 @@ import { Link, useNavigate, useParams, useSearchParams } from "react-router";
 import { analiseSchema, caminhoDaAnalise } from "../confronto/analise";
 import { useData } from "../data/useData";
 import { lerId } from "../live/contas";
-import { erroAoVivo, mensagemDoErro } from "../live/erros";
 import { ErroAoVivoView } from "../live/ErroAoVivo";
 import type { DetalheDaPartida } from "../live/partida/detalhe";
 import { useAoVivo } from "../live/useAoVivo";
@@ -25,11 +24,18 @@ export function AnalisePage() {
     return (
       <article className="analise-pagina">
         <FormularioDeAnalise matchIdInicial={matchId} contaInicial={params.get("conta") ?? ""} />
-        <p role="alert">{mensagemDoErro(erroAoVivo("ENTRADA_INVALIDA"))}</p>
+        <p role="alert" className="analise-aviso">{avisoDaEntrada(matchId, params.get("conta"))}</p>
       </article>
     );
   }
   return <AnaliseDeUmaPartida matchId={matchId} conta={conta} />;
+}
+
+/** A busca ao vivo fala de "2 letras"; aqui a pessoa precisa saber qual dos dois números falta ou está errado. */
+export function avisoDaEntrada(matchId: string, conta: string | null): string {
+  if (lerId(matchId, 15) === null) return "O número da partida não parece válido: use só os dígitos, ex. 9046905170.";
+  if (!conta) return "Falta a sua conta: com ela sabemos qual dos 10 jogadores analisar.";
+  return "O número da conta não parece válido: use o ID de amigo do Dota, ex. 329255797.";
 }
 
 function FormularioDeAnalise({ matchIdInicial = "", contaInicial = "" }: { matchIdInicial?: string; contaInicial?: string }) {
@@ -51,9 +57,9 @@ function FormularioDeAnalise({ matchIdInicial = "", contaInicial = "" }: { match
         esperamos até um minuto; depois disso, tenta de novo manualmente.
       </p>
       <form onSubmit={enviar} className="analise-formulario">
-        <label>Partida<input inputMode="numeric" value={matchId} onChange={(e) => setMatchId(e.target.value)} placeholder="9046905170" /></label>
-        <label>Conta<input inputMode="numeric" value={conta} onChange={(e) => setConta(e.target.value)} placeholder="329255797" /></label>
-        <button type="submit">Analisar</button>
+        <label className="campo">Partida<input type="text" inputMode="numeric" value={matchId} onChange={(e) => setMatchId(e.target.value)} placeholder="ex. 9046905170" /></label>
+        <label className="campo">Sua conta (ID de amigo)<input type="text" inputMode="numeric" value={conta} onChange={(e) => setConta(e.target.value)} placeholder="ex. 329255797" /></label>
+        <button type="submit" className="analise-enviar">Analisar</button>
       </form>
     </article>
   );

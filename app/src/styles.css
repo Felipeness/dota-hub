@@ -30,7 +30,8 @@ button[aria-pressed="true"] { border-color: var(--cor-destaque); background: var
 button.link { position: relative; min-height: 0; padding: 0; border: 0; background: none; color: var(--cor-destaque); text-decoration: underline; }
 button.link::after { content: ""; position: absolute; inset: -12px -6px; }
 
-input[type="search"] {
+/* Todo campo de texto do site segue o mesmo visual; sem isso, input sem type cai no cinza padrão do navegador. */
+:is(input[type="search"], input[type="text"], input[type="number"], input:not([type])) {
   font: inherit;
   width: 100%;
   min-height: var(--alvo-toque);
@@ -39,6 +40,14 @@ input[type="search"] {
   border: 1px solid var(--cor-linha-forte);
   border-radius: 10px;
   padding: 0 var(--espaco-3);
+  transition: border-color 120ms ease, background-color 120ms ease;
+}
+:is(input[type="search"], input[type="text"], input[type="number"], input:not([type])):hover { border-color: var(--cor-linha-pilula); }
+:is(input[type="search"], input[type="text"], input[type="number"], input:not([type])):focus-visible {
+  outline: none;
+  border-color: var(--cor-destaque);
+  background: var(--cor-superficie);
+  box-shadow: 0 0 0 3px var(--cor-destaque-fundo);
 }
 /* #8b968f sobre #111920 dá 5,8:1; o cinza padrão do navegador dava 3,85:1. */
 ::placeholder { color: var(--cor-texto-3); opacity: 1; }
@@ -130,7 +139,7 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
   background: var(--cor-superficie-2); border: 1px solid var(--cor-linha-forte); border-radius: 10px;
   padding: 0 14px; color: var(--cor-texto-3);
 }
-.busca-campo input[type="search"] { border: 0; background: transparent; padding: 0; outline: none; }
+.busca-campo input[type="search"], .busca-campo input[type="search"]:is(:hover, :focus-visible) { border: 0; background: transparent; padding: 0; outline: none; box-shadow: none; }
 .busca-campo:focus-within { border-color: var(--cor-destaque); }
 .busca kbd { font-family: var(--fonte-num); font-size: 11px; }
 .busca ul, .busca > p {
