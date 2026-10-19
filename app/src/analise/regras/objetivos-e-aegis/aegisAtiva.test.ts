@@ -1,21 +1,6 @@
-import { readFileSync } from "node:fs";
-import { montarDetalhe, tempoDaPartida } from "../../../live/partida/detalhe";
-import { partidaFonte } from "../../../live/fonte/schemas";
-import type { Contexto } from "../../modelo";
-import { REGRAS } from "./index";
-
-// Partida real 9046905170 (Medusa, pos1, derrota 16/9/14 em 50:46), reduzida ao necessário para esta família:
-// objectives (só Roshan), o teamfight da luta final e os logs da própria Medusa. Ver docs/analise-partida/SPEC.md,
-// critério de aceitação com a partida de referência.
-const PARTIDA = JSON.parse(readFileSync(`${__dirname}/../../amostras/partida-9046905170.json`, "utf-8"));
-const SEM_CONSTANTES = { herois: {}, itens: {}, idsDeHabilidades: {}, habilidades: {} };
-
-function contextoDaAmostra(): Contexto {
-  const partida = partidaFonte.parse(PARTIDA);
-  const resposta = montarDetalhe({ partida, conta: 329255797, constantes: SEM_CONSTANTES, benchmarks: null, frescor: { buscadoEm: 0, vencido: false } });
-  if (!resposta.ok) throw new Error(resposta.erro.codigo);
-  return { detalhe: resposta.dados, pro: null, proDoHeroi: null, meuHeroi: resposta.dados.heroi, inimigos: resposta.dados.inimigos };
-}
+import { tempoDaPartida } from "../../../live/partida/detalhe";
+import { contextoDaAmostra } from "./amostraDeTeste";
+import { REGRAS } from "./aegisAtiva";
 
 it("acusa as duas mortes da Medusa dentro da janela de Aegis do time inimigo (28:33 e 49:51, ref. Dotaflix)", () => {
   const achados = REGRAS.flatMap((regra) => regra.avaliar(contextoDaAmostra()));
