@@ -3,9 +3,9 @@ import { contextoDaAmostra } from "./amostraDeTeste";
 import { REGRA } from "./abatesSemMorrerDepois";
 
 describe("abatesSemMorrerDepois, partida real", () => {
-  it("acusa só os 2 clusters de abate que não tiveram morte própria nos 3 minutos seguintes (11:46 e 41:08)", () => {
+  it("acusa só o cluster de 41:08: o de 11:46 teve morte própria 45s antes (11:01, mesma luta, troca), não uma luta convertida", () => {
     const achados = REGRA.avaliar(contextoDaAmostra());
-    expect(achados.map((a) => tempoDaPartida(Math.round((a.minuto ?? 0) * 60)))).toEqual(["11:46", "41:08"]);
+    expect(achados.map((a) => tempoDaPartida(Math.round((a.minuto ?? 0) * 60)))).toEqual(["41:08"]);
     expect(achados.every((a) => a.tipo === "acerto")).toBe(true);
   });
 

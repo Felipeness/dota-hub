@@ -15,8 +15,8 @@ describe("mortesEmDesvantagem, partida real", () => {
     expect(graves).toEqual(["28:33", "31:38", "49:51"]);
   });
 
-  it("todas as mortes acusadas são tipo erro, com a vantagem de ouro do time nas evidências", () => {
+  it("é contexto da morte, não erro próprio: a regra não sabe se o jogador tinha como evitar a luta", () => {
     const achados = REGRA.avaliar(contextoDaAmostra());
-    expect(achados.every((a) => a.tipo === "erro" && typeof a.evidencias.numeros?.vantagemDeOuroDoTime === "number")).toBe(true);
+    expect(achados.every((a) => a.tipo === "contexto" && typeof a.evidencias.numeros?.vantagemDeOuroDoTime === "number")).toBe(true);
   });
 });

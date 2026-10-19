@@ -25,7 +25,10 @@ function abatesSemMorrerDepois(ctx: Contexto): Achado[] {
   return clusters(tAbates).flatMap((cluster): Achado[] => {
     const inicio = cluster[0]!;
     const fimDaJanela = cluster.at(-1)! + JANELA_SEM_MORRER_S;
-    const morreuNaJanela = tMortes.some((t) => t >= inicio && t <= fimDaJanela);
+    // Janela simétrica: também conta uma morte imediatamente ANTES do primeiro abate do cluster (mesma troca de
+    // vida por vida na mesma luta), não só mortes depois. Sem isso, um abate 1s após a própria morte no mesmo
+    // confronto passava como "luta convertida" em vez de troca.
+    const morreuNaJanela = tMortes.some((t) => t >= inicio - JANELA_DO_CLUSTER_S && t <= fimDaJanela);
     if (morreuNaJanela) return [];
 
     const nAbates = cluster.length;

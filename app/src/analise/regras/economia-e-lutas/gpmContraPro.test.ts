@@ -20,6 +20,11 @@ describe("gpmContraPro, casos sintéticos", () => {
     expect(achado).toMatchObject({ id: "gpm-abaixo-do-pro", tipo: "erro", peso: "pesou" });
   });
 
+  it("pesa muito (pesou_muito) quando o GPM fica abaixo de 60% da média do pro, não só 'pesou' fixo", () => {
+    const [achado] = REGRA.avaliar(ctxComGpm(300 * 40, 40 * 60)); // 300 gpm, razão ~0,44 < 0,6
+    expect(achado).toMatchObject({ id: "gpm-abaixo-do-pro", tipo: "erro", peso: "pesou_muito" });
+  });
+
   it("não acusa nada sem amostra de pro suficiente (n abaixo de AMOSTRA_MINIMA)", () => {
     const ctx = contextoDaAmostra();
     const semAmostra = { ...ctx, proDoHeroi: { ...ctx.proDoHeroi!, forca: { ...ctx.proDoHeroi!.forca, n: 2 } } };
