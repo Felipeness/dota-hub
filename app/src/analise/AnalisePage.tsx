@@ -88,7 +88,10 @@ function AnaliseDeUmaPartida({ matchId, conta }: { matchId: string; conta: numbe
 }
 
 function RelatorioDaPartida({ detalhe }: { detalhe: DetalheDaPartida }) {
-  const pro = useData(caminhoDaAnalise(detalhe.heroi.chave), analiseSchema);
+  // content/confrontos nomeia o arquivo pelo slug do nome localizado (retrato), não pela chave interna do OpenDota:
+  // 19/127 heróis divergem entre as duas (ex. "antimage" vs "anti_mage"), e usar a chave faz ctx.pro virar null
+  // em silêncio pra esses heróis, sem avisar que faltou dado pra build-core/build-fora-de-contexto.
+  const pro = useData(caminhoDaAnalise(detalhe.heroi.retrato), analiseSchema);
   const proPosicoes = useData(CAMINHO_PRO_POSICOES, proPorPosicaoSchema);
   const ctx = construirContexto(detalhe, pro.estado === "ok" ? pro.dados : null, proPosicoes.estado === "ok" ? proPosicoes.dados : null);
   const relatorio = montarRelatorio(avaliarRegras(ctx, REGISTRO_DE_REGRAS));

@@ -42,7 +42,8 @@ async function main() {
 
   const pro = (() => {
     try {
-      const bruto = JSON.parse(readFileSync(`public${caminhoDaAnalise(detalhe.heroi.chave)}`, "utf-8"));
+      // Ver AnalisePage.tsx: content/confrontos nomeia pelo slug do nome localizado (retrato), não pela chave do OpenDota.
+      const bruto = JSON.parse(readFileSync(`public${caminhoDaAnalise(detalhe.heroi.retrato)}`, "utf-8"));
       return analiseSchema.parse(bruto);
     } catch {
       return null;
