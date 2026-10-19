@@ -1,0 +1,683 @@
+{
+  "match_id": 9046905170,
+  "duration": 3046,
+  "radiant_win": false,
+  "objectives": [],
+  "teamfights": [],
+  "radiant_gold_adv": [],
+  "radiant_xp_adv": [],
+  "picks_bans": [],
+  "players": [
+    {
+      "account_id": 1102790729,
+      "player_slot": 0,
+      "hero_id": 107,
+      "lane_role": 2,
+      "kills": 8,
+      "deaths": 9,
+      "assists": 12,
+      "gold_t": [],
+      "xp_t": [],
+      "lh_t": [],
+      "networth_t": [],
+      "purchase_log": [],
+      "kills_log": [],
+      "deaths_log": [],
+      "runes_log": [],
+      "obs_log": [],
+      "sen_log": [],
+      "buyback_log": [],
+      "ability_upgrades_arr": [],
+      "neutral_item_history": []
+    },
+    {
+      "account_id": 206152248,
+      "player_slot": 1,
+      "hero_id": 123,
+      "lane_role": 3,
+      "kills": 2,
+      "deaths": 9,
+      "assists": 14,
+      "gold_t": [],
+      "xp_t": [],
+      "lh_t": [],
+      "networth_t": [],
+      "purchase_log": [],
+      "kills_log": [],
+      "deaths_log": [],
+      "runes_log": [],
+      "obs_log": [],
+      "sen_log": [],
+      "buyback_log": [],
+      "ability_upgrades_arr": [],
+      "neutral_item_history": []
+    },
+    {
+      "account_id": 69525956,
+      "player_slot": 2,
+      "hero_id": 2,
+      "lane_role": 3,
+      "kills": 1,
+      "deaths": 20,
+      "assists": 12,
+      "gold_t": [],
+      "xp_t": [],
+      "lh_t": [],
+      "networth_t": [],
+      "purchase_log": [],
+      "kills_log": [],
+      "deaths_log": [],
+      "runes_log": [],
+      "obs_log": [],
+      "sen_log": [],
+      "buyback_log": [],
+      "ability_upgrades_arr": [],
+      "neutral_item_history": []
+    },
+    {
+      "account_id": 329255797,
+      "player_slot": 3,
+      "hero_id": 94,
+      "lane_role": 1,
+      "kills": 16,
+      "deaths": 9,
+      "assists": 14,
+      "gold_t": [
+        0,
+        259,
+        641,
+        767,
+        1007,
+        1533,
+        1956,
+        2339,
+        2746,
+        3027,
+        3580,
+        3905,
+        4726,
+        5320,
+        5884,
+        6441,
+        7338,
+        7432,
+        8094,
+        9638,
+        10316,
+        12488,
+        13159,
+        14657,
+        15342,
+        16571,
+        16666,
+        17271,
+        18225,
+        18730,
+        19026,
+        20884,
+        22619,
+        25318,
+        26350,
+        27301,
+        27689,
+        29538,
+        30496,
+        31227,
+        31960,
+        33485,
+        35366,
+        37502,
+        38004,
+        39351,
+        41024,
+        41405,
+        42998,
+        43845,
+        45089
+      ],
+      "xp_t": [
+        0,
+        34,
+        398,
+        607,
+        805,
+        1328,
+        1719,
+        1977,
+        2313,
+        2683,
+        3191,
+        3536,
+        4701,
+        5338,
+        5988,
+        6608,
+        7449,
+        7449,
+        8113,
+        9399,
+        10021,
+        13760,
+        14533,
+        16127,
+        17242,
+        19107,
+        19107,
+        19543,
+        20095,
+        20436,
+        20436,
+        25700,
+        26453,
+        32809,
+        34009,
+        34553,
+        34703,
+        37099,
+        38136,
+        38765,
+        39062,
+        41711,
+        46859,
+        50179,
+        50478,
+        53498,
+        55175,
+        55466,
+        56630,
+        57238,
+        59431
+      ],
+      "lh_t": [],
+      "networth_t": [
+        600,
+        859,
+        1241,
+        1302,
+        1477,
+        1943,
+        2366,
+        2749,
+        3156,
+        3295,
+        3848,
+        4173,
+        4891,
+        5420,
+        5884,
+        6441,
+        7338,
+        7249,
+        7911,
+        9219,
+        9897,
+        12069,
+        12740,
+        14238,
+        14923,
+        15749,
+        15844,
+        16449,
+        17403,
+        17464,
+        17760,
+        19618,
+        20834,
+        21730,
+        22532,
+        23483,
+        23871,
+        25720,
+        26425,
+        27156,
+        27889,
+        29414,
+        31295,
+        33431,
+        33933,
+        35280,
+        36953,
+        33406,
+        34299,
+        35146,
+        35481
+      ],
+      "purchase_log": [
+        {
+          "time": -89,
+          "key": "branches"
+        },
+        {
+          "time": -89,
+          "key": "branches"
+        },
+        {
+          "time": -89,
+          "key": "magic_wand"
+        },
+        {
+          "time": 6,
+          "key": "enchanted_mango"
+        },
+        {
+          "time": 49,
+          "key": "circlet"
+        },
+        {
+          "time": 65,
+          "key": "mantle"
+        },
+        {
+          "time": 102,
+          "key": "null_talisman"
+        },
+        {
+          "time": 181,
+          "key": "clarity"
+        },
+        {
+          "time": 181,
+          "key": "enchanted_mango"
+        },
+        {
+          "time": 268,
+          "key": "boots"
+        },
+        {
+          "time": 329,
+          "key": "gloves"
+        },
+        {
+          "time": 390,
+          "key": "boots_of_elves"
+        },
+        {
+          "time": 424,
+          "key": "power_treads"
+        },
+        {
+          "time": 439,
+          "key": "boots_of_elves"
+        },
+        {
+          "time": 440,
+          "key": "clarity"
+        },
+        {
+          "time": 542,
+          "key": "enchanted_mango"
+        },
+        {
+          "time": 625,
+          "key": "blade_of_alacrity"
+        },
+        {
+          "time": 715,
+          "key": "tpscroll"
+        },
+        {
+          "time": 755,
+          "key": "yasha"
+        },
+        {
+          "time": 792,
+          "key": "diadem"
+        },
+        {
+          "time": 874,
+          "key": "tpscroll"
+        },
+        {
+          "time": 970,
+          "key": "manta"
+        },
+        {
+          "time": 1099,
+          "key": "blade_of_alacrity"
+        },
+        {
+          "time": 1100,
+          "key": "belt_of_strength"
+        },
+        {
+          "time": 1118,
+          "key": "dragon_lance"
+        },
+        {
+          "time": 1221,
+          "key": "orb_of_frost"
+        },
+        {
+          "time": 1309,
+          "key": "ultimate_orb"
+        },
+        {
+          "time": 1450,
+          "key": "ultimate_orb"
+        },
+        {
+          "time": 1458,
+          "key": "skadi"
+        },
+        {
+          "time": 1615,
+          "key": "aghanims_shard"
+        },
+        {
+          "time": 1823,
+          "key": "staff_of_wizardry"
+        },
+        {
+          "time": 1823,
+          "key": "fluffy_hat"
+        },
+        {
+          "time": 1823,
+          "key": "force_staff"
+        },
+        {
+          "time": 1848,
+          "key": "hurricane_pike"
+        },
+        {
+          "time": 2009,
+          "key": "eagle"
+        },
+        {
+          "time": 2076,
+          "key": "talisman_of_evasion"
+        },
+        {
+          "time": 2164,
+          "key": "claymore"
+        },
+        {
+          "time": 2180,
+          "key": "butterfly"
+        },
+        {
+          "time": 2266,
+          "key": "ultimate_orb"
+        },
+        {
+          "time": 2493,
+          "key": "ring_of_health"
+        },
+        {
+          "time": 2493,
+          "key": "pers"
+        },
+        {
+          "time": 2493,
+          "key": "void_stone"
+        },
+        {
+          "time": 2506,
+          "key": "sphere"
+        },
+        {
+          "time": 2841,
+          "key": "blade_of_alacrity"
+        },
+        {
+          "time": 2841,
+          "key": "robe"
+        },
+        {
+          "time": 2841,
+          "key": "diffusal_blade"
+        },
+        {
+          "time": 2860,
+          "key": "eagle"
+        },
+        {
+          "time": 2878,
+          "key": "disperser"
+        }
+      ],
+      "kills_log": [
+        {
+          "time": 706,
+          "key": "npc_dota_hero_doom_bringer"
+        },
+        {
+          "time": 1083,
+          "key": "npc_dota_hero_undying"
+        },
+        {
+          "time": 1119,
+          "key": "npc_dota_hero_undying"
+        },
+        {
+          "time": 1186,
+          "key": "npc_dota_hero_necrolyte"
+        },
+        {
+          "time": 1208,
+          "key": "npc_dota_hero_doom_bringer"
+        },
+        {
+          "time": 1242,
+          "key": "npc_dota_hero_ursa"
+        },
+        {
+          "time": 1498,
+          "key": "npc_dota_hero_ancient_apparition"
+        },
+        {
+          "time": 1801,
+          "key": "npc_dota_hero_undying"
+        },
+        {
+          "time": 1813,
+          "key": "npc_dota_hero_ancient_apparition"
+        },
+        {
+          "time": 1892,
+          "key": "npc_dota_hero_ancient_apparition"
+        },
+        {
+          "time": 1898,
+          "key": "npc_dota_hero_doom_bringer"
+        },
+        {
+          "time": 1943,
+          "key": "npc_dota_hero_undying"
+        },
+        {
+          "time": 1952,
+          "key": "npc_dota_hero_necrolyte"
+        },
+        {
+          "time": 2468,
+          "key": "npc_dota_hero_ancient_apparition"
+        },
+        {
+          "time": 2651,
+          "key": "npc_dota_hero_undying"
+        },
+        {
+          "time": 2989,
+          "key": "npc_dota_hero_doom_bringer"
+        }
+      ],
+      "deaths_log": [
+        {
+          "time": 514,
+          "key": "npc_dota_hero_undying"
+        },
+        {
+          "time": 661,
+          "key": "npc_dota_hero_undying"
+        },
+        {
+          "time": 966,
+          "key": "npc_dota_hero_ursa"
+        },
+        {
+          "time": 1130,
+          "key": "npc_dota_hero_doom_bringer"
+        },
+        {
+          "time": 1498,
+          "key": "npc_dota_hero_necrolyte"
+        },
+        {
+          "time": 1713,
+          "key": "npc_dota_hero_doom_bringer"
+        },
+        {
+          "time": 1898,
+          "key": "npc_dota_hero_ursa"
+        },
+        {
+          "time": 2770,
+          "key": "npc_dota_hero_ursa"
+        },
+        {
+          "time": 2991,
+          "key": "npc_dota_hero_necrolyte"
+        }
+      ],
+      "runes_log": [],
+      "obs_log": [],
+      "sen_log": [],
+      "buyback_log": [],
+      "ability_upgrades_arr": [],
+      "neutral_item_history": []
+    },
+    {
+      "account_id": 1098837719,
+      "player_slot": 4,
+      "hero_id": 59,
+      "lane_role": 1,
+      "kills": 2,
+      "deaths": 17,
+      "assists": 14,
+      "gold_t": [],
+      "xp_t": [],
+      "lh_t": [],
+      "networth_t": [],
+      "purchase_log": [],
+      "kills_log": [],
+      "deaths_log": [],
+      "runes_log": [],
+      "obs_log": [],
+      "sen_log": [],
+      "buyback_log": [],
+      "ability_upgrades_arr": [],
+      "neutral_item_history": []
+    },
+    {
+      "account_id": 158751497,
+      "player_slot": 128,
+      "hero_id": 36,
+      "lane_role": 2,
+      "kills": 16,
+      "deaths": 5,
+      "assists": 13,
+      "gold_t": [],
+      "xp_t": [],
+      "lh_t": [],
+      "networth_t": [],
+      "purchase_log": [],
+      "kills_log": [],
+      "deaths_log": [],
+      "runes_log": [],
+      "obs_log": [],
+      "sen_log": [],
+      "buyback_log": [],
+      "ability_upgrades_arr": [],
+      "neutral_item_history": []
+    },
+    {
+      "account_id": 125880717,
+      "player_slot": 129,
+      "hero_id": 68,
+      "lane_role": 1,
+      "kills": 5,
+      "deaths": 8,
+      "assists": 39,
+      "gold_t": [],
+      "xp_t": [],
+      "lh_t": [],
+      "networth_t": [],
+      "purchase_log": [],
+      "kills_log": [],
+      "deaths_log": [],
+      "runes_log": [],
+      "obs_log": [],
+      "sen_log": [],
+      "buyback_log": [],
+      "ability_upgrades_arr": [],
+      "neutral_item_history": []
+    },
+    {
+      "account_id": 1047315009,
+      "player_slot": 130,
+      "hero_id": 85,
+      "lane_role": 3,
+      "kills": 7,
+      "deaths": 7,
+      "assists": 34,
+      "gold_t": [],
+      "xp_t": [],
+      "lh_t": [],
+      "networth_t": [],
+      "purchase_log": [],
+      "kills_log": [],
+      "deaths_log": [],
+      "runes_log": [],
+      "obs_log": [],
+      "sen_log": [],
+      "buyback_log": [],
+      "ability_upgrades_arr": [],
+      "neutral_item_history": []
+    },
+    {
+      "account_id": 1039863326,
+      "player_slot": 131,
+      "hero_id": 69,
+      "lane_role": 3,
+      "kills": 11,
+      "deaths": 8,
+      "assists": 30,
+      "gold_t": [],
+      "xp_t": [],
+      "lh_t": [],
+      "networth_t": [],
+      "purchase_log": [],
+      "kills_log": [],
+      "deaths_log": [],
+      "runes_log": [],
+      "obs_log": [],
+      "sen_log": [],
+      "buyback_log": [],
+      "ability_upgrades_arr": [],
+      "neutral_item_history": []
+    },
+    {
+      "account_id": 151690979,
+      "player_slot": 132,
+      "hero_id": 70,
+      "lane_role": 1,
+      "kills": 25,
+      "deaths": 4,
+      "assists": 19,
+      "gold_t": [],
+      "xp_t": [],
+      "lh_t": [],
+      "networth_t": [],
+      "purchase_log": [],
+      "kills_log": [],
+      "deaths_log": [],
+      "runes_log": [],
+      "obs_log": [],
+      "sen_log": [],
+      "buyback_log": [],
+      "ability_upgrades_arr": [],
+      "neutral_item_history": []
+    }
+  ]
+}

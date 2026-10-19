@@ -12,7 +12,7 @@ import { celulaParaNorm, laneDasManchas, manchasDaLane, type Lado } from "../rot
 import type { Frescor, Lane } from "../tipos";
 
 export type HeroiNaPartida = Readonly<{ id: number; chave: string; nome: string; retrato: string }>;
-export type TipoDeEvento = "abate" | "morte" | "item" | "roshan" | "observer" | "sentry" | "runa" | "buyback" | "smoke" | "camp";
+export type TipoDeEvento = "abate" | "morte" | "item" | "roshan" | "torre" | "observer" | "sentry" | "runa" | "buyback" | "smoke" | "camp";
 export type EventoDaPartida = Readonly<{ t: number; tipo: TipoDeEvento; texto: string; ponto: Ponto | null }>;
 export type Compra = Readonly<{ t: number; chave: string; nome: string; custo: number | null; grande: boolean }>;
 export type Neutro = Readonly<{ t: number; chave: string; nome: string; tier: number | null }>;
@@ -57,6 +57,9 @@ const DIGITOS_DA_PARTIDA = 15;
 const MINUTO_DA_LANE = 10;
 const MEDIANA = 0.5;
 const ROSHAN = "CHAT_MESSAGE_ROSHAN_KILL";
+const TORRE = "building_kill";
+/** key de building_kill começa com o dono da construção; o OpenDota não marca torre com um campo `team` próprio. */
+const PREFIXO_DE_TORRE_RADIANT = "npc_dota_goodguys_tower";
 const TIME_RADIANT = 2;
 /** Papel do OpenDota (1 safe, 2 mid, 3 off) do adversário direto de lane. */
 const PAPEL_ADVERSARIO: Readonly<Record<number, number>> = { 1: 3, 2: 2, 3: 1 };
@@ -145,6 +148,13 @@ function eventosDoJogador(contexto: Contexto): EventoDaPartida[] {
     ...compras.filter((c) => c.grande).map((c): EventoDaPartida => ({ t: c.t, tipo: "item", texto: c.nome, ponto: null })),
     ...partida.objectives.filter((o) => o.type === ROSHAN)
       .map((o): EventoDaPartida => ({ t: o.time, tipo: "roshan", texto: o.team === meuTime ? "Roshan pelo seu time" : "Roshan pelo time inimigo", ponto: null })),
+    ...partida.objectives.filter((o) => o.type === TORRE && o.key?.includes("_tower"))
+      .map((o): EventoDaPartida => {
+        const torreDoRadiant = o.key?.startsWith(PREFIXO_DE_TORRE_RADIANT) ?? false;
+        const meuLado = meuTime === TIME_RADIANT ? "radiant" : "dire";
+        const perdidaPeloSeuTime = (torreDoRadiant && meuLado === "radiant") || (!torreDoRadiant && meuLado === "dire");
+        return { t: o.time, tipo: "torre", texto: perdidaPeloSeuTime ? "Torre perdida" : "Torre destruída pelo seu time", ponto: null };
+      }),
     ...jogador.obs_log.map(ward("observer")),
     ...jogador.sen_log.map(ward("sentry")),
     ...jogador.runes_log.map((r): EventoDaPartida => ({ t: r.time, tipo: "runa", texto: `Runa: ${RUNAS[Number(r.key)] ?? r.key}`, ponto: null })),
@@ -227,9 +237,16 @@ export function montarDetalhe({ partida, conta, constantes, benchmarks, frescor 
 const constante = <T>(consultar: Consultar, caminho: string, schema: z.ZodType<T>) =>
   consultar({ caminho, schema, validadeS: VALIDADE_S.constantes });
 
-export async function detalheDaPartida(consultar: Consultar, partidaId: string, conta: number): Promise<RespostaAoVivo<DetalheDaPartida>> {
+/**
+ * `ignorarCache` força uma rede nova em vez do guardado de 7 dias (sufixo de query, o OpenDota ignora chaves que
+ * não conhece); usado pelo polling de `analise/carregar.ts` enquanto a partida ainda não foi analisada.
+ */
+export async function detalheDaPartida(
+  consultar: Consultar, partidaId: string, conta: number, ignorarCache?: string,
+): Promise<RespostaAoVivo<DetalheDaPartida>> {
   if (lerId(partidaId, DIGITOS_DA_PARTIDA) === null) return falha(erroAoVivo("ENTRADA_INVALIDA"));
-  const partida = await consultar({ caminho: `/matches/${partidaId}`, schema: partidaFonte, validadeS: VALIDADE_S.partida });
+  const caminhoDaPartida = ignorarCache ? `/matches/${partidaId}?_t=${ignorarCache}` : `/matches/${partidaId}`;
+  const partida = await consultar({ caminho: caminhoDaPartida, schema: partidaFonte, validadeS: VALIDADE_S.partida });
   if (!partida.ok) return partida;
   const jogador = partida.dados.valor.players.find((p) => p.account_id === conta);
   if (!jogador) return falha(erroAoVivo("NAO_ENCONTRADO"));
