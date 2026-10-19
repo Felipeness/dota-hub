@@ -7,18 +7,23 @@ import type { Achado, Contexto, Regra } from "../../modelo";
 const FONTE_WARDS = "obs_log / sen_log do OpenDota (próprio jogador; wards de aliados não são visíveis aqui)";
 const FONTE_ROSHAN = "objectives[] do OpenDota (CHAT_MESSAGE_ROSHAN_KILL)";
 
-function semWardsContraRoshan(ctx: Contexto, totalWards: number): Achado | null {
-  if (totalWards > 0) return null;
+/**
+ * Conta como "sem aviso" só o Roshan do inimigo sem nenhuma ward própria colocada ANTES dele; uma ward colocada
+ * num ponto qualquer da partida, mesmo bem depois do Roshan, não é aviso daquela tentativa (sem obs_left_log não
+ * dá pra saber se ela ainda estava viva, mas pelo menos t <= roshan.t é exigido pra contar).
+ */
+function semWardsContraRoshan(ctx: Contexto, wards: readonly { t: number }[]): Achado | null {
   const roshansInimigos = ctx.detalhe.eventos.filter((e) => e.tipo === "roshan" && e.texto.includes("time inimigo"));
-  if (roshansInimigos.length === 0) return null;
-  const minutos = roshansInimigos.map((r) => tempoDaPartida(r.t)).join(", ");
+  const semAviso = roshansInimigos.filter((r) => !wards.some((w) => w.t <= r.t));
+  if (semAviso.length === 0) return null;
+  const minutos = semAviso.map((r) => tempoDaPartida(r.t)).join(", ");
   return {
     id: "sem-wards-contra-roshan",
     tipo: "erro",
     minuto: null,
-    titulo: `0 wards colocadas na partida toda; o time inimigo pegou Roshan ${roshansInimigos.length}x`,
-    oQueAconteceu: `Você não colocou nenhuma observer ou sentry a partida toda, e o time inimigo pegou o Roshan ` +
-      `${roshansInimigos.length} vez(es) (${minutos}) sem nenhuma ward sua perto da pit para avisar a tentativa.`,
+    titulo: `${wards.length} wards colocadas; o time inimigo pegou Roshan ${semAviso.length}x sem nenhuma antes`,
+    oQueAconteceu: `Você colocou ${wards.length} observer/sentry na partida toda, mas o time inimigo pegou o ` +
+      `Roshan ${semAviso.length} vez(es) (${minutos}) sem nenhuma ward sua colocada antes para avisar a tentativa.`,
     oQueFazer:
       "Mesmo como carry, comprar uma observer antes de farmar perto da pit do Roshan (rio, tri inimiga) custa 1 " +
       "slot e 100g e dá o único aviso antecipado de que o time inimigo está montando pro Roshan.",
@@ -27,7 +32,7 @@ function semWardsContraRoshan(ctx: Contexto, totalWards: number): Achado | null 
       "já está com o inimigo e a janela de reagir já passou.",
     fontes: [FONTE_WARDS, FONTE_ROSHAN],
     peso: "pesou",
-    evidencias: { numeros: { wardsColocadas: 0, roshansDoInimigo: roshansInimigos.length } },
+    evidencias: { numeros: { wardsColocadas: wards.length, roshansDoInimigo: roshansInimigos.length, roshansSemAviso: semAviso.length } },
   };
 }
 
@@ -54,10 +59,8 @@ function listaDeWards(ctx: Contexto): Achado | null {
 }
 
 function wardsColocadas(ctx: Contexto): Achado[] {
-  const observers = ctx.detalhe.eventos.filter((e) => e.tipo === "observer").length;
-  const sentries = ctx.detalhe.eventos.filter((e) => e.tipo === "sentry").length;
-  const total = observers + sentries;
-  const achados = [semWardsContraRoshan(ctx, total), listaDeWards(ctx)];
+  const wards = ctx.detalhe.eventos.filter((e) => e.tipo === "observer" || e.tipo === "sentry");
+  const achados = [semWardsContraRoshan(ctx, wards), listaDeWards(ctx)];
   return achados.filter((a): a is Achado => a !== null);
 }
 
