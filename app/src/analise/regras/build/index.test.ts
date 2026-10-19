@@ -58,6 +58,29 @@ describe("itemCoreAtrasado", () => {
     expect(ids).not.toContain("build-core-ausente-lesser_crit");
   });
 
+  it("Daedalus sai em só 27% das partidas pro: diz a porcentagem real, não 'na maioria', e pesa menos", () => {
+    const ausente = achados().find((a) => a.id === "build-core-ausente-greater_crit");
+    expect(ausente?.porque).toContain("em 27% das partidas (137 de 503)");
+    expect(ausente?.porque).not.toContain("maioria");
+    expect(ausente?.peso).toBe("pesou");
+    expect(ausente?.oQueAconteceu).toMatch(/\d+:\d{2} min/);
+  });
+
+  it("item core em mais da metade das partidas pro continua 'na maioria' e pesa muito", () => {
+    const semButterfly = { ...contextoDaAmostra() };
+    const ctx = { ...semButterfly, detalhe: { ...semButterfly.detalhe, compras: semButterfly.detalhe.compras.filter((c) => c.chave !== "butterfly") } };
+    const ausente = REGRAS.flatMap((regra) => regra.avaliar(ctx)).find((a) => a.id === "build-core-ausente-butterfly");
+    expect(ausente?.porque).toContain("na maioria das partidas (376 de 503)");
+    expect(ausente?.peso).toBe("pesou_muito");
+  });
+
+  it("só diz 'no tempo certo (ou antes)' quando saiu antes da mediana; depois dela, dentro da margem, diz isso", () => {
+    const porId = new Map(achados().map((a) => [a.id, a]));
+    expect(porId.get("build-core-no-tempo-aghanims_shard")?.titulo).toContain("no tempo certo (ou antes)");
+    // Yasha aos 12,6 min contra mediana de 11: depois, mas dentro da margem de 3 min.
+    expect(porId.get("build-core-no-tempo-yasha")?.titulo).toBe("Yasha saiu depois da mediana do pro, mas dentro da margem aceitável");
+  });
+
   it("não acusa Yasha, Manta e Aghanim's Shard: dentro da margem ou adiantados", () => {
     const ids = achados().map((a) => a.id);
     expect(ids).not.toContain("build-core-atrasado-yasha");
