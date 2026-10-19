@@ -227,9 +227,16 @@ export function montarDetalhe({ partida, conta, constantes, benchmarks, frescor 
 const constante = <T>(consultar: Consultar, caminho: string, schema: z.ZodType<T>) =>
   consultar({ caminho, schema, validadeS: VALIDADE_S.constantes });
 
-export async function detalheDaPartida(consultar: Consultar, partidaId: string, conta: number): Promise<RespostaAoVivo<DetalheDaPartida>> {
+/**
+ * `ignorarCache` força uma rede nova em vez do guardado de 7 dias (sufixo de query, o OpenDota ignora chaves que
+ * não conhece); usado pelo polling de `analise/carregar.ts` enquanto a partida ainda não foi analisada.
+ */
+export async function detalheDaPartida(
+  consultar: Consultar, partidaId: string, conta: number, ignorarCache?: string,
+): Promise<RespostaAoVivo<DetalheDaPartida>> {
   if (lerId(partidaId, DIGITOS_DA_PARTIDA) === null) return falha(erroAoVivo("ENTRADA_INVALIDA"));
-  const partida = await consultar({ caminho: `/matches/${partidaId}`, schema: partidaFonte, validadeS: VALIDADE_S.partida });
+  const caminhoDaPartida = ignorarCache ? `/matches/${partidaId}?_t=${ignorarCache}` : `/matches/${partidaId}`;
+  const partida = await consultar({ caminho: caminhoDaPartida, schema: partidaFonte, validadeS: VALIDADE_S.partida });
   if (!partida.ok) return partida;
   const jogador = partida.dados.valor.players.find((p) => p.account_id === conta);
   if (!jogador) return falha(erroAoVivo("NAO_ENCONTRADO"));
