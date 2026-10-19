@@ -23,7 +23,7 @@ function achadoFaltou(grupo: GrupoDeContra): Achado {
     id: `build-situacional-faltou-${grupo.assinatura}`,
     tipo: "erro",
     minuto: null,
-    titulo: `Faltou item contra ${explicacao.motivo?.replace("Provável motivo: ", "") ?? "o draft inimigo"}`,
+    titulo: `Faltou item contra ${explicacao.motivo?.replace("Provável motivo: o time inimigo tem ", "") ?? "o draft inimigo"}`,
     oQueAconteceu: `O draft inimigo pede resposta e nenhum item da build cobriu isso até o fim da partida.`,
     oQueFazer: `Montar ${sugestoes(chaves)}.`,
     porque: `${explicacao.motivo ?? ""} Sem um item que cubra isso, essa mecânica decide a luta sozinha.`,
