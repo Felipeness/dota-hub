@@ -1,0 +1,47 @@
+/* Página de análise pós-jogo. Segue os tokens de live/partida/partida.css (espaçamento, cor, tipografia). */
+.analise-pagina { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-5); min-width: 0; }
+.analise-explicacao { margin: 0; max-width: 70ch; color: var(--cor-texto-2); line-height: 1.5; }
+.analise-formulario { display: flex; flex-wrap: wrap; gap: var(--espaco-3); align-items: end; }
+.analise-formulario label { display: grid; gap: 4px; font-size: 13px; color: var(--cor-texto-3); min-width: 0; flex: 1 1 160px; }
+.analise-formulario input { width: 100%; }
+
+.analise { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-4); min-width: 0; }
+.analise-resumo { margin: 0; font-size: 18px; line-height: 1.5; color: var(--cor-texto-leitura); }
+.analise-treinos { border-left: 3px solid var(--cor-destaque); padding: var(--espaco-3) var(--espaco-4); background: var(--cor-destaque-fundo); border-radius: 0 var(--raio) var(--raio) 0; }
+.analise-treinos-titulo { margin: 0 0 4px; font-weight: 700; }
+.analise-treinos ol { margin: 0; padding-left: 20px; }
+
+.placar-por-area { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: var(--espaco-3); }
+.placar-area { border: 1px solid var(--cor-linha); border-radius: var(--raio); padding: var(--espaco-3); min-width: 0; }
+.placar-area-nome { margin: 0; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--cor-texto-3); }
+.placar-area-valor { margin: 2px 0; font-family: var(--fonte-num); font-size: 24px; }
+.placar-area-valor span { font-size: 12px; color: var(--cor-texto-3); }
+.placar-area-selo { margin: 0; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+.placar-area-ponto_forte .placar-area-selo { color: var(--cor-radiant); }
+.placar-area-abaixo_do_pro .placar-area-selo { color: var(--cor-dire); }
+.placar-area-sem_benchmark .placar-area-selo, .placar-area-dentro_da_faixa .placar-area-selo { color: var(--cor-texto-3); }
+.placar-area-comparacao { margin: var(--espaco-2) 0 0; font-size: 12px; color: var(--cor-texto-3); line-height: 1.4; }
+
+.analise-mapa { min-width: 0; }
+
+.analise-filtro { display: flex; gap: var(--espaco-2); }
+.analise-filtro button { border-radius: var(--raio-pilula); font-size: 13px; padding: 4px var(--espaco-4); }
+
+.analise-lista { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-3); }
+.achado { border: 1px solid var(--cor-linha); border-radius: var(--raio); padding: var(--espaco-4); min-width: 0; }
+.achado-erro { border-left: 3px solid var(--cor-dire); }
+.achado-acerto { border-left: 3px solid var(--cor-radiant); }
+.achado-cabeca { display: flex; gap: var(--espaco-3); align-items: center; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
+.achado-tipo { color: var(--cor-texto-3); }
+.achado-minuto { font-family: var(--fonte-num); }
+.achado-peso { font-weight: 700; }
+.achado-peso-pesou_muito { color: var(--cor-dire); }
+.achado-titulo { margin: var(--espaco-2) 0; font-family: var(--fonte-display); font-size: 18px; color: var(--cor-texto); }
+.achado-linha { margin: 4px 0; line-height: 1.5; }
+.achado-numeros { display: flex; flex-wrap: wrap; gap: var(--espaco-3); margin: var(--espaco-2) 0; font-family: var(--fonte-num); font-size: 12px; }
+.achado-numeros div { display: flex; gap: 4px; }
+.achado-numeros dt { color: var(--cor-texto-3); }
+.achado-fontes { margin: var(--espaco-2) 0 0; font-size: 11px; color: var(--cor-texto-3); }
+
+.analise-nao-vemos summary { cursor: pointer; color: var(--cor-texto-3); }
+.analise-nao-vemos ul { color: var(--cor-texto-3); font-size: 13px; line-height: 1.6; }

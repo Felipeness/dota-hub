@@ -28,6 +28,7 @@ const router = createBrowserRouter([
       { path: "/jogadores/times/:id", hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./players/TeamPage")).TeamPage }) },
       { path: "/times", hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./times/TimesPage")).TimesPage }) },
       { path: "/draft", hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./draft/DraftPage")).DraftPage }) },
+      { path: "/analise/:matchId?", hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./analise/AnalisePage")).AnalisePage }) },
       { path: "/times/:id", hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./times/TimeAtlasPage")).TimeAtlasPage }) },
       {
         path: "/ao-vivo",
