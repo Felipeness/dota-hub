@@ -180,6 +180,14 @@ def spikes(pro: dict, core: frozenset[str]) -> list[dict]:
                   key=lambda s: s["minuto"])
 
 
+def _lh10(resumo: dict) -> float | None:
+    """Mediana de last hits aos 10 min nas partidas pro; o pro_dados grava como texto ("65")."""
+    try:
+        return float(resumo["lh10"])
+    except (KeyError, TypeError, ValueError):
+        return None
+
+
 def confronto(interno: str, texto: str, pro: dict, core: frozenset[str]) -> dict:
     heroi = _herois().get(interno)
     if heroi is None:
@@ -193,7 +201,7 @@ def confronto(interno: str, texto: str, pro: dict, core: frozenset[str]) -> dict
         raise ValueError(f"oponente repetido: {', '.join(sorted(repetidos))}")
     return {"id": id_no_app(heroi["localized_name"]), "nome": heroi["localized_name"], "nome_interno": interno,
             "hero_id": heroi["id"], "patch": meta["patch"], "jogos_pro": pro["resumo"]["n"],
-            "spikes": spikes(pro, core), "confrontos": blocos}
+            "lh10": _lh10(pro["resumo"]), "spikes": spikes(pro, core), "confrontos": blocos}
 
 
 def itens_core(guias: list[dict], fichas: list[dict]) -> dict[int, frozenset[str]]:

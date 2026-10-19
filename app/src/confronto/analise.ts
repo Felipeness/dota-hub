@@ -28,6 +28,8 @@ export const analiseSchema = z.object({
   hero_id: z.number(),
   patch: z.string(),
   jogos_pro: z.number().int().positive(),
+  /** Mediana de last hits aos 10 min nas partidas pro do herói; null quando o pro_dados não tem. */
+  lh10: z.number().nonnegative().nullable().default(null),
   spikes: z.array(spikeSchema),
   confrontos: z.array(blocoSchema).min(1),
 });

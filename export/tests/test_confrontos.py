@@ -39,7 +39,7 @@ Os oponentes com mais jogos de pro.
 - como jogar: fique longe dele.
 """
 
-PRO = {"hero_id": 10, "resumo": {"n": 100},
+PRO = {"hero_id": 10, "resumo": {"n": 100, "lh10": "58"},
        "confrontos": [{"hero_id": 11, "games_played": 149, "wins": 67}, {"hero_id": 86, "games_played": 80, "wins": 40}],
        "itens": [{"item": "manta", "n": 80, "minuto_mediano": "18.4", "minuto_p25": "16.0"},
                  {"item": "power_treads", "n": 95, "minuto_mediano": "6.0", "minuto_p25": "5.0"},
@@ -83,6 +83,12 @@ def test_fontes_viram_nome_legivel_sem_caminho_e_sem_repetir():
 ])
 def test_texto_troca_arquivo_citado_por_nome_curto(bruto, legivel):
     assert confrontos.texto_legivel(bruto) == legivel
+
+
+def test_le_a_mediana_de_last_hits_aos_10_min_do_pro():
+    assert _gerar()["lh10"] == 58.0
+    sem_lh10 = {**PRO, "resumo": {"n": 100}}
+    assert confrontos.confronto("morphling", TEXTO, sem_lh10, frozenset())["lh10"] is None
 
 
 def test_power_spike_tem_so_item_fechado_relevante_em_ordem_de_minuto():

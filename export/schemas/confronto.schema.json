@@ -20,7 +20,7 @@
   },
   "type": "object",
   "additionalProperties": false,
-  "required": ["id", "nome", "nome_interno", "hero_id", "patch", "jogos_pro", "spikes", "confrontos"],
+  "required": ["id", "nome", "nome_interno", "hero_id", "patch", "jogos_pro", "lh10", "spikes", "confrontos"],
   "properties": {
     "id": {"$ref": "#/$defs/slug"},
     "nome": {"$ref": "#/$defs/texto"},
@@ -28,6 +28,7 @@
     "hero_id": {"type": "integer"},
     "patch": {"type": "string"},
     "jogos_pro": {"type": "integer", "minimum": 1},
+    "lh10": {"type": ["number", "null"], "minimum": 0},
     "spikes": {"type": "array", "items": {"$ref": "#/$defs/spike"}},
     "confrontos": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/bloco"}}
   }
