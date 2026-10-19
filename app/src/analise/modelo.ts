@@ -52,7 +52,6 @@ export const PESO_EM_NUMERO: Readonly<Record<Peso, number>> = { pesou_muito: 3, 
 
 /** Lista fixa do que os dados do OpenDota não deixam a análise concluir; sempre visível, nunca inferida como achado. */
 export const O_QUE_NAO_VEMOS: readonly string[] = [
-  "Perda de torre (o OpenDota só marca objetivo de Roshan, não de torre).",
   "Qual habilidade específica causou cada morte (só o herói matador, não a skill).",
   "Morte fora de uma janela de teamfight não tem posição no mapa (deaths_pos vazio nesse caso).",
   "Vantagem numérica real na luta (5v4, 5v3): o OpenDota não lista quem estava vivo e presente.",

@@ -26,7 +26,8 @@ export const partidaFonte = z.object({
   match_id: z.number(),
   duration: z.number(),
   radiant_win: z.boolean().nullable().optional().transform((v) => v ?? null),
-  objectives: lista(z.object({ time: z.number(), type: z.string(), team: z.number().optional() })),
+  // key só existe em building_kill (npc_dota_goodguys_tower1_top etc); diz de qual time era a construção perdida.
+  objectives: lista(z.object({ time: z.number(), type: z.string(), team: z.number().optional(), key: z.string().optional() })),
   teamfights: lista(z.object({
     start: z.number(), end: z.number(),
     players: z.array(z.object({ deaths_pos: lanePos.nullable().optional() })),

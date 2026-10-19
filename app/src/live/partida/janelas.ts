@@ -21,7 +21,7 @@ const RAIO_DO_EVENTO = 0.013;
 const RAIO_DO_CAMP = 0.012;
 
 const COR_DO_EVENTO: Record<TipoDeEvento, CorDesenho> = {
-  abate: "radiant", morte: "dire", item: "texto", roshan: "neutro", observer: "destaque", sentry: "info",
+  abate: "radiant", morte: "dire", item: "texto", roshan: "neutro", torre: "neutro", observer: "destaque", sentry: "info",
   runa: "info", buyback: "dire", smoke: "neutro", camp: "texto",
 };
 const FORMA_DO_EVENTO: Partial<Record<TipoDeEvento, FormaPino>> = { observer: "losango", sentry: "losango", camp: "quadrado" };
