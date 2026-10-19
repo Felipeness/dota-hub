@@ -58,7 +58,8 @@ function achado(c: Candidato): Achado {
     id: `build-ouro-no-bolso-${c.morteT}`,
     tipo: "erro",
     minuto: minutoMorte,
-    titulo: `Morreu já com ouro pra boa parte do ${c.nome}, ${tempoDaPartida(c.morteT)}`,
+    // "pelo menos": o ganho entre a compra anterior e a morte é piso do ouro na mão (não conta sobra de antes).
+    titulo: `Já tinha pelo menos ${Math.round(Math.min(c.razao, 1) * 100)}% do custo do ${c.nome} quando morreu`,
     oQueAconteceu:
       `Entre a compra anterior e essa morte (${tempoDaPartida(c.morteT)}), ganhou pelo menos ${c.ganho} de ouro; ` +
       `o ${c.nome} (custo ${c.custo}) saiu só ${minutos(minutoCompra - minutoMorte)} min depois, em ${tempoDaPartida(c.compraT)}.`,

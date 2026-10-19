@@ -121,6 +121,7 @@ describe("itemGrandeComOuroNoBolso", () => {
     const erro = achados().find((a) => a.id.startsWith("build-ouro-no-bolso-") && a.minuto !== null && Math.abs(a.minuto - 2770 / 60) < 0.01);
     expect(erro?.peso).toBe("pesou_muito");
     expect(erro?.evidencias.numeros?.ganho).toBe(7539);
+    expect(erro?.titulo).toBe("Já tinha pelo menos 100% do custo do Diffusal Blade quando morreu");
   });
 
   it("não acusa a compra do Skadi (1130): ganho de ouro no período foi zero", () => {
