@@ -66,3 +66,12 @@ it("não acusa quando a torre cai fora da janela de 90 s depois da última morte
   };
   expect(REGRAS.flatMap((regra) => regra.avaliar(torreTardia))).toEqual([]);
 });
+
+it("não afirma que a lane ficou sem defesa: diz que é correlação no tempo, sem dado de posição", () => {
+  const achados = REGRAS.flatMap((regra) => regra.avaliar(contextoDaAmostra()));
+  expect(achados.length).toBeGreaterThan(0);
+  for (const achado of achados) {
+    expect(achado.oQueAconteceu).not.toContain("sem ninguém pra defender");
+    expect(achado.oQueAconteceu).toContain("correlação no tempo");
+  }
+});

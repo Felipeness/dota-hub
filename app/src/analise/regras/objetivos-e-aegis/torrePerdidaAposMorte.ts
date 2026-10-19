@@ -4,7 +4,7 @@ import type { Achado, Contexto, Regra } from "../../modelo";
 
 /**
  * Janela de correlação entre morte e queda de torre: sem número documentado em fonte externa, é o critério
- * próprio desta regra para "a torre caiu porque a lane ficou sem defesa", não uma mecânica do jogo.
+ * próprio desta regra para associar a queda à morte (correlação no tempo, sem posição dos heróis), não uma mecânica do jogo.
  */
 const JANELA_DE_TORRE_S = 90; // 1,5 min: janela curta de propósito, pra não confundir "time perdendo" com "essa torre caiu por essa morte"
 const FONTE_TORRE = "objectives[] do OpenDota (building_kill), cruzado com deaths_log do jogador";
@@ -35,14 +35,15 @@ function torrePerdidaAposMorte(ctx: Contexto): Achado[] {
         ? `${torresDepois.length} torres caíram nos 90 s depois de uma morte, ${tempoDaPartida(morte.t)}`
         : `Torre caiu ${tempoDaPartida(torresDepois[0].t - morte.t)} depois de uma morte, ${tempoDaPartida(morte.t)}`,
       oQueAconteceu:
-        `${morte.texto} em ${tempoDaPartida(morte.t)} e ${plural ? "as torres caíram" : "a torre caiu"} em ${horarios}, ` +
-        `sem ninguém pra defender a lane nesses segundos.`,
+        `${morte.texto} em ${tempoDaPartida(morte.t)} e ${plural ? "as torres caíram" : "a torre caiu"} em ${horarios}. ` +
+        "É correlação no tempo: sem posição dos heróis na fonte, não dá pra afirmar que a lane ficou sem defesa " +
+        "nem que a queda foi por causa dessa morte.",
       oQueFazer:
         "Depois de morrer, voltar pra lane rápido ou pedir rotação de outro herói pra cobrir a torre: uma morte isolada " +
         "não devia custar a estrutura inteira.",
       porque:
-        "Torre sem defensor cai rápido pra creeps ou pra um herói inimigo parado nela; o tempo morto do respawn é " +
-        "justamente a janela em que isso acontece.",
+        "Quando é a morte que abre o espaço, a torre sem defensor cai rápido pra creeps ou pra um herói inimigo " +
+        "parado nela; o tempo morto do respawn é justamente a janela em que isso acontece.",
       fontes: [FONTE_TORRE],
       peso: torresDepois.length >= 2 ? "pesou_muito" : "pesou",
       evidencias: { numeros: { minutoDaMorte, torresPerdidas: torresDepois.length } },
