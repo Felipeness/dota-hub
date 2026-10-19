@@ -5,6 +5,7 @@
 import { readFileSync } from "node:fs";
 import { montarDetalhe } from "../../../live/partida/detalhe";
 import { partidaFonte } from "../../../live/fonte/schemas";
+import type { Analise } from "../../../confronto/analise";
 import type { Contexto } from "../../modelo";
 import type { HeroiDaPosicao } from "../../pro";
 
@@ -36,12 +37,18 @@ export const PRO_DO_HEROI_DA_AMOSTRA: HeroiDaPosicao = {
   },
 };
 
+/** Recorte de app/public/data/confrontos/medusa.json (content/pro_dados/medusa.json: resumo.n=503, resumo.lh10=65). */
+export const PRO_DA_AMOSTRA: Analise = {
+  id: "medusa", nome: "Medusa", nome_interno: "medusa", hero_id: 94, patch: "7.41", jogos_pro: 503, lh10: 65,
+  spikes: [], confrontos: [],
+};
+
 export function contextoDaAmostra(): Contexto {
   const partida = partidaFonte.parse(PARTIDA);
   const resposta = montarDetalhe({ partida, conta: 329255797, constantes: CONSTANTES, benchmarks: null, frescor: { buscadoEm: 0, vencido: false } });
   if (!resposta.ok) throw new Error(resposta.erro.codigo);
   return {
     detalhe: { ...resposta.dados, referencia: { ouroPorMin: 611, lhPorMin: 9.622641509433961 } },
-    pro: null, proDoHeroi: PRO_DO_HEROI_DA_AMOSTRA, meuHeroi: resposta.dados.heroi, inimigos: resposta.dados.inimigos,
+    pro: PRO_DA_AMOSTRA, proDoHeroi: PRO_DO_HEROI_DA_AMOSTRA, meuHeroi: resposta.dados.heroi, inimigos: resposta.dados.inimigos,
   };
 }
