@@ -2,7 +2,7 @@
 // (mesmas tags + mínimo) pra avaliar uma vez por grupo, não uma vez por item irmão (manta/lotus_orb/sphere
 // são 3 respostas pro mesmo "controle duplo", por exemplo). Reusa porQueItem.ts e tagsDosHerois.ts (já existem
 // em live/partida/), não duplica a lista de itens nem a de tags.
-import { explicarItem, ITENS_CURADOS, type Explicacao } from "../../../live/partida/porQueItem";
+import { explicarItem, ITENS_CURADOS, type Clausula, type Explicacao } from "../../../live/partida/porQueItem";
 
 export type InimigoParaRegra = Readonly<{ chave: string; nome: string }>;
 export type GrupoDeContra = Readonly<{ assinatura: string; chaves: readonly string[]; explicacao: Explicacao }>;
@@ -49,6 +49,42 @@ export function agruparPorMotivo(grupos: readonly GrupoDeContra[]): readonly Gru
     }
   }
   return [...porMotivo.values()];
+}
+
+const mesmaClausula = (a: Clausula, b: Clausula) => a.tag === b.tag && a.herois.join("|") === b.herois.join("|");
+
+/** Todo o risco que `grupo` cobre neste draft (cada tag, com os mesmos heróis) também é coberto por `outro`. */
+export function riscoContidoEm(grupo: GrupoDeContra, outro: GrupoDeContra): boolean {
+  const deOutro = outro.explicacao.clausulas;
+  return grupo.explicacao.clausulas.length > 0 &&
+    grupo.explicacao.clausulas.every((c) => deOutro.some((d) => mesmaClausula(c, d)));
+}
+
+const contidoEstritamente = (menor: GrupoDeContra, maior: GrupoDeContra) =>
+  menor.explicacao.clausulas.length < maior.explicacao.clausulas.length && riscoContidoEm(menor, maior);
+
+/** Superconjunto com mais cláusulas que contém o grupo; null quando nenhum outro grupo o contém. */
+function destinoDaFusao(grupo: GrupoDeContra, grupos: readonly GrupoDeContra[]): GrupoDeContra | null {
+  return grupos
+    .filter((outro) => contidoEstritamente(grupo, outro))
+    .reduce<GrupoDeContra | null>((maior, outro) =>
+      (maior && maior.explicacao.clausulas.length >= outro.explicacao.clausulas.length ? maior : outro), null);
+}
+
+/**
+ * Funde o grupo cujo risco é subconjunto do risco de outro grupo neste draft (ex. Pipe = dano mágico de AA e
+ * Necrophos, contido no Black King Bar = controle + o mesmo dano mágico): vira um achado só, com a explicação do
+ * maior e os itens dos dois. Sem isso o mesmo risco gera dois "faltou item", ou um acerto e um erro contraditórios.
+ * Cláusula disjunta (ex. fuga) não está contida em nenhum outro e continua sendo grupo próprio.
+ */
+export function fundirSubconjuntos(grupos: readonly GrupoDeContra[]): readonly GrupoDeContra[] {
+  const destinos = new Map(grupos.map((g) => [g, destinoDaFusao(g, grupos)]));
+  return grupos
+    .filter((g) => destinos.get(g) === null)
+    .map((g) => {
+      const absorvidos = grupos.filter((outro) => destinos.get(outro) === g).flatMap((outro) => outro.chaves);
+      return { ...g, chaves: [...new Set([...g.chaves, ...absorvidos])] };
+    });
 }
 
 export const nomeDoItem = (chave: string): string =>

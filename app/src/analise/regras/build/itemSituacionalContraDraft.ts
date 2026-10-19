@@ -1,7 +1,10 @@
 // Família build: itens situacionais que o draft inimigo pedia (motor de porQueItem.ts/tagsDosHerois.ts, agrupado
 // por contraDraft.ts). Acerto quando comprou algo do grupo justificado; erro quando o draft pedia e faltou.
 import type { Achado, Contexto } from "../../modelo";
-import { agruparPorMotivo, gruposDeContra, gruposJustificados, nomeDoItem, type InimigoParaRegra } from "./contraDraft";
+import {
+  agruparPorMotivo, fundirSubconjuntos, gruposDeContra, gruposJustificados, nomeDoItem, riscoContidoEm,
+  type GrupoDeContra, type InimigoParaRegra,
+} from "./contraDraft";
 import { ITENS_CURADOS } from "../../../live/partida/porQueItem";
 import { FONTES_DAS_TAGS } from "../../../live/partida/tagsDosHerois";
 
@@ -14,7 +17,7 @@ function sugestoes(chaves: readonly string[]): string {
     .join(" ou ");
 }
 
-function achadoFaltou(grupo: ReturnType<typeof gruposJustificados>[number]): Achado {
+function achadoFaltou(grupo: GrupoDeContra): Achado {
   const { chaves, explicacao } = grupo;
   return {
     id: `build-situacional-faltou-${grupo.assinatura}`,
@@ -30,7 +33,7 @@ function achadoFaltou(grupo: ReturnType<typeof gruposJustificados>[number]): Ach
   };
 }
 
-function achadoAcerto(grupo: ReturnType<typeof gruposJustificados>[number], chaveComprada: string): Achado {
+function achadoAcerto(grupo: GrupoDeContra, chaveComprada: string): Achado {
   const { explicacao } = grupo;
   return {
     id: `build-situacional-acerto-${grupo.assinatura}`,
@@ -50,8 +53,17 @@ export function itemSituacionalContraDraft(ctx: Contexto): Achado[] {
   const inimigos: InimigoParaRegra[] = ctx.inimigos.map((i) => ({ chave: i.chave, nome: i.nome }));
   const grupos = agruparPorMotivo(gruposJustificados(gruposDeContra(inimigos)));
   const chavesCompradas = new Set(ctx.detalhe.compras.map((c) => c.chave));
-  return grupos.map((grupo): Achado => {
-    const compradoDoGrupo = grupo.chaves.find((chave) => chavesCompradas.has(chave));
-    return compradoDoGrupo ? achadoAcerto(grupo, compradoDoGrupo) : achadoFaltou(grupo);
-  });
+  const compradoDo = (grupo: GrupoDeContra) => grupo.chaves.find((chave) => chavesCompradas.has(chave));
+  const respondidos = fundirSubconjuntos(grupos.filter((g) => compradoDo(g) !== undefined));
+  // Risco que um item comprado já cobre inteiro não vira "faltou" ao lado do acerto (ex. comprou BKB, não vira erro
+  // por faltar Pipe contra o mesmo dano mágico).
+  const faltando = fundirSubconjuntos(grupos.filter((g) =>
+    compradoDo(g) === undefined && !respondidos.some((r) => riscoContidoEm(g, r))));
+  return [
+    ...respondidos.flatMap((g) => {
+      const comprado = compradoDo(g);
+      return comprado === undefined ? [] : [achadoAcerto(g, comprado)];
+    }),
+    ...faltando.map(achadoFaltou),
+  ];
 }

@@ -90,15 +90,23 @@ describe("itemCoreAtrasado", () => {
 });
 
 describe("itemSituacionalContraDraft", () => {
-  it("acusa a falta de resposta a dano mágico (Ancient Apparition + Necrophos, 2 heróis mágicos)", () => {
-    const erro = achados().find((a) => a.tipo === "erro" && a.id.startsWith("build-situacional-faltou-2:magico"));
-    expect(erro).toBeDefined();
-    expect(erro?.oQueFazer).toMatch(/Pipe|Glimmer Cape|Eternal Shroud|Hood Of Defiance|Mage Slayer/);
+  it("acusa uma vez só a falta de resposta a controle e dano mágico: Pipe (dano mágico de AA e Necrophos) está contido no BKB", () => {
+    const faltou = achados().filter((a) => a.id.startsWith("build-situacional-faltou-"));
+    expect(faltou.map((a) => a.id)).toEqual(["build-situacional-faltou-2:controle,magico"]);
+    expect(faltou[0]?.titulo).toContain("dano mágico");
+    expect(faltou[0]?.oQueFazer).toContain("Black King Bar");
+    expect(faltou[0]?.oQueFazer).toMatch(/Pipe|Glimmer Cape|Eternal Shroud|Hood Of Defiance|Mage Slayer/);
   });
 
-  it("também acusa a falta de BKB: a mesma regra conta 2 heróis mágicos (AA e Necrophos), não precisa de 2 de controle", () => {
-    const erro = achados().find((a) => a.id === "build-situacional-faltou-2:controle,magico");
-    expect(erro?.oQueFazer).toContain("Black King Bar");
+  it("não acusa falta de resposta a um risco que o item comprado já cobre inteiro", () => {
+    const ctx = contextoDaAmostra();
+    const comBkb: Contexto = {
+      ...ctx,
+      detalhe: { ...ctx.detalhe, compras: [...ctx.detalhe.compras, { t: 1_500, chave: "black_king_bar", nome: "Black King Bar", custo: 4_050, grande: true }] },
+    };
+    const situacionais = REGRAS.flatMap((r) => r.avaliar(comBkb)).filter((a) => a.id.startsWith("build-situacional-"));
+    expect(situacionais.filter((a) => a.tipo === "erro")).toEqual([]);
+    expect(situacionais.some((a) => a.titulo.startsWith("Black King Bar"))).toBe(true);
   });
 });
 

@@ -21,9 +21,15 @@ it("BKB pede pelo menos 2 heróis de controle: um só não vira motivo", () => {
   expect(explicarItem("black_king_bar", [heroi("lion", "Lion"), heroi("sniper")])?.motivo).toBeNull();
 });
 
+it("devolve só as cláusulas que bateram o mínimo, com os heróis de cada uma", () => {
+  const inimigos = [heroi("lion", "Lion"), heroi("shadow_shaman", "Shadow Shaman"), heroi("sniper", "Sniper")];
+  const explicacao = explicarItem("black_king_bar", inimigos);
+  expect(explicacao?.clausulas).toEqual([{ tag: "controle", herois: ["Lion", "Shadow Shaman"] }]);
+});
+
 it("item sem regra que case mostra só a função", () => {
   expect(explicarItem("monkey_king_bar", [heroi("axe"), heroi("lion")]))
-    .toEqual({ funcao: ITENS_CURADOS.monkey_king_bar?.funcao, motivo: null, semDadoDe: [] });
+    .toEqual({ funcao: ITENS_CURADOS.monkey_king_bar?.funcao, motivo: null, clausulas: [], semDadoDe: [] });
   expect(explicarItem("blink", [heroi("riki")])).toMatchObject({ motivo: null, semDadoDe: [] });
 });
 

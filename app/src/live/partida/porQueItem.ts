@@ -103,18 +103,26 @@ export const ITENS_CURADOS: Readonly<Record<string, ItemCurado>> = {
 };
 
 export type InimigoParaRegra = Readonly<{ chave: string; nome: string }>;
-/** `semDadoDe` só vem preenchido quando `motivo` é null por falta de dado (herói sem tag), não por não casar a regra. */
-export type Explicacao = Readonly<{ funcao: string; motivo: string | null; semDadoDe: readonly string[] }>;
+/** Uma tag do item que bateu o mínimo no draft inimigo, com os heróis que a têm (na ordem do draft). */
+export type Clausula = Readonly<{ tag: Tag; herois: readonly string[] }>;
+/**
+ * `semDadoDe` só vem preenchido quando `motivo` é null por falta de dado (herói sem tag), não por não casar a regra.
+ * `clausulas` são as partes do motivo que bateram (vazio quando `motivo` é null), pra comparar itens por risco coberto.
+ */
+export type Explicacao = Readonly<{ funcao: string; motivo: string | null; clausulas: readonly Clausula[]; semDadoDe: readonly string[] }>;
 
 const itemCurado = (chave: string): ItemCurado | undefined =>
   (Object.hasOwn(ITENS_CURADOS, chave) ? ITENS_CURADOS[chave] : undefined);
 
-function motivoContra(regra: Contra, inimigos: readonly InimigoParaRegra[]): string | null {
-  const porTag = regra.tags
+function clausulasQueBateram(regra: Contra, inimigos: readonly InimigoParaRegra[]): readonly Clausula[] {
+  return regra.tags
     .map((tag) => ({ tag, herois: inimigos.filter((i) => tagsDoHeroi(i.chave).includes(tag)).map((i) => i.nome) }))
     .filter(({ herois }) => herois.length >= regra.minimo);
-  if (porTag.length === 0) return null;
-  const partes = porTag.map(({ tag, herois }) => `${NOME_DA_TAG[tag]}: ${herois.join(", ")}`);
+}
+
+function motivoDasClausulas(clausulas: readonly Clausula[]): string | null {
+  if (clausulas.length === 0) return null;
+  const partes = clausulas.map(({ tag, herois }) => `${NOME_DA_TAG[tag]}: ${herois.join(", ")}`);
   return `Provável motivo: o time inimigo tem ${partes.join("; ")}.`;
 }
 
@@ -122,10 +130,11 @@ function motivoContra(regra: Contra, inimigos: readonly InimigoParaRegra[]): str
 export function explicarItem(chave: string, inimigos: readonly InimigoParaRegra[]): Explicacao | null {
   const item = itemCurado(chave);
   if (!item) return null;
-  if (!item.contra) return { funcao: item.funcao, motivo: null, semDadoDe: [] };
-  const motivo = motivoContra(item.contra, inimigos);
+  if (!item.contra) return { funcao: item.funcao, motivo: null, clausulas: [], semDadoDe: [] };
+  const clausulas = clausulasQueBateram(item.contra, inimigos);
+  const motivo = motivoDasClausulas(clausulas);
   const semDadoDe = motivo ? [] : inimigos.filter((i) => !heroiConferido(i.chave)).map((i) => i.nome);
-  return { funcao: item.funcao, motivo, semDadoDe };
+  return { funcao: item.funcao, motivo, clausulas, semDadoDe };
 }
 
 export const temExplicacao = (chave: string) => itemCurado(chave) !== undefined;
