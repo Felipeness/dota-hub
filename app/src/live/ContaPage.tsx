@@ -76,6 +76,7 @@ function ListaDePartidas({ partidas, conta }: { partidas: readonly PartidaDaCont
             {!p.analisada && <span className="conta-partida-parcial" title="dados ainda não totalmente processados pela fonte"> · dados parciais</span>}
             <SelosDeBenchmark comparacao={p.comparacao} />
           </Link>
+          {" · "}<Link to={`/analise/${p.id}?conta=${conta}`}>Analisar esta partida</Link>
         </li>
       ))}
     </ul>

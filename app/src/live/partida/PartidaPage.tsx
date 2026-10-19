@@ -60,7 +60,11 @@ function Partida({ detalhe, onAtualizar }: { detalhe: DetalheDaPartida; onAtuali
           Esta partida não foi analisada pelo OpenDota: só há placar, sem ouro por minuto, compras nem posições.
         </p>
       )}
-      <p><Link to={`/ao-vivo/contas/${detalhe.conta}`}>Voltar para a conta</Link></p>
+      <p>
+        <Link to={`/analise/${detalhe.partida}?conta=${detalhe.conta}`}>Analisar esta partida</Link>
+        {" · "}
+        <Link to={`/ao-vivo/contas/${detalhe.conta}`}>Voltar para a conta</Link>
+      </p>
     </article>
   );
 }
