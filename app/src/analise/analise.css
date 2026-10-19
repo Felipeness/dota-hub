@@ -1,9 +1,18 @@
 /* Página de análise pós-jogo. Segue os tokens de live/partida/partida.css (espaçamento, cor, tipografia). */
 .analise-pagina { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-5); min-width: 0; }
 .analise-explicacao { margin: 0; max-width: 70ch; color: var(--cor-texto-2); line-height: 1.5; }
-.analise-formulario { display: flex; flex-wrap: wrap; gap: var(--espaco-3); align-items: end; }
-.analise-formulario label { display: grid; gap: 4px; font-size: 13px; color: var(--cor-texto-3); min-width: 0; flex: 1 1 160px; }
-.analise-formulario input { width: 100%; }
+.analise-formulario {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; gap: var(--espaco-3); align-items: end;
+  max-width: 760px; padding: var(--espaco-4); border: 1px solid var(--cor-linha); border-radius: var(--raio); background: var(--cor-superficie);
+}
+.analise-formulario label { min-width: 0; }
+.analise-enviar {
+  min-height: var(--alvo-toque); padding: 0 var(--espaco-5); font-weight: 700;
+  background: var(--cor-destaque); border-color: var(--cor-destaque); color: var(--cor-fundo);
+}
+.analise-enviar:hover { filter: brightness(1.08); }
+.analise-aviso { margin: 0; color: var(--cor-destaque); }
+@media (max-width: 560px) { .analise-formulario { grid-template-columns: minmax(0, 1fr); } }
 
 .analise { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-4); min-width: 0; }
 .analise-resumo { margin: 0; font-size: 18px; line-height: 1.5; color: var(--cor-texto-leitura); }
