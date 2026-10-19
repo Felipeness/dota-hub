@@ -22,11 +22,11 @@ function mortesNoFarm(ctx: Contexto): Achado[] {
     tipo: "erro",
     minuto: mortes[0] ? mortes[0].t / 60 : null,
     titulo: `${mortes.length} mortes entre 8 e 20 minutos`,
-    oQueAconteceu: `Você morreu ${mortes.length} vezes na janela de 8 a 20 minutos (${minutos}), a fase onde um ` +
-      "carry ou meio deveria estar consolidando a vantagem de farm, não dando respawn de graça.",
+    oQueAconteceu: `Você morreu ${mortes.length} vezes na janela de 8 a 20 minutos (${minutos}), a fase em que ` +
+      "cada morte ainda custa caro: o seu respawn e o ouro que vira item pro time inimigo.",
     oQueFazer:
-      "Nessa janela, priorize ficar vivo sobre forçar uma troca: recue ao ver dois ou mais inimigos sumidos da " +
-      "lane deles, e só invada o território inimigo com visão colocada antes.",
+      "Nessa janela, priorize ficar vivo sobre forçar uma troca: recue ao ver dois ou mais inimigos sumidos do " +
+      "seu lado do mapa, e só se exponha com visão colocada antes.",
     porque:
       "Cada morte nesses minutos custa o dobro: o farm perdido respawnando e o farm que o inimigo ganha com o " +
       "ouro do seu abate, logo na fase em que a diferença de item ainda decide o meio-jogo.",

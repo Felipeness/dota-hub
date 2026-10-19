@@ -26,7 +26,7 @@ function achadoNoMinuto(ctx: Contexto, minuto: number): Achado[] {
   if (razao >= LIMIAR_ACERTO) {
     return [{
       id, tipo: "acerto", minuto,
-      titulo: `${lh} last hits aos ${minuto} min, acima da mediana do herói`,
+      titulo: `${lh} last hits aos ${minuto} min, acima da mediana pública do herói`,
       oQueAconteceu: `${ctx.meuHeroi.nome} tinha ${lh} last hits em ${tempo}, contra uma mediana pública de ` +
         `${numeros.esperado} (${referencia.lhPorMin.toFixed(1)}/min) para o herói.`,
       oQueFazer: "Manter essa rotina de farm: ela paga os itens core na janela certa, mesmo numa partida difícil.",
@@ -38,7 +38,7 @@ function achadoNoMinuto(ctx: Contexto, minuto: number): Achado[] {
   if (razao < LIMIAR_ERRO) {
     return [{
       id, tipo: "erro", minuto,
-      titulo: `${lh} last hits aos ${minuto} min, abaixo da mediana do herói (${numeros.esperado})`,
+      titulo: `${lh} last hits aos ${minuto} min, abaixo da mediana pública do herói (${numeros.esperado})`,
       oQueAconteceu: `${ctx.meuHeroi.nome} tinha ${lh} last hits em ${tempo}; a mediana pública do herói nesse ` +
         `tempo é ${numeros.esperado} (${referencia.lhPorMin.toFixed(1)}/min).`,
       oQueFazer: minuto <= 10

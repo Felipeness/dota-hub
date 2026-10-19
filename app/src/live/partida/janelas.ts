@@ -22,7 +22,7 @@ const RAIO_DO_CAMP = 0.012;
 
 const COR_DO_EVENTO: Record<TipoDeEvento, CorDesenho> = {
   abate: "radiant", morte: "dire", item: "texto", roshan: "neutro", torre: "neutro", observer: "destaque", sentry: "info",
-  runa: "info", buyback: "dire", smoke: "neutro", camp: "texto",
+  runa: "info", buyback: "dire", smoke: "neutro", camp: "texto", "aegis-consumida": "neutro",
 };
 const FORMA_DO_EVENTO: Partial<Record<TipoDeEvento, FormaPino>> = { observer: "losango", sentry: "losango", camp: "quadrado" };
 
@@ -37,9 +37,13 @@ export function estaNaJanela(janela: IdJanela, t: number): boolean {
 
 export const janelaDoTempo = (t: number): Janela => JANELAS.find((j) => t < j.ate) ?? JANELAS[JANELAS.length - 1];
 
-/** Numera na ordem do tempo; camps ficam fora da lista numerada (são dezenas) e aparecem só no mapa e na contagem. */
+/**
+ * Numera na ordem do tempo; camps ficam fora da lista numerada (são dezenas) e aparecem só no mapa e na contagem.
+ * "aegis-consumida" é sinal interno pras regras de análise (quando o portador morre com a Aegis antes de expirar),
+ * nunca um evento visível da partida: sem ponto no mapa e sem entrada própria no OpenDota, não entra na timeline.
+ */
 export function eventosDaJanela(eventos: readonly EventoDaPartida[], janela: IdJanela): EventoNumerado[] {
-  return eventos.filter((e) => e.tipo !== "camp" && estaNaJanela(janela, e.t))
+  return eventos.filter((e) => e.tipo !== "camp" && e.tipo !== "aegis-consumida" && estaNaJanela(janela, e.t))
     .sort((a, b) => a.t - b.t).map((e, i) => ({ ...e, n: i + 1 }));
 }
 

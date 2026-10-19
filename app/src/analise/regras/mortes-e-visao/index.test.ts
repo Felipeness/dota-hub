@@ -51,16 +51,48 @@ describe("mapaDeMortes", () => {
 });
 
 describe("mortesRepetidas", () => {
-  it("acusa as 3 mortes pro Ursa como erro (16:06, 31:38, 46:10)", () => {
-    const encontrado = achados().find((a) => a.id.toLowerCase() === "mortes-repetidas-morte para ursa");
-    expect(encontrado).toBeDefined();
-    expect(encontrado?.tipo).toBe("erro");
-    expect(encontrado?.evidencias.numeros?.vezes).toBe(3);
+  it("não acusa Ursa: das 3 mortes pra ela, só 1 é isolada (16:06); 31:38 e 46:10 são perda de teamfight, outro problema", () => {
+    const repetidas = achados().filter((a) => a.id.startsWith("mortes-repetidas-"));
+    expect(repetidas).toHaveLength(0);
   });
 
-  it("não acusa undying, doom bringer nem necrolyte: só 2 mortes cada, abaixo do limiar de 3", () => {
-    const repetidas = achados().filter((a) => a.id.startsWith("mortes-repetidas-"));
-    expect(repetidas).toHaveLength(1);
+  it("acusa 3+ mortes isoladas pro mesmo herói (caso sintético), ignorando as de teamfight do mesmo matador", () => {
+    const ctx = contextoDaAmostra();
+    const matador = "Morte para zeus";
+    const ctxComMortes: Contexto = {
+      ...ctx,
+      detalhe: {
+        ...ctx.detalhe,
+        eventos: [
+          ...ctx.detalhe.eventos,
+          { t: 100, tipo: "morte", texto: matador, ponto: null },
+          { t: 200, tipo: "morte", texto: matador, ponto: null },
+          { t: 300, tipo: "morte", texto: matador, ponto: null },
+          { t: 400, tipo: "morte", texto: matador, ponto: [0.1, 0.1] }, // teamfight: não deve contar
+        ],
+      },
+    };
+    const achado = REGRAS.flatMap((r) => r.avaliar(ctxComMortes)).find((a) => a.id === `mortes-repetidas-${matador}`);
+    expect(achado).toBeDefined();
+    expect(achado?.evidencias.numeros?.vezes).toBe(3);
+  });
+
+  it("não agrupa mortes sem herói (torre, creep ou neutro) como se fosse 'o mesmo herói'", () => {
+    const ctx = contextoDaAmostra();
+    const ctxComMortesSemHeroi: Contexto = {
+      ...ctx,
+      detalhe: {
+        ...ctx.detalhe,
+        eventos: [
+          ...ctx.detalhe.eventos,
+          { t: 100, tipo: "morte", texto: "Morte para creep ou neutro", ponto: null },
+          { t: 200, tipo: "morte", texto: "Morte para creep ou neutro", ponto: null },
+          { t: 300, tipo: "morte", texto: "Morte para creep ou neutro", ponto: null },
+        ],
+      },
+    };
+    const ids = REGRAS.flatMap((r) => r.avaliar(ctxComMortesSemHeroi)).map((a) => a.id);
+    expect(ids.some((id) => id.includes("creep ou neutro"))).toBe(false);
   });
 });
 
@@ -84,6 +116,44 @@ describe("wardsColocadas", () => {
   it("não gera o achado de listagem de wards quando não há nenhuma colocada", () => {
     const achado = achados().find((a) => a.id === "wards-colocadas");
     expect(achado).toBeUndefined();
+  });
+
+  it("ainda acusa os 3 Roshans quando a única ward foi colocada DEPOIS de todos eles: ward tardia não é aviso de nenhum", () => {
+    const ctx = contextoDaAmostra();
+    const roshans = ctx.detalhe.eventos.filter((e) => e.tipo === "roshan");
+    const depoisDoUltimo = Math.max(...roshans.map((r) => r.t)) + 60;
+    const ctxComWardTardia: Contexto = {
+      ...ctx,
+      detalhe: {
+        ...ctx.detalhe,
+        eventos: [
+          ...ctx.detalhe.eventos,
+          { t: depoisDoUltimo, tipo: "observer", texto: "Observer colocada", ponto: [0.5, 0.5] },
+        ],
+      },
+    };
+    const achado = REGRAS.flatMap((r) => r.avaliar(ctxComWardTardia)).find((a) => a.id === "sem-wards-contra-roshan");
+    expect(achado).toBeDefined();
+    expect(achado?.evidencias.numeros?.roshansSemAviso).toBe(3); // antes do fix, a mera existência dessa ward suprimia o achado inteiro
+  });
+
+  it("não conta como 'sem aviso' o Roshan que teve ward colocada antes dele, só os que não tiveram", () => {
+    const ctx = contextoDaAmostra();
+    const roshans = [...ctx.detalhe.eventos.filter((e) => e.tipo === "roshan")].sort((a, b) => a.t - b.t);
+    const entreOPrimeiroEOSegundo = (roshans[0]!.t + roshans[1]!.t) / 2;
+    const ctxComWardNoMeio: Contexto = {
+      ...ctx,
+      detalhe: {
+        ...ctx.detalhe,
+        eventos: [
+          ...ctx.detalhe.eventos,
+          { t: entreOPrimeiroEOSegundo, tipo: "observer", texto: "Observer colocada", ponto: [0.5, 0.5] },
+        ],
+      },
+    };
+    const achado = REGRAS.flatMap((r) => r.avaliar(ctxComWardNoMeio)).find((a) => a.id === "sem-wards-contra-roshan");
+    // só o 1º Roshan ficou sem nenhuma ward colocada antes dele; o 2º e o 3º têm essa ward antes.
+    expect(achado?.evidencias.numeros?.roshansSemAviso).toBe(1);
   });
 
   it("lista observer e sentry com posição quando há wards colocadas (contexto sintético, não é a partida real)", () => {

@@ -12,7 +12,7 @@ import { celulaParaNorm, laneDasManchas, manchasDaLane, type Lado } from "../rot
 import type { Frescor, Lane } from "../tipos";
 
 export type HeroiNaPartida = Readonly<{ id: number; chave: string; nome: string; retrato: string }>;
-export type TipoDeEvento = "abate" | "morte" | "item" | "roshan" | "torre" | "observer" | "sentry" | "runa" | "buyback" | "smoke" | "camp";
+export type TipoDeEvento = "abate" | "morte" | "item" | "roshan" | "torre" | "observer" | "sentry" | "runa" | "buyback" | "smoke" | "camp" | "aegis-consumida";
 export type EventoDaPartida = Readonly<{ t: number; tipo: TipoDeEvento; texto: string; ponto: Ponto | null }>;
 export type Compra = Readonly<{ t: number; chave: string; nome: string; custo: number | null; grande: boolean }>;
 export type Neutro = Readonly<{ t: number; chave: string; nome: string; tier: number | null }>;
@@ -57,6 +57,9 @@ const DIGITOS_DA_PARTIDA = 15;
 const MINUTO_DA_LANE = 10;
 const MEDIANA = 0.5;
 const ROSHAN = "CHAT_MESSAGE_ROSHAN_KILL";
+const AEGIS = "CHAT_MESSAGE_AEGIS";
+/** Aegis of the Immortal expira 5 min depois de pega (Dota 2 Wiki / Liquipedia: Roshan; estável em 7.41, 7.41c/e/f). */
+export const JANELA_DE_AEGIS_S = 5 * 60;
 const TORRE = "building_kill";
 /** key de building_kill começa com o dono da construção; o OpenDota não marca torre com um campo `team` próprio. */
 const PREFIXO_DE_TORRE_RADIANT = "npc_dota_goodguys_tower";
@@ -136,6 +139,25 @@ function mortesDoJogador({ partida, jogador, herois }: Contexto): readonly Reado
       .map((k) => ({ time: k.time, key: `${PREFIXO_DO_HEROI}${herois.porId(p.hero_id).chave}` })));
 }
 
+/**
+ * Quando o portador da Aegis do time inimigo (CHAT_MESSAGE_AEGIS, player_slot do pickup) morre antes dela expirar,
+ * a Aegis acabou: emite um evento no instante dessa morte, pra `mortesComAegisInimigaAtiva` (aegisAtiva.ts) não
+ * continuar contando uma Aegis já gasta pelo resto da janela de 5 min.
+ */
+function aegisConsumidaPeloInimigo(partida: PartidaFonte, herois: ReturnType<typeof indiceDeHerois>, meuTime: number): EventoDaPartida[] {
+  const roshansInimigos = partida.objectives.filter((o) => o.type === ROSHAN && o.team !== undefined && o.team !== meuTime);
+  return roshansInimigos.flatMap((roshan): EventoDaPartida[] => {
+    const pickup = partida.objectives.find((o) => o.type === AEGIS && Math.abs(o.time - roshan.time) <= 5 && o.player_slot !== undefined);
+    if (pickup?.player_slot === undefined) return [];
+    const portador = partida.players.find((p) => p.player_slot === pickup.player_slot);
+    if (!portador) return [];
+    const morteDoPortador = portador.deaths_log.find((d) => d.time > roshan.time && d.time - roshan.time <= JANELA_DE_AEGIS_S);
+    if (!morteDoPortador) return [];
+    const nomeDoPortador = herois.porId(portador.hero_id).nome;
+    return [{ t: morteDoPortador.time, tipo: "aegis-consumida", texto: `Aegis consumida: ${nomeDoPortador} morreu com ela`, ponto: null }];
+  });
+}
+
 function eventosDoJogador(contexto: Contexto): EventoDaPartida[] {
   const { partida, jogador, indice, herois, compras } = contexto;
   const pontoDaMorte = pontosDasMortes(partida, indice);
@@ -159,6 +181,7 @@ function eventosDoJogador(contexto: Contexto): EventoDaPartida[] {
     ...jogador.sen_log.map(ward("sentry")),
     ...jogador.runes_log.map((r): EventoDaPartida => ({ t: r.time, tipo: "runa", texto: `Runa: ${RUNAS[Number(r.key)] ?? r.key}`, ponto: null })),
     ...jogador.buyback_log.map((b): EventoDaPartida => ({ t: b.time, tipo: "buyback", texto: "Buyback", ponto: null })),
+    ...aegisConsumidaPeloInimigo(partida, herois, meuTime),
   ];
   return eventos.sort((a, b) => a.t - b.t);
 }

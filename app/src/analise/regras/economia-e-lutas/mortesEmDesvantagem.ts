@@ -1,8 +1,12 @@
-// Regra: morrer enquanto o time já estava em forte desvantagem de ouro (radiant_gold_adv/vantagemDoTime). É um
-// proxy, não a vantagem numérica real da luta: o OpenDota não lista quem estava vivo e presente em cada luta
-// (ver O_QUE_NAO_VEMOS em modelo.ts), mas a vantagem de ouro do time no minuto é um campo oficial e aponta pro
-// mesmo risco — lutar quando o time inteiro já está perdendo custa mais caro (buyback mais caro relativo ao
-// patrimônio, menos gente pra reagir). Ver SPEC §economia-e-lutas / lutas.
+// Regra: morte com o time já em forte desvantagem de ouro (radiant_gold_adv/vantagemDoTime). É contexto, não erro
+// do jogador: a regra não sabe se ele iniciou a luta, estava isolado ou defendia uma estrutura, só que o placar do
+// time já estava ruim; tratar como erro próprio carimbaria quase toda morte de uma partida perdida como culpa
+// individual. É um proxy, não a vantagem numérica real da luta: o OpenDota não lista quem estava vivo e presente
+// em cada luta (ver O_QUE_NAO_VEMOS em modelo.ts), mas a vantagem de ouro do time no minuto é um campo oficial e
+// aponta pro mesmo risco: lutar quando o time inteiro já está perdendo custa mais caro (buyback mais caro relativo
+// ao patrimônio, menos gente pra reagir). Limiares (-1500/-3000/-6000) são um corte de ouro absoluto pro jogo
+// inteiro, sem normalizar por fase (uma desvantagem de 3-4k pesa mais aos 16 min que aos 50 min); fica como
+// limitação conhecida, não corrigida aqui. Ver SPEC §economia-e-lutas / lutas.
 import { tempoDaPartida } from "../../../live/partida/detalhe";
 import type { Achado, Contexto, Peso, Regra } from "../../modelo";
 
@@ -29,14 +33,14 @@ function mortesEmDesvantagem(ctx: Contexto): Achado[] {
     if (!pesoDaMorte) return [];
     return [{
       id: `morte-em-desvantagem-${morte.t}`,
-      tipo: "erro", minuto: morte.t / 60,
+      tipo: "contexto", minuto: morte.t / 60,
       titulo: `Morreu com o time ${Math.abs(vantagemNoMinuto)} de ouro atrás, ${tempoDaPartida(morte.t)}`,
       oQueAconteceu: `${morte.texto} em ${tempoDaPartida(morte.t)}; nesse minuto o time já estava ` +
         `${Math.abs(vantagemNoMinuto)} de ouro atrás do time adversário.`,
-      oQueFazer: "Com o time inteiro nessa desvantagem, jogar pelo não risco: segurar posição e esperar o " +
-        "reforço ou o item que falta em vez de se expor numa luta que custa mais caro pra quem já está atrás.",
-      porque: "Uma luta perdida custa mais pro time que já está atrás: o buyback fica mais caro relativo ao " +
-        "patrimônio e sobra menos gente pra reagir. Morrer nesse momento amplia a desvantagem em vez de estabilizar.",
+      oQueFazer: null,
+      porque: "Contexto da morte, não um erro à parte dela: uma luta perdida custa mais pro time que já está " +
+        "atrás (buyback mais caro relativo ao patrimônio, menos gente pra reagir), então essa desvantagem ajuda " +
+        "a entender o resultado, sem presumir que o jogador tinha como evitar a luta.",
       fontes: [FONTE], peso: pesoDaMorte,
       evidencias: { numeros: { minuto, vantagemDeOuroDoTime: vantagemNoMinuto } },
     }];

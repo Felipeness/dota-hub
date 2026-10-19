@@ -4,7 +4,11 @@ import { tempoDaPartida } from "../../../live/partida/detalhe";
 import type { Achado, Contexto, Regra } from "../../modelo";
 import { FONTE_JANELA_RESPAWN, janelaDeRespawn } from "./janela";
 
-/** Quanto tempo depois do buyback ainda conta a morte seguinte como "sem buyback pronto" (o custo sobe com o tempo e não recarrega na hora). */
+/**
+ * Quanto tempo depois do buyback ainda conta a morte seguinte como "sem buyback pronto" (o custo sobe com o tempo
+ * e não recarrega na hora). Não é o cooldown real de buyback do jogo (que é fixo); é só a janela de rastreio desta
+ * regra pra ligar o gasto antecipado à morte seguinte.
+ */
 const JANELA_DE_RASTREIO_DA_PROXIMA_MORTE_S = 10 * 60;
 
 function buybackNaJanelaDoRoshan(ctx: Contexto): Achado[] {
@@ -29,7 +33,7 @@ function buybackNaJanelaDoRoshan(ctx: Contexto): Achado[] {
         `a janela de respawn depois do Roshan que o time inimigo pegou em ${tempoDaPartida(roshanQueAbriuAJanela.t)}` +
         (proximaMorte ? `; morreu de novo em ${tempoDaPartida(proximaMorte.t)}, sem outro buyback pronto a tempo.` : "."),
       oQueFazer:
-        "Guardar o buyback para a luta do Roshan (ou para defender o high ground) em vez de usá-lo antes da janela se abrir; " +
+        "Guardar o buyback para a luta do Roshan (ou para defender o high ground) em vez de gastá-lo logo quando essa janela se abre; " +
         "o custo sobe conforme o jogo avança e ele não recarrega na hora.",
       porque:
         "O Roshan volta entre 8 e 11 minutos depois de morto; gastar o buyback bem quando essa janela abre deixa o time sem " +

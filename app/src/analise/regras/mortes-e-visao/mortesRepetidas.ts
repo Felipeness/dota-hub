@@ -1,12 +1,17 @@
-// 3+ mortes pro mesmo herói inimigo: padrão de rota ou de visão explorado, não acaso. Ver SPEC §mortes-e-visao.
+// 3+ mortes isoladas pro mesmo herói inimigo: padrão de rota ou de visão explorado, não acaso. Só conta morte
+// isolada (fora de teamfight, ponto === null); morte dentro de uma luta em equipe é perda de luta/posicionamento,
+// um problema diferente, já coberto por mapaDeMortes.ts, e o conselho de "mude a rota/ward" não se aplica a ela.
+// Ver SPEC §mortes-e-visao.
 import { tempoDaPartida } from "../../../live/partida/detalhe";
 import type { Achado, Contexto, Regra } from "../../modelo";
 
 const LIMIAR_PARA_ERRO = 3;
-const FONTE = "deaths_log do OpenDota, agrupado pelo herói matador (campo key)";
+const FONTE = "deaths_log do OpenDota, agrupado pelo herói matador (campo key), só mortes isoladas (fora de teamfight)";
+// Rótulos de fallback de nomeDoMatador (detalhe.ts) que não são heróis: nunca agrupar sob eles como "mesmo herói".
+const MATADORES_SEM_HEROI = new Set(["Morte para torre", "Morte para creep ou neutro"]);
 
 function mortesRepetidas(ctx: Contexto): Achado[] {
-  const mortes = ctx.detalhe.eventos.filter((e) => e.tipo === "morte");
+  const mortes = ctx.detalhe.eventos.filter((e) => e.tipo === "morte" && e.ponto === null && !MATADORES_SEM_HEROI.has(e.texto));
   const porMatador = new Map<string, typeof mortes>();
   for (const morte of mortes) {
     const lista = porMatador.get(morte.texto) ?? [];

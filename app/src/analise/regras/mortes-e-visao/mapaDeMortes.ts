@@ -23,8 +23,8 @@ function mapaDeMortes(ctx: Contexto): Achado[] {
           "para decidir onde colocar observer na próxima partida."
         : null,
       porque: temPosicao
-        ? "O OpenDota só registra deaths_pos para mortes dentro da janela de um teamfight detectado; fora disso o " +
-          "campo vem vazio (ver O_QUE_NAO_VEMOS)."
+        ? "O OpenDota só registra a posição da morte (deaths_pos) quando ela cai dentro da janela de um teamfight " +
+          "detectado; fora disso o campo vem vazio."
         : "Mortes isoladas (gank de rota, pick-off de farm) não entram em teamfights, então a fonte não guarda onde " +
           "no mapa elas aconteceram.",
       fontes: [FONTE_POSICAO],

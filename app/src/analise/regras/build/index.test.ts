@@ -52,10 +52,10 @@ describe("itemCoreAtrasado", () => {
     expect(erro?.evidencias.numeros?.minutoMedianoPro).toBe(22.2);
   });
 
-  it("acusa Lesser Crit (Crystalys) e Greater Crit (Daedalus) como itens core nunca montados", () => {
+  it("acusa só Daedalus (Greater Crit) como item core nunca montado, não Crystalys também: é o mesmo gap de build (nunca chegou no crit tardio), não dois", () => {
     const ids = achados().map((a) => a.id);
-    expect(ids).toContain("build-core-ausente-lesser_crit");
     expect(ids).toContain("build-core-ausente-greater_crit");
+    expect(ids).not.toContain("build-core-ausente-lesser_crit");
   });
 
   it("não acusa Yasha, Manta e Aghanim's Shard: dentro da margem ou adiantados", () => {
@@ -80,10 +80,10 @@ describe("itemSituacionalContraDraft", () => {
 });
 
 describe("itemGrandeComOuroNoBolso", () => {
-  it("acusa as 4 mortes com ouro acumulado antes de item grande (16:06 Manta, 28:33 Force Staff, 31:38 Butterfly, 46:10 Diffusal Blade)", () => {
+  it("acusa 3 mortes com ouro acumulado antes de item grande (28:33 Force Staff, 31:38 Butterfly, 46:10 Diffusal Blade); não 16:06 Manta, comprado só 4s depois da morte", () => {
     const erros = achados().filter((a) => a.id.startsWith("build-ouro-no-bolso-"));
     const minutos = erros.map((a) => tempoDaPartida(Math.round((a.minuto ?? 0) * 60))).sort();
-    expect(minutos).toEqual(["16:06", "28:33", "31:38", "46:10"]);
+    expect(minutos).toEqual(["28:33", "31:38", "46:10"]);
   });
 
   it("46:10 pesa muito: ouro ganho (7539) mais que cobre o Diffusal Blade (2500)", () => {
@@ -96,6 +96,16 @@ describe("itemGrandeComOuroNoBolso", () => {
     const ids = achados().map((a) => a.id);
     expect(ids.some((id) => id === "build-ouro-no-bolso-1130")).toBe(false);
   });
+
+  it("não acusa quando há um buyback entre a compra anterior e a morte: o ouro foi pro buyback, não ficou parado", () => {
+    const ctx = contextoDaAmostra();
+    const ctxComBuyback: Contexto = {
+      ...ctx,
+      detalhe: { ...ctx.detalhe, eventos: [...ctx.detalhe.eventos, { t: 1860, tipo: "buyback", texto: "Buyback", ponto: null }] },
+    };
+    const ids = REGRAS.flatMap((r) => r.avaliar(ctxComBuyback)).map((a) => a.id);
+    expect(ids).not.toContain("build-ouro-no-bolso-1898"); // 31:38 (1898s), buyback cai entre a compra anterior e essa morte
+  });
 });
 
 describe("itemForaDeContexto", () => {
@@ -106,8 +116,16 @@ describe("itemForaDeContexto", () => {
     expect(ids.some((id) => id.startsWith("build-fora-de-contexto-butterfly"))).toBe(false);
   });
 
-  it("acusa Linken's Sphere: contra é 2+ de controle, só tem 1 (Doom), e não é item core de Medusa", () => {
+  it("não acusa Linken's Sphere: Doom e Necrophos (Reaper's Scythe, alvo único bloqueável) somam 2 de controle, o mínimo da regra", () => {
     const ids = achados().map((a) => a.id);
-    expect(ids.some((id) => id.startsWith("build-fora-de-contexto-sphere"))).toBe(true);
+    expect(ids.some((id) => id.startsWith("build-fora-de-contexto-sphere"))).toBe(false);
+    const acertoDeControle = achados().find((a) => a.id === "build-situacional-acerto-2:controle");
+    expect(acertoDeControle?.titulo).toContain("Sphere");
+  });
+
+  it("acusa só 1 vez a cadeia Diffusal Blade -> Disperser (upgrade), não 2: o componente foi consumido no item final", () => {
+    const ids = achados().filter((a) => a.id.startsWith("build-fora-de-contexto-"));
+    expect(ids).toHaveLength(1);
+    expect(ids[0]?.id).toBe("build-fora-de-contexto-disperser-2878");
   });
 });

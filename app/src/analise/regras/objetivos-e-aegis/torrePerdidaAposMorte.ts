@@ -11,13 +11,19 @@ const FONTE_TORRE = "objectives[] do OpenDota (building_kill), cruzado com death
 
 const emMinutos = (segundos: number) => segundos / 60;
 
-/** Agrupa por morte: uma luta perdida que custa 3 torres de uma vez é 1 achado, não 3 repetidos. */
+/**
+ * Agrupa por morte: uma luta perdida que custa 3 torres de uma vez é 1 achado, não 3 repetidos. Mortes são
+ * processadas em ordem cronológica e cada torre só é atribuída à primeira morte que abriu a janela dela, pra duas
+ * janelas de 90s que se sobrepõem (duas mortes próximas) não contarem a mesma queda de torre duas vezes.
+ */
 function torrePerdidaAposMorte(ctx: Contexto): Achado[] {
   const torresPerdidas = ctx.detalhe.eventos.filter((e) => e.tipo === "torre" && e.texto === "Torre perdida");
   const mortes = ctx.detalhe.eventos.filter((e) => e.tipo === "morte");
+  const jaAtribuidas = new Set<(typeof torresPerdidas)[number]>();
   return mortes.flatMap((morte): Achado[] => {
-    const torresDepois = torresPerdidas.filter((t) => t.t >= morte.t && t.t - morte.t <= JANELA_DE_TORRE_S);
+    const torresDepois = torresPerdidas.filter((t) => !jaAtribuidas.has(t) && t.t >= morte.t && t.t - morte.t <= JANELA_DE_TORRE_S);
     if (torresDepois.length === 0) return [];
+    torresDepois.forEach((t) => jaAtribuidas.add(t));
     const horarios = torresDepois.map((t) => tempoDaPartida(t.t)).join(", ");
     const minutoDaMorte = emMinutos(morte.t);
     const plural = torresDepois.length > 1;
@@ -38,7 +44,7 @@ function torrePerdidaAposMorte(ctx: Contexto): Achado[] {
         "Torre sem defensor cai rápido pra creeps ou pra um herói inimigo parado nela; o tempo morto do respawn é " +
         "justamente a janela em que isso acontece.",
       fontes: [FONTE_TORRE],
-      peso: "pesou",
+      peso: torresDepois.length >= 2 ? "pesou_muito" : "pesou",
       evidencias: { numeros: { minutoDaMorte, torresPerdidas: torresDepois.length } },
     }];
   });

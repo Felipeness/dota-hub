@@ -78,6 +78,20 @@ it.each([{ s: -89, texto: "-1:29" }, { s: 0, texto: "0:00" }, { s: 848, texto: "
   expect(tempoDaPartida(s)).toBe(texto);
 });
 
+// Regressão: content/confrontos nomeia o arquivo do herói pelo slug do nome localizado (o mesmo que `retrato`),
+// não pela chave interna do OpenDota (`chave`). Pra pelo menos 19/127 heróis as duas divergem (ex. Anti-Mage:
+// chave "antimage", slug/arquivo "anti_mage"); quem busca a análise pro de um herói deve usar `heroi.retrato` via
+// `caminhoDaAnalise`, senão o fetch falha em silêncio e a build dele nunca é comparada com o pro (ver AnalisePage.tsx).
+it.each([
+  { chave: "antimage", localizado: "Anti-Mage", slug: "anti_mage" },
+  { chave: "doom_bringer", localizado: "Doom", slug: "doom" },
+  { chave: "necrolyte", localizado: "Necrophos", slug: "necrophos" },
+  { chave: "zuus", localizado: "Zeus", slug: "zeus" },
+])("$chave (chave do OpenDota) diverge do slug do nome localizado ($slug), usado no arquivo de confronto", ({ chave, localizado, slug }) => {
+  expect(chave).not.toBe(slug);
+  expect(slugDoHeroi(localizado)).toBe(slug);
+});
+
 it("vantagem do time inverte o sinal pro Dire; draft sai na ordem do campo order, não da posição no array", () => {
   const partida = partidaFonte.parse({
     match_id: 2, duration: 600, radiant_win: true,

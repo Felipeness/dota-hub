@@ -4,10 +4,12 @@ import { tempoDaPartida } from "../../../live/partida/detalhe";
 import type { Achado, Contexto, Peso, Regra } from "../../modelo";
 
 const MINUTO = 10;
-/** Mais frouxa que o ±10% de placarPorArea.ts porque é 1x1 (menos amostra, mais ruído) e não distribuição de pro. */
+/** Mais frouxa que o ±10% de gpmContraPro.ts porque é 1x1 (menos amostra, mais ruído) e não distribuição de pro. */
 const MARGEM = 0.15;
 const MARGEM_GRAVE = 0.35;
-const FONTE = "gold_t do OpenDota, próprio jogador e adversário direto de lane (mesmo papel, times opostos)";
+const FONTE =
+  "gold_t do OpenDota, próprio jogador e o inimigo que mais farmou no papel espelhado da lane (role1<->role3 " +
+  "safelane x offlane, role2<->role2 mid x mid)";
 
 const diferencaRelativa = (meu: number, dele: number) => (meu === 0 ? 0 : (dele - meu) / meu);
 const pesoDaDiferenca = (diferenca: number): Peso => (diferenca >= MARGEM_GRAVE ? "pesou_muito" : "pesou");
@@ -28,8 +30,9 @@ function laneContraAdversario(ctx: Contexto): Achado[] {
       titulo: `Perdeu a lane para ${adversario.heroi.nome}: ${ouroAdversario} de ouro contra ${meuOuro} aos 10 min`,
       oQueAconteceu: `Aos ${tempo}, ${adversario.heroi.nome} (adversário direto de lane) tinha ${ouroAdversario} ` +
         `de ouro contra ${meuOuro} seus, ${numeros.diferencaPct}% a mais.`,
-      oQueFazer: "Jogar a lane mais segura (ficar atrás da wave, pedir visão ou puxar o suporte pra ajudar) em " +
-        "vez de contestar last hit com um adversário que já bate mais forte nessa fase.",
+      oQueFazer: "Jogar essa lane de forma mais segura (ficar atrás da wave, pedir visão, puxar o suporte) até a " +
+        "fase de lane acabar: o adversário direto farmou mais que você nesse recorte de 10 minutos, então vale " +
+        "ceder prioridade em vez de forçar.",
       porque: "Ouro aos 10 min no confronto direto de lane é o sinal mais limpo de quem ganhou essa fase; sair " +
         "atrás nesse ponto atrasa o timing do primeiro item.",
       fontes: [FONTE], peso: pesoDaDiferenca(diferenca), evidencias: { numeros },
