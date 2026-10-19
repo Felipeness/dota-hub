@@ -1,4 +1,6 @@
-// Regra: presença no Roshan — quem pegou quantos. Ver SPEC §"Famílias de regras" > objetivos-e-aegis.
+// Regra: presença no Roshan — quem pegou quantos. É contexto, não erro do jogador (mesmo raciocínio de
+// mortesEmDesvantagem.ts): o Roshan é decisão e disputa do time, e o OpenDota não diz quem estava no pit, quem
+// chamou a jogada nem se o jogador estava longe por outra prioridade. Ver SPEC §"Famílias de regras" > objetivos-e-aegis.
 import { tempoDaPartida } from "../../../live/partida/detalhe";
 import type { Achado, Contexto, Regra } from "../../modelo";
 
@@ -15,7 +17,7 @@ function contagemDeRoshan(ctx: Contexto): Achado[] {
   const horariosSeuTime = doSeuTime.map((e) => tempoDaPartida(e.t)).join(", ");
   return [{
     id: "contagem-de-roshan",
-    tipo: "erro",
+    tipo: "contexto",
     minuto: null,
     titulo: `O time inimigo pegou ${doInimigo.length} Roshan${doInimigo.length > 1 ? "s" : ""} e o seu, ${doSeuTime.length}`,
     oQueAconteceu:

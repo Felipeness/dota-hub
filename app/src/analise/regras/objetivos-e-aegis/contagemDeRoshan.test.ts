@@ -5,7 +5,7 @@ it("acusa 3 Roshans do time inimigo contra 0 do seu time, com os três horários
   const [achado] = REGRAS.flatMap((regra) => regra.avaliar(contextoDaAmostra()));
   expect(achado?.titulo).toBe("O time inimigo pegou 3 Roshans e o seu, 0");
   expect(achado?.oQueAconteceu).toContain("26:23, 38:30, 48:16");
-  expect(achado?.tipo).toBe("erro");
+  expect(achado?.tipo).toBe("contexto"); // disputa do time, não erro individual
   expect(achado?.peso).toBe("pesou_muito");
   expect(achado?.evidencias.numeros).toEqual({ roshansDoTimeInimigo: 3, roshansDoSeuTime: 0 });
 });
