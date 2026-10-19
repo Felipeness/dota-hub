@@ -31,5 +31,25 @@ export function gruposDeContra(inimigos: readonly InimigoParaRegra[]): readonly 
 export const gruposJustificados = (grupos: readonly GrupoDeContra[]): readonly GrupoDeContra[] =>
   grupos.filter((g) => g.explicacao.motivo !== null);
 
+/**
+ * Funde grupos cujo motivo (texto renderizado por motivoContra) ficou idêntico. Isso acontece quando um item de
+ * tags compostas (ex. Black King Bar = controle+mágico) só bate o mínimo numa das tags nesse draft específico: o
+ * motivo reduz pro texto da tag única, igual ao de outro item que só cobre aquela tag (ex. Pipe). Sem essa fusão,
+ * o mesmo risco gera dois achados (faltou/acerto) contraditórios ou duplicados.
+ */
+export function agruparPorMotivo(grupos: readonly GrupoDeContra[]): readonly GrupoDeContra[] {
+  const porMotivo = new Map<string, { chaves: string[]; explicacao: Explicacao; assinatura: string }>();
+  for (const g of grupos) {
+    const motivo = g.explicacao.motivo ?? "";
+    const existente = porMotivo.get(motivo);
+    if (existente) {
+      existente.chaves.push(...g.chaves.filter((c) => !existente.chaves.includes(c)));
+    } else {
+      porMotivo.set(motivo, { chaves: [...g.chaves], explicacao: g.explicacao, assinatura: g.assinatura });
+    }
+  }
+  return [...porMotivo.values()];
+}
+
 export const nomeDoItem = (chave: string): string =>
   chave.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());

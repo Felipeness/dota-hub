@@ -10,6 +10,7 @@ import type { Achado, Contexto, Evidencia } from "../../modelo";
 const JANELA_MAXIMA_S = 10 * 60; // tempo entre morrer e a compra, pra ainda contar como "já tinha o ouro"
 const RAZAO_MINIMA = 0.25; // pelo menos 1/4 do custo já estava disponível antes de morrer
 const OURO_MINIMO = 800; // piso absoluto: ganho pequeno é ruído, não achado
+const GAP_MINIMO_MORTE_COMPRA_S = 30; // compra saída em segundos depois da morte não teve janela real pra "ir gastar antes"
 
 const FONTE =
   "DetalheDaPartida.curvas.ouro (gold_t do OpenDota) e compras/mortes da própria partida; estimativa com margem, " +
@@ -26,8 +27,15 @@ function candidato(ctx: Contexto, compra: Contexto["detalhe"]["compras"][number]
   const mortesAntes = ctx.detalhe.eventos.filter((e) => e.tipo === "morte" && e.t < compra.t && compra.t - e.t <= JANELA_MAXIMA_S);
   const morte = mortesAntes.at(-1);
   if (!morte) return null;
+  // Compra saiu em segundos depois da morte: não há janela real em que "ir gastar antes de arriscar" fosse
+  // possível, então não é o mesmo achado de ouro parado na mão.
+  if (compra.t - morte.t < GAP_MINIMO_MORTE_COMPRA_S) return null;
   const comprasAntesDaMorte = ctx.detalhe.compras.filter((c) => c.t < morte.t);
   const desde = comprasAntesDaMorte.at(-1)?.t ?? 0;
+  // Buyback consome ouro direto, fora de `compras`; se caiu dentro da janela, o ouro "parado" na verdade já foi
+  // gasto no respawn, não sobrou pra financiar o item.
+  const teveBuyback = ctx.detalhe.eventos.some((e) => e.tipo === "buyback" && e.t >= desde && e.t <= morte.t);
+  if (teveBuyback) return null;
   const ganho = ouroEm(ctx.detalhe.curvas.ouro, morte.t) - ouroEm(ctx.detalhe.curvas.ouro, desde);
   return { morteT: morte.t, compraT: compra.t, nome: compra.nome, custo: compra.custo, ganho, razao: ganho / compra.custo };
 }

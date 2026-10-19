@@ -2,6 +2,7 @@
 // contra a mediana de pro do mesmo herói. Ver SPEC §"build".
 import { tempoDaPartida } from "../../../live/partida/detalhe";
 import type { Achado, Contexto } from "../../modelo";
+import { ITEM_FINAL_DO_COMPONENTE } from "./componentesDeItem";
 
 const FONTE_PRO = "content/confrontos (export/dota_export/confrontos.py): spikes do herói em partidas de liga 7.40/7.41";
 
@@ -18,7 +19,7 @@ function achadoAusente(ctx: Contexto, item: { item: string; nome: string; minuto
     minuto: null,
     titulo: `Nunca montou ${item.nome}, item core do ${ctx.meuHeroi.nome} no pro`,
     oQueAconteceu: `A partida acabou (${tempoDaPartida(ctx.detalhe.duracaoS)}) sem o ${item.nome} na build.`,
-    oQueFazer: `Priorizar o ${item.nome} na build: é core, mediana de ${minutos(item.minuto)} em ${item.n} partidas de pro.`,
+    oQueFazer: `Priorizar o ${item.nome} na build: é core, mediana de ${minutos(item.minuto)} min em ${item.n} partidas de pro.`,
     porque: `No pro, ${ctx.meuHeroi.nome} monta ${item.nome} na maioria das partidas (${item.n} amostras): é parte do que faz o herói funcionar na metade do jogo, não um item de situação.`,
     fontes: [FONTE_PRO],
     peso: "pesou_muito",
@@ -60,7 +61,14 @@ function achadoNoTempo(item: { item: string; nome: string; minuto: number; n: nu
 const minutos = (n: number) => n.toLocaleString("pt-BR", { maximumFractionDigits: 1 });
 
 export function itemCoreAtrasado(ctx: Contexto): Achado[] {
-  const itensCore = (ctx.pro?.spikes ?? []).filter((s) => s.chave);
+  const todosOsSpikesChave = new Set((ctx.pro?.spikes ?? []).filter((s) => s.chave).map((s) => s.item));
+  // Componente cujo item final também é spike chave deste herói: avaliar só o item final, senão o mesmo gap de
+  // build (nunca chegou no item tardio) conta duas vezes (ex. Crystalys + Daedalus pra quem nunca montou nenhum).
+  const itensCore = (ctx.pro?.spikes ?? []).filter((s) => {
+    if (!s.chave) return false;
+    const itemFinal = ITEM_FINAL_DO_COMPONENTE[s.item];
+    return !(itemFinal && todosOsSpikesChave.has(itemFinal));
+  });
   const duracaoMin = ctx.detalhe.duracaoS / 60;
   return itensCore.flatMap((item): Achado[] => {
     const compra = ctx.detalhe.compras.find((c) => c.chave === item.item);

@@ -35,7 +35,7 @@ export const TAGS_DOS_HEROIS: Readonly<Record<string, readonly Tag[]>> = {
   lion: ["controle", "magico"], lone_druid: ["fisico"], luna: ["fisico"], lycan: ["fisico"], magnataur: ["controle"],
   marci: ["fisico", "controle"], mars: ["controle"], medusa: ["fisico"], meepo: ["controle"],
   mirana: ["invisivel", "controle"], monkey_king: ["fisico"], morphling: ["fuga"], muerta: ["magico", "fisico"],
-  naga_siren: ["ilusoes", "controle"], necrolyte: ["cura", "magico"], nevermore: ["magico", "fisico"],
+  naga_siren: ["ilusoes", "controle"], necrolyte: ["cura", "magico", "controle"], nevermore: ["magico", "fisico"],
   night_stalker: ["controle", "fisico"], nyx_assassin: ["controle", "magico", "invisivel"],
   obsidian_destroyer: ["magico", "controle"], ogre_magi: ["controle", "magico"], omniknight: ["cura"],
   oracle: ["cura", "magico"], pangolier: ["controle", "fuga"], phantom_assassin: ["evasao", "passiva", "fisico"],

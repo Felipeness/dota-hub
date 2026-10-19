@@ -1,7 +1,7 @@
 // Família build: itens situacionais que o draft inimigo pedia (motor de porQueItem.ts/tagsDosHerois.ts, agrupado
 // por contraDraft.ts). Acerto quando comprou algo do grupo justificado; erro quando o draft pedia e faltou.
 import type { Achado, Contexto } from "../../modelo";
-import { gruposDeContra, gruposJustificados, nomeDoItem, type InimigoParaRegra } from "./contraDraft";
+import { agruparPorMotivo, gruposDeContra, gruposJustificados, nomeDoItem, type InimigoParaRegra } from "./contraDraft";
 import { ITENS_CURADOS } from "../../../live/partida/porQueItem";
 import { FONTES_DAS_TAGS } from "../../../live/partida/tagsDosHerois";
 
@@ -48,7 +48,7 @@ function achadoAcerto(grupo: ReturnType<typeof gruposJustificados>[number], chav
 
 export function itemSituacionalContraDraft(ctx: Contexto): Achado[] {
   const inimigos: InimigoParaRegra[] = ctx.inimigos.map((i) => ({ chave: i.chave, nome: i.nome }));
-  const grupos = gruposJustificados(gruposDeContra(inimigos));
+  const grupos = agruparPorMotivo(gruposJustificados(gruposDeContra(inimigos)));
   const chavesCompradas = new Set(ctx.detalhe.compras.map((c) => c.chave));
   return grupos.map((grupo): Achado => {
     const compradoDoGrupo = grupo.chaves.find((chave) => chavesCompradas.has(chave));
