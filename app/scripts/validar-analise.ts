@@ -9,10 +9,11 @@ import { REGRAS as BUILD } from "../src/analise/regras/build";
 import { REGRAS as ECONOMIA_E_LUTAS } from "../src/analise/regras/economia-e-lutas";
 import { REGRAS as MORTES_E_VISAO } from "../src/analise/regras/mortes-e-visao";
 import { REGRAS as OBJETIVOS_E_AEGIS } from "../src/analise/regras/objetivos-e-aegis";
+import { REGRAS as MOMENTOS } from "../src/analise/regras/momentos";
 import { montarRelatorio } from "../src/analise/relatorio";
 
 // import.meta.glob (registro.ts) só funciona sob o Vite; fora dele, listamos as famílias à mão.
-const REGISTRO_DE_REGRAS = [...OBJETIVOS_E_AEGIS, ...MORTES_E_VISAO, ...BUILD, ...ECONOMIA_E_LUTAS];
+const REGISTRO_DE_REGRAS = [...OBJETIVOS_E_AEGIS, ...MORTES_E_VISAO, ...BUILD, ...ECONOMIA_E_LUTAS, ...MOMENTOS];
 import { analiseSchema, caminhoDaAnalise } from "../src/confronto/analise";
 import type { Consultar } from "../src/live/consulta";
 import { detalheDaPartida } from "../src/live/partida/detalhe";
@@ -58,6 +59,8 @@ async function main() {
   for (const achado of relatorio.achados) {
     const minuto = achado.minuto === null ? "-" : `${Math.floor(achado.minuto)}:${String(Math.round((achado.minuto % 1) * 60)).padStart(2, "0")}`;
     console.log(`[${achado.tipo}/${achado.peso}] ${minuto} ${achado.titulo}`);
+    if (process.env.DETALHE && achado.id.startsWith(process.env.DETALHE)) console.log(`   ${achado.oQueAconteceu}
+   -> ${achado.oQueFazer}`);
   }
   console.log(`\nTotal: ${relatorio.achados.length} achados.`);
 }
