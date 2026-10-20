@@ -7,7 +7,7 @@ import {
 } from "./contraDraft";
 import { ITENS_CURADOS } from "../../../live/partida/porQueItem";
 import { FONTES_DAS_TAGS } from "../../../live/partida/tagsDosHerois";
-import { FRACAO_RARA, fracaoNoMatchup, matchupDePro } from "./matchupDePro";
+import { FRACAO_INCOMUM, FRACAO_RARA, fracaoNoMatchup, matchupDePro } from "./matchupDePro";
 
 const FONTES = FONTES_DAS_TAGS;
 const MAXIMO_DE_SUGESTOES = 2;
@@ -67,11 +67,17 @@ export function itemSituacionalContraDraft(ctx: Contexto): Achado[] {
     const fracao = matchup ? fracaoNoMatchup(matchup, chave) : null;
     return fracao !== null && fracao <= FRACAO_RARA;
   };
+  // "Faltou" é erro: só afirma quando algum item do grupo é feito por uma fatia real dos pros deste herói contra estes
+  // inimigos (Medusa contra Doom e Necrophos quase nunca faz BKB ou Pipe, e o herói nunca fez Pipe contra ninguém).
+  const prosDispensam = (grupo: GrupoDeContra) => matchup !== null && grupo.chaves.every((chave) => {
+    const fracao = fracaoNoMatchup(matchup, chave);
+    return fracao === null || fracao < FRACAO_INCOMUM;
+  });
   return [
     ...respondidos.flatMap((g) => {
       const comprado = compradoDo(g);
       return comprado === undefined || raroNoMatchup(comprado) ? [] : [achadoAcerto(g, comprado)];
     }),
-    ...faltando.map(achadoFaltou),
+    ...faltando.filter((g) => !prosDispensam(g)).map(achadoFaltou),
   ];
 }

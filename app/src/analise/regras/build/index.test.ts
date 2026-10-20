@@ -185,6 +185,10 @@ describe("com o recorte contra os inimigos da partida (content/pro_contra)", () 
     expect(achados.some((a) => a.id === "build-situacional-faltou-2:controle")).toBe(false);
   });
 
+  it("não acusa falta de BKB/Pipe quando os pros da Medusa quase não fazem nenhum deles contra esses inimigos", () => {
+    expect(comMatchup().some((a) => a.id.startsWith("build-situacional-faltou-"))).toBe(false);
+  });
+
   it("Skadi no tempo é um acerto só, o do recorte do confronto", () => {
     const ids = comMatchup().map((a) => a.id);
     expect(ids).toContain("build-matchup-no-tempo-skadi");

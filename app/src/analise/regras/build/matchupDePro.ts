@@ -9,6 +9,8 @@ export const JOGOS_MINIMOS_DO_MATCHUP = 20;
 export const FRACAO_DE_CORE = 0.6;
 /** Escolha comum dos pros nesse confronto: fazer no tempo é acerto, faltar não é erro. */
 export const FRACAO_DE_ESCOLHA = 0.3;
+/** Abaixo disso nenhum item do grupo é resposta usual dos pros: faltar não é erro. */
+export const FRACAO_INCOMUM = 0.15;
 /** Os pros quase nunca fazem o item contra esses heróis. */
 export const FRACAO_RARA = 0.05;
 
