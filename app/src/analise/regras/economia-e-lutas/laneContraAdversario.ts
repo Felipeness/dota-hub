@@ -2,15 +2,14 @@
 // detalhe.ts/adversarioDeLane). Ver SPEC §economia-e-lutas / lane.
 import { tempoDaPartida } from "../../../live/partida/detalhe";
 import type { Achado, Contexto, Peso, Regra } from "../../modelo";
-import { jogaDeSuporte } from "../../pro";
 
 const MINUTO = 10;
 /** Mais frouxa que o ±10% de gpmContraPro.ts porque é 1x1 (menos amostra, mais ruído) e não distribuição de pro. */
 const MARGEM = 0.15;
 const MARGEM_GRAVE = 0.35;
 const FONTE =
-  "gold_t do OpenDota, próprio jogador e o inimigo que mais farmou no papel espelhado da lane (role1<->role3 " +
-  "safelane x offlane, role2<->role2 mid x mid)";
+  "gold_t do OpenDota, próprio jogador e o inimigo na posição espelhada (1x3, 2x2, 4x5), com a posição deduzida " +
+  "da lane e de quem tinha mais last hits nela aos 10 min";
 
 const diferencaRelativa = (meu: number, dele: number) => (meu === 0 ? 0 : (dele - meu) / meu);
 const pesoDaDiferenca = (diferenca: number): Peso => (diferenca >= MARGEM_GRAVE ? "pesou_muito" : "pesou");
@@ -19,7 +18,7 @@ function laneContraAdversario(ctx: Contexto): Achado[] {
   const adversario = ctx.detalhe.adversario;
   const meuOuro = ctx.detalhe.curvas.ouro[MINUTO];
   const ouroAdversario = adversario?.curvas.ouro[MINUTO];
-  if (jogaDeSuporte(ctx.proDoHeroi) || !adversario || meuOuro === undefined || ouroAdversario === undefined) return [];
+  if (!adversario || meuOuro === undefined || ouroAdversario === undefined) return [];
 
   const diferenca = diferencaRelativa(meuOuro, ouroAdversario);
   const numeros = { meuOuro, ouroAdversario, diferencaPct: Math.round(diferenca * 100) };

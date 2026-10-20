@@ -1,3 +1,4 @@
+import { nomeDaLane, nomeDaPosicao } from "../live/formato";
 import { useState, type FormEvent } from "react";
 import { Link, useNavigate, useParams, useSearchParams } from "react-router";
 import { analiseSchema, caminhoDaAnalise } from "../confronto/analise";
@@ -98,6 +99,9 @@ function RelatorioDaPartida({ detalhe }: { detalhe: DetalheDaPartida }) {
   return (
     <article className="analise-pagina">
       <h1>Análise de {detalhe.heroi.nome}, partida {detalhe.partida}</h1>
+      <p className="analise-posicao" title="Deduzida da lane e de quem tinha mais last hits nela aos 10 min">
+        {nomeDaLane(detalhe.lane)} · {nomeDaPosicao(detalhe.posicao)}
+      </p>
       <p><Link to={`/ao-vivo/partidas/${detalhe.partida}?conta=${detalhe.conta}`}>Ver a partida completa</Link></p>
       <AnalisePosJogo ctx={ctx} relatorio={relatorio} />
     </article>

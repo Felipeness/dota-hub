@@ -8,7 +8,7 @@ import { urlDoRetrato } from "../../heroes/resumo";
 import { lerId } from "../contas";
 import { erroAoVivo, mensagemDoErro } from "../erros";
 import { ErroAoVivoView } from "../ErroAoVivo";
-import { nomeDaLane, textoDoResultado } from "../formato";
+import { nomeDaLane, nomeDaPosicao, textoDoResultado } from "../formato";
 import { FrescorView } from "../Frescor";
 import { useAoVivo } from "../useAoVivo";
 import { BuildDaPartida, IconeOuIniciais } from "./BuildDaPartida";
@@ -84,6 +84,7 @@ function Cabecalho({ detalhe, herois, onAtualizar }: { detalhe: DetalheDaPartida
           <span>{detalhe.abates}/{detalhe.mortes}/{detalhe.assistencias}</span>
           <span>{Math.floor(detalhe.duracaoS / 60)} min</span>
           <span>{nomeDaLane(detalhe.lane)}</span>
+          <span title="Deduzida da lane e de quem tinha mais last hits nela aos 10 min">{nomeDaPosicao(detalhe.posicao)}</span>
         </p>
         {adversario && (
           <p className="partida-adversario">

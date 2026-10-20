@@ -77,7 +77,7 @@ function achadoNoMinuto(ctx: Contexto, minuto: number): Achado[] {
 }
 
 function lastHitsContraReferencia(ctx: Contexto): Achado[] {
-  if (jogaDeSuporte(ctx.proDoHeroi)) return [];
+  if (jogaDeSuporte(ctx.detalhe.posicao, ctx.proDoHeroi)) return [];
   return CHECKPOINTS.flatMap((minuto) => achadoNoMinuto(ctx, minuto));
 }
 

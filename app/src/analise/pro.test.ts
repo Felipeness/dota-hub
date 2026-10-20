@@ -7,9 +7,11 @@ const heroi = (pos4: number, pos5: number): HeroiDaPosicao => ({
 });
 
 it.each([
-  { caso: "Lion (pos 4/5 em 93%)", heroi: heroi(0.67, 0.26), suporte: true },
-  { caso: "carry", heroi: heroi(0, 0.01), suporte: false },
-  { caso: "sem dado do herói", heroi: null, suporte: false },
-])("jogaDeSuporte: $caso", ({ heroi, suporte }) => {
-  expect(jogaDeSuporte(heroi)).toBe(suporte);
+  { caso: "pos 5 na partida, mesmo com herói de core", posicao: 5, heroi: heroi(0, 0.01), suporte: true },
+  { caso: "pos 1 na partida, mesmo com herói de suporte", posicao: 1, heroi: heroi(0.67, 0.26), suporte: false },
+  { caso: "sem posição: Lion (pos 4/5 em 93% no pro)", posicao: null, heroi: heroi(0.67, 0.26), suporte: true },
+  { caso: "sem posição: carry", posicao: null, heroi: heroi(0, 0.01), suporte: false },
+  { caso: "sem posição nem dado do herói", posicao: null, heroi: null, suporte: false },
+])("jogaDeSuporte: $caso", ({ posicao, heroi, suporte }) => {
+  expect(jogaDeSuporte(posicao, heroi)).toBe(suporte);
 });

@@ -4,7 +4,7 @@ import { itemDoGuia, ouroCurto, resumoDaPartida } from "./resumo";
 const minutos = (porMinuto: number, n = 31) => Array.from({ length: n }, (_, i) => i * porMinuto);
 const base: DetalheDaPartida = {
   partida: "1", conta: 7, slot: 0, duracaoS: 46 * 60, venceu: true, analisada: true,
-  heroi: { id: 93, chave: "slark", nome: "Slark", retrato: "slark" }, lado: "radiant", lane: "safe",
+  heroi: { id: 93, chave: "slark", nome: "Slark", retrato: "slark" }, lado: "radiant", lane: "safe", posicao: 1,
   abates: 13, mortes: 3, assistencias: 12, gpm: 500, curvas: { ouro: minutos(500), lh: minutos(6), patrimonio: minutos(700) },
   adversario: {
     heroi: { id: 36, chave: "necrolyte", nome: "Necrophos", retrato: "necrophos" },

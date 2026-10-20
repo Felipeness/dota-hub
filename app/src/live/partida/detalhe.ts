@@ -27,7 +27,10 @@ export type PickOuBan = Readonly<{ heroi: HeroiNaPartida; pick: boolean; seuTime
 
 export type DetalheDaPartida = Readonly<{
   partida: string; conta: number; slot: number; duracaoS: number; venceu: boolean | null; analisada: boolean;
-  heroi: HeroiNaPartida; lado: Lado; lane: Lane | null; abates: number; mortes: number; assistencias: number;
+  heroi: HeroiNaPartida; lado: Lado; lane: Lane | null;
+  /** Posição 1-5 deduzida da lane e do farm nela (o OpenDota não registra); null sem lane. */
+  posicao: Posicao | null;
+  abates: number; mortes: number; assistencias: number;
   /** gold_per_min do próprio OpenDota (o mesmo número da tela da partida); sem ele, a curva de ouro pela duração. */
   gpm: number | null;
   curvas: Curvas; adversario: Readonly<{ heroi: HeroiNaPartida; curvas: Curvas }> | null;
@@ -66,8 +69,11 @@ const TORRE = "building_kill";
 /** key de building_kill começa com o dono da construção; o OpenDota não marca torre com um campo `team` próprio. */
 const PREFIXO_DE_TORRE_RADIANT = "npc_dota_goodguys_tower";
 const TIME_RADIANT = 2;
-/** Papel do OpenDota (1 safe, 2 mid, 3 off) do adversário direto de lane. */
-const PAPEL_ADVERSARIO: Readonly<Record<number, number>> = { 1: 3, 2: 2, 3: 1 };
+export type Posicao = 1 | 2 | 3 | 4 | 5;
+/** Por papel do OpenDota (1 safe, 2 mid, 3 off, 4 selva): posição de quem mais farmou na lane e de quem acompanha. */
+const POSICAO_NA_LANE: Readonly<Record<number, readonly [Posicao, Posicao]>> = { 1: [1, 5], 2: [2, 4], 3: [3, 4], 4: [4, 4] };
+/** Adversário direto: core contra core da lane oposta (1x3, 2x2), suporte contra suporte (4x5). */
+const POSICAO_ADVERSARIA: Readonly<Record<Posicao, Posicao>> = { 1: 3, 2: 2, 3: 1, 4: 5, 5: 4 };
 /** Tipos de runa do OpenDota (constants/runes), na ordem do número. */
 const RUNAS = ["Dano duplo", "Velocidade", "Ilusão", "Invisibilidade", "Regeneração", "Recompensa", "Arcana", "Água", "Sabedoria", "Escudo"];
 
@@ -110,11 +116,20 @@ function draftDaPartida(partida: PartidaFonte, herois: ReturnType<typeof indiceD
 /** picks_bans.team do OpenDota: 0 Radiant, 1 Dire. */
 const ladoDoTimeNumerico = (time: number): Lado => (time === 0 ? "radiant" : "dire");
 
-function adversarioDeLane(jogador: JogadorDaPartidaFonte, inimigos: readonly JogadorDaPartidaFonte[]) {
-  const papel = jogador.lane_role == null ? undefined : PAPEL_ADVERSARIO[jogador.lane_role];
-  const ouroNaLane = (j: JogadorDaPartidaFonte) => j.gold_t[MINUTO_DA_LANE] ?? j.gold_t.at(-1) ?? 0;
-  // Offlane e suporte dividem o papel 3; o adversário direto é quem mais farmou na lane.
-  return inimigos.filter((i) => i.lane_role === papel).sort((a, b) => ouroNaLane(b) - ouroNaLane(a))[0] ?? null;
+const lastHitsNaLane = (j: JogadorDaPartidaFonte) => j.lh_t[MINUTO_DA_LANE] ?? j.lh_t.at(-1) ?? 0;
+
+/** Na mesma lane do mesmo time, quem tem mais last hits aos 10 min é o core; o outro é o suporte. */
+function posicaoNoTime(jogador: JogadorDaPartidaFonte, time: readonly JogadorDaPartidaFonte[]): Posicao | null {
+  const posicoes = jogador.lane_role == null ? undefined : POSICAO_NA_LANE[jogador.lane_role];
+  if (!posicoes) return null;
+  const maisFarm = time.filter((j) => j.lane_role === jogador.lane_role).sort((a, b) => lastHitsNaLane(b) - lastHitsNaLane(a))[0];
+  return maisFarm === jogador ? posicoes[0] : posicoes[1];
+}
+
+function adversarioDeLane(posicao: Posicao | null, inimigos: readonly JogadorDaPartidaFonte[]) {
+  if (posicao === null) return null;
+  const alvo = POSICAO_ADVERSARIA[posicao];
+  return inimigos.find((i) => posicaoNoTime(i, inimigos) === alvo) ?? null;
 }
 
 function pontosDasMortes(partida: PartidaFonte, indice: number): (t: number) => Ponto | null {
@@ -243,14 +258,15 @@ export function montarDetalhe({ partida, conta, constantes, benchmarks, frescor 
   const herois = indiceDeHerois(constantes.herois);
   const lado = ladoDoSlot(jogador.player_slot);
   const inimigos = partida.players.filter((p) => ladoDoSlot(p.player_slot) !== lado);
-  const adversario = adversarioDeLane(jogador, inimigos);
+  const posicao = posicaoNoTime(jogador, partida.players.filter((p) => ladoDoSlot(p.player_slot) === lado));
+  const adversario = adversarioDeLane(posicao, inimigos);
   const compras = comprasDoJogador(jogador, constantes.itens);
   const manchas = jogador.lane_pos ? manchasDaLane(jogador.lane_pos) : [];
   return ok({
     partida: String(partida.match_id), conta, slot: jogador.player_slot, duracaoS: partida.duration,
     venceu: venceu({ player_slot: jogador.player_slot, radiant_win: partida.radiant_win }), analisada: jogador.gold_t.length > 0,
     heroi: herois.porId(jogador.hero_id), lado,
-    lane: jogador.lane_role == null ? null : LANE_POR_PAPEL[jogador.lane_role] ?? null,
+    lane: jogador.lane_role == null ? null : LANE_POR_PAPEL[jogador.lane_role] ?? null, posicao,
     abates: jogador.kills, mortes: jogador.deaths, assistencias: jogador.assists,
     gpm: jogador.gold_per_min ?? gpmDaCurva(jogador.gold_t, partida.duration),
     curvas: curvas(jogador),
