@@ -21,7 +21,10 @@ const lanePos = z.record(z.string(), z.record(z.string(), z.number()));
 /** Partida sem análise da fonte vem sem as listas por tempo; ausente ou null vira lista vazia. */
 const lista = <T extends z.ZodType>(item: T) => z.array(item).nullable().optional().transform((v) => v ?? []);
 const noTempo = z.object({ time: z.number(), key: z.coerce.string() });
-const wardNoTempo = z.object({ time: z.number(), x: z.number(), y: z.number() });
+// ehandle liga a ward colocada (obs_log/sen_log) à saída dela (obs_left_log/sen_left_log): destruída ou expirada.
+const wardNoTempo = z.object({ time: z.number(), x: z.number(), y: z.number(), ehandle: z.number().optional() });
+// time_dead: segundos que o herói ficou morto de fato (já conta buyback e reduções); ausente em partidas antigas.
+const morteNoTempo = z.object({ time: z.number(), key: z.coerce.string(), time_dead: z.number().nullable().optional().transform((v) => v ?? null) });
 export const partidaFonte = z.object({
   match_id: z.number(),
   duration: z.number(),
@@ -45,8 +48,9 @@ export const partidaFonte = z.object({
     kills: z.number(), deaths: z.number(), assists: z.number(),
     gold_per_min: z.number().nullable().optional().transform((v) => v ?? null),
     gold_t: lista(z.number()), xp_t: lista(z.number()), lh_t: lista(z.number()), networth_t: lista(z.number()),
-    purchase_log: lista(noTempo), kills_log: lista(noTempo), deaths_log: lista(noTempo), runes_log: lista(noTempo),
-    obs_log: lista(wardNoTempo), sen_log: lista(wardNoTempo), buyback_log: lista(z.object({ time: z.number() })),
+    purchase_log: lista(noTempo), kills_log: lista(noTempo), deaths_log: lista(morteNoTempo), runes_log: lista(noTempo),
+    obs_log: lista(wardNoTempo), sen_log: lista(wardNoTempo), obs_left_log: lista(wardNoTempo), sen_left_log: lista(wardNoTempo),
+    buyback_log: lista(z.object({ time: z.number() })),
     ability_upgrades_arr: lista(z.number()),
     // Troca só do encantamento vem sem item_neutral.
     neutral_item_history: lista(z.object({ time: z.number(), item_neutral: z.string().optional() })),
@@ -60,6 +64,8 @@ export const itensFonte = z.record(z.string(), z.object({
   // O cache guarda a saída do schema e a lê de novo com ele: o booleano já reduzido também precisa passar.
   components: z.union([z.boolean(), z.array(z.string()).nullable().optional().transform((v) => (v ?? []).length > 0)]),
 }));
+/** /constants/xp_level: xp total acumulada pra alcançar cada nível (índice 0 = nível 1). */
+export const xpPorNivelFonte = z.array(z.number());
 export const idsDeHabilidadesFonte = z.record(z.string(), z.string());
 export const habilidadesFonte = z.record(z.string(), z.object({ dname: texto }));
 const percentis = z.array(z.object({ percentile: z.number(), value: z.number() }));

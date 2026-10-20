@@ -17,7 +17,7 @@ const base: DetalheDaPartida = {
   compras: [{ t: 1_060, chave: "diffusal_blade", nome: "Diffusal Blade", custo: 2_500, grande: true }],
   neutros: [], habilidades: [], manchasDaLane: [], laneDoMapa: "safe",
   referencia: { ouroPorMin: 526, lhPorMin: 5.7 }, frescor: { buscadoEm: 1, vencido: false },
-  vantagemDoTime: { ouro: [], xp: [] }, eficienciaDeLanePct: null, draft: [],
+  vantagemDoTime: { ouro: [], xp: [] }, eficienciaDeLanePct: null, draft: [], panorama: { jogadores: [], wards: [], estruturas: [], roshans: [] },
 };
 
 it("resume resultado, lane, last hits, item principal e a janela com mais mortes", () => {

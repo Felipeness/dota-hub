@@ -5,10 +5,11 @@ import { juntarFrescor, type Consultar } from "../consulta";
 import { LANE_POR_PAPEL, VALIDADE_S, consultarNomesDeHerois, lerId, venceu } from "../contas";
 import { erroAoVivo, falha, ok, type RespostaAoVivo } from "../erros";
 import {
-  benchmarksFonte, habilidadesFonte, idsDeHabilidadesFonte, itensFonte, partidaFonte,
+  benchmarksFonte, habilidadesFonte, idsDeHabilidadesFonte, itensFonte, partidaFonte, xpPorNivelFonte,
   type BenchmarksFonte, type ItensFonte, type JogadorDaPartidaFonte, type PartidaFonte, type nomesDeHeroisFonte,
 } from "../fonte/schemas";
 import { celulaParaNorm, laneDasManchas, manchasDaLane, type Lado } from "../rotaAproximada";
+import { ladoDoSlot, montarPanorama, mortesDaFonte, pontosDasMortes, type Panorama } from "./panorama";
 import type { Frescor, Lane } from "../tipos";
 
 export type HeroiNaPartida = Readonly<{ id: number; chave: string; nome: string; retrato: string }>;
@@ -44,12 +45,16 @@ export type DetalheDaPartida = Readonly<{
   eficienciaDeLanePct: number | null;
   /** Ordem real do draft (campo order do OpenDota); vazio em partidas sem picks_bans. */
   draft: readonly PickOuBan[];
+  /** Os 10 heróis, wards dos dois times, estruturas e Roshans: o contexto de cada lance (ver panorama.ts). */
+  panorama: Panorama;
 }>;
 
 type Nomes = z.infer<typeof nomesDeHeroisFonte>;
 export type Constantes = Readonly<{
   herois: Nomes; itens: ItensFonte; idsDeHabilidades: Readonly<Record<string, string>>;
   habilidades: Readonly<Record<string, Readonly<{ dname: string | null }>>>;
+  /** /constants/xp_level (xp acumulada por nível); sem ela, o respawn só sai do time_dead da fonte. */
+  xpPorNivel?: readonly number[];
 }>;
 type Entrada = Readonly<{
   partida: PartidaFonte; conta: number; constantes: Constantes; benchmarks: BenchmarksFonte | null; frescor: Frescor;
@@ -77,7 +82,6 @@ const POSICAO_ADVERSARIA: Readonly<Record<Posicao, Posicao>> = { 1: 3, 2: 2, 3: 
 /** Tipos de runa do OpenDota (constants/runes), na ordem do número. */
 const RUNAS = ["Dano duplo", "Velocidade", "Ilusão", "Invisibilidade", "Regeneração", "Recompensa", "Arcana", "Água", "Sabedoria", "Escudo"];
 
-const ladoDoSlot = (slot: number): Lado => (slot < 128 ? "radiant" : "dire");
 export const tempoDaPartida = (s: number) => `${s < 0 ? "-" : ""}${Math.floor(Math.abs(s) / 60)}:${String(Math.abs(s) % 60).padStart(2, "0")}`;
 
 /** "Nature's Prophet" vira natures_prophet, o nome do arquivo de retrato no app. */
@@ -132,29 +136,11 @@ function adversarioDeLane(posicao: Posicao | null, inimigos: readonly JogadorDaP
   return inimigos.find((i) => posicaoNoTime(i, inimigos) === alvo) ?? null;
 }
 
-function pontosDasMortes(partida: PartidaFonte, indice: number): (t: number) => Ponto | null {
-  return (t) => {
-    const luta = partida.teamfights.find((l) => l.start <= t && t <= l.end);
-    const celulas = Object.entries(luta?.players[indice]?.deaths_pos ?? {}).flatMap(([x, ys]) => Object.keys(ys).map((y) => [x, y] as const));
-    const [celula] = celulas;
-    return celula ? [celulaParaNorm(Number(celula[0])), celulaParaNorm(Number(celula[1]))] : null;
-  };
-}
-
 type Contexto = Readonly<{
   partida: PartidaFonte; jogador: JogadorDaPartidaFonte; indice: number; herois: ReturnType<typeof indiceDeHerois>; compras: readonly Compra[];
 }>;
 
 const nomeDoMatador = (herois: Contexto["herois"], chave: string) => herois.porChave(chave)?.nome ?? (chave.includes("tower") ? "torre" : "creep ou neutro");
-
-function mortesDoJogador({ partida, jogador, herois }: Contexto): readonly Readonly<{ time: number; key: string }>[] {
-  if (jogador.deaths_log.length > 0) return jogador.deaths_log;
-  // Partida antiga sem deaths_log: as mortes saem do kills_log dos inimigos.
-  const meuHeroi = herois.porId(jogador.hero_id).chave;
-  return partida.players.filter((p) => ladoDoSlot(p.player_slot) !== ladoDoSlot(jogador.player_slot))
-    .flatMap((p) => p.kills_log.filter((k) => k.key === `${PREFIXO_DO_HEROI}${meuHeroi}`)
-      .map((k) => ({ time: k.time, key: `${PREFIXO_DO_HEROI}${herois.porId(p.hero_id).chave}` })));
-}
 
 /**
  * Quando o portador da Aegis do time inimigo (CHAT_MESSAGE_AEGIS, player_slot do pickup) morre antes dela expirar,
@@ -183,7 +169,7 @@ function eventosDoJogador(contexto: Contexto): EventoDaPartida[] {
     ({ t: w.time, tipo, texto: tipo === "observer" ? "Observer colocada" : "Sentry colocada", ponto: [celulaParaNorm(w.x), celulaParaNorm(w.y)] });
   const eventos: EventoDaPartida[] = [
     ...jogador.kills_log.map((k): EventoDaPartida => ({ t: k.time, tipo: "abate", texto: `Abate: ${herois.porChave(k.key)?.nome ?? k.key}`, ponto: null })),
-    ...mortesDoJogador(contexto).map((m): EventoDaPartida => ({ t: m.time, tipo: "morte", texto: `Morte para ${nomeDoMatador(herois, m.key)}`, ponto: pontoDaMorte(m.time) })),
+    ...mortesDaFonte(partida, jogador, herois).map((m): EventoDaPartida => ({ t: m.time, tipo: "morte", texto: `Morte para ${nomeDoMatador(herois, m.key)}`, ponto: pontoDaMorte(m.time) })),
     ...compras.filter((c) => c.grande).map((c): EventoDaPartida => ({ t: c.t, tipo: "item", texto: c.nome, ponto: null })),
     ...partida.objectives.filter((o) => o.type === ROSHAN)
       .map((o): EventoDaPartida => ({ t: o.time, tipo: "roshan", texto: o.team === meuTime ? "Roshan pelo seu time" : "Roshan pelo time inimigo", ponto: null })),
@@ -279,6 +265,7 @@ export function montarDetalhe({ partida, conta, constantes, benchmarks, frescor 
     vantagemDoTime: vantagemDoTime(partida, lado),
     eficienciaDeLanePct: jogador.lane_efficiency_pct,
     draft: draftDaPartida(partida, herois, lado),
+    panorama: montarPanorama(partida, herois, constantes.xpPorNivel ?? null),
   });
 }
 
@@ -298,12 +285,13 @@ export async function detalheDaPartida(
   if (!partida.ok) return partida;
   const jogador = partida.dados.valor.players.find((p) => p.account_id === conta);
   if (!jogador) return falha(erroAoVivo("NAO_ENCONTRADO"));
-  const [herois, itens, ids, habilidades, benchmarks] = await Promise.all([
+  const [herois, itens, ids, habilidades, benchmarks, xpPorNivel] = await Promise.all([
     consultarNomesDeHerois(consultar),
     constante(consultar, "/constants/items", itensFonte),
     constante(consultar, "/constants/ability_ids", idsDeHabilidadesFonte),
     constante(consultar, "/constants/abilities", habilidadesFonte),
     constante(consultar, `/benchmarks?hero_id=${jogador.hero_id}`, benchmarksFonte),
+    constante(consultar, "/constants/xp_level", xpPorNivelFonte),
   ]);
   if (!herois.ok) return herois;
   if (!itens.ok) return itens;
@@ -311,7 +299,11 @@ export async function detalheDaPartida(
   if (!habilidades.ok) return habilidades;
   return montarDetalhe({
     partida: partida.dados.valor, conta,
-    constantes: { herois: herois.dados.valor, itens: itens.dados.valor, idsDeHabilidades: ids.dados.valor, habilidades: habilidades.dados.valor },
+    constantes: {
+      herois: herois.dados.valor, itens: itens.dados.valor, idsDeHabilidades: ids.dados.valor, habilidades: habilidades.dados.valor,
+      // Extra como a referência: sem ela o respawn fica só no time_dead que a própria partida traz.
+      ...(xpPorNivel.ok ? { xpPorNivel: xpPorNivel.dados.valor } : {}),
+    },
     // A referência é extra: sem ela a página mostra a partida sem a linha da mediana.
     benchmarks: benchmarks.ok ? benchmarks.dados.valor : null,
     frescor: juntarFrescor(partida.dados.frescor, herois.dados.frescor, itens.dados.frescor),

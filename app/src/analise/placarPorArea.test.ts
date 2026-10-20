@@ -11,7 +11,7 @@ function detalheMinimo(parcial: Partial<DetalheDaPartida>): DetalheDaPartida {
     lane: null, posicao: null, abates: 0, mortes: 3, assistencias: 0, gpm: 600, curvas: { ouro: [0, 30_000], lh: [], patrimonio: [] },
     adversario: null, inimigos: [], eventos: [], compras: [], neutros: [], habilidades: [], manchasDaLane: [],
     laneDoMapa: null, referencia: null, frescor: { buscadoEm: 0, vencido: false }, vantagemDoTime: { ouro: [], xp: [] },
-    eficienciaDeLanePct: null, draft: [], ...parcial,
+    eficienciaDeLanePct: null, draft: [], panorama: { jogadores: [], wards: [], estruturas: [], roshans: [] }, ...parcial,
   };
 }
 
