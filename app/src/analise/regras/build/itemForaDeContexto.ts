@@ -6,6 +6,7 @@ import { gruposDeContra, gruposJustificados, nomeDoItem, type InimigoParaRegra }
 import { explicarItem, ITENS_CURADOS } from "../../../live/partida/porQueItem";
 import { FONTES_DAS_TAGS } from "../../../live/partida/tagsDosHerois";
 import { ITEM_FINAL_DO_COMPONENTE } from "./componentesDeItem";
+import { matchupDePro, matchupJulgaOItem } from "./matchupDePro";
 
 /**
  * Primeiro grupo justificado ainda sem resposta NO MOMENTO da compra avaliada (não no estado final da build) e
@@ -33,9 +34,12 @@ export function itemForaDeContexto(ctx: Contexto): Achado[] {
   // "slot desperdiçado" só porque a função de counter do catálogo não bate com os 5 inimigos desta partida.
   const chavesCore = new Set((ctx.pro?.spikes ?? []).filter((s) => s.chave).map((s) => s.item));
   const jaSugeridos = new Set<string>();
+  // Com amostra do confronto, quem fala do item é itemContraInimigos: escolha comum dos pros contra estes inimigos não
+  // é slot desperdiçado, e item que eles quase nunca fazem já vira achado lá.
+  const matchup = matchupDePro(ctx);
 
   return ctx.detalhe.compras.flatMap((compra): Achado[] => {
-    if (chavesCore.has(compra.chave)) return [];
+    if (chavesCore.has(compra.chave) || matchupJulgaOItem(matchup, compra.chave)) return [];
     // Componente consumido num upgrade posterior (ex. Diffusal Blade -> Disperser): a decisão de compra já foi
     // avaliada no item final, não é um segundo slot desperdiçado.
     const itemFinal = ITEM_FINAL_DO_COMPONENTE[compra.chave];

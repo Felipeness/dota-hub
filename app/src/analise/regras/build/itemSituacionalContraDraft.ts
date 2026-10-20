@@ -7,6 +7,7 @@ import {
 } from "./contraDraft";
 import { ITENS_CURADOS } from "../../../live/partida/porQueItem";
 import { FONTES_DAS_TAGS } from "../../../live/partida/tagsDosHerois";
+import { FRACAO_RARA, fracaoNoMatchup, matchupDePro } from "./matchupDePro";
 
 const FONTES = FONTES_DAS_TAGS;
 const MAXIMO_DE_SUGESTOES = 2;
@@ -59,10 +60,17 @@ export function itemSituacionalContraDraft(ctx: Contexto): Achado[] {
   // por faltar Pipe contra o mesmo dano mágico).
   const faltando = fundirSubconjuntos(grupos.filter((g) =>
     compradoDo(g) === undefined && !respondidos.some((r) => riscoContidoEm(g, r))));
+  // O item ainda conta como resposta (não vira "faltou"), mas não é acerto quando os pros quase nunca o fazem contra
+  // estes inimigos: itemContraInimigos já comenta a escolha com a amostra do confronto.
+  const matchup = matchupDePro(ctx);
+  const raroNoMatchup = (chave: string) => {
+    const fracao = matchup ? fracaoNoMatchup(matchup, chave) : null;
+    return fracao !== null && fracao <= FRACAO_RARA;
+  };
   return [
     ...respondidos.flatMap((g) => {
       const comprado = compradoDo(g);
-      return comprado === undefined ? [] : [achadoAcerto(g, comprado)];
+      return comprado === undefined || raroNoMatchup(comprado) ? [] : [achadoAcerto(g, comprado)];
     }),
     ...faltando.map(achadoFaltou),
   ];

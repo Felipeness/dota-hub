@@ -10,4 +10,9 @@ export const ITEM_FINAL_DO_COMPONENTE: Readonly<Record<string, string>> = {
   sange: "abyssal_blade",
   diffusal_blade: "disperser",
   eagle: "disperser",
+  yasha: "manta", // também vira Sange and Yasha / Yasha and Kaya; Manta é o caminho dos heróis de agilidade
+  maelstrom: "mjollnir",
+  dragon_lance: "hurricane_pike",
+  invis_sword: "silver_edge",
+  pers: "sphere", // também vira Battle Fury / Refresher
 };

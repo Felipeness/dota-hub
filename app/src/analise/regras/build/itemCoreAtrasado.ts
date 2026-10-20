@@ -4,6 +4,7 @@ import { tempoDaPartida } from "../../../live/partida/detalhe";
 import type { SpikeDePro } from "../../../confronto/analise";
 import type { Achado, Contexto } from "../../modelo";
 import { ITEM_FINAL_DO_COMPONENTE } from "./componentesDeItem";
+import { matchupDePro, matchupJulgaOItem } from "./matchupDePro";
 
 const FONTE_PRO = "content/confrontos (export/dota_export/confrontos.py): spikes do herói em partidas de liga 7.40/7.41";
 
@@ -82,11 +83,14 @@ const minutos = (n: number) => n.toLocaleString("pt-BR", { maximumFractionDigits
 export function itemCoreAtrasado(ctx: Contexto): Achado[] {
   const pro = ctx.pro;
   if (!pro) return [];
+  // Item com veredito do recorte contra estes inimigos (itemContraInimigos) fica com aquela regra, que tem a amostra
+  // do confronto; a mediana do herói inteiro aqui repetiria ou contradiria o achado.
+  const matchup = matchupDePro(ctx);
   const todosOsSpikesChave = new Set(pro.spikes.filter((s) => s.chave).map((s) => s.item));
   // Componente cujo item final também é spike chave deste herói: avaliar só o item final, senão o mesmo gap de
   // build (nunca chegou no item tardio) conta duas vezes (ex. Crystalys + Daedalus pra quem nunca montou nenhum).
   const itensCore = pro.spikes.filter((s) => {
-    if (!s.chave) return false;
+    if (!s.chave || matchupJulgaOItem(matchup, s.item)) return false;
     const itemFinal = ITEM_FINAL_DO_COMPONENTE[s.item];
     return !(itemFinal && todosOsSpikesChave.has(itemFinal));
   });

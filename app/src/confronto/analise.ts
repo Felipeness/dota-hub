@@ -21,6 +21,16 @@ const blocoSchema = z.object({
 
 export const spikeSchema = z.object({ item: z.string(), nome: z.string(), minuto: z.number().nonnegative(), n: z.number().int().positive(), chave: z.boolean() });
 
+const itemContraSchema = z.object({ chave: z.string(), n: z.number().int().positive(), mediana: z.number() });
+
+/** Partidas pro do herói contra um inimigo (content/pro_contra, export/dota_export/pro_contra.py). */
+const contraSchema = z.object({
+  jogos: z.number().int().positive(),
+  vitorias: z.number().int().nonnegative(),
+  /** Primeira compra de cada item fechado (1000+ de ouro, sem consumível): em quantas partidas e minuto mediano. */
+  itens: z.array(itemContraSchema),
+});
+
 export const analiseSchema = z.object({
   id: z.string(),
   nome: z.string(),
@@ -32,6 +42,10 @@ export const analiseSchema = z.object({
   lh10: z.number().nonnegative().nullable().default(null),
   spikes: z.array(spikeSchema),
   confrontos: z.array(blocoSchema).min(1),
+  /** Nome interno do inimigo (HeroiNaPartida.chave) -> partidas pro contra ele; vazio em arquivo antigo. */
+  contra_inimigo: z.record(z.string(), contraSchema).default({}),
+  /** Nome de cada item citado em `contra_inimigo`. */
+  nomes_dos_itens: z.record(z.string(), z.string()).default({}),
 });
 
 /** id do app -> quantos confrontos o herói tem analisados. */
@@ -40,6 +54,7 @@ export const indiceDeConfrontosSchema = z.record(z.string(), z.number().int().po
 export type Analise = z.infer<typeof analiseSchema>;
 export type BlocoDeConfronto = z.infer<typeof blocoSchema>;
 export type SpikeDePro = z.infer<typeof spikeSchema>;
+export type ContraInimigo = z.infer<typeof contraSchema>;
 
 export const caminhoDaAnalise = (idDoApp: string) => `/data/confrontos/${idDoApp}.json`;
 

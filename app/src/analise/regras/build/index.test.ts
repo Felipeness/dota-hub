@@ -25,7 +25,11 @@ const HEROIS_USADOS = {
 };
 const CONSTANTES = { herois: HEROIS_USADOS, itens: ITENS_DA_PARTIDA, idsDeHabilidades: {}, habilidades: {} };
 
-function contextoDaAmostra(pro = PRO_MEDUSA): Contexto {
+// As regras genéricas são testadas sem o recorte por inimigo (content/pro_contra); com ele, itemContraInimigos assume
+// os itens que julga, e isso é testado à parte no fim do arquivo.
+const PRO_MEDUSA_SEM_MATCHUP = { ...PRO_MEDUSA, contra_inimigo: {} };
+
+function contextoDaAmostra(pro = PRO_MEDUSA_SEM_MATCHUP): Contexto {
   const partida = partidaFonte.parse(PARTIDA);
   const resposta = montarDetalhe({ partida, conta: 329255797, constantes: CONSTANTES, benchmarks: null, frescor: { buscadoEm: 0, vencido: false } });
   if (!resposta.ok) throw new Error(resposta.erro.codigo);
@@ -77,8 +81,9 @@ describe("itemCoreAtrasado", () => {
   it("só diz 'no tempo certo (ou antes)' quando saiu antes da mediana; depois dela, dentro da margem, diz isso", () => {
     const porId = new Map(achados().map((a) => [a.id, a]));
     expect(porId.get("build-core-no-tempo-aghanims_shard")?.titulo).toContain("no tempo certo (ou antes)");
-    // Yasha aos 12,6 min contra mediana de 11: depois, mas dentro da margem de 3 min.
-    expect(porId.get("build-core-no-tempo-yasha")?.titulo).toBe("Yasha saiu depois da mediana do pro, mas dentro da margem aceitável");
+    // Manta aos 16:10 contra mediana de 15: depois, mas dentro da margem de 4,5 min. Yasha não é avaliado: vira Manta.
+    expect(porId.get("build-core-no-tempo-manta")?.titulo).toBe("Manta Style saiu depois da mediana do pro, mas dentro da margem aceitável");
+    expect(porId.has("build-core-no-tempo-yasha")).toBe(false);
   });
 
   it("não acusa Yasha, Manta e Aghanim's Shard: dentro da margem ou adiantados", () => {
@@ -159,5 +164,30 @@ describe("itemForaDeContexto", () => {
     const ids = achados().filter((a) => a.id.startsWith("build-fora-de-contexto-"));
     expect(ids).toHaveLength(1);
     expect(ids[0]?.id).toBe("build-fora-de-contexto-disperser-2878");
+  });
+});
+
+describe("com o recorte contra os inimigos da partida (content/pro_contra)", () => {
+  const comMatchup = () => REGRAS.flatMap((regra) => regra.avaliar(contextoDaAmostra(PRO_MEDUSA)));
+
+  it("o Butterfly atrasado vem só do recorte do confronto, não repetido como core atrasado do herói", () => {
+    const ids = comMatchup().map((a) => a.id);
+    expect(ids).toContain("build-matchup-atrasado-butterfly");
+    expect(ids).not.toContain("build-core-atrasado-butterfly");
+  });
+
+  it("Linken's Sphere vira contexto de que os pros quase não fazem, e deixa de ser acerto contra o draft", () => {
+    const achados = comMatchup();
+    const raro = achados.find((a) => a.id === "build-matchup-raro-sphere");
+    expect(raro?.tipo).toBe("contexto");
+    expect(raro?.titulo).toMatch(/Os pros quase não fazem Linken's Sphere contra .+ \(\d+ em \d+\)/);
+    expect(achados.some((a) => a.id.startsWith("build-situacional-acerto-") && a.titulo.includes("Sphere"))).toBe(false);
+    expect(achados.some((a) => a.id === "build-situacional-faltou-2:controle")).toBe(false);
+  });
+
+  it("Skadi no tempo é um acerto só, o do recorte do confronto", () => {
+    const ids = comMatchup().map((a) => a.id);
+    expect(ids).toContain("build-matchup-no-tempo-skadi");
+    expect(ids).not.toContain("build-core-no-tempo-skadi");
   });
 });

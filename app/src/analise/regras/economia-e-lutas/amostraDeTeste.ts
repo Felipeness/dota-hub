@@ -40,7 +40,7 @@ export const PRO_DO_HEROI_DA_AMOSTRA: HeroiDaPosicao = {
 /** Recorte de app/public/data/confrontos/medusa.json (content/pro_dados/medusa.json: resumo.n=503, resumo.lh10=65). */
 export const PRO_DA_AMOSTRA: Analise = {
   id: "medusa", nome: "Medusa", nome_interno: "medusa", hero_id: 94, patch: "7.41", jogos_pro: 503, lh10: 65,
-  spikes: [], confrontos: [],
+  spikes: [], confrontos: [], contra_inimigo: {}, nomes_dos_itens: {},
 };
 
 export function contextoDaAmostra(): Contexto {
