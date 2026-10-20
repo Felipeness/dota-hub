@@ -7,7 +7,6 @@ const doMinuto = (texto: string) => achados.find((a) => tempoDaPartida(Math.roun
 
 describe("morteEmInferioridade na partida 9046905170", () => {
   it.each([
-    { morte: "16:06", aliados: 4, inimigos: 5 },
     { morte: "28:33", aliados: 4, inimigos: 5 },
     { morte: "31:38", aliados: 3, inimigos: 4 },
     { morte: "49:51", aliados: 3, inimigos: 5 },
@@ -18,6 +17,7 @@ describe("morteEmInferioridade na partida 9046905170", () => {
   it.each([
     { morte: "8:34", motivo: "ninguém do time estava morto" },
     { morte: "11:01", motivo: "Huskar voltava 1 s depois, na mesma luta" },
+    { morte: "16:06", motivo: "Huskar voltava 4 s depois" },
     { morte: "46:10", motivo: "time completo" },
   ])("não acusa $morte: $motivo", ({ morte }) => {
     expect(doMinuto(morte)).toBeUndefined();
