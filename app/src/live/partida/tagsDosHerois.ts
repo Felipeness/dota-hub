@@ -58,3 +58,14 @@ export const tagsDoHeroi = (chave: string): readonly Tag[] => TAGS_DOS_HEROIS[ch
 
 /** false = herói ainda sem entrada no dicionário de tags (não conferido), não "sem motivo de counter". */
 export const heroiConferido = (chave: string): boolean => Object.hasOwn(TAGS_DOS_HEROIS, chave);
+
+/**
+ * Heróis cujo controle principal atravessa imunidade a magia (Liquipedia, "Pierces Spell Immunity" no ultimate ou no
+ * disable que define o herói): contra eles a Black King Bar não resolve o controle. Lista curta, só casos certos.
+ */
+const CONTROLE_ATRAVESSA_IMUNIDADE: ReadonlySet<string> = new Set([
+  "axe", "bane", "batrider", "beastmaster", "doom_bringer", "enigma", "faceless_void", "legion_commander",
+  "magnataur", "necrolyte", "primal_beast", "winter_wyvern",
+]);
+
+export const controleAtravessaImunidade = (chave: string): boolean => CONTROLE_ATRAVESSA_IMUNIDADE.has(chave);

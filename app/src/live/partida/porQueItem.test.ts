@@ -21,6 +21,12 @@ it("BKB pede pelo menos 2 heróis de controle: um só não vira motivo", () => {
   expect(explicarItem("black_king_bar", [heroi("lion", "Lion"), heroi("sniper")])?.motivo).toBeNull();
 });
 
+it("BKB não conta controle que atravessa imunidade (Doom, Reaper's Scythe); Linken continua contando", () => {
+  const inimigos = [heroi("necrolyte", "Necrophos"), heroi("doom_bringer", "Doom"), heroi("ancient_apparition", "Ancient Apparition")];
+  expect(explicarItem("black_king_bar", inimigos)?.clausulas).toEqual([{ tag: "magico", herois: ["Necrophos", "Ancient Apparition"] }]);
+  expect(explicarItem("sphere", inimigos)?.clausulas).toEqual([{ tag: "controle", herois: ["Necrophos", "Doom"] }]);
+});
+
 it("devolve só as cláusulas que bateram o mínimo, com os heróis de cada uma", () => {
   const inimigos = [heroi("lion", "Lion"), heroi("shadow_shaman", "Shadow Shaman"), heroi("sniper", "Sniper")];
   const explicacao = explicarItem("black_king_bar", inimigos);

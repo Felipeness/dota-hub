@@ -1,17 +1,18 @@
-import { NOME_DA_TAG, heroiConferido, tagsDoHeroi, type Tag } from "./tagsDosHerois";
+import { NOME_DA_TAG, controleAtravessaImunidade, heroiConferido, tagsDoHeroi, type Tag } from "./tagsDosHerois";
 
 /**
  * Para que serve cada item comum e contra o quê ele costuma ser comprado. Função do item resumida da descrição
  * oficial (https://www.dota2.com/items, 7.41) e das páginas de item da Liquipedia; `contra` só existe quando a
  * página do item cita o caso como motivo de compra. `minimo` = quantos heróis inimigos com a tag justificam a regra.
  */
-type Contra = Readonly<{ tags: readonly Tag[]; minimo: number }>;
+type Contra = Readonly<{ tags: readonly Tag[]; minimo: number; imunidade?: true }>;
 type ItemCurado = Readonly<{ funcao: string; contra?: Contra }>;
 
 const contra = (minimo: number, ...tags: Tag[]): Contra => ({ tags, minimo });
 
 export const ITENS_CURADOS: Readonly<Record<string, ItemCurado>> = {
-  black_king_bar: { funcao: "imunidade a magia: atravessa controle e dano mágico na luta", contra: contra(2, "controle", "magico") },
+  // Imunidade não segura controle que a atravessa (Doom, Reaper's Scythe, Black Hole...): esses heróis não contam pra BKB.
+  black_king_bar: { funcao: "imunidade a magia: atravessa controle e dano mágico na luta", contra: { ...contra(2, "controle", "magico"), imunidade: true } },
   silver_edge: { funcao: "quebra passivas e entra invisível para abrir a luta", contra: contra(1, "passiva") },
   invis_sword: { funcao: "invisibilidade para entrar na luta ou fugir; vira Silver Edge", contra: contra(1, "passiva") },
   monkey_king_bar: { funcao: "acerto garantido: ignora evasão", contra: contra(1, "evasao") },
@@ -114,9 +115,12 @@ export type Explicacao = Readonly<{ funcao: string; motivo: string | null; claus
 const itemCurado = (chave: string): ItemCurado | undefined =>
   (Object.hasOwn(ITENS_CURADOS, chave) ? ITENS_CURADOS[chave] : undefined);
 
+const contaPraTag = (regra: Contra, tag: Tag, chave: string): boolean =>
+  tagsDoHeroi(chave).includes(tag) && !(regra.imunidade && tag === "controle" && controleAtravessaImunidade(chave));
+
 function clausulasQueBateram(regra: Contra, inimigos: readonly InimigoParaRegra[]): readonly Clausula[] {
   return regra.tags
-    .map((tag) => ({ tag, herois: inimigos.filter((i) => tagsDoHeroi(i.chave).includes(tag)).map((i) => i.nome) }))
+    .map((tag) => ({ tag, herois: inimigos.filter((i) => contaPraTag(regra, tag, i.chave)).map((i) => i.nome) }))
     .filter(({ herois }) => herois.length >= regra.minimo);
 }
 
