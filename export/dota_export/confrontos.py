@@ -180,6 +180,13 @@ def spikes(pro: dict, core: frozenset[str]) -> list[dict]:
                   key=lambda s: s["minuto"])
 
 
+def nomes_dos_itens(contra_inimigo: dict) -> dict[str, str]:
+    """slug -> nome do item, só dos itens citados no recorte por inimigo: a regra cita o item pelo nome."""
+    itens = _ler(fontes.ITENS)
+    slugs = sorted({i["chave"] for c in contra_inimigo.values() for i in c["itens"]})
+    return {slug: itens.get(slug, {}).get("dname", slug) for slug in slugs}
+
+
 def _lh10(resumo: dict) -> float | None:
     """Mediana de last hits aos 10 min nas partidas pro; o pro_dados grava como texto ("65")."""
     try:
@@ -188,7 +195,7 @@ def _lh10(resumo: dict) -> float | None:
         return None
 
 
-def confronto(interno: str, texto: str, pro: dict, core: frozenset[str]) -> dict:
+def confronto(interno: str, texto: str, pro: dict, core: frozenset[str], contra_inimigo: dict | None = None) -> dict:
     heroi = _herois().get(interno)
     if heroi is None:
         raise ValueError(f"herói fora do heroes.json: {interno}")
@@ -201,7 +208,8 @@ def confronto(interno: str, texto: str, pro: dict, core: frozenset[str]) -> dict
         raise ValueError(f"oponente repetido: {', '.join(sorted(repetidos))}")
     return {"id": id_no_app(heroi["localized_name"]), "nome": heroi["localized_name"], "nome_interno": interno,
             "hero_id": heroi["id"], "patch": meta["patch"], "jogos_pro": pro["resumo"]["n"],
-            "lh10": _lh10(pro["resumo"]), "spikes": spikes(pro, core), "confrontos": blocos}
+            "lh10": _lh10(pro["resumo"]), "spikes": spikes(pro, core), "confrontos": blocos,
+            "contra_inimigo": contra_inimigo or {}, "nomes_dos_itens": nomes_dos_itens(contra_inimigo or {})}
 
 
 def itens_core(guias: list[dict], fichas: list[dict]) -> dict[int, frozenset[str]]:
@@ -211,12 +219,19 @@ def itens_core(guias: list[dict], fichas: list[dict]) -> dict[int, frozenset[str
     return do_guia | da_ficha
 
 
-def carregar(pasta: Path, pasta_pro: Path, core: dict[int, frozenset[str]]) -> list[dict]:
+def _contra_inimigo(pasta_contra: Path, interno: str) -> dict:
+    """content/pro_contra/<herói>.json (dota_export/pro_contra.py); herói ainda sem busca fica sem o recorte."""
+    arquivo = pasta_contra / f"{interno}.json"
+    return json.loads(arquivo.read_text(encoding="utf-8"))["contra"] if arquivo.exists() else {}
+
+
+def carregar(pasta: Path, pasta_pro: Path, core: dict[int, frozenset[str]], pasta_contra: Path | None = None) -> list[dict]:
     todos = []
     for arq in sorted(pasta.glob("*.md")):
         try:
             pro = json.loads((pasta_pro / f"{arq.stem}.json").read_text(encoding="utf-8"))
-            todos.append(confronto(arq.stem, arq.read_text(encoding="utf-8"), pro, core.get(pro["hero_id"], frozenset())))
+            contra = _contra_inimigo(pasta_contra, arq.stem) if pasta_contra else {}
+            todos.append(confronto(arq.stem, arq.read_text(encoding="utf-8"), pro, core.get(pro["hero_id"], frozenset()), contra))
         except (ValueError, KeyError, FileNotFoundError) as erro:
             raise ValueError(f"{arq.name}: {erro}") from erro
     return todos

@@ -16,11 +16,15 @@
         "placar": {"$ref": "#/$defs/texto"}, "por_que_importa": {"$ref": "#/$defs/texto"}, "janelas": {"$ref": "#/$defs/texto"},
         "ele_faz": {"$ref": "#/$defs/texto_ou_nulo"}, "voce_faz": {"$ref": "#/$defs/texto_ou_nulo"},
         "itens": {"$ref": "#/$defs/texto"}, "como_jogar": {"$ref": "#/$defs/texto"},
-        "fontes": {"type": "array", "items": {"$ref": "#/$defs/texto"}}}}
+        "fontes": {"type": "array", "items": {"$ref": "#/$defs/texto"}}}},
+    "contra": {"type": "object", "additionalProperties": false, "required": ["jogos", "vitorias", "itens"],
+      "properties": {"jogos": {"type": "integer", "minimum": 1}, "vitorias": {"type": "integer", "minimum": 0},
+        "itens": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["chave", "n", "mediana"],
+          "properties": {"chave": {"$ref": "#/$defs/slug"}, "n": {"type": "integer", "minimum": 1}, "mediana": {"type": "number"}}}}}}
   },
   "type": "object",
   "additionalProperties": false,
-  "required": ["id", "nome", "nome_interno", "hero_id", "patch", "jogos_pro", "lh10", "spikes", "confrontos"],
+  "required": ["id", "nome", "nome_interno", "hero_id", "patch", "jogos_pro", "lh10", "spikes", "confrontos", "contra_inimigo", "nomes_dos_itens"],
   "properties": {
     "id": {"$ref": "#/$defs/slug"},
     "nome": {"$ref": "#/$defs/texto"},
@@ -30,6 +34,8 @@
     "jogos_pro": {"type": "integer", "minimum": 1},
     "lh10": {"type": ["number", "null"], "minimum": 0},
     "spikes": {"type": "array", "items": {"$ref": "#/$defs/spike"}},
-    "confrontos": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/bloco"}}
+    "confrontos": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/bloco"}},
+    "contra_inimigo": {"type": "object", "propertyNames": {"$ref": "#/$defs/slug"}, "additionalProperties": {"$ref": "#/$defs/contra"}},
+    "nomes_dos_itens": {"type": "object", "propertyNames": {"$ref": "#/$defs/slug"}, "additionalProperties": {"$ref": "#/$defs/texto"}}
   }
 }

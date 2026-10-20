@@ -77,7 +77,7 @@ def main() -> None:
     _gravar_colecao("fichas", "ficha", por_posicao)
     pacotes["herois_catalogo"] = fichas_por_posicao.catalogo(fichas, por_posicao)
     analises = confrontos.carregar(RAIZ / "content" / "confrontos", RAIZ / "content" / "pro_dados",
-                                   confrontos.itens_core(fichas, por_posicao))
+                                   confrontos.itens_core(fichas, por_posicao), RAIZ / "content" / "pro_contra")
     _gravar_colecao("confrontos", "confronto", analises)
     pacotes["confrontos_indice"] = confrontos.indice(analises)
     paineis = [jogadores.felipe(), *(jogadores.pro_compare(c) for c in ("satanic", "yatoro", "watson")),
