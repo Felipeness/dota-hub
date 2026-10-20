@@ -2,6 +2,7 @@
 // detalhe.ts/adversarioDeLane). Ver SPEC §economia-e-lutas / lane.
 import { tempoDaPartida } from "../../../live/partida/detalhe";
 import type { Achado, Contexto, Peso, Regra } from "../../modelo";
+import { jogaDeSuporte } from "../../pro";
 
 const MINUTO = 10;
 /** Mais frouxa que o ±10% de gpmContraPro.ts porque é 1x1 (menos amostra, mais ruído) e não distribuição de pro. */
@@ -18,7 +19,7 @@ function laneContraAdversario(ctx: Contexto): Achado[] {
   const adversario = ctx.detalhe.adversario;
   const meuOuro = ctx.detalhe.curvas.ouro[MINUTO];
   const ouroAdversario = adversario?.curvas.ouro[MINUTO];
-  if (!adversario || meuOuro === undefined || ouroAdversario === undefined) return [];
+  if (jogaDeSuporte(ctx.proDoHeroi) || !adversario || meuOuro === undefined || ouroAdversario === undefined) return [];
 
   const diferenca = diferencaRelativa(meuOuro, ouroAdversario);
   const numeros = { meuOuro, ouroAdversario, diferencaPct: Math.round(diferenca * 100) };

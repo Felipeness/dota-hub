@@ -4,6 +4,7 @@
 // acerto (farm que passou a referência). Ver SPEC §economia-e-lutas.
 import { tempoDaPartida } from "../../../live/partida/detalhe";
 import type { Achado, Contexto, Peso, Regra } from "../../modelo";
+import { jogaDeSuporte } from "../../pro";
 
 const CHECKPOINTS: readonly number[] = [10, 20];
 const MINUTO_DO_PRO = 10;
@@ -76,6 +77,7 @@ function achadoNoMinuto(ctx: Contexto, minuto: number): Achado[] {
 }
 
 function lastHitsContraReferencia(ctx: Contexto): Achado[] {
+  if (jogaDeSuporte(ctx.proDoHeroi)) return [];
   return CHECKPOINTS.flatMap((minuto) => achadoNoMinuto(ctx, minuto));
 }
 

@@ -38,3 +38,12 @@ export const AMOSTRA_MINIMA = 10;
 export function proDoHeroi(dados: ProPorPosicao | null, heroId: number): HeroiDaPosicao | null {
   return dados?.herois.find((h) => h.hero_id === heroId) ?? null;
 }
+
+/** Na maioria das partidas pro o herói é pos 4 ou 5. O OpenDota não diz a posição jogada; o herói é o melhor sinal. */
+const FRACAO_DE_SUPORTE = 0.5;
+
+/** Suporte não disputa farm de lane: ouro e last hits contra o core inimigo não medem o trabalho dele. */
+export function jogaDeSuporte(heroi: HeroiDaPosicao | null): boolean {
+  const { pos4, pos5 } = heroi?.posicoes.distribuicao ?? {};
+  return (pos4?.fracao ?? 0) + (pos5?.fracao ?? 0) >= FRACAO_DE_SUPORTE;
+}

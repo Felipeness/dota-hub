@@ -25,6 +25,9 @@ function alternativa(
   return chave ? `${nomeDoItem(chave)} (${ITENS_CURADOS[chave]?.funcao ?? ""})` : null;
 }
 
+/** Consumível de visão é rotina (dewardar, mapa), não resposta a um herói: comprar sem invisível no draft não é erro. */
+const CONSUMIVEIS = new Set(["ward_sentry", "ward_observer", "dust"]);
+
 export function itemForaDeContexto(ctx: Contexto): Achado[] {
   const inimigos: InimigoParaRegra[] = ctx.inimigos.map((i) => ({ chave: i.chave, nome: i.nome }));
   const grupos = gruposDeContra(inimigos);
@@ -39,7 +42,7 @@ export function itemForaDeContexto(ctx: Contexto): Achado[] {
   const matchup = matchupDePro(ctx);
 
   return ctx.detalhe.compras.flatMap((compra): Achado[] => {
-    if (chavesCore.has(compra.chave) || matchupJulgaOItem(matchup, compra.chave)) return [];
+    if (CONSUMIVEIS.has(compra.chave) || chavesCore.has(compra.chave) || matchupJulgaOItem(matchup, compra.chave)) return [];
     // Componente consumido num upgrade posterior (ex. Diffusal Blade -> Disperser): a decisão de compra já foi
     // avaliada no item final, não é um segundo slot desperdiçado.
     const itemFinal = ITEM_FINAL_DO_COMPONENTE[compra.chave];
