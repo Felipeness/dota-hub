@@ -24,7 +24,7 @@ func TestDeltaXY(t *testing.T) {
 	}
 }
 
-func TestDeathIntervals(t *testing.T) {
+func TestIntervals(t *testing.T) {
 	tests := []struct {
 		name  string
 		alive []bool
@@ -37,8 +37,8 @@ func TestDeathIntervals(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := deathIntervals(tt.alive, -10); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("deathIntervals = %v, want %v", got, tt.want)
+			if got := intervals(tt.alive, false, -10); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("intervals = %v, want %v", got, tt.want)
 			}
 		})
 	}

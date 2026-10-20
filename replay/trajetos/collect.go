@@ -22,7 +22,14 @@ const (
 	unitsPerCell    = 128
 	// clockOutlierS: a few combat log entries carry a stale timestamp; only
 	// the first entry sets the offset, so outliers are simply ignored.
-	clockOutlierS = 1.0
+	clockOutlierS    = 1.0
+	smokeItem        = "item_smoke_of_deceit"
+	smokeModifier    = "modifier_smoke_of_deceit"
+	smokeJoinWindow  = 40.0 // smoke lasts 35 s; later modifier adds belong to the same cast
+	wardKillWindow   = 1.5
+	dayStart, dayEnd = 0.25, 0.75
+	timeOfDayScale   = 65536
+	invisibleBit     = 7 // MODIFIER_STATE_INVISIBLE in m_nUnitState64
 )
 
 type player struct {
@@ -37,6 +44,7 @@ type player struct {
 type track struct {
 	gx, gy    []float64
 	alive     []bool
+	seen      []bool // seen by the enemy team (estimate, see visionSources)
 	levelUpAt []int
 	level     int
 	lh        []int
@@ -49,6 +57,36 @@ type wardSeen struct {
 	gx, gy             float64
 	ended              bool
 	slot               *int
+}
+
+// smokeCast is one Smoke of Deceit use; heroes are who got the modifier.
+type smokeCast struct {
+	gameTime float64
+	pl       *player
+	gx, gy   float64
+	heroes   []*smokedHero
+}
+
+type smokedHero struct {
+	pl                 *player
+	gameStart, gameEnd float64
+	ended              bool
+}
+
+type heroKill struct {
+	gameTime    float64
+	victim      *player
+	killer      *player
+	killerName  string
+	reincarnate bool
+}
+
+type wardKill struct {
+	gameTime float64
+	team     int
+	kind     string
+	killer   *player
+	used     bool
 }
 
 type wardUse struct {
@@ -72,6 +110,9 @@ type collector struct {
 	allWards []*wardSeen
 	wardUses []wardUse
 	towers   []towerKill
+	smokes   []*smokeCast
+	kills    []heroKill
+	wardDead []*wardKill
 	firstT   int
 	nextT    float64
 	offset   float64
@@ -148,11 +189,19 @@ func (c *collector) onWard(e *manta.Entity, op manta.EntityOp) {
 		c.allWards = append(c.allWards, w)
 		return
 	}
-	if op&manta.EntityOpDeleted == 0 {
+	w, ok := c.wards[e.GetIndex()]
+	if !ok {
 		return
 	}
-	if w, ok := c.wards[e.GetIndex()]; ok {
+	// A dead ward entity lingers ~7.7 s before deletion; the ward is gone
+	// from the map at the death, which is also when the combat log logs it.
+	if !w.ended && num(e, "m_lifeState") != 0 {
 		w.gameEnd, w.ended = c.gameTime(), true
+	}
+	if op&manta.EntityOpDeleted != 0 {
+		if !w.ended {
+			w.gameEnd, w.ended = c.gameTime(), true
+		}
 		delete(c.wards, e.GetIndex())
 	}
 }
@@ -164,13 +213,107 @@ func (c *collector) onCombatLog(m *dota.CMsgDOTACombatLogEntry) error {
 	}
 	switch m.GetType() {
 	case dota.DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_DEATH:
-		if target := c.clName(m.GetTargetName()); m.GetIsTargetBuilding() && strings.Contains(target, "tower") {
-			c.towers = append(c.towers, towerKill{gameTime: gt, name: target})
-		}
+		c.onDeath(m, gt)
 	case dota.DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_ITEM:
-		pl := c.byHero[c.clName(m.GetAttackerName())]
-		if pl != nil && strings.Contains(c.clName(m.GetInflictorName()), "ward") {
-			c.wardUses = append(c.wardUses, wardUse{gameTime: gt, pl: pl})
+		c.onItem(m, gt)
+	case dota.DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_MODIFIER_ADD:
+		c.onSmokeModifier(m, gt, true)
+	case dota.DOTA_COMBATLOG_TYPES_DOTA_COMBATLOG_MODIFIER_REMOVE:
+		c.onSmokeModifier(m, gt, false)
+	}
+	return nil
+}
+
+func (c *collector) onDeath(m *dota.CMsgDOTACombatLogEntry, gt float64) {
+	target := c.clName(m.GetTargetName())
+	attacker := c.clName(m.GetAttackerName())
+	switch {
+	case m.GetIsTargetHero() && !m.GetIsTargetIllusion():
+		victim := c.byHero[target]
+		if victim == nil {
+			return
+		}
+		k := heroKill{gameTime: gt, victim: victim, killer: c.heroOf(m, attacker), reincarnate: m.GetWillReincarnate()}
+		if k.killer == nil {
+			k.killerName = attacker
+		}
+		c.kills = append(c.kills, k)
+	case m.GetIsTargetBuilding() && strings.Contains(target, "tower"):
+		c.towers = append(c.towers, towerKill{gameTime: gt, name: target})
+	case strings.Contains(target, "_wards") && attacker != target:
+		// an expired ward is logged as killed by itself; anything else dewarded it
+		c.wardDead = append(c.wardDead, &wardKill{gameTime: gt, team: int(m.GetTargetTeam()), kind: wardKind(target), killer: c.heroOf(m, attacker)})
+	}
+}
+
+// heroOf credits summons (zombies, treants...) to their hero through the
+// damage source, as OpenDota does.
+func (c *collector) heroOf(m *dota.CMsgDOTACombatLogEntry, attacker string) *player {
+	if pl := c.byHero[attacker]; pl != nil {
+		return pl
+	}
+	return c.byHero[c.clName(m.GetDamageSourceName())]
+}
+
+func (c *collector) onItem(m *dota.CMsgDOTACombatLogEntry, gt float64) {
+	pl := c.byHero[c.clName(m.GetAttackerName())]
+	item := c.clName(m.GetInflictorName())
+	if pl == nil {
+		return
+	}
+	if item == smokeItem {
+		cast := &smokeCast{gameTime: gt, pl: pl}
+		if hero := c.p.FindEntityByHandle(pl.handle); hero != nil {
+			cast.gx, cast.gy = posX(hero), posY(hero)
+		}
+		c.smokes = append(c.smokes, cast)
+		return
+	}
+	if strings.Contains(item, "ward") {
+		c.wardUses = append(c.wardUses, wardUse{gameTime: gt, pl: pl})
+	}
+}
+
+// onSmokeModifier tracks who carried the smoke: the modifier add names the
+// caster as attacker, the remove (broken or expired) closes the interval.
+func (c *collector) onSmokeModifier(m *dota.CMsgDOTACombatLogEntry, gt float64, added bool) {
+	if c.clName(m.GetInflictorName()) != smokeModifier {
+		return
+	}
+	target := c.byHero[c.clName(m.GetTargetName())]
+	if target == nil || m.GetIsTargetIllusion() {
+		return
+	}
+	if added {
+		if cast := c.lastSmokeBy(c.byHero[c.clName(m.GetAttackerName())], gt); cast != nil {
+			cast.heroes = append(cast.heroes, &smokedHero{pl: target, gameStart: gt})
+		}
+		return
+	}
+	if h := c.openSmoke(target); h != nil {
+		h.gameEnd, h.ended = gt, true
+	}
+}
+
+func (c *collector) lastSmokeBy(caster *player, gt float64) *smokeCast {
+	for i := len(c.smokes) - 1; i >= 0; i-- {
+		s := c.smokes[i]
+		if gt-s.gameTime > smokeJoinWindow {
+			return nil
+		}
+		if s.pl == caster {
+			return s
+		}
+	}
+	return nil
+}
+
+func (c *collector) openSmoke(pl *player) *smokedHero {
+	for i := len(c.smokes) - 1; i >= 0; i-- {
+		for _, h := range c.smokes[i].heroes {
+			if h.pl == pl && !h.ended {
+				return h
+			}
 		}
 	}
 	return nil
@@ -262,6 +405,7 @@ func (c *collector) dataRowFor(pl *player) int {
 }
 
 func (c *collector) sampleHeroes(t int) {
+	vision := c.visionSources()
 	for _, pl := range c.players {
 		tr := pl.track
 		hero := c.p.FindEntityByHandle(pl.handle)
@@ -271,7 +415,10 @@ func (c *collector) sampleHeroes(t int) {
 		}
 		tr.gx = append(tr.gx, posX(hero))
 		tr.gy = append(tr.gy, posY(hero))
-		tr.alive = append(tr.alive, num(hero, "m_lifeState") == 0)
+		alive := num(hero, "m_lifeState") == 0
+		tr.alive = append(tr.alive, alive)
+		canBeSeen := alive && !isInvisible(hero)
+		tr.seen = append(tr.seen, canBeSeen && vision[enemyOf(pl.team)].sees(posX(hero), posY(hero)))
 		for lvl := int(num(hero, "m_iCurrentLevel")); tr.level < lvl; tr.level++ {
 			tr.levelUpAt = append(tr.levelUpAt, t)
 		}
@@ -285,10 +432,11 @@ func (c *collector) sampleHeroes(t int) {
 func (tr *track) repeatLast() {
 	n := len(tr.gx)
 	if n == 0 {
-		tr.gx, tr.gy, tr.alive = append(tr.gx, 0), append(tr.gy, 0), append(tr.alive, true)
+		tr.gx, tr.gy, tr.alive, tr.seen = append(tr.gx, 0), append(tr.gy, 0), append(tr.alive, true), append(tr.seen, false)
 		return
 	}
-	tr.gx, tr.gy, tr.alive = append(tr.gx, tr.gx[n-1]), append(tr.gy, tr.gy[n-1]), append(tr.alive, tr.alive[n-1])
+	tr.gx, tr.gy = append(tr.gx, tr.gx[n-1]), append(tr.gy, tr.gy[n-1])
+	tr.alive, tr.seen = append(tr.alive, tr.alive[n-1]), append(tr.seen, tr.seen[n-1])
 }
 
 func (c *collector) lastHits(pl *player) int {
@@ -314,6 +462,80 @@ func (c *collector) creditWardPlacers() {
 			}
 		}
 	}
+}
+
+// dewarder finds the combat log ward death matching a removed ward, if any.
+func (c *collector) dewarder(w *wardSeen) (*wardKill, bool) {
+	for _, k := range c.wardDead {
+		if !k.used && k.team == w.team && k.kind == w.kind && math.Abs(k.gameTime-w.gameEnd) <= wardKillWindow {
+			k.used = true
+			return k, true
+		}
+	}
+	return nil, false
+}
+
+func wardKind(unitName string) string {
+	if strings.Contains(unitName, "sentry") {
+		return "sen"
+	}
+	return "obs"
+}
+
+func enemyOf(team int) int {
+	if team == teamRadiant {
+		return teamDire
+	}
+	return teamRadiant
+}
+
+// circle is one unit's vision on the grid.
+type circle struct{ x, y, r2 float64 }
+
+type visionSet []circle
+
+func (v visionSet) sees(x, y float64) bool {
+	for _, c := range v {
+		dx, dy := x-c.x, y-c.y
+		if dx*dx+dy*dy <= c.r2 {
+			return true
+		}
+	}
+	return false
+}
+
+// visionSources lists every living unit's vision circle per team.
+// ponytail: plain radius, no trees, high ground or true sight; good enough to
+// fade unseen enemies, upgrade to a fog-of-war grid if exact visibility matters.
+func (c *collector) visionSources() map[int]visionSet {
+	night := c.isNight()
+	sources := map[int]visionSet{}
+	for _, e := range c.p.FilterEntity(func(e *manta.Entity) bool { return e != nil }) {
+		team := int(num(e, "m_iTeamNum"))
+		if team != teamRadiant && team != teamDire {
+			continue
+		}
+		r := num(e, "m_iDayTimeVisionRange")
+		if night {
+			r = num(e, "m_iNightTimeVisionRange")
+		}
+		if r <= 0 || num(e, "m_lifeState") != 0 {
+			continue
+		}
+		cells := r / unitsPerCell
+		sources[team] = append(sources[team], circle{posX(e), posY(e), cells * cells})
+	}
+	return sources
+}
+
+func (c *collector) isNight() bool {
+	frac := num(c.rules, "m_pGameRules.m_iNetTimeOfDay") / timeOfDayScale
+	return frac < dayStart || frac >= dayEnd
+}
+
+func isInvisible(e *manta.Entity) bool {
+	state, _ := e.GetUint64("m_nUnitState64")
+	return state&(1<<invisibleBit) != 0
 }
 
 func num(e *manta.Entity, field string) float64 {
