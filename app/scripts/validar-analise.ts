@@ -16,7 +16,8 @@ import { montarRelatorio } from "../src/analise/relatorio";
 const REGISTRO_DE_REGRAS = [...OBJETIVOS_E_AEGIS, ...MORTES_E_VISAO, ...BUILD, ...ECONOMIA_E_LUTAS, ...MOMENTOS];
 import { analiseSchema, caminhoDaAnalise } from "../src/confronto/analise";
 import type { Consultar } from "../src/live/consulta";
-import { detalheDaPartida } from "../src/live/partida/detalhe";
+import { detalheDaPartida, tempoDaPartida } from "../src/live/partida/detalhe";
+import { escolherLances } from "../src/analise/lancesDecisivos";
 
 const BASE = "https://api.opendota.com/api";
 
@@ -63,6 +64,19 @@ async function main() {
    -> ${achado.oQueFazer}`);
   }
   console.log(`\nTotal: ${relatorio.achados.length} achados.`);
+  const { lances, fezBem, treino } = escolherLances(detalhe, relatorio.achados);
+  console.log(`
+=== ${lances.length} lances decidiram o jogo ===`);
+  for (const { achado, t, impacto } of lances) {
+    console.log(`
+[${achado.tipo} ${achado.peso} ${tempoDaPartida(t)} impacto ${impacto.toFixed(1)}] ${achado.titulo}`);
+    console.log(`  O que você fez: ${achado.oQueAconteceu}`);
+    if (achado.oQueFazer) console.log(`  O que deveria ter feito: ${achado.oQueFazer}`);
+  }
+  console.log("\n=== E o que você fez bem ===");
+  for (const { achado, t } of fezBem) console.log(`  ${tempoDaPartida(t)} ${achado.titulo}`);
+  console.log("\n=== O que treinar na próxima ===");
+  console.log(treino ? `  ${treino.titulo}: ${treino.texto}` : "  (nada)");
 }
 
 void main();

@@ -24,7 +24,8 @@ function torrePerdidaAposMorte(ctx: Contexto): Achado[] {
     const torresDepois = torresPerdidas.filter((t) => !jaAtribuidas.has(t) && t.t >= morte.t && t.t - morte.t <= JANELA_DE_TORRE_S);
     if (torresDepois.length === 0) return [];
     torresDepois.forEach((t) => jaAtribuidas.add(t));
-    const horarios = torresDepois.map((t) => tempoDaPartida(t.t)).join(", ");
+    const nomeDaTorre = (t: number) => ctx.detalhe.panorama.estruturas.find((e) => e.t === t && e.lado === ctx.detalhe.lado)?.nome;
+    const horarios = torresDepois.map((t) => `${nomeDaTorre(t.t) ?? "torre"} (${tempoDaPartida(t.t)})`).join(", ");
     const minutoDaMorte = emMinutos(morte.t);
     const plural = torresDepois.length > 1;
     return [{
@@ -35,7 +36,7 @@ function torrePerdidaAposMorte(ctx: Contexto): Achado[] {
         ? `${torresDepois.length} torres caíram nos 90 s depois de uma morte, ${tempoDaPartida(morte.t)}`
         : `Torre caiu ${tempoDaPartida(torresDepois[0].t - morte.t)} depois de uma morte, ${tempoDaPartida(morte.t)}`,
       oQueAconteceu:
-        `${morte.texto} em ${tempoDaPartida(morte.t)} e ${plural ? "as torres caíram" : "a torre caiu"} em ${horarios}. ` +
+        `${morte.texto} em ${tempoDaPartida(morte.t)}; ${plural ? "caíram" : "caiu"} em seguida: ${horarios}. ` +
         "É correlação no tempo: sem posição dos heróis na fonte, não dá pra afirmar que a lane ficou sem defesa " +
         "nem que a queda foi por causa dessa morte.",
       oQueFazer:
