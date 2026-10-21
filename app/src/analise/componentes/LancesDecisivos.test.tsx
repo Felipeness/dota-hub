@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { act, fireEvent, render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { contextoDaAmostraCompleta, detalheDaAmostraCompleta } from "../amostras/amostraCompleta";
 import { escolherLances } from "../lancesDecisivos";
 import { avaliarRegras } from "../motor";
@@ -31,13 +31,12 @@ it("mostra quantos lances decidiram o jogo, com um marcador por lance na linha d
 
 it("clicar no marcador leva o relógio ao lance e mostra o card com o que fazer", async () => {
   renderizar();
-  const marcador = await screen.findByRole("button", { name: /Erro grave às 49:51/ });
+  const marcador = await screen.findByRole("button", { name: /Erro grave às 28:33/ });
   fireEvent.click(marcador);
-  expect(screen.getByRole("slider", { name: "Tempo da partida" })).toHaveValue("2991");
-  const card = screen.getAllByRole("article").find((a) => a.textContent?.includes("Erro grave · 49:51"));
+  expect(screen.getByRole("slider", { name: "Tempo da partida" })).toHaveValue("1713");
+  const card = screen.getAllByRole("article").find((a) => a.textContent?.includes("Erro grave · 28:33"));
   expect(card).toBeDefined();
-  await act(async () => { await new Promise((r) => setTimeout(r, 1_000)); });
-  expect(card?.textContent).toContain("Axe volta às 51:17");
+  expect(card?.textContent).toContain("Huskar volta às 29:19): recuar para a T2 de cima");
 });
 
 it("tocar alterna para pausar e o teclado chega nos controles", async () => {

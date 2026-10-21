@@ -1,7 +1,7 @@
 import { detalheDaAmostraCompleta } from "./amostras/amostraCompleta";
 import type { Lance } from "./lancesDecisivos";
 import type { Achado } from "./modelo";
-import { MAPA_INTEIRO, PAUSA_NO_LANCE_MS, avancar, cameraPara, mapaDosTrajetos, quadroEm, velocidadeEm, type Relogio } from "./replayDosLances";
+import { MAPA_INTEIRO, PAUSA_NO_LANCE_MS, aproximarCamera, avancar, cameraPara, mapaDosTrajetos, quadroEm, velocidadeEm, type Relogio } from "./replayDosLances";
 
 const lance = (t: number): Lance => ({
   t, impacto: 1, relacionados: [],
@@ -12,31 +12,42 @@ const tocando = (t: number): Relogio => ({ t, tocando: true, pausaRestanteMs: 0,
 
 describe("velocidadeEm", () => {
   it.each([
-    { t: 0, velocidade: 48 }, { t: 500, velocidade: 24 }, { t: 560, velocidade: 12 }, { t: 585, velocidade: 5 },
-    { t: 595, velocidade: 2 }, { t: 1300, velocidade: 48 },
-  ])("a $t s, ${velocidade}x", ({ t, velocidade }) => {
-    expect(velocidadeEm(t, LANCES)).toBe(velocidade);
+    { t: 0, escolhida: 30, velocidade: 30 }, { t: 579, escolhida: 30, velocidade: 30 }, { t: 580, escolhida: 30, velocidade: 5 },
+    { t: 599, escolhida: 60, velocidade: 5 }, { t: 590, escolhida: 1, velocidade: 1 }, { t: 1300, escolhida: 15, velocidade: 15 },
+  ] as const)("a $t s com $escolhida x escolhida, ${velocidade}x", ({ t, escolhida, velocidade }) => {
+    expect(velocidadeEm(t, LANCES, escolhida)).toBe(velocidade);
   });
 });
 
 describe("avancar", () => {
   it.each([
-    { caso: "anda pela velocidade", antes: tocando(0), depois: { t: expect.closeTo(4.8), pausaRestanteMs: 0 } },
-    { caso: "para em cima do lance e segura a pausa", antes: tocando(599.9), depois: { t: 600, pausaRestanteMs: PAUSA_NO_LANCE_MS, ultimoLance: 600 } },
+    { caso: "anda pela velocidade, contínuo", antes: tocando(0), depois: { t: expect.closeTo(3), pausaRestanteMs: 0 } },
+    { caso: "para no segundo exato do lance e segura a pausa", antes: tocando(599.9), depois: { t: 600, pausaRestanteMs: PAUSA_NO_LANCE_MS, ultimoLance: 600 } },
     { caso: "na pausa não anda", antes: { ...tocando(600), pausaRestanteMs: 500, ultimoLance: 600 }, depois: { t: 600, pausaRestanteMs: 400 } },
-    { caso: "depois da pausa segue para o próximo", antes: { ...tocando(600), ultimoLance: 600 }, depois: { t: expect.closeTo(600.2), pausaRestanteMs: 0 } },
+    { caso: "depois da pausa segue a 30x", antes: { ...tocando(600), ultimoLance: 600 }, depois: { t: expect.closeTo(603), pausaRestanteMs: 0 } },
     { caso: "para no fim", antes: tocando(1999.9), depois: { t: 2000, tocando: false } },
     { caso: "parado não muda", antes: { ...tocando(10), tocando: false }, depois: { t: 10 } },
   ])("$caso", ({ antes, depois }) => {
-    expect(avancar(antes, 100, LANCES, 2000)).toMatchObject(depois);
+    expect(avancar(antes, { ms: 100, lances: LANCES, fim: 2000, velocidade: 30 })).toMatchObject(depois);
+  });
+});
+
+describe("aproximarCamera", () => {
+  it("anda parte do caminho a cada quadro, sem passar do alvo, e chega", () => {
+    const alvo = { centro: [0.2, 0.8] as [number, number], zoom: 2.7 };
+    const umQuadro = aproximarCamera(MAPA_INTEIRO, alvo, 16);
+    expect(umQuadro.zoom).toBeGreaterThan(1);
+    expect(umQuadro.zoom).toBeLessThan(2.7);
+    const depoisDeTresSegundos = Array.from({ length: 190 }).reduce<typeof umQuadro>((c) => aproximarCamera(c, alvo, 16), MAPA_INTEIRO);
+    expect(depoisDeTresSegundos).toEqual(alvo);
   });
 });
 
 describe("cameraPara", () => {
   it.each([
     { foco: null, camera: MAPA_INTEIRO },
-    { foco: [0.5, 0.5] as [number, number], camera: { centro: [0.5, 0.5], zoom: 2.6 } },
-    { foco: [0.02, 0.99] as [number, number], camera: { centro: [0.5 / 2.6, 1 - 0.5 / 2.6], zoom: 2.6 } },
+    { foco: [0.5, 0.5] as [number, number], camera: { centro: [0.5, 0.5], zoom: 2.7 } },
+    { foco: [0.02, 0.99] as [number, number], camera: { centro: [0.5 / 2.7, 1 - 0.5 / 2.7], zoom: 2.7 } },
   ])("foco $foco", ({ foco, camera }) => {
     expect(cameraPara(foco)).toEqual(camera);
   });
@@ -74,9 +85,9 @@ describe("quadroEm na partida 9046905170", () => {
     });
     const quadro = quadroEm(detalhe.panorama, 600, eu, trajetos);
     expect(quadro.herois.map((h) => [h.nome, h.eu, h.escondido])).toEqual([["Medusa", true, false], ["Necrophos", false, true]]);
-    expect(quadro.herois[0]?.rastro).toHaveLength(25);
+    expect(quadro.herois[0]?.rastro).toHaveLength(22);
     expect(quadro.feed[0]).toMatchObject({ vitima: "Medusa", matador: "Necrophos", t: 598 });
-    expect(quadro.mortes).toEqual([{ t: 598, ponto: [(150 - 57) / 142, (150 - 57) / 142], lado: "radiant", minha: true }]);
+    expect(quadro.mortes).toEqual([{ t: 598, ponto: [(150 - 57) / 142, (150 - 57) / 142], lado: "radiant", minha: true, idade: 2 }]);
     expect(quadro.smokes).toMatchObject([{ t: 590, lado: "dire", nomes: ["Necrophos"] }]);
   });
 });

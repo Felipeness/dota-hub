@@ -83,21 +83,29 @@ function oQueAconteceu(cena: Cena): string {
   return `Você morreu${matador} às ${tempoDaPartida(morte.t)}; ${mortos}: ${aliadosVivos} do seu time vivos contra ${inimigosVivos}.${onde}${torres}${aegis}`;
 }
 
-function esperaPelosAliados(cena: Cena): string {
-  const voltas = cena.aliadosMortos.flatMap((a) => (a.voltaEm === null ? [] : [{ nome: a.nome, voltaEm: a.voltaEm }]));
-  if (voltas.length === 0) return " e esperar o time voltar antes de aceitar a luta";
-  const ultimaVolta = Math.max(...voltas.map((a) => a.voltaEm));
+type Volta = Readonly<{ nome: string; voltaEm: number }>;
+
+/** Quem volta antes do fim da partida, na ordem em que volta; quem não volta a tempo não entra no conselho. */
+function voltasAntesDoFim(cena: Cena, fimDaPartida: number): Volta[] {
+  return cena.aliadosMortos
+    .flatMap((a) => (a.voltaEm === null || a.voltaEm > fimDaPartida ? [] : [{ nome: a.nome, voltaEm: a.voltaEm }]))
+    .sort((a, b) => a.voltaEm - b.voltaEm);
+}
+
+function esperaPelosAliados(cena: Cena, voltas: readonly Volta[]): string {
+  const ultima = voltas.at(-1);
+  if (!ultima) return " e esperar o time voltar antes de aceitar a luta";
   const juntos = cena.aliadosVivos + voltas.length;
-  return ` e esperar até ${tempoDaPartida(ultimaVolta)} para lutar com ${juntos === TAMANHO_DO_TIME ? "os cinco" : juntos}`;
+  return ` e esperar até ${tempoDaPartida(ultima.voltaEm)} para lutar com ${juntos === TAMANHO_DO_TIME ? "os cinco" : juntos}`;
 }
 
 function oQueFazer(detalhe: DetalheDaPartida, cena: Cena): string {
-  const quando = cena.aliadosMortos.flatMap((a, i) =>
-    a.voltaEm === null ? [] : [`${i === 0 ? `${a.nome} volta` : a.nome} às ${tempoDaPartida(a.voltaEm)}`]);
+  const voltas = voltasAntesDoFim(cena, detalhe.duracaoS);
+  const quando = voltas.map((a, i) => `${i === 0 ? `${a.nome} volta` : a.nome} às ${tempoDaPartida(a.voltaEm)}`);
   const destino = cena.linha ? `recuar para ${torreParaRecuar(detalhe, cena.linha.linha, cena.morte.t)}` : "recuar para trás da sua torre mais próxima";
   const contagem = cena.aliadosMortos.length === 1 ? "um aliado morto" : `${cena.aliadosMortos.length} aliados mortos`;
   const detalheDaVolta = quando.length > 0 ? ` (${juntarNomes(quando)})` : "";
-  return `Com ${contagem}${detalheDaVolta}: ${destino}${esperaPelosAliados(cena)}.`;
+  return `Com ${contagem}${detalheDaVolta}: ${destino}${esperaPelosAliados(cena, voltas)}.`;
 }
 
 function achadoDaCena(detalhe: DetalheDaPartida, cena: Cena): Achado {
