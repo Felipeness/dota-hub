@@ -1,0 +1,38 @@
+/* Sequência de build (SequenciaDeBuild.tsx): passos em linha com seta, quebrando no celular. */
+.sb { display: flex; flex-wrap: wrap; align-items: stretch; gap: var(--espaco-2) var(--espaco-1); margin: 0; padding: 0; list-style: none; min-width: 0; }
+.sb-passo { position: relative; display: grid; grid-template-columns: auto auto; grid-template-areas: "img nome" "img minuto" "nota nota";
+  align-items: center; column-gap: var(--espaco-2); padding: 6px var(--espaco-2) 6px 6px; border: 1px solid var(--cor-linha-forte);
+  border-radius: var(--raio-pequeno); background: var(--cor-superficie-2); min-width: 0; }
+.sb-passo + .sb-passo { margin-left: 18px; }
+.sb-passo + .sb-passo::before { content: "→"; position: absolute; left: -17px; top: 50%; transform: translateY(-50%); color: var(--cor-texto-3); font-size: 14px; }
+.sb-ordem { position: absolute; top: -7px; left: -5px; min-width: 16px; height: 16px; padding: 0 3px; border-radius: var(--raio-pilula);
+  background: var(--cor-superficie-3); border: 1px solid var(--cor-linha-ativa); font-size: 10px; line-height: 14px; text-align: center; color: var(--cor-texto-2); }
+.sb-passo img { grid-area: img; display: block; border-radius: 4px; background: var(--cor-superficie-3); }
+.sb-nome { grid-area: nome; font-size: 13px; line-height: 1.2; color: var(--cor-texto); max-width: 11ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sb-minuto { grid-area: minuto; font-size: 12px; color: var(--cor-texto-2); }
+.sb-nota { grid-area: nota; margin-top: 2px; font-size: 11px; color: var(--cor-texto-3); }
+
+.sb-no-tempo { border-color: var(--cor-radiant); }
+.sb-no-tempo .sb-nota { color: var(--cor-radiant); }
+.sb-atrasado { border-color: var(--cor-destaque); background: var(--cor-destaque-fundo); }
+.sb-atrasado .sb-nota { color: var(--cor-destaque); font-weight: 600; }
+.sb-rara { opacity: 0.75; border-style: solid; border-color: var(--cor-linha-ativa); }
+.sb-rara img { filter: grayscale(1); }
+.sb-faltou { border-style: dashed; border-color: var(--cor-dire); background: transparent; }
+.sb-faltou img { opacity: 0.45; filter: grayscale(1); }
+.sb-faltou .sb-nota { color: var(--cor-alerta-texto); }
+
+.sb-builds { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-4); margin: 0; padding: 0; list-style: none; }
+.sb-build { display: grid; gap: var(--espaco-3); padding: var(--espaco-3) var(--espaco-4) var(--espaco-4); border: 1px solid var(--cor-linha); border-radius: var(--raio); min-width: 0; }
+.sb-build:first-child { border-color: var(--cor-linha-ativa); }
+.sb-build-titulo { display: flex; flex-wrap: wrap; gap: var(--espaco-1) var(--espaco-3); align-items: baseline; margin: 0; }
+.sb-build-numeros { font-size: 13px; color: var(--cor-texto-2); }
+.sb-opcoes { margin: 0; font-size: 13px; color: var(--cor-texto-2); }
+.sb-opcoes-rotulo { font: 600 12px var(--fonte-display); text-transform: uppercase; letter-spacing: 0.06em; color: var(--cor-neutro); }
+
+@media (max-width: 520px) {
+  .sb-passo { grid-template-columns: auto; grid-template-areas: "img" "minuto" "nota"; justify-items: center; padding: 6px; }
+  .sb-nome { display: none; }
+  .sb-passo + .sb-passo { margin-left: 14px; }
+  .sb-passo + .sb-passo::before { left: -13px; font-size: 12px; }
+}

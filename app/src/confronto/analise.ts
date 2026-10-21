@@ -23,12 +23,25 @@ export const spikeSchema = z.object({ item: z.string(), nome: z.string(), minuto
 
 const itemContraSchema = z.object({ chave: z.string(), n: z.number().int().positive(), mediana: z.number() });
 
+/** Partidas com os mesmos 3 primeiros itens: sequência (40%+ delas) e opções (15-40%), em minuto mediano. */
+const buildSchema = z.object({
+  jogos: z.number().int().positive(),
+  vitorias: z.number().int().nonnegative(),
+  sequencia: z.array(itemContraSchema),
+  opcoes: z.array(itemContraSchema),
+});
+
+/** Nas partidas com os dois itens, quantas tiveram `a` antes de `b` (a = o que vem antes na maioria). */
+const ordemSchema = z.object({ a: z.string(), b: z.string(), a_antes: z.number().int().nonnegative(), ambos: z.number().int().positive() });
+
 /** Partidas pro do herói contra um inimigo (content/pro_contra, export/dota_export/pro_contra.py). */
 const contraSchema = z.object({
   jogos: z.number().int().positive(),
   vitorias: z.number().int().nonnegative(),
   /** Primeira compra de cada item fechado (1000+ de ouro, sem consumível): em quantas partidas e minuto mediano. */
   itens: z.array(itemContraSchema),
+  builds: z.array(buildSchema).default([]),
+  ordem: z.array(ordemSchema).default([]),
 });
 
 export const analiseSchema = z.object({

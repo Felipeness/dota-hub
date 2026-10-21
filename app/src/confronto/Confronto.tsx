@@ -4,7 +4,9 @@ import { FrescorView } from "../live/Frescor";
 import { useAoVivo, type EstadoAoVivo } from "../live/useAoVivo";
 import { carregarEstatisticas, type Estatisticas } from "./carregar";
 import type { PopularidadeFonte } from "./fonte";
-import { AnaliseDePro } from "./AnaliseDePro";
+import { AnaliseDePro, ComAnalisesDoPar } from "./AnaliseDePro";
+import { filtrarCounters, type CounterUsado, type DadosDoPar } from "./countersDosPros";
+import { ProsContraInimigo } from "./ProsContraInimigo";
 import { dicasDoConfronto, type Dica, type Fase } from "./dicas";
 import { analisarMecanicas, itensDoConfronto, type Achado } from "./mecanicas";
 import { urlDoItem, type Heroi, type Item } from "./modelo";
@@ -19,9 +21,19 @@ export function Confronto({ meu, inimigo, itens }: Props) {
   return (
     <>
       <BlocoVantagem meu={meu} inimigo={inimigo} estatisticas={estatisticas} />
-      <AnaliseDePro meu={meu} inimigo={inimigo} />
-      <BlocoMecanicas inimigo={inimigo} achados={achados} />
-      <BlocoItens meu={meu} achados={achados} popularidade={estatisticas.estado === "ok" ? estatisticas.dados.popularidade : null} />
+      <ComAnalisesDoPar meu={meu} inimigo={inimigo}>
+        {({ minha, dele }) => (
+          <>
+            {minha && <ProsContraInimigo meuNome={meu.nome} inimigoNome={inimigo.nome} contra={minha.contra_inimigo[inimigo.chave] ?? null} nomes={minha.nomes_dos_itens} />}
+            {minha && dele && <AnaliseDePro meu={meu} inimigo={inimigo} minha={minha} dele={dele} />}
+            <BlocoMecanicas inimigo={inimigo} achados={achados} />
+            <BlocoItens
+              meu={meu} achados={achados} popularidade={estatisticas.estado === "ok" ? estatisticas.dados.popularidade : null}
+              par={{ meuNome: meu.nome, inimigo, contra: minha?.contra_inimigo[inimigo.chave] ?? null, spikes: minha?.spikes ?? [] }}
+            />
+          </>
+        )}
+      </ComAnalisesDoPar>
       <BlocoDicas meu={meu} inimigo={inimigo} />
       <p className="cf-fontes">
         Fontes: OpenDota (constants/heroes, hero_abilities, abilities, items e aghs_desc; heroes/{meu.id}/matchups e itemPopularity)
@@ -139,37 +151,51 @@ function RecursoView({ recurso }: { recurso: Recurso }) {
   );
 }
 
-type Itens = Readonly<{ meu: Heroi; achados: readonly Achado[]; popularidade: PopularidadeFonte | null }>;
+type Itens = Readonly<{ meu: Heroi; achados: readonly Achado[]; popularidade: PopularidadeFonte | null; par: DadosDoPar }>;
 
-function BlocoItens({ meu, achados, popularidade }: Itens) {
-  const indicados = itensDoConfronto(achados);
-  if (indicados.length === 0) return null;
+function BlocoItens({ meu, achados, popularidade, par }: Itens) {
+  const { usados, genericos } = filtrarCounters(itensDoConfronto(achados), par);
+  if (usados.length === 0 && genericos.length === 0) return null;
   return (
     <section className="cf-bloco" aria-labelledby="cf-itens">
       <h2 id="cf-itens">Itens que viram o confronto</h2>
+      {usados.length === 0 && <p>Nenhum counter genérico contra o {par.inimigo.nome} aparece nas compras dos pros de {meu.nome}: siga as builds acima.</p>}
       <ul className="cf-itens">
-        {indicados.map(({ item, motivo, prova, mecanica }) => {
-          const compras = popularidade ? vezesComprado(popularidade, item.id) : 0;
-          return (
-            <li key={item.chave} className="cf-item">
-              <img src={urlDoItem(item.chave)} alt="" width={44} height={32} loading="lazy" />
-              <div>
-                <p><strong>{item.nome}</strong> <span className="cf-chip">{mecanica}</span></p>
-                <p><TextoComTermos texto={motivo} /></p>
-                <details className="cf-detalhe">
-                  <summary>De onde vem</summary>
-                  <p>“{prova}”</p>
-                  <small className="cf-fonte">
-                    Texto do item no OpenDota (constants/items).
-                    {compras > 0 && ` Comprado ${inteiro(compras)} vezes em partidas de liga de ${meu.nome} (OpenDota, itemPopularity).`}
-                  </small>
-                </details>
-              </div>
-            </li>
-          );
-        })}
+        {usados.map((c) => <CounterView key={c.item.chave} counter={c} meu={meu} par={par} popularidade={popularidade} />)}
       </ul>
+      {genericos.length > 0 && (
+        <details className="cf-cartao cf-genericos">
+          <summary><strong>Counters genéricos que os pros quase não usam aqui</strong> <span className="cf-resumo">{genericos.map((g) => g.item.nome).join(", ")}</span></summary>
+          <ul className="cf-provas">
+            {genericos.map((g) => <li key={g.item.chave}><b>{g.item.nome}</b> ({g.mecanica.toLowerCase()}): <TextoComTermos texto={g.razao} /></li>)}
+          </ul>
+        </details>
+      )}
     </section>
+  );
+}
+
+type ParaCounter = Readonly<{ counter: CounterUsado; meu: Heroi; par: DadosDoPar; popularidade: PopularidadeFonte | null }>;
+
+function CounterView({ counter: { item, motivo, prova, mecanica, fracaoPro }, meu, par, popularidade }: ParaCounter) {
+  const compras = popularidade ? vezesComprado(popularidade, item.id) : 0;
+  return (
+    <li className="cf-item">
+      <img src={urlDoItem(item.chave)} alt="" width={44} height={32} loading="lazy" />
+      <div>
+        <p><strong>{item.nome}</strong> <span className="cf-chip">{mecanica}</span></p>
+        <p><TextoComTermos texto={motivo} /></p>
+        {fracaoPro !== null && <p className="cf-pros-fracao">Os pros de {meu.nome} fazem em <b className="numero">{pct(fracaoPro)}</b> das partidas contra o {par.inimigo.nome}.</p>}
+        <details className="cf-detalhe">
+          <summary>De onde vem</summary>
+          <p>“{prova}”</p>
+          <small className="cf-fonte">
+            Texto do item no OpenDota (constants/items).
+            {compras > 0 && ` Comprado ${inteiro(compras)} vezes em partidas de liga de ${meu.nome} (OpenDota, itemPopularity).`}
+          </small>
+        </details>
+      </div>
+    </li>
   );
 }
 

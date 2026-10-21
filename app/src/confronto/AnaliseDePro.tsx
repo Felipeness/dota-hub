@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Link } from "react-router";
 import { heroisCatalogoSchema } from "../data/schemas";
 import { dadosOuVazio, useData } from "../data/useData";
@@ -11,25 +12,36 @@ import { urlDoItem, type Heroi } from "./modelo";
 type HeroiDoPar = Pick<Heroi, "id" | "chave" | "nome">;
 type Par = Readonly<{ meu: HeroiDoPar; inimigo: HeroiDoPar }>;
 
-/** Análise de pro do par e a linha do tempo de power spike. O arquivo de cada herói vem pelo id do app, via catálogo. */
-export function AnaliseDePro({ meu, inimigo }: Par) {
-  const catalogo = dadosOuVazio(useData("/data/herois_catalogo.json", heroisCatalogoSchema));
-  const idDoApp = (h: HeroiDoPar) => catalogo.find((c) => c.hero_id === h.id)?.id;
-  const idMeu = idDoApp(meu);
-  const idDele = idDoApp(inimigo);
-  if (!idMeu || !idDele) return null;
-  return <AnalisesCarregadas meu={meu} inimigo={inimigo} idMeu={idMeu} idDele={idDele} />;
+export type AnalisesDoPar = Readonly<{ minha: Analise | null; dele: Analise | null }>;
+type ComAnalises = Par & Readonly<{ children: (analises: AnalisesDoPar) => ReactNode }>;
+
+/**
+ * Carrega a análise de pro dos dois heróis (arquivo pelo id do app, via catálogo) e entrega às seções que dependem
+ * dela; herói sem arquivo chega como null, e as seções decidem o que mostrar sem o dado.
+ */
+export function ComAnalisesDoPar({ meu, inimigo, children }: ComAnalises) {
+  const catalogo = useData("/data/herois_catalogo.json", heroisCatalogoSchema);
+  if (catalogo.estado === "carregando") return <p>Carregando a análise de pro…</p>;
+  const idDoApp = (h: HeroiDoPar) => dadosOuVazio(catalogo).find((c) => c.hero_id === h.id)?.id;
+  return <AnalisesCarregadas idMeu={idDoApp(meu) ?? null} idDele={idDoApp(inimigo) ?? null}>{children}</AnalisesCarregadas>;
 }
 
-function AnalisesCarregadas({ meu, inimigo, idMeu, idDele }: Par & Readonly<{ idMeu: string; idDele: string }>) {
-  const minha = useData(caminhoDaAnalise(idMeu), analiseSchema);
-  const dele = useData(caminhoDaAnalise(idDele), analiseSchema);
+type Carregadas = Readonly<{ idMeu: string | null; idDele: string | null; children: ComAnalises["children"] }>;
+
+function AnalisesCarregadas({ idMeu, idDele, children }: Carregadas) {
+  // Sem id o caminho aponta pra um arquivo que não existe e cai em "indisponivel", que vira null abaixo.
+  const minha = useData(caminhoDaAnalise(idMeu ?? "_sem_analise"), analiseSchema);
+  const dele = useData(caminhoDaAnalise(idDele ?? "_sem_analise"), analiseSchema);
   if (minha.estado === "carregando" || dele.estado === "carregando") return <p>Carregando a análise de pro…</p>;
-  if (minha.estado === "indisponivel" || dele.estado === "indisponivel") return null;
+  return <>{children({ minha: minha.estado === "ok" ? minha.dados : null, dele: dele.estado === "ok" ? dele.dados : null })}</>;
+}
+
+/** Análise escrita de pro do par e a linha do tempo de power spike. */
+export function AnaliseDePro({ meu, inimigo, minha, dele }: Analises) {
   return (
     <>
-      <SecaoDaAnalise meu={meu} inimigo={inimigo} minha={minha.dados} dele={dele.dados} />
-      <SecaoDaLinhaDoTempo meu={meu} inimigo={inimigo} minha={minha.dados} dele={dele.dados} />
+      <SecaoDaAnalise meu={meu} inimigo={inimigo} minha={minha} dele={dele} />
+      <SecaoDaLinhaDoTempo meu={meu} inimigo={inimigo} minha={minha} dele={dele} />
     </>
   );
 }
@@ -44,7 +56,7 @@ function SecaoDaAnalise({ meu, inimigo, minha, dele }: Analises) {
       <h2 id="cf-pro">Análise de pro</h2>
       {meuBloco
         ? <BlocoView bloco={meuBloco} dono={meu.nome} outro={inimigo.nome} />
-        : <SemAnalise meu={meu} analise={minha} />}
+        : <SemAnalise meu={meu} inimigo={inimigo} analise={minha} />}
       {blocoDele && (
         <details className="cf-cartao cf-outro-lado">
           <summary><strong>Visto do lado dele</strong> <span className="cf-resumo">a análise do {inimigo.nome} contra o {meu.nome}</span></summary>
@@ -55,10 +67,15 @@ function SecaoDaAnalise({ meu, inimigo, minha, dele }: Analises) {
   );
 }
 
-function SemAnalise({ meu, analise }: { meu: HeroiDoPar; analise: Analise }) {
+function SemAnalise({ meu, inimigo, analise }: { meu: HeroiDoPar; inimigo: HeroiDoPar; analise: Analise }) {
+  const contra = analise.contra_inimigo[inimigo.chave];
   return (
     <>
-      <p>A análise de pro cobre os confrontos mais relevantes de cada herói, e este par não está entre eles. O {meu.nome} tem análise contra:</p>
+      <p>
+        Ainda não há texto de análise escrito para {meu.nome} contra {inimigo.nome}.
+        {contra && ` Os números das ${contra.jogos.toLocaleString("pt-BR")} partidas pro do par (vitória, builds e itens) estão na seção "O que os pros de ${meu.nome} fazem contra ${inimigo.nome}", acima.`}
+      </p>
+      <p>Análise escrita do {meu.nome} existe contra:</p>
       <ul className="cf-oponentes">
         {analise.confrontos.map(({ oponente }) => (
           <li key={oponente.id}><Link to={`/confronto/${meu.chave}/${oponente.nome_interno}`}>{oponente.nome}</Link></li>

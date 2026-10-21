@@ -2,7 +2,7 @@
 import { render, screen, within } from "@testing-library/react";
 import { readFileSync } from "node:fs";
 import { MemoryRouter } from "react-router";
-import { AnaliseDePro } from "./AnaliseDePro";
+import { AnaliseDePro, ComAnalisesDoPar } from "./AnaliseDePro";
 
 const MORPHLING = { id: 10, chave: "morphling", nome: "Morphling" };
 const ALCHEMIST = { id: 73, chave: "alchemist", nome: "Alchemist" };
@@ -10,7 +10,13 @@ const LION = { id: 26, chave: "lion", nome: "Lion" };
 
 function abrir(meu: typeof MORPHLING, inimigo: typeof MORPHLING) {
   vi.stubGlobal("fetch", async (url: string) => new Response(readFileSync(`public${url}`, "utf-8"), { headers: { "content-type": "application/json" } }));
-  return render(<MemoryRouter><AnaliseDePro meu={meu} inimigo={inimigo} /></MemoryRouter>);
+  return render(
+    <MemoryRouter>
+      <ComAnalisesDoPar meu={meu} inimigo={inimigo}>
+        {({ minha, dele }) => minha && dele && <AnaliseDePro meu={meu} inimigo={inimigo} minha={minha} dele={dele} />}
+      </ComAnalisesDoPar>
+    </MemoryRouter>,
+  );
 }
 
 afterEach(() => vi.unstubAllGlobals());
@@ -27,10 +33,11 @@ it("mostra o bloco do seu herói com placar e porquê, e o lado dele recolhido",
   expect(analise).not.toHaveTextContent(/pro_dados|C:\//);
 });
 
-it("sem bloco para o par, explica a cobertura e leva aos oponentes analisados", async () => {
+it("sem texto escrito para o par, aponta para os números de pro do par e leva aos oponentes analisados", async () => {
   abrir(MORPHLING, LION);
   const analise = await screen.findByRole("region", { name: "Análise de pro" });
-  expect(analise).toHaveTextContent("A análise de pro cobre os confrontos mais relevantes de cada herói");
+  expect(analise).toHaveTextContent("Ainda não há texto de análise escrito para Morphling contra Lion");
+  expect(analise).toHaveTextContent(/partidas pro do par \(vitória, builds e itens\)/);
   expect(within(analise).getByRole("link", { name: "Alchemist" })).toHaveAttribute("href", "/confronto/morphling/alchemist");
   expect(within(analise).queryByText("Visto do lado dele")).not.toBeInTheDocument();
 });

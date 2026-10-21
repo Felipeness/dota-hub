@@ -43,7 +43,7 @@ it("mostra vantagem, mecânicas, itens e dicas do Slark contra o Phantom Lancer,
   abrir("/confronto/slark/phantom_lancer");
   const vantagem = await screen.findByRole("region", { name: "Quem leva vantagem" });
   expect(await within(vantagem).findByText(/jogos \(\d+ vitórias\)/)).toBeInTheDocument();
-  expect(screen.getByRole("region", { name: /Por que/ })).toHaveTextContent("Cria ilusões");
+  expect(await screen.findByRole("region", { name: /Por que/ })).toHaveTextContent("Cria ilusões");
   const itens = screen.getByRole("region", { name: "Itens que viram o confronto" });
   expect(within(itens).getByText("Battle Fury")).toBeInTheDocument();
   expect(screen.getByRole("region", { name: "Na prática" })).toBeInTheDocument();
@@ -73,4 +73,14 @@ it("Morphling contra Axe: o cartão do controle mostra o Manta no tempo certo e 
   expect(within(porque).getByText(/sai da faixa do Culling Blade/)).toBeInTheDocument();
   expect(within(porque).getByText(/Aperte entre 0,2 s e 0,3 s/)).toBeInTheDocument();
   expect(within(porque).getByRole("link", { name: "dota2.fandom.com, Manta_Style" })).toHaveAttribute("href", "https://dota2.fandom.com/wiki/Manta_Style");
+});
+
+it("Morphling contra Axe: builds e itens dos pros primeiro, BKB entre os genéricos porque o Axe atravessa imunidade", async () => {
+  abrir("/confronto/morphling/axe");
+  const pros = await screen.findByRole("region", { name: /O que os pros de Morphling fazem contra Axe \(\d+ partidas\)/ }, { timeout: 5000 });
+  expect(within(pros).getAllByRole("list", { name: /^Caminho / }).length).toBeGreaterThan(0);
+  const itens = screen.getByRole("region", { name: "Itens que viram o confronto" });
+  const genericos = within(itens).getByText("Counters genéricos que os pros quase não usam aqui").closest("details");
+  expect(genericos).toHaveTextContent(/Black King Bar.*atravessa imunidade a magia/);
+  expect(within(itens).queryByText("Black King Bar", { selector: ".cf-item strong" })).not.toBeInTheDocument();
 });

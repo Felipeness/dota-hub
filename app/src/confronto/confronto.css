@@ -84,3 +84,17 @@
 .cf-tl-legenda { border-left: 3px solid; padding-left: var(--espaco-3); }
 .cf-tl-legenda-meu { border-color: var(--cor-radiant); }
 .cf-tl-legenda-dele { border-color: var(--cor-dire); }
+
+/* O que os pros fazem contra o inimigo (ProsContraInimigo.tsx) e o filtro dos counters. */
+.cf-pros-placar { margin: 0; color: var(--cor-texto-2); }
+.cf-pros-taxa { font-size: 28px; font-weight: 700; }
+.cf-pros-taxa-sua { color: var(--cor-radiant); }
+.cf-pros-taxa-dele { color: var(--cor-dire); }
+.cf-pros-itens { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); gap: var(--espaco-2); margin: 0; padding: 0; list-style: none; }
+.cf-pros-itens li { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "img nome" "img num"; column-gap: var(--espaco-2); align-items: center;
+  padding: 6px var(--espaco-2); border: 1px solid var(--cor-linha); border-radius: var(--raio-pequeno); min-width: 0; }
+.cf-pros-itens img { grid-area: img; border-radius: 4px; background: var(--cor-superficie-3); }
+.cf-pros-item-nome { grid-area: nome; font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cf-pros-item-num { grid-area: num; font-size: 12px; color: var(--cor-texto-3); }
+.cf-pros-fracao { color: var(--cor-texto-2); font-size: 14px; }
+.cf-genericos { margin-top: var(--espaco-3); }
