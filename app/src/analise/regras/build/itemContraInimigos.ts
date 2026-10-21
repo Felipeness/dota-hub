@@ -3,12 +3,14 @@
 // fazem nesse confronto, e item de pro feito no tempo.
 import { tempoDaPartida, type Compra } from "../../../live/partida/detalhe";
 import type { Achado, Contexto, Peso } from "../../modelo";
+import { ITENS_CURADOS } from "../../../live/partida/porQueItem";
 import {
   ehComponente, FRACAO_DE_CORE, FRACAO_DE_ESCOLHA, FRACAO_RARA, fracaoNoMatchup, listaDeNomes, matchupDePro,
   type ItemDoMatchup, type Matchup,
 } from "./matchupDePro";
 
-const FONTE = "content/pro_contra (export/dota_export/pro_contra.py): partidas de liga dos últimos 18 meses no OpenDota, compras do herói por inimigo";
+const FONTE = "content/pro_contra (export/dota_export/pro_contra.py): partidas de liga dos últimos 18 meses no OpenDota, " +
+  "compras do herói por inimigo; os jogos são somados por inimigo (uma partida contra dois deles conta para os dois)";
 const ATRASO_TOLERADO_MIN = 8;
 const MAXIMO_DE_RESPOSTAS = 2;
 /** Alternativa citada quando o jogador fez um item raro: o que os pros fazem com frequência e ele não fez. */
@@ -17,13 +19,20 @@ const FRACAO_DE_RESPOSTA = 0.2;
 const minutos = (n: number) => n.toLocaleString("pt-BR", { maximumFractionDigits: 1 });
 const porcento = (fracao: number) => `${Math.round(fracao * 100)}%`;
 
-type Recorte = Readonly<{ matchup: Matchup; contra: string; heroi: string }>;
+type Recorte = Readonly<{ matchup: Matchup; contra: string; heroi: string; porqueDosItens: Readonly<Record<string, string>> }>;
 
 const amostra = ({ matchup }: Recorte, item: ItemDoMatchup) => `${item.n} de ${matchup.jogos} jogos pro contra eles`;
 
-const porqueDoRecorte = (r: Recorte) =>
-  `É o recorte das partidas pro de ${r.heroi} contra ${r.contra}, não a média do herói; os jogos são somados por ` +
-  "inimigo (uma partida contra dois deles conta para os dois).";
+/**
+ * Por que o item importa: o porquê tático do guia/ficha do herói quando existe; sem ele, o que o item faz. Como o número
+ * dos pros foi calculado fica nas fontes, não no card.
+ */
+function porqueDoItem(r: Recorte, chave: string, nome: string): string {
+  const doHeroi = r.porqueDosItens[chave];
+  if (doHeroi) return doHeroi;
+  const funcao = ITENS_CURADOS[chave]?.funcao;
+  return funcao ? `${nome}: ${funcao}.` : `É o item que os pros de ${r.heroi} usam pra jogar contra esse draft.`;
+}
 
 function pesoDoAtraso(atrasoMin: number): Peso {
   return atrasoMin > ATRASO_TOLERADO_MIN * 2 ? "pesou_muito" : "pesou";
@@ -38,7 +47,7 @@ function achadoFaltou(r: Recorte, item: ItemDoMatchup, duracaoS: number): Achado
     oQueAconteceu: `Contra ${r.contra}, os pros fazem ${item.nome} em ${porcento(item.fracao)} das partidas, mediana ` +
       `${minutos(item.mediana)} min (${amostra(r, item)}); a partida acabou aos ${tempoDaPartida(duracaoS)} sem ele.`,
     oQueFazer: `Contra esse draft, encaixar o ${item.nome} na build mirando ${minutos(item.mediana)} min, como os pros.`,
-    porque: porqueDoRecorte(r),
+    porque: porqueDoItem(r, item.chave, item.nome),
     fontes: [FONTE],
     peso: item.fracao >= 0.8 ? "pesou_muito" : "pesou",
     evidencias: { numeros: { fracaoPro: Number(item.fracao.toFixed(2)), minutoMedianoPro: Number(item.mediana.toFixed(1)), amostraPro: item.n, jogosPro: r.matchup.jogos } },
@@ -65,7 +74,7 @@ function achadoAtrasado(r: Recorte, item: ItemDoMatchup, compra: Compra, compras
     oQueFazer: antes
       ? `Fazer o ${item.nome} antes de ${antes}, mirando ${minutos(item.mediana)} min como os pros.`
       : `Puxar o ${item.nome} pra perto de ${minutos(item.mediana)} min: farmar sem rotas sem prioridade até ele sair.`,
-    porque: porqueDoRecorte(r),
+    porque: porqueDoItem(r, item.chave, item.nome),
     fontes: [FONTE],
     peso: pesoDoAtraso(atraso),
     evidencias: { numeros: { minutoCompra: Number(minutoCompra.toFixed(1)), minutoMedianoPro: Number(item.mediana.toFixed(1)), atrasoMin: Number(atraso.toFixed(1)), amostraPro: item.n, jogosPro: r.matchup.jogos } },
@@ -81,7 +90,7 @@ function achadoNoTempo(r: Recorte, item: ItemDoMatchup, compra: Compra): Achado 
     oQueAconteceu: `Os pros fazem ${item.nome} em ${porcento(item.fracao)} das partidas contra ${r.contra}, mediana ` +
       `${minutos(item.mediana)} min (${amostra(r, item)}); você fez aos ${tempoDaPartida(compra.t)}.`,
     oQueFazer: null,
-    porque: porqueDoRecorte(r),
+    porque: porqueDoItem(r, item.chave, item.nome),
     fontes: [FONTE],
     peso: "leve",
     evidencias: { numeros: { minutoMedianoPro: Number(item.mediana.toFixed(1)), amostraPro: item.n, jogosPro: r.matchup.jogos } },
@@ -108,7 +117,7 @@ function achadoRaro(r: Recorte, compra: Compra, fracao: number, compradas: Reado
     oQueAconteceu: `Você fez ${compra.nome} aos ${tempoDaPartida(compra.t)}; os pros de ${r.heroi} fizeram em ${n} de ` +
       `${r.matchup.jogos} jogos contra ${r.contra} (${porcento(fracao)}).`,
     oQueFazer: respostas ? `Contra esse draft, eles respondem com ${respostas}.` : null,
-    porque: porqueDoRecorte(r),
+    porque: `Contra esse draft, os pros de ${r.heroi} preferem outros itens; o ${compra.nome} quase não aparece nas builds deles.`,
     fontes: [FONTE],
     peso: "leve",
     evidencias: { numeros: { amostraPro: n, jogosPro: r.matchup.jogos } },
@@ -134,7 +143,7 @@ const primeiraDeCada = (compras: readonly Compra[]): readonly Compra[] =>
 export function itemContraInimigos(ctx: Contexto): Achado[] {
   const matchup = matchupDePro(ctx);
   if (!matchup) return [];
-  const r: Recorte = { matchup, contra: listaDeNomes(matchup.inimigos), heroi: ctx.meuHeroi.nome };
+  const r: Recorte = { matchup, contra: listaDeNomes(matchup.inimigos), heroi: ctx.meuHeroi.nome, porqueDosItens: ctx.porqueDosItens ?? {} };
   const compradas = new Set(ctx.detalhe.compras.map((c) => c.chave));
 
   const dePro = [...matchup.itens.values()]

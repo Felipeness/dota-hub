@@ -3,6 +3,7 @@ import type { Analise } from "../confronto/analise";
 import type { HeroiNaPartida } from "../live/partida/detalhe";
 import type { DetalheDaPartida } from "../live/partida/detalhe";
 import type { HeroiDaPosicao } from "./pro";
+import type { PorqueDosItens } from "./porqueDosItens";
 
 export type Categoria = "erro" | "acerto" | "contexto";
 export type Peso = "leve" | "pesou" | "pesou_muito";
@@ -40,6 +41,8 @@ export type Contexto = Readonly<{
   proDoHeroi: HeroiDaPosicao | null;
   meuHeroi: HeroiNaPartida;
   inimigos: readonly HeroiNaPartida[];
+  /** Porquê tático de cada item do herói (analise/porqueDosItens.ts); ausente sem guia nem ficha carregados. */
+  porqueDosItens?: PorqueDosItens;
 }>;
 
 export interface Regra {

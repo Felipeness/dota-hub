@@ -2,6 +2,7 @@ import { nomeDaLane, nomeDaPosicao } from "../live/formato";
 import { useState, type FormEvent } from "react";
 import { Link, useNavigate, useParams, useSearchParams } from "react-router";
 import { analiseSchema, caminhoDaAnalise } from "../confronto/analise";
+import { fichaSchema, heroiSchema } from "../data/schemas";
 import { useData } from "../data/useData";
 import { lerId } from "../live/contas";
 import { ErroAoVivoView } from "../live/ErroAoVivo";
@@ -16,6 +17,7 @@ import { CAMINHO_PRO_POSICOES, proPorPosicaoSchema } from "./pro";
 import { REGISTRO_DE_REGRAS } from "./registro";
 import { escolherLances } from "./lancesDecisivos";
 import { montarRelatorio } from "./relatorio";
+import { porqueDosItens } from "./porqueDosItens";
 import "./analise.css";
 
 export function AnalisePage() {
@@ -96,7 +98,13 @@ function RelatorioDaPartida({ detalhe }: { detalhe: DetalheDaPartida }) {
   // em silêncio pra esses heróis, sem avisar que faltou dado pra build-core/build-fora-de-contexto.
   const pro = useData(caminhoDaAnalise(detalhe.heroi.retrato), analiseSchema);
   const proPosicoes = useData(CAMINHO_PRO_POSICOES, proPorPosicaoSchema);
-  const ctx = construirContexto(detalhe, pro.estado === "ok" ? pro.dados : null, proPosicoes.estado === "ok" ? proPosicoes.dados : null);
+  // Herói tem guia completo (22) ou ficha por posição (105): um dos dois arquivos não existe e cai em erro, sem efeito.
+  const guia = useData(`/data/herois/${detalhe.heroi.retrato}.json`, heroiSchema);
+  const ficha = useData(`/data/fichas/${detalhe.heroi.retrato}.json`, fichaSchema);
+  const ctx = {
+    ...construirContexto(detalhe, pro.estado === "ok" ? pro.dados : null, proPosicoes.estado === "ok" ? proPosicoes.dados : null),
+    porqueDosItens: porqueDosItens(guia.estado === "ok" ? guia.dados : null, ficha.estado === "ok" ? ficha.dados : null, detalhe.posicao),
+  };
   const relatorio = montarRelatorio(avaliarRegras(ctx, REGISTRO_DE_REGRAS));
   return (
     <article className="analise-pagina">
