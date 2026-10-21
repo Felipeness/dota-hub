@@ -55,6 +55,7 @@ export function LancesDecisivos({ detalhe, escolha }: Props) {
   return (
     <section className="lances" aria-labelledby="titulo-lances">
       <h2 id="titulo-lances">{lances.length === 1 ? "1 lance decidiu o jogo" : `${lances.length} lances decidiram o jogo`}</h2>
+      <p className="lances-dica">Aperte Tocar: o mapa anda e para em cada lance.</p>
       <NumerosDaPartida detalhe={detalhe} trajetos={trajetos} />
       {replay.estado === "carregando" && <p role="status" className="replay-aviso">Lendo o replay da partida para desenhar os heróis (até ~10 s na primeira vez)…</p>}
       {replay.estado === "erro" && (

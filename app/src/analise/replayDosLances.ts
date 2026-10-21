@@ -3,7 +3,7 @@
 // 5x perto, pausa no segundo exato do lance) e para onde a câmera olha. O componente só desenha o que sai daqui.
 import type { Objetivo } from "../data/schemas";
 import type { Ponto } from "../map/coords";
-import { wardAtiva, type Panorama, type WardNoPanorama } from "../live/partida/panorama";
+import { estaMorto, wardAtiva, type Panorama, type WardNoPanorama } from "../live/partida/panorama";
 import type { Lado } from "../live/rotaAproximada";
 import { pontoDaGrade, posicaoEm, trilhas, type Trajetos } from "../replay/trajetos";
 import type { Lance } from "./lancesDecisivos";
@@ -17,6 +17,12 @@ export type TrajetosDoMapa = Readonly<{
   posicaoEm: (slot: number, t: number) => Ponto | null;
   vistoEm: (slot: number, t: number) => boolean;
   mortoEm: (slot: number, t: number) => boolean;
+  /** Segundo em que o herói volta, se está morto em t; senão null. */
+  voltaEm: (slot: number, t: number) => number | null;
+  /** Nível em t (niveis[i] = segundo em que chegou ao nível i+2). */
+  nivelEm: (slot: number, t: number) => number | null;
+  /** Last hits no minuto de t (= lh_t do OpenDota). */
+  lhEm: (slot: number, t: number) => number | null;
   mortes: readonly Readonly<{ t: number; vitima: number; assassino: number | null; ponto: Ponto }>[];
   smokes: readonly Readonly<{ t: number; lado: Lado; herois: readonly Readonly<{ slot: number; ini: number; fim: number | null }>[] }>[];
   totais: Readonly<{ wards: number; smokes: number; mortes: number }>;
@@ -30,6 +36,7 @@ export function mapaDosTrajetos(trajetos: Trajetos): TrajetosDoMapa {
   const porSlot = new Map(trilhas(trajetos).map((trilha) => [trilha.slot, trilha]));
   const vistos = new Map(trajetos.herois.map((h) => [h.slot, h.visto]));
   const mortos = new Map(trajetos.herois.map((h) => [h.slot, h.mortes]));
+  const porHeroi = new Map(trajetos.herois.map((h) => [h.slot, h]));
   return {
     posicaoEm: (slot, t) => {
       const trilha = porSlot.get(slot);
@@ -37,6 +44,12 @@ export function mapaDosTrajetos(trajetos: Trajetos): TrajetosDoMapa {
     },
     vistoEm: (slot, t) => dentro(vistos.get(slot) ?? [], t),
     mortoEm: (slot, t) => dentro(mortos.get(slot) ?? [], t),
+    voltaEm: (slot, t) => (mortos.get(slot) ?? []).find(([de, ate]) => de <= t && t < ate)?.[1] ?? null,
+    nivelEm: (slot, t) => {
+      const heroi = porHeroi.get(slot);
+      return heroi ? 1 + heroi.niveis.filter((s) => s <= t).length : null;
+    },
+    lhEm: (slot, t) => porHeroi.get(slot)?.lh[Math.max(0, Math.floor(t / 60))] ?? porHeroi.get(slot)?.lh.at(-1) ?? null,
     mortes: trajetos.mortes.map((m) => ({ t: m.t, vitima: m.vitima, assassino: m.assassino ?? null, ponto: pontoDaGrade(m.x, m.y, trajetos.escala) })),
     smokes: trajetos.smokes.map((s) => ({ t: s.t, lado: ladoDoTime(s.time), herois: s.herois.map((h) => ({ slot: h.slot, ini: h.ini, fim: h.fim ?? null })) })),
     totais: trajetos.totais,
@@ -212,7 +225,7 @@ export function avancar(relogio: Relogio, { ms, lances, fim, velocidade }: Passo
 
 /* Câmera: fecha no lance ativo, mapa inteiro entre eles. */
 const ANTES_DO_LANCE_S = 20;
-const DEPOIS_DO_LANCE_S = 25;
+const DEPOIS_DO_LANCE_S = 20;
 const ZOOM_NO_LANCE = 2.7;
 /** Heróis a até esta distância do jogador no lance entram no enquadramento. */
 const RAIO_DO_LANCE = 0.12;
@@ -283,3 +296,72 @@ export function rotuloDoLance(lance: Lance): string {
 
 /** Os títulos dos achados terminam em ", 24:58"; no card o horário já está no sobretítulo. */
 export const tituloSemTempo = (titulo: string) => titulo.replace(/,\s*\d+:\d{2}$/, "");
+
+/* HUD do topo, gráfico e letreiro: o contexto da partida no instante t. */
+
+export type HeroiNoPlacar = Readonly<{
+  slot: number; nome: string; retrato: string; lado: Lado; eu: boolean;
+  nivel: number | null; lh: number | null;
+  /** Segundos até voltar, se está morto em t. */
+  voltaEmS: number | null;
+}>;
+export type Placar = Readonly<{ abatesNosso: number; abatesDeles: number; nosso: readonly HeroiNoPlacar[]; deles: readonly HeroiNoPlacar[] }>;
+
+/** Abate = morte de herói do outro time para um herói (morte para creep, torre ou neutro não entra no placar). */
+export function placarEm(panorama: Panorama, t: number, eu: Quem, trajetos: TrajetosDoMapa | null): Placar {
+  const mortes = mortesAte(panorama, trajetos, t).filter((m) => m.matador !== null || m.nomeDoMatador !== null);
+  const heroi = (j: Jogador): HeroiNoPlacar => {
+    const voltaReplay = trajetos?.voltaEm(j.slot, t) ?? null;
+    const voltaOpenDota = j.mortes.find((m) => estaMorto(m, t))?.voltaEm ?? null;
+    const volta = trajetos ? voltaReplay : voltaOpenDota;
+    return {
+      slot: j.slot, nome: j.heroi.nome, retrato: j.heroi.retrato, lado: j.lado, eu: j.slot === eu.slot,
+      nivel: trajetos?.nivelEm(j.slot, t) ?? null, lh: trajetos?.lhEm(j.slot, t) ?? null,
+      voltaEmS: volta === null ? null : Math.ceil(volta - t),
+    };
+  };
+  return {
+    abatesNosso: mortes.filter((m) => m.vitima.lado !== eu.lado).length,
+    abatesDeles: mortes.filter((m) => m.vitima.lado === eu.lado).length,
+    nosso: panorama.jogadores.filter((j) => j.lado === eu.lado).map(heroi),
+    deles: panorama.jogadores.filter((j) => j.lado !== eu.lado).map(heroi),
+  };
+}
+
+/** Vantagem de ouro do seu time em t, interpolada entre os pontos por minuto; null sem a curva. */
+export function vantagemEm(ouroPorMinuto: readonly number[], t: number): number | null {
+  const minuto = Math.max(0, t / 60);
+  const antes = ouroPorMinuto[Math.floor(minuto)];
+  if (antes === undefined) return ouroPorMinuto.at(-1) ?? null;
+  const depois = ouroPorMinuto[Math.floor(minuto) + 1] ?? antes;
+  return antes + (depois - antes) * (minuto - Math.floor(minuto));
+}
+
+export type TipoNoLetreiro = "abate" | "estrutura" | "roshan" | "smoke" | "ward" | "buyback";
+export type EventoNoLetreiro = Readonly<{ t: number; tipo: TipoNoLetreiro; texto: string }>;
+type Partida = Readonly<{ panorama: Panorama; eventos: readonly Readonly<{ t: number; tipo: string; texto: string }>[] }>;
+
+/** Tudo o que pode aparecer no letreiro embaixo do mapa, em ordem de tempo. */
+export function eventosDoLetreiro({ panorama, eventos }: Partida, eu: Quem, trajetos: TrajetosDoMapa | null): readonly EventoNoLetreiro[] {
+  const deQuem = (lado: Lado | null) => (lado === null ? "" : lado === eu.lado ? " do seu time" : " inimiga");
+  const abates = mortesAte(panorama, trajetos, Number.POSITIVE_INFINITY).map((m): EventoNoLetreiro => ({
+    t: m.t, tipo: "abate", texto: m.nomeDoMatador ? `${m.nomeDoMatador} matou ${m.vitima.heroi.nome}` : `${m.vitima.heroi.nome} morreu para creep ou torre`,
+  }));
+  const estruturas = panorama.estruturas.map((e): EventoNoLetreiro => ({ t: e.t, tipo: "estrutura", texto: `Caiu ${e.nome}${deQuem(e.lado)}` }));
+  const roshans = panorama.roshans.map((r): EventoNoLetreiro => ({
+    t: r.t, tipo: "roshan", texto: `Roshan pelo ${r.lado === eu.lado ? "seu time" : "time inimigo"}${r.aegisAte !== null ? ", com Aegis" : ""}`,
+  }));
+  const porSlot = new Map(panorama.jogadores.map((j) => [j.slot, j.heroi.nome]));
+  const smokes = (trajetos?.smokes ?? []).map((s): EventoNoLetreiro => ({
+    t: s.t, tipo: "smoke", texto: `Smoke ${s.lado === eu.lado ? "do seu time" : "inimigo"}: ${s.herois.map((h) => porSlot.get(h.slot) ?? "").filter(Boolean).join(", ")}`,
+  }));
+  const meus = eventos.flatMap((e): EventoNoLetreiro[] => {
+    if (e.tipo === "observer" || e.tipo === "sentry") return [{ t: e.t, tipo: "ward", texto: `Você colocou ${e.tipo === "observer" ? "uma observer" : "uma sentry"}` }];
+    return e.tipo === "buyback" ? [{ t: e.t, tipo: "buyback", texto: "Você comprou buyback" }] : [];
+  });
+  return [...abates, ...estruturas, ...roshans, ...smokes, ...meus].sort((a, b) => a.t - b.t);
+}
+
+/** O último evento até t, ou null antes do primeiro. */
+export const eventoEm = (eventos: readonly EventoNoLetreiro[], t: number): EventoNoLetreiro | null =>
+  eventos.findLast((e) => e.t <= t) ?? null;

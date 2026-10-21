@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { contextoDaAmostraCompleta, detalheDaAmostraCompleta } from "../amostras/amostraCompleta";
 import { escolherLances } from "../lancesDecisivos";
 import { avaliarRegras } from "../motor";
@@ -20,30 +20,35 @@ function renderizar() {
   return render(<LancesDecisivos detalhe={detalhe} escolha={escolherLances(detalhe, achados)} />);
 }
 
-it("mostra quantos lances decidiram o jogo, com um marcador por lance na linha do tempo", async () => {
+const slider = () => screen.getByRole("slider", { name: "Tempo da partida" });
+
+it("abre parado no primeiro lance, com o card dele, o placar e o tempo de jogo", async () => {
   renderizar();
   const titulo = await screen.findByRole("heading", { level: 2 });
-  const quantos = Number(/^(\d+) lances/.exec(titulo.textContent ?? "")?.[1]);
-  expect(quantos).toBeGreaterThan(0);
-  const marcadores = within(screen.getByRole("list", { name: "Lances na linha do tempo" })).getAllByRole("button");
-  expect(marcadores).toHaveLength(quantos);
+  expect(Number(/^(\d+) lances/.exec(titulo.textContent ?? "")?.[1])).toBeGreaterThan(0);
+  const primeiro = Number(slider().getAttribute("value"));
+  expect(screen.getAllByRole("article").some((a) => a.textContent?.includes(`· ${Math.floor(primeiro / 60)}:`))).toBe(true);
+  expect(screen.getByText("/ 50:46", { exact: false })).toBeInTheDocument();
+  expect(screen.getByLabelText(/^Abates: seu time \d+, inimigo \d+$/)).toBeInTheDocument();
 });
 
-it("clicar no marcador leva o relógio ao lance e mostra o card com o que fazer", async () => {
+it("próximo lance (botão ou tecla L) leva o relógio ao lance e mostra o card com o que fazer", async () => {
   renderizar();
-  const marcador = await screen.findByRole("button", { name: /Erro grave às 28:33/ });
-  fireEvent.click(marcador);
-  expect(screen.getByRole("slider", { name: "Tempo da partida" })).toHaveValue("1713");
+  const proximo = await screen.findByRole("button", { name: "Próximo lance (L)" });
+  while (Number(slider().getAttribute("value")) < 1713) fireEvent.click(proximo);
+  expect(slider()).toHaveValue("1713");
   const card = screen.getAllByRole("article").find((a) => a.textContent?.includes("Erro grave · 28:33"));
-  expect(card).toBeDefined();
   expect(card?.textContent).toContain("Huskar volta às 29:19): recuar para a T2 de cima");
+  fireEvent.keyDown(slider().closest(".replay-lances") ?? document.body, { key: "j" });
+  expect(Number(slider().getAttribute("value"))).toBeLessThan(1713);
 });
 
-it("tocar alterna para pausar e o teclado chega nos controles", async () => {
+it("tocar alterna para pausar, pelo botão e pela barra de espaço", async () => {
   renderizar();
-  const tocar = await screen.findByRole("button", { name: "Tocar" });
-  fireEvent.click(tocar);
-  expect(screen.getByRole("button", { name: "Pausar" })).toHaveAttribute("aria-pressed", "true");
+  fireEvent.click(await screen.findByRole("button", { name: "Tocar (K)" }));
+  expect(screen.getByRole("button", { name: "Pausar (K)" })).toHaveAttribute("aria-pressed", "true");
+  fireEvent.keyDown(slider().closest(".replay-lances") ?? document.body, { key: " " });
+  expect(screen.getByRole("button", { name: "Tocar (K)" })).toBeInTheDocument();
 });
 
 it("traz o que fez bem e um único treino com a janela de tempo", async () => {
