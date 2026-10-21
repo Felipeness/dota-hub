@@ -54,3 +54,18 @@ Contra o OpenDota: duração igual, as 14 torres com o mesmo nome e tempo exato,
 minutos, wards 47 obs e 72 sentries iguais ao `obs_placed`/`sen_placed`, dewards por jogador iguais ao
 `observer_kills`/`sentry_kills` (mais 1 sentry morta por creep), 12 smokes iguais ao `item_uses`, os 93 kills do
 `kills_log` com o mesmo assassino e vítima dentro de 1 s. Medusa às 10:00 em (176.75, 98), lane de baixo.
+
+## Lambda (`cmd/lambda`, `infra.sh`)
+
+`GET https://<function-url>.lambda-url.us-east-2.on.aws/?match=<id>` devolve o JSON (gzip).
+Se `s3://dota-hub-968000946695/data/replays/<id>.json` existe, lê de lá (~30 ms); senão pede o `replay_url` ao
+OpenDota, baixa da Valve (só `replayN.valve.net`), lê em streaming sem gravar o `.dem`, grava no S3 e devolve
+(~6 a 10 s, 120 MB de memória). O mesmo arquivo sai pelo CloudFront em
+`https://d22phpj0gnvpfs.cloudfront.net/data/replays/<id>.json`; o `deploy.sh` do app não apaga essa pasta.
+
+Erros em JSON `{code, message}`: 400 `match_invalido`, 404 `replay_indisponivel` (expirou ou o OpenDota não tem o
+salt), 502 `upstream`, 500 `interno`. Logs JSON no CloudWatch (14 dias) com `operation`, `match`, `durationMs`, `bytes`.
+
+Custo: cada partida nova gasta ~10 GB-s (US$ 0,00013) e ~50 KB no S3; dentro do free tier da Lambda fica em US$ 0.
+A reserva de 2 execuções simultâneas não entra enquanto a conta tiver limite de 10 (a AWS exige 10 livres); até lá
+o teto é o da conta.
