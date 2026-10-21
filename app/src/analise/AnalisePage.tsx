@@ -10,9 +10,12 @@ import type { DetalheDaPartida } from "../live/partida/detalhe";
 import { useAoVivo } from "../live/useAoVivo";
 import { AnalisePosJogo } from "./componentes/AnalisePosJogo";
 import { LancesDecisivos } from "./componentes/LancesDecisivos";
+import { ResumoGeral } from "./componentes/ResumoGeral";
+import { SuaBuildView } from "./componentes/SuaBuild";
+import { resumoGeral } from "./resumoGeral";
+import { avaliarSuaBuild } from "./suaBuild";
 import { carregarPartidaParaAnalise } from "./carregar";
 import { construirContexto } from "./contexto";
-import { avaliarRegras } from "./motor";
 import { CAMINHO_PRO_POSICOES, proPorPosicaoSchema } from "./pro";
 import { REGISTRO_DE_REGRAS } from "./registro";
 import { escolherLances } from "./lancesDecisivos";
@@ -105,7 +108,9 @@ function RelatorioDaPartida({ detalhe }: { detalhe: DetalheDaPartida }) {
     ...construirContexto(detalhe, pro.estado === "ok" ? pro.dados : null, proPosicoes.estado === "ok" ? proPosicoes.dados : null),
     porqueDosItens: porqueDosItens(guia.estado === "ok" ? guia.dados : null, ficha.estado === "ok" ? ficha.dados : null, detalhe.posicao),
   };
-  const relatorio = montarRelatorio(avaliarRegras(ctx, REGISTRO_DE_REGRAS));
+  const porRegra = REGISTRO_DE_REGRAS.map((regra) => ({ regra, achados: regra.avaliar(ctx) }));
+  const relatorio = montarRelatorio(porRegra.flatMap((r) => r.achados));
+  const suaBuild = avaliarSuaBuild(ctx);
   return (
     <article className="analise-pagina">
       <h1>Análise de {detalhe.heroi.nome}, partida {detalhe.partida}</h1>
@@ -113,7 +118,9 @@ function RelatorioDaPartida({ detalhe }: { detalhe: DetalheDaPartida }) {
         {nomeDaLane(detalhe.lane)} · {nomeDaPosicao(detalhe.posicao)}
       </p>
       <p><Link to={`/ao-vivo/partidas/${detalhe.partida}?conta=${detalhe.conta}`}>Ver a partida completa</Link></p>
+      <ResumoGeral linhas={resumoGeral(porRegra, suaBuild?.vereditos[0] ?? null)} />
       <LancesDecisivos detalhe={detalhe} escolha={escolherLances(detalhe, relatorio.achados)} />
+      <SuaBuildView build={suaBuild} heroi={detalhe.heroi.nome} />
       <AnalisePosJogo ctx={ctx} relatorio={relatorio} />
     </article>
   );
