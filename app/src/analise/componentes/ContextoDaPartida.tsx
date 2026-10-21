@@ -45,6 +45,7 @@ const LARGURA = 1_000;
 const ALTURA = 64;
 const MEIO = ALTURA / 2;
 const MARCA_A_CADA_S = 10 * 60;
+const FOLGA_DO_FIM_S = 4 * 60;
 
 /** Curva de vantagem de ouro da partida inteira, no mesmo eixo x da barra do player: verde acima de zero (seu time), vermelho abaixo. */
 export const GraficoDaVantagem = memo(function GraficoDaVantagem(
@@ -55,7 +56,9 @@ export const GraficoDaVantagem = memo(function GraficoDaVantagem(
   const pontos = ouro.map((v, minuto) => `${xDe(minuto * 60)},${MEIO - (v / maior) * (MEIO - 2)}`).join(" ");
   const fimX = xDe(Math.min(duracaoS, (ouro.length - 1) * 60));
   const area = `0,${MEIO} ${pontos} ${fimX},${MEIO}`;
-  const marcas = Array.from({ length: Math.floor(duracaoS / MARCA_A_CADA_S) + 1 }, (_, i) => i * MARCA_A_CADA_S);
+  // Marca de 10 em 10 min, sem a que ficaria encostada no rótulo do fim.
+  const marcas = Array.from({ length: Math.floor(duracaoS / MARCA_A_CADA_S) + 1 }, (_, i) => i * MARCA_A_CADA_S)
+    .filter((s) => duracaoS - s >= FOLGA_DO_FIM_S);
   const aoClicar = (e: MouseEvent<HTMLDivElement>) => {
     const caixa = e.currentTarget.getBoundingClientRect();
     onIr(Math.round(((e.clientX - caixa.left) / caixa.width) * duracaoS));

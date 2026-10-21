@@ -49,6 +49,15 @@ function useRelogioECamera(lances: readonly Lance[], fim: number, velocidade: Ve
   const chaveDoAlvo = `${alvo.centro[0]}:${alvo.centro[1]}:${alvo.zoom}`;
   const reduzir = prefereMenosMovimento();
 
+  // Os lances chegam aos poucos (os dados de pro carregam depois); enquanto a pessoa não mexeu, o player segue o primeiro.
+  const primeiro = lances[0]?.t ?? 0;
+  const primeiroAnterior = useRef(primeiro);
+  useEffect(() => {
+    const anterior = primeiroAnterior.current;
+    primeiroAnterior.current = primeiro;
+    setRelogio((r) => (!r.tocando && r.t === anterior ? relogioParado(primeiro, primeiro) : r));
+  }, [primeiro]);
+
   useEffect(() => {
     if (reduzir) return;
     let quadro = 0;
