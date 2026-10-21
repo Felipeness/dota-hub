@@ -159,7 +159,7 @@ function MapaDoQuadro({ quadro, camera, objetivos, lado }: { quadro: QuadroDoMap
   return (
     <div className="replay-mapa" role="img" aria-label="Minimapa no instante escolhido: wards, torres de pé e mortes recentes">
       <div className={`replay-tabuleiro${prefereMenosMovimento() ? " sem-movimento" : ""}`} style={estilo}>
-        <img src="/data/mapa_2048.jpg" alt="" draggable={false} />
+        <img className="replay-fundo" src="/data/mapa_2048.jpg" alt="" draggable={false} />
         <svg viewBox="0 0 1 1" preserveAspectRatio="none">
           {quadro.wards.map((w) => {
             const { x, y } = svg(w.ponto);

@@ -88,11 +88,21 @@ function mortesAte(panorama: Panorama, trajetos: TrajetosDoMapa | null, t: numbe
   return panorama.jogadores.flatMap((j) => j.mortes.filter((m) => m.t <= t).map((m) => ({ t: m.t, vitima: j, matador: m.matador, ponto: m.ponto })));
 }
 
+/** Mais que isso num segundo é teleporte ou respawn na fonte: o rastro recomeça dali, sem riscar o mapa inteiro. */
+const SALTO_NUM_SEGUNDO = 0.05;
+function semSalto(rastro: readonly Ponto[]): readonly Ponto[] {
+  const ultimoSalto = rastro.findLastIndex((p, i) => {
+    const antes = rastro[i - 1];
+    return antes !== undefined && Math.hypot(p[0] - antes[0], p[1] - antes[1]) > SALTO_NUM_SEGUNDO;
+  });
+  return ultimoSalto === -1 ? rastro : rastro.slice(ultimoSalto);
+}
+
 function heroisNoMapa(panorama: Panorama, trajetos: TrajetosDoMapa, t: number, eu: Quem): HeroiNoMapa[] {
   return panorama.jogadores.flatMap((j) => {
     const ponto = trajetos.posicaoEm(j.slot, t);
     if (!ponto) return [];
-    const rastro = Array.from({ length: RASTRO_S }, (_, i) => trajetos.posicaoEm(j.slot, t - RASTRO_S + i)).filter((p): p is Ponto => p !== null);
+    const rastro = semSalto(Array.from({ length: RASTRO_S }, (_, i) => trajetos.posicaoEm(j.slot, t - RASTRO_S + i)).filter((p): p is Ponto => p !== null));
     return [{
       slot: j.slot, ponto, rastro, lado: j.lado, retrato: j.heroi.retrato, nome: j.heroi.nome, eu: j.slot === eu.slot,
       morto: j.mortes.some((m) => estaMorto(m, t)),
@@ -163,14 +173,15 @@ export const MAPA_INTEIRO: Camera = { centro: [0.5, 0.5], zoom: 1 };
 export const lanceAtivoEm = (t: number, lances: readonly Lance[]): Lance | null =>
   lances.find((l) => t >= l.t - ANTES_DO_LANCE_S && t <= l.t + DEPOIS_DO_LANCE_S) ?? null;
 
-/** Foco do lance: posição registrada da morte; senão, a estrutura do time que caiu logo depois; senão, o herói no replay. */
+/** Foco do lance: posição registrada da morte; senão, o herói no replay; senão, a estrutura do time que caiu logo depois. */
 export function focoDoLance(lance: Lance, panorama: Panorama, objetivos: readonly Objetivo[], eu: Quem, trajetos: TrajetosDoMapa | null): Ponto | null {
   const posicao = lance.achado.evidencias.posicaoNoMapa;
   if (posicao) return [posicao.x, posicao.y];
+  const noReplay = trajetos?.posicaoEm(eu.slot, lance.t);
+  if (noReplay) return noReplay;
   const estrutura = panorama.estruturas.find((e) => e.lado === eu.lado && e.t >= lance.t && e.t - lance.t <= 90 && e.id !== null);
   const objetivo = estrutura && objetivos.find((o) => o.id === estrutura.id);
-  if (objetivo) return [objetivo.x, objetivo.y];
-  return trajetos?.posicaoEm(eu.slot, lance.t) ?? null;
+  return objetivo ? [objetivo.x, objetivo.y] : null;
 }
 
 const limitar = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
