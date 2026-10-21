@@ -1,7 +1,7 @@
 import { detalheDaAmostraCompleta } from "./amostras/amostraCompleta";
 import type { Lance } from "./lancesDecisivos";
 import type { Achado } from "./modelo";
-import { MAPA_INTEIRO, PAUSA_NO_LANCE_MS, avancar, cameraPara, quadroEm, velocidadeEm, type Relogio } from "./replayDosLances";
+import { MAPA_INTEIRO, PAUSA_NO_LANCE_MS, avancar, cameraPara, mapaDosTrajetos, quadroEm, velocidadeEm, type Relogio } from "./replayDosLances";
 
 const lance = (t: number): Lance => ({
   t, impacto: 1, relacionados: [],
@@ -61,10 +61,22 @@ describe("quadroEm na partida 9046905170", () => {
     expect(quadroEm(detalhe.panorama, t, eu, null).wards.every((w) => w.de <= t && t < w.ate)).toBe(true);
   });
 
-  it("com trajetos, desenha os heróis com rastro e marca o próprio", () => {
-    const quadro = quadroEm(detalhe.panorama, 600, eu, { posicaoEm: (slot, t) => [slot / 200, t / 3000] });
-    expect(quadro.herois).toHaveLength(10);
-    expect(quadro.herois.filter((h) => h.eu).map((h) => h.nome)).toEqual(["Medusa"]);
-    expect(quadro.herois[0]?.rastro.length).toBe(25);
+  it("com os trajetos do replay: heróis com rastro, inimigo não visto apagado, morte na posição real e smoke", () => {
+    const parado = (x: number, y: number) => [x, y, ...Array.from({ length: 2 * 700 }, () => 0)];
+    const heroi = (slot: number, time: 2 | 3, xy: number[], visto: [number, number][]) => ({ slot, heroi: "", time, xy, mortes: [], visto, niveis: [], lh: [] });
+    const trajetos = mapaDosTrajetos({
+      v: 1, match: 9046905170, build: 6962, escala: 4, t0: 0, duracao: 700,
+      herois: [heroi(3, 2, parado(600, 600), []), heroi(128, 3, parado(700, 700), [[0, 100]])],
+      wards: [], torres: [],
+      smokes: [{ t: 590, slot: 128, time: 3, x: 700, y: 700, herois: [{ slot: 128, ini: 590 }] }],
+      mortes: [{ t: 598, vitima: 3, assassino: 128, x: 600, y: 600 }],
+      totais: { wards: 0, smokes: 1, mortes: 1 },
+    });
+    const quadro = quadroEm(detalhe.panorama, 600, eu, trajetos);
+    expect(quadro.herois.map((h) => [h.nome, h.eu, h.escondido])).toEqual([["Medusa", true, false], ["Necrophos", false, true]]);
+    expect(quadro.herois[0]?.rastro).toHaveLength(25);
+    expect(quadro.feed[0]).toMatchObject({ vitima: "Medusa", matador: "Necrophos", t: 598 });
+    expect(quadro.mortes).toEqual([{ t: 598, ponto: [(150 - 57) / 142, (150 - 57) / 142], lado: "radiant", minha: true }]);
+    expect(quadro.smokes).toMatchObject([{ t: 590, lado: "dire", nomes: ["Necrophos"] }]);
   });
 });

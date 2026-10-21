@@ -8,7 +8,7 @@ import { tempoDaPartida, type DetalheDaPartida } from "../../live/partida/detalh
 import type { Lance } from "../lancesDecisivos";
 import {
   MAPA_INTEIRO, RAIO_DE_VISAO, avancar, cameraPara, focoDoLance, lanceAtivoEm, quadroEm, rotuloDoLance, velocidadeEm,
-  type Camera, type QuadroDoMapa, type Relogio, type TrajetosDoMapa,
+  type Camera, type QuadroDoMapa, type Relogio, type SmokeNoMapa, type TrajetosDoMapa,
 } from "../replayDosLances";
 import { prefereMenosMovimento, useTextoProgressivo } from "./movimento";
 
@@ -69,6 +69,7 @@ export function ReplayDosLances({ detalhe, lances, objetivos, trajetos, pedido }
         <button type="button" onClick={() => { const l = lanceVizinho(1); if (l) irPara(l.t); }} disabled={!lanceVizinho(1)}>Próximo lance</button>
       </div>
       <BarraDeTempo t={t} fim={fim} lances={lances} onIr={irPara} />
+      {quadro.smokes.map((smoke) => <LegendaDoSmoke key={smoke.t} smoke={smoke} nosso={smoke.lado === detalhe.lado} />)}
       {ativo ? <CardDoLance lance={ativo} /> : <p className="replay-espera">Toque ou escolha um lance na barra: o mapa vai até ele e para.</p>}
       {!trajetos && (
         <p className="replay-aviso">
@@ -117,6 +118,16 @@ export function CardDoLance({ lance, progressivo = true }: { lance: Lance; progr
         <p className="lance-relacionados">Também neste lance: {lance.relacionados.map((a) => a.titulo).join("; ")}.</p>
       )}
     </article>
+  );
+}
+
+function LegendaDoSmoke({ smoke, nosso }: { smoke: SmokeNoMapa; nosso: boolean }) {
+  return (
+    <p className="replay-smoke">
+      <strong>Smoke {nosso ? "do seu time" : "deles"} · {tempoDaPartida(smoke.t)}</strong>
+      {smoke.retratos.map((r, i) => <img key={r} src={`/data/retratos/herois/${r}.webp`} alt={smoke.nomes[i] ?? ""} width={20} height={20} />)}
+      <span>{nosso ? "andam escondidos" : "somem do mapa"}.</span>
+    </p>
   );
 }
 
@@ -177,7 +188,7 @@ function MapaDoQuadro({ quadro, camera, objetivos, lado }: { quadro: QuadroDoMap
         </svg>
         {quadro.herois.map((h) => (
           <img key={h.slot} src={`/data/retratos/herois/${h.retrato}.webp`} alt={h.nome} title={h.nome}
-            className={`replay-heroi replay-heroi-${h.lado === lado ? "aliado" : "inimigo"}${h.eu ? " eu" : ""}${h.morto ? " morto" : ""}`}
+            className={`replay-heroi replay-heroi-${h.lado === lado ? "aliado" : "inimigo"}${h.eu ? " eu" : ""}${h.morto ? " morto" : ""}${h.escondido ? " escondido" : ""}`}
             style={{ left: `${h.ponto[0] * 100}%`, top: `${(1 - h.ponto[1]) * 100}%`, width: `${4.5 / camera.zoom}%` }} />
         ))}
       </div>

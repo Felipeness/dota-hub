@@ -58,7 +58,7 @@
 /* Lances decisivos: player do minimapa + cards. Verde/vermelho = acerto/erro, como no resto da análise. */
 .lances { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-4); min-width: 0; }
 .lances h2 { font-size: clamp(28px, 5vw, 40px); }
-.lances-numeros { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--espaco-3); margin: 0; }
+.lances-numeros { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: var(--espaco-3); margin: 0; }
 .lances-numeros div { display: flex; flex-direction: column-reverse; min-width: 0; }
 .lances-numeros dt { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--cor-texto-3); }
 .lances-numeros dd { margin: 0; font-family: var(--fonte-num); font-size: clamp(18px, 4vw, 26px); color: var(--cor-texto); }
@@ -128,5 +128,10 @@
 .lances-treino { border-left: 3px solid var(--cor-destaque); padding: var(--espaco-3) var(--espaco-4); background: var(--cor-destaque-fundo); border-radius: 0 var(--raio) var(--raio) 0; }
 .lances-treino p { margin: var(--espaco-2) 0; line-height: 1.55; }
 .lances-treino-titulo { font-weight: 700; color: var(--cor-texto); }
-@media (max-width: 560px) { .lances-numeros { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .lances-numeros { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (prefers-reduced-motion: reduce) { .replay-tabuleiro { transition: none; } }
+.replay-heroi.escondido { opacity: 0.35; }
+.replay-smoke { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0; font-size: 13px; color: var(--cor-neutro); }
+.replay-smoke strong { font-family: var(--fonte-display); letter-spacing: 0.1em; text-transform: uppercase; }
+.replay-smoke img { border-radius: 50%; border: 1px solid var(--cor-neutro); }
+.replay-smoke span { color: var(--cor-texto-2); }

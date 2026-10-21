@@ -5,17 +5,40 @@ import type { Objetivo } from "../data/schemas";
 import type { Ponto } from "../map/coords";
 import { estaMorto, wardAtiva, type Panorama, type WardNoPanorama } from "../live/partida/panorama";
 import type { Lado } from "../live/rotaAproximada";
+import { pontoDaGrade, posicaoEm, trilhas, type Trajetos } from "../replay/trajetos";
 import type { Lance } from "./lancesDecisivos";
 
 /**
- * Costura para os trajetos lidos do replay (app/src/replay/trajetos.ts, feito à parte): quem tiver os dados entrega
- * a posição normalizada (0-1, origem embaixo à esquerda) de cada slot do OpenDota por segundo. Sem ela, o mapa fica
- * só com o que o OpenDota sabe: wards, torres, mortes em luta e Roshan.
+ * O que o minimapa usa dos trajetos lidos do replay (app/src/replay/trajetos.ts): posição de cada slot do OpenDota
+ * por segundo (normalizada 0-1, origem embaixo à esquerda), se o time inimigo via o herói, mortes com a posição
+ * real e smokes. Sem replay, o mapa fica só com o que o OpenDota sabe: wards, torres, mortes em luta e Roshan.
  */
 export type TrajetosDoMapa = Readonly<{
   posicaoEm: (slot: number, t: number) => Ponto | null;
-  smokes?: readonly Readonly<{ t: number; lado: Lado; slots: readonly number[] }>[];
+  vistoEm: (slot: number, t: number) => boolean;
+  mortes: readonly Readonly<{ t: number; vitima: number; assassino: number | null; ponto: Ponto }>[];
+  smokes: readonly Readonly<{ t: number; lado: Lado; herois: readonly Readonly<{ slot: number; ini: number; fim: number | null }>[] }>[];
+  totais: Readonly<{ wards: number; smokes: number; mortes: number }>;
 }>;
+
+const ladoDoTime = (time: 2 | 3): Lado => (time === 2 ? "radiant" : "dire");
+const dentro = (intervalos: readonly (readonly [number, number])[], t: number) => intervalos.some(([de, ate]) => de <= t && t < ate);
+
+/** Adapta o JSON do replay para o minimapa; o formato e as unidades estão em replay/README.md. */
+export function mapaDosTrajetos(trajetos: Trajetos): TrajetosDoMapa {
+  const porSlot = new Map(trilhas(trajetos).map((trilha) => [trilha.slot, trilha]));
+  const vistos = new Map(trajetos.herois.map((h) => [h.slot, h.visto]));
+  return {
+    posicaoEm: (slot, t) => {
+      const trilha = porSlot.get(slot);
+      return trilha ? posicaoEm(trilha, t) : null;
+    },
+    vistoEm: (slot, t) => dentro(vistos.get(slot) ?? [], t),
+    mortes: trajetos.mortes.map((m) => ({ t: m.t, vitima: m.vitima, assassino: m.assassino ?? null, ponto: pontoDaGrade(m.x, m.y, trajetos.escala) })),
+    smokes: trajetos.smokes.map((s) => ({ t: s.t, lado: ladoDoTime(s.time), herois: s.herois.map((h) => ({ slot: h.slot, ini: h.ini, fim: h.fim ?? null })) })),
+    totais: trajetos.totais,
+  };
+}
 
 /** Visão em unidades do mundo (Dota 2 Wiki 7.41: Observer 1600, Sentry 900 de true sight), na escala do mapa (grade de 128 unidades, 142 células). */
 const UNIDADES_POR_LADO_DO_MAPA = 128 * 142;
@@ -27,10 +50,17 @@ export const RAIO_DE_VISAO: Readonly<Record<WardNoPanorama["tipo"], number>> = {
 const MORTE_VISIVEL_S = 90;
 const ABATES_NO_FEED = 4;
 const RASTRO_S = 25;
+/** Smoke sem fim registrado: o efeito dura até 35 s (Dota 2 Wiki: Smoke of Deceit). */
+const DURACAO_DO_SMOKE_S = 35;
 
 export type AbateNoFeed = Readonly<{ t: number; matador: string | null; vitima: string; retratoDaVitima: string; ladoDaVitima: Lado }>;
 export type MorteNoMapa = Readonly<{ t: number; ponto: Ponto; lado: Lado; minha: boolean }>;
-export type HeroiNoMapa = Readonly<{ slot: number; ponto: Ponto; rastro: readonly Ponto[]; lado: Lado; retrato: string; nome: string; eu: boolean; morto: boolean }>;
+export type HeroiNoMapa = Readonly<{
+  slot: number; ponto: Ponto; rastro: readonly Ponto[]; lado: Lado; retrato: string; nome: string; eu: boolean; morto: boolean;
+  /** Inimigo que o seu time não via nesse instante: aparece apagado. */
+  escondido: boolean;
+}>;
+export type SmokeNoMapa = Readonly<{ t: number; centro: Ponto; lado: Lado; nomes: readonly string[]; retratos: readonly string[] }>;
 export type QuadroDoMapa = Readonly<{
   wards: readonly WardNoPanorama[];
   torresCaidas: ReadonlySet<string>;
@@ -38,10 +68,25 @@ export type QuadroDoMapa = Readonly<{
   feed: readonly AbateNoFeed[];
   roshans: readonly Readonly<{ t: number; lado: Lado | null }>[];
   herois: readonly HeroiNoMapa[];
-  smokes: readonly Readonly<{ centro: Ponto; lado: Lado }>[];
+  smokes: readonly SmokeNoMapa[];
 }>;
 
 type Quem = Readonly<{ lado: Lado; slot: number }>;
+type Jogador = Panorama["jogadores"][number];
+/** Uma morte vinda do replay (posição real de todas) ou do OpenDota (posição só dentro de luta). */
+type Morte = Readonly<{ t: number; vitima: Jogador; matador: string | null; ponto: Ponto | null }>;
+
+function mortesAte(panorama: Panorama, trajetos: TrajetosDoMapa | null, t: number): Morte[] {
+  const porSlot = new Map(panorama.jogadores.map((j) => [j.slot, j]));
+  if (trajetos) {
+    return trajetos.mortes.filter((m) => m.t <= t).flatMap((m) => {
+      const vitima = porSlot.get(m.vitima);
+      const matador = m.assassino === null ? null : porSlot.get(m.assassino)?.heroi.nome ?? null;
+      return vitima ? [{ t: m.t, vitima, matador, ponto: m.ponto }] : [];
+    });
+  }
+  return panorama.jogadores.flatMap((j) => j.mortes.filter((m) => m.t <= t).map((m) => ({ t: m.t, vitima: j, matador: m.matador, ponto: m.ponto })));
+}
 
 function heroisNoMapa(panorama: Panorama, trajetos: TrajetosDoMapa, t: number, eu: Quem): HeroiNoMapa[] {
   return panorama.jogadores.flatMap((j) => {
@@ -51,6 +96,7 @@ function heroisNoMapa(panorama: Panorama, trajetos: TrajetosDoMapa, t: number, e
     return [{
       slot: j.slot, ponto, rastro, lado: j.lado, retrato: j.heroi.retrato, nome: j.heroi.nome, eu: j.slot === eu.slot,
       morto: j.mortes.some((m) => estaMorto(m, t)),
+      escondido: j.lado !== eu.lado && !trajetos.vistoEm(j.slot, t),
     }];
   });
 }
@@ -58,27 +104,28 @@ function heroisNoMapa(panorama: Panorama, trajetos: TrajetosDoMapa, t: number, e
 const centroDe = (pontos: readonly Ponto[]): Ponto =>
   [pontos.reduce((s, p) => s + p[0], 0) / pontos.length, pontos.reduce((s, p) => s + p[1], 0) / pontos.length];
 
-/** Smoke dura até 35 s ou até revelar; sem o fim na fonte, o anel fica 35 s. */
-const DURACAO_DO_SMOKE_S = 35;
-
-function smokesNoMapa(trajetos: TrajetosDoMapa, t: number): QuadroDoMapa["smokes"] {
-  return (trajetos.smokes ?? []).filter((s) => s.t <= t && t < s.t + DURACAO_DO_SMOKE_S).flatMap((s) => {
-    const pontos = s.slots.map((slot) => trajetos.posicaoEm(slot, t)).filter((p): p is Ponto => p !== null);
-    return pontos.length > 0 ? [{ centro: centroDe(pontos), lado: s.lado }] : [];
+function smokesNoMapa(panorama: Panorama, trajetos: TrajetosDoMapa, t: number): SmokeNoMapa[] {
+  const porSlot = new Map(panorama.jogadores.map((j) => [j.slot, j]));
+  return trajetos.smokes.flatMap((s) => {
+    const sob = s.herois.filter((h) => h.ini <= t && t < (h.fim ?? h.ini + DURACAO_DO_SMOKE_S));
+    const pontos = sob.map((h) => trajetos.posicaoEm(h.slot, t)).filter((p): p is Ponto => p !== null);
+    if (pontos.length === 0) return [];
+    const jogadores = sob.flatMap((h) => porSlot.get(h.slot) ?? []);
+    return [{ t: s.t, centro: centroDe(pontos), lado: s.lado, nomes: jogadores.map((j) => j.heroi.nome), retratos: jogadores.map((j) => j.heroi.retrato) }];
   });
 }
 
 export function quadroEm(panorama: Panorama, t: number, eu: Quem, trajetos: TrajetosDoMapa | null): QuadroDoMapa {
-  const mortes = panorama.jogadores.flatMap((j) => j.mortes.filter((m) => m.t <= t).map((m) => ({ j, m })));
+  const mortes = mortesAte(panorama, trajetos, t);
   return {
     wards: panorama.wards.filter((w) => wardAtiva(w, t)),
     torresCaidas: new Set(panorama.estruturas.filter((e) => e.t <= t && e.id !== null).map((e) => e.id ?? "")),
-    mortes: mortes.flatMap(({ j, m }) => (m.ponto && t - m.t < MORTE_VISIVEL_S ? [{ t: m.t, ponto: m.ponto, lado: j.lado, minha: j.slot === eu.slot }] : [])),
-    feed: [...mortes].sort((a, b) => b.m.t - a.m.t).slice(0, ABATES_NO_FEED)
-      .map(({ j, m }) => ({ t: m.t, matador: m.matador, vitima: j.heroi.nome, retratoDaVitima: j.heroi.retrato, ladoDaVitima: j.lado })),
+    mortes: mortes.flatMap((m) => (m.ponto && t - m.t < MORTE_VISIVEL_S ? [{ t: m.t, ponto: m.ponto, lado: m.vitima.lado, minha: m.vitima.slot === eu.slot }] : [])),
+    feed: [...mortes].sort((a, b) => b.t - a.t).slice(0, ABATES_NO_FEED)
+      .map((m) => ({ t: m.t, matador: m.matador, vitima: m.vitima.heroi.nome, retratoDaVitima: m.vitima.heroi.retrato, ladoDaVitima: m.vitima.lado })),
     roshans: panorama.roshans.filter((r) => r.t <= t),
     herois: trajetos ? heroisNoMapa(panorama, trajetos, t, eu) : [],
-    smokes: trajetos ? smokesNoMapa(trajetos, t) : [],
+    smokes: trajetos ? smokesNoMapa(panorama, trajetos, t) : [],
   };
 }
 
