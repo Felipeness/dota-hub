@@ -56,36 +56,43 @@
 .analise-nao-vemos ul { color: var(--cor-texto-3); font-size: 13px; line-height: 1.6; }
 
 /* Lances decisivos: player do minimapa + cards. Verde/vermelho = acerto/erro, como no resto da análise. */
-.lances { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-4); min-width: 0; }
+.lances { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-4); min-width: 0; padding-top: var(--espaco-4); }
+/* O player e tudo dele ficam numa coluna central de 760 px, com o card na mesma largura do mapa. */
+.lances > * { width: 100%; max-width: 760px; justify-self: center; min-width: 0; }
 .lances h2 { font-size: clamp(28px, 5vw, 40px); }
 .lances-numeros { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: var(--espaco-3); margin: 0; }
 .lances-numeros div { display: flex; flex-direction: column-reverse; min-width: 0; }
 .lances-numeros dt { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--cor-texto-3); }
 .lances-numeros dd { margin: 0; font-family: var(--fonte-num); font-size: clamp(18px, 4vw, 26px); color: var(--cor-texto); }
 
-.replay-lances { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-3); max-width: 760px; min-width: 0; }
+.replay-lances { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-3); min-width: 0; }
 .replay-palco { position: relative; min-width: 0; }
 .replay-mapa { display: block; width: 100%; aspect-ratio: 1; border: 1px solid var(--cor-linha); border-radius: var(--raio); background: var(--cor-brilho-mapa); }
-.replay-escurecer { fill: #070b0e; opacity: 0.45; }
+/* O mapa é fundo: escuro e sem cor, para heróis, rastros e wards serem o que mais brilha. */
+.replay-arte { filter: brightness(0.38) saturate(0.35) contrast(1.1); }
+.replay-vinheta { position: absolute; inset: 0; border-radius: var(--raio); pointer-events: none; background: radial-gradient(ellipse at center, transparent 55%, rgba(4, 6, 8, 0.75) 100%); }
 /* Wards: só a visão de ward tem círculo; observer sólido com losango, sentry tracejado. */
-.ward-visao { fill-opacity: 0.09; stroke-opacity: 0.35; stroke-width: 1px; }
+.ward-visao { fill-opacity: 0.05; stroke-opacity: 0.25; stroke-width: 1px; }
 .ward-sentry .ward-visao { stroke-dasharray: 4 3; }
 .ward-observer.ward-nosso { fill: var(--cor-destaque); stroke: var(--cor-destaque); }
 .ward-observer.ward-deles { fill: var(--cor-dire); stroke: var(--cor-dire); }
 .ward-sentry.ward-nosso { fill: var(--cor-info); stroke: var(--cor-info); }
 .ward-sentry.ward-deles { fill: #f07ab0; stroke: #f07ab0; }
-.ward-icone { fill-opacity: 1; stroke: none; }
+.ward-icone { fill-opacity: 1; stroke: #fff; stroke-opacity: 1; stroke-width: 1px; }
 .torre { stroke: #05080b; stroke-width: 1px; }
 .torre-nosso { fill: var(--cor-radiant); }
 .torre-deles { fill: var(--cor-dire); }
 .rastro line { stroke-width: 2px; stroke-linecap: round; }
 .rastro-nosso line { stroke: var(--cor-radiant); }
 .rastro-deles line { stroke: var(--cor-dire); }
-.heroi-anel { fill: none; stroke-width: 2.5px; }
+.heroi { filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.8)); }
+.heroi-anel { fill: none; stroke-width: 3px; }
 .heroi-nosso .heroi-anel { stroke: var(--cor-radiant); }
 .heroi-deles .heroi-anel { stroke: var(--cor-dire); }
 .heroi-eu .heroi-anel { stroke: #fff; stroke-width: 3px; }
-.heroi-brilho { fill: #fff; opacity: 0.22; }
+.heroi-brilho { fill: #fff; opacity: 0.25; transform-box: fill-box; transform-origin: center; animation: brilho-do-heroi 1.6s ease-in-out infinite; }
+@keyframes brilho-do-heroi { 0%, 100% { opacity: 0.18; transform: scale(0.9); } 50% { opacity: 0.38; transform: scale(1.1); } }
+@media (prefers-reduced-motion: reduce) { .heroi-brilho { animation: none; } }
 .smoke-anel { fill: none; stroke: var(--cor-neutro); stroke-width: 3px; }
 .smoke-brilho { fill: none; stroke: var(--cor-neutro); stroke-width: 10px; stroke-opacity: 0.25; }
 .morte { fill: none; stroke: #fff; stroke-width: 2.5px; stroke-linecap: round; }
@@ -94,7 +101,7 @@
 .replay-feed { position: absolute; top: var(--espaco-2); left: var(--espaco-2); margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; max-width: 60%; }
 .replay-abate {
   display: flex; align-items: center; gap: 6px; padding: 2px 8px; border-radius: var(--raio-pilula); font-size: 11px;
-  background: rgba(10, 14, 17, 0.82); border: 1px solid var(--cor-linha-forte); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  background: rgba(6, 9, 12, 0.78); backdrop-filter: blur(6px); border: 1px solid var(--cor-linha-forte); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .replay-abate img { width: 20px; height: 20px; border-radius: 50%; object-fit: cover; flex: none; }
 .replay-abate-sem { color: var(--cor-texto-3); }
@@ -103,8 +110,11 @@
 .replay-abate-tempo { font-family: var(--fonte-num); color: var(--cor-texto-3); }
 .replay-roshan { color: var(--cor-neutro); }
 
-.replay-relogio { position: absolute; right: var(--espaco-3); top: var(--espaco-2); display: grid; justify-items: end; gap: 2px; pointer-events: none; }
-.replay-relogio-tempo { font-family: var(--fonte-num); font-size: clamp(22px, 5vw, 34px); color: var(--cor-texto); text-shadow: 0 1px 6px #000; }
+.replay-relogio {
+  position: absolute; right: var(--espaco-2); top: var(--espaco-2); display: grid; justify-items: center; gap: 2px; pointer-events: none;
+  padding: 4px 10px 6px; border-radius: var(--raio-pequeno); background: rgba(6, 9, 12, 0.72); backdrop-filter: blur(6px);
+}
+.replay-relogio-tempo { font-family: var(--fonte-num); font-size: clamp(20px, 4.5vw, 30px); line-height: 1.1; color: var(--cor-texto); }
 .replay-velocidade { font-family: var(--fonte-num); font-size: 12px; padding: 0 8px; border-radius: var(--raio-pilula); background: var(--cor-destaque); color: var(--cor-fundo); }
 
 .replay-controles { display: flex; flex-wrap: wrap; gap: var(--espaco-2); align-items: center; }

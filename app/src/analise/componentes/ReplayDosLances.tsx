@@ -9,7 +9,7 @@ import { tempoDaPartida, type DetalheDaPartida } from "../../live/partida/detalh
 import type { Lance } from "../lancesDecisivos";
 import {
   MAPA_INTEIRO, MORTE_VISIVEL_S, PAUSA_NO_LANCE_MS, RAIO_DE_VISAO, VELOCIDADES, VELOCIDADE_PADRAO, aproximarCamera, avancar,
-  cameraPara, focoDoLance, janelaDaCamera, lanceAtivoEm, quadroEm, rotuloDoLance, velocidadeEm,
+  cameraPara, envolvidosNoLance, focoDoLance, janelaDaCamera, lanceAtivoEm, quadroEm, rotuloDoLance, tituloSemTempo, velocidadeEm,
   type Camera, type HeroiNoMapa, type QuadroDoMapa, type Relogio, type SmokeNoMapa, type TrajetosDoMapa, type Velocidade,
 } from "../replayDosLances";
 import { prefereMenosMovimento, useTextoProgressivo } from "./movimento";
@@ -29,6 +29,7 @@ type Props = Readonly<{
   pedido: Readonly<{ t: number; n: number }> | null;
 }>;
 
+const NINGUEM: ReadonlySet<number> = new Set();
 const relogioParado = (t: number, ultimoLance: number | null = null): Relogio => ({ t, tocando: false, pausaRestanteMs: 0, ultimoLance });
 
 /** Relógio e câmera num laço de requestAnimationFrame; com prefers-reduced-motion, tocar pula de lance em lance. */
@@ -81,9 +82,12 @@ export function ReplayDosLances({ detalhe, lances, objetivos, trajetos, pedido }
   }, [pedido, setRelogio]);
 
   const t = relogio.t;
-  const quadro = quadroEm(detalhe.panorama, t, eu, trajetos);
-  const ativo = lanceAtivoEm(t, lances);
   const parado = !relogio.tocando || relogio.pausaRestanteMs > 0;
+  // Parado em cima do lance, quem participou dele aparece inteiro mesmo sem o seu time ver (o apagado é só tocando).
+  const lanceNaTela = parado ? lances.find((l) => Math.abs(l.t - t) < 0.5) : undefined;
+  const envolvidos = lanceNaTela && trajetos ? envolvidosNoLance(lanceNaTela, detalhe.panorama, trajetos, eu) : NINGUEM;
+  const quadro = quadroEm(detalhe.panorama, t, { eu, trajetos, envolvidos });
+  const ativo = lanceAtivoEm(t, lances);
   const irPara = (novo: number) => setRelogio(relogioParado(novo, novo));
   const anterior = [...lances].reverse().find((l) => l.t < Math.floor(t));
   const proximo = lances.find((l) => l.t > Math.ceil(t));
@@ -92,6 +96,7 @@ export function ReplayDosLances({ detalhe, lances, objetivos, trajetos, pedido }
     <div className="replay-lances">
       <div className="replay-palco">
         <MapaDoQuadro quadro={quadro} camera={camera} objetivos={objetivos} lado={detalhe.lado} />
+        <div className="replay-vinheta" aria-hidden="true" />
         <FeedDeAbates quadro={quadro} />
         <div className="replay-relogio">
           <span className="replay-relogio-tempo">{tempoDaPartida(Math.floor(t))}</span>
@@ -132,7 +137,7 @@ function BarraDeTempo({ t, fim, lances, onIr }: { t: number; fim: number; lances
         {lances.map((l) => (
           <li key={l.t} style={{ left: `${(Math.max(0, l.t) / fim) * 100}%` }}>
             <button type="button" className={`replay-marcador replay-marcador-${l.achado.tipo}`} onClick={() => onIr(l.t)}
-              aria-label={`${rotuloDoLance(l)} às ${tempoDaPartida(l.t)}: ${l.achado.titulo}`} title={`${tempoDaPartida(l.t)} ${l.achado.titulo}`} />
+              aria-label={`${rotuloDoLance(l)} às ${tempoDaPartida(l.t)}: ${tituloSemTempo(l.achado.titulo)}`} title={`${tempoDaPartida(l.t)} ${tituloSemTempo(l.achado.titulo)}`} />
           </li>
         ))}
       </ol>
@@ -145,7 +150,7 @@ export function CardDoLance({ lance, progressivo = true }: { lance: Lance; progr
   return (
     <article className={`lance-card lance-${lance.achado.tipo}`}>
       <p className="lance-sobretitulo">{rotuloDoLance(lance)} · {tempoDaPartida(lance.t)}</p>
-      <h4 className="lance-titulo">{lance.achado.titulo}</h4>
+      <h4 className="lance-titulo">{tituloSemTempo(lance.achado.titulo)}</h4>
       <p className="lance-fato" aria-label={lance.achado.oQueAconteceu}>{fato}</p>
       <div className="lance-caixas">
         <section className="lance-caixa lance-porque"><h5>Por que</h5><p>{lance.achado.porque}</p></section>
@@ -156,7 +161,7 @@ export function CardDoLance({ lance, progressivo = true }: { lance: Lance; progr
         )}
       </div>
       {lance.relacionados.length > 0 && (
-        <p className="lance-relacionados">Também neste lance: {lance.relacionados.map((a) => a.titulo).join("; ")}.</p>
+        <p className="lance-relacionados">Também neste lance: {lance.relacionados.map((a) => tituloSemTempo(a.titulo)).join("; ")}.</p>
       )}
     </article>
   );
@@ -207,41 +212,53 @@ function useLargura() {
   return { ref, largura };
 }
 
-/** Retrato com pelo menos 24 px de diâmetro no celular; no desktop, ~2,2% da largura visível (~30 px). */
-const DIAMETRO_MINIMO_PX = 24;
-const FRACAO_DO_RAIO = 0.022;
+/** Retrato: ~30 px no mapa inteiro, ~40 px no zoom do lance, nunca menos de 26 px; o do jogador 1,2x. */
+const DIAMETRO_GERAL_PX = 30;
+const DIAMETRO_NO_ZOOM_PX = 40;
+const DIAMETRO_MINIMO_PX = 26;
+const ZOOM_DO_LANCE = 2.7;
+const diametroDoRetrato = (zoom: number) =>
+  Math.max(DIAMETRO_MINIMO_PX, DIAMETRO_GERAL_PX + ((DIAMETRO_NO_ZOOM_PX - DIAMETRO_GERAL_PX) * (zoom - 1)) / (ZOOM_DO_LANCE - 1));
+const LOSANGO_DA_WARD_PX = 11;
+
+type Janela = ReturnType<typeof janelaDaCamera>;
+/** Só desenha a visão da ward que cruza o que a câmera mostra. */
+const cruzaAJanela = ([x, y]: Ponto, raio: number, j: Janela) =>
+  x + raio >= j.x && x - raio <= j.x + j.lado && y + raio >= j.y && y - raio <= j.y + j.lado;
 
 function MapaDoQuadro({ quadro, camera, objetivos, lado }: { quadro: QuadroDoMapa; camera: Camera; objetivos: readonly Objetivo[]; lado: string }) {
   const { ref, largura } = useLargura();
   // useId traz caracteres que não valem dentro de url(#...); fica só o que é seguro.
   const recorte = `recorte-heroi-${useId().replace(/[^a-zA-Z0-9_-]/g, "")}`;
   const janela = janelaDaCamera(camera);
-  // Fração da largura visível: ícones ficam do mesmo tamanho na tela com qualquer zoom.
-  const u = janela.lado;
+  /** Um pixel da tela em unidades do viewBox: tamanhos de ícone ficam fixos na tela com qualquer zoom. */
+  const px = janela.lado / largura;
   const deQuem = (l: string) => (l === lado ? "nosso" : "deles");
   const torres = objetivos.filter((o) => TORRES.has(o.tipo) && !quadro.torresCaidas.has(o.id));
-  const herois = [...quadro.herois].sort((a, b) => Number(a.eu) - Number(b.eu));
+  const herois = [...quadro.herois].sort((a, b) => Number(a.eu) - Number(b.eu) || Number(!a.escondido) - Number(!b.escondido));
+  const wards = quadro.wards.filter((w) => cruzaAJanela(svg(w.ponto), RAIO_DE_VISAO[w.tipo], janela));
+  const raioDoHeroi = (diametroDoRetrato(camera.zoom) / 2) * px;
   return (
     <svg ref={ref} className="replay-mapa" viewBox={`${janela.x} ${janela.y} ${janela.lado} ${janela.lado}`} role="img"
       aria-label="Minimapa da partida no instante do relógio: heróis, wards, torres de pé e mortes recentes">
       <defs>
         <clipPath id={recorte} clipPathUnits="objectBoundingBox"><circle cx={0.5} cy={0.5} r={0.5} /></clipPath>
       </defs>
-      <image href="/data/mapa_2048.jpg" x={0} y={0} width={1} height={1} preserveAspectRatio="none" />
-      <rect className="replay-escurecer" x={0} y={0} width={1} height={1} />
-      {quadro.wards.map((w) => {
+      <image className="replay-arte" href="/data/mapa_2048.jpg" x={0} y={0} width={1} height={1} preserveAspectRatio="none" />
+      {wards.map((w) => {
         const [x, y] = svg(w.ponto);
+        const meio = (LOSANGO_DA_WARD_PX / 2) * px;
         return (
-          <g key={`${w.tipo}-${w.de}-${x}-${y}`} className={`ward ward-${w.tipo} ward-${deQuem(w.lado)}`}>
+          <g key={`${w.tipo}-${w.de}-${x}-${y}`} className={`ward ward-${w.tipo} ward-${deQuem(w.lado)}`} opacity={w.opacidade}>
             <circle cx={x} cy={y} r={RAIO_DE_VISAO[w.tipo]} className="ward-visao" vectorEffect="non-scaling-stroke" />
             {w.tipo === "observer"
-              ? <rect x={x - 0.007 * u} y={y - 0.007 * u} width={0.014 * u} height={0.014 * u} transform={`rotate(45 ${x} ${y})`} className="ward-icone" />
-              : <circle cx={x} cy={y} r={0.005 * u} className="ward-icone" />}
+              ? <rect x={x - meio} y={y - meio} width={meio * 2} height={meio * 2} transform={`rotate(45 ${x} ${y})`} className="ward-icone" vectorEffect="non-scaling-stroke" />
+              : <circle cx={x} cy={y} r={meio * 0.8} className="ward-icone" vectorEffect="non-scaling-stroke" />}
           </g>
         );
       })}
       {torres.map((o) => (
-        <rect key={o.id} x={o.x - 0.008 * u} y={1 - o.y - 0.008 * u} width={0.016 * u} height={0.016 * u}
+        <rect key={o.id} x={o.x - 5 * px} y={1 - o.y - 5 * px} width={10 * px} height={10 * px}
           className={`torre torre-${deQuem(o.lado)}`} vectorEffect="non-scaling-stroke" />
       ))}
       {quadro.herois.map((h) => <Rastro key={`rastro-${h.slot}`} heroi={h} nosso={h.lado === lado} />)}
@@ -254,9 +271,11 @@ function MapaDoQuadro({ quadro, camera, objetivos, lado }: { quadro: QuadroDoMap
           </g>
         );
       })}
-      {herois.map((h) => <IconeDoHeroi key={h.slot} heroi={h} nosso={h.lado === lado} raio={Math.max(FRACAO_DO_RAIO, DIAMETRO_MINIMO_PX / 2 / largura) * u} recorte={recorte} />)}
+      {herois.map((h) => (
+        <IconeDoHeroi key={h.slot} heroi={h} nosso={h.lado === lado} raio={h.eu ? raioDoHeroi * 1.2 : raioDoHeroi} recorte={recorte} />
+      ))}
       {quadro.mortes.map((m) => (
-        <MarcaDeMorte key={`${m.t}-${m.ponto[0]}`} ponto={m.ponto} tamanho={(m.minha ? 0.035 : 0.012) * u}
+        <MarcaDeMorte key={`${m.t}-${m.ponto[0]}`} ponto={m.ponto} tamanho={(m.minha ? 20 : 8) * px}
           opacidade={1 - m.idade / MORTE_VISIVEL_S} grossa={m.minha} />
       ))}
     </svg>
@@ -282,7 +301,7 @@ function IconeDoHeroi({ heroi, nosso, raio, recorte }: { heroi: HeroiNoMapa; nos
   return (
     <g className={`heroi heroi-${anel}`} opacity={heroi.escondido ? 0.35 : 1}>
       <title>{heroi.nome}{heroi.escondido ? " (o seu time não via)" : ""}</title>
-      {heroi.eu && <circle cx={x} cy={y} r={raio * 1.7} className="heroi-brilho" />}
+      {heroi.eu && <circle cx={x} cy={y} r={raio * 1.5} className="heroi-brilho" />}
       <image href={retrato(heroi.retrato)} x={x - raio} y={y - raio} width={raio * 2} height={raio * 2}
         preserveAspectRatio="xMidYMid slice" clipPath={`url(#${recorte})`} />
       <circle cx={x} cy={y} r={raio} className="heroi-anel" vectorEffect="non-scaling-stroke" />

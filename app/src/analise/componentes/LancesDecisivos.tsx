@@ -6,7 +6,7 @@ import { useData } from "../../data/useData";
 import { tempoDaPartida, type DetalheDaPartida } from "../../live/partida/detalhe";
 import type { LancesDecisivos as Escolha } from "../lancesDecisivos";
 import { pedirTrajetos, type CodigoDeErro } from "../../replay/trajetos";
-import { mapaDosTrajetos, type TrajetosDoMapa } from "../replayDosLances";
+import { mapaDosTrajetos, tituloSemTempo, type TrajetosDoMapa } from "../replayDosLances";
 import { useContagem } from "./movimento";
 import { CardDoLance, ReplayDosLances } from "./ReplayDosLances";
 
@@ -83,7 +83,7 @@ export function LancesDecisivos({ detalhe, escolha }: Props) {
             {fezBem.map((l) => (
               <li key={l.t}>
                 <button type="button" className="link lances-tempo" onClick={() => verNoMapa(l.t)}>{tempoDaPartida(l.t)}</button>
-                <span>{l.achado.titulo}</span>
+                <span>{tituloSemTempo(l.achado.titulo)}</span>
               </li>
             ))}
           </ul>

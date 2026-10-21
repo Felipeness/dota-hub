@@ -1,7 +1,7 @@
 import { detalheDaAmostraCompleta } from "./amostras/amostraCompleta";
 import type { Lance } from "./lancesDecisivos";
 import type { Achado } from "./modelo";
-import { MAPA_INTEIRO, PAUSA_NO_LANCE_MS, aproximarCamera, avancar, cameraPara, mapaDosTrajetos, quadroEm, velocidadeEm, type Relogio } from "./replayDosLances";
+import { MAPA_INTEIRO, PAUSA_NO_LANCE_MS, aproximarCamera, avancar, cameraPara, mapaDosTrajetos, quadroEm, tituloSemTempo, velocidadeEm, type Relogio } from "./replayDosLances";
 
 const lance = (t: number): Lance => ({
   t, impacto: 1, relacionados: [],
@@ -58,7 +58,7 @@ describe("quadroEm na partida 9046905170", () => {
   const eu = { lado: detalhe.lado, slot: detalhe.slot };
 
   it("aos 31:38 mostra a morte da Medusa na luta, o feed e as torres já caídas", () => {
-    const quadro = quadroEm(detalhe.panorama, 31 * 60 + 38, eu, null);
+    const quadro = quadroEm(detalhe.panorama, 31 * 60 + 38, { eu, trajetos: null, envolvidos: new Set() });
     expect(quadro.mortes.some((m) => m.minha)).toBe(true);
     expect(quadro.feed[0]).toMatchObject({ vitima: "Medusa", matador: "Ursa" });
     expect(quadro.feed.length).toBeLessThanOrEqual(4);
@@ -69,7 +69,7 @@ describe("quadroEm na partida 9046905170", () => {
 
   it("só wards ativas no instante", () => {
     const t = 20 * 60;
-    expect(quadroEm(detalhe.panorama, t, eu, null).wards.every((w) => w.de <= t && t < w.ate)).toBe(true);
+    expect(quadroEm(detalhe.panorama, t, { eu, trajetos: null, envolvidos: new Set() }).wards.every((w) => w.de <= t && t < w.ate)).toBe(true);
   });
 
   it("com os trajetos do replay: heróis com rastro, inimigo não visto apagado, morte na posição real e smoke", () => {
@@ -83,11 +83,24 @@ describe("quadroEm na partida 9046905170", () => {
       mortes: [{ t: 598, vitima: 3, assassino: 128, x: 600, y: 600 }],
       totais: { wards: 0, smokes: 1, mortes: 1 },
     });
-    const quadro = quadroEm(detalhe.panorama, 600, eu, trajetos);
+    const quadro = quadroEm(detalhe.panorama, 600, { eu, trajetos, envolvidos: new Set() });
     expect(quadro.herois.map((h) => [h.nome, h.eu, h.escondido])).toEqual([["Medusa", true, false], ["Necrophos", false, true]]);
-    expect(quadro.herois[0]?.rastro).toHaveLength(22);
+    expect(quadro.herois[0]?.rastro).toHaveLength(21);
+    // Parado no lance, quem participou (Necrophos matou a Medusa) aparece inteiro mesmo sem visão.
+    const noLance = quadroEm(detalhe.panorama, 600, { eu, trajetos, envolvidos: new Set([128]) });
+    expect(noLance.herois.find((h) => h.nome === "Necrophos")?.escondido).toBe(false);
     expect(quadro.feed[0]).toMatchObject({ vitima: "Medusa", matador: "Necrophos", t: 598 });
     expect(quadro.mortes).toEqual([{ t: 598, ponto: [(150 - 57) / 142, (150 - 57) / 142], lado: "radiant", minha: true, idade: 2 }]);
     expect(quadro.smokes).toMatchObject([{ t: 590, lado: "dire", nomes: ["Necrophos"] }]);
+  });
+});
+
+describe("tituloSemTempo", () => {
+  it.each([
+    { titulo: "Torre caiu 0:49 depois de uma morte, 24:58", limpo: "Torre caiu 0:49 depois de uma morte" },
+    { titulo: "Morreu com o time em 4 contra 5, 28:33", limpo: "Morreu com o time em 4 contra 5" },
+    { titulo: "Nunca montou Daedalus", limpo: "Nunca montou Daedalus" },
+  ])("$titulo", ({ titulo, limpo }) => {
+    expect(tituloSemTempo(titulo)).toBe(limpo);
   });
 });
