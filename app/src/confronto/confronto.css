@@ -90,7 +90,7 @@
 .cf-pros-taxa { font-size: 28px; font-weight: 700; }
 .cf-pros-taxa-sua { color: var(--cor-radiant); }
 .cf-pros-taxa-dele { color: var(--cor-dire); }
-.cf-pros-itens { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); gap: var(--espaco-2); margin: 0; padding: 0; list-style: none; }
+.cf-pros-itens { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 160px), 1fr)); gap: var(--espaco-2); margin: 0; padding: 0; list-style: none; }
 .cf-pros-itens li { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "img nome" "img num"; column-gap: var(--espaco-2); align-items: center;
   padding: 6px var(--espaco-2); border: 1px solid var(--cor-linha); border-radius: var(--raio-pequeno); min-width: 0; }
 .cf-pros-itens img { grid-area: img; border-radius: 4px; background: var(--cor-superficie-3); }

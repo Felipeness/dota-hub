@@ -1,6 +1,6 @@
 // "Sua build": as suas compras grandes contra a build dos pros do mesmo herói contra este draft (contra_inimigo do
 // confronto, somando os 5 inimigos como matchupDePro), item a item, e até 4 vereditos concretos com horário.
-import { buildsPossiveis, itensDosPros, ordemDosPros, ordemEntre, type BuildPossivel, type ItemDosPros } from "../confronto/buildsDosPros";
+import { buildsPossiveis, itensDosPros, ordemDosPros, ordemEntre, porcentagemInteira as porcentagem, type BuildPossivel, type ItemDosPros } from "../confronto/buildsDosPros";
 import type { Marca } from "../confronto/SequenciaDeBuild";
 import { tempoDaPartida } from "../live/partida/detalhe";
 import { PESO_EM_NUMERO, type Contexto, type Peso } from "./modelo";
@@ -60,7 +60,6 @@ function minhasCompras(ctx: Contexto, matchup: Matchup): Compra[] {
 }
 
 const minutoInteiro = (m: number) => Math.round(m);
-const porcentagem = (fracao: number) => `${Math.round(100 * fracao)}%`;
 const relogio = (minuto: number) => tempoDaPartida(Math.round(minuto * 60));
 
 function julgar(compra: Compra, matchup: Matchup, pros: ReadonlyMap<string, ItemDosPros>): MinhaCompra {
@@ -160,7 +159,7 @@ export function vereditosDaBuild(insumos: Insumos): VereditoDaBuild[] {
   const raros = vereditosDeItemRaro(insumos);
   // O item que já aparece como "os pros respondem com X" não vira um segundo veredito de "X nunca saiu".
   const citados = new Set(raros.flatMap((r) => (r.citado ? [r.citado] : [])));
-  return [...vereditosDeAtraso(insumos), ...vereditosDeFalta(insumos, citados), ...raros.map(({ citado: _, ...v }) => v), ...vereditosDeOrdem(insumos)]
+  return [...vereditosDeAtraso(insumos), ...vereditosDeFalta(insumos, citados), ...raros, ...vereditosDeOrdem(insumos)]
     .sort(porPesoDepoisMinuto)
     .slice(0, MAXIMO_DE_VEREDITOS);
 }

@@ -8,7 +8,7 @@
 .sb-ordem { position: absolute; top: -7px; left: -5px; min-width: 16px; height: 16px; padding: 0 3px; border-radius: var(--raio-pilula);
   background: var(--cor-superficie-3); border: 1px solid var(--cor-linha-ativa); font-size: 10px; line-height: 14px; text-align: center; color: var(--cor-texto-2); }
 .sb-passo img { grid-area: img; display: block; border-radius: 4px; background: var(--cor-superficie-3); }
-.sb-nome { grid-area: nome; font-size: 13px; line-height: 1.2; color: var(--cor-texto); max-width: 11ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sb-nome { grid-area: nome; font-size: 13px; line-height: 1.2; color: var(--cor-texto); max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .sb-minuto { grid-area: minuto; font-size: 12px; color: var(--cor-texto-2); }
 .sb-nota { grid-area: nota; margin-top: 2px; font-size: 11px; color: var(--cor-texto-3); }
 

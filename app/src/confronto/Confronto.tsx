@@ -7,6 +7,7 @@ import type { PopularidadeFonte } from "./fonte";
 import { AnaliseDePro, ComAnalisesDoPar } from "./AnaliseDePro";
 import { filtrarCounters, type CounterUsado, type DadosDoPar } from "./countersDosPros";
 import { ProsContraInimigo } from "./ProsContraInimigo";
+import { porcentagemInteira } from "./buildsDosPros";
 import { dicasDoConfronto, type Dica, type Fase } from "./dicas";
 import { analisarMecanicas, itensDoConfronto, type Achado } from "./mecanicas";
 import { urlDoItem, type Heroi, type Item } from "./modelo";
@@ -185,7 +186,7 @@ function CounterView({ counter: { item, motivo, prova, mecanica, fracaoPro }, me
       <div>
         <p><strong>{item.nome}</strong> <span className="cf-chip">{mecanica}</span></p>
         <p><TextoComTermos texto={motivo} /></p>
-        {fracaoPro !== null && <p className="cf-pros-fracao">Os pros de {meu.nome} fazem em <b className="numero">{pct(fracaoPro)}</b> das partidas contra o {par.inimigo.nome}.</p>}
+        {fracaoPro !== null && <p className="cf-pros-fracao">Os pros de {meu.nome} fazem em <b className="numero">{porcentagemInteira(fracaoPro)}</b> das partidas contra o {par.inimigo.nome}.</p>}
         <details className="cf-detalhe">
           <summary>De onde vem</summary>
           <p>“{prova}”</p>

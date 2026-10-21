@@ -30,9 +30,11 @@ TEMPO_MAXIMO_S = 180
 TENTATIVAS = 4
 PAUSA_ENTRE_CONSULTAS_S = 3
 JOGOS_MINIMOS_CONTRA = 5
-# Builds: partidas agrupadas pelos 3 primeiros itens (sem ordem), que é onde a build de um herói costuma se dividir
-# (Butterfly vs Mjollnir como 3º item); dentro do grupo a sequência sai do minuto mediano de cada item.
-ITENS_NA_CHAVE_DA_BUILD = 3
+# Builds: partidas agrupadas pelos primeiros itens (sem ordem), que é onde a build de um herói costuma se dividir
+# (Butterfly vs Mjollnir como 3º item de carry); dentro do grupo a sequência sai do minuto mediano de cada item.
+# Suporte varia muito mais cedo: com 3 itens o maior grupo fica com 7% das partidas, então cai para 2.
+ITENS_NA_CHAVE_DA_BUILD = (3, 2)
+FRACAO_DO_MAIOR_GRUPO = 0.25
 BUILDS_MAXIMAS = 3
 FRACAO_MINIMA_DA_BUILD = 0.05
 JOGOS_MINIMOS_DA_BUILD = 5
@@ -102,16 +104,25 @@ def _contra(jogadas: list[tuple[dict[str, float], list[str], bool]]) -> dict:
             "builds": builds_comuns(jogadas), "ordem": ordem_dos_itens(builds, len(jogadas))}
 
 
-def builds_comuns(jogadas: list[tuple[dict[str, float], list[str], bool]]) -> list[dict]:
-    """Até 3 builds: partidas com os mesmos 3 primeiros itens (em qualquer ordem). Cada build lista, em ordem de minuto
-    mediano, os itens que aparecem em 40%+ das partidas dela (sequência) e os de 15-40% (opções situacionais)."""
+def _grupos(jogadas: list[tuple[dict[str, float], list[str], bool]], itens_na_chave: int):
     grupos: dict[frozenset[str], list[tuple[dict[str, float], list[str], bool]]] = defaultdict(list)
     for jogada in jogadas:
-        if len(jogada[1]) >= ITENS_NA_CHAVE_DA_BUILD:
-            grupos[frozenset(jogada[1][:ITENS_NA_CHAVE_DA_BUILD])].append(jogada)
+        if len(jogada[1]) >= itens_na_chave:
+            grupos[frozenset(jogada[1][:itens_na_chave])].append(jogada)
+    return sorted(grupos.items(), key=lambda par: (-len(par[1]), sorted(par[0])))
+
+
+def builds_comuns(jogadas: list[tuple[dict[str, float], list[str], bool]]) -> list[dict]:
+    """Até 3 builds: partidas com os mesmos 3 primeiros itens (em qualquer ordem), ou 2 quando com 3 nenhum grupo junta
+    25% das partidas. Cada build lista a chave do grupo, em ordem de minuto mediano os itens que aparecem em 40%+ das
+    partidas dela (sequência) e os de 15-40% (opções situacionais)."""
+    ordenados = []
+    for itens_na_chave in ITENS_NA_CHAVE_DA_BUILD:
+        ordenados = _grupos(jogadas, itens_na_chave)
+        if ordenados and len(ordenados[0][1]) >= FRACAO_DO_MAIOR_GRUPO * len(jogadas):
+            break
     minimo = max(JOGOS_MINIMOS_DA_BUILD, FRACAO_MINIMA_DA_BUILD * len(jogadas))
-    maiores = sorted(grupos.items(), key=lambda par: (-len(par[1]), sorted(par[0])))[:BUILDS_MAXIMAS]
-    return [_build(grupo) for _, grupo in maiores if len(grupo) >= minimo]
+    return [{"chave": sorted(chave), **_build(grupo)} for chave, grupo in ordenados[:BUILDS_MAXIMAS] if len(grupo) >= minimo]
 
 
 def _build(grupo: list[tuple[dict[str, float], list[str], bool]]) -> dict:

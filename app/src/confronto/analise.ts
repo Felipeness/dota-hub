@@ -23,8 +23,10 @@ export const spikeSchema = z.object({ item: z.string(), nome: z.string(), minuto
 
 const itemContraSchema = z.object({ chave: z.string(), n: z.number().int().positive(), mediana: z.number() });
 
-/** Partidas com os mesmos 3 primeiros itens: sequência (40%+ delas) e opções (15-40%), em minuto mediano. */
+/** Partidas com os mesmos primeiros itens: sequência (40%+ delas) e opções (15-40%), em minuto mediano. */
 const buildSchema = z.object({
+  /** Os primeiros itens (sem ordem) que definem o grupo: 3, ou 2 quando com 3 a build espalha demais (suporte). */
+  chave: z.array(z.string()).min(1),
   jogos: z.number().int().positive(),
   vitorias: z.number().int().nonnegative(),
   sequencia: z.array(itemContraSchema),

@@ -76,6 +76,7 @@ def test_builds_agrupam_pelos_tres_primeiros_itens_e_separam_sequencia_de_opcao(
     assert [i["chave"] for i in builds[0]["sequencia"]] == ["treads", "manta", "butterfly", "skadi", "daedalus"]
     assert [i["chave"] for i in builds[0]["opcoes"]] == ["disperser"]
     assert builds[0]["sequencia"][1] == {"chave": "manta", "n": 8, "mediana": 15.0}
+    assert builds[0]["chave"] == ["butterfly", "manta", "treads"]
 
 
 def test_builds_ignoram_grupo_pequeno():
@@ -90,3 +91,10 @@ def test_ordem_compara_pares_de_itens_comuns_pela_maioria():
         {"a": "butterfly", "b": "skadi", "a_antes": 3, "ambos": 4},
         {"a": "manta", "b": "skadi", "a_antes": 4, "ambos": 4},
     ]
+
+
+def test_builds_guardam_a_chave_e_caem_para_dois_itens_quando_tres_espalham_demais():
+    jogadas = [_jogada(True, ("arcane", 4), ("glimmer", 12), (extra, 20)) for extra in ("a", "b", "c", "d", "e", "f")] * 5
+    builds = pro_contra.builds_comuns(jogadas)
+    assert builds[0]["chave"] == ["arcane", "glimmer"]
+    assert builds[0]["jogos"] == 30

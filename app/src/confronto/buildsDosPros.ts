@@ -22,12 +22,14 @@ export type OrdemDosPros = Readonly<{ antes: string; depois: string; antesEm: nu
 type Nomes = Readonly<Record<string, string>>;
 type Contado = Readonly<{ chave: string; n: number; mediana: number }>;
 
+/** Em lista de item, décimo de ponto percentual é ruído: inteiro lê mais rápido. */
+export const porcentagemInteira = (fracao: number) => `${Math.round(100 * fracao)}%`;
+
 const FRACAO_NA_SEQUENCIA = 0.4;
 const FRACAO_DE_OPCAO = 0.15;
 const OPCOES_MAXIMAS = 3;
 const BUILDS_MAXIMAS = 3;
 const FRACAO_MINIMA_DA_BUILD = 0.05;
-const ITENS_NA_CHAVE = 3;
 
 const ehComponente = (chave: string) => Object.hasOwn(ITEM_FINAL_DO_COMPONENTE, chave);
 const totalDeJogos = (contras: readonly ContraInimigo[]) => contras.reduce((soma, c) => soma + c.jogos, 0);
@@ -59,8 +61,7 @@ const passo = (nomes: Nomes, jogos: number) => (i: Contado): PassoDaBuild =>
 
 type Grupo = Readonly<{ chave: string; jogos: number; vitorias: number; itens: readonly Contado[] }>;
 
-const chaveDaBuild = (build: ContraInimigo["builds"][number]) =>
-  build.sequencia.slice(0, ITENS_NA_CHAVE).map((i) => i.chave).sort().join("+");
+const chaveDaBuild = (build: ContraInimigo["builds"][number]) => [...build.chave].sort().join("+");
 
 function agrupar(contras: readonly ContraInimigo[]): Grupo[] {
   const grupos = new Map<string, Grupo>();
@@ -75,23 +76,25 @@ function agrupar(contras: readonly ContraInimigo[]): Grupo[] {
   return [...grupos.values()];
 }
 
-function montarBuild(grupo: Grupo, total: number, nomes: Nomes): Omit<BuildPossivel, "destaque"> {
+type Montada = Omit<BuildPossivel, "destaque"> & Readonly<{ itensDaChave: readonly string[] }>;
+
+function montarBuild(grupo: Grupo, total: number, nomes: Nomes): Montada {
   // ponytail: item abaixo de 15% numa build de um inimigo não vem no arquivo, então somar inimigos subconta o item;
   // fica bom enquanto a build principal é a mesma contra quase todos (o caso comum).
   const itens = somar(grupo.itens).map(passo(nomes, grupo.jogos));
   return {
-    jogos: grupo.jogos, vitorias: grupo.vitorias, fracaoDosJogos: grupo.jogos / total,
+    itensDaChave: grupo.chave.split("+"), jogos: grupo.jogos, vitorias: grupo.vitorias, fracaoDosJogos: grupo.jogos / total,
     sequencia: itens.filter((i) => i.fracao >= FRACAO_NA_SEQUENCIA).sort(porMinuto),
     opcoes: itens.filter((i) => i.fracao >= FRACAO_DE_OPCAO && i.fracao < FRACAO_NA_SEQUENCIA)
       .sort((a, b) => b.fracao - a.fracao).slice(0, OPCOES_MAXIMAS).sort(porMinuto),
   };
 }
 
-/** Item do começo da build que as outras não têm; sem diferença, o último dos 3 primeiros. */
-function destaqueDe(build: Omit<BuildPossivel, "destaque">, todas: readonly Omit<BuildPossivel, "destaque">[]): PassoDaBuild | undefined {
-  const comeco = build.sequencia.slice(0, ITENS_NA_CHAVE);
-  const emTodas = (chave: string) => todas.every((b) => b.sequencia.slice(0, ITENS_NA_CHAVE).some((i) => i.chave === chave));
-  return comeco.filter((i) => todas.length === 1 || !emTodas(i.chave)).at(-1) ?? comeco.at(-1);
+/** Item da chave da build (os primeiros itens) que menos aparece na chave das outras; no empate, o mais tardio. */
+function destaqueDe(build: Montada, todas: readonly Montada[]): PassoDaBuild | undefined {
+  const emOutras = (chave: string) => todas.filter((b) => b !== build && b.itensDaChave.includes(chave)).length;
+  const daChave = build.sequencia.filter((s) => build.itensDaChave.includes(s.chave));
+  return [...daChave].sort((a, b) => emOutras(a.chave) - emOutras(b.chave) || b.minuto - a.minuto)[0] ?? build.sequencia.at(-1);
 }
 
 /** Até 3 builds, da mais seguida para a menos; cada uma com a sequência em ordem de minuto e as opções. */
@@ -103,9 +106,10 @@ export function buildsPossiveis(contras: readonly ContraInimigo[], nomes: Nomes)
     .sort((a, b) => b.jogos - a.jogos || a.chave.localeCompare(b.chave))
     .slice(0, BUILDS_MAXIMAS)
     .map((g) => montarBuild(g, total, nomes));
-  return montadas.flatMap((b) => {
-    const destaque = destaqueDe(b, montadas);
-    return destaque ? [{ ...b, destaque }] : [];
+  return montadas.flatMap((montada) => {
+    const destaque = destaqueDe(montada, montadas);
+    const { jogos, vitorias, fracaoDosJogos, sequencia, opcoes } = montada;
+    return destaque ? [{ destaque, jogos, vitorias, fracaoDosJogos, sequencia, opcoes }] : [];
   });
 }
 

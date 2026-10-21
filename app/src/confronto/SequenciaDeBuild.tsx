@@ -1,7 +1,7 @@
 // Build como sequência lida de relance: ícone, nome e minuto de cada item em ordem, com seta entre eles. Usada no
 // confronto (builds dos pros contra um herói) e na análise pós-jogo (a sua build ao lado da dos pros).
-import { minutos, porcentagem } from "./analise";
-import type { BuildPossivel } from "./buildsDosPros";
+import { porcentagem } from "./analise";
+import { porcentagemInteira, type BuildPossivel } from "./buildsDosPros";
 import { urlDoItem } from "./modelo";
 import "./sequenciaDeBuild.css";
 
@@ -10,7 +10,7 @@ export type Marca = "no-tempo" | "atrasado" | "rara" | "escolha" | "faltou";
 
 export type Passo = Readonly<{ chave: string; nome: string; minuto: number | null; marca?: Marca; nota?: string }>;
 
-export const minutoCurto = (minuto: number) => `${Math.round(minuto)}'`;
+const minutoCurto = (minuto: number) => `${Math.round(minuto)}'`;
 
 export function SequenciaDeBuild({ passos, rotulo }: { passos: readonly Passo[]; rotulo: string }) {
   return (
@@ -36,16 +36,16 @@ export function BuildsPossiveis({ builds }: { builds: readonly BuildPossivel[] }
   return (
     <ol className="sb-builds">
       {builds.map((b, i) => (
-        <li key={b.destaque.chave} className="sb-build">
+        <li key={`${i}-${b.destaque.chave}`} className="sb-build">
           <p className="sb-build-titulo">
             <strong>{i === 0 ? "Mais comum" : `Variação ${i}`}: caminho {b.destaque.nome}</strong>
-            <span className="sb-build-numeros numero">{porcentagem(b.fracaoDosJogos)} das partidas ({b.jogos}){vitoria(b)}</span>
+            <span className="sb-build-numeros numero">{porcentagemInteira(b.fracaoDosJogos)} das partidas ({b.jogos}){vitoria(b)}</span>
           </p>
-          <SequenciaDeBuild rotulo={`Caminho ${b.destaque.nome}`} passos={b.sequencia.map((s) => (s.fracao < 0.95 ? { ...s, nota: porcentagem(s.fracao) } : s))} />
+          <SequenciaDeBuild rotulo={`Caminho ${b.destaque.nome}`} passos={b.sequencia.map((s) => (s.fracao < 0.95 ? { ...s, nota: `em ${porcentagemInteira(s.fracao)}` } : s))} />
           {b.opcoes.length > 0 && (
             <p className="sb-opcoes">
               <span className="sb-opcoes-rotulo">Situacional</span>{" "}
-              {b.opcoes.map((o) => `${o.nome} (${porcentagem(o.fracao)}, ~${minutos(o.minuto)} min)`).join(" · ")}
+              {b.opcoes.map((o) => `${o.nome} (${porcentagemInteira(o.fracao)}, ~${minutoCurto(o.minuto)})`).join(" · ")}
             </p>
           )}
         </li>

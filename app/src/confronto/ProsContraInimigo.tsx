@@ -1,6 +1,6 @@
 // "O que os pros de X fazem contra Y": vitória do par, builds em sequência e todos os itens frequentes, com minuto.
-import { minutos, porcentagem, type ContraInimigo } from "./analise";
-import { buildsPossiveis, itensDosPros } from "./buildsDosPros";
+import { porcentagem, type ContraInimigo } from "./analise";
+import { buildsPossiveis, itensDosPros, porcentagemInteira } from "./buildsDosPros";
 import { urlDoItem } from "./modelo";
 import { BuildsPossiveis } from "./SequenciaDeBuild";
 
@@ -41,7 +41,7 @@ function Conteudo({ meuNome, inimigoNome, contra, nomes }: Props & { contra: Con
       {builds.length > 0 && (
         <>
           <h3 className="cf-fase">Builds dos pros contra {inimigoNome}</h3>
-          <p className="cf-sub">Partidas agrupadas pelos 3 primeiros itens; a sequência mostra o minuto mediano e, quando nem todo jogo da build tem o item, em quantos ele aparece.</p>
+          <p className="cf-sub">Partidas agrupadas pelos primeiros itens (3, ou 2 quando a build varia cedo); a sequência mostra o minuto mediano e, quando nem todo jogo da build tem o item, em quantos ele aparece.</p>
           <BuildsPossiveis builds={builds} />
         </>
       )}
@@ -51,7 +51,7 @@ function Conteudo({ meuNome, inimigoNome, contra, nomes }: Props & { contra: Con
           <li key={i.chave}>
             <img src={urlDoItem(i.chave)} alt="" width={36} height={27} loading="lazy" />
             <span className="cf-pros-item-nome">{i.nome}</span>
-            <span className="numero cf-pros-item-num">{porcentagem(i.fracao)} · {minutos(i.minuto)} min</span>
+            <span className="numero cf-pros-item-num">{porcentagemInteira(i.fracao)} · {Math.round(i.minuto)} min</span>
           </li>
         ))}
       </ul>
