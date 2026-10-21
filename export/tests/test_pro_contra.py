@@ -51,3 +51,42 @@ def test_recorte_por_inimigo_entra_no_confronto_com_nome_dos_itens():
     analise = confrontos.confronto("morphling", TEXTO, PRO, frozenset(), contra)
     assert analise["contra_inimigo"] == contra
     assert analise["nomes_dos_itens"] == {"manta": "Manta Style"}
+
+
+COMPONENTES = {"manta": frozenset({"yasha", "ultimate_orb"}), "disperser": frozenset({"diffusal_blade", "eagle"})}
+
+
+def test_build_da_partida_tira_componente_que_virou_item_e_receita():
+    compras = {"yasha": 10.0, "power_treads": 6.0, "manta": 14.0, "recipe_travel_boots": 30.0, "diffusal_blade": 20.0}
+    assert pro_contra.build_da_partida(compras, COMPONENTES) == ["power_treads", "manta", "diffusal_blade"]
+
+
+def _jogada(win: bool, *itens: tuple[str, float]) -> tuple[dict[str, float], list[str], bool]:
+    compras = dict(itens)
+    return compras, [slug for slug, _ in sorted(itens, key=lambda par: par[1])], win
+
+
+def test_builds_agrupam_pelos_tres_primeiros_itens_e_separam_sequencia_de_opcao():
+    principal = [_jogada(True, ("treads", 6), ("manta", 15), ("butterfly", 22), ("skadi", 28), ("daedalus", 35))] * 6
+    variante = [_jogada(False, ("treads", 6), ("butterfly", 14), ("manta", 18), ("skadi", 30), ("disperser", 34))] * 2
+    outra = [_jogada(False, ("treads", 7), ("manta", 16), ("mjollnir", 21))] * 5
+    curta = [_jogada(False, ("treads", 7))]
+    builds = pro_contra.builds_comuns(principal + variante + outra + curta)
+    assert [(b["jogos"], b["vitorias"]) for b in builds] == [(8, 6), (5, 0)]
+    assert [i["chave"] for i in builds[0]["sequencia"]] == ["treads", "manta", "butterfly", "skadi", "daedalus"]
+    assert [i["chave"] for i in builds[0]["opcoes"]] == ["disperser"]
+    assert builds[0]["sequencia"][1] == {"chave": "manta", "n": 8, "mediana": 15.0}
+
+
+def test_builds_ignoram_grupo_pequeno():
+    jogadas = [_jogada(True, ("a", 1), ("b", 2), ("c", 3))] * 20 + [_jogada(True, ("a", 1), ("b", 2), ("d", 3))] * 4
+    assert len(pro_contra.builds_comuns(jogadas)) == 1
+
+
+def test_ordem_compara_pares_de_itens_comuns_pela_maioria():
+    builds = [["manta", "butterfly", "skadi"]] * 3 + [["manta", "skadi", "butterfly"]] + [["manta"]] * 4 + [["manta", "raro"]] * 2
+    assert pro_contra.ordem_dos_itens(builds, 10) == [
+        {"a": "manta", "b": "butterfly", "a_antes": 4, "ambos": 4},
+        {"a": "butterfly", "b": "skadi", "a_antes": 3, "ambos": 4},
+        {"a": "manta", "b": "skadi", "a_antes": 4, "ambos": 4},
+    ]

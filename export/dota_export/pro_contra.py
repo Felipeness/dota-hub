@@ -30,6 +30,18 @@ TEMPO_MAXIMO_S = 180
 TENTATIVAS = 4
 PAUSA_ENTRE_CONSULTAS_S = 3
 JOGOS_MINIMOS_CONTRA = 5
+# Builds: partidas agrupadas pelos 3 primeiros itens (sem ordem), que é onde a build de um herói costuma se dividir
+# (Butterfly vs Mjollnir como 3º item); dentro do grupo a sequência sai do minuto mediano de cada item.
+ITENS_NA_CHAVE_DA_BUILD = 3
+BUILDS_MAXIMAS = 3
+FRACAO_MINIMA_DA_BUILD = 0.05
+JOGOS_MINIMOS_DA_BUILD = 5
+FRACAO_NA_SEQUENCIA = 0.4
+FRACAO_DE_OPCAO = 0.15
+OPCOES_MAXIMAS = 3
+ITENS_MAXIMOS_NA_SEQUENCIA = 8
+# Ordem entre dois itens só é comparada quando os dois são escolha comum dos pros contra o inimigo.
+FRACAO_PARA_ORDEM = 0.3
 
 SQL = """SELECT pm.match_id, (pm.player_slot < 128) = m.radiant_win AS win,
 (SELECT array_agg(e.hero_id) FROM player_matches e
@@ -56,23 +68,84 @@ def primeiras_compras(purchase_log: list[dict] | None, relevantes: frozenset[str
     return compras
 
 
-def agregar(partidas: list[dict], relevantes: frozenset[str], nome_interno: dict[int, str]) -> dict[str, dict]:
-    """Inimigo (nome interno) -> jogos, vitórias e, por item, em quantas partidas o pro fechou e a mediana do minuto.
-    Partida sem purchase_log (não parseada) fica de fora: não dá pra saber o que foi comprado."""
-    jogos: dict[str, int] = defaultdict(int)
-    vitorias: dict[str, int] = defaultdict(int)
-    minutos: dict[str, dict[str, list[float]]] = defaultdict(lambda: defaultdict(list))
+def build_da_partida(compras: dict[str, float], componentes: dict[str, frozenset[str]]) -> list[str]:
+    """Itens na ordem de compra, sem o componente que virou outro item da mesma partida (Yasha que virou Manta) e
+    sem receita: é a build que o jogador enxerga no inventário."""
+    usados = {c for slug in compras for c in componentes.get(slug, frozenset())}
+    return [slug for slug, _ in sorted(compras.items(), key=lambda par: par[1])
+            if slug not in usados and not slug.startswith("recipe_")]
+
+
+def agregar(partidas: list[dict], relevantes: frozenset[str], nome_interno: dict[int, str],
+            componentes: dict[str, frozenset[str]] | None = None) -> dict[str, dict]:
+    """Inimigo (nome interno) -> jogos, vitórias, por item em quantas partidas o pro fechou e a mediana do minuto, as
+    builds mais comuns e a ordem entre os itens comuns. Partida sem purchase_log (não parseada) fica de fora: não
+    dá pra saber o que foi comprado."""
+    por_inimigo: dict[str, list[tuple[dict[str, float], list[str], bool]]] = defaultdict(list)
     for partida in partidas:
         if not partida.get("purchase_log"):
             continue
         compras = primeiras_compras(partida["purchase_log"], relevantes)
+        jogada = (compras, build_da_partida(compras, componentes or {}), bool(partida["win"]))
         for inimigo in {nome_interno[i] for i in partida.get("inimigos") or [] if i in nome_interno}:
-            jogos[inimigo] += 1
-            vitorias[inimigo] += bool(partida["win"])
-            for slug, minuto in compras.items():
-                minutos[inimigo][slug].append(minuto)
-    return {inimigo: {"jogos": n, "vitorias": vitorias[inimigo], "itens": _itens(minutos[inimigo])}
-            for inimigo, n in sorted(jogos.items()) if n >= JOGOS_MINIMOS_CONTRA}
+            por_inimigo[inimigo].append(jogada)
+    return {inimigo: _contra(jogadas) for inimigo, jogadas in sorted(por_inimigo.items()) if len(jogadas) >= JOGOS_MINIMOS_CONTRA}
+
+
+def _contra(jogadas: list[tuple[dict[str, float], list[str], bool]]) -> dict:
+    minutos: dict[str, list[float]] = defaultdict(list)
+    for compras, _, _ in jogadas:
+        for slug, minuto in compras.items():
+            minutos[slug].append(minuto)
+    builds = [build for _, build, _ in jogadas]
+    return {"jogos": len(jogadas), "vitorias": sum(win for _, _, win in jogadas), "itens": _itens(minutos),
+            "builds": builds_comuns(jogadas), "ordem": ordem_dos_itens(builds, len(jogadas))}
+
+
+def builds_comuns(jogadas: list[tuple[dict[str, float], list[str], bool]]) -> list[dict]:
+    """Até 3 builds: partidas com os mesmos 3 primeiros itens (em qualquer ordem). Cada build lista, em ordem de minuto
+    mediano, os itens que aparecem em 40%+ das partidas dela (sequência) e os de 15-40% (opções situacionais)."""
+    grupos: dict[frozenset[str], list[tuple[dict[str, float], list[str], bool]]] = defaultdict(list)
+    for jogada in jogadas:
+        if len(jogada[1]) >= ITENS_NA_CHAVE_DA_BUILD:
+            grupos[frozenset(jogada[1][:ITENS_NA_CHAVE_DA_BUILD])].append(jogada)
+    minimo = max(JOGOS_MINIMOS_DA_BUILD, FRACAO_MINIMA_DA_BUILD * len(jogadas))
+    maiores = sorted(grupos.items(), key=lambda par: (-len(par[1]), sorted(par[0])))[:BUILDS_MAXIMAS]
+    return [_build(grupo) for _, grupo in maiores if len(grupo) >= minimo]
+
+
+def _build(grupo: list[tuple[dict[str, float], list[str], bool]]) -> dict:
+    minutos: dict[str, list[float]] = defaultdict(list)
+    for compras, build, _ in grupo:
+        for slug in build:
+            minutos[slug].append(compras[slug])
+    itens = sorted(({"chave": slug, "n": len(ms), "mediana": round(statistics.median(ms), 1)} for slug, ms in minutos.items()),
+                   key=lambda i: (i["mediana"], i["chave"]))
+    sequencia = [i for i in itens if i["n"] >= FRACAO_NA_SEQUENCIA * len(grupo)][:ITENS_MAXIMOS_NA_SEQUENCIA]
+    opcoes = sorted((i for i in itens if FRACAO_DE_OPCAO * len(grupo) <= i["n"] < FRACAO_NA_SEQUENCIA * len(grupo)),
+                    key=lambda i: (-i["n"], i["chave"]))[:OPCOES_MAXIMAS]
+    return {"jogos": len(grupo), "vitorias": sum(win for _, _, win in grupo), "sequencia": sequencia,
+            "opcoes": sorted(opcoes, key=lambda i: (i["mediana"], i["chave"]))}
+
+
+def ordem_dos_itens(builds: list[list[str]], jogos: int) -> list[dict]:
+    """Para cada par de itens que os pros fazem em 30%+ das partidas: em quantas partidas fizeram os dois e em quantas
+    o primeiro (`a`) veio antes. `a` é o que vem antes na maioria; empate fica na ordem alfabética."""
+    contagem: dict[str, int] = defaultdict(int)
+    for build in builds:
+        for slug in build:
+            contagem[slug] += 1
+    comuns = sorted(slug for slug, n in contagem.items() if n >= FRACAO_PARA_ORDEM * jogos)
+    pares = []
+    for indice, x in enumerate(comuns):
+        for y in comuns[indice + 1:]:
+            com_os_dois = [b for b in builds if x in b and y in b]
+            if not com_os_dois:
+                continue
+            x_antes = sum(b.index(x) < b.index(y) for b in com_os_dois)
+            a, b, a_antes = (x, y, x_antes) if 2 * x_antes >= len(com_os_dois) else (y, x, len(com_os_dois) - x_antes)
+            pares.append({"a": a, "b": b, "a_antes": a_antes, "ambos": len(com_os_dois)})
+    return pares
 
 
 def _itens(por_item: dict[str, list[float]]) -> list[dict]:
@@ -115,6 +188,7 @@ def main(escolhidos: list[str]) -> None:
     herois = json.loads(fontes.HEROIS_OPENDOTA.read_text(encoding="utf-8"))
     itens = json.loads(fontes.ITENS.read_text(encoding="utf-8"))
     relevantes = frozenset(slug for slug, item in itens.items() if item_relevante(slug, item))
+    componentes = {slug: frozenset(item.get("components") or []) for slug, item in itens.items()}
     nome_interno = {h["id"]: h["name"].removeprefix("npc_dota_hero_") for h in herois}
     desde = int(time.time()) - JANELA_DIAS * 86400
     DESTINO.mkdir(parents=True, exist_ok=True)
@@ -122,7 +196,7 @@ def main(escolhidos: list[str]) -> None:
         if escolhidos and interno not in escolhidos:
             continue
         print(f"{interno} ({hero_id})", flush=True)
-        dados = {"hero_id": hero_id, "fonte": FONTE, "contra": agregar(partidas(hero_id, desde), relevantes, nome_interno)}
+        dados = {"hero_id": hero_id, "fonte": FONTE, "contra": agregar(partidas(hero_id, desde), relevantes, nome_interno, componentes)}
         (DESTINO / f"{interno}.json").write_text(json.dumps(dados, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
 
