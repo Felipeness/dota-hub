@@ -193,7 +193,26 @@ function FeedDeAbates({ quadro }: { quadro: QuadroDoMapa }) {
 const svg = ([x, y]: Ponto): Ponto => [x, 1 - y];
 const TORRES = new Set(["torre", "ancient"]);
 
+/** Largura do mapa na tela, medida só quando ela muda (não a cada quadro). */
+function useLargura() {
+  const ref = useRef<SVGSVGElement>(null);
+  const [largura, setLargura] = useState(700);
+  useEffect(() => {
+    const elemento = ref.current;
+    if (!elemento || typeof ResizeObserver === "undefined") return;
+    const observador = new ResizeObserver(([entrada]) => { if (entrada) setLargura(entrada.contentRect.width); });
+    observador.observe(elemento);
+    return () => observador.disconnect();
+  }, []);
+  return { ref, largura };
+}
+
+/** Retrato com pelo menos 24 px de diâmetro no celular; no desktop, ~2,2% da largura visível (~30 px). */
+const DIAMETRO_MINIMO_PX = 24;
+const FRACAO_DO_RAIO = 0.022;
+
 function MapaDoQuadro({ quadro, camera, objetivos, lado }: { quadro: QuadroDoMapa; camera: Camera; objetivos: readonly Objetivo[]; lado: string }) {
+  const { ref, largura } = useLargura();
   // useId traz caracteres que não valem dentro de url(#...); fica só o que é seguro.
   const recorte = `recorte-heroi-${useId().replace(/[^a-zA-Z0-9_-]/g, "")}`;
   const janela = janelaDaCamera(camera);
@@ -203,7 +222,7 @@ function MapaDoQuadro({ quadro, camera, objetivos, lado }: { quadro: QuadroDoMap
   const torres = objetivos.filter((o) => TORRES.has(o.tipo) && !quadro.torresCaidas.has(o.id));
   const herois = [...quadro.herois].sort((a, b) => Number(a.eu) - Number(b.eu));
   return (
-    <svg className="replay-mapa" viewBox={`${janela.x} ${janela.y} ${janela.lado} ${janela.lado}`} role="img"
+    <svg ref={ref} className="replay-mapa" viewBox={`${janela.x} ${janela.y} ${janela.lado} ${janela.lado}`} role="img"
       aria-label="Minimapa da partida no instante do relógio: heróis, wards, torres de pé e mortes recentes">
       <defs>
         <clipPath id={recorte} clipPathUnits="objectBoundingBox"><circle cx={0.5} cy={0.5} r={0.5} /></clipPath>
@@ -235,7 +254,7 @@ function MapaDoQuadro({ quadro, camera, objetivos, lado }: { quadro: QuadroDoMap
           </g>
         );
       })}
-      {herois.map((h) => <IconeDoHeroi key={h.slot} heroi={h} nosso={h.lado === lado} raio={0.022 * u} recorte={recorte} />)}
+      {herois.map((h) => <IconeDoHeroi key={h.slot} heroi={h} nosso={h.lado === lado} raio={Math.max(FRACAO_DO_RAIO, DIAMETRO_MINIMO_PX / 2 / largura) * u} recorte={recorte} />)}
       {quadro.mortes.map((m) => (
         <MarcaDeMorte key={`${m.t}-${m.ponto[0]}`} ponto={m.ponto} tamanho={(m.minha ? 0.035 : 0.012) * u}
           opacidade={1 - m.idade / MORTE_VISIVEL_S} grossa={m.minha} />

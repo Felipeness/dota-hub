@@ -147,6 +147,10 @@
 .lances-treino { border-left: 3px solid var(--cor-destaque); padding: var(--espaco-3) var(--espaco-4); background: var(--cor-destaque-fundo); border-radius: 0 var(--raio) var(--raio) 0; }
 .lances-treino p { margin: var(--espaco-2) 0; line-height: 1.55; }
 .lances-treino-titulo { font-weight: 700; color: var(--cor-texto); }
+@media (max-width: 560px) {
+  .replay-abate { font-size: 10px; padding: 1px 6px; gap: 4px; }
+  .replay-abate img { width: 16px; height: 16px; }
+}
 @media (max-width: 560px) { .lances-numeros { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .replay-smoke { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0; font-size: 13px; color: var(--cor-neutro); }
 .replay-smoke strong { font-family: var(--fonte-display); letter-spacing: 0.1em; text-transform: uppercase; }
