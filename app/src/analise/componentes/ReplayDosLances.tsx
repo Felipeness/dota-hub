@@ -217,8 +217,12 @@ const DIAMETRO_GERAL_PX = 30;
 const DIAMETRO_NO_ZOOM_PX = 40;
 const DIAMETRO_MINIMO_PX = 26;
 const ZOOM_DO_LANCE = 2.7;
-const diametroDoRetrato = (zoom: number) =>
-  Math.max(DIAMETRO_MINIMO_PX, DIAMETRO_GERAL_PX + ((DIAMETRO_NO_ZOOM_PX - DIAMETRO_GERAL_PX) * (zoom - 1)) / (ZOOM_DO_LANCE - 1));
+/** Largura do mapa no desktop (coluna de 760 px); abaixo dela o retrato encolhe junto, até o mínimo. */
+const LARGURA_DE_REFERENCIA_PX = 660;
+const diametroDoRetrato = (zoom: number, largura: number) => {
+  const desktop = DIAMETRO_GERAL_PX + ((DIAMETRO_NO_ZOOM_PX - DIAMETRO_GERAL_PX) * (zoom - 1)) / (ZOOM_DO_LANCE - 1);
+  return Math.max(DIAMETRO_MINIMO_PX, desktop * Math.min(1, largura / LARGURA_DE_REFERENCIA_PX));
+};
 const LOSANGO_DA_WARD_PX = 11;
 
 type Janela = ReturnType<typeof janelaDaCamera>;
@@ -237,7 +241,9 @@ function MapaDoQuadro({ quadro, camera, objetivos, lado }: { quadro: QuadroDoMap
   const torres = objetivos.filter((o) => TORRES.has(o.tipo) && !quadro.torresCaidas.has(o.id));
   const herois = [...quadro.herois].sort((a, b) => Number(a.eu) - Number(b.eu) || Number(!a.escondido) - Number(!b.escondido));
   const wards = quadro.wards.filter((w) => cruzaAJanela(svg(w.ponto), RAIO_DE_VISAO[w.tipo], janela));
-  const raioDoHeroi = (diametroDoRetrato(camera.zoom) / 2) * px;
+  const raioDoHeroi = (diametroDoRetrato(camera.zoom, largura) / 2) * px;
+  // Losango da ward e quadrado da torre encolhem junto no celular, sem sumir.
+  const escala = Math.max(0.65, Math.min(1, largura / LARGURA_DE_REFERENCIA_PX));
   return (
     <svg ref={ref} className="replay-mapa" viewBox={`${janela.x} ${janela.y} ${janela.lado} ${janela.lado}`} role="img"
       aria-label="Minimapa da partida no instante do relógio: heróis, wards, torres de pé e mortes recentes">
@@ -247,7 +253,7 @@ function MapaDoQuadro({ quadro, camera, objetivos, lado }: { quadro: QuadroDoMap
       <image className="replay-arte" href="/data/mapa_2048.jpg" x={0} y={0} width={1} height={1} preserveAspectRatio="none" />
       {wards.map((w) => {
         const [x, y] = svg(w.ponto);
-        const meio = (LOSANGO_DA_WARD_PX / 2) * px;
+        const meio = (LOSANGO_DA_WARD_PX / 2) * escala * px;
         return (
           <g key={`${w.tipo}-${w.de}-${x}-${y}`} className={`ward ward-${w.tipo} ward-${deQuem(w.lado)}`} opacity={w.opacidade}>
             <circle cx={x} cy={y} r={RAIO_DE_VISAO[w.tipo]} className="ward-visao" vectorEffect="non-scaling-stroke" />
@@ -258,7 +264,7 @@ function MapaDoQuadro({ quadro, camera, objetivos, lado }: { quadro: QuadroDoMap
         );
       })}
       {torres.map((o) => (
-        <rect key={o.id} x={o.x - 5 * px} y={1 - o.y - 5 * px} width={10 * px} height={10 * px}
+        <rect key={o.id} x={o.x - 5 * escala * px} y={1 - o.y - 5 * escala * px} width={10 * escala * px} height={10 * escala * px}
           className={`torre torre-${deQuem(o.lado)}`} vectorEffect="non-scaling-stroke" />
       ))}
       {quadro.herois.map((h) => <Rastro key={`rastro-${h.slot}`} heroi={h} nosso={h.lado === lado} />)}
@@ -271,12 +277,13 @@ function MapaDoQuadro({ quadro, camera, objetivos, lado }: { quadro: QuadroDoMap
           </g>
         );
       })}
-      {herois.map((h) => (
-        <IconeDoHeroi key={h.slot} heroi={h} nosso={h.lado === lado} raio={h.eu ? raioDoHeroi * 1.2 : raioDoHeroi} recorte={recorte} />
-      ))}
+      {/* O ✕ fica por baixo dos heróis: quem matou continua visível em cima do ponto da morte. */}
       {quadro.mortes.map((m) => (
         <MarcaDeMorte key={`${m.t}-${m.ponto[0]}`} ponto={m.ponto} tamanho={(m.minha ? 20 : 8) * px}
           opacidade={1 - m.idade / MORTE_VISIVEL_S} grossa={m.minha} />
+      ))}
+      {herois.map((h) => (
+        <IconeDoHeroi key={h.slot} heroi={h} nosso={h.lado === lado} raio={h.eu ? raioDoHeroi * 1.2 : raioDoHeroi} recorte={recorte} />
       ))}
     </svg>
   );
