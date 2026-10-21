@@ -8,11 +8,13 @@ import { ErroAoVivoView } from "../live/ErroAoVivo";
 import type { DetalheDaPartida } from "../live/partida/detalhe";
 import { useAoVivo } from "../live/useAoVivo";
 import { AnalisePosJogo } from "./componentes/AnalisePosJogo";
+import { LancesDecisivos } from "./componentes/LancesDecisivos";
 import { carregarPartidaParaAnalise } from "./carregar";
 import { construirContexto } from "./contexto";
 import { avaliarRegras } from "./motor";
 import { CAMINHO_PRO_POSICOES, proPorPosicaoSchema } from "./pro";
 import { REGISTRO_DE_REGRAS } from "./registro";
+import { escolherLances } from "./lancesDecisivos";
 import { montarRelatorio } from "./relatorio";
 import "./analise.css";
 
@@ -103,6 +105,7 @@ function RelatorioDaPartida({ detalhe }: { detalhe: DetalheDaPartida }) {
         {nomeDaLane(detalhe.lane)} · {nomeDaPosicao(detalhe.posicao)}
       </p>
       <p><Link to={`/ao-vivo/partidas/${detalhe.partida}?conta=${detalhe.conta}`}>Ver a partida completa</Link></p>
+      <LancesDecisivos detalhe={detalhe} escolha={escolherLances(detalhe, relatorio.achados)} />
       <AnalisePosJogo ctx={ctx} relatorio={relatorio} />
     </article>
   );
