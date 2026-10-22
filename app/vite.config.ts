@@ -5,6 +5,7 @@ import { defineConfig } from 'vitest/config'
 import { replayLocal } from './plugins/replayLocal.ts'
 
 const raizDoApp = path.dirname(fileURLToPath(import.meta.url))
+const SITE_PUBLICADO = 'https://d22phpj0gnvpfs.cloudfront.net'
 
 export default defineConfig({
   plugins: [
@@ -18,7 +19,11 @@ export default defineConfig({
   ],
   server: {
     // Mesma rota do site publicado; a Lambda só aceita chamadas assinadas pelo CloudFront.
-    proxy: { '/api/replay': { target: 'https://d22phpj0gnvpfs.cloudfront.net', changeOrigin: true } },
+    proxy: {
+      '/api/replay': { target: SITE_PUBLICADO, changeOrigin: true },
+      // Sem o jogo instalado não dá para gerar public/data; DOTA_DADOS_PUBLICADOS=1 usa os dados do site no ar.
+      ...(process.env.DOTA_DADOS_PUBLICADOS === '1' ? { '/data': { target: SITE_PUBLICADO, changeOrigin: true } } : {}),
+    },
   },
   test: {
     environment: 'jsdom',
