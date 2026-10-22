@@ -1,6 +1,8 @@
-// Command lambda serves hero trajectories per match: GET /?match=<id> returns
-// the gzipped JSON, from S3 when already generated, otherwise it downloads the
-// Valve replay, parses it and stores the result first.
+// Command lambda serves hero trajectories per match: GET /api/replay?match=<id>
+// returns the gzipped JSON, from S3 when already generated, otherwise it downloads
+// the Valve replay, parses it and stores the result first. The function URL uses
+// AWS_IAM auth, so only the site's CloudFront distribution (signing through an
+// origin access control) can reach it.
 package main
 
 import (
@@ -27,6 +29,7 @@ const (
 	keyPrefix    = "data/replays/"
 	s3Timeout    = 10 * time.Second
 	cacheForever = "public,max-age=31536000,immutable"
+	routePath    = "/api/replay"
 )
 
 var matchIDPattern = regexp.MustCompile(`^[0-9]{1,12}$`)
@@ -56,7 +59,10 @@ func main() {
 func (s *server) handle(ctx context.Context, req events.LambdaFunctionURLRequest) (events.LambdaFunctionURLResponse, error) {
 	started := time.Now()
 	match := req.QueryStringParameters["match"]
-	if req.RequestContext.HTTP.Method != http.MethodGet {
+	if req.RawPath != routePath {
+		return apiError(http.StatusNotFound, "rota", "use "+routePath), nil
+	}
+	if !isRead(req.RequestContext.HTTP.Method) {
 		return apiError(http.StatusMethodNotAllowed, "metodo", "use GET"), nil
 	}
 	if !matchIDPattern.MatchString(match) {
@@ -72,11 +78,13 @@ func (s *server) handle(ctx context.Context, req events.LambdaFunctionURLRequest
 	log.Info("trajetos", "status", http.StatusOK, "bytes", len(body))
 	return events.LambdaFunctionURLResponse{
 		StatusCode:      http.StatusOK,
-		Headers:         map[string]string{"Content-Type": "application/json", "Content-Encoding": "gzip", "Cache-Control": "public,max-age=86400"},
+		Headers:         map[string]string{"Content-Type": "application/json", "Content-Encoding": "gzip", "Cache-Control": cacheForever},
 		Body:            base64.StdEncoding.EncodeToString(body),
 		IsBase64Encoded: true,
 	}, nil
 }
+
+func isRead(method string) bool { return method == http.MethodGet || method == http.MethodHead }
 
 // trajetos returns the gzipped JSON and where it came from ("s3" or "replay").
 func (s *server) trajetos(ctx context.Context, match string) ([]byte, string, error) {

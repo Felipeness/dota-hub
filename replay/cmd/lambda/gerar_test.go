@@ -1,8 +1,12 @@
 package main
 
 import (
+	"context"
 	"errors"
+	"net/http"
 	"testing"
+
+	"github.com/aws/aws-lambda-go/events"
 )
 
 func TestValidReplayURL(t *testing.T) {
@@ -37,5 +41,28 @@ func TestMatchIDPattern(t *testing.T) {
 		if got := matchIDPattern.MatchString(in); got != want {
 			t.Errorf("matchIDPattern(%q) = %v, want %v", in, got, want)
 		}
+	}
+}
+
+func TestHandleRejectsBeforeTouchingS3(t *testing.T) {
+	tests := []struct {
+		name, path, method, match string
+		want                      int
+	}{
+		{"other path", "/", http.MethodGet, "9046905170", http.StatusNotFound},
+		{"path prefix only", "/api/replayx", http.MethodGet, "9046905170", http.StatusNotFound},
+		{"post", routePath, http.MethodPost, "9046905170", http.StatusMethodNotAllowed},
+		{"non digit id", routePath, http.MethodGet, "12a", http.StatusBadRequest},
+	}
+	srv := &server{}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			req := events.LambdaFunctionURLRequest{RawPath: tt.path, QueryStringParameters: map[string]string{"match": tt.match}}
+			req.RequestContext.HTTP.Method = tt.method
+			resp, err := srv.handle(context.Background(), req)
+			if err != nil || resp.StatusCode != tt.want {
+				t.Fatalf("handle = %d, %v; want %d", resp.StatusCode, err, tt.want)
+			}
+		})
 	}
 }
