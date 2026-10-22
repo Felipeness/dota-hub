@@ -82,7 +82,7 @@ export function posicaoEm(trilha: TrilhaDoHeroi, t: number): Ponto | null {
   return [antes[0] + (depois[0] - antes[0]) * f, antes[1] + (depois[1] - antes[1]) * f];
 }
 
-export const CODIGOS_DE_ERRO = ["match_invalido", "replay_indisponivel", "upstream", "interno", "tempo_esgotado", "sem_conexao", "formato"] as const;
+export const CODIGOS_DE_ERRO = ["match_invalido", "replay_indisponivel", "upstream", "interno", "tempo_esgotado", "sem_conexao", "formato", "muitas_analises"] as const;
 export type CodigoDeErro = (typeof CODIGOS_DE_ERRO)[number];
 export type ResultadoDosTrajetos =
   | { readonly ok: true; readonly trajetos: Trajetos }

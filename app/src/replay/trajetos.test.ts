@@ -44,6 +44,7 @@ describe("pedirTrajetos", () => {
   it.each([
     { nome: "devolve os trajetos", fetch: () => resposta(200, trajetosValidos), esperado: { ok: true, trajetos: trajetosValidos } },
     { nome: "repassa o código do servidor", fetch: () => resposta(404, { code: "replay_indisponivel", message: "expirou" }), esperado: { ok: false, erro: "replay_indisponivel", detalhe: "expirou" } },
+    { nome: "limite do WAF", fetch: () => resposta(429, { code: "muitas_analises", message: "muitas análises de replay, tente em alguns minutos" }), esperado: expect.objectContaining({ ok: false, erro: "muitas_analises" }) },
     { nome: "código desconhecido vira interno", fetch: () => resposta(500, { code: "novo", message: "x" }), esperado: { ok: false, erro: "interno", detalhe: "x" } },
     { nome: "corpo fora do formato", fetch: () => resposta(200, { v: 2 }), esperado: expect.objectContaining({ ok: false, erro: "formato" }) },
     { nome: "rede caída", fetch: () => Promise.reject(new TypeError("failed to fetch")), esperado: expect.objectContaining({ ok: false, erro: "sem_conexao" }) },

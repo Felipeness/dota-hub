@@ -39,6 +39,7 @@ const AVISO_DO_ERRO: Readonly<Record<CodigoDeErro, string>> = {
   upstream: "o servidor de replays da Valve não respondeu",
   interno: "erro no leitor de replay",
   formato: "o replay veio num formato inesperado",
+  muitas_analises: "muitas análises de replay, tente em alguns minutos",
 };
 
 export function LancesDecisivos({ detalhe, escolha }: Props) {
