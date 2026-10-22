@@ -2,17 +2,18 @@ import { useState, type ReactNode } from "react";
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Link, useParams } from "react-router";
-import { Indisponivel, useData } from "../data/useData";
+import { Indisponivel, useData, type EstadoDados } from "../data/useData";
 import { TextoComTermos } from "../glossary/Termo";
 import { MapView } from "../map/MapView";
 import {
   CAMADAS, JANELAS, SETAS_POR_PADRAO, TODAS_AS_INTENCOES, desenhosDoMapa, intencoesDosWards, itensDoMapa, linhasDoPreparo, smokesDaJanela,
   type Camada, type Filtro, type FiltroJanela, type ItemDoMapa, type Preparo,
 } from "./camadas";
+import { CartaoContra } from "./CartaoContra";
 import { ComoVencer } from "./ComoVencer";
 import { LanesPerdidas } from "./LanesPerdidas";
 import { LeituraDoMapa } from "./LeituraDoMapa";
-import { chavesSchema, lanesSchema, timeAtlasSchema, type Confianca, type Secao, type TimeAtlas } from "./schemas";
+import { chavesSchema, lanesSchema, timeAtlasSchema, type Chaves, type Confianca, type Secao, type TimeAtlas } from "./schemas";
 import { ordenarSecoes } from "./secoes";
 import { SeloAmostra, SeloFronteira } from "./TimesPage";
 
@@ -87,6 +88,7 @@ function AtlasDoTime({ time }: { time: TimeAtlas }) {
     return proximo;
   });
   const { amostra } = time;
+  const chaves = useData(`/data/times_atlas/${encodeURIComponent(time.id)}.chaves.json`, chavesSchema);
   return (
     <section className="atlas atlas-time">
       <header className="atlas-cabecalho">
@@ -96,6 +98,7 @@ function AtlasDoTime({ time }: { time: TimeAtlas }) {
         <p className="atlas-sub numero">{amostra.partidas} partidas · {amostra.replays} replays · {amostra.vitorias} vitórias</p>
         {amostra.nota && <p className="atlas-nota">{amostra.nota}</p>}
       </header>
+      {chaves.estado === "ok" && <CartaoContra chaves={chaves.dados} nome={time.nome} />}
       <div className="atlas-corpo">
         <div className="atlas-mapa-coluna">
           <div className="atlas-controles" role="group" aria-label="Camadas do mapa do time">
@@ -140,7 +143,8 @@ function AtlasDoTime({ time }: { time: TimeAtlas }) {
           <LeituraDoMapa mapa={time.mapa} camadas={camadas} janela={janela} />
         </div>
         <div className="atlas-texto">
-          <ChavesDoTime id={time.id} nome={time.nome} />
+          <h2 id="detalhes" className="atlas-detalhes-titulo">Detalhes</h2>
+          <ChavesDoTime chaves={chaves} nome={time.nome} />
           <LanesDoTime id={time.id} nome={time.nome} />
           <p className="abertura"><TextoComTermos texto={time.resumo} /></p>
           <ComoJogarContra gameplan={time.gameplan_contra} />
@@ -213,8 +217,7 @@ function ComoJogarContra({ gameplan }: { gameplan: TimeAtlas["gameplan_contra"] 
 }
 
 // As chaves vêm num arquivo à parte; sem ele a página segue sem o bloco, com o motivo à vista.
-function ChavesDoTime({ id, nome }: { id: string; nome: string }) {
-  const chaves = useData(`/data/times_atlas/${encodeURIComponent(id)}.chaves.json`, chavesSchema);
+function ChavesDoTime({ chaves, nome }: { chaves: EstadoDados<Chaves>; nome: string }) {
   if (chaves.estado === "carregando") return null;
   if (chaves.estado === "indisponivel") return <p className="chave-ausente">Como vencer: {chaves.motivo}</p>;
   return <ComoVencer chaves={chaves.dados} nome={nome} />;

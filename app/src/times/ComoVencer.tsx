@@ -198,7 +198,7 @@ function CartaoFator({ fator, maior, lado }: { fator: FatorChave; maior: number;
 function ListaDeFatores({ titulo, fatores, maior, lado }: { titulo: string; fatores: readonly FatorChave[]; maior: number; lado: Lado }) {
   const ordenados = fatores.toSorted((a, b) => Math.abs(b.efeito_pp) - Math.abs(a.efeito_pp));
   return (
-    <section className={`chave-fatores chave-fatores-${lado}`} aria-label={titulo}>
+    <section id={`chaves-${lado}`} className={`chave-fatores chave-fatores-${lado}`} aria-label={titulo}>
       <h3>{titulo}</h3>
       {ordenados.length === 0
         ? <p className="chave-vazio">Nenhum fator com evidência suficiente.</p>
@@ -217,7 +217,7 @@ export function ComoVencer({ chaves, nome }: { chaves: Chaves; nome: string }) {
       {chaves.historico && <span className="selo chave-historico"><TextoComTermos texto="histórico: roster de antes da TI" /></span>}
       <p className="chave-resumo"><TextoComTermos texto={chaves.resumo_para_vencer} /></p>
       {chaves.banir.length > 0 && (
-        <section aria-label="Bans sugeridos">
+        <section id="chaves-banir" aria-label="Bans sugeridos">
           <h3>Bans sugeridos</h3>
           {!algumConfirmado && <p className="chave-aviso">Nenhum ban passa no teste estatístico com esta amostra; estes são os heróis com mais sinal.</p>}
           <BansSugeridos bans={chaves.banir} />
@@ -228,7 +228,7 @@ export function ComoVencer({ chaves, nome }: { chaves: Chaves; nome: string }) {
         <ListaDeFatores titulo="Aumenta a chance de derrota deles" fatores={chaves.fatores_derrota} maior={maior} lado="derrota" />
       </div>
       {chaves.herois_contra.length > 0 && (
-        <section aria-label="Pickar contra eles">
+        <section id="chaves-contra" aria-label="Pickar contra eles">
           <h3>Pickar contra eles</h3>
           <ul className="chave-herois">{chaves.herois_contra.map((h) => <CartaoContra key={h.heroi} heroi={h} />)}</ul>
         </section>
