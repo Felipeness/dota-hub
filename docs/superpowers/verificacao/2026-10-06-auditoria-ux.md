@@ -1,6 +1,6 @@
 # Auditoria visual e de usabilidade do Dota Hub (main, 06/10/2026)
 
-App da branch `main` (commit `bad6abd`) rodando em `http://localhost:5174` a partir da worktree `C:\Users\felip\Desktop\dota-hub-teste`. Telas abertas pelo Playwright MCP (Chromium com 3D ligado) em 1440×900 e 390×844, mais 800, 1024 e 1280 de largura no mapa. Capturas em `C:\Users\felip\Desktop\dota-hub-auditoria\` (o número da captura aparece entre colchetes). Linhas citadas são do `main`.
+App da branch `main` (commit `bad6abd`) rodando em `http://localhost:5174` a partir da worktree `~/Desktop/dota-hub-teste`. Telas abertas pelo Playwright MCP (Chromium com 3D ligado) em 1440×900 e 390×844, mais 800, 1024 e 1280 de largura no mapa. Capturas em `~/Desktop/dota-hub-auditoria/` (o número da captura aparece entre colchetes). Linhas citadas são do `main`.
 
 Medições feitas na própria página: largura rolável contra largura visível (`scrollWidth` e `clientWidth`), tamanho de cada alvo de toque (`getBoundingClientRect`), contraste de cada texto contra o fundo real (fórmula WCAG) e mensagens do console.
 

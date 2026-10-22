@@ -8,7 +8,7 @@
 
 **Tech Stack:** o da 1C, sem nada novo (Python 3.13, pytest, Pillow, numpy; React 19, TypeScript strict, react-three-fiber + drei, zod 4, react-router 8, vitest + Testing Library; Source 2 Viewer CLI 20.0 já instalado em `export/ferramentas/vrf/`). A verificação visual usa o Playwright MCP, não uma dependência do projeto.
 
-**Fonte:** auditoria `docs/superpowers/verificacao/2026-10-06-auditoria-ux.md` (capturas "antes" em `C:\Users\felip\Desktop\dota-hub-auditoria\`). Visual de referência: `docs/design/v1` (`Main.dc.html` mapa em 1440, `Rotas.dc.html`, `Celular.dc.html` mapa em 390, `Glossario.dc.html`). Spec da fase 1: `docs/superpowers/specs/2026-10-06-dota-hub-design.md` (as 11 situações do índice, regra de nada digitado à mão no app).
+**Fonte:** auditoria `docs/superpowers/verificacao/2026-10-06-auditoria-ux.md` (capturas "antes" em `~/Desktop/dota-hub-auditoria/`). Visual de referência: `docs/design/v1` (`Main.dc.html` mapa em 1440, `Rotas.dc.html`, `Celular.dc.html` mapa em 390, `Glossario.dc.html`). Spec da fase 1: `docs/superpowers/specs/2026-10-06-dota-hub-design.md` (as 11 situações do índice, regra de nada digitado à mão no app).
 
 **Pré-requisito:** a fase 1C mesclada no `main`. Antes da Task 1, crie a branch `feat/fase-1d-ux` a partir do `main` atualizado e leia o código real dos arquivos que a 1C mudou e que este plano também muda: `app/src/App.tsx`, `app/src/glossary/GlossaryPage.tsx`, `app/src/objectives/ObjectivePanel.tsx`, `app/src/search/SearchBox.tsx`, `app/src/map/MapPage.tsx`, `export/dota_export/__main__.py` e `app/src/unidades/unidades.css`. Os blocos deste plano foram escritos contra o `main` em `bad6abd` mais o diff da 1C (`git diff main..feat/fase-1c`, 13 commits até `c29ef26`). Se a 1C mudou algo depois disso (um nome, uma prop, a ordem das linhas do `__main__.py`), use o real, aplique a mudança deste plano por cima e registre no ledger `.superpowers/sdd/2026-10-06-dota-hub-fase1d/progress.md`.
 
@@ -85,7 +85,7 @@ Toda tarefa marcada "Verificação visual" roda este roteiro antes do commit.
 ```js
 async (page) => {
   const BASE = "http://localhost:5173";
-  const PASTA = "C:/Users/felip/Desktop/dota-hub-auditoria/1d/";
+  const PASTA = "~/Desktop/dota-hub-auditoria/1d/";
   const TELAS = [
     // ["mapa-roshan-avancado", "/mapa/roshan_pit_top", async (p) => p.getByRole("tab", { name: "Avançado" }).click()],
   ];
@@ -2119,7 +2119,7 @@ git commit -m "docs: record phase 1d visual verification"
 
 ### Task 13: Solo de Roshan por herói (pesquisa em replays) e correção do texto do Roshan
 
-Origem: pesquisa de 06/10/2026 em `C:\Users\felip\Desktop\dota-roshan-solo` (1.328 replays do 7.41, 111 solos confirmados; achados em `work/solo_roshan.md`, uma linha por solo em `work/solos_linha_a_linha.md`). Os textos prontos estão em `C:\Users\felip\Desktop\dota-roshan-solo\content\roshan_solo\` (huskar, ursa, nevermore, beastmaster, spectre, gyrocopter, kez), no formato de conteúdo do Dota Hub (frontmatter com `id`, `titulo`, `patch: 7.41`, `fontes` com "replay <match_id>", `origem: replay`, `replay`; corpo com `## Básico` e `## Avançado`). Esta tarefa roda antes da verificação final (Task 14).
+Origem: pesquisa de 06/10/2026 em `~/Desktop/dota-roshan-solo` (1.328 replays do 7.41, 111 solos confirmados; achados em `work/solo_roshan.md`, uma linha por solo em `work/solos_linha_a_linha.md`). Os textos prontos estão em `~/Desktop/dota-roshan-solo/content/roshan_solo/` (huskar, ursa, nevermore, beastmaster, spectre, gyrocopter, kez), no formato de conteúdo do Dota Hub (frontmatter com `id`, `titulo`, `patch: 7.41`, `fontes` com "replay <match_id>", `origem: replay`, `replay`; corpo com `## Básico` e `## Avançado`). Esta tarefa roda antes da verificação final (Task 14).
 
 **Files:**
 - Create: `content/roshan_solo/<heroi>.md` (copiar os 7 arquivos sem mudar o texto)

@@ -13,7 +13,7 @@ Data: 06/10/2026. Decidido sozinho, com as decisões liberadas pelo Felipe ("lib
 - **Mostrar no app**: o React Three Fiber e o drei que o app já tem (`useGLTF` com meshopt, `useAnimations`, `Bounds`, `OrbitControls` com giro automático). Atrás de um componente só (`VisualizadorUnidade`), carregado sob demanda, como a `MapView` faz com o mapa.
 - **Imagem parada (aparelho sem 3D)**: gerada uma vez por modelo com o Playwright (dependência de desenvolvimento), abrindo uma página do próprio app que mostra o modelo parado e fotografando o canvas. Navegador único, fechado em `finally`.
 
-## Teste de viabilidade (06/10/2026, pasta `C:\Users\felip\Desktop\dota-hub-spike-3d\`)
+## Teste de viabilidade (06/10/2026, pasta `~/Desktop/dota-hub-spike-3d/`)
 
 | O quê | Resultado |
 |---|---|

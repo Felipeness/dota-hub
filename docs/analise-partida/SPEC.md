@@ -4,7 +4,7 @@ Documento de design, não de implementação. Nada aqui foi escrito ou editado n
 código do Dota Hub por esta tarefa; é a base para as próximas fases do que já
 existe.
 
-## Estado atual (o que já existe em `C:/Users/felip/Desktop/dota-hub`)
+## Estado atual (o que já existe em `~/Desktop/dota-hub`)
 
 A pesquisa anterior mostrou que uma primeira versão já está no código, não
 precisa ser recriada do zero:

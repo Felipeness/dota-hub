@@ -12,7 +12,7 @@
 
 **Pré-requisito:** a fase 1B mesclada no `main`. Antes da Task 1, leia o código real da 1B (`export/dota_export/*.py`, `app/src/**`, ledger em `.superpowers/sdd/2026-10-06-dota-hub-fase1b/progress.md`) e confira os nomes acima. Três pontos mudam na 1B e precisam ser lidos antes de mexer: a lista de rotas em `App.tsx` (a 1B pode ter passado as telas para `lazy`), o tipo `Achado` da busca (a 1B acrescenta herói, jogador e time) e as props do `ObjectivePanel` (a 1B acrescenta `children`). Se um nome mudou, use o real e registre no ledger da 1C.
 
-**Viabilidade:** testada em 06/10/2026 na pasta `C:\Users\felip\Desktop\dota-hub-spike-3d\` (resultado na decisão técnica). Roshan exportado com textura e animação parada, otimizado de 3,42 MB para 317 KB, carregou em 104 a 212 ms local e girou animado no navegador; os 59 modelos das unidades do 7.41 saem do jogo; 260 números da selva batem com `farm_mechanics_corrigido.json`; textos em português existem para todas as habilidades visíveis.
+**Viabilidade:** testada em 06/10/2026 na pasta `~/Desktop/dota-hub-spike-3d/` (resultado na decisão técnica). Roshan exportado com textura e animação parada, otimizado de 3,42 MB para 317 KB, carregou em 104 a 212 ms local e girou animado no navegador; os 59 modelos das unidades do 7.41 saem do jogo; 260 números da selva batem com `farm_mechanics_corrigido.json`; textos em português existem para todas as habilidades visíveis.
 
 ## Global Constraints
 
