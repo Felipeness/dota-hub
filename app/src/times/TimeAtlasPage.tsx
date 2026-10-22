@@ -12,7 +12,8 @@ import {
 import { CartaoContra } from "./CartaoContra";
 import { ComoVencer } from "./ComoVencer";
 import { LanesPerdidas } from "./LanesPerdidas";
-import { MAPA_VAZIO, SeletorDeLado, escolhaDoLado, notaDoLado, useMapaDoLado, type EscolhaDeLado } from "./LadoDoMapa";
+import { SeletorDeLado } from "./LadoDoMapa";
+import { MAPA_VAZIO, escolhaDoLado, notaDoLado, useMapaDoLado, type EscolhaDeLado } from "./mapaPorLado";
 import { LeituraDoMapa } from "./LeituraDoMapa";
 import { chavesSchema, lanesSchema, timeAtlasSchema, type Chaves, type Confianca, type Secao, type TimeAtlas } from "./schemas";
 import { ordenarSecoes } from "./secoes";
@@ -113,7 +114,8 @@ function AtlasDoTime({ time }: { time: TimeAtlas }) {
         <p className="atlas-sub numero">{amostra.partidas} partidas · {amostra.replays} replays · {amostra.vitorias} vitórias</p>
         {amostra.nota && <p className="atlas-nota">{amostra.nota}</p>}
       </header>
-      {chaves.estado === "ok" && <CartaoContra chaves={chaves.dados} nome={time.nome} />}
+      {/* Telas estreitas: o cartão abre a página; telas largas: abre a coluna do texto, ao lado do mapa (CSS escolhe). */}
+      {chaves.estado === "ok" && <CartaoContra chaves={chaves.dados} nome={time.nome} onde="topo" />}
       <div className="atlas-corpo">
         <div className="atlas-mapa-coluna">
           <SeletorDeLado lado={lado} nota={notaDoLado(lado, mapaDoLado, amostra.replays)} onEscolher={escolherLado} />
@@ -159,6 +161,7 @@ function AtlasDoTime({ time }: { time: TimeAtlas }) {
           <LeituraDoMapa mapa={mapa} camadas={camadas} janela={janela} />
         </div>
         <div className="atlas-texto">
+          {chaves.estado === "ok" && <CartaoContra chaves={chaves.dados} nome={time.nome} onde="coluna" />}
           <h2 id="detalhes" className="atlas-detalhes-titulo">Detalhes</h2>
           <ChavesDoTime chaves={chaves} nome={time.nome} />
           <LanesDoTime id={time.id} nome={time.nome} />

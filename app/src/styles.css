@@ -1031,8 +1031,19 @@ button.pino:hover { transform: translate(-50%, -50%) scale(1.2); }
 .contra-vazio, .contra-nota { margin: 0; font-size: 13px; color: var(--cor-texto-3); }
 .atlas-detalhes-titulo { margin: 0; font-family: var(--fonte-display); font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cor-texto-3); }
 .atlas-lado { display: flex; flex-wrap: wrap; align-items: center; gap: 6px var(--espaco-3); margin-bottom: var(--espaco-2); }
+.atlas-lado .alternador { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .atlas-lado .alternador button { min-height: 34px; padding: 0 14px; }
 .atlas-lado .alternador .atlas-lado-radiant[aria-pressed="true"] { color: var(--cor-radiant); }
 .atlas-lado .alternador .atlas-lado-dire[aria-pressed="true"] { color: var(--cor-dire); }
 .atlas-lado-nota { flex: 1 1 260px; margin: 0; font-size: 12px; color: var(--cor-texto-3); }
 .atlas-lado-alerta { flex-basis: 100%; margin: 0; font-size: 12px; font-weight: 600; color: var(--cor-alerta-texto); }
+.contra-cartao-coluna { display: none; }
+@media (min-width: 1100px) {
+  .contra-cartao-topo { display: none; }
+  .contra-cartao-coluna { display: flex; margin-bottom: 0; padding: var(--espaco-4); }
+  .contra-cartao-coluna .contra-blocos { grid-template-columns: minmax(0, 1fr); }
+  /* O seletor de lado ganha uma linha própria acima das camadas. */
+  .atlas-mapa-coluna { grid-template-rows: auto auto minmax(0, 1fr); }
+  .atlas-lado { grid-column: 1 / -1; margin-bottom: 0; }
+  .atlas-mapa, .atlas-leitura { grid-row: 3; }
+}

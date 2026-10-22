@@ -1,4 +1,4 @@
-import { MAPA_VAZIO, escolhaDoLado, notaDoLado } from "./LadoDoMapa";
+import { MAPA_VAZIO, escolhaDoLado, notaDoLado } from "./mapaPorLado";
 
 it.each([
   { valor: "dire", esperado: "dire" },

@@ -17,11 +17,11 @@ function Linhas({ linhas, vazio }: { linhas: readonly LinhaDoResumo[]; vazio: st
 }
 
 // Cartão do topo: o que fazer contra o time em linhas curtas; a estatística completa fica nos Detalhes.
-export function CartaoContra({ chaves, nome }: { chaves: Chaves; nome: string }) {
+export function CartaoContra({ chaves, nome, onde }: { chaves: Chaves; nome: string; onde: "topo" | "coluna" }) {
   const resumo = resumirContra(chaves);
   return (
-    <section className="contra-cartao" aria-labelledby="titulo-cartao-contra">
-      <h2 id="titulo-cartao-contra">Contra a {nome}</h2>
+    <section className={`contra-cartao contra-cartao-${onde}`} aria-labelledby={`titulo-cartao-contra-${onde}`}>
+      <h2 id={`titulo-cartao-contra-${onde}`}>Contra a {nome}</h2>
       {resumo.historico && <p className="contra-nota">Histórico: roster de antes da TI.</p>}
       <div className="contra-blocos">
         <div className="contra-bloco contra-bloco-faca">
