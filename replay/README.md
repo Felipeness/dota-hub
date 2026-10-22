@@ -7,8 +7,8 @@ A v1.5.0 do manta não lê o build 6962 (`nextByte: insufficient buffer`); a v1.
 
 - `trajetos/`: o parser (`trajetos.Ler(r, match)`).
 - `cmd/trajetos`: CLI local, `go run ./cmd/trajetos -replay X.dem.bz2 -match ID -out ID.json[.gz]`.
-- `cmd/lambda`: a função que gera sob demanda (`GET <function url>/?match=ID`).
-- `infra.sh`: cria ou atualiza a função, o papel IAM e a Function URL (idempotente).
+- `cmd/lambda`: a função que gera sob demanda (`GET /api/replay?match=ID`, pelo CloudFront do site).
+- `infra.sh`: cria ou atualiza a função, o papel IAM, a Function URL e a rota `/api/replay*` no CloudFront (idempotente).
 
 ## Formato (`data/replays/<id>.json`, v1)
 
@@ -57,7 +57,12 @@ minutos, wards 47 obs e 72 sentries iguais ao `obs_placed`/`sen_placed`, dewards
 
 ## Lambda (`cmd/lambda`, `infra.sh`)
 
-`GET https://<function-url>.lambda-url.us-east-2.on.aws/?match=<id>` devolve o JSON (gzip).
+`GET https://d22phpj0gnvpfs.cloudfront.net/api/replay?match=<id>` devolve o JSON (gzip). A Function URL é
+`AWS_IAM` e só aceita a distribuição do site, que assina com um OAC do tipo `lambda` (sigv4); chamada direta
+recebe 403. O comportamento `/api/replay*` só aceita GET/HEAD, usa só `match` na chave de cache, guarda o 200 por
+1 ano (o resultado de uma partida não muda) e não guarda erro (a Lambda manda `no-store`). A origem recebe tudo
+menos o `Host` (`AllViewerExceptHostHeader`), senão a assinatura não confere. No dev, o Vite repassa `/api/replay`
+para o CloudFront.
 Se `s3://dota-hub-968000946695/data/replays/<id>.json` existe, lê de lá (~30 ms); senão pede o `replay_url` ao
 OpenDota, baixa da Valve (só `replayN.valve.net`), lê em streaming sem gravar o `.dem`, grava no S3 e devolve
 (~6 a 10 s, 120 MB de memória). O mesmo arquivo sai pelo CloudFront em

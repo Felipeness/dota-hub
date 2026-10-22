@@ -1,8 +1,8 @@
 import { z } from "zod";
 import type { Ponto } from "../map/coords";
 
-/** Lambda que lê o replay da Valve sob demanda (código e formato em replay/README.md na raiz do repo). */
-export const URL_TRAJETOS = "https://<function-url>.lambda-url.us-east-2.on.aws/";
+/** Rota do CloudFront para a Lambda que lê o replay sob demanda (código e formato em replay/README.md na raiz do repo). */
+export const URL_TRAJETOS = "/api/replay";
 /** Partida nova leva ~10 s (baixar + ler); o servidor desiste em 120 s. */
 const TEMPO_MAXIMO_MS = 120_000;
 const ID_DA_PARTIDA = /^[0-9]{1,12}$/;

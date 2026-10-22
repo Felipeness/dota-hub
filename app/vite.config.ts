@@ -16,6 +16,10 @@ export default defineConfig({
       pastaDosReplays: process.env.DOTA_REPLAYS ?? 'D:/dota-replays/hub',
     }),
   ],
+  server: {
+    // Mesma rota do site publicado; a Lambda só aceita chamadas assinadas pelo CloudFront.
+    proxy: { '/api/replay': { target: 'https://d22phpj0gnvpfs.cloudfront.net', changeOrigin: true } },
+  },
   test: {
     environment: 'jsdom',
     globals: true,
