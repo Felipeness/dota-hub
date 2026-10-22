@@ -63,6 +63,10 @@ recebe 403. O comportamento `/api/replay*` só aceita GET/HEAD, usa só `match` 
 1 ano (o resultado de uma partida não muda) e não guarda erro (a Lambda manda `no-store`). A origem recebe tudo
 menos o `Host` (`AllViewerExceptHostHeader`), senão a assinatura não confere. No dev, o Vite repassa `/api/replay`
 para o CloudFront.
+
+Um WAF (`dota-hub-rate`, us-east-1) limita por IP: 20 chamadas a `/api/replay*` em 5 min (429 com
+`{"code":"muitas_analises"}`, que o app mostra) e 2000 requisições no site todo em 5 min (403, contra scraper).
+A página de análise faz uma chamada por partida aberta, longe do limite. Sem grupos de regras gerenciadas.
 Se `s3://dota-hub-968000946695/data/replays/<id>.json` existe, lê de lá (~30 ms); senão pede o `replay_url` ao
 OpenDota, baixa da Valve (só `replayN.valve.net`), lê em streaming sem gravar o `.dem`, grava no S3 e devolve
 (~6 a 10 s, 120 MB de memória). O mesmo arquivo sai pelo CloudFront em
@@ -71,6 +75,7 @@ OpenDota, baixa da Valve (só `replayN.valve.net`), lê em streaming sem gravar 
 Erros em JSON `{code, message}`: 400 `match_invalido`, 404 `replay_indisponivel` (expirou ou o OpenDota não tem o
 salt), 502 `upstream`, 500 `interno`. Logs JSON no CloudWatch (14 dias) com `operation`, `match`, `durationMs`, `bytes`.
 
-Custo: cada partida nova gasta ~10 GB-s (US$ 0,00013) e ~50 KB no S3; dentro do free tier da Lambda fica em US$ 0.
+Custo: o WAF custa ~US$ 7/mês (US$ 5 da web ACL, US$ 1 por regra, US$ 0,60 por milhão de requisições); o
+CloudFront chamando a Lambda não acrescenta nada além das requisições que já existiam. Cada partida nova gasta ~10 GB-s (US$ 0,00013) e ~50 KB no S3; dentro do free tier da Lambda fica em US$ 0.
 A reserva de 2 execuções simultâneas não entra enquanto a conta tiver limite de 10 (a AWS exige 10 livres); até lá
 o teto é o da conta.

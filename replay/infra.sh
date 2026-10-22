@@ -17,6 +17,8 @@ DIST=E2HBYA8DQ0PFFO
 DIST_ARN=arn:aws:cloudfront::$ACCOUNT:distribution/$DIST
 OAC_NAME=$FN-oac
 CACHE_POLICY_NAME=$FN-match
+WAF="--profile pessoal --region us-east-1 --scope CLOUDFRONT" # web ACL de CloudFront só existe em us-east-1
+WEB_ACL=dota-hub-rate
 ALL_VIEWER_EXCEPT_HOST=b689b0a8-53d0-40ab-baf2-68738e2966ac # política gerenciada: sem Host, a assinatura sigv4 vale
 BUILD=$(mktemp -d)
 command -v cygpath >/dev/null && BUILD=$(cygpath -m "$BUILD") # Go e Python do Windows não entendem /tmp
@@ -111,14 +113,40 @@ if [[ "$CACHE_POLICY_ID" == "None" ]]; then
       \"QueryStringsConfig\":{\"QueryStringBehavior\":\"whitelist\",\"QueryStrings\":{\"Quantity\":1,\"Items\":[\"match\"]}}}}")
 fi
 
-echo "== distribuição: origem lambda + comportamento /api/replay*"
+echo "== WAF: limite por IP (20 análises de replay e 2000 requisições em 5 min)"
+visibility() { echo "{\"SampledRequestsEnabled\":true,\"CloudWatchMetricsEnabled\":true,\"MetricName\":\"$1\"}"; }
+# SearchString é blob: o AWS CLI v2 espera base64 ("L2FwaS9yZXBsYXk=" = "/api/replay").
+WAF_RULES=$(cat <<JSON
+[{"Name":"replay-rate","Priority":0,"VisibilityConfig":$(visibility replay-rate),
+  "Action":{"Block":{"CustomResponse":{"ResponseCode":429,"CustomResponseBodyKey":"muitas-analises"}}},
+  "Statement":{"RateBasedStatement":{"Limit":20,"EvaluationWindowSec":300,"AggregateKeyType":"IP",
+    "ScopeDownStatement":{"ByteMatchStatement":{"SearchString":"L2FwaS9yZXBsYXk=","FieldToMatch":{"UriPath":{}},
+      "TextTransformations":[{"Priority":0,"Type":"NONE"}],"PositionalConstraint":"STARTS_WITH"}}}}},
+ {"Name":"site-rate","Priority":1,"VisibilityConfig":$(visibility site-rate),"Action":{"Block":{}},
+  "Statement":{"RateBasedStatement":{"Limit":2000,"EvaluationWindowSec":300,"AggregateKeyType":"IP"}}}]
+JSON
+)
+WAF_BODIES='{"muitas-analises":{"ContentType":"APPLICATION_JSON","Content":"{\"code\":\"muitas_analises\",\"message\":\"muitas análises de replay, tente em alguns minutos\"}"}}'
+WAF_ID=$(aws wafv2 list-web-acls $WAF --query "WebACLs[?Name=='$WEB_ACL'].Id | [0]" --output text)
+if [[ "$WAF_ID" == "None" ]]; then
+  aws wafv2 create-web-acl $WAF --name "$WEB_ACL" --default-action Allow={} --rules "$WAF_RULES" \
+    --custom-response-bodies "$WAF_BODIES" --visibility-config "$(visibility "$WEB_ACL")" >/dev/null
+  WAF_ID=$(aws wafv2 list-web-acls $WAF --query "WebACLs[?Name=='$WEB_ACL'].Id | [0]" --output text)
+else
+  LOCK=$(aws wafv2 get-web-acl $WAF --name "$WEB_ACL" --id "$WAF_ID" --query LockToken --output text)
+  aws wafv2 update-web-acl $WAF --name "$WEB_ACL" --id "$WAF_ID" --lock-token "$LOCK" --default-action Allow={} \
+    --rules "$WAF_RULES" --custom-response-bodies "$WAF_BODIES" --visibility-config "$(visibility "$WEB_ACL")" >/dev/null
+fi
+WAF_ARN=arn:aws:wafv2:us-east-1:$ACCOUNT:global/webacl/$WEB_ACL/$WAF_ID
+
+echo "== distribuição: origem lambda + comportamento /api/replay* + WAF"
 aws cloudfront get-distribution-config --id "$DIST" $P > "$BUILD/dist.json"
 cp "$BUILD/dist.json" "$BACKUP_DIR/dist-$DIST-$(date +%Y%m%d%H%M%S).json"
-# Edita o JSON: troca (ou cria) a origem "replay" e o comportamento /api/replay*, sem mexer no resto.
+# Edita o JSON: troca (ou cria) a origem "replay", o comportamento /api/replay* e o WebACLId, sem mexer no resto.
 # Grava dist-new.json só quando muda, para não gerar deploy à toa.
-python -I - "$BUILD" "$FN_HOST" "$OAC_ID" "$CACHE_POLICY_ID" "$ALL_VIEWER_EXCEPT_HOST" <<'PY'
+python -I - "$BUILD" "$FN_HOST" "$OAC_ID" "$CACHE_POLICY_ID" "$ALL_VIEWER_EXCEPT_HOST" "$WAF_ARN" <<'PY'
 import json, sys
-build, host, oac, cache_policy, request_policy = sys.argv[1:]
+build, host, oac, cache_policy, request_policy, web_acl = sys.argv[1:]
 current = json.load(open(build + "/dist.json"))
 config = current["DistributionConfig"]
 origin = {
@@ -144,6 +172,7 @@ def upsert(section, item, key):
 before = json.dumps(config, sort_keys=True)
 upsert(config["Origins"], origin, "Id")
 upsert(config["CacheBehaviors"], behavior, "PathPattern")
+config["WebACLId"] = web_acl
 if json.dumps(config, sort_keys=True) != before:
     json.dump(config, open(build + "/dist-new.json", "w"))
 PY
