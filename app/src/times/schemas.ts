@@ -1,7 +1,8 @@
 import { z } from "zod";
 
 // Contrato em dota-tier1/work/CONTRATO_HUB.md. Coordenadas de 0 a 1, y para cima, sempre do ponto de vista
-// Radiant: a fase 3 já espelha as partidas de Dire, então o app desenha x e y como chegam.
+// Radiant: a fase 3 já espelha as partidas de Dire, então o app desenha x e y como chegam. Exceção: os mapas por
+// lado (mapaDoLadoSchema, mais abaixo) vêm em coordenadas reais.
 
 export const CAMINHO_INDICE = "/data/times_atlas/indice.json";
 
@@ -72,6 +73,16 @@ export const mapaAtlasSchema = z.object({
   lutas: z.array(lutaSchema).default([]),
   farm: z.object({ pos1: z.array(pontoFarmSchema).default([]), pos2: z.array(pontoFarmSchema).default([]) }).default({ pos1: [], pos2: [] }),
 });
+
+// <id>.radiant.json e <id>.dire.json: o mapa só das partidas daquele lado, em coordenadas REAIS (Dire sem espelhar),
+// como o jogador vê o mapa no jogo. "Ambos" continua sendo o mapa do <id>.json, no ponto de vista Radiant.
+export const LADOS = ["radiant", "dire"] as const;
+export const ladoSchema = z.enum(LADOS);
+export const mapaDoLadoSchema = z.object({
+  lado: ladoSchema, partidas: z.number().int().nonnegative(), convencoes: z.string(), mapa: mapaAtlasSchema,
+});
+export type Lado = z.infer<typeof ladoSchema>;
+export type MapaDoLado = z.infer<typeof mapaDoLadoSchema>;
 
 export const timeAtlasSchema = z.object({
   id: z.string(), nome: z.string(), tag: z.string(),

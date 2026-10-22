@@ -5,24 +5,24 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { ZodType } from "zod";
-import { chavesSchema, indiceAtlasSchema, lanesSchema, timeAtlasSchema } from "../src/times/schemas.ts";
+import { LADOS, chavesSchema, indiceAtlasSchema, lanesSchema, mapaDoLadoSchema, timeAtlasSchema } from "../src/times/schemas.ts";
 
-type Equipe = { id: string; chave: string; classificacao: "tier1" | "fronteira" };
+type Equipe = { id: string; mapa: string; chave: string; classificacao: "tier1" | "fronteira" };
 
-// chave = nome da equipe em sintese/eixos.json; fronteira segundo data/derivados/mapa_por_equipe/indice_base.json.
+// mapa = id em data/derivados/mapa_por_equipe (<mapa>.lados.json); chave = nome da equipe em sintese/eixos.json; fronteira segundo data/derivados/mapa_por_equipe/indice_base.json.
 const EQUIPES: readonly Equipe[] = [
-  { id: "team-spirit", chave: "Spirit", classificacao: "tier1" },
-  { id: "yandex", chave: "Yandex", classificacao: "tier1" },
-  { id: "parivision", chave: "PARIVISION", classificacao: "tier1" },
-  { id: "betboom", chave: "BetBoom", classificacao: "tier1" },
-  { id: "aurora", chave: "Aurora", classificacao: "tier1" },
-  { id: "falcons", chave: "Falcons", classificacao: "tier1" },
-  { id: "liquid", chave: "Liquid", classificacao: "tier1" },
-  { id: "1win", chave: "1win", classificacao: "tier1" },
-  { id: "lgd", chave: "LGD", classificacao: "fronteira" },
-  { id: "nigma", chave: "Nigma", classificacao: "tier1" },
-  { id: "navi", chave: "NAVI", classificacao: "tier1" },
-  { id: "xtreme", chave: "Xtreme", classificacao: "fronteira" },
+  { id: "team-spirit", mapa: "team-spirit", chave: "Spirit", classificacao: "tier1" },
+  { id: "yandex", mapa: "team-yandex", chave: "Yandex", classificacao: "tier1" },
+  { id: "parivision", mapa: "parivision", chave: "PARIVISION", classificacao: "tier1" },
+  { id: "betboom", mapa: "betboom-team", chave: "BetBoom", classificacao: "tier1" },
+  { id: "aurora", mapa: "aurora-gaming", chave: "Aurora", classificacao: "tier1" },
+  { id: "falcons", mapa: "team-falcons", chave: "Falcons", classificacao: "tier1" },
+  { id: "liquid", mapa: "team-liquid", chave: "Liquid", classificacao: "tier1" },
+  { id: "1win", mapa: "1win", chave: "1win", classificacao: "tier1" },
+  { id: "lgd", mapa: "lgd-gaming", chave: "LGD", classificacao: "fronteira" },
+  { id: "nigma", mapa: "nigma-galaxy", chave: "Nigma", classificacao: "tier1" },
+  { id: "navi", mapa: "natus-vincere", chave: "NAVI", classificacao: "tier1" },
+  { id: "xtreme", mapa: "xtreme-gaming", chave: "Xtreme", classificacao: "fronteira" },
 ];
 
 type Sintese = {
@@ -112,6 +112,26 @@ function publicarExtras(id: string) {
   }
 }
 
+// Mapa por lado (coordenadas reais, Dire sem espelhar), um arquivo por lado para a tela baixar só o escolhido.
+function publicarLados(equipe: Equipe) {
+  const caminho = join(origem, "../data/derivados/mapa_por_equipe", `${equipe.mapa}.lados.json`);
+  if (!existsSync(caminho)) {
+    registro.push(`${equipe.id}: sem ${equipe.mapa}.lados.json, a tela mostra só o mapa Ambos`);
+    return;
+  }
+  const lados = lerJson<Json>(caminho);
+  for (const lado of LADOS) {
+    const bloco = lados[lado];
+    const arquivo = { lado, convencoes: lados.convencoes, ...(ehObjeto(bloco) ? bloco : {}) };
+    const analise = mapaDoLadoSchema.safeParse(arquivo);
+    if (!analise.success) {
+      const problemas = analise.error.issues.slice(0, 5).map((i) => `${i.path.map(String).join(".")}: ${i.message}`).join("; ");
+      throw new Error(`${equipe.id}/${lado}: ${problemas}`);
+    }
+    writeFileSync(join(destino, `${equipe.id}.${lado}.json`), JSON.stringify(arquivo));
+  }
+}
+
 function publicarTime(equipe: Equipe) {
   const bruto = lerJson<Json>(join(origem, "equipes", equipe.id, "hub.json"));
   const time = corrigirFormato(equipe.id, bruto, equipe);
@@ -123,6 +143,7 @@ function publicarTime(equipe: Equipe) {
   if (analise.data.id !== equipe.id) throw new Error(`${equipe.id}: o arquivo diz id ${analise.data.id}`);
   writeFileSync(join(destino, `${equipe.id}.json`), JSON.stringify(time));
   publicarExtras(equipe.id);
+  publicarLados(equipe);
   return analise.data;
 }
 
@@ -172,13 +193,18 @@ function montarIndice(times: ReturnType<typeof publicarTime>[]) {
   return analise.data;
 }
 
+const partidasPorLado = (id: string) => LADOS.map((lado) => {
+  const caminho = join(destino, `${id}.${lado}.json`);
+  return existsSync(caminho) ? `, ${lado} n=${lerJson<{ partidas: number }>(caminho).partidas}` : "";
+}).join("");
+
 mkdirSync(destino, { recursive: true });
 const times = EQUIPES.map(publicarTime);
 const indice = montarIndice(times);
 const linhas = [
   `Atlas publicado em ${destino} a partir de ${origem}`,
   `${indice.times.length} equipes, ${indice.eixos.length} eixos, ${indice.clusters.length} clusters`,
-  ...indice.times.map((t) => `  ${t.id} (${t.tag}): ${t.estilo}${t.classificacao === "fronteira" ? ", fronteira" : ""}, amostra ${t.amostra}, OpenDota ${t.team_ids.join("/") || "sem id"}`),
+  ...indice.times.map((t) => `  ${t.id} (${t.tag}): ${t.estilo}${partidasPorLado(t.id)}${t.classificacao === "fronteira" ? ", fronteira" : ""}, amostra ${t.amostra}, OpenDota ${t.team_ids.join("/") || "sem id"}`),
   registro.length ? "Registro (correções de formato e arquivos que faltam):" : "Nenhuma correção de formato.",
   ...registro.map((r) => `  ${r}`),
 ];

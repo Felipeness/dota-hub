@@ -1,7 +1,7 @@
 import { useState, type ReactNode } from "react";
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { Link, useParams } from "react-router";
+import { Link, useParams, useSearchParams } from "react-router";
 import { Indisponivel, useData, type EstadoDados } from "../data/useData";
 import { TextoComTermos } from "../glossary/Termo";
 import { MapView } from "../map/MapView";
@@ -12,6 +12,7 @@ import {
 import { CartaoContra } from "./CartaoContra";
 import { ComoVencer } from "./ComoVencer";
 import { LanesPerdidas } from "./LanesPerdidas";
+import { MAPA_VAZIO, SeletorDeLado, escolhaDoLado, notaDoLado, useMapaDoLado, type EscolhaDeLado } from "./LadoDoMapa";
 import { LeituraDoMapa } from "./LeituraDoMapa";
 import { chavesSchema, lanesSchema, timeAtlasSchema, type Chaves, type Confianca, type Secao, type TimeAtlas } from "./schemas";
 import { ordenarSecoes } from "./secoes";
@@ -78,9 +79,23 @@ function AtlasDoTime({ time }: { time: TimeAtlas }) {
   const [intencao, setIntencao] = useState(TODAS_AS_INTENCOES);
   const [aberto, setAberto] = useState<string | null>(null);
   const [vista, setVista] = useState<Vista>("2.5d");
+  const [parametros, setParametros] = useSearchParams();
+  const lado = escolhaDoLado(parametros.get("lado"));
+  const mapaDoLado = useMapaDoLado(time.id, lado);
+  const mapa = mapaDoLado === null ? time.mapa : mapaDoLado.estado === "ok" ? mapaDoLado.dados.mapa : MAPA_VAZIO;
+  // Os ids dos marcadores são posições no arquivo: ao trocar de lado, o marcador aberto deixa de existir.
+  const escolherLado = (novo: EscolhaDeLado) => {
+    setAberto(null);
+    setParametros((atual) => {
+      const proximo = new URLSearchParams(atual);
+      if (novo === "ambos") proximo.delete("lado");
+      else proximo.set("lado", novo);
+      return proximo;
+    }, { replace: true });
+  };
   const filtro: Filtro = { camadas, janela, intencao, maximoDeSetas: todasAsSetas ? null : SETAS_POR_PADRAO };
-  const totalDeSmokes = smokesDaJanela(time.mapa, janela).length;
-  const itens = itensDoMapa(time.mapa, filtro);
+  const totalDeSmokes = smokesDaJanela(mapa, janela).length;
+  const itens = itensDoMapa(mapa, filtro);
   const item = itens.find((i) => i.id === aberto) ?? null;
   const alternar = (camada: Camada) => setCamadas((atual) => {
     const proximo = new Set(atual);
@@ -101,6 +116,7 @@ function AtlasDoTime({ time }: { time: TimeAtlas }) {
       {chaves.estado === "ok" && <CartaoContra chaves={chaves.dados} nome={time.nome} />}
       <div className="atlas-corpo">
         <div className="atlas-mapa-coluna">
+          <SeletorDeLado lado={lado} nota={notaDoLado(lado, mapaDoLado, amostra.replays)} onEscolher={escolherLado} />
           <div className="atlas-controles" role="group" aria-label="Camadas do mapa do time">
             <div className="pilulas">
               {CAMADAS.map((c) => (
@@ -123,13 +139,13 @@ function AtlasDoTime({ time }: { time: TimeAtlas }) {
                 Intenção dos wards
                 <select value={intencao} onChange={(e) => setIntencao(e.target.value)}>
                   <option value={TODAS_AS_INTENCOES}>Todas</option>
-                  {intencoesDosWards(time.mapa).map((i) => <option key={i} value={i}>{i}</option>)}
+                  {intencoesDosWards(mapa).map((i) => <option key={i} value={i}>{i}</option>)}
                 </select>
               </label>
             )}
           </div>
           <div className="atlas-mapa">
-            <MapView objetivos={[]} desenhos={desenhosDoMapa(time.mapa, filtro, aberto)} selecionado={aberto}
+            <MapView objetivos={[]} desenhos={desenhosDoMapa(mapa, filtro, aberto)} selecionado={aberto}
               onSelecionar={(novo) => setAberto((atual) => (atual === novo ? null : novo))} forcarPlano={vista === "plano"}>
               <div className="alternador atlas-vista" role="group" aria-label="Vista">
                 <button aria-pressed={vista === "2.5d"} onClick={() => setVista("2.5d")}>2.5D</button>
@@ -140,7 +156,7 @@ function AtlasDoTime({ time }: { time: TimeAtlas }) {
               ? <PainelDoItem item={item} onFechar={() => setAberto(null)} />
               : <p className="atlas-dica">{itens.length} marcadores nesta janela. Clique num deles para ler o padrão.</p>}
           </div>
-          <LeituraDoMapa mapa={time.mapa} camadas={camadas} janela={janela} />
+          <LeituraDoMapa mapa={mapa} camadas={camadas} janela={janela} />
         </div>
         <div className="atlas-texto">
           <h2 id="detalhes" className="atlas-detalhes-titulo">Detalhes</h2>
@@ -177,7 +193,7 @@ function PainelDoItem({ item, onFechar }: { item: ItemDoMapa; onFechar: () => vo
         {item.numeros.map(([rotulo, valor]) => <div key={rotulo}><dt><TextoComTermos texto={rotulo} /></dt><dd>{valor}</dd></div>)}
       </dl>
       {item.preparo && <LinhaDoPreparo preparo={item.preparo} />}
-      <p><TextoComTermos texto={item.texto} /></p>
+      {item.texto && <p><TextoComTermos texto={item.texto} /></p>}
     </aside>
   );
 }
