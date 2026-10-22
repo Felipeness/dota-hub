@@ -12,6 +12,7 @@
 [![Go](https://img.shields.io/badge/Go-1.26-00add8?logo=go&logoColor=white)](replay/go.mod)
 [![Python](https://img.shields.io/badge/Python-3.13-3776ab?logo=python&logoColor=white)](export/pyproject.toml)
 [![Tests](https://img.shields.io/badge/Tests-1239-brightgreen?style=flat-square)](#a-prova-em-números)
+[![Licença](https://img.shields.io/badge/Licen%C3%A7a-todos%20os%20direitos%20reservados-lightgrey?style=flat-square)](LICENSE)
 
 **127 confrontos 1x1** &bull; **22 guias + 105 fichas por posição** &bull; **12 times no Atlas** &bull; **19 regras de pós-jogo** &bull; **1.239 testes**
 
@@ -239,7 +240,7 @@ O leitor em Go (`replay/trajetos`) usa o [manta](https://github.com/dotabuff/man
 - 47 observers e 72 sentries iguais ao `obs_placed` e `sen_placed`;
 - last hits com diferença máxima de 5 em 51 minutos.
 
-Uma partida de 50 minutos dá ~185 KB de JSON e ~49 KB em gzip. O serviço é uma AWS Lambda atrás do CloudFront (`/api/replay`): só aceita ID com dígitos, só baixa de `replayN.valve.net`, guarda o resultado no S3 e o CloudFront guarda o 200 por um ano. A primeira geração leva de 6 a 10 s; as seguintes, ~30 ms.
+Uma partida de 50 minutos dá ~185 KB de JSON e ~49 KB em gzip. O serviço é uma AWS Lambda atrás do CloudFront (`/api/replay`): só aceita ID com dígitos, só baixa de `replayN.valve.net`, guarda o resultado no S3 e o CloudFront guarda o 200 por um ano. A primeira geração leva de 6 a 10 s; as seguintes, ~30 ms. A função não aceita chamada direta (só o CloudFront assina com IAM) e um WAF limita a 20 replays por IP a cada 5 minutos, devolvendo 429 acima disso.
 
 </details>
 
@@ -480,6 +481,6 @@ O corpo é sempre `{ "code": "...", "message": "..." }`. Erros não ficam em cac
 
 ## Licença
 
-Ainda não há licença definida neste repositório. Até lá, todos os direitos são reservados ao autor.
+Todos os direitos reservados. O código e os dados estão aqui para leitura: copiar, modificar, distribuir ou usar, no todo ou em parte, depende de autorização por escrito do autor. Veja [LICENSE](LICENSE).
 
 Dota 2 é marca da Valve Corporation. Os modelos, ícones e textos extraídos do jogo pertencem à Valve. Os dados de partida vêm da API pública do [OpenDota](https://www.opendota.com) e os replays são lidos com o [manta](https://github.com/dotabuff/manta), do Dotabuff.

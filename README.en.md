@@ -12,6 +12,7 @@
 [![Go](https://img.shields.io/badge/Go-1.26-00add8?logo=go&logoColor=white)](replay/go.mod)
 [![Python](https://img.shields.io/badge/Python-3.13-3776ab?logo=python&logoColor=white)](export/pyproject.toml)
 [![Tests](https://img.shields.io/badge/Tests-1239-brightgreen?style=flat-square)](#proof-in-numbers)
+[![License](https://img.shields.io/badge/License-all%20rights%20reserved-lightgrey?style=flat-square)](LICENSE)
 
 **127 1v1 matchups** &bull; **22 guides + 105 per-position sheets** &bull; **12 teams in the Atlas** &bull; **19 post-game rules** &bull; **1,239 tests**
 
@@ -239,7 +240,7 @@ The Go reader (`replay/trajetos`) uses [manta](https://github.com/dotabuff/manta
 - 47 observers and 72 sentries equal to `obs_placed` and `sen_placed`;
 - last hits off by at most 5 over 51 minutes.
 
-A 50-minute game yields ~185 KB of JSON and ~49 KB gzipped. The service is an AWS Lambda behind CloudFront (`/api/replay`): it only accepts digit-only ids, only downloads from `replayN.valve.net`, stores the result in S3, and CloudFront caches the 200 for a year. The first generation takes 6 to 10 s; later ones ~30 ms.
+A 50-minute game yields ~185 KB of JSON and ~49 KB gzipped. The service is an AWS Lambda behind CloudFront (`/api/replay`): it only accepts digit-only ids, only downloads from `replayN.valve.net`, stores the result in S3, and CloudFront caches the 200 for a year. The first generation takes 6 to 10 s; later ones ~30 ms. The function rejects direct calls (only CloudFront signs with IAM), and a WAF caps replays at 20 per IP every 5 minutes, returning 429 above that.
 
 </details>
 
@@ -480,6 +481,6 @@ The body is always `{ "code": "...", "message": "..." }`. Errors are not cached 
 
 ## License
 
-This repository has no license yet. Until one is chosen, all rights are reserved by the author.
+All rights reserved. The code and data are here to read: copying, modifying, distributing or using them, in whole or in part, requires written permission from the author. See [LICENSE](LICENSE).
 
 Dota 2 is a trademark of Valve Corporation. The models, icons and texts extracted from the game belong to Valve. Match data comes from the public [OpenDota](https://www.opendota.com) API, and replays are read with Dotabuff's [manta](https://github.com/dotabuff/manta).
