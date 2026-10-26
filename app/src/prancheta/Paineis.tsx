@@ -100,7 +100,7 @@ export function PainelDeOpcoes(p: PropsDasOpcoes) {
       <fieldset className="pr-grupo">
         <legend>Limpar o passo</legend>
         <div className="pr-linha-de-botoes">
-          {LIMPEZAS.map((l) => <button key={l.alvo} type="button" onClick={() => p.onLimpar(l.alvo)}>{l.nome}</button>)}
+          {LIMPEZAS.map((l) => <button key={l.alvo} type="button" aria-label={`Limpar ${l.nome.toLowerCase()} do passo`} onClick={() => p.onLimpar(l.alvo)}>{l.nome}</button>)}
         </div>
       </fieldset>
       <fieldset className="pr-grupo">

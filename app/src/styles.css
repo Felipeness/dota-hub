@@ -133,7 +133,7 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
   color: var(--cor-nav); font-size: 14px; text-decoration: none;
 }
 .abas a.active { background: var(--cor-superficie-3); color: var(--cor-texto); font-weight: 600; }
-.busca { position: relative; margin-left: auto; flex: 0 1 380px; min-width: 240px; }
+.busca { position: relative; margin-left: auto; flex: 1 1 240px; max-width: 380px; min-width: 240px; }
 .busca-campo {
   display: flex; align-items: center; gap: 10px;
   background: var(--cor-superficie-2); border: 1px solid var(--cor-linha-forte); border-radius: 10px;

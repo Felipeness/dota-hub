@@ -15,7 +15,7 @@ it("topo mostra o selo do patch e as abas de navegação", async () => {
   render(<MemoryRouter><Shell /></MemoryRouter>);
   expect(await screen.findByLabelText("Patch 7.41")).toBeInTheDocument();
   const nav = screen.getByRole("navigation", { name: "Principal" });
-  for (const aba of ["Mapa", "Rotas", "Heróis", "Jogadores", "Glossário"]) expect(nav).toContainElement(screen.getByRole("link", { name: aba }));
+  for (const aba of ["Mapa", "Rotas", "Heróis", "Jogadores", "Prancheta", "Glossário"]) expect(nav).toContainElement(screen.getByRole("link", { name: aba }));
 });
 
 it("a tecla / leva o foco para a busca", () => {

@@ -1,3 +1,4 @@
+import { MemoryRouter } from "react-router";
 import { readFileSync } from "node:fs";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { contextoDaAmostraCompleta, detalheDaAmostraCompleta } from "../amostras/amostraCompleta";
@@ -17,7 +18,7 @@ afterEach(() => vi.unstubAllGlobals());
 function renderizar() {
   const detalhe = detalheDaAmostraCompleta();
   const achados = avaliarRegras(contextoDaAmostraCompleta(), [...MOMENTOS, ...OBJETIVOS_E_AEGIS]);
-  return render(<LancesDecisivos detalhe={detalhe} escolha={escolherLances(detalhe, achados)} />);
+  return render(<MemoryRouter><LancesDecisivos detalhe={detalhe} escolha={escolherLances(detalhe, achados)} /></MemoryRouter>);
 }
 
 const slider = () => screen.getByRole("slider", { name: "Tempo da partida" });

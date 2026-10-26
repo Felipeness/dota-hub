@@ -29,7 +29,10 @@ type Aviso = Readonly<{ texto: string; link?: string }>;
 type EstadoDoLance = Readonly<{ estado: "parado" | "carregando" | "ok" | "erro"; texto: string }>;
 type AbaDoCelular = "opcoes" | "herois" | "mapa";
 
-const ehCampo = (alvo: EventTarget | null) => alvo instanceof HTMLInputElement || alvo instanceof HTMLTextAreaElement || alvo instanceof HTMLSelectElement;
+const TIPOS_SEM_TEXTO = new Set(["checkbox", "radio", "range", "button", "file"]);
+/** Campo onde a tecla vira texto; caixa de marcar e faixa não seguram os atalhos. */
+const ehCampoDeTexto = (alvo: EventTarget | null) =>
+  alvo instanceof HTMLTextAreaElement || alvo instanceof HTMLSelectElement || (alvo instanceof HTMLInputElement && !TIPOS_SEM_TEXTO.has(alvo.type));
 
 /** Reproduzir: passo a passo, com os ícones andando entre passos; com prefers-reduced-motion, só troca de passo. */
 function useReproducao(total: number, despachar: (a: Acao) => void) {
@@ -155,7 +158,7 @@ export function PranchetaPage() {
       "+": () => zoom(1.5), "=": () => zoom(1.5), "-": () => zoom(1 / 1.5), f: telaCheia,
     };
     const aoTeclar = (e: KeyboardEvent) => {
-      if (ehCampo(e.target) || e.altKey) return;
+      if (ehCampoDeTexto(e.target) || e.altKey) return;
       const tecla = e.key.length === 1 ? e.key.toLowerCase() : e.key;
       if (e.ctrlKey || e.metaKey) {
         const historico = tecla === "z" ? (e.shiftKey ? "refazer" : "desfazer") : tecla === "y" ? "refazer" : null;
