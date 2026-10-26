@@ -266,7 +266,7 @@ export function Tabuleiro(props: Props) {
 
 const COR_DA_SELECAO = "#ffd27a";
 
-/** Caixa tracejada em volta do traço selecionado e as alças para mover ou redimensionar; não vai para o PNG. */
+/** Caixa tracejada em volta do traço selecionado e as alças para mover ou redimensionar; não vai para a imagem exportada. */
 function SelecaoDoTraco({ traco, tamanho }: { traco: Traco; tamanho: number }) {
   const caixa = caixaDoTraco(traco);
   const folga = (traco.tipo === "texto" ? 5 : ESPESSURAS[traco.espessura] / 2) + tamanho;

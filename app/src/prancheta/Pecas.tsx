@@ -1,4 +1,4 @@
-// Desenho em SVG de tudo que vai no quadro. Cor, traço e fonte vão em atributos (não em classes CSS) porque o PNG
+// Desenho em SVG de tudo que vai no quadro. Cor, traço e fonte vão em atributos (não em classes CSS) porque a imagem exportada
 // é gerado serializando este mesmo SVG, e uma imagem SVG não enxerga a folha de estilo da página.
 import type { ReactNode } from "react";
 import type { Objetivo } from "../data/schemas";

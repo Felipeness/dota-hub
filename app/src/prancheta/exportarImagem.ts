@@ -1,7 +1,9 @@
-// "Baixar PNG": serializa o mesmo SVG do quadro com o mapa inteiro no enquadramento, troca cada imagem por data URL
+// "Baixar imagem": serializa o mesmo SVG do quadro com o mapa inteiro no enquadramento, troca cada imagem por data URL
 // (uma imagem SVG não carrega arquivos externos) e desenha num canvas. Tudo é do mesmo domínio, então o canvas não
 // fica "sujo" e o toBlob funciona.
-const LADO_DO_PNG = 2048;
+const LADO_DA_IMAGEM = 2048;
+/** O mapa é textura de foto: JPEG 0,88 dá ~1 MB contra ~9,5 MB do PNG no mesmo tamanho (cabe no WhatsApp). */
+const QUALIDADE_DO_JPEG = 0.88;
 
 async function comoDataUrl(url: string, cache: Map<string, Promise<string>>): Promise<string> {
   const pronto = cache.get(url);
@@ -23,10 +25,10 @@ async function comoDataUrl(url: string, cache: Map<string, Promise<string>>): Pr
 
 async function svgPronto(original: SVGSVGElement): Promise<string> {
   const copia = original.cloneNode(true);
-  if (!(copia instanceof SVGSVGElement)) throw new Error("png: o quadro não é um SVG");
+  if (!(copia instanceof SVGSVGElement)) throw new Error("imagem: o quadro não é um SVG");
   copia.setAttribute("viewBox", "0 0 1000 1000");
-  copia.setAttribute("width", String(LADO_DO_PNG));
-  copia.setAttribute("height", String(LADO_DO_PNG));
+  copia.setAttribute("width", String(LADO_DA_IMAGEM));
+  copia.setAttribute("height", String(LADO_DA_IMAGEM));
   copia.removeAttribute("style");
   copia.querySelectorAll("[data-exportar='nao']").forEach((n) => n.remove());
   const cache = new Map<string, Promise<string>>();
@@ -41,7 +43,7 @@ function carregarImagem(url: string): Promise<HTMLImageElement> {
   return new Promise((resolver, falhar) => {
     const imagem = new Image();
     imagem.onload = () => resolver(imagem);
-    imagem.onerror = () => falhar(new Error("png: o navegador não desenhou o SVG"));
+    imagem.onerror = () => falhar(new Error("imagem: o navegador não desenhou o SVG"));
     imagem.src = url;
   });
 }
@@ -55,19 +57,20 @@ export function baixarArquivo(blob: Blob, nome: string) {
   setTimeout(() => URL.revokeObjectURL(url), 1_000);
 }
 
-export async function baixarPng(svg: SVGSVGElement, nome: string): Promise<void> {
+export async function baixarImagem(svg: SVGSVGElement, nome: string): Promise<void> {
   const url = URL.createObjectURL(new Blob([await svgPronto(svg)], { type: "image/svg+xml" }));
   try {
     const imagem = await carregarImagem(url);
     const canvas = document.createElement("canvas");
-    canvas.width = LADO_DO_PNG;
-    canvas.height = LADO_DO_PNG;
+    canvas.width = LADO_DA_IMAGEM;
+    canvas.height = LADO_DA_IMAGEM;
     const contexto = canvas.getContext("2d");
-    if (!contexto) throw new Error("png: canvas 2d indisponível");
-    contexto.drawImage(imagem, 0, 0, LADO_DO_PNG, LADO_DO_PNG);
-    const png = await new Promise<Blob | null>((resolver) => canvas.toBlob(resolver, "image/png"));
-    if (!png) throw new Error("png: o canvas não gerou a imagem");
-    baixarArquivo(png, nome);
+    if (!contexto) throw new Error("imagem: canvas 2d indisponível");
+    contexto.drawImage(imagem, 0, 0, LADO_DA_IMAGEM, LADO_DA_IMAGEM);
+    // O JPEG não tem transparência: o mapa cobre o quadro inteiro, então nada se perde.
+    const jpeg = await new Promise<Blob | null>((resolver) => canvas.toBlob(resolver, "image/jpeg", QUALIDADE_DO_JPEG));
+    if (!jpeg) throw new Error("imagem: o canvas não gerou o arquivo");
+    baixarArquivo(jpeg, nome);
   } finally {
     URL.revokeObjectURL(url);
   }

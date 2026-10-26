@@ -7,7 +7,7 @@ import { heroisCatalogoSchema, objetivosSchema } from "../data/schemas";
 import { dadosOuVazio, useData } from "../data/useData";
 import { pedirTrajetos } from "../replay/trajetos";
 import { prefereMenosMovimento } from "../analise/componentes/movimento";
-import { baixarArquivo, baixarPng } from "./exportarPng";
+import { baixarArquivo, baixarImagem } from "./exportarImagem";
 import { CAMERA_INTEIRA, centroDaCamera, interpolarPassos, interpolarTracos, suavizar, zoomNoPonto, type Camera } from "./geometria";
 import { iconesDoLance, lerTempo, tempoDoLance } from "./lance";
 import { codificar, codigoDoHash, comSalvo, decodificar, gravarSalvos, hashDoQuadro, lerJson, lerSalvos, TAMANHO_MAXIMO_DO_LINK, type Salvo } from "./link";
@@ -200,7 +200,7 @@ export function PranchetaPage() {
 
   const baixar = () => {
     if (!svg.current) return;
-    baixarPng(svg.current, `prancheta-passo-${atual + 1}.png`).catch((erro: unknown) => setAviso({ texto: `Não deu para gerar o PNG: ${String(erro)}` }));
+    baixarImagem(svg.current, `prancheta-passo-${atual + 1}.jpg`).catch((erro: unknown) => setAviso({ texto: `Não deu para gerar a imagem: ${String(erro)}` }));
   };
 
   const exibido = reproducao.quadro;
@@ -282,7 +282,7 @@ function BarraDePassos(p: PropsDaBarra) {
           {p.tocando ? "Parar" : "Reproduzir"}
         </button>
         <button type="button" onClick={p.onCompartilhar}>Compartilhar link</button>
-        <button type="button" onClick={p.onBaixar}>Baixar PNG</button>
+        <button type="button" onClick={p.onBaixar} title="JPEG 2048×2048, cerca de 1 MB">Baixar imagem</button>
         <Salvos quadro={p.quadro} onAbrir={p.onAbrir} onAviso={p.onAviso} />
       </div>
     </div>
