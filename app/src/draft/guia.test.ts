@@ -54,6 +54,18 @@ describe("extrairMencoes", () => {
     expect(extrairMencoes(guia, NOMES).map((m) => m.alvo)).toEqual([15]);
   });
 
+  it("conta uma opinião por herói citado, a que tem número, mesmo citado em três itens", () => {
+    // Como o guia do Terrorblade cita Phoenix: na lista de counters negada, nos "2 ou mais counters" e no dano em área.
+    const guia: GuiaDraft = {
+      ...JUGGERNAUT,
+      bom: ["O time inimigo tem poucos dos counters: Razor (-4,5)."],
+      evitar: ["O inimigo tem 2 ou mais dos counters (Razor (-4,5)).", "O inimigo tem dano em área: Razor, Slark."],
+    };
+    expect(extrairMencoes(guia, NOMES).filter((m) => m.alvo === 15)).toEqual([
+      { dono: 8, alvo: 15, lista: "evitar", lado: "inimigo", pp: -4.5, texto: "O inimigo tem 2 ou mais dos counters (Razor (-4,5))." },
+    ]);
+  });
+
   it("ignora frase sem lado claro", () => {
     const guia = { ...JUGGERNAUT, bom: ["Há um carry livre que você domina mais (Sven)."], evitar: [] };
     expect(extrairMencoes(guia, NOMES)).toEqual([]);

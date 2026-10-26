@@ -33,7 +33,8 @@ export type Contexto = Readonly<{
 }>;
 
 export type TipoDeMotivo = "matchup" | "guia" | "funcao" | "patch";
-export type Motivo = Readonly<{ tipo: TipoDeMotivo; pp: number; curto: string; detalhe: string }>;
+/** chave: identifica o motivo dentro da sugestão (tipo + heróis envolvidos), estável entre renderizações. */
+export type Motivo = Readonly<{ chave: string; tipo: TipoDeMotivo; pp: number; curto: string; detalhe: string }>;
 export type Sugestao = Readonly<{ heroi: HeroiDraft; nota: number; motivos: readonly Motivo[]; maisPerigoso: HeroId | null }>;
 
 /** "pick": o herói é para o seu time. "ban": o herói é o que o inimigo pegaria contra você. */
@@ -77,6 +78,7 @@ function motivoDeMatchup(contexto: Contexto, candidato: HeroId, rival: HeroId, p
   const rivalNome = nomeDe(contexto, rival);
   const alvo = perspectiva === "pick" ? rivalNome : `seu ${rivalNome}`;
   return {
+    chave: `matchup:${rival}`,
     tipo: "matchup",
     pp,
     curto: `Vence ${pct(taxa)} contra ${alvo}`,
@@ -124,7 +126,7 @@ function motivosDoGuia(contexto: Contexto, candidato: HeroId, draft: Draft, pers
     const magnitude = m.pp === null ? PP_DO_GUIA_SEM_NUMERO : Math.abs(m.pp);
     const pp = relacao.favorece ? magnitude : -magnitude;
     const numero = m.pp === null ? "" : ` (${formatarPp(m.pp)})`;
-    return [{ tipo: "guia", pp, curto: `${relacao.frase}${numero}`, detalhe: `Guia do ${nome(m.dono)}: ${m.texto}` }];
+    return [{ chave: `guia:${m.dono}:${m.alvo}:${m.lado}:${m.lista}`, tipo: "guia", pp, curto: `${relacao.frase}${numero}`, detalhe: `Guia do ${nome(m.dono)}: ${m.texto}` }];
   });
 }
 
@@ -143,6 +145,7 @@ function motivosDeFuncao(contexto: Contexto, candidato: HeroiDraft, time: readon
   const faltando = Object.entries(FUNCOES_QUE_O_TIME_QUER)
     .filter(([funcao, minimo]) => candidato.funcoes.includes(funcao) && quantos(funcao) < minimo)
     .map(([funcao]): Motivo => ({
+      chave: `funcao:${funcao}`,
       tipo: "funcao",
       pp: PP_DA_FUNCAO,
       curto: `${dono} ainda precisa de ${NOME_DA_FUNCAO[funcao] ?? funcao}`,
@@ -151,6 +154,7 @@ function motivosDeFuncao(contexto: Contexto, candidato: HeroiDraft, time: readon
   const carryDemais = candidato.funcoes.includes("Carry") && !candidato.funcoes.includes("Support") && quantos("Carry") >= MAXIMO_DE_CARRIES;
   if (!carryDemais) return faltando;
   return [...faltando, {
+    chave: "funcao:carries-demais",
     tipo: "funcao",
     pp: -PP_DA_FUNCAO,
     curto: `${dono} já tem ${quantos("Carry")} carries`,
@@ -163,6 +167,7 @@ function motivoDePatch(heroi: HeroiDraft): Motivo | null {
   if (jogos < MINIMO_DE_JOGOS_NO_PATCH) return null;
   const taxa = vitorias / jogos;
   return {
+    chave: "patch",
     tipo: "patch",
     pp: (taxa - 0.5) * 100,
     curto: `${pct(taxa)} de vitória no Divine`,

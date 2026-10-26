@@ -46,7 +46,7 @@ function Cartao({ sugestao, posicao, acao, onAcao, guia, pagina, inimigoPerigoso
       </div>
       {motivos.length === 0
         ? <p className="draft-nota">Sem motivo com dado: só aparece porque não tem nada contra.</p>
-        : <ul className="draft-motivos">{motivos.slice(0, MOTIVOS_VISIVEIS).map((m) => <LinhaDeMotivo key={m.curto} motivo={m} comDetalhe={false} />)}</ul>}
+        : <ul className="draft-motivos">{motivos.slice(0, MOTIVOS_VISIVEIS).map((m) => <LinhaDeMotivo key={m.chave} motivo={m} comDetalhe={false} />)}</ul>}
       {inimigoPerigoso && (
         <Link to={`/confronto/${heroi.npc}/${inimigoPerigoso.npc}`} className="draft-nota">
           Como jogar {heroi.nome} contra {inimigoPerigoso.nome}
@@ -55,7 +55,7 @@ function Cartao({ sugestao, posicao, acao, onAcao, guia, pagina, inimigoPerigoso
       {(motivos.length > 0 || guia || pagina) && (
         <details className="draft-porque">
           <summary>Por quê, em detalhe</summary>
-          <ul className="draft-motivos">{motivos.map((m) => <LinhaDeMotivo key={m.curto} motivo={m} comDetalhe />)}</ul>
+          <ul className="draft-motivos">{motivos.map((m) => <LinhaDeMotivo key={m.chave} motivo={m} comDetalhe />)}</ul>
           {guia && <p className="draft-momento"><strong><TextoComTermos texto="Momento do draft, pelo guia:" /></strong> <TextoComTermos texto={guia.momento} /></p>}
           {pagina && <Link to={`/herois/${pagina}`}>{guia ? "Guia completo" : "Ficha"} do {heroi.nome}</Link>}
         </details>

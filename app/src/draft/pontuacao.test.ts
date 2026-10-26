@@ -1,4 +1,4 @@
-import type { Mencao } from "./guia";
+import { extrairMencoes, type GuiaDraft, type Mencao } from "./guia";
 import { avaliar, placarContra, sugerir, type Contexto, type HeroiDraft } from "./pontuacao";
 
 const heroi = (id: number, nome: string, funcoes: string[], divine = { jogos: 10_000, vitorias: 5_000 }): HeroiDraft =>
@@ -50,6 +50,23 @@ describe("avaliar", () => {
     const mencao: Mencao = { dono: JUGG.id, alvo: OMNI.id, lista: "evitar", lado: "inimigo", pp: -4.4, texto: "O inimigo tem Omniknight (-4,4 pp)." };
     const motivo = avaliar(contexto([mencao]), OMNI, draft, "ban").motivos.find((m) => m.tipo === "guia");
     expect(motivo).toMatchObject({ pp: 4.4, curto: "Guia do Juggernaut: sofre contra Omniknight (−4,4 pp)" });
+  });
+
+  it("soma o guia do inimigo uma vez quando ele cita o candidato em vários itens", () => {
+    const guiaDoAxe: GuiaDraft = {
+      heroId: AXE.id, momento: "", itensSituacionais: [],
+      bom: [],
+      evitar: ["O inimigo tem counters: Omniknight (-4,5).", "O inimigo tem cura em área: Omniknight, Lion."],
+    };
+    const mencoes = extrairMencoes(guiaDoAxe, [AXE, LION, OMNI]);
+    const doGuia = avaliar(contexto(mencoes), OMNI, draft, "pick").motivos.filter((m) => m.tipo === "guia");
+    expect(doGuia).toMatchObject([{ pp: 4.5, curto: "Guia do Axe: sofre contra Omniknight (−4,5 pp)" }]);
+  });
+
+  it("dá chave única a cada motivo do cartão", () => {
+    const mencao: Mencao = { dono: AXE.id, alvo: LION.id, lista: "evitar", lado: "inimigo", pp: null, texto: "O inimigo tem Lion." };
+    const chaves = avaliar(contexto([mencao]), LION, draft, "pick").motivos.map((m) => m.chave);
+    expect(new Set(chaves).size).toBe(chaves.length);
   });
 
   it("aponta o inimigo com a pior taxa de vitória pra linkar o confronto 1x1", () => {

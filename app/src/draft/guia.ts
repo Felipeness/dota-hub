@@ -78,11 +78,28 @@ function mencoesDoItem(dono: HeroId, item: string, lista: Lista, nomes: readonly
   });
 }
 
+const forcaDaMencao = (m: Mencao) => (m.pp === null ? -1 : Math.abs(m.pp));
+
+/**
+ * Uma opinião do guia por herói citado: o guia do Terrorblade cita Phoenix em três itens (counters, "2 ou mais
+ * counters" e dano em área), e somar os três contava o mesmo sinal três vezes. Fica a menção com número; sem
+ * número em nenhuma, a primeira.
+ */
+function umaPorHeroi(mencoes: readonly Mencao[]): Mencao[] {
+  const porOpiniao = new Map<string, Mencao>();
+  for (const m of mencoes) {
+    const chave = `${m.alvo}|${m.lista}|${m.lado}`;
+    const atual = porOpiniao.get(chave);
+    if (!atual || forcaDaMencao(m) > forcaDaMencao(atual)) porOpiniao.set(chave, m);
+  }
+  return [...porOpiniao.values()];
+}
+
 export function extrairMencoes(guia: GuiaDraft, nomes: readonly NomeDeHeroi[]): Mencao[] {
-  return [
+  return umaPorHeroi([
     ...guia.bom.flatMap((item) => mencoesDoItem(guia.heroId, item, "bom", nomes)),
     ...guia.evitar.flatMap((item) => mencoesDoItem(guia.heroId, item, "evitar", nomes)),
-  ];
+  ]);
 }
 
 // Situações: o que o inimigo tem. Só aparece a situação que algum guia cita, com a frase do guia como motivo.
