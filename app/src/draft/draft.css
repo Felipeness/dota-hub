@@ -110,7 +110,8 @@
 .draft-resumo-comparacao { margin: 0; padding: var(--espaco-2) var(--espaco-3); border-left: 3px solid var(--cor-destaque); background: var(--cor-superficie-2); color: var(--cor-texto-leitura); font-size: 14px; }
 .draft-eixos { display: grid; gap: var(--espaco-2); margin: 0; padding: 0; list-style: none; }
 .draft-eixo { display: flex; flex-direction: column; gap: 4px; padding: var(--espaco-2) var(--espaco-3); border: 1px solid var(--cor-linha); border-radius: var(--raio); background: var(--cor-superficie); }
-.draft-eixo-topo { display: flex; justify-content: space-between; align-items: baseline; gap: var(--espaco-2); font-size: 14px; }
+.draft-eixo-topo { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0 var(--espaco-2); font-size: 14px; }
+.draft-eixo-topo .numero { white-space: nowrap; }
 .draft-eixo-topo .a-favor { color: var(--cor-radiant); }
 .draft-eixo-topo .contra { color: var(--cor-dire); }
 .draft-eixo-barra { position: relative; display: block; height: 8px; width: 100%; background: var(--cor-superficie-3); border-radius: 4px; overflow: hidden; }
