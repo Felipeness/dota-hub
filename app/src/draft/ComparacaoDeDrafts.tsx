@@ -1,6 +1,11 @@
-import { comparar, EIXOS, pontuarEixos, resumoComparativo, type HeroiNoTime, type LimitesDeNormalizacao } from "./eixos";
+import { comparar, EIXOS, LIMIAR_DE_VANTAGEM, pontos, pontuarEixos, resumoComparativo, type HeroiNoTime, type LimitesDeNormalizacao, type Vantagem } from "./eixos";
 
-const pct = (valor: number) => `${Math.round(valor * 100)}%`;
+const pct = (valor: number) => `${pontos(valor)}%`;
+const VEREDITO: Readonly<Record<Vantagem, { texto: string; classe: string }>> = {
+  meu: { texto: "você na frente", classe: "a-favor" },
+  deles: { texto: "adversário na frente", classe: "contra" },
+  parelho: { texto: "parelho", classe: "" },
+};
 
 function BarraDeEixo({ valor, classe, rotulo }: { valor: number; classe: string; rotulo: string }) {
   return (
@@ -25,19 +30,19 @@ export function ComparacaoDeDrafts({ meuTime, timeInimigo, limites }: Props) {
       <h2>Ponto de força dos dois drafts</h2>
       <p className="draft-explicacao">
         Cada eixo é a média de números reais de partidas de pro e das habilidades dos heróis no OpenDota, não uma nota inventada.
+        Cada número vai de 0 a 100 (percentil entre os 127 heróis do patch); menos de {LIMIAR_DE_VANTAGEM} pontos de diferença conta como parelho.
         Falta herói para pontuar um eixo? Ele some do cálculo, não vira zero.
       </p>
       {resumo && <p className="draft-resumo-comparacao">{resumo}</p>}
       <ul className="draft-eixos">
         {comparacoes.map((c) => {
           const eixo = EIXOS[c.eixo];
+          const veredito = VEREDITO[c.vantagem];
           return (
             <li key={c.eixo} className="draft-eixo">
               <div className="draft-eixo-topo">
                 <span>{eixo.titulo}</span>
-                <span className={`numero ${c.diferenca > 0 ? "a-favor" : c.diferenca < 0 ? "contra" : ""}`}>
-                  {c.diferenca > 0 ? "você na frente" : c.diferenca < 0 ? "adversário na frente" : "parelho"}
-                </span>
+                <span className={`numero ${veredito.classe}`}>{pontos(c.meu)} × {pontos(c.deles)} · {veredito.texto}</span>
               </div>
               <BarraDeEixo valor={c.meu} classe="draft-barra-aliado" rotulo="Seu time" />
               <BarraDeEixo valor={c.deles} classe="draft-barra-inimigo" rotulo="Time inimigo" />
