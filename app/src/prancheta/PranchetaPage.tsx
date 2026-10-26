@@ -15,6 +15,7 @@ import { BarraDeFerramentas, BotaoDeIcone, FormularioDoLance, PainelDeOpcoes, Pa
 import type { Camadas } from "./Pecas";
 import { estadoInicial, indiceAtual, passoAtual, reduzir, type Acao, type Cor, type Espessura, type Passo, type Quadro, type Time } from "./quadro";
 import { Tabuleiro, type Ferramenta, type Opcoes } from "./Tabuleiro";
+import { ROTA_DA_PRANCHETA } from "./rota";
 import { carregarPontosDeWard, type PontoDeWard } from "./wardsDosPros";
 import "./prancheta.css";
 
@@ -189,7 +190,7 @@ export function PranchetaPage() {
   });
 
   const compartilhar = async () => {
-    const link = `${location.origin}/prancheta${hashDoQuadro(await codificar(estado.presente))}`;
+    const link = `${location.origin}${ROTA_DA_PRANCHETA}${hashDoQuadro(await codificar(estado.presente))}`;
     if (link.length > TAMANHO_MAXIMO_DO_LINK) {
       return setAviso({ texto: `O quadro ficou grande demais para um link (${link.length.toLocaleString("pt-BR")} caracteres). Use Salvar ou Exportar .json.` });
     }

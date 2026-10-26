@@ -3,6 +3,7 @@ import { GlossaryPage } from "./glossary/GlossaryPage";
 import { Shell } from "./layout/Shell";
 import { ProvedorAoVivo } from "./live/ProvedorAoVivo";
 import { MapPage } from "./map/MapPage";
+import { RedirecionarParaAPrancheta, ROTA_ANTIGA_DA_PRANCHETA, ROTA_DA_PRANCHETA } from "./prancheta/rota";
 import { RoutesPage } from "./routes/RoutesPage";
 
 const Carregando = () => <p>Carregando…</p>;
@@ -28,7 +29,8 @@ const router = createBrowserRouter([
       { path: "/jogadores/times/:id", hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./players/TeamPage")).TeamPage }) },
       { path: "/times", hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./times/TimesPage")).TimesPage }) },
       { path: "/draft", hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./draft/DraftPage")).DraftPage }) },
-      { path: "/prancheta", hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./prancheta/PranchetaPage")).PranchetaPage }) },
+      { path: ROTA_ANTIGA_DA_PRANCHETA, element: <RedirecionarParaAPrancheta /> },
+      { path: ROTA_DA_PRANCHETA, hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./prancheta/PranchetaPage")).PranchetaPage }) },
       { path: "/analise/:matchId?", hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./analise/AnalisePage")).AnalisePage }) },
       { path: "/times/:id", hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./times/TimeAtlasPage")).TimeAtlasPage }) },
       {

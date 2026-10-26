@@ -7,6 +7,7 @@ import { Link } from "react-router";
 import type { Objetivo } from "../../data/schemas";
 import { tempoDaPartida, type DetalheDaPartida } from "../../live/partida/detalhe";
 import type { Lance } from "../lancesDecisivos";
+import { ROTA_DA_PRANCHETA } from "../../prancheta/rota";
 import {
   MAPA_INTEIRO, PAUSA_NO_LANCE_MS, VELOCIDADE_PADRAO, aproximarCamera, avancar, cameraPara, envolvidosNoLance, eventoEm,
   eventosDoLetreiro, focoDoLance, lanceAtivoEm, placarEm, quadroEm, rotuloDoLance, tituloSemTempo, vantagemEm, velocidadeEm,
@@ -184,7 +185,7 @@ export function ReplayDosLances({ detalhe, lances, objetivos, trajetos, pedido }
           visivel={controles.visiveis} onTocar={tocarOuPausar} onIr={irPara} onLance={irAoLance} onVelocidade={setVelocidade} onTelaCheia={telaCheia} />
       </div>
       <Letreiro evento={eventoEm(eventos, tLento)} />
-      <Link className="pilula replay-prancheta" to={`/prancheta?partida=${detalhe.partida}&t=${Math.floor(t)}`}>
+      <Link className="pilula replay-prancheta" to={`${ROTA_DA_PRANCHETA}?partida=${detalhe.partida}&t=${Math.floor(t)}`}>
         Abrir na prancheta ({tempoDaPartida(Math.floor(t))})
       </Link>
       <GraficoDaVantagem ouro={detalhe.vantagemDoTime.ouro} duracaoS={detalhe.duracaoS} t={tLento} lances={lances} onIr={irPara} />

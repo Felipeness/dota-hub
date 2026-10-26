@@ -3,6 +3,7 @@ import type { Meta } from "../data/schemas";
 import { metaSchema } from "../data/schemas";
 import { useData } from "../data/useData";
 import { SearchBox } from "../search/SearchBox";
+import { ROTA_DA_PRANCHETA } from "../prancheta/rota";
 
 export function Rodape({ meta }: { meta: Meta }) {
   const data = new Date(meta.exportado_em).toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo" });
@@ -27,7 +28,7 @@ export function Shell() {
           <NavLink to="/jogadores">Jogadores</NavLink>
           <NavLink to="/times">Times</NavLink>
           <NavLink to="/draft">Draft</NavLink>
-          <NavLink to="/prancheta">Prancheta</NavLink>
+          <NavLink to={ROTA_DA_PRANCHETA}>Prancheta</NavLink>
           <NavLink to="/glossario">Glossário</NavLink>
           <NavLink to="/ao-vivo">Ao vivo</NavLink>
         </nav>
