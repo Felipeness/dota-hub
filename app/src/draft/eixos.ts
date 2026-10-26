@@ -15,9 +15,9 @@ const PERCENTIL = "percentil entre os 127 heróis do patch (0 = o menor, 100 = o
 const PONDERADO = "média ponderada pela posição (pos 1 35%, pos 2 25%, pos 3 20%, pos 4 e 5 10% cada)";
 
 export const EIXOS: Readonly<Record<EixoId, { titulo: string; comoCalcular: string }>> = {
-  luta: { titulo: "Luta em grupo", comoCalcular: `Média de: fração do time com controle ou dano em área (habilidades marcadas AOE no OpenDota), e os stuns médios por partida de pro de cada herói, em ${PERCENTIL}, média simples do time.` },
+  luta: { titulo: "Luta em grupo", comoCalcular: `Média de: fração do time com controle ou dano em área (habilidades AOE ou com raio, largura e cone no OpenDota), e os stuns médios por partida de pro de cada herói, em ${PERCENTIL}, média simples do time.` },
   farm: { titulo: "Farm e late", comoCalcular: `Por herói: 60% gold por minuto de pro e 40% a duração média das vitórias de pro (herói que vence tarde), cada um em ${PERCENTIL}. O time é a ${PONDERADO}: o carry pesa mais que o suporte.` },
-  push: { titulo: "Push e limpar wave", comoCalcular: `Média de: dano a torre de pro de cada herói, em ${PERCENTIL}, média simples do time (suporte de push como Pugna e Shadow Shaman conta igual), e a fração do time com dano em área (AOE) no OpenDota, que limpa wave.` },
+  push: { titulo: "Push e limpar wave", comoCalcular: `Média de três números: dano a torre de pro de cada herói, em ${PERCENTIL}, média simples do time (suporte de push como Pugna e Shadow Shaman conta igual); a fração do time que derruba torre pelas habilidades no OpenDota (invoca unidades que ficam batendo, como lobos, wards, treants e eidolons, ou tem feitiço que acerta construção, como Nether Blast e Exorcism); e a fração do time com dano em área, que limpa wave.` },
   pickoff: { titulo: "Pickoff e caça", comoCalcular: `Média de: fração do time com controle de alvo único (stun, hex, raiz) ou fuga/blink no OpenDota, e o dano a heróis por partida de pro de cada herói, em ${PERCENTIL}, média simples do time.` },
   early: { titulo: "Ritmo no early", comoCalcular: `Taxa de vitória de pro em partidas que terminaram antes dos 30 minutos, em ${PERCENTIL}, média simples do time.` },
   sustain: { titulo: "Sobrevivência e sustain", comoCalcular: `Média de: cura/lifesteal de pro por partida de cada herói, em ${PERCENTIL}, média simples do time, e a fração do time com habilidade de cura no OpenDota.` },
@@ -26,8 +26,12 @@ export const EIXOS: Readonly<Record<EixoId, { titulo: string; comoCalcular: stri
 /** Flags de habilidade por herói, tiradas do OpenDota pelas mesmas regras do Confronto 1x1 (ver tracosDeHabilidade.ts). */
 export type TracosDeHabilidade = Readonly<{
   controleEmArea: boolean; controleAlvoUnico: boolean; danoEmArea: boolean; cura: boolean; fuga: boolean;
+  /** Invoca unidades que batem em torre ou tem feitiço que acerta construção. */
+  empurraTorre: boolean;
 }>;
-export const SEM_TRACOS: TracosDeHabilidade = { controleEmArea: false, controleAlvoUnico: false, danoEmArea: false, cura: false, fuga: false };
+export const SEM_TRACOS: TracosDeHabilidade = {
+  controleEmArea: false, controleAlvoUnico: false, danoEmArea: false, cura: false, fuga: false, empurraTorre: false,
+};
 
 export type HeroiNoTime = Readonly<{ forca: ForcaPro; tracos: TracosDeHabilidade; posicao: PosicaoId }>;
 
@@ -91,7 +95,7 @@ export function pontuarEixos(time: readonly HeroiNoTime[], limites: LimitesDeNor
   return {
     luta: media([fracaoComTraco(time, (t) => t.controleEmArea || t.danoEmArea), noTime("stuns")]),
     farm: mediaPorPosicao(time, (h) => forcaDeLate(h.forca, limites)),
-    push: media([noTime("danoTorre"), fracaoComTraco(time, (t) => t.danoEmArea)]),
+    push: media([noTime("danoTorre"), fracaoComTraco(time, (t) => t.empurraTorre), fracaoComTraco(time, (t) => t.danoEmArea)]),
     pickoff: media([fracaoComTraco(time, (t) => t.controleAlvoUnico || t.fuga), noTime("danoHeroi")]),
     early: noTime("vitoriaCedo"),
     sustain: media([noTime("cura"), fracaoComTraco(time, (t) => t.cura)]),

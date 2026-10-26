@@ -49,6 +49,13 @@ const causaDano = (h: Habilidade) =>
   (h.tipoDeDano !== null && (h.atributos.some(eAtributoDeDano) || /\bdamag(e|es|ing)\b/i.test(h.descricao)))
   || h.atributos.some((a) => ehDaBase(a) && /cleave|splash/.test(a.chave) && /damage/.test(a.chave));
 const prende = (h: Habilidade) => provar(h, DETECTOR_CONTROLE) !== null;
+// Unidade invocada que fica no mapa batendo: o atributo de vida dela (wolf_hp, ward_health, treant_health, eidelon_max_health).
+const VIDA_DE_INVOCACAO = /^(tooltip_)?(wolf|boar|hawk|golem|eidelon|treant|spiderling|bear|familiar|zombie|skeleton|ward|imp)_(base_max_health|max_health|health|hp)(_tooltip)?$/;
+// Feitiço comum não acerta construção; quando acerta, o OpenDota diz (structure_damage_mod, affects_buildings, building_damage_pct).
+const DANO_EM_CONSTRUCAO = /build|structure/;
+const empurraTorre = (h: Habilidade) =>
+  h.atributos.some((a) => temValor(a) && (VIDA_DE_INVOCACAO.test(a.chave) || (DANO_EM_CONSTRUCAO.test(a.chave) && !/reduction/.test(a.chave))))
+  || /\b(units|enemies) and (structures|buildings)\b/i.test(h.descricao);
 
 /**
  * Onde o dado do OpenDota não diz a verdade, com a habilidade que justifica. Fica pequeno de propósito: cada linha é
@@ -69,6 +76,7 @@ export function tracosDoHeroi(heroi: Heroi): TracosDeHabilidade {
     danoEmArea: heroi.habilidades.some((h) => atingeArea(h) && causaDano(h)),
     cura: heroi.habilidades.some((h) => provar(h, DETECTOR_CURA) !== null),
     fuga: ativas.some((h) => provar(h, DETECTOR_FUGA) !== null),
+    empurraTorre: heroi.habilidades.some(empurraTorre),
   };
   return { ...detectados, ...CORRECOES[heroi.chave] };
 }

@@ -44,10 +44,10 @@ const com = (...tracos: ReadonlyArray<keyof TracosDeHabilidade>): TracosDeHabili
   ({ ...SEM_TRACOS, ...Object.fromEntries(tracos.map((t) => [t, true])) });
 
 it.each<[string, TracosDeHabilidade]>([
-  ["lycan", com("cura", "fuga")],
-  ["beastmaster", com("controleEmArea", "controleAlvoUnico", "danoEmArea", "cura")],
-  ["death_prophet", com("danoEmArea", "cura")],
-  ["shadow_shaman", com("controleAlvoUnico", "danoEmArea")],
+  ["lycan", com("cura", "fuga", "empurraTorre")],
+  ["beastmaster", com("controleEmArea", "controleAlvoUnico", "danoEmArea", "cura", "empurraTorre")],
+  ["death_prophet", com("danoEmArea", "cura", "empurraTorre")],
+  ["shadow_shaman", com("controleAlvoUnico", "danoEmArea", "empurraTorre")],
   ["lion", com("controleEmArea", "controleAlvoUnico", "danoEmArea")],
   ["axe", com("controleEmArea", "danoEmArea")],
   ["puck", com("controleEmArea", "danoEmArea", "fuga")],
@@ -59,9 +59,9 @@ it.each<[string, TracosDeHabilidade]>([
   ["necrolyte", com("controleAlvoUnico", "danoEmArea", "cura")],
   ["omniknight", com("danoEmArea", "cura")],
   ["dazzle", com("danoEmArea", "cura")],
-  ["undying", com("danoEmArea", "cura")],
+  ["undying", com("danoEmArea", "cura", "empurraTorre")],
   ["disruptor", com("controleEmArea", "danoEmArea")],
-  ["techies", com("controleEmArea", "danoEmArea", "fuga")],
+  ["techies", com("controleEmArea", "danoEmArea", "fuga", "empurraTorre")],
   ["templar_assassin", com("danoEmArea", "fuga")],
   ["pangolier", com("controleEmArea", "danoEmArea", "fuga")],
   ["snapfire", com("controleEmArea", "danoEmArea", "fuga")],

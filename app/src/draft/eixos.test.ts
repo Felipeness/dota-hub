@@ -54,6 +54,16 @@ describe("pontuarEixos", () => {
     expect(pontuarEixos(comCoreFarmador, LIMITES).farm).toBeGreaterThan(pontuarEixos(comSuporteFarmador, LIMITES).farm);
   });
 
+  it("push favorece quem invoca ou acerta torre mesmo quando os dois limpam wave em área", () => {
+    // Quase todo herói tem dano em área (116 de 127): sozinho ele não separa um time de push de um time de late.
+    const timeDeLate: HeroiNoTime[] = [heroi({ dano_torre_medio: 3000 }, { danoEmArea: true }), heroi({ dano_torre_medio: 3000 }, { danoEmArea: true })];
+    const timeDePush: HeroiNoTime[] = [
+      heroi({ dano_torre_medio: 3000 }, { danoEmArea: true, empurraTorre: true }),
+      heroi({ dano_torre_medio: 3000 }, { empurraTorre: true }),
+    ];
+    expect(pontuarEixos(timeDePush, LIMITES).push).toBeGreaterThan(pontuarEixos(timeDeLate, LIMITES).push);
+  });
+
   it("time vazio pontua zero em todos os eixos, sem lançar erro", () => {
     const eixos = pontuarEixos([], LIMITES);
     expect(Object.values(eixos)).toEqual([0, 0, 0, 0, 0, 0]);
