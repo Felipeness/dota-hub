@@ -68,6 +68,8 @@ const FUGA_NO_TEXTO = new RegExp([
 const FUGA_DE_OUTRO = /teleports the target|and the target unit|leaps (through|between)|jumps from target|dive-bomb/i;
 // Cura de verdade: recupera vida de alguém do time. Frases que cortam ou adiam cura (Doom, Decrepify) ficam de fora.
 const CURA_NO_TEXTO = /lifesteal|vampiric|\bheal(s|ing|ed)?\b|regain\w* (the )?(hp|health)|regenerate health|restor\w* [^.]{0,30}health|\b(hp|health)( and mana)? regen/i;
+// Inata só conta se for lifesteal (Succubus): Puckish e Intrinsic Edge recuperam um pouco de vida, mas não pedem corte de cura.
+const curaQueConta = (h: Habilidade) => !h.inata || /lifesteal/i.test(h.descricao);
 const CORTA_CURA = /(prevent|reduc|amplif|delay|increas|disabl)\w*[^.]{0,30}heal|heal\w* (on|amplification|that is delayed)/i;
 
 export const REGRAS: readonly Regra[] = [
@@ -142,7 +144,7 @@ export const REGRAS: readonly Regra[] = [
     porque: "Se ele recupera vida no meio da luta, o seu dano some. Corte de cura faz o dano ficar.",
     detector: {
       atributo: /^(lifesteal\w*|hp_leech\w*|health_regen|bonus_health_regen|bonus_regen|regen|heal|heal_amount|max_health_regen|maximum_health_regen)$/,
-      texto: CURA_NO_TEXTO, exceto: CORTA_CURA,
+      texto: CURA_NO_TEXTO, exceto: CORTA_CURA, filtro: curaQueConta,
     },
     respostas: [
       { item: "spirit_vessel", motivo: "Corta a recuperação de vida do alvo enquanto dura.", prova: /health restoration/i },

@@ -49,11 +49,6 @@ const causaDano = (h: Habilidade) =>
   (h.tipoDeDano !== null && (h.atributos.some(eAtributoDeDano) || /\bdamag(e|es|ing)\b/i.test(h.descricao)))
   || h.atributos.some((a) => ehDaBase(a) && /cleave|splash/.test(a.chave) && /damage/.test(a.chave));
 const prende = (h: Habilidade) => provar(h, DETECTOR_CONTROLE) !== null;
-/** Inata só conta se for lifesteal (Succubus): Puckish e Intrinsic Edge recuperam um pouco de vida, mas ninguém escolhe o herói por isso. */
-function curaDeVerdade(h: Habilidade): boolean {
-  const prova = provar(h, DETECTOR_CURA);
-  return prova !== null && (!h.inata || /lifesteal/i.test(prova.trecho));
-}
 
 /**
  * Onde o dado do OpenDota não diz a verdade, com a habilidade que justifica. Fica pequeno de propósito: cada linha é
@@ -72,7 +67,7 @@ export function tracosDoHeroi(heroi: Heroi): TracosDeHabilidade {
     controleEmArea: ativas.some((h) => atingeArea(h) && prende(h)),
     controleAlvoUnico: ativas.some((h) => miraUmInimigo(h) && prende(h)) || heroi.habilidades.some(prendeNoAtaque),
     danoEmArea: heroi.habilidades.some((h) => atingeArea(h) && causaDano(h)),
-    cura: heroi.habilidades.some(curaDeVerdade),
+    cura: heroi.habilidades.some((h) => provar(h, DETECTOR_CURA) !== null),
     fuga: ativas.some((h) => provar(h, DETECTOR_FUGA) !== null),
   };
   return { ...detectados, ...CORRECOES[heroi.chave] };
