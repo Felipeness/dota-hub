@@ -1,6 +1,6 @@
 // Geometria pura da prancheta: o que está debaixo do ponteiro, a ponta da seta, o zoom da câmera e a
 // interpolação dos ícones entre dois passos.
-import { ESPESSURAS, LADO_DO_QUADRO, raioDaPeca, type Icone, type Passo, type Traco } from "./quadro";
+import { ESPESSURAS, LADO_DO_QUADRO, raioDaPeca, type Alca, type Edicao, type Icone, type Passo, type Traco } from "./quadro";
 
 type Xy = readonly [number, number];
 
@@ -44,6 +44,48 @@ export function itemNoPonto(passo: Passo, p: Xy, opcoes: Readonly<{ tolerancia: 
   const icone = opcoes.icones ? passo.icones.findLast((i) => tocaNoIcone(i, p, opcoes.escala)) : undefined;
   if (icone) return icone.id;
   return passo.tracos.findLast((t) => tocaNoTraco(t, p, opcoes.tolerancia))?.id ?? null;
+}
+
+type Caixa = Readonly<{ x: number; y: number; largura: number; altura: number }>;
+
+export function caixaDoTraco(traco: Traco): Caixa {
+  if (traco.tipo === "texto") return caixaDoTexto(traco);
+  if (traco.tipo === "circulo") return { x: traco.centro[0] - traco.raio, y: traco.centro[1] - traco.raio, largura: traco.raio * 2, altura: traco.raio * 2 };
+  const xs = traco.pontos.map((p) => p[0]);
+  const ys = traco.pontos.map((p) => p[1]);
+  const [x, y] = [Math.min(...xs), Math.min(...ys)];
+  return { x, y, largura: Math.max(...xs) - x, altura: Math.max(...ys) - y };
+}
+
+export type AlcaNaTela = Readonly<{ alca: Alca; ponto: Xy }>;
+
+/** Alças do traço selecionado: pontas da linha e da seta, borda do círculo (do lado que cabe no mapa) e, no resto, um pegador no canto. */
+export function alcasDoTraco(traco: Traco): readonly AlcaNaTela[] {
+  if (traco.tipo === "circulo") {
+    const [cx, cy] = traco.centro;
+    return [{ alca: "raio", ponto: [cx + traco.raio <= LADO_DO_QUADRO ? cx + traco.raio : cx - traco.raio, cy] }];
+  }
+  if (traco.tipo === "linha" || traco.tipo === "seta") {
+    const [a, b] = [traco.pontos[0], traco.pontos.at(-1)];
+    return a && b ? [{ alca: "inicio", ponto: a }, { alca: "fim", ponto: b }] : [];
+  }
+  const caixa = caixaDoTraco(traco);
+  return [{ alca: "mover", ponto: [caixa.x, caixa.y] }];
+}
+
+export const alcaNoPonto = (traco: Traco, p: Xy, alcance: number): Alca | null =>
+  alcasDoTraco(traco).findLast((a) => distancia(a.ponto, p) <= alcance)?.alca ?? null;
+
+/** Um arrasto em curso: `base` é onde a alça (ou o item) estava, `desde` e `agora` são o ponteiro. */
+export type Arrasto = Readonly<{ id: string; alca: Alca; base: Xy; desde: Xy; agora: Xy }>;
+
+/** O gesto inteiro vira uma ação só, para um desfazer por arrasto; sem movimento não há ação. */
+export function acaoDoArrasto(arrasto: Arrasto): Edicao | null {
+  const dx = arrasto.agora[0] - arrasto.desde[0];
+  const dy = arrasto.agora[1] - arrasto.desde[1];
+  if (Math.round(dx) === 0 && Math.round(dy) === 0) return null;
+  if (arrasto.alca === "mover") return { tipo: "transladar", id: arrasto.id, dx, dy };
+  return { tipo: "ajustar", id: arrasto.id, alca: arrasto.alca, ponto: [arrasto.base[0] + dx, arrasto.base[1] + dy] };
 }
 
 /** Triângulo da ponta da seta no fim do segmento a→b, proporcional à espessura. */
@@ -102,6 +144,25 @@ export function interpolarPassos(de: Passo, para: Passo, f: number): IconeNaTela
   const origem = new Set(de.icones.map((i) => i.id));
   const chegando = para.icones.filter((i) => !origem.has(i.id)).map((icone) => ({ icone, opacidade: t }));
   return [...andando, ...chegando];
+}
+
+const misturar = (a: Xy, b: Xy, t: number): [number, number] => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+
+function misturarTraco(de: Traco, para: Traco, t: number): Traco {
+  if (de.tipo === "circulo" && para.tipo === "circulo") return { ...para, centro: misturar(de.centro, para.centro, t), raio: de.raio + (para.raio - de.raio) * t };
+  if (de.tipo === "texto" && para.tipo === "texto") return { ...para, ponto: misturar(de.ponto, para.ponto, t) };
+  if (de.tipo === "circulo" || de.tipo === "texto" || para.tipo === "circulo" || para.tipo === "texto" || de.pontos.length !== para.pontos.length) return de;
+  return { ...para, pontos: para.pontos.map((p, i) => misturar(de.pontos[i] ?? p, p, t)) };
+}
+
+/** Traços do passo de origem a caminho do próximo: o que tem o mesmo id nos dois passos (passo duplicado) anda junto com os ícones. */
+export function interpolarTracos(de: Passo, para: Passo, f: number): Traco[] {
+  const t = Math.min(1, Math.max(0, f));
+  const destino = new Map(para.tracos.map((tr) => [tr.id, tr]));
+  return de.tracos.map((traco) => {
+    const fim = destino.get(traco.id);
+    return fim ? misturarTraco(traco, fim, t) : traco;
+  });
 }
 
 /** Aceleração e freio suaves (cúbica) para o movimento entre passos. */

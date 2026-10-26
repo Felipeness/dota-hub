@@ -8,7 +8,7 @@ import { dadosOuVazio, useData } from "../data/useData";
 import { pedirTrajetos } from "../replay/trajetos";
 import { prefereMenosMovimento } from "../analise/componentes/movimento";
 import { baixarArquivo, baixarPng } from "./exportarPng";
-import { CAMERA_INTEIRA, centroDaCamera, interpolarPassos, suavizar, zoomNoPonto, type Camera } from "./geometria";
+import { CAMERA_INTEIRA, centroDaCamera, interpolarPassos, interpolarTracos, suavizar, zoomNoPonto, type Camera } from "./geometria";
 import { iconesDoLance, lerTempo, tempoDoLance } from "./lance";
 import { codificar, codigoDoHash, comSalvo, decodificar, gravarSalvos, hashDoQuadro, lerJson, lerSalvos, TAMANHO_MAXIMO_DO_LINK, type Salvo } from "./link";
 import { BarraDeFerramentas, BotaoDeIcone, FormularioDoLance, PainelDeOpcoes, PainelDePecas, TECLA_DA_FERRAMENTA } from "./Paineis";
@@ -23,6 +23,12 @@ const PAUSA_ENTRE_PASSOS_MS = 600;
 const PASSO_SEM_ANIMACAO_MS = 1_200;
 const CAMADAS_INICIAIS: Camadas = { torres: true, estruturas: false, camps: false, runas: false, wards: false };
 const OPCOES_INICIAIS: Opcoes = { raioDasWards: true, travarIcones: false, escala: 1 };
+
+const MANTEM_A_SELECAO: ReadonlySet<Acao["tipo"]> = new Set(["transladar", "ajustar", "anotar"]);
+/** Setas empurram o item selecionado 1 unidade do mapa; com Shift, 10. */
+const EMPURRAO = 1;
+const EMPURRAO_COM_SHIFT = 10;
+const DIRECAO_DA_SETA: Readonly<Record<string, readonly [number, number]>> = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] };
 
 type QuadroDaReproducao = Readonly<{ de: number; f: number }>;
 type Aviso = Readonly<{ texto: string; link?: string }>;
@@ -86,7 +92,7 @@ export function PranchetaPage() {
   const [selecionado, setSelecionado] = useState<string | null>(null);
   const despachar = useCallback((acao: Acao) => {
     despacharBruto(acao);
-    if (acao.tipo !== "mover" && acao.tipo !== "anotar") setSelecionado(null);
+    if (!MANTEM_A_SELECAO.has(acao.tipo)) setSelecionado(null);
   }, []);
   const [ferramenta, setFerramenta] = useState<Ferramenta>({ tipo: "selecionar" });
   const [cor, setCor] = useState<Cor>("ouro");
@@ -166,6 +172,12 @@ export function PranchetaPage() {
         e.preventDefault();
         return despachar({ tipo: historico });
       }
+      const direcao = DIRECAO_DA_SETA[tecla];
+      if (direcao && selecionado) {
+        e.preventDefault();
+        const empurrao = e.shiftKey ? EMPURRAO_COM_SHIFT : EMPURRAO;
+        return despachar({ tipo: "transladar", id: selecionado, dx: direcao[0] * empurrao, dy: direcao[1] * empurrao });
+      }
       const tipo = TECLA_DA_FERRAMENTA[tecla];
       const acao = tipo ? () => setFerramenta({ tipo }) : atalhos[tecla];
       if (!acao) return;
@@ -195,7 +207,7 @@ export function PranchetaPage() {
   const de = exibido ? passos[exibido.de] : undefined;
   const para = exibido ? passos[exibido.de + 1] : undefined;
   const iconesNaTela = de && para && exibido ? interpolarPassos(de, para, suavizar(exibido.f)) : passo.icones.map((icone) => ({ icone, opacidade: 1 }));
-  const passoNaTela: Passo = de && para && exibido ? (exibido.f < 1 ? de : para) : passo;
+  const passoNaTela: Passo = de && para && exibido ? (exibido.f < 1 ? { ...de, tracos: interpolarTracos(de, para, suavizar(exibido.f)) } : para) : passo;
   const passoDestacado = exibido ? exibido.de + (exibido.f >= 1 ? 1 : 0) : atual;
 
   const escolherAbaDoCelular = (aba: AbaDoCelular) => {

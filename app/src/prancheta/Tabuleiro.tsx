@@ -2,9 +2,9 @@
 // as camadas, os traços e os ícones. Ponteiro serve para mouse, caneta e toque; dois dedos dão zoom e arrastam.
 import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent, type RefObject } from "react";
 import type { Objetivo } from "../data/schemas";
-import { arrastarCamera, itemNoPonto, zoomNoPonto, type Camera, type IconeNaTela } from "./geometria";
+import { acaoDoArrasto, alcaNoPonto, alcasDoTraco, arrastarCamera, caixaDoTraco, itemNoPonto, zoomNoPonto, type Arrasto, type Camera, type IconeNaTela } from "./geometria";
 import { CamadasDoMapa, DefsDoQuadro, IconeSvg, RaioDaWard, TracoSvg, type Camadas } from "./Pecas";
-import { LADO_DO_QUADRO, raioDaPeca, type Acao, type Cor, type Espessura, type NovoTraco, type Passo, type Peca, type Ponto } from "./quadro";
+import { editarItem, ESPESSURAS, LADO_DO_QUADRO, raioDaPeca, type Acao, type Cor, type Espessura, type NovoTraco, type Passo, type Peca, type Ponto, type Traco } from "./quadro";
 import type { PontoDeWard } from "./wardsDosPros";
 
 export type Ferramenta =
@@ -15,7 +15,7 @@ export type Opcoes = Readonly<{ raioDasWards: boolean; travarIcones: boolean; es
 type Xy = [number, number];
 type Gesto =
   | { tipo: "arrastarMapa"; ultimo: Xy }
-  | { tipo: "moverIcone"; id: string; desde: Xy; ponto: Xy; moveu: boolean }
+  | { tipo: "arrastarItem"; arrasto: Arrasto }
   | { tipo: "desenhar" }
   | { tipo: "apagar" }
   | { tipo: "pinca"; distancia: number; meio: Xy };
@@ -43,6 +43,10 @@ type Props = Readonly<{
 const DISTANCIA_MINIMA_DO_TRACO = 3;
 const FATOR_DA_RODA = 1.15;
 const TOLERANCIA_EM_PIXELS = 8;
+/** O dedo cobre mais que o cursor: no toque a área de acerto dobra. */
+const FATOR_DO_TOQUE = 2;
+/** Tamanho da alça na tela como fração do lado visível do mapa (acompanha o zoom). */
+const ALCA_POR_LADO = 0.009;
 
 const CURSOR: Readonly<Record<Ferramenta["tipo"], string>> = {
   selecionar: "grab", livre: "crosshair", linha: "crosshair", seta: "crosshair", circulo: "crosshair", texto: "text", borracha: "cell", colocar: "copy",
@@ -77,7 +81,7 @@ const meioEDistancia = (a: Xy, b: Xy) => ({ meio: [(a[0] + b[0]) / 2, (a[1] + b[
 export function Tabuleiro(props: Props) {
   const { passo, icones, ferramenta, cor, espessura, opcoes, camadas, objetivos, pontosDeWard, camera, onCamera, selecionado, onSelecionar, despachar, svgRef, bloqueado } = props;
   const [rascunho, setRascunho] = useState<NovoTraco | null>(null);
-  const [arrasto, setArrasto] = useState<{ id: string; ponto: Xy } | null>(null);
+  const [arrasto, setArrasto] = useState<Arrasto | null>(null);
   const [texto, setTexto] = useState<{ ponto: Ponto; esquerda: number; topo: number } | null>(null);
   const toques = useRef(new Map<number, Xy>());
   const gesto = useRef<Gesto | null>(null);
@@ -108,8 +112,12 @@ export function Tabuleiro(props: Props) {
     return () => svg.removeEventListener("wheel", aoRolar);
   }, [svgRef, onCamera]);
 
-  const apagarEm = (p: Ponto) => {
-    const id = itemNoPonto(passo, p, { tolerancia: TOLERANCIA_EM_PIXELS * unidadesPorPixel(), escala: opcoes.escala, icones: !opcoes.travarIcones });
+  const tolerancia = (tipoDoPonteiro: string) => TOLERANCIA_EM_PIXELS * unidadesPorPixel() * (tipoDoPonteiro === "touch" ? FATOR_DO_TOQUE : 1);
+  const itemEm = (p: Ponto, tipoDoPonteiro: string) =>
+    itemNoPonto(passo, p, { tolerancia: tolerancia(tipoDoPonteiro), escala: opcoes.escala, icones: !opcoes.travarIcones });
+
+  const apagarEm = (p: Ponto, tipoDoPonteiro: string) => {
+    const id = itemEm(p, tipoDoPonteiro);
     if (id) despachar({ tipo: "remover", id });
   };
 
@@ -142,9 +150,9 @@ export function Tabuleiro(props: Props) {
     }
     if (ferramenta.tipo === "borracha") {
       gesto.current = { tipo: "apagar" };
-      return apagarEm(p);
+      return apagarEm(p, e.pointerType);
     }
-    if (ferramenta.tipo === "selecionar") return comecarSelecao(p, [e.clientX, e.clientY]);
+    if (ferramenta.tipo === "selecionar") return comecarSelecao(p, [e.clientX, e.clientY], e.pointerType);
     const novo = rascunhoNovo(ferramenta, p, cor, espessura);
     if (novo) {
       gesto.current = { tipo: "desenhar" };
@@ -152,11 +160,21 @@ export function Tabuleiro(props: Props) {
     }
   };
 
-  const comecarSelecao = (p: Ponto, tela: Xy) => {
-    const id = itemNoPonto(passo, p, { tolerancia: TOLERANCIA_EM_PIXELS * unidadesPorPixel(), escala: opcoes.escala, icones: !opcoes.travarIcones });
+  const arrastar = (novo: Arrasto) => {
+    gesto.current = { tipo: "arrastarItem", arrasto: novo };
+    setArrasto(novo);
+  };
+
+  /** Alça do traço já selecionado primeiro; depois o item debaixo do ponteiro; o mapa só anda no vazio. */
+  const comecarSelecao = (p: Ponto, tela: Xy, tipoDoPonteiro: string) => {
+    const jaSelecionado = passo.tracos.find((t) => t.id === selecionado);
+    const alcance = tolerancia(tipoDoPonteiro) + camera.lado * ALCA_POR_LADO;
+    const pegador = jaSelecionado ? alcasDoTraco(jaSelecionado).find((a) => a.alca === alcaNoPonto(jaSelecionado, p, alcance)) : undefined;
+    if (jaSelecionado && pegador) return arrastar({ id: jaSelecionado.id, alca: pegador.alca, base: pegador.ponto, desde: p, agora: p });
+    const id = itemEm(p, tipoDoPonteiro);
     onSelecionar(id);
-    const icone = id ? passo.icones.find((i) => i.id === id) : undefined;
-    gesto.current = icone ? { tipo: "moverIcone", id: icone.id, desde: p, ponto: [icone.ponto[0], icone.ponto[1]], moveu: false } : { tipo: "arrastarMapa", ultimo: tela };
+    if (id) return arrastar({ id, alca: "mover", base: p, desde: p, agora: p });
+    gesto.current = { tipo: "arrastarMapa", ultimo: tela };
   };
 
   const aoMover = (e: PointerEvent<SVGSVGElement>) => {
@@ -173,13 +191,9 @@ export function Tabuleiro(props: Props) {
     }
     const p = noQuadro(e.clientX, e.clientY);
     if (!p) return;
-    if (atual.tipo === "apagar") return apagarEm(p);
+    if (atual.tipo === "apagar") return apagarEm(p, e.pointerType);
     if (atual.tipo === "desenhar") return setRascunho((r) => (r ? esticar(r, p) : r));
-    const icone = passo.icones.find((i) => i.id === atual.id);
-    if (!icone) return;
-    const ponto: Xy = [icone.ponto[0] + p[0] - atual.desde[0], icone.ponto[1] + p[1] - atual.desde[1]];
-    gesto.current = { ...atual, ponto, moveu: true };
-    setArrasto({ id: atual.id, ponto });
+    arrastar({ ...atual.arrasto, agora: p });
   };
 
   const pincar = (atual: Extract<Gesto, { tipo: "pinca" }>) => {
@@ -196,7 +210,8 @@ export function Tabuleiro(props: Props) {
     toques.current.delete(e.pointerId);
     const atual = gesto.current;
     gesto.current = null;
-    if (atual?.tipo === "moverIcone" && atual.moveu) despachar({ tipo: "mover", id: atual.id, ponto: atual.ponto });
+    const edicao = atual?.tipo === "arrastarItem" ? acaoDoArrasto(atual.arrasto) : null;
+    if (edicao) despachar(edicao);
     if (atual?.tipo === "desenhar" && rascunho && valeGuardar(rascunho)) despachar({ tipo: "desenhar", traco: rascunho });
     setRascunho(null);
     setArrasto(null);
@@ -214,9 +229,13 @@ export function Tabuleiro(props: Props) {
     if (e.key === "Enter" || e.key === "Escape") e.currentTarget.blur();
   };
 
-  const iconeSelecionado = passo.icones.find((i) => i.id === selecionado);
-  const tracoSelecionado = passo.tracos.find((t) => t.id === selecionado);
-  const naTela = icones.map((i) => (arrasto && i.icone.id === arrasto.id ? { ...i, icone: { ...i.icone, ponto: arrasto.ponto } } : i));
+  // A prévia do arrasto passa pela mesma edição pura que o reducer aplica ao soltar.
+  const edicaoEmCurso = arrasto ? acaoDoArrasto(arrasto) : null;
+  const passoNaTela = edicaoEmCurso ? editarItem(passo, edicaoEmCurso) : passo;
+  const iconeSelecionado = passoNaTela.icones.find((i) => i.id === selecionado);
+  const tracoSelecionado = passoNaTela.tracos.find((t) => t.id === selecionado);
+  const iconeArrastado = edicaoEmCurso ? passoNaTela.icones.find((i) => i.id === edicaoEmCurso.id) : undefined;
+  const naTela = iconeArrastado ? icones.map((i) => (i.icone.id === iconeArrastado.id ? { ...i, icone: iconeArrastado } : i)) : icones;
 
   return (
     <div className="pr-tabuleiro">
@@ -228,16 +247,12 @@ export function Tabuleiro(props: Props) {
         <image href="/data/mapa_2048.jpg" x={0} y={0} width={LADO_DO_QUADRO} height={LADO_DO_QUADRO} preserveAspectRatio="none" />
         <CamadasDoMapa camadas={camadas} objetivos={objetivos} pontosDeWard={pontosDeWard} />
         {opcoes.raioDasWards && naTela.map(({ icone }) => <RaioDaWard key={`raio-${icone.id}`} icone={icone} />)}
-        {tracoSelecionado && (
-          <g data-exportar="nao" opacity={0.45}>
-            <TracoSvg traco={{ ...tracoSelecionado, cor: "branco", ...(tracoSelecionado.tipo === "texto" ? {} : { espessura: "grossa" }) }} />
-          </g>
-        )}
-        {passo.tracos.map((t) => <TracoSvg key={t.id} traco={t} />)}
+        {passoNaTela.tracos.map((t) => <TracoSvg key={t.id} traco={t} />)}
+        {tracoSelecionado && <SelecaoDoTraco traco={tracoSelecionado} tamanho={camera.lado * ALCA_POR_LADO} />}
         {rascunho && <TracoSvg traco={rascunho} opacidade={0.8} />}
         {naTela.map(({ icone, opacidade }) => <IconeSvg key={icone.id} icone={icone} escala={opcoes.escala} opacidade={opacidade} />)}
         {iconeSelecionado && (
-          <circle data-exportar="nao" cx={arrasto?.ponto[0] ?? iconeSelecionado.ponto[0]} cy={arrasto?.ponto[1] ?? iconeSelecionado.ponto[1]}
+          <circle data-exportar="nao" cx={iconeSelecionado.ponto[0]} cy={iconeSelecionado.ponto[1]}
             r={raioDaPeca(iconeSelecionado.peca, opcoes.escala) + 8} fill="none" stroke="#ffd27a" strokeWidth={2.5} strokeDasharray="5 4" pointerEvents="none" />
         )}
       </svg>
@@ -246,5 +261,23 @@ export function Tabuleiro(props: Props) {
           placeholder="Escreva e Enter" maxLength={120} autoFocus onKeyDown={teclaNoTexto} onBlur={(e) => guardarTexto(e.currentTarget.value)} />
       )}
     </div>
+  );
+}
+
+const COR_DA_SELECAO = "#ffd27a";
+
+/** Caixa tracejada em volta do traço selecionado e as alças para mover ou redimensionar; não vai para o PNG. */
+function SelecaoDoTraco({ traco, tamanho }: { traco: Traco; tamanho: number }) {
+  const caixa = caixaDoTraco(traco);
+  const folga = (traco.tipo === "texto" ? 5 : ESPESSURAS[traco.espessura] / 2) + tamanho;
+  return (
+    <g data-exportar="nao" pointerEvents="none">
+      <rect x={caixa.x - folga} y={caixa.y - folga} width={caixa.largura + folga * 2} height={caixa.altura + folga * 2}
+        fill="none" stroke={COR_DA_SELECAO} strokeWidth={1.5} strokeDasharray="6 4" vectorEffect="non-scaling-stroke" />
+      {alcasDoTraco(traco).map(({ alca, ponto }) => (
+        <rect key={alca} x={ponto[0] - tamanho} y={ponto[1] - tamanho} width={tamanho * 2} height={tamanho * 2} rx={tamanho * 0.3}
+          fill={COR_DA_SELECAO} stroke="#1a1408" strokeWidth={1.5} vectorEffect="non-scaling-stroke" />
+      ))}
+    </g>
   );
 }

@@ -1,4 +1,5 @@
-import { estadoInicial, passoAtual, reduzir, RAIO_DA_VISAO, type Acao, type Estado, type Peca } from "./quadro";
+import { acaoDoArrasto } from "./geometria";
+import { estadoInicial, passoAtual, reduzir, RAIO_DA_VISAO, type Acao, type Estado, type NovoTraco, type Peca } from "./quadro";
 
 const radiantAxe: Peca = { tipo: "heroi", heroi: "axe", time: "radiant" };
 const aplicar = (acoes: readonly Acao[], estado: Estado = estadoInicial()) => acoes.reduce(reduzir, estado);
@@ -34,9 +35,54 @@ it("passo novo herda os ícones (mesmo id) sem traços; duplicar copia tudo", ()
   expect(passoAtual(reduzir(base, { tipo: "duplicarPasso" }))).toEqual(passoAtual(base));
 });
 
-it("mover só mexe no passo atual", () => {
-  const estado = aplicar([{ tipo: "colocar", peca: radiantAxe, ponto: [1, 1] }, { tipo: "novoPasso" }, { tipo: "mover", id: "i0", ponto: [500, 500] }]);
+it("transladar só mexe no passo atual", () => {
+  const estado = aplicar([{ tipo: "colocar", peca: radiantAxe, ponto: [1, 1] }, { tipo: "novoPasso" }, { tipo: "transladar", id: "i0", dx: 499, dy: 499.4 }]);
   expect(estado.presente.passos.map((p) => p.icones[0]?.ponto)).toEqual([[1, 1], [500, 500]]);
+});
+
+const comTraco = (traco: NovoTraco) => aplicar([{ tipo: "desenhar", traco }]);
+const tracoDepois = (traco: NovoTraco, acao: Acao) => passoAtual(reduzir(comTraco(traco), acao)).tracos[0];
+const livre: NovoTraco = { tipo: "livre", pontos: [[10, 10], [20, 30], [40, 20]], cor: "ouro", espessura: "fina" };
+const tracejada: NovoTraco = { tipo: "linha", pontos: [[100, 100], [200, 100]], cor: "ouro", espessura: "fina" };
+const flecha: NovoTraco = { tipo: "seta", pontos: [[100, 100], [200, 100]], cor: "ouro", espessura: "fina" };
+const roda: NovoTraco = { tipo: "circulo", centro: [500, 500], raio: 50, cor: "azul", espessura: "media" };
+const rotulo: NovoTraco = { tipo: "texto", ponto: [300, 300], texto: "gank", cor: "branco" };
+
+it.each([
+  { caso: "livre anda inteiro", traco: livre, dx: 5, dy: 5, esperado: { pontos: [[15, 15], [25, 35], [45, 25]] } },
+  { caso: "livre freia na borda sem deformar", traco: livre, dx: -50, dy: 0, esperado: { pontos: [[0, 10], [10, 30], [30, 20]] } },
+  { caso: "linha anda as duas pontas", traco: tracejada, dx: 10.4, dy: -20, esperado: { pontos: [[110, 80], [210, 80]] } },
+  { caso: "seta freia na borda direita", traco: flecha, dx: 900, dy: 0, esperado: { pontos: [[900, 100], [1000, 100]] } },
+  { caso: "círculo anda o centro e mantém o raio", traco: roda, dx: -100, dy: 30, esperado: { centro: [400, 530], raio: 50 } },
+  { caso: "texto anda o ponto", traco: rotulo, dx: 1, dy: -1, esperado: { ponto: [301, 299] } },
+] as const)("transladar: $caso", ({ traco, dx, dy, esperado }) => {
+  expect(tracoDepois(traco, { tipo: "transladar", id: "i0", dx, dy })).toMatchObject(esperado);
+});
+
+it.each([
+  { caso: "raio do círculo pela borda", traco: roda, alca: "raio", ponto: [500, 620], esperado: { centro: [500, 500], raio: 120 } },
+  { caso: "raio nunca abaixo do mínimo", traco: roda, alca: "raio", ponto: [501, 500], esperado: { raio: 4 } },
+  { caso: "início da seta mira de novo", traco: flecha, alca: "inicio", ponto: [50, 60], esperado: { pontos: [[50, 60], [200, 100]] } },
+  { caso: "fim da linha mira de novo", traco: tracejada, alca: "fim", ponto: [1200, 300.6], esperado: { pontos: [[100, 100], [1000, 301]] } },
+  { caso: "texto não redimensiona", traco: rotulo, alca: "fim", ponto: [0, 0], esperado: { ponto: [300, 300] } },
+  { caso: "livre não redimensiona", traco: livre, alca: "inicio", ponto: [0, 0], esperado: { pontos: [[10, 10], [20, 30], [40, 20]] } },
+] as const)("ajustar: $caso", ({ traco, alca, ponto, esperado }) => {
+  expect(tracoDepois(traco, { tipo: "ajustar", id: "i0", alca, ponto: [ponto[0], ponto[1]] })).toMatchObject(esperado);
+});
+
+it.each([
+  { caso: "mover", arrasto: { id: "i0", alca: "mover", base: [500, 450], desde: [500, 450], agora: [560, 470] } },
+  { caso: "redimensionar", arrasto: { id: "i0", alca: "raio", base: [550, 500], desde: [552, 501], agora: [600, 501] } },
+] as const)("um arrasto ($caso) vira um passo de desfazer só", ({ arrasto }) => {
+  const antes = comTraco(roda);
+  const edicao = acaoDoArrasto({ ...arrasto, agora: arrasto.desde });
+  expect(edicao).toBeNull();
+  const acao = acaoDoArrasto(arrasto);
+  if (!acao) throw new Error("arrasto sem ação");
+  const depois = reduzir(antes, acao);
+  expect(depois.passado).toHaveLength(antes.passado.length + 1);
+  expect(passoAtual(depois).tracos[0]).not.toEqual(passoAtual(antes).tracos[0]);
+  expect(reduzir(depois, { tipo: "desfazer" }).presente).toBe(antes.presente);
 });
 
 it("remover passo volta para o anterior e o último passo só é esvaziado", () => {

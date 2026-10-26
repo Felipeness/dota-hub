@@ -63,12 +63,16 @@ type SemId<T> = T extends unknown ? Omit<T, "id"> : never;
 export type NovoTraco = SemId<Traco>;
 export type NovoIcone = Omit<Icone, "id">;
 export type AlvoDaLimpeza = "tracos" | "icones" | "tudo";
+/** Alça de redimensionar: a borda do círculo ou uma das pontas da linha e da seta. */
+export type AlcaDeAjuste = "raio" | "inicio" | "fim";
+export type Alca = "mover" | AlcaDeAjuste;
 
 export type Estado = Readonly<{ passado: readonly Quadro[]; presente: Quadro; futuro: readonly Quadro[]; atual: number }>;
 
 export type Acao =
   | { tipo: "colocar"; peca: Peca; ponto: Ponto }
-  | { tipo: "mover"; id: string; ponto: Ponto }
+  | { tipo: "transladar"; id: string; dx: number; dy: number }
+  | { tipo: "ajustar"; id: string; alca: AlcaDeAjuste; ponto: Ponto }
   | { tipo: "desenhar"; traco: NovoTraco }
   | { tipo: "remover"; id: string }
   | { tipo: "limpar"; alvo: AlvoDaLimpeza }
@@ -95,6 +99,43 @@ function arredondarTraco(traco: NovoTraco): NovoTraco {
   return { ...traco, pontos: traco.pontos.map(arredondar) };
 }
 
+export type Edicao = Extract<Acao, { tipo: "transladar" | "ajustar" }>;
+const RAIO_MINIMO = 4;
+const somar = ([x, y]: Ponto, dx: number, dy: number): Ponto => [x + dx, y + dy];
+const pontosDeControle = (t: Traco): readonly Ponto[] => (t.tipo === "circulo" ? [t.centro] : t.tipo === "texto" ? [t.ponto] : t.pontos);
+const entre = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
+
+/** Desloca o traço inteiro, freando o deslocamento na borda do quadro para a forma não se deformar. */
+function transladarTraco(traco: Traco, dx: number, dy: number): Traco {
+  const pontos = pontosDeControle(traco);
+  const xs = pontos.map((p) => p[0]);
+  const ys = pontos.map((p) => p[1]);
+  const ddx = entre(Math.round(dx), -Math.min(...xs), LADO_DO_QUADRO - Math.max(...xs));
+  const ddy = entre(Math.round(dy), -Math.min(...ys), LADO_DO_QUADRO - Math.max(...ys));
+  if (traco.tipo === "circulo") return { ...traco, centro: somar(traco.centro, ddx, ddy) };
+  if (traco.tipo === "texto") return { ...traco, ponto: somar(traco.ponto, ddx, ddy) };
+  return { ...traco, pontos: traco.pontos.map((p) => somar(p, ddx, ddy)) };
+}
+
+/** Raio do círculo pela borda; ponta da linha e da seta. Texto e traço livre só andam. */
+function ajustarTraco(traco: Traco, alca: AlcaDeAjuste, ponto: Ponto): Traco {
+  const p = arredondar(ponto);
+  if (traco.tipo === "circulo" && alca === "raio") {
+    return { ...traco, raio: entre(Math.round(Math.hypot(p[0] - traco.centro[0], p[1] - traco.centro[1])), RAIO_MINIMO, LADO_DO_QUADRO) };
+  }
+  if (traco.tipo !== "linha" && traco.tipo !== "seta") return traco;
+  if (alca === "inicio") return { ...traco, pontos: [p, ...traco.pontos.slice(1)] };
+  if (alca === "fim") return { ...traco, pontos: [...traco.pontos.slice(0, -1), p] };
+  return traco;
+}
+
+/** Aplica a edição ao item do passo (ícone ou traço); a prévia do arrasto usa a mesma função que o reducer. */
+export function editarItem(passo: Passo, acao: Edicao): Passo {
+  const editarTraco = (t: Traco) => (t.id !== acao.id ? t : acao.tipo === "transladar" ? transladarTraco(t, acao.dx, acao.dy) : ajustarTraco(t, acao.alca, acao.ponto));
+  const editarIcone = (i: Icone) => (i.id === acao.id && acao.tipo === "transladar" ? { ...i, ponto: arredondar(somar(i.ponto, acao.dx, acao.dy)) } : i);
+  return { ...passo, icones: passo.icones.map(editarIcone), tracos: passo.tracos.map(editarTraco) };
+}
+
 export const passoAtual = (estado: Estado): Passo => estado.presente.passos[indiceAtual(estado)] ?? PASSO_VAZIO;
 export const indiceAtual = (estado: Estado) => Math.min(estado.atual, estado.presente.passos.length - 1);
 
@@ -117,8 +158,9 @@ function aplicar(quadro: Quadro, atual: number, acao: Acao): { quadro: Quadro; a
   switch (acao.tipo) {
     case "colocar":
       return mesmo(usarId(editarPasso(quadro, atual, (p, q) => ({ ...p, icones: [...p.icones, { id: novoId(q), peca: acao.peca, ponto: arredondar(acao.ponto) }] }))));
-    case "mover":
-      return mesmo(editarPasso(quadro, atual, (p) => ({ ...p, icones: p.icones.map((i) => (i.id === acao.id ? { ...i, ponto: arredondar(acao.ponto) } : i)) })));
+    case "transladar":
+    case "ajustar":
+      return mesmo(editarPasso(quadro, atual, (p) => editarItem(p, acao)));
     case "desenhar":
       return mesmo(usarId(editarPasso(quadro, atual, (p, q) => ({ ...p, tracos: [...p.tracos, { ...arredondarTraco(acao.traco), id: novoId(q) }] }))));
     case "remover":
