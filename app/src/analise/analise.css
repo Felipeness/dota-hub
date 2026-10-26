@@ -321,3 +321,4 @@
 .sb-tl-chave-atrasado::before { border-color: var(--cor-destaque) !important; }
 .sb-tl-chave-rara::before { border-color: var(--cor-texto-3) !important; }
 .sb-tl-chave-faltou::before { border-color: var(--cor-dire) !important; border-style: dashed !important; }
+.replay-prancheta { justify-self: start; }

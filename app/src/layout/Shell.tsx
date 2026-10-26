@@ -27,6 +27,7 @@ export function Shell() {
           <NavLink to="/jogadores">Jogadores</NavLink>
           <NavLink to="/times">Times</NavLink>
           <NavLink to="/draft">Draft</NavLink>
+          <NavLink to="/prancheta">Prancheta</NavLink>
           <NavLink to="/glossario">Glossário</NavLink>
           <NavLink to="/ao-vivo">Ao vivo</NavLink>
         </nav>

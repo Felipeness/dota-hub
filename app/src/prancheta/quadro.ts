@@ -16,8 +16,9 @@ export const CORES = {
   ouro: "#f2b544", branco: "#e9e4d8", vermelho: "#e0675a", verde: "#5bbf7a", azul: "#4fc3e8", roxo: "#b08cff", rosa: "#ff8fc8",
 } as const satisfies Record<Cor, string>;
 
-export const ESPESSURAS = { fina: 3, media: 6, grossa: 11 } as const;
-export type Espessura = keyof typeof ESPESSURAS;
+export const NOMES_DAS_ESPESSURAS = ["fina", "media", "grossa"] as const;
+export type Espessura = (typeof NOMES_DAS_ESPESSURAS)[number];
+export const ESPESSURAS = { fina: 3, media: 6, grossa: 11 } as const satisfies Record<Espessura, number>;
 
 export const RUNAS = ["bounty", "agua", "sabedoria", "velocidade", "dano_dobrado", "arcana", "ilusao", "invisibilidade", "regeneracao", "escudo"] as const;
 export type Runa = (typeof RUNAS)[number];
@@ -32,7 +33,7 @@ const MAX_HISTORICO = 100;
 const ponto = z.tuple([z.number().int().min(0).max(LADO_DO_QUADRO), z.number().int().min(0).max(LADO_DO_QUADRO)]);
 const time = z.enum(TIMES);
 const cor = z.enum(NOMES_DAS_CORES);
-const espessura = z.enum(["fina", "media", "grossa"] satisfies Espessura[]);
+const espessura = z.enum(NOMES_DAS_ESPESSURAS);
 const id = z.string().min(1).max(12);
 
 const pecaSchema = z.discriminatedUnion("tipo", [

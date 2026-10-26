@@ -3,6 +3,7 @@
 // contexto da partida no instante (placar, vantagem de ouro, último evento) e o card do lance. Sem os trajetos do
 // replay, o mapa mostra só o que o OpenDota tem.
 import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react";
+import { Link } from "react-router";
 import type { Objetivo } from "../../data/schemas";
 import { tempoDaPartida, type DetalheDaPartida } from "../../live/partida/detalhe";
 import type { Lance } from "../lancesDecisivos";
@@ -183,6 +184,9 @@ export function ReplayDosLances({ detalhe, lances, objetivos, trajetos, pedido }
           visivel={controles.visiveis} onTocar={tocarOuPausar} onIr={irPara} onLance={irAoLance} onVelocidade={setVelocidade} onTelaCheia={telaCheia} />
       </div>
       <Letreiro evento={eventoEm(eventos, tLento)} />
+      <Link className="pilula replay-prancheta" to={`/prancheta?partida=${detalhe.partida}&t=${Math.floor(t)}`}>
+        Abrir na prancheta ({tempoDaPartida(Math.floor(t))})
+      </Link>
       <GraficoDaVantagem ouro={detalhe.vantagemDoTime.ouro} duracaoS={detalhe.duracaoS} t={tLento} lances={lances} onIr={irPara} />
       {quadro.smokes.map((smoke) => <LegendaDoSmoke key={smoke.t} smoke={smoke} nosso={smoke.lado === detalhe.lado} />)}
       {ativo ? <CardDoLance lance={ativo} /> : <p className="replay-espera">Próximo lance: {proximoLance(lances, t)}</p>}
