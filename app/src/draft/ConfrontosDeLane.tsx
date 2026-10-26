@@ -1,9 +1,9 @@
 import { Link } from "react-router";
-import { analiseSchema, blocoContra, caminhoDaAnalise, porcentagem, taxaDeVitoria } from "../confronto/analise";
 import { useData } from "../data/useData";
 import type { HeroId } from "./guia";
 import type { HeroiDraft } from "./pontuacao";
 import { Retrato } from "./Retrato";
+import { CAMINHO_PARES, frasePlacar, paresSchema, placarDoPar, type PlacarDoPar } from "./paresDeLane";
 import { LANE_DA_POSICAO, ROTULO_DA_LANE, type Lane, type PosicaoId, type SlotDeHeroi } from "./posicoesPro";
 
 type Par = Readonly<{ titulo: string; laneMinha: Lane; laneDoOponente: Lane; meu: HeroiDraft; oponente: HeroiDraft }>;
@@ -28,10 +28,8 @@ function montarPares(aliados: readonly SlotDeHeroi[], inimigos: readonly SlotDeH
   });
 }
 
-function ParDeLane({ par, paginas }: { par: Par; paginas: ReadonlyMap<HeroId, string> }) {
-  const slug = paginas.get(par.meu.id);
-  const analise = useData(slug ? caminhoDaAnalise(slug) : "/data/__sem_analise__.json", analiseSchema);
-  const bloco = analise.estado === "ok" ? blocoContra(analise.dados, par.oponente.id) : null;
+/** placar undefined: o arquivo de placares ainda não chegou (ou falhou), então não afirma que falta partida. */
+function ParDeLane({ par, placar }: { par: Par; placar: PlacarDoPar | null | undefined }) {
   return (
     <li className="draft-lane-par">
       <span className="draft-lane-titulo">{par.titulo}</span>
@@ -42,13 +40,13 @@ function ParDeLane({ par, paginas }: { par: Par; paginas: ReadonlyMap<HeroId, st
         <strong>{par.oponente.nome}</strong>
         <Retrato heroi={par.oponente} className="draft-retrato draft-lane-retrato" />
       </span>
-      {bloco
+      {placar
         ? (
           <Link to={`/confronto/${par.meu.npc}/${par.oponente.npc}`} className="draft-nota">
-            Análise de pro: {par.meu.nome} venceu {porcentagem(taxaDeVitoria(bloco))} ({bloco.jogos} jogos) · ver confronto
+            {placar.analiseEscrita ? "Análise de pro: " : ""}{frasePlacar(par.meu.nome, par.oponente.nome, placar)} · {placar.analiseEscrita ? "ver análise" : "ver confronto"}
           </Link>
         )
-        : <span className="draft-nota">Sem análise de pro para este confronto ainda.</span>}
+        : placar === null && <span className="draft-nota">Sem partidas pro deste confronto ainda.</span>}
     </li>
   );
 }
@@ -57,11 +55,11 @@ type Props = Readonly<{
   aliados: readonly SlotDeHeroi[];
   inimigos: readonly SlotDeHeroi[];
   porId: ReadonlyMap<HeroId, HeroiDraft>;
-  paginas: ReadonlyMap<HeroId, string>;
 }>;
 
 /** Os confrontos de lane que a posição de pro de cada herói resulta: sua safe x off deles, sua off x safe deles, mid x mid. */
-export function ConfrontosDeLane({ aliados, inimigos, porId, paginas }: Props) {
+export function ConfrontosDeLane({ aliados, inimigos, porId }: Props) {
+  const placares = useData(CAMINHO_PARES, paresSchema);
   const pares = montarPares(aliados, inimigos, porId);
   if (pares.length === 0) return null;
   return (
@@ -69,7 +67,7 @@ export function ConfrontosDeLane({ aliados, inimigos, porId, paginas }: Props) {
       <h2>Confrontos de lane</h2>
       <p className="draft-explicacao">Pela posição de pro de cada herói (quem fica na safelane, no mid e na offlane dos dois times).</p>
       <ul className="draft-lane-pares">
-        {pares.map((par) => <ParDeLane key={par.titulo} par={par} paginas={paginas} />)}
+        {pares.map((par) => <ParDeLane key={par.titulo} par={par} placar={placares.estado === "ok" ? placarDoPar(placares.dados, par.meu.id, par.oponente.id) : undefined} />)}
       </ul>
     </section>
   );

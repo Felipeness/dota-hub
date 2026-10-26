@@ -1,6 +1,7 @@
 """python -m dota_export: gera todos os arquivos de dados do app em app/public/data/.
 
     python -m dota_export --rotas   # só as rotas, o resumo e o índice (não precisa do jogo nem do Source 2 Viewer)
+    python -m dota_export --pares   # só o confrontos_pares.json, dos confrontos/*.json já exportados
 """
 import json
 import shutil
@@ -59,6 +60,13 @@ def main() -> None:
         _gravar("pro_posicoes.json", dados)
         print(f"ok: {len(dados['herois'])} herois com posicao e forca de pro")
         return
+    if sys.argv[1:] == ["--pares"]:
+        analises = [json.loads(p.read_text(encoding="utf-8")) for p in sorted((DESTINO / "confrontos").glob("*.json"))]
+        dados = confrontos.pares(analises)
+        validar.validar("confrontos_pares", dados)
+        _gravar("confrontos_pares.json", dados)
+        print(f"ok: {sum(map(len, dados.values()))} pares de {len(dados)} herois")
+        return
     for tamanho in (2048, 4096):
         mapa.textura_alinhada(tamanho).save(DESTINO / f"mapa_{tamanho}.jpg", **mapa.JPEG)
     todas_rotas = gerar_rotas()
@@ -80,6 +88,7 @@ def main() -> None:
                                    confrontos.itens_core(fichas, por_posicao), RAIZ / "content" / "pro_contra")
     _gravar_colecao("confrontos", "confronto", analises)
     pacotes["confrontos_indice"] = confrontos.indice(analises)
+    pacotes["confrontos_pares"] = confrontos.pares(analises)
     paineis = [jogadores.felipe(), *(jogadores.pro_compare(c) for c in ("satanic", "yatoro", "watson")),
                *jogadores.pros_de_replay(), amigos.leonardo(), amigos.hane(), amigos.yuma()]
     _gravar_colecao("jogadores", "painel", paineis)

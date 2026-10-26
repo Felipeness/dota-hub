@@ -97,7 +97,7 @@ function Painel({ herois, guias }: { herois: readonly HeroiDraft[]; guias: Guias
           />
           {erro && <ErroAoVivoView erro={erro} onTentar={tentarDeNovo} />}
           {carregando && <p className="draft-nota" role="status">Buscando confrontos no OpenDota…</p>}
-          <ConfrontosDeLane aliados={slotsAliados} inimigos={slotsInimigos} porId={porId} paginas={guias.paginas} />
+          <ConfrontosDeLane aliados={slotsAliados} inimigos={slotsInimigos} porId={porId} />
           <ComparacaoDeDrafts
             meuTime={montarTime(slotsAliados, porHeroIdPro, porHeroIdHabilidade)}
             timeInimigo={montarTime(slotsInimigos, porHeroIdPro, porHeroIdHabilidade)}

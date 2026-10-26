@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 import pytest
@@ -122,3 +123,27 @@ def test_os_127_arquivos_do_conteudo_passam_no_schema():
     assert sum(len(a["confrontos"]) for a in todos) == 1899
     textos = [b[c] or "" for a in todos for b in a["confrontos"] for c in ("placar", "janelas", "ele_faz", "voce_faz")]
     assert not [t for t in textos if "C:/" in t or "pro_dados/" in t]
+
+
+def _analise(hero_id: int, interno: str, contra: dict, escritos: tuple = ()) -> dict:
+    return {"hero_id": hero_id, "nome_interno": interno, "contra_inimigo": contra,
+            "confrontos": [{"oponente": {"nome_interno": i}, "jogos": j, "vitorias": v} for i, j, v in escritos]}
+
+
+def test_pares_usa_hero_id_e_marca_o_par_com_analise_escrita():
+    snapfire = _analise(128, "snapfire", {"pangolier": {"jogos": 392, "vitorias": 216}})
+    pangolier = _analise(120, "pangolier", {"snapfire": {"jogos": 392, "vitorias": 176}}, (("snapfire", 400, 180),))
+    assert confrontos.pares([snapfire, pangolier]) == {"128": {"120": [392, 216]}, "120": {"128": [400, 180, 1]}}
+
+
+def test_pares_ignora_inimigo_sem_analise():
+    assert confrontos.pares([_analise(1, "antimage", {"heroi_novo": {"jogos": 5, "vitorias": 2}})]) == {"1": {}}
+
+
+def test_pares_do_export_passam_no_schema_e_cabem_no_orcamento():
+    pasta = RAIZ / "app" / "public" / "data" / "confrontos"
+    dados = confrontos.pares([json.loads(p.read_text(encoding="utf-8")) for p in pasta.glob("*.json")])
+    validar.validar("confrontos_pares", dados)
+    assert len(dados) == 127
+    assert dados["128"]["120"][:2] == [392, 216]  # Snapfire x Pangolier
+    assert len(json.dumps(dados, separators=(",", ":"))) < 300_000

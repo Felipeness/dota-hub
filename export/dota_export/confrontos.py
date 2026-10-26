@@ -240,3 +240,18 @@ def carregar(pasta: Path, pasta_pro: Path, core: dict[int, frozenset[str]], past
 def indice(todos: list[dict]) -> dict[str, int]:
     """id do app -> quantos confrontos de pro o herói tem analisados (selo da lista de heróis)."""
     return {c["id"]: len(c["confrontos"]) for c in todos}
+
+
+def _placar_do_par(analise: dict, interno: str, contra: dict) -> list[int]:
+    """[jogos, vitórias] do par; [jogos, vitórias, 1] quando há análise escrita, com o placar dela (o que /confronto mostra)."""
+    escrito = next((b for b in analise["confrontos"] if b["oponente"]["nome_interno"] == interno), None)
+    return [escrito["jogos"], escrito["vitorias"], 1] if escrito else [contra["jogos"], contra["vitorias"]]
+
+
+def pares(todos: list[dict]) -> dict[str, dict[str, list[int]]]:
+    """hero_id -> hero_id do inimigo -> placar do par (ver _placar_do_par): o simulador de draft lê só isto, não os
+    127 arquivos de ~470 KB. Inimigo fora das análises fica de fora."""
+    id_por_interno = {a["nome_interno"]: a["hero_id"] for a in todos}
+    return {str(a["hero_id"]): {str(id_por_interno[interno]): _placar_do_par(a, interno, contra)
+                                for interno, contra in a["contra_inimigo"].items() if interno in id_por_interno}
+            for a in todos}
