@@ -344,8 +344,13 @@ function Salvos({ quadro, onAbrir, onAviso }: { quadro: Quadro; onAbrir: (q: Qua
  * novo, então o download (e o compartilhar do celular) não é barrado.
  */
 function PreviaDaImagem({ arquivo, onFechar, onAviso }: { arquivo: File; onFechar: () => void; onAviso: (a: Aviso) => void }) {
-  const [url] = useState(() => URL.createObjectURL(arquivo));
-  useEffect(() => () => URL.revokeObjectURL(url), [url]);
+  // A URL nasce e morre no mesmo efeito: no StrictMode o efeito roda duas vezes e a prévia não fica com URL revogada.
+  const [url, setUrl] = useState<string | null>(null);
+  useEffect(() => {
+    const criada = URL.createObjectURL(arquivo);
+    setUrl(criada);
+    return () => URL.revokeObjectURL(criada);
+  }, [arquivo]);
   const abrir = (dialogo: HTMLDialogElement | null) => {
     if (dialogo && !dialogo.open) dialogo.showModal();
   };
@@ -357,7 +362,7 @@ function PreviaDaImagem({ arquivo, onFechar, onAviso }: { arquivo: File; onFecha
   };
   return (
     <dialog className="pr-previa" ref={abrir} onClose={onFechar} aria-label="Imagem da prancheta">
-      <img src={url} alt="Prévia da imagem exportada da prancheta" width={2048} height={2048} />
+      {url && <img src={url} alt="Prévia da imagem exportada da prancheta" width={2048} height={2048} />}
       <p className="pr-dica">JPEG 2048×2048, {(arquivo.size / 1_048_576).toFixed(1).replace(".", ",")} MB. No celular, se o botão não salvar, toque e segure a imagem para salvar.</p>
       <div className="pr-linha-de-botoes">
         <button type="button" onClick={() => baixarArquivo(arquivo, arquivo.name)}>Baixar imagem</button>
