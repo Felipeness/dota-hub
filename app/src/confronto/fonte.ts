@@ -17,9 +17,13 @@ const habilidadeFonte = z.object({
   desc: z.string().nullable().optional(),
   attrib: z.array(z.object({ key: z.string(), header: z.string().nullable().optional(), value: escalarOuLista })).nullable().optional(),
   cd: escalarOuLista,
+  /** Dano base de algumas habilidades (Ravage, Death Pulse, Storm Bolt) que não aparece no attrib. */
+  dmg: escalarOuLista,
 });
 export const habilidadesFonte = z.record(z.string(), habilidadeFonte)
-  .refine((r) => Object.values(r).some((h) => typeof h.desc === "string"), "habilidades sem descrição (versão podada do cache)");
+  .refine((r) => Object.values(r).some((h) => typeof h.desc === "string"), "habilidades sem descrição (versão podada do cache)")
+  // Cache gravado antes do dmg entrar no schema: recusa para buscar de novo, senão Ravage e Death Pulse ficam sem dano.
+  .refine((r) => Object.values(r).some((h) => h.dmg != null), "habilidades sem dmg (cache antigo)");
 
 export const habilidadesDosHeroisFonte = z.record(z.string(), z.object({
   abilities: z.array(z.union([z.string(), z.array(z.string())])),

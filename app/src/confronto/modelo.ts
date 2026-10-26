@@ -11,6 +11,10 @@ export type Habilidade = Readonly<{
   nome: string;
   comportamento: readonly string[];
   tipoDeDano: string | null;
+  /** target_team do OpenDota: "Enemy", "Friendly", "Both" (vazio quando a habilidade não mira ninguém). */
+  alvo: readonly string[];
+  /** Habilidade inata (is_innate): vem com o herói, sem ponto de habilidade. */
+  inata: boolean;
   /** null quando o OpenDota não informa. */
   atravessaBkb: boolean | null;
   dispel: Dispel;
@@ -54,10 +58,15 @@ export function habilidade(chave: string, fonte: HabilidadeFonte): Habilidade {
     nome: fonte.dname ?? chave,
     comportamento: lista(fonte.behavior),
     tipoDeDano: primeiro(fonte.dmg_type),
+    alvo: lista(fonte.target_team),
+    inata: fonte.is_innate === true,
     atravessaBkb: SIM_NAO[primeiro(fonte.bkbpierce) ?? ""] ?? null,
     dispel: DISPEL[primeiro(fonte.dispellable) ?? ""] ?? "desconhecido",
     descricao: fonte.desc ?? "",
-    atributos: (fonte.attrib ?? []).map((a) => ({ chave: a.key, rotulo: (a.header ?? a.key).replace(/:$/, ""), valores: lista(a.value) })),
+    atributos: [
+      ...(fonte.attrib ?? []).map((a) => ({ chave: a.key, rotulo: (a.header ?? a.key).replace(/:$/, ""), valores: lista(a.value) })),
+      ...(fonte.dmg == null ? [] : [{ chave: "damage", rotulo: "DAMAGE", valores: lista(fonte.dmg) }]),
+    ],
     recargaS: numeros(fonte.cd),
   };
 }

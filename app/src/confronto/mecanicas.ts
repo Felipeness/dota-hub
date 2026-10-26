@@ -43,8 +43,32 @@ const naoAtravessaBkb = (achadas: readonly Habilidade[]) => achadas.some((h) => 
 const saiComDispelBasico = (achadas: readonly Habilidade[]) => achadas.some((h) => h.dispel === "basico");
 const temAlvoUnico = (achadas: readonly Habilidade[]) => achadas.some((h) => h.comportamento.includes("Unit Target"));
 
-// does_root (Sniper) prende o próprio herói, não o inimigo.
-const DISABLE = /^(?!does_).*(stun|hex|sleep|taunt|root|leash|fear|banish|cyclone|ensnare)/;
+// does_root (Sniper) e self_stun (Meat Hook) prendem o próprio herói, não o inimigo; unperched_stunned (Tree Dance) também.
+// Mini-stun (Lightning Bolt, Mana Void) só interrompe, tombstone_stun_penalty é dano que a Tombstone toma e leash_radius
+// (Escape Act) é a distância da caixa do próprio Ringmaster.
+const DISABLE = /^(?!does_|self_|unperched_)(?!.*(mini|penalty|radius)).*(stun|hex|sleep|taunt|root|leash|fear|banish|cyclone|ensnare)/;
+// O texto do OpenDota descreve muito controle sem a palavra "stun": Hex ("harmless creature"), Shackles ("cannot move
+// or attack"), Frostbite ("prohibiting movement"), Fiend's Grip e Dismember ("disabling it"), Vacuum ("sucks in").
+const CONTROLE_NO_TEXTO = new RegExp([
+  /(?<!mini-?)\bstun(s|ned|ning)?\b|\bhex(es)?\b|\bsleep|\btaunt|\broot(s|ed)?\b|\bleash|\bbanish|trapping|\bstasis\b/.source,
+  /\bfear(ed|ful)?\b|\bflee\b|hypnoti[sz]|unconscious|turn\w* to stone|harmless (creature|beast)/.source,
+  /cannot (move|act)\b|prohibit\w* movement|disabling (it|them)\b|\band disabled\b|sucks in|pulls an enemy|\bdrag(s|ging|ged)?\b/.source,
+  /(anchor|trap|freez)\w* (\w+ ){0,2}in place|prevent\w* [^.]{0,25}\b(moving|movement)\b|forced to attack|into the air|can'?t pass|cannot pass/.source,
+].join("|"), "i");
+// Howl "strikes fear" só tira armadura; Decrepify "banishing" deixa o alvo intocável, não preso; Tree Dance atordoa o próprio Monkey King.
+const CONTROLE_QUE_NAO_PRENDE = /strikes fear|unable to attack or be attacked|falls and is stunned/i;
+// Fuga é o herói tirar a si mesmo da luta: teleporte, salto, avanço, invisibilidade própria ou ficar intocável.
+// Mover um inimigo (Glimpse, Nether Swap) ou um aliado (Relocate só leva junto) não conta.
+const FUGA_NO_TEXTO = new RegExp([
+  /\bblink(s)?\b|\bteleport(s|ation)?\b|\bleap(s|ing)?\b|\bjumps? (to|forward|onto|in the air)\b|\bhops?\b|\bdash(es)?\b|\bdives?\b|\brush(es)?\b|\brolls? (out|toward)/.source,
+  /charging across|tunnels forward|hurtle themselves|launches (him|her|it)self|swings on a grappling|warps backward|takes to the skies|flying movement/.source,
+  /\bbecom\w* invisible|\bturns? [^.]{0,40}\binvisible|moves invisibly|shifts out of visibility|conceals (him|her|it)self|impossible to see/.source,
+  /immune from harm|untargetable|phases out|vanishes|fades into the aether|\bis invulnerable during/.source,
+].join("|"), "i");
+const FUGA_DE_OUTRO = /teleports the target|and the target unit|leaps (through|between)|jumps from target|dive-bomb/i;
+// Cura de verdade: recupera vida de alguém do time. Frases que cortam ou adiam cura (Doom, Decrepify) ficam de fora.
+const CURA_NO_TEXTO = /lifesteal|vampiric|\bheal(s|ing|ed)?\b|regain\w* (the )?(hp|health)|regenerate health|restor\w* [^.]{0,30}health|\b(hp|health)( and mana)? regen/i;
+const CORTA_CURA = /(prevent|reduc|amplif|delay|increas|disabl)\w*[^.]{0,30}heal|heal\w* (on|amplification|that is delayed)/i;
 
 export const REGRAS: readonly Regra[] = [
   {
@@ -72,7 +96,7 @@ export const REGRAS: readonly Regra[] = [
   {
     id: "controle", titulo: "Prende ou atordoa", minimo: 1,
     porque: "Enquanto você está preso ou atordoado, o time dele bate de graça. Saber o que segura você define a hora de entrar.",
-    detector: { atributo: DISABLE, texto: /\bstun(s|ned|ning)?\b|\bhex(es)?\b|\bsleep|\btaunt|\broot(s|ed)?\b|\bleash|\bfear\b|\bbanish|trapping/i, filtro: ativa },
+    detector: { atributo: DISABLE, texto: CONTROLE_NO_TEXTO, exceto: CONTROLE_QUE_NAO_PRENDE, filtro: ativa },
     respostas: [
       { item: "black_king_bar", motivo: "Imunidade a magia contra o controle que não atravessa BKB.", prova: /immun/i, quando: naoAtravessaBkb },
       { item: "sphere", motivo: "Bloqueia um feitiço com alvo a cada recarga.", prova: /block/i, quando: temAlvoUnico },
@@ -118,7 +142,7 @@ export const REGRAS: readonly Regra[] = [
     porque: "Se ele recupera vida no meio da luta, o seu dano some. Corte de cura faz o dano ficar.",
     detector: {
       atributo: /^(lifesteal\w*|hp_leech\w*|health_regen|bonus_health_regen|bonus_regen|regen|heal|heal_amount|max_health_regen|maximum_health_regen)$/,
-      texto: /lifesteal|heals? (him|her|it)self|provide heal/i,
+      texto: CURA_NO_TEXTO, exceto: CORTA_CURA,
     },
     respostas: [
       { item: "spirit_vessel", motivo: "Corta a recuperação de vida do alvo enquanto dura.", prova: /health restoration/i },
@@ -139,7 +163,7 @@ export const REGRAS: readonly Regra[] = [
   {
     id: "fuga", titulo: "Escapa com salto ou blink", minimo: 1,
     porque: "Se ele sai da luta com um botão, o abate escapa. Silêncio ou controle antes do seu dano segura ele.",
-    detector: { texto: /\bblink(s)?\b|teleports? (him|her|it)self|\bleaps?\b|\bdash(es)?\b/i, filtro: ativa },
+    detector: { texto: FUGA_NO_TEXTO, exceto: FUGA_DE_OUTRO, filtro: ativa },
     respostas: [
       { item: "orchid", motivo: "Silencia: sem botão de fuga.", prova: /silenc/i },
       { item: "sheepstick", motivo: "Vira bicho: sem habilidade e sem item.", prova: /critter/i },

@@ -13,8 +13,8 @@ const itens = (meu: string, inimigo: string, id: MecanicaId) => achado(meu, inim
 
 it.each<[string, MecanicaId[]]>([
   ["slark", ["invisibilidade", "controle", "cura", "fuga"]],
-  ["phantom_lancer", ["ilusoes", "evasao"]],
-  ["phantom_assassin", ["invisibilidade", "evasao", "passivas"]],
+  ["phantom_lancer", ["ilusoes", "evasao", "fuga"]],
+  ["phantom_assassin", ["invisibilidade", "evasao", "fuga", "passivas"]],
   ["silencer", ["silencio", "magico"]],
   ["lion", ["controle", "magico"]],
   ["life_stealer", ["cura"]],
