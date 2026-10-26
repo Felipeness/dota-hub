@@ -48,16 +48,29 @@ function carregarImagem(url: string): Promise<HTMLImageElement> {
   });
 }
 
+/** Tempo para o navegador terminar de gravar o arquivo antes de soltar a URL do blob. */
+const VIDA_DA_URL_MS = 60_000;
+
+/**
+ * Baixa o blob com nome e extensão. O link entra no documento (Firefox e WebViews ignoram `download` em link solto)
+ * e deve ser chamado direto do clique: Safari e navegadores embutidos descartam o `download` sem gesto do usuário.
+ */
 export function baixarArquivo(blob: Blob, nome: string) {
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
   link.download = nome;
+  link.hidden = true;
+  document.body.append(link);
   link.click();
-  setTimeout(() => URL.revokeObjectURL(url), 1_000);
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), VIDA_DA_URL_MS);
 }
 
-export async function baixarImagem(svg: SVGSVGElement, nome: string): Promise<void> {
+export const TIPO_DA_IMAGEM = "image/jpeg";
+
+/** Desenha o quadro inteiro em JPEG; quem baixa é o botão da prévia, num clique novo. */
+export async function gerarImagem(svg: SVGSVGElement, nome: string): Promise<File> {
   const url = URL.createObjectURL(new Blob([await svgPronto(svg)], { type: "image/svg+xml" }));
   try {
     const imagem = await carregarImagem(url);
@@ -68,10 +81,13 @@ export async function baixarImagem(svg: SVGSVGElement, nome: string): Promise<vo
     if (!contexto) throw new Error("imagem: canvas 2d indisponível");
     contexto.drawImage(imagem, 0, 0, LADO_DA_IMAGEM, LADO_DA_IMAGEM);
     // O JPEG não tem transparência: o mapa cobre o quadro inteiro, então nada se perde.
-    const jpeg = await new Promise<Blob | null>((resolver) => canvas.toBlob(resolver, "image/jpeg", QUALIDADE_DO_JPEG));
+    const jpeg = await new Promise<Blob | null>((resolver) => canvas.toBlob(resolver, TIPO_DA_IMAGEM, QUALIDADE_DO_JPEG));
     if (!jpeg) throw new Error("imagem: o canvas não gerou o arquivo");
-    baixarArquivo(jpeg, nome);
+    return new File([jpeg], `${nome}.jpg`, { type: TIPO_DA_IMAGEM });
   } finally {
     URL.revokeObjectURL(url);
   }
 }
+
+/** Compartilhar arquivo existe no celular (Android, iOS); no desktop o canShare costuma recusar. */
+export const podeCompartilhar = (arquivo: File) => typeof navigator.canShare === "function" && navigator.canShare({ files: [arquivo] });

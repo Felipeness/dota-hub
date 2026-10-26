@@ -7,7 +7,7 @@ import { heroisCatalogoSchema, objetivosSchema } from "../data/schemas";
 import { dadosOuVazio, useData } from "../data/useData";
 import { pedirTrajetos } from "../replay/trajetos";
 import { prefereMenosMovimento } from "../analise/componentes/movimento";
-import { baixarArquivo, baixarImagem } from "./exportarImagem";
+import { baixarArquivo, gerarImagem, podeCompartilhar } from "./exportarImagem";
 import { CAMERA_INTEIRA, centroDaCamera, interpolarPassos, interpolarTracos, suavizar, zoomNoPonto, type Camera } from "./geometria";
 import { iconesDoLance, lerTempo, tempoDoLance } from "./lance";
 import { codificar, codigoDoHash, comSalvo, decodificar, gravarSalvos, hashDoQuadro, lerJson, lerSalvos, TAMANHO_MAXIMO_DO_LINK, type Salvo } from "./link";
@@ -198,9 +198,10 @@ export function PranchetaPage() {
     setAviso({ texto: copiou ? "Link copiado. Quem abrir vê todos os passos, ícones, traços e notas." : "Copie o link abaixo.", link });
   };
 
+  const [imagem, setImagem] = useState<File | null>(null);
   const baixar = () => {
     if (!svg.current) return;
-    baixarImagem(svg.current, `prancheta-passo-${atual + 1}.jpg`).catch((erro: unknown) => setAviso({ texto: `Não deu para gerar a imagem: ${String(erro)}` }));
+    gerarImagem(svg.current, `prancheta-passo-${atual + 1}`).then(setImagem, (erro: unknown) => setAviso({ texto: `Não deu para gerar a imagem: ${String(erro)}` }));
   };
 
   const exibido = reproducao.quadro;
@@ -251,6 +252,7 @@ export function PranchetaPage() {
           <button key={aba} type="button" role="tab" aria-selected={abaDoCelular === aba} onClick={() => escolherAbaDoCelular(aba)}>{nome}</button>
         ))}
       </div>
+      {imagem && <PreviaDaImagem arquivo={imagem} onFechar={() => setImagem(null)} onAviso={setAviso} />}
       <PainelDePecas herois={catalogo} aba={abaDasPecas} onAba={(a) => { setAbaDasPecas(a); setAbaDoCelular(a); }} time={time} onTime={setTime}
         ferramenta={ferramenta} onPeca={(peca) => setFerramenta({ tipo: "colocar", peca })} />
     </div>
@@ -333,5 +335,34 @@ function Salvos({ quadro, onAbrir, onAviso }: { quadro: Quadro; onAbrir: (q: Qua
         </div>
       </div>
     </details>
+  );
+}
+
+/**
+ * A imagem fica pronta segundos depois do clique, quando o navegador já esqueceu o gesto; o botão daqui é um clique
+ * novo, então o download (e o compartilhar do celular) não é barrado.
+ */
+function PreviaDaImagem({ arquivo, onFechar, onAviso }: { arquivo: File; onFechar: () => void; onAviso: (a: Aviso) => void }) {
+  const [url] = useState(() => URL.createObjectURL(arquivo));
+  useEffect(() => () => URL.revokeObjectURL(url), [url]);
+  const abrir = (dialogo: HTMLDialogElement | null) => {
+    if (dialogo && !dialogo.open) dialogo.showModal();
+  };
+  const compartilhar = () => {
+    navigator.share({ files: [arquivo], title: "Prancheta" }).catch((erro: unknown) => {
+      if (erro instanceof DOMException && erro.name === "AbortError") return;
+      onAviso({ texto: `Não deu para compartilhar: ${String(erro)}. Use Baixar imagem.` });
+    });
+  };
+  return (
+    <dialog className="pr-previa" ref={abrir} onClose={onFechar} aria-label="Imagem da prancheta">
+      <img src={url} alt="Prévia da imagem exportada da prancheta" width={2048} height={2048} />
+      <p className="pr-dica">JPEG 2048×2048, {(arquivo.size / 1_048_576).toFixed(1).replace(".", ",")} MB. No celular, se o botão não salvar, toque e segure a imagem para salvar.</p>
+      <div className="pr-linha-de-botoes">
+        <button type="button" onClick={() => baixarArquivo(arquivo, arquivo.name)}>Baixar imagem</button>
+        {podeCompartilhar(arquivo) && <button type="button" onClick={compartilhar}>Compartilhar</button>}
+        <button type="button" className="link" onClick={onFechar}>Fechar</button>
+      </div>
+    </dialog>
   );
 }

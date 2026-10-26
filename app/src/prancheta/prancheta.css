@@ -130,3 +130,8 @@
   .prancheta[data-aba="opcoes"] .pr-pecas, .prancheta:not([data-aba="opcoes"]) .pr-opcoes { display: none; }
   .pr-pecas > .abas-pilula:first-child { display: none; }
 }
+
+.pr-previa { width: min(560px, calc(100vw - 32px)); padding: 16px; border: 1px solid var(--cor-linha-forte); border-radius: var(--raio); background: var(--cor-superficie); color: var(--cor-texto); }
+.pr-previa::backdrop { background: rgb(0 0 0 / 0.6); }
+.pr-previa img { display: block; width: 100%; height: auto; border-radius: var(--raio); }
+.pr-previa .pr-dica { margin: 10px 0; }
