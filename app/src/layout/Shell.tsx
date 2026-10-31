@@ -27,7 +27,13 @@ export function Shell() {
           <NavLink to="/confronto">Confronto</NavLink>
           <NavLink to="/jogadores">Jogadores</NavLink>
           <NavLink to="/times">Times</NavLink>
-          <NavLink to="/draft">Draft</NavLink>
+          <div className="abas-grupo">
+            <NavLink to="/draft">Draft</NavLink>
+            <div className="abas-menu">
+              <NavLink to="/draft" end>Normal</NavLink>
+              <NavLink to="/draft/jogadores">Por ID</NavLink>
+            </div>
+          </div>
           <NavLink to={ROTA_DA_PRANCHETA}>Prancheta</NavLink>
           <NavLink to="/glossario">Glossário</NavLink>
           <NavLink to="/ao-vivo">Ao vivo</NavLink>

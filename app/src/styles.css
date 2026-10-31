@@ -133,6 +133,17 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
   color: var(--cor-nav); font-size: 14px; text-decoration: none;
 }
 .abas a.active { background: var(--cor-superficie-3); color: var(--cor-texto); font-weight: 600; }
+.abas-grupo { position: relative; }
+.abas-menu {
+  position: absolute; top: 100%; left: 0; z-index: 30;
+  display: none; flex-direction: column; gap: var(--espaco-1); min-width: 120px; padding: var(--espaco-1);
+  background: var(--cor-superficie-2); border: 1px solid var(--cor-linha-forte); border-radius: var(--raio-pequeno);
+}
+.abas-menu a:hover { color: var(--cor-texto); }
+/* :focus-visible abre pelo teclado sem deixar o menu preso aberto depois do clique. */
+@media (min-width: 721px) {
+  .abas-grupo:hover .abas-menu, .abas-grupo:has(:focus-visible) .abas-menu { display: flex; }
+}
 .busca { position: relative; margin-left: auto; flex: 1 1 240px; max-width: 380px; min-width: 240px; }
 .busca-campo {
   display: flex; align-items: center; gap: 10px;
@@ -578,6 +589,10 @@ a.pilula:hover { border-color: var(--cor-destaque); color: var(--cor-texto); }
   /* 9 abas não cabem em ~390px: cada aba tem largura mínima legível e a barra rola de lado. */
   .abas a { justify-content: center; text-align: center; border-radius: 0; font-size: 12px; line-height: 1.2; padding: 2px 4px; white-space: nowrap; }
   .abas a.active { background: none; color: var(--cor-destaque); }
+  /* Sem hover no toque: "Por ID" vira aba própria ao lado de Draft, que já é o modo normal. */
+  .abas-grupo, .abas-menu { display: contents; }
+  .abas-menu a:first-child { display: none; }
+  .abas-grupo:has(.abas-menu a:last-child.active) > a.active { color: var(--cor-nav); font-weight: 400; }
 
   .shell:has(.pagina-mapa) { padding-bottom: 0; height: calc(100dvh - var(--altura-barra-celular)); }
   .pagina-mapa { display: flex; flex-direction: column; }

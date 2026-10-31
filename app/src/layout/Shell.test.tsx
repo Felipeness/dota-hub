@@ -18,6 +18,14 @@ it("topo mostra o selo do patch e as abas de navegação", async () => {
   for (const aba of ["Mapa", "Rotas", "Heróis", "Jogadores", "Prancheta", "Glossário"]) expect(nav).toContainElement(screen.getByRole("link", { name: aba }));
 });
 
+it("aba Draft oferece o modo normal e o modo por ID", () => {
+  vi.stubGlobal("fetch", vi.fn(() => new Promise(() => {})));
+  render(<MemoryRouter><Shell /></MemoryRouter>);
+  expect(screen.getByRole("link", { name: "Draft" })).toHaveAttribute("href", "/draft");
+  expect(screen.getByRole("link", { name: "Normal" })).toHaveAttribute("href", "/draft");
+  expect(screen.getByRole("link", { name: "Por ID" })).toHaveAttribute("href", "/draft/jogadores");
+});
+
 it("a tecla / leva o foco para a busca", () => {
   vi.stubGlobal("fetch", vi.fn(() => new Promise(() => {})));
   render(<MemoryRouter><Shell /></MemoryRouter>);
