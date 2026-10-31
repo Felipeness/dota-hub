@@ -55,7 +55,7 @@ export function indexarPorHeroId(dados: ProPosicoes): ReadonlyMap<HeroId, HeroiP
 
 export type SlotDeHeroi = Readonly<{ heroId: HeroId; posicao: PosicaoId; lane: Lane; fracaoPro: number | null }>;
 
-const fracaoNaPosicao = (heroi: HeroiPro | undefined, posicao: PosicaoId): number | null => {
+export const fracaoNaPosicao = (heroi: HeroiPro | undefined, posicao: PosicaoId): number | null => {
   if (!heroi || heroi.posicoes.n_total === 0) return null;
   return heroi.posicoes.distribuicao[`pos${posicao}`].fracao;
 };
@@ -69,7 +69,7 @@ const pesoDaPosicao = (heroi: HeroiPro | undefined, posicao: PosicaoId): number 
   return fracao === null ? SEM_DADO_NEUTRO : Math.max(fracao, EPSILON);
 };
 
-function permutacoes<T>(itens: readonly T[]): T[][] {
+export function permutacoes<T>(itens: readonly T[]): T[][] {
   if (itens.length <= 1) return [[...itens]];
   return itens.flatMap((item, i) => {
     const resto = [...itens.slice(0, i), ...itens.slice(i + 1)];
