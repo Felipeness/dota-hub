@@ -28,6 +28,7 @@ const router = createBrowserRouter([
       { path: "/jogadores/:id", hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./players/PlayerPage")).PlayerPage }) },
       { path: "/jogadores/times/:id", hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./players/TeamPage")).TeamPage }) },
       { path: "/times", hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./times/TimesPage")).TimesPage }) },
+      { path: "/draft/jogadores", hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./draft/jogadores/JogadoresPage")).JogadoresPage }) },
       { path: "/draft", hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./draft/DraftPage")).DraftPage }) },
       { path: ROTA_ANTIGA_DA_PRANCHETA, element: <RedirecionarParaAPrancheta /> },
       { path: ROTA_DA_PRANCHETA, hydrateFallbackElement: <Carregando />, lazy: async () => ({ Component: (await import("./prancheta/PranchetaPage")).PranchetaPage }) },

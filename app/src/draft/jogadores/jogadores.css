@@ -1,0 +1,51 @@
+/* Draft pelos 10 jogadores. Reaproveita .draft-* (sugestões, fileiras, retratos) e só os tokens de styles/tokens.css. */
+.jog { min-width: 0; }
+.jog-formulario { display: flex; flex-direction: column; gap: var(--espaco-3); }
+.jog-times { display: grid; gap: var(--espaco-3); }
+.jog-time { display: flex; flex-direction: column; gap: var(--espaco-3); min-width: 0; margin: 0; }
+.jog-time legend { padding: 0 var(--espaco-2); font-family: var(--fonte-display); font-size: 18px; }
+.jog-campo { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.jog-campo label { font-size: 13px; color: var(--cor-texto-2); }
+.jog-campo input { width: 100%; min-width: 0; min-height: var(--alvo-toque); }
+.jog-campo input[aria-invalid="true"] { border-color: var(--cor-dire); }
+.jog-erro-campo { margin: 0; font-size: 13px; color: var(--cor-alerta-texto); }
+.jog-analisar { align-self: flex-start; min-height: var(--alvo-toque); padding: 0 var(--espaco-5); border-color: var(--cor-destaque); }
+.jog-analisar:disabled { border-color: var(--cor-linha-forte); }
+
+.jog-conta { display: inline-flex; align-items: center; gap: var(--espaco-2); min-width: 0; max-width: 100%; }
+.jog-avatar { flex: 0 0 32px; width: 32px; height: 32px; border-radius: 50%; object-fit: cover; background: var(--cor-superficie-3); }
+.jog-avatar-vazio { display: grid; place-items: center; font-family: var(--fonte-display); color: var(--cor-texto-2); }
+.jog-conta-nome { display: flex; flex-direction: column; min-width: 0; overflow-wrap: anywhere; }
+.jog-conta-nome .numero { font-size: 12px; color: var(--cor-texto-3); }
+
+.jog-progresso { margin: 0; }
+.jog-lista-contas { display: grid; gap: var(--espaco-2); margin: 0; padding: 0; list-style: none; }
+
+.jog-falhas { display: flex; flex-direction: column; gap: var(--espaco-2); align-items: flex-start; padding: var(--espaco-3); border: 1px solid var(--cor-dire); border-radius: var(--raio); background: var(--cor-superficie); }
+.jog-falhas p, .jog-falhas ul { margin: 0; }
+.jog-falhas ul { padding-left: var(--espaco-4); }
+
+.jog-resultado { display: flex; flex-direction: column; gap: var(--espaco-5); min-width: 0; }
+.jog-secao, .jog-banidos { display: flex; flex-direction: column; gap: var(--espaco-3); min-width: 0; }
+.jog-veredito { margin: 0; padding: var(--espaco-2) var(--espaco-3); border-left: 3px solid var(--cor-linha-ativa); background: var(--cor-superficie-2); color: var(--cor-texto-leitura); font-size: 14px; }
+.jog-decidido { border-left-color: var(--cor-radiant); }
+.jog-nota-numero, .jog-aviso-conta { margin: 0; font-size: 14px; color: var(--cor-texto-2); }
+.jog-aviso-conta { color: var(--cor-texto-3); }
+.jog-picks { display: grid; gap: var(--espaco-4); }
+.jog-conta-picks { display: flex; flex-direction: column; gap: var(--espaco-2); min-width: 0; padding: var(--espaco-3); border: 1px solid var(--cor-linha); border-left: 3px solid var(--cor-radiant); border-radius: var(--raio); }
+.jog-avisos { display: flex; flex-direction: column; gap: var(--espaco-2); margin: 0; padding-left: var(--espaco-4); font-size: 14px; color: var(--cor-texto-2); }
+
+.jog-chips { display: flex; flex-wrap: wrap; gap: var(--espaco-2); margin: 0; padding: 0; list-style: none; }
+.jog-chips li { display: inline-flex; align-items: center; gap: var(--espaco-2); padding: 0 0 0 var(--espaco-3); border: 1px solid var(--cor-linha-forte); border-radius: var(--raio-pilula); }
+.jog-adicionar { display: flex; flex-direction: column; gap: 4px; max-width: 360px; font-size: 13px; color: var(--cor-texto-2); }
+.jog-adicionar select { font: inherit; min-height: var(--alvo-toque); padding: 0 var(--espaco-3); color: var(--cor-texto); background: var(--cor-superficie-2); border: 1px solid var(--cor-linha-forte); border-radius: 10px; }
+
+.jog .draft-sugestao-topo { flex-wrap: wrap; }
+.jog .draft-sugestao-nome { flex: 1 1 140px; overflow-wrap: anywhere; }
+.jog .draft-sugestao-topo button { min-height: var(--alvo-toque); }
+
+@media (min-width: 900px) {
+  .jog-times { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .jog-picks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .jog-draft { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

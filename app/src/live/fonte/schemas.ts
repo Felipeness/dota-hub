@@ -1,10 +1,16 @@
-// Só os campos que o app usa. URLs de avatar e logo ficam de fora de propósito (privacidade, ver a decisão técnica).
+// Só os campos que o app usa. O avatar da conta só entra no jogador (tela de draft por contas, que mostra quem é cada ID colado); logo e demais URLs ficam de fora (privacidade).
 import { z } from "zod";
 
 const texto = z.string().nullable().optional().transform((v) => v ?? null);
+/** Só imagem https servida pela Steam: qualquer outra URL vira "sem avatar". */
+const avatarDaSteam = z.string().nullable().optional().transform((v) => {
+  if (!v) return null;
+  const url = URL.canParse(v) ? new URL(v) : null;
+  return url?.protocol === "https:" && url.hostname.endsWith(".steamstatic.com") ? v : null;
+});
 
 export const jogadorFonte = z.object({
-  profile: z.object({ account_id: z.number(), personaname: texto }).nullable().optional(),
+  profile: z.object({ account_id: z.number(), personaname: texto, avatarfull: avatarDaSteam.optional() }).nullable().optional(),
   rank_tier: z.number().nullable().optional(),
 });
 export const vitoriasFonte = z.object({ win: z.number(), lose: z.number() });

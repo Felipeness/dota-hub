@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { useSearchParams } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import { carregarBase } from "../confronto/carregar";
 import type { Heroi } from "../confronto/modelo";
 import { useData } from "../data/useData";
@@ -147,6 +147,9 @@ export function DraftPage() {
       <div className="rotas-topo"><span className="sobretitulo">Draft</span><h1>Simulador de draft</h1></div>
       <p className="draft-explicacao">
         Monte os dois times e os bans. A lista mostra o que pegar e o que banir, sempre com o porquê e de onde veio o número.
+      </p>
+      <p className="draft-nota">
+        Tem o ID dos 10 jogadores? <Link to="/draft/jogadores">Cole as contas e veja bans, picks e o melhor draft pelo histórico de cada um.</Link>
       </p>
       <p className="draft-nota">
         Em all pick de pub o draft não é tão coordenado assim. O que ajuda de verdade: o confronto 1x1 contra o herói que mais te
