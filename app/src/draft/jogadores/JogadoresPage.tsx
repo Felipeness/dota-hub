@@ -20,6 +20,7 @@ import {
 import { ContaNaLista } from "./ContaNaLista";
 import { Resultado, type IdentidadeMostrada, type NomesDosHerois } from "./Resultado";
 import { situacaoDaAnalise, type ContaQueFalhou, type Situacao } from "./situacao";
+import "../draft.css";
 import "./jogadores.css";
 
 const MAXIMO_DE_BANS = 14;

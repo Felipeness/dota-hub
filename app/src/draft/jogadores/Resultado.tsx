@@ -84,7 +84,7 @@ function ItemDeBan({ ban, posicao, herois, identidade, onBanir }: {
         <BotaoJaBanido heroi={ban.heroi} onBanir={onBanir} nome={nome} />
       </div>
       <p className="jog-nota-numero">
-        <span className="numero">{formatarPp(ban.notaPp)}</span> para o time inimigo, {entre(ban.intervaloPp)}
+        Tira do time inimigo <span className="numero">{formatarPp(ban.notaPp)}</span>, {entre(ban.intervaloPp)}
       </p>
       <p className="draft-motivo-texto">{ban.motivo}</p>
     </li>
@@ -202,6 +202,7 @@ function MelhorDraftView({ melhorDraft, herois, identidade, semDados }: Pick<Pro
       <h2 id="jog-draft-titulo">Melhor draft para o seu time</h2>
       <p className="draft-nota">Um herói por aliado, sem repetir, na posição que os heróis da conta costumam ocupar entre os pros.</p>
       <FraseDaChance chance={melhorDraft.chance} />
+      <p className="draft-nota">A chance soma as 10 contas e ainda não foi conferida contra partidas reais de ranqueada com as 10 contas: leia como pista, não como previsão.</p>
       <ul className="draft-sugestoes jog-draft">
         {melhorDraft.escolhas.map((e) => <LinhaDoDraft key={e.conta} escolha={e} herois={herois} identidade={identidade} semDados={semDados.has(e.conta)} />)}
       </ul>
