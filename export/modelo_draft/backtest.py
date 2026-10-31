@@ -27,14 +27,17 @@ BOOTSTRAPS = 2000
 EPS = 1e-6
 MEIAS_VIDAS_DIAS = (float("inf"), 365.0, 180.0, 90.0)
 HISTORICOS_CURTOS = (100, 300)
-FORCA_DA_BASE = (20, 50, 100, 200, 500)
+FORCA_DA_BASE = (20, 50, 100, 200, 500, 1000, 2000)
 FORCA_DO_HEROI = (5, 10, 20, 40, 80, 160, 320, 640, 1280, 5000)
 CS_DA_HIERARQUICA = (0.01, 0.03, 0.1, 0.3, 1.0)
+CS_DA_TABELA = (0.003, 0.01, 0.03, 0.1)
+DIAS_DA_TABELA = 365
+MEIA_VIDA_DA_TABELA = 120
 JANELA_DA_META_DIAS = 30
 PRIOR_DA_META = 100
 FORCA_DO_PAR = 200
 MEIAS_VIDAS_PICK_JOGOS = (10, 25, 50, 100, 200, float("inf"))
-ALFAS_PICK = (0.25, 0.5, 1.0, 2.0, 5.0, 10.0)
+ALFAS_PICK = (0.5, 1.0, 2.0, 5.0, 10.0, 20.0, 40.0)
 TOP_PICK = (1, 3, 5, 10)
 BANS_NA_LISTA = 3
 JOGOS_MINIMOS_PARA_RANKING = 5
@@ -156,6 +159,28 @@ def efeitos_de_par(L, antes: np.ndarray) -> np.ndarray:
     return par - esperado
 
 
+class Tabela:
+    """Matrizes e configuração dos modelos com tabela de heróis, reaproveitadas entre janelas."""
+
+    def __init__(self, L, c: float, pares_pro: np.ndarray):
+        self.unica, self.separada, self.c, self.pares_pro = linhas_da_tabela(L, False), linhas_da_tabela(L, True), c, pares_pro
+        self.congelada = None
+
+    def congelada_em(self, ajuste) -> None:
+        self.congelada = ajuste
+
+
+def pares_de_pro(caminho: Path) -> np.ndarray:
+    """Efeito de par em logit vindo de confrontos_pares.json, encolhido para zero."""
+    bruto = json.loads(caminho.read_text(encoding="utf-8"))
+    efeito = np.zeros((MAX_HEROI, MAX_HEROI))
+    for heroi, rivais in bruto.items():
+        for rival, placar in rivais.items():
+            jogos, vitorias = placar[0], placar[1]
+            efeito[int(heroi), int(rival)] = logit((vitorias + FORCA_DO_PAR / 2) / (jogos + FORCA_DO_PAR))
+    return efeito
+
+
 @dataclass(frozen=True)
 class Previsao:
     p: np.ndarray
@@ -222,6 +247,45 @@ def hierarquica(L, treino, teste, c: float) -> np.ndarray:
     return modelo.predict_proba(X[teste])[:, 1]
 
 
+def linhas_da_tabela(L, separada: bool):
+    """Efeitos de herói com sinal: +1 para quem está do lado da conta, -1 para o outro lado."""
+    n = len(L)
+    linhas = np.arange(n)
+    meu = sparse.csr_matrix((np.ones(n), (linhas, L.heroi)), shape=(n, MAX_HEROI))
+    ali = sparse.csr_matrix((np.ones(4 * n), (np.repeat(linhas, 4), L.aliados.ravel())), shape=(n, MAX_HEROI))
+    ini = sparse.csr_matrix((-np.ones(5 * n), (np.repeat(linhas, 5), L.inimigos.ravel())), shape=(n, MAX_HEROI))
+    return sparse.hstack([meu, ali, ini], format="csr") if separada else (meu + ali + ini).tocsr()
+
+
+def ajustar_tabela(X_herois, extras, y, treino, dias, c: float) -> tuple[np.ndarray, float]:
+    """Logística L2 com os efeitos de herói e colunas extras; devolve coeficientes e intercepto."""
+    X = sparse.hstack([sparse.csr_matrix(extras), X_herois], format="csr")
+    pesos = 2.0 ** (-(dias[treino].max() - dias[treino]) / MEIA_VIDA_DA_TABELA)
+    modelo = LogisticRegression(C=c, max_iter=300).fit(X[treino], y[treino], sample_weight=pesos)
+    return modelo.coef_[0], float(modelo.intercept_[0])
+
+
+def aplicar_tabela(X_herois, extras, coefs, intercepto, teste) -> np.ndarray:
+    return expit(intercepto + extras[teste] @ coefs[:extras.shape[1]] + X_herois[teste] @ coefs[extras.shape[1]:])
+
+
+def escolher_c_tabela(L, f, media, origem: int) -> float:
+    """Validação nos 30 dias antes da primeira janela de teste, mesma regra da hierárquica."""
+    corte = origem - 30
+    y = L.vitoria.astype(float)
+    treino = (L.dia < corte) & (L.dia >= corte - DIAS_DA_TABELA)
+    validacao = (L.dia >= corte) & (L.dia < origem)
+    s, a, k, _ = melhor_eb(f, y, (L.dia < corte) & (L.dia >= corte - DIAS_DE_AJUSTE), media)
+    extras = (logit(eb(f, s, a, k, media)) - logit(base_do_jogador(f, s, a, media)))[:, None]
+    X = linhas_da_tabela(L, False)
+
+    def erro(c):
+        coefs, intercepto = ajustar_tabela(X, extras, y, treino, L.dia, c)
+        return perda(y[validacao], aplicar_tabela(X, extras, coefs, intercepto, validacao))
+
+    return min(CS_DA_TABELA, key=erro)
+
+
 def escolher_c_hierarquica(L, origem: int) -> float:
     """Validação nos 30 dias antes da primeira janela de teste: nada do teste entra na escolha."""
     corte = origem - 30
@@ -231,7 +295,7 @@ def escolher_c_hierarquica(L, origem: int) -> float:
     return min(CS_DA_HIERARQUICA, key=lambda c: perda(y, hierarquica(L, treino, validacao, c)))
 
 
-def prever_janela(L, f, meta, dia_base, janela: Janela, c_hierarquica: float | None) -> dict[str, Previsao]:
+def prever_janela(L, f, meta, dia_base, janela: Janela, c_hierarquica: float | None, tabela) -> dict[str, Previsao]:
     y = L.vitoria.astype(float)
     antes = L.dia < janela.inicio
     teste = (L.dia >= janela.inicio) & (L.dia < janela.fim)
@@ -287,6 +351,26 @@ def prever_janela(L, f, meta, dia_base, janela: Janela, c_hierarquica: float | N
     log_dias = np.log1p(f["dias_sem"]) - np.log1p(f["dias_sem"][ajuste]).mean()
     p_d, b_d = logistica([mu, vantagem, g_h, g_ali, g_ini, soma_par, vantagem * log_n, vantagem * log_dias], c=0.1)
     saida["d_logistica_regularizada"] = Previsao(p_d, "coefs=" + ",".join(f"{v:.3f}" for v in b_d))
+    treino_t = antes & (L.dia >= janela.inicio - DIAS_DA_TABELA)
+    so_vantagem = vantagem[:, None]
+    com_mu = np.column_stack([vantagem, mu])
+    com_exp = np.column_stack([vantagem, np.log1p(f["n_jh"])])
+    for nome_t, X_t, extras, c in (
+        ("f1_vantagem_tabela", tabela.unica, so_vantagem, tabela.c),
+        ("f2_vantagem_tabela_base", tabela.unica, com_mu, tabela.c),
+        ("f3_vantagem_tabela_experiencia", tabela.unica, com_exp, tabela.c),
+        ("f4_vantagem_tres_tabelas", tabela.separada, so_vantagem, tabela.c / 3),
+    ):
+        coefs, intercepto = ajustar_tabela(X_t, extras, y, treino_t, L.dia, c)
+        saida[nome_t] = Previsao(aplicar_tabela(X_t, extras, coefs, intercepto, teste), f"c={c} intercepto={intercepto:.3f} extras=" + ",".join(f"{v:.3f}" for v in coefs[:extras.shape[1]]))
+    if tabela.congelada is None:
+        tabela.congelada_em(ajustar_tabela(tabela.unica, com_exp, y, treino_t, L.dia, tabela.c))
+    coefs, intercepto = tabela.congelada
+    saida["f3c_tabela_congelada"] = Previsao(aplicar_tabela(tabela.unica, com_exp, coefs, intercepto, teste), "tabela da primeira origem")
+    par_pro = tabela.pares_pro[L.heroi[:, None], L.inimigos].sum(1)[:, None]
+    com_par = np.column_stack([vantagem, par_pro])
+    coefs, intercepto = ajustar_tabela(tabela.unica, com_par, y, treino_t, L.dia, tabela.c)
+    saida["f5_tabela_pares_pro"] = Previsao(aplicar_tabela(tabela.unica, com_par, coefs, intercepto, teste), f"extras={coefs[0]:.3f},{coefs[1]:.4f}")
     if c_hierarquica is not None:
         treino_h = antes & (L.dia >= janela.inicio - 2 * 365)
         saida["d2_hierarquica_esparsa"] = Previsao(hierarquica(L, treino_h, teste, c_hierarquica), f"congelada na origem, C={c_hierarquica}")
@@ -337,6 +421,22 @@ def centrar_na_conta(valores, conta_i, contas):
     return valores - medias[conta_i]
 
 
+PARES_COMPARADOS = (
+    ("f3_vantagem_tabela_experiencia", "c_beta_binomial"), ("f3_vantagem_tabela_experiencia", "b_concorrente"),
+    ("f3_vantagem_tabela_experiencia", "d_logistica_regularizada"), ("f3_vantagem_tabela_experiencia", "d2_hierarquica_esparsa"), ("f3_vantagem_tabela_experiencia", "f1_vantagem_tabela"),
+    ("f2_vantagem_tabela_base", "f1_vantagem_tabela"), ("f5_tabela_pares_pro", "f1_vantagem_tabela"), ("f3c_tabela_congelada", "f3_vantagem_tabela_experiencia"),
+    ("c2_beta_binomial_recencia", "c_beta_binomial"), ("c_beta_binomial", "b_concorrente"),
+)
+
+
+def comparacoes_pareadas(y, previsoes, conta_i, contas, rng) -> list[dict]:
+    saida = []
+    for a, b in PARES_COMPARADOS:
+        delta, baixo, alto = diferenca_com_ic(perda_pontual(y, previsoes[a]), perda_pontual(y, previsoes[b]), conta_i, contas, rng)
+        saida.append({"a": a, "b": b, "delta": delta, "ic": [baixo, alto]})
+    return saida
+
+
 def utilidade_da_vantagem(y, vantagens, n_jh, conta_i, contas, rng) -> dict:
     """Dentro de uma mesma conta, herói com nota maior vence mais depois? Centrar na conta tira o nível do jogador,
     que entraria dos dois lados da comparação como ruído em comum. Inclinação ≈ 1 = a vantagem vale o que promete."""
@@ -358,6 +458,32 @@ def utilidade_da_vantagem(y, vantagens, n_jh, conta_i, contas, rng) -> dict:
             "terco_de_cima_menos_de_baixo_pp": float(100 * (s_a.sum() / n_a.sum() - s_b.sum() / n_b.sum())),
             "terco_ic_pp": [float(100 * q) for q in np.quantile(dif, [0.025, 0.975])], "linhas": int(linhas.sum()),
         }
+    return saida
+
+
+def efeito_de_experiencia(y, t, conta_i, contas, rng) -> dict:
+    """Taxa de vitória por jogos anteriores no herói, centrada na conta: conforto existe mesmo sem vantagem medida?"""
+    amostras = rng.multinomial(contas, np.full(contas, 1 / contas), size=BOOTSTRAPS)
+    e = centrar_na_conta(y, conta_i, contas)
+    saida = {}
+    for faixa, (baixo, alto) in {"0": (0, 0), "1-4": (1, 4), "5-19": (5, 19), "20-59": (20, 59), "60+": (60, 10**9)}.items():
+        marcados = (t["n_jh"] >= baixo) & (t["n_jh"] <= alto)
+        s, n = por_conta(marcados * e, conta_i, contas), por_conta(marcados * 1.0, conta_i, contas)
+        medias = (amostras @ s) / np.maximum(amostras @ n, 1)
+        saida[faixa] = {"linhas": int(marcados.sum()), "excesso_pp": float(100 * s.sum() / max(n.sum(), 1)), "ic_pp": [float(100 * q) for q in np.quantile(medias, [0.025, 0.975])]}
+    return saida
+
+
+def inclinacao_por_medalha(L, teste, y, adv, n_jh) -> dict:
+    saida = {}
+    for faixa, (baixo, alto) in {"ate_legend": (1, 59), "ancient": (60, 69), "divine": (70, 79), "immortal": (80, 89)}.items():
+        marcados = (L.medalha[teste] >= baixo) & (L.medalha[teste] <= alto) & (n_jh >= JOGOS_MINIMOS_PARA_RANKING)
+        if marcados.sum() < 500:
+            continue
+        contas_faixa, c = np.unique(L.conta[teste][marcados], return_inverse=True)
+        x = centrar_na_conta(adv[marcados], c, len(contas_faixa))
+        e = centrar_na_conta(y[marcados], c, len(contas_faixa))
+        saida[faixa] = {"linhas": int(marcados.sum()), "contas": len(contas_faixa), "inclinacao": float((x * e).sum() / (x * x).sum())}
     return saida
 
 
@@ -387,7 +513,7 @@ def cobertura_do_intervalo(L, teste, p_eb, n_jh, k) -> dict:
     return {"pares": int(vale.sum()), "cobertura_95": float(dentro[vale].mean())}
 
 
-def varrer_picks(L, teste_dia_ini, ajuste_ini, media, k_h, a_b, mv_base_sufixo, f) -> dict:
+def varrer_picks(L, teste_dia_ini, ajuste_ini, media, k_h, a_b, forca) -> dict:
     """Passa por cada conta mantendo vetores por herói; avalia pick (ajuste + teste) e listas de ban (teste)."""
     ajuste_dia = (L.dia >= ajuste_ini) & (L.dia < teste_dia_ini)
     teste_dia = L.dia >= teste_dia_ini
@@ -399,7 +525,7 @@ def varrer_picks(L, teste_dia_ini, ajuste_ini, media, k_h, a_b, mv_base_sufixo, 
     medidas_grade = {chave: {"ll": 0.0, "n": 0} for chave in grade}
     registros = _varrer_ajuste(L, ajuste_dia, decaimentos, q, medidas_grade)
     melhor = min(registros, key=lambda chave: registros[chave])
-    resultados = _varrer_teste(L, teste_dia, melhor, dict(decaimentos), q, media, k_h, a_b, f)
+    resultados = _varrer_teste(L, teste_dia, melhor, dict(decaimentos), q, media, k_h, a_b, forca)
     return {"melhor_mv_jogos": melhor[0], "melhor_alfa": melhor[1], **resultados}
 
 
@@ -428,12 +554,12 @@ def _top_acertos(escores, h, ks):
     return posicao, {k: int(posicao <= k) for k in ks}
 
 
-def _varrer_teste(L, teste_dia, melhor, decaimentos, q, media, k_h, a_b, f):
+def _varrer_teste(L, teste_dia, melhor, decaimentos, q, media, k_h, a_b, forca):
     mv, alfa = melhor
     d = decaimentos[mv]
     nomes = ("global", "historico_todo", "recencia_jogos", "concorrente")
     rank = {nome: {"rr": [], **{f"top{k}": [] for k in TOP_PICK}, "ll": []} for nome in nomes}
-    bans = {nome: {"captura": [], "acerto": []} for nome in ("frequencia", "winrate_bruto", "concorrente", "p_vezes_vantagem")}
+    bans = {nome: {"captura": [], "acerto": []} for nome in ("frequencia", "winrate_bruto", "concorrente", "p_vezes_vantagem", "p_vezes_valor")}
     conta_teste = []
     fronteiras = np.flatnonzero(np.diff(L.conta)) + 1
     for inicio, fim in zip(np.r_[0, fronteiras], np.r_[fronteiras, len(L)]):
@@ -454,6 +580,10 @@ def _varrer_teste(L, teste_dia, melhor, decaimentos, q, media, k_h, a_b, f):
                 v_todos = (p_rec * adv).sum()
                 sem = (v_todos - p_rec * adv) / resto
                 remove = p_rec * (adv - sem)
+                valor = forca[0] * (logit(p_eb) - logit(mu)) + forca[1] * np.log1p(n) + forca[2]
+                v_valor = (p_rec * valor).sum()
+                sem_valor = (v_valor - p_rec * valor) / resto
+                remove_valor = p_rec * (valor - sem_valor)
                 wr = np.divide(v, n, out=np.zeros(MAX_HEROI), where=n >= 3)
                 conf = n ** 2 / (n ** 2 + 18)
                 recencia = 2 ** (-(dia - ultimo) / 90)
@@ -465,7 +595,7 @@ def _varrer_teste(L, teste_dia, melhor, decaimentos, q, media, k_h, a_b, f):
                         rank[nome][f"top{k}"].append(acerto)
                     if pr is not None:
                         rank[nome]["ll"].append(-np.log(max(pr[h], 1e-9)))
-                for nome, escores in (("frequencia", p_rec), ("winrate_bruto", wr), ("concorrente", comp), ("p_vezes_vantagem", remove)):
+                for nome, escores in (("frequencia", p_rec), ("winrate_bruto", wr), ("concorrente", comp), ("p_vezes_vantagem", remove), ("p_vezes_valor", remove_valor)):
                     lista = np.argpartition(-escores, BANS_NA_LISTA)[:BANS_NA_LISTA]
                     acertou = h in lista
                     bans[nome]["acerto"].append(int(acertou))
@@ -494,6 +624,9 @@ def resumir_picks(picks, rng) -> dict:
 
     rank = {nome: {chave: com_ic(valores) for chave, valores in r.items() if len(valores)} for nome, r in picks["rank"].items()}
     bans = {nome: {"acerto": com_ic(r["acerto"]), "captura_pp": com_ic(100 * np.array(r["captura"]))} for nome, r in picks["bans"].items()}
+    referencia = 100 * np.array(picks["bans"]["p_vezes_valor"]["captura"])
+    for nome, r in picks["bans"].items():
+        bans[nome]["ganho_do_p_vezes_valor_pp"] = com_ic(referencia - 100 * np.array(r["captura"]))
     return {"melhor_mv_jogos": picks["melhor_mv_jogos"], "melhor_alfa": picks["melhor_alfa"], "rank": rank, "bans": bans, "linhas": len(conta_i)}
 
 
@@ -541,7 +674,7 @@ def recorte(L, mascara):
     return fonte.Linhas(**{campo: getattr(L, campo)[mascara] for campo in L.__dataclass_fields__})
 
 
-def avaliar_segmento(nome: str, L, usar_hierarquica: bool) -> dict:
+def avaliar_segmento(nome: str, L, usar_hierarquica: bool, pares_pro: np.ndarray) -> dict:
     rng = np.random.default_rng(SEMENTE)
     f = estatisticas_por_linha(L)
     meta, dia_base = meta_dos_herois(L)
@@ -550,9 +683,11 @@ def avaliar_segmento(nome: str, L, usar_hierarquica: bool) -> dict:
     parametros: dict[str, list[str]] = {}
     indices = []
     c_hierarquica = escolher_c_hierarquica(L, janelas[0].inicio) if usar_hierarquica else None
+    media_inicial = float(L.vitoria[L.dia < janelas[0].inicio].mean())
+    tabela = Tabela(L, escolher_c_tabela(L, f, media_inicial, janelas[0].inicio), pares_pro)
     for janela in janelas:
         indices.append(np.flatnonzero((L.dia >= janela.inicio) & (L.dia < janela.fim)))
-        for modelo, previsao in prever_janela(L, f, meta, dia_base, janela, c_hierarquica).items():
+        for modelo, previsao in prever_janela(L, f, meta, dia_base, janela, c_hierarquica, tabela).items():
             acumulado.setdefault(modelo, []).append(previsao.p)
             parametros.setdefault(modelo, []).append(previsao.params)
         print(f"{nome}: janela {janela} pronta", flush=True)
@@ -574,7 +709,8 @@ def avaliar_segmento(nome: str, L, usar_hierarquica: bool) -> dict:
     vantagens = {"bruto": bruto - mu, "beta_binomial": p_eb - mu, "beta_binomial_recencia": previsoes["c2_beta_binomial_recencia"] - mu,
                  "concorrente": escore_do_concorrente(t)}
 
-    picks = varrer_picks(L, janelas[0].inicio, janelas[0].inicio - 60, media, k_inicial, a_inicial, "", f)
+    coefs_congelados, _ = tabela.congelada
+    picks = varrer_picks(L, janelas[0].inicio, janelas[0].inicio - 60, media, k_inicial, a_inicial, (coefs_congelados[0], coefs_congelados[1], coefs_congelados[2:]))
     por_faixa = {}
     for faixa, (baixo, alto) in {"0": (0, 0), "1-4": (1, 4), "5-19": (5, 19), "20+": (20, 10**9)}.items():
         marcados = (t["n_jh"] >= baixo) & (t["n_jh"] <= alto)
@@ -585,8 +721,11 @@ def avaliar_segmento(nome: str, L, usar_hierarquica: bool) -> dict:
         "taxa_de_vitoria_teste": float(y.mean()), "periodo_teste": [int(janelas[0].inicio), int(janelas[-1].fim)],
         "parametros": {m: p[-1] for m, p in parametros.items()},
         "resultado": tabela_de_resultado(y, previsoes, conta_i, contas, rng),
+        "pareadas": comparacoes_pareadas(y, previsoes, conta_i, contas, rng),
         "por_jogos_no_heroi": por_faixa,
         "utilidade_vantagem": utilidade_da_vantagem(y, vantagens, t["n_jh"], conta_i, contas, rng),
+        "experiencia": efeito_de_experiencia(y, t, conta_i, contas, rng),
+        "por_medalha": inclinacao_por_medalha(L, teste, y, p_eb - mu, t["n_jh"]),
         "sinal": sinal_certo(y, mu, p_eb, t["n_jh"], k_inicial, conta_i, contas, rng),
         "cobertura": cobertura_do_intervalo(L, teste, p_eb, t["n_jh"], k_inicial),
         "picks_e_bans": resumir_picks(picks, rng),
@@ -598,6 +737,7 @@ def main() -> None:
     argumentos = argparse.ArgumentParser()
     argumentos.add_argument("--tier1", type=Path, required=True)
     argumentos.add_argument("--saida", type=Path, required=True)
+    argumentos.add_argument("--pares", type=Path, required=True)
     argumentos.add_argument("--sem-hierarquica", action="store_true")
     opcoes = argumentos.parse_args()
     sys.path.insert(0, str(opcoes.tier1 / "tools"))
@@ -605,11 +745,12 @@ def main() -> None:
 
     L = fonte.carregar(od)
     print(f"{len(L)} linhas em {len(set(L.conta))} contas", flush=True)
+    pares = pares_de_pro(opcoes.pares)
     resultados = []
     eh_pro = L.origem == "pro"
     for nome, mascara in (("ranqueada", ~eh_pro), ("pro", eh_pro)):
         if mascara.sum() > 0:
-            resultados.append(avaliar_segmento(nome, recorte(L, mascara), not opcoes.sem_hierarquica))
+            resultados.append(avaliar_segmento(nome, recorte(L, mascara), not opcoes.sem_hierarquica, pares))
     opcoes.saida.write_text(json.dumps(resultados, indent=1), encoding="utf-8")
 
 
