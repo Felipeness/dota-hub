@@ -60,3 +60,8 @@ it("lê as lanes e troca o semáforo da confiança pela escala do app", () => {
   expect(lidas.map((l) => l.confianca)).toEqual(["alta", "baixa"]);
   expect(lanesSchema.safeParse({ lanes: [{ ...lanesA.lanes[0], confianca: "verde" }] }).success).toBe(false);
 });
+
+it("considera o time ativo quando o índice não diz o contrário", () => {
+  const [time] = indiceAtlasSchema.parse(indice).times;
+  expect(time?.inativa).toBe(false);
+});

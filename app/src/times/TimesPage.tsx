@@ -28,6 +28,8 @@ export function TimesPage() {
   if (indice.estado === "carregando") return <p>Carregando times…</p>;
   if (indice.estado === "indisponivel") return <section className="atlas"><Indisponivel motivo={indice.motivo} /></section>;
   const { times, eixos, clusters, periodo, patch, gerado_em } = indice.dados;
+  const ativos = times.filter((t) => !t.inativa);
+  const inativos = times.filter((t) => t.inativa);
   return (
     <section className="atlas">
       <header className="rotas-topo">
@@ -37,7 +39,14 @@ export function TimesPage() {
       </header>
       {times.length === 0
         ? <p className="atlas-sub">O índice ainda não tem times.</p>
-        : <ul className="atlas-grade">{times.map((t) => <CartaoTime key={t.id} time={t} cor={corDoCluster(clusters, t.cluster)} />)}</ul>}
+        : <ul className="atlas-grade">{ativos.map((t) => <CartaoTime key={t.id} time={t} cor={corDoCluster(clusters, t.cluster)} />)}</ul>}
+      {inativos.length > 0 && (
+        <>
+          <h2 className="atlas-inativos">Fichas históricas</h2>
+          <p className="atlas-sub">Elencos desfeitos: análise até a saída, não vale para jogar contra hoje.</p>
+          <ul className="atlas-grade">{inativos.map((t) => <CartaoTime key={t.id} time={t} cor={corDoCluster(clusters, t.cluster)} />)}</ul>
+        </>
+      )}
       <MapaDeEstilos indice={indice.dados} eixos={eixos} />
     </section>
   );

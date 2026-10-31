@@ -1,7 +1,7 @@
 import type { Secao } from "./schemas";
 
 // Ordem de leitura: quem é o time, depois o catálogo do contrato e, por fim, como a análise foi feita e corrigida.
-const ABERTURA = ["identidade", "dna", "dna_cadeia", "contexto", "amostra"];
+const ABERTURA = ["elenco_atual", "identidade", "dna", "dna_cadeia", "contexto", "amostra"];
 const CATALOGO = [
   "draft", "hero_pool", "pool", "heroes", "laning", "recursos", "mapa", "farm", "visao", "smoke", "objetivos",
   "objetivo_ward_smoke", "lutas", "ritmo", "vitoria", "derrota", "assinatura", "tres_niveis", "niveis", "jogadores",

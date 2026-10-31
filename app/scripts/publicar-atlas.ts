@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 import type { ZodType } from "zod";
 import { LADOS, chavesSchema, indiceAtlasSchema, lanesSchema, mapaDoLadoSchema, timeAtlasSchema } from "../src/times/schemas.ts";
 
-type Equipe = { id: string; mapa: string; chave: string; classificacao: "tier1" | "fronteira" };
+type Equipe = { id: string; mapa: string; chave: string; classificacao: "tier1" | "fronteira"; inativa?: boolean };
 
 // mapa = id em data/derivados/mapa_por_equipe (<mapa>.lados.json); chave = nome da equipe em sintese/eixos.json; fronteira segundo data/derivados/mapa_por_equipe/indice_base.json.
 const EQUIPES: readonly Equipe[] = [
@@ -16,13 +16,17 @@ const EQUIPES: readonly Equipe[] = [
   { id: "parivision", mapa: "parivision", chave: "PARIVISION", classificacao: "tier1" },
   { id: "betboom", mapa: "betboom-team", chave: "BetBoom", classificacao: "tier1" },
   { id: "aurora", mapa: "aurora-gaming", chave: "Aurora", classificacao: "tier1" },
-  { id: "falcons", mapa: "team-falcons", chave: "Falcons", classificacao: "tier1" },
+  { id: "falcons", mapa: "team-falcons", chave: "Falcons", classificacao: "tier1", inativa: true },
   { id: "liquid", mapa: "team-liquid", chave: "Liquid", classificacao: "tier1" },
   { id: "1win", mapa: "1win", chave: "1win", classificacao: "tier1" },
-  { id: "lgd", mapa: "lgd-gaming", chave: "LGD", classificacao: "fronteira" },
-  { id: "nigma", mapa: "nigma-galaxy", chave: "Nigma", classificacao: "tier1" },
+  { id: "lgd", mapa: "lgd-gaming", chave: "LGD", classificacao: "fronteira", inativa: true },
+  { id: "nigma", mapa: "nigma-galaxy", chave: "Nigma", classificacao: "tier1", inativa: true },
   { id: "navi", mapa: "natus-vincere", chave: "NAVI", classificacao: "tier1" },
   { id: "xtreme", mapa: "xtreme-gaming", chave: "Xtreme", classificacao: "fronteira" },
+  { id: "gamerlegion", mapa: "gamerlegion", chave: "GamerLegion", classificacao: "fronteira" },
+  { id: "og", mapa: "og", chave: "OG", classificacao: "fronteira" },
+  { id: "legion", mapa: "legion", chave: "LEGION", classificacao: "fronteira" },
+  { id: "astra-invicta", mapa: "astra-invicta", chave: "Astra", classificacao: "fronteira" },
 ];
 
 type Sintese = {
@@ -183,7 +187,7 @@ function montarIndice(times: ReturnType<typeof publicarTime>[]) {
       return {
         id: t.id, nome: t.nome, tag: t.tag, partidas: t.amostra.partidas, replays: t.amostra.replays, amostra: t.amostra.nivel,
         estilo: nomesClusters[String(cluster)] ?? `C${cluster}`, cluster: `C${cluster}`,
-        classificacao: equipe.classificacao, eixos: posicao, team_ids: idsPorNome.get(t.nome) ?? [],
+        classificacao: equipe.classificacao, eixos: posicao, team_ids: idsPorNome.get(t.nome) ?? [], inativa: equipe.inativa ?? false,
       };
     }),
   };
