@@ -201,11 +201,11 @@ def perda(y, p) -> float:
     return float(-(y * np.log(p) + (1 - y) * np.log(1 - p)).mean())
 
 
-def melhor_eb(f, y, ajuste, media, sufixos=("",)) -> tuple[str, float, float, float]:
+def melhor_eb(f, y, ajuste, media, sufixos=("",)) -> tuple[str, float, float]:
     candidatos = [(perda(y[ajuste], eb({k: v[ajuste] for k, v in f.items()}, s, a, k_h, media)), s, a, k_h)
                   for s in sufixos for a in FORCA_DA_BASE for k_h in FORCA_DO_HEROI]
     _, sufixo, a, k_h = min(candidatos)
-    return sufixo, a, k_h, 0.0
+    return sufixo, a, k_h
 
 
 def melhor_base(f, y, ajuste, media) -> float:
@@ -275,7 +275,7 @@ def escolher_c_tabela(L, f, media, origem: int) -> float:
     y = L.vitoria.astype(float)
     treino = (L.dia < corte) & (L.dia >= corte - DIAS_DA_TABELA)
     validacao = (L.dia >= corte) & (L.dia < origem)
-    s, a, k, _ = melhor_eb(f, y, (L.dia < corte) & (L.dia >= corte - DIAS_DE_AJUSTE), media)
+    s, a, k = melhor_eb(f, y, (L.dia < corte) & (L.dia >= corte - DIAS_DE_AJUSTE), media)
     extras = (logit(eb(f, s, a, k, media)) - logit(base_do_jogador(f, s, a, media)))[:, None]
     X = linhas_da_tabela(L, False)
 
@@ -315,13 +315,13 @@ def prever_janela(L, f, meta, dia_base, janela: Janela, c_hierarquica: float | N
     com_conf = (f["n_jh"] ** 2 / (f["n_jh"] ** 2 + 18)) * np.divide(f["v_jh_90"], f["n_jh_90"], out=np.full_like(f["n_jh"], 0.5), where=f["n_jh_90"] > 0)
     saida["b2_conf_x_wr"] = Previsao(platt(com_conf[ajuste, None], y[ajuste], com_conf[teste, None]), "só N²/(N²+18) × winrate, Platt")
 
-    s, a_eb, k_eb, _ = melhor_eb(f, y, ajuste, media)
+    s, a_eb, k_eb = melhor_eb(f, y, ajuste, media)
     saida["c_beta_binomial"] = Previsao(eb(t, s, a_eb, k_eb, media), f"a={a_eb} k={k_eb}")
-    s_r, a_r, k_r, _ = melhor_eb(f, y, ajuste, media, tuple(f"_{mv:.0f}" for mv in MEIAS_VIDAS_DIAS[1:]) + ("",))
+    s_r, a_r, k_r = melhor_eb(f, y, ajuste, media, tuple(f"_{mv:.0f}" for mv in MEIAS_VIDAS_DIAS[1:]) + ("",))
     saida["c2_beta_binomial_recencia"] = Previsao(eb(t, s_r, a_r, k_r, media), f"sufixo={s_r} a={a_r} k={k_r}")
     for k in HISTORICOS_CURTOS:
         sufixo = f"_u{k}"
-        s_k, a_k, k_k, _ = melhor_eb(f, y, ajuste, media, (sufixo,))
+        s_k, a_k, k_k = melhor_eb(f, y, ajuste, media, (sufixo,))
         saida[f"c3_beta_binomial_ultimos_{k}"] = Previsao(eb(t, s_k, a_k, k_k, media), f"a={a_k} k={k_k}")
 
     mu = logit(base_do_jogador(f, s_r, a_r, media))
@@ -431,7 +431,7 @@ PARES_COMPARADOS = (
 
 def comparacoes_pareadas(y, previsoes, conta_i, contas, rng) -> list[dict]:
     saida = []
-    for a, b in PARES_COMPARADOS:
+    for a, b in (par for par in PARES_COMPARADOS if par[0] in previsoes and par[1] in previsoes):
         delta, baixo, alto = diferenca_com_ic(perda_pontual(y, previsoes[a]), perda_pontual(y, previsoes[b]), conta_i, contas, rng)
         saida.append({"a": a, "b": b, "delta": delta, "ic": [baixo, alto]})
     return saida
@@ -521,8 +521,7 @@ def varrer_picks(L, teste_dia_ini, ajuste_ini, media, k_h, a_b, forca) -> dict:
     q[0] = 0
     q = q / q.sum()
     decaimentos = [(mv, 1.0 if mv == float("inf") else 2 ** (-1 / mv)) for mv in MEIAS_VIDAS_PICK_JOGOS]
-    grade = {(mv, alfa): [] for mv, _ in decaimentos for alfa in ALFAS_PICK}
-    medidas_grade = {chave: {"ll": 0.0, "n": 0} for chave in grade}
+    medidas_grade = {(mv, alfa): {"ll": 0.0, "n": 0} for mv, _ in decaimentos for alfa in ALFAS_PICK}
     registros = _varrer_ajuste(L, ajuste_dia, decaimentos, q, medidas_grade)
     melhor = min(registros, key=lambda chave: registros[chave])
     resultados = _varrer_teste(L, teste_dia, melhor, dict(decaimentos), q, media, k_h, a_b, forca)

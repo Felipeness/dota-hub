@@ -30,7 +30,7 @@ def treinar(L) -> dict:
     ajuste = L.dia >= dia_final - bt.DIAS_DE_AJUSTE
     treino = L.dia >= dia_final - bt.DIAS_DA_TABELA
     media = float(y.mean())
-    _, a, k, _ = bt.melhor_eb(f, y, ajuste, media)
+    _, a, k = bt.melhor_eb(f, y, ajuste, media)
     vantagem = bt.logit(bt.eb(f, "", a, k, media)) - bt.logit(bt.base_do_jogador(f, "", a, media))
     extras = np.column_stack([vantagem, np.log1p(f["n_jh"])])
     X = bt.linhas_da_tabela(L, False)
